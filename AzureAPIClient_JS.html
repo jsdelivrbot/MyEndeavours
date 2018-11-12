@@ -1,0 +1,120 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>JSSample</title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> 
+</head> 
+<body>
+    <center><div  style="margin-left:100px;width:700px;height:50px;border:1px solid #000; background-color: lightgrey ">
+	<p align="center"><b>EFTS API</b></p>
+	</div></center>
+    <div align="center">
+	<h1><hr></hr></h1>
+        <div  >
+		<b>Enter Source name:</b><input type="text" id="api_link_source" required />
+            <button type="submit" onclick="displaySourceAPI()" align= "right">Click here</button><br><br>
+        </div>
+		<div style="margin-left:15px" >
+		<b>Enter File Name  :</b><input type="text" id="api_link_filename" />
+            <button type="submit" onclick="displayFileNameAPI()">Click here</button><br><br>
+        </div >
+		<div style="margin-left:10px">
+		<b>Enter Interface id:</b><input type="text" id="api_link_interfaceid" />
+            <button type="submit" onclick="displayInterfaceAPI()">Click here</button><br>
+        </div>
+		<h1><hr></hr></h1>
+	</div>	
+<div align="center">		
+<p id="demo" >Please select one of the above option</p>
+</div>
+<script type="text/javascript">
+var subscriptionKey = "0b6f1d02fdfb481abf24b114f50e1ff0";
+ function displaySourceAPI() {
+var txt="";
+var params = document.getElementById("api_link_source").value;
+$.ajax({ 
+type: "GET",
+url: "http://gdc-apim-poc.azure-api.net/filetransfers/source/"+params.toUpperCase(),
+beforeSend: function(xhrObj){ 
+ //Request headers 
+xhrObj.setRequestHeader('Ocp-Apim-Subscription-Key',subscriptionKey); 
+//xhrObj.setRequestHeader('Access-Control-Allow-Origin','*')
+}
+// Request body 
+//data: "{body}",
+ }).done(function(data) { //alert("success");
+console.log(data.SearchResult);
+txt += "<table border='1'; cellpadding='10'>"
+txt += "<tr><th>Interface Id</th><th>File Name</th><th>Source System</th><th>Status</th></tr>"
+for (x in data.SearchResult) {
+            txt += "<tr><td>" + data.SearchResult[x].InterfaceId + "</td> <td>" + data.SearchResult[x].FileName + "</td> <td>" + data.SearchResult[x].SourceSystem + "</td> <td>" + data.SearchResult[x].Status + "</td></tr>";
+        }
+        txt += "</table>"        
+        document.getElementById("demo").innerHTML = txt;
+		document.getElementById("api_link_source").value="";
+ }) 
+ .fail(function() { alert("error");
+ });
+ 
+ }; 
+ 
+  function displayFileNameAPI() {
+var txt="";
+var params = document.getElementById("api_link_filename").value;
+$.ajax({ 
+type: "GET",
+url: "http://gdc-apim-poc.azure-api.net/filetransfers/filename/"+params,
+beforeSend: function(xhrObj){ 
+ //Request headers 
+xhrObj.setRequestHeader('Ocp-Apim-Subscription-Key',subscriptionKey); 
+//xhrObj.setRequestHeader('Access-Control-Allow-Origin','*')
+}
+// Request body 
+//data: "{body}",
+ }).done(function(data) { //alert("success");
+console.log(data.SearchResult);
+txt += "<table border='1'; cellpadding='10'>"
+txt += "<tr><th>Interface Id</th><th>File Name</th><th>Source System</th><th>Status</th></tr>"
+for (x in data.SearchResult) {
+            txt += "<tr><td>" + data.SearchResult[x].InterfaceId + "</td> <td>" + data.SearchResult[x].FileName + "</td> <td>" + data.SearchResult[x].SourceSystem + "</td> <td>" + data.SearchResult[x].Status + "</td></tr>";
+        }
+        txt += "</table>"        
+        document.getElementById("demo").innerHTML = txt;
+		document.getElementById("api_link_filename").value="";
+ }) 
+ .fail(function() { alert("error");
+ });
+ 
+ }; 
+ 
+  function displayInterfaceAPI() {
+var txt="";
+var params = document.getElementById("api_link_interfaceid").value;
+$.ajax({ 
+type: "GET",
+url: "http://gdc-apim-poc.azure-api.net/filetransfers/interfaceid/"+params.toUpperCase(),
+beforeSend: function(xhrObj){ 
+ //Request headers 
+xhrObj.setRequestHeader('Ocp-Apim-Subscription-Key',subscriptionKey); 
+//xhrObj.setRequestHeader('Access-Control-Allow-Origin','*')
+}
+// Request body 
+//data: "{body}",
+ }).done(function(data) { //alert("success");
+console.log(data.SearchResult);
+txt += "<table border='1'; cellpadding='10'>"
+txt += "<tr><th>Interface Id</th><th>File Name</th><th>Source System</th><th>Status</th></tr>"
+for (x in data.SearchResult) {
+            txt += "<tr><td>" + data.SearchResult[x].InterfaceId + "</td> <td>" + data.SearchResult[x].FileName + "</td> <td>" + data.SearchResult[x].SourceSystem + "</td> <td>" + data.SearchResult[x].Status + "</td></tr>";
+        }
+        txt += "</table>"        
+        document.getElementById("demo").innerHTML = txt;
+		document.getElementById("api_link_interfaceid").value="";
+ }) 
+ .fail(function() { alert("error");
+ });
+ 
+ }; 
+ </script>
+ </body>
+ </html>
