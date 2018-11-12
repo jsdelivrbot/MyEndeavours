@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_FL_WR_Sarah"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_WR_Sarah"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_WR_Sarah"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:imp1="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="WriteSarah_plt" >
+    <plt:role name="WriteSarah_role" >
+      <plt:portType name="tns:WriteSarah_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_WR_Sarah"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Industry/Manufacturing/EBO/PurchaseOrder/Emerson/PurchaseOrderEBM.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="WriteSarah_msg">
+        <wsdl:part name="body" element="imp1:CreatePurchaseOrderEBM"/>
+    </wsdl:message>
+    <wsdl:portType name="WriteSarah_ptt">
+        <wsdl:operation name="WriteSarah">
+            <wsdl:input message="tns:WriteSarah_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

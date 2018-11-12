@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://xmlns.oracle.com/pcbpel/errorHandling"
+        xmlns:tns="http://xmlns.oracle.com/pcbpel/errorHandling"
+        elementFormDefault="qualified">
+  <element name="RejectedMessage" type="tns:RejectedMessageType"/>
+
+
+    <complexType name="RejectedMessageType">
+        <sequence>
+       <!-- base64 encoded strings" -->
+          <element name="MessageHeader" type="string"/>
+          <element name="MessagePayload" type="string"/>
+          <element name="RejectionReason" type="string"/>
+        </sequence>
+      <attribute name="RejectionId" type="string"/>
+    </complexType>
+
+</schema>

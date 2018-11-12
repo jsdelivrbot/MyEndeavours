@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.0 **
+** Date: Apr 3, 2009 **
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\ResourceAvailabilityException.xsd
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO ResourceAvailabilityException EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:corecalendarcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.00">
+	<!-- ====================================================================== -->
+	<!-- ==============  Imports and Includes   =============================== -->
+	<!-- ====================================================================== -->
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomCalendar.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+	<!--xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" schemaLocation="../../CommonEBO/V1/ResourceShift.xsd"/-->
+	<!-- ====================================================================== -->
+	<!-- ==============  ResourceAvailabilityException Components ================ -->
+	<!-- ====================================================================== -->
+	<xsd:element name="ResourceShift" type="ResourceShiftType">
+		<xsd:annotation>
+			<xsd:documentation>
+A ResourceShift defines the availabilty during a period of time. It can be used to schedule the usage of non labor resource or the work hours of labor resource.  ResourceShifts are typically defined for a 24 hour period
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description>
+A ResourceShift defines the availabilty during a period of time. It can be used to schedule the usage of non labor resource or the work hours of labor resource.  ResourceShifts are typically defined for a 24 hour period
+                                   </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry/>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="ResourceShiftType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Unique identification of the resource shift
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Name" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+Name of the resource shift
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+Description of the resource shift
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the type of resource shift e.g., Flex, Duration etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CategoryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the category of the resource shift
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:TimeDuration" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the period of time of the shift. It includes the start time, end time and duration
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ResourceShiftTimePeriod" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecalendarcust:CustomResourceShiftType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ResourceShiftPattern" type="ResourceShiftPatternType">
+		<xsd:annotation>
+			<xsd:documentation>
+A resource shift pattern refers to a grouping of resource shifts over a fixed duration of time such as a week
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description>
+A resource shift pattern refers to a grouping of resource shifts over a fixed duration of time such as a week
+                                   </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry/>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="ResourceShiftPatternType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Unique identification of the resource shift pattern
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Name" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+Name of the resource shift pattern
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+Description of the resource shift pattern
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Duration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Identifies the duration for which the resource shift pattern is applicable e.g, one week
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the type of resource shift pattern e.g., Flex, Duration etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ResourceShiftPatternEntry" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+Each entry in a resource shift pattern defines the usage of a shift for a fixed number of days
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corecalendarcust:CustomResourceShiftPatternType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ResourceAvailabilityException" type="ResourceAvailabilityExceptionType">
+		<xsd:annotation>
+			<xsd:documentation>
+Resource availability exception refers to the exception to the normal usage or work schedule of resources such as to indicate holidays or maintenance downtimes.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description>
+Resource availability exception refers to the exception to the normal usage or work schedule of resources such as to indicate holidays or maintenance downtimes.
+                                   </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry/>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="ResourceAvailabilityExceptionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Unique identification of the resource availability exception
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Name" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+Name of the resource availability exception
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+Description of the resource availability exception
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Type of exception e.g., Available, Not Available, Tentatively Available etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CategoryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the category of the resource availability exception
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WholeDayIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Indicates whether the exception applies to the whole day. Holidays are applicable for the whole day
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:TimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the period of time of the exception. It includes the start date time, end date time and duration
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corecalendarcust:CustomResourceAvailabilityExceptionType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ResourceShiftPatternEntry" type="ResourceShiftPatternEntryType">
+		<xsd:annotation>
+			<xsd:documentation>
+Each entry in a resource shift pattern defines the usage of a shift for a fixed number of days
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ResourceShiftPatternEntryType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Unique identification of the resource shift pattern entry
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="StartDayCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the start day for the resource shift
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EndDayCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the end day for the resource shift
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ResourceShiftSequenceNumber" type="corecom:PositiveIntegerType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+The sequence of the entry of a resource shift within the resource shift pattern
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ResourceShift" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Details of the resource shift
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corecalendarcust:CustomResourceShiftPatternEntryType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ResourceShiftTimePeriod" type="ResourceShiftTimePeriodType">
+		<xsd:annotation>
+			<xsd:documentation>
+Defines the break up of a shift into working and non-working periods of time
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ResourceShiftTimePeriodType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Unique identification of the resource shift time period
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Type of period defined by the resource shift time period e.g., IN, OUT, Working, Lunch Break, Coffee Break etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:TimeDuration" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Refers to the duration of time of the shift time period. It includes the start time, end time and duration
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corecalendarcust:CustomResourceShiftTimePeriodType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+</xsd:schema>

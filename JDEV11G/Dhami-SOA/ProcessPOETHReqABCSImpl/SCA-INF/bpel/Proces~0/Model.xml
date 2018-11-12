@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ProcessPOETHReqABCSImplProcess" targetNamespace="http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1" xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/PurchaseOrder/V1" xmlns:client="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL" xmlns:oag7abo="http://xmlns.emrsn.com/CommonProcessPO_007" xmlns:oag7abcs="http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1" xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions" xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:aiaeh="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess" xmlns:xacml="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" id="BpPrc0">
+  <partnerLinks>
+    
+    <partnerLink name="ProcessPOETHReqABCSImpl" partnerLinkType="oag7abcs:ProcessPOETHReqABCSImpl" myRole="ProcessPOETHReqABCSImplProvider"/>
+
+    <partnerLink name="ETH_CommonService_BPEL" partnerRole="ETH_CommonService_BPEL_Role" partnerLinkType="client:ETH_CommonService_BPEL"/>
+    
+
+    
+
+    <partnerLink myRole="AIAAsyncErrorHandlingBPELProcessRequester" name="AIAAsyncErrorHandlingBPELProcess" partnerRole="AIAAsyncErrorHandlingBPELProcessProvider" partnerLinkType="aiaeh:AIAAsyncErrorHandlingBPELProcess"/>
+
+
+  </partnerLinks>
+  <variables>
+    <variable name="ProcessPOReqMsg" messageType="oag7abcs:ProcessPOReqMsg"/>
+    <variable name="ProcessETH_CommonService_BPELEBSReqMsg" messageType="client:ETH_CommonService_BPELRequestMessage"/>
+
+    
+    <variable name="SystemFaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="AIAAsyncErrorHandlingBPELProcessRequestMessage" messageType="aiaeh:AIAAsyncErrorHandlingBPELProcessRequestMessage"/>
+
+
+    <variable name="SystemFaultMsg" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="SystemID" type="xsd:string"/>
+    <variable name="Sender" element="corecom:Sender"/>
+    <variable name="Title" type="xsd:string"/>
+    <variable name="EBM_HEADER" element="corecom:EBMHeader"/>
+    <variable name="InstanceID" type="xsd:string"/>
+    <variable name="ServiceName" type="xsd:string"/>
+    <variable name="TraceLogEnabled" type="xsd:boolean"/>
+
+    
+  </variables>
+  
+  
+
+  <faultHandlers id="BpFhs0">
+        <catch faultName="bpelx:remoteFault" faultVariable="SystemFaultVar" id="BpCFt0">
+            <sequence name="Sequence_RemoteFault" id="BpSeq0">
+ <bpelx:exec name="TraceLog_BeginRemoteFaultCatch" language="java" version="1.3" id="BxExe0">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Entering Error Hanlder Remote Fault Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+  	
+                
+                <throw name="ReThrow_RemoteFault" faultName="bpelx:remoteFault" faultVariable="SystemFaultVar" id="BpThw0"/>
+ <bpelx:exec name="TraceLog_EndRemoteFaultCatch" language="java" version="1.3" id="BxExe1">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Exiting Error Hanlder Remote Fault Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+  	
+	    </sequence>
+        </catch>
+        <catch faultName="bpelx:bindingFault" faultVariable="SystemFaultVar" id="BpCFt1">
+            <sequence name="Sequence_BindingFault" id="BpSeq1">
+
+ <bpelx:exec name="TraceLog_BeginBindingFaultCatch" language="java" version="1.3" id="BxExe2">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Entering Error Hanlder Binding Fault Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+		
+                <throw name="ReThrow_BindingFault" faultName="bpelx:bindingFault" faultVariable="SystemFaultVar" id="BpThw1"/>
+ <bpelx:exec name="TraceLog_EndBindingFaultCatch" language="java" version="1.3" id="BxExe3">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Exiting Error Hanlder Binding Fault Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+  		
+	    </sequence>
+        </catch>
+        
+  
+        <catch faultName="bpelx:subLanguageExecutionFault" faultVariable="SystemFaultVar" id="BpCFt2">
+            <sequence name="Sequence_SubLanguageExecutionFault" id="BpSeq2">
+ <bpelx:exec name="TraceLog_BeginSubLanguageExecutionFaultCatch" language="java" version="1.3" id="BxExe4">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Entering Error Hanlder SubLanguageExecution Fault Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+  		
+                <assign name="Assign_AIAAsyncErrorHandlingBPELProcessRequestMessage" id="BpAss0">
+                    <copy>
+                        <from expression="ora:processXSLT('xsl/EBM_to_Fault.xsl',bpws:getVariableData('EBM_HEADER'))"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault"/>
+                    </copy>                        
+                    <copy>
+                        <from variable="SystemFaultVar" part="code"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultMessage/corecom:Code"/>
+                    </copy>
+                    <copy>
+                        <from variable="SystemFaultVar" part="summary"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultMessage/corecom:Text"/>
+                    </copy>
+
+                    <copy>
+                        <from expression="xp20:current-dateTime()"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:ReportingDateTime"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:getProcessId()"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:ID"/>
+                    </copy>
+                    <copy>
+                        <from expression="'BPEL'"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:ImplementationCode"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:getInstanceId()"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:InstanceID"/>
+                    </copy>
+					<copy>
+                        <from expression="ora:getECID()"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:ExecutionContextID"/>
+                    </copy>
+                </assign>
+                <invoke name="Invoke_AIAAsyncErrorHandlingBPELProcess" partnerLink="AIAAsyncErrorHandlingBPELProcess" portType="aiaeh:AIAAsyncErrorHandlingBPELProcess" operation="initiate" inputVariable="AIAAsyncErrorHandlingBPELProcessRequestMessage" id="BpInv0"/>
+
+
+                <throw name="Rethrow_subLanguageExecutionFault" faultName="bpelx:subLanguageExecutionFault" faultVariable="SystemFaultVar" id="BpThw2"/>
+ <bpelx:exec name="TraceLog_EndSubLanguageExecutionFaultCatch" language="java" version="1.3" id="BxExe5">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Exiting Error Hanlder SubLanguageExecution Fault Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+  		
+	    </sequence>
+        </catch>
+        <catchAll id="BpCAl0">
+            <sequence name="Sequence_CatchAll" id="BpSeq3">
+
+ <bpelx:exec name="TraceLog_BeginCatchAll" language="java" version="1.3" id="BxExe6">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Entering Error Hanlder Catch All Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+  	
+                    <assign name="Assign_AIAAsyncErrorHandlingBPELProcessRequestMessage" id="BpAss1">
+                    	<copy>
+			   <from expression="ora:processXSLT('xsl/EBM_to_Fault.xsl',bpws:getVariableData('EBM_HEADER'))"/>
+			   <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault"/>
+			</copy>
+                        <copy>
+                            <from expression="ora:getFaultAsString()"/>
+                            <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultMessage/corecom:Text"/>
+                        </copy>
+                        <copy>
+                            <from expression="xp20:current-dateTime()"/>
+                            <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:ReportingDateTime"/>
+                        </copy>
+                        <copy>
+                            <from expression="ora:getProcessId()"/>
+                            <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:ID"/>
+                        </copy>
+                        <copy>
+                            <from expression="'BPEL'"/>
+                            <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:ImplementationCode"/>
+                        </copy>
+                        <copy>
+                            <from expression="ora:getInstanceId()"/>
+                            <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:InstanceID"/>
+                        </copy>
+						<copy>
+                        <from expression="ora:getECID()"/>
+                        <to variable="AIAAsyncErrorHandlingBPELProcessRequestMessage" part="FaultMessage" query="/corecom:Fault/corecom:FaultNotification/corecom:FaultingService/corecom:ExecutionContextID"/>
+                    </copy>
+                    </assign>
+                    <invoke name="Invoke_AIAAsyncErrorHandlingBPELProcess" partnerLink="AIAAsyncErrorHandlingBPELProcess" portType="aiaeh:AIAAsyncErrorHandlingBPELProcess" operation="initiate" inputVariable="AIAAsyncErrorHandlingBPELProcessRequestMessage" id="BpInv1"/>
+
+		
+                <throw name="Throw_Fault" faultName="oag7abcs:Fault" faultVariable="AIAAsyncErrorHandlingBPELProcessRequestMessage" id="BpThw3"/>
+
+ <bpelx:exec name="TraceLog_EndCatchAll" language="java" version="1.3" id="BxExe7">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Exiting Error Hanlder Catch All Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+  	
+            </sequence>
+        </catchAll>
+  </faultHandlers>
+
+ 
+
+  <sequence name="main" id="BpSeq4">
+     <receive name="ReceivePO" partnerLink="ProcessPOETHReqABCSImpl" portType="oag7abcs:ProcessPOETHReqABCSImpl" operation="ProcessPO" variable="ProcessPOReqMsg" createInstance="yes" id="BpRcv0"/>
+    
+     <assign name="GetTitle" id="BpAss2">
+      <copy>
+	<from expression="'Process PO'"/>
+	<to variable="Title"/>
+      </copy>
+      <copy>
+        <from expression="ora:getInstanceId()"/>
+        <to variable="InstanceID"/>
+      </copy>
+      <copy>
+        <from expression="ora:getProcessId()"/>
+        <to variable="ServiceName"/>
+      </copy>
+     </assign>
+     <bpelx:exec name="SetTitle" language="java" version="1.5" id="BxExe8">
+      <![CDATA[setTitle((String)getVariableData("Title"));]]>
+     </bpelx:exec>
+ <bpelx:exec name="TraceLog_BeginABCS" language="java" version="1.3" id="BxExe9">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled;  
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+tracelogenabled = oracle.apps.aia.core.eh.logging.AIALogger.isTraceLoggingEnabled("INFO","{http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1}ProcessPOETHReqABCSImpl");                                                                                  
+setVariableData("TraceLogEnabled", tracelogenabled);        
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+    
+     <scope name="ETH_CommonService_BPEL" id="BpScp0">
+      <sequence name="ETH_CommonService_BPEL" id="BpSeq5">
+ <bpelx:exec name="TraceLog_BeforeETH_CommonService_BPELEBMReqMsgTransform" language="java" version="1.3" id="BxExe10">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled;  
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+tracelogenabled = oracle.apps.aia.core.eh.logging.AIALogger.isTraceLoggingEnabled("INFO","{http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1}ProcessPOETHReqABCSImpl");                                                                                  
+setVariableData("TraceLogEnabled", tracelogenabled);        
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Before ETH_CommonService_BPELEBMReqMsg Transform Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+     <assign name="Xform_POABMReqMsg_to_ETH_CommonService_BPELEBMReqMsg" id="BpAss3">
+	      <bpelx:annotation>
+		<bpelx:pattern>transformation</bpelx:pattern>
+	      </bpelx:annotation>
+	      <copy>
+		<from expression="ora:processXSLT('xsl/Xform_POABMReqMsg_to_ETH_CommonService_BPELEBMReqMsg.xsl',bpws:getVariableData('ProcessPOReqMsg','ProcessPO'))"/>
+		<to variable="ProcessETH_CommonService_BPELEBSReqMsg" part="payload" query="/ns1:CreatePurchaseOrderEBM"/>
+	      </copy>
+      </assign>
+ <bpelx:exec name="TraceLog_AfterETH_CommonService_BPELEBMReqMsgTransform" language="java" version="1.3" id="BxExe11">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled;  
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+tracelogenabled = oracle.apps.aia.core.eh.logging.AIALogger.isTraceLoggingEnabled("INFO","{http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1}ProcessPOETHReqABCSImpl");                                                                                  
+setVariableData("TraceLogEnabled", tracelogenabled);        
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " After ETH_CommonService_BPELEBMReqMsg Transform Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+    
+      <assign name="Assign_EBM_HEADER" id="BpAss4">
+                    <copy>
+                        <from variable="ProcessETH_CommonService_BPELEBSReqMsg" part="payload" query="/ns1:CreatePurchaseOrderEBM/corecom:EBMHeader"/>
+                        <to variable="EBM_HEADER" query="/corecom:EBMHeader"/>
+                    </copy>
+                </assign>
+ <bpelx:exec name="TraceLog_BeforeInvokeETH_CommonService_BPEL" language="java" version="1.3" id="BxExe12">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled;  
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+tracelogenabled = oracle.apps.aia.core.eh.logging.AIALogger.isTraceLoggingEnabled("INFO","{http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1}ProcessPOETHReqABCSImpl");                                                                                  
+setVariableData("TraceLogEnabled", tracelogenabled);        
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " Before ETH_CommonService_BPEL Service Invoke Instance: " + instanceID + title; ;                         
+   
+   oracle.xml.parser.v2.XMLElement EBM_HEADER =                                                                        
+                                                                              
+   (oracle.xml.parser.v2.XMLElement)getVariableData("EBM_HEADER");                                                                                     
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  EBM_HEADER ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+	
+    <scope name="SetDynamicPartnerlinkScope" id="BpScp1">
+    <variables>
+	<variable name="TargetEndpointLocation" type="xsd:string"/>
+	<variable name="EndpointReference" element="wsa:EndpointReference"/>
+    </variables>
+ 
+	<switch name="Switch_SetEndpoint" id="BpSwt0">
+            <case condition="string-length(bpws:getVariableData('ProcessETH_CommonService_BPELEBSReqMsg','payload','/ns1:CreatePurchaseOrderEBM/corecom:EBMHeader/corecom:MessageProcessingInstruction/corecom:DefinitionID'))>0">
+		<bpelx:annotation>
+                    <bpelx:pattern>Test - isCAVSDefiniitonIDSet</bpelx:pattern>
+                </bpelx:annotation>
+                <sequence id="BpSeq6">
+                    <assign name="SetCAVSEndPointURL" id="BpAss5">
+                        <copy>
+                            <from variable="ProcessETH_CommonService_BPELEBSReqMsg" part="payload" query="/ns1:CreatePurchaseOrderEBM/corecom:EBMHeader/corecom:MessageProcessingInstruction/corecom:DefinitionID"/>
+                            <to variable="TargetEndpointLocation"/>
+                        </copy>
+                    </assign>
+                    <assign name="AssignPartnerlinkEndpointReference" id="BpAss6">
+                        <copy>
+                            <from>
+                                <wsa:EndpointReference>
+                                    <wsa:Address/>
+                                </wsa:EndpointReference>
+                            </from>
+                            <to variable="EndpointReference"/>
+                        </copy>
+                        <copy>
+                            <from variable="TargetEndpointLocation"/>
+                            <to variable="EndpointReference" query="/wsa:EndpointReference/wsa:Address"/>
+                        </copy>
+                        <copy>
+                            <from variable="EndpointReference"/>
+                            <to partnerLink="ETH_CommonService_BPEL"/>
+                        </copy>
+                    </assign>
+                </sequence>
+            </case>
+            <otherwise> <empty name="Empty_NoSetEndpoint" id="BpEmp0"/> </otherwise>
+        </switch>
+		
+     </scope>
+
+	<invoke name="InvokeETH_CommonService_BPEL" partnerLink="ETH_CommonService_BPEL" portType="client:ETH_CommonService_BPEL" operation="process" inputVariable="ProcessETH_CommonService_BPELEBSReqMsg" id="BpInv2">
+	</invoke>
+ <bpelx:exec name="TraceLog_AfterInvokeETH_CommonService_BPEL" language="java" version="1.3" id="BxExe13">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled;  
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+tracelogenabled = oracle.apps.aia.core.eh.logging.AIALogger.isTraceLoggingEnabled("INFO","{http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1}ProcessPOETHReqABCSImpl");                                                                                  
+setVariableData("TraceLogEnabled", tracelogenabled);        
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " After ETH_CommonService_BPEL Service Invoke Instance: " + instanceID + title; ;                         
+   
+   oracle.xml.parser.v2.XMLElement EBM_HEADER =                                                                        
+                                                                              
+   (oracle.xml.parser.v2.XMLElement)getVariableData("EBM_HEADER");                                                                                     
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  EBM_HEADER ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+    
+      </sequence>
+     </scope>
+    
+    
+    
+
+ <bpelx:exec name="TraceLog_EndABCS" language="java" version="1.3" id="BxExe14">
+      <![CDATA[java.lang.String TraceLogMessage = null; 
+	java.lang.Boolean tracelogenabled   = (java.lang.Boolean)getVariableData("TraceLogEnabled");
+java.lang.String title = (java.lang.String)getVariableData("Title");         
+java.lang.String instanceID = (java.lang.String)getVariableData("InstanceID");      
+java.lang.String serviceName = (java.lang.String)getVariableData("ServiceName");     
+
+
+if (tracelogenabled.booleanValue())                                                                                
+{                                                                                                                                                                                      
+                       
+          
+   TraceLogMessage = "Starting " + serviceName + " ABCS End Instance: " + instanceID + title; ;                         
+   
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,TraceLogMessage); 
+   
+}]]>
+    </bpelx:exec>
+   
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: 
+  Author:  
+  Purpose: 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

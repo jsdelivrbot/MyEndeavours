@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Aug 20 17:55:08 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/TEST_Dequeue_AQ/BPELProcess1"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/TEST_Dequeue_AQ/BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/TEST_Dequeue_AQ/TEST_AQ_DEQ"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="TEST_AQ_DEQ" partnerLinkType="ns1:Dequeue_plt"
+                 myRole="Dequeue_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Dequeue_InputVariable_1"
+              messageType="ns1:process_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_Dequeue_InputVariable_1"
+             partnerLink="TEST_AQ_DEQ" portType="ns1:Dequeue_ptt"
+             operation="Dequeue"/>
+  </sequence>
+</process>

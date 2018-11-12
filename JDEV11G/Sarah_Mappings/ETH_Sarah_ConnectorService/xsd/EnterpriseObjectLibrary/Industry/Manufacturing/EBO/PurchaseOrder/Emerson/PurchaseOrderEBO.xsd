@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:corepurchaseordercust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/PurchaseOrder/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns:corecomEBO="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" xmlns:oagis="http://www.openapplications.org/oagis/9" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00.00">
+   <xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../Infrastructure/OAGIS90/ProcessPurchaseOrder.xsd"/>
+   <xsd:element name="EmersonPurchaseOrderEBO" type="EmersonPurchaseOrderEBOType"/>
+   <xsd:complexType name="EmersonPurchaseOrderEBOType">
+      <xsd:complexContent>
+         <xsd:extension base="oagis:PurchaseOrderType"/>
+      </xsd:complexContent>
+   </xsd:complexType>
+</xsd:schema>

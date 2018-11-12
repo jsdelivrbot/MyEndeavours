@@ -1,0 +1,193 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon May 02 18:28:59 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_PO_OAGIS_Provider"
+               targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/ETH_PO_OAGIS_Provider_Temp/ETH_BPEL_PO_OAGIS_Provider"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/ETH_PO_OAGIS_Provider_Temp/ETH_BPEL_PO_OAGIS_Provider"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_PO_OAGIS_Provider_Temp/ETH_FL_RD_PO_OAGIS"
+         xmlns:ns2="http://services.emerson.com/OutputServices/ETH_B2B_Enqueue/ETH_PO_OAGIS_B2BMsg_Enqueue"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns3="http://www.openapplications.org/oagis/9"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_PO_OAGIS_Provider_Temp/ETH_AQ_ENQ_B2BPO"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_PO_OAGIS_Provider_Temp/ETH_AQ_ENQ_IP_OUT">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ETH_FL_RD_PO_OAGIS"
+                 partnerLinkType="ns1:ReadPO_OAGIS_plt"
+                 myRole="ReadPO_OAGIS_role"/>
+    <partnerLink name="ETH_AQ_ENQ_B2BPO" partnerLinkType="ns4:EnqueuePenske_plt"
+                 partnerRole="EnqueuePenske_role"/>
+    <partnerLink name="ETH_AQ_ENQ_IP_OUT" partnerLinkType="ns6:EnqueueIPOUT_plt"
+                 partnerRole="EnqueueIPOUT_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_ReadPO_OAGIS_InputVariable"
+              messageType="ns1:ReadPO_OAGIS_msg"/>
+    <variable name="Invoke_SendToB2B_EnqueuePenske_InputVariable"
+              messageType="ns4:ProcessPurchaseOrder_msg"/>
+    <variable name="B2B_Header" messageType="ns4:Header_msg"/>
+    <variable name="Invoke_IP_OUT_Queue_EnqueueIPOUT_InputVariable"
+              messageType="ns6:ProcessPurchaseOrder_msg"/>
+    <variable name="B2BHeader_String" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_ReadPO_OAGIS_InputVariable"
+             partnerLink="ETH_FL_RD_PO_OAGIS" portType="ns1:ReadPO_OAGIS_ptt"
+             operation="ReadPO_OAGIS"/>
+    <assign name="Assign_B2BHeader">
+      <copy>
+        <from expression="string('63452753434')"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/MSG_ID"/>
+      </copy>
+      <!--<copy>
+        <from expression="string('PAYLOAD')"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/PAYLOAD"/>
+      </copy>--><copy>
+        <from expression="string('EMERSON')"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/FROM_PARTY"/>
+      </copy><copy>
+        <from expression="string('PENSKE')"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/TO_PARTY"/>
+      </copy><copy>
+        <from expression="string('contentType:application/octet-stream;filename:ETH_PO_20110502_120000')"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/ACTION_NAME"/>
+      </copy><copy>
+        <from expression="string('ProcessPo')"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/DOCTYPE_NAME"/>
+      </copy><copy>
+        <from expression="string('9.0')"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/DOCTYPE_REVISION"/>
+      </copy><copy>
+        <from expression="1"/>
+        <to variable="B2B_Header" part="Header"
+            query="/ns5:ETH_AQ_ENQ_B2BPOHeader/ns5:PayloadHeader/MSG_TYPE"/>
+      </copy><copy>
+        <from expression="ora:getContentAsString(bpws:getVariableData('B2B_Header','Header','/ns5:ETH_AQ_ENQ_B2BPOHeader'))"/>
+        <to variable="B2BHeader_String"/>
+      </copy></assign>
+    <!--<assign name="Assign_DynaicPartnerLink">
+      <copy>
+        <from><EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+                                 xmlns:adapter="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+    <Address>eis/AQ/ETH/B2B_DB</Address>
+    <ReferenceProperties>
+                    <adapter:QueueName>REAMAGNETWIRE_OUT_QUEUE</adapter:QueueName>
+    </ReferenceProperties>
+    <ReferenceParameters>
+                    <adapter:QueueName>REAMAGNETWIRE_OUT_QUEUE</adapter:QueueName>
+    </ReferenceParameters>
+</EndpointReference></from>
+        <to partnerLink="ETH_AQ_ENQ_B2BPO"/>
+      </copy>
+    </assign>-->
+    <scope name="Scope_Invoke_Penske" variableAccessSerializable="no">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Invoke_Penske</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="Error" type="xsd:string"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <assign name="Assign_Error">
+            <copy>
+              <from expression="ora:getFaultAsString()"/>
+              <to variable="Error"/>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_Invoke_Penske">
+        <assign name="Assign_PENSKE_Input">
+          <copy>
+            <from variable="Receive1_ReadPO_OAGIS_InputVariable" part="body"
+                  query="/ns3:ProcessPurchaseOrder"/>
+            <to variable="Invoke_SendToB2B_EnqueuePenske_InputVariable"
+                part="ProcessPurchaseOrder" query="/ns3:ProcessPurchaseOrder"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_SendToB2B"
+                inputVariable="Invoke_SendToB2B_EnqueuePenske_InputVariable"
+                partnerLink="ETH_AQ_ENQ_B2BPO" portType="ns4:EnqueuePenske_ptt"
+                operation="EnqueuePenske" bpelx:invokeAsDetail="no">
+          <bpelx:inputProperty name="jca.aq.HeaderDocument"
+                               variable="B2BHeader_String"/>
+        </invoke>
+      </sequence>
+    </scope>
+    <scope name="Scope_Invoke_IPOUT" variableAccessSerializable="no">
+      <variables>
+        <variable name="Error" type="xsd:string"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <assign name="Assign_Error">
+            <copy>
+              <from expression="ora:getFaultAsString()"/>
+              <to variable="Error"/>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_Invoke_IPOUT">
+        <assign name="Assign_IPOUT_Input">
+          <copy>
+            <from variable="Receive1_ReadPO_OAGIS_InputVariable" part="body"
+                  query="/ns3:ProcessPurchaseOrder"/>
+            <to variable="Invoke_IP_OUT_Queue_EnqueueIPOUT_InputVariable"
+                part="ProcessPurchaseOrder" query="/ns3:ProcessPurchaseOrder"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_IP_OUT_Queue"
+                inputVariable="Invoke_IP_OUT_Queue_EnqueueIPOUT_InputVariable"
+                partnerLink="ETH_AQ_ENQ_IP_OUT" portType="ns6:EnqueueIPOUT_ptt"
+                operation="EnqueueIPOUT" bpelx:invokeAsDetail="no">
+          <bpelx:inputProperty name="jca.aq.HeaderDocument"
+                               variable="B2BHeader_String"/>
+        </invoke>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

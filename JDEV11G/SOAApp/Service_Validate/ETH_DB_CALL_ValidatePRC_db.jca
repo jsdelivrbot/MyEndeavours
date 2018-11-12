@@ -1,0 +1,13 @@
+<adapter-config name="ETH_DB_CALL_ValidatePRC" adapter="Database Adapter" wsdlLocation="ETH_DB_CALL_ValidatePRC.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/ETH/DB/NXAppDB" UIConnectionName="DEV_ETHAPP_DB" adapterRef=""/>
+  <endpoint-interaction portType="ETH_DB_CALL_ValidatePRC_ptt" operation="ETH_DB_CALL_ValidatePRC">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="ProcedureName" value="VALIDATE_TEST"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

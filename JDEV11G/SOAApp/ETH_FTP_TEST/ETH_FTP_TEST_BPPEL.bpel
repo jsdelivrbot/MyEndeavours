@@ -1,0 +1,133 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Jul 06 15:56:01 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_FTP_TEST_BPPEL"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/ETH_FTP_TEST/ETH_FTP_TEST_BPPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/ETH_FTP_TEST/ETH_FTP_TEST_BPPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_FTP_TEST/ETH_FL_PUT_PENSKE"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_FTP_TEST/ETH_FL_PUT_APLL"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/aq/SOAApp/ETH_FTP_TEST/sdfsdfsd">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eth_ftp_test_bppel_client" partnerLinkType="client:ETH_FTP_TEST_BPPEL" myRole="ETH_FTP_TEST_BPPELProvider"/>
+    <partnerLink name="ETH_FL_PUT_PENSKE" partnerLinkType="ns1:WritePENSKE_plt"
+                 partnerRole="WritePENSKE_role"/>
+    <partnerLink name="ETH_FL_PUT_APLL" partnerLinkType="ns2:WriteAPLL_plt"
+                 partnerRole="WriteAPLL_role"/>
+    <partnerLink name="ETH_AQ_NQ_Test" partnerLinkType="ns3:Enqueue_plt"
+                 partnerRole="Enqueue_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_FTP_TEST_BPPELRequestMessage"/>
+    <variable name="Invoke1_WritePENSKE_InputVariable"
+              messageType="ns1:WritePENSKE_msg"/>
+    <variable name="Invoke2_WriteAPLL_InputVariable"
+              messageType="ns2:WriteAPLL_msg"/>
+    <variable name="Invoke3_Enqueue_InputVariable"
+              messageType="ns3:process_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_FTP_TEST_BPPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_ftp_test_bppel_client" portType="client:ETH_FTP_TEST_BPPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <scope name="Scope3">
+      <sequence name="Sequence3">
+        <assign name="Assign3">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:process/client:input"/>
+            <to variable="Invoke3_Enqueue_InputVariable" part="process"
+                query="/client:process/client:input"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke3" bpelx:invokeAsDetail="no"
+                inputVariable="Invoke3_Enqueue_InputVariable"
+                partnerLink="ETH_AQ_NQ_Test" portType="ns3:Enqueue_ptt"
+                operation="Enqueue"/>
+        <terminate name="Terminate1"/>
+      </sequence>
+    </scope>
+    <scope name="Scope2">
+      <faultHandlers>
+        <catchAll>
+          <empty name="Empty1"/>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence1">
+        <assign name="Assign1">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:process/client:input"/>
+            <to variable="Invoke1_WritePENSKE_InputVariable" part="body"
+                query="/client:process/client:input"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke1" bpelx:invokeAsDetail="no"
+                inputVariable="Invoke1_WritePENSKE_InputVariable"
+                partnerLink="ETH_FL_PUT_PENSKE" portType="ns1:WritePENSKE_ptt"
+                operation="WritePENSKE"/>
+      </sequence>
+    </scope>
+    <scope name="Scope1">
+      <faultHandlers>
+        <catchAll>
+          <empty name="Empty2"/>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence2">
+        <assign name="Assign2">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:process/client:input"/>
+            <to variable="Invoke2_WriteAPLL_InputVariable" part="body"
+                query="/client:process/client:input"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke2" bpelx:invokeAsDetail="no"
+                inputVariable="Invoke2_WriteAPLL_InputVariable"
+                partnerLink="ETH_FL_PUT_APLL" portType="ns2:WriteAPLL_ptt"
+                operation="WriteAPLL"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

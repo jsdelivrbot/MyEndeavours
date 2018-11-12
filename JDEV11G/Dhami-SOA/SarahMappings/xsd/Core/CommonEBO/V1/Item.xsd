@@ -1,0 +1,3719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.04 **
+** Date: Nov 17, 2009 **
+***
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\Item.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Item EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:coreitemcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.04.00">
+	<!-- ====================================================================== -->
+	<!-- ==============  Imports and Includes   =============================== -->
+	<!-- ====================================================================== -->
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomItem.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- ==============  Item Components ================ -->
+	<!-- ====================================================================== -->
+	<xsd:element name="Item" type="ItemType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A product is a good or service which can be bought and sold. A product is anything that can be offered to a market that might satisfy a want or need. 
+
+Item EBO contains the definition of a sellable product or service or a manufactured or procured inventory item. It describes the form, fit and function of the item. It contains attributes that comprise the item definition in the master organization as well as inventory organizations. It is synonymous with Product from a CRM application standpoint. It provides a way to identify the item in any other system such as that of the manufacturer or supplier or customer or standard such as GTIN
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description> 
+A product is a good or service which can be bought and sold. A product is anything that can be offered to a market that might satisfy a want or need. 
+
+Item EBO contains the definition of a sellable product or service or a manufactured or procured inventory item. It describes the form, fit and function of the item. It contains attributes that comprise the item definition in the master organization as well as inventory organizations. It is synonymous with Product from a CRM application standpoint. It provides a way to identify the item in any other system such as that of the manufacturer or supplier or customer or standard such as GTIN
+                                   </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry/>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="ItemType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Name of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Description of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SerialControlIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates if the item is a serialized item i.e. unique instances of the item are identified by unique serial numbers
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotControlIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates if the item is a lotted item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ServiceIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies if the item is a service
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the item type
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DualUOMTrackingIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether on-hand balances are tracked in both Primary and Secondary UOM or just Primary UOM
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BaseUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This is the default UOM that the business refers to the item in. This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+EXAMPLES: 
+Generic Quantity  (Each, Pair, Dozen, Gross, etc); 
+Weight (Ounce, Pound, Ton, Kilogram, etc); 
+Volume (Cup, Pint, Gallon, Liter, etc);
+Dimensions (Inch, Foot, Yard, Meter, etc)
+Time (Second, Minute, Hour, Day, Year, etc)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="StorageUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This is the storage unit of measure of the item in inventory. This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShippingUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This describes the unit of measure that a product is shipped. This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UOMConversionUsageCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item may use item specific UOM conversion or standard UOM conversion or both
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SecondaryUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The secondary Unit of Measure for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PrimaryClassificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The primary classification of the item. This classification determines the user defined attributes of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PerUOMQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The number of items in the unit of measure.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CompoundItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If this is a networking product which uses compound product validation rules.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ToolIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If this product is a tool, such as one used by field service engineers.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProjectResourceIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If the product is a resource for a project.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IncentiveCompensationAvailableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If sales personnel can receive compensation for selling the product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriorityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This priority sets the order in which the billing application analyzes products during rating. The higher the number, the higher the priority; zero is the lowest priority you can set.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="StructureTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Type indicating whether an item has children or a bundle. Sample value. Bundle, None, Customizable.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AccessPassKey" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+User defined access code for the item.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultSubstitutionAvailabilityIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate whether a secondary default is specified or not. If the Item is not available, then this indicates whether an alternative secondary default item has been defined.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PositiveSecondaryUOMDeviationPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Upper bound of tolerance factor by which the Dual Unit of Measure may be transacted in. This field specifies the percent by which the quantity in the secondary UOM can deviate over the quantity translated from the primary UOM using the default conversion factor (this is because the quantity in the secondary UOM can be manually specified).
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="NegativeSeconaryUOMDeviationPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lower bound of tolerance factor by which the Dual Unit of Measure may be transacted in. This field specifies the percent by which the quantity in the secondary UOM can deviate under the quantity translated from the primary UOM using the default conversion factor  (this is because the quantity in the secondary UOM can be manually specified).
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="QuantityTrackingIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate tracking quantity
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PricingUOMTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether Pricing is based on the Primary or Secondary Unit of Measure. Sample Values: Primary, Secondary
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UOMConversionTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Allowed unit of measure conversion type. Sample values: Item specific, Standard, Both standard and item specific
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShortDescription" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+short description of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RevisionNotificationMethodCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates how to notify customers of new revisions of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ContainerItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating if the item is a container. Used for shipping sales orders
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VehicleItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates if the item is a vehicle or not. Used for shipping sales orders
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EquipmentIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item is equipment
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CollateralIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item is collateral item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Level" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The numeric product level in the product hierarchy taken bottom up.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InventoryItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating inventory item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EntityTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the Entity Type of an item. An item represents a product, but functionally it may represent different Entity, Eg. the product is Promotion or is treated as Option Choice etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SerialControlAgencyID" type="corecom:IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This is used to determine the Agency that controls serialization. This may also be used to indicate system which assigns the serial number (e.g., OPSM - Oracle Pedigree Serial Management system). It should have a value if and only if Item Serial Control Indicator is on. If Item Serial Control Indicator is null (implying that Serial Control Agency must also be null) then it means that the item is not serialized
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ItemIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The identifier of the item internally as well as in other systems such as those of the manufacturer, supplier, and customer. It also includes the GTIN identification of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Note" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The notes applicable to the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether an item is active, inactive, or in other various states.  Examples of values for this field include: Active, Inactive, Hold, Deleted, Obsolete
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0"/>
+			<xsd:element ref="corecom:PaymentTerm" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Payment term for the Item.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:TemplateItemReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The template item used to create this item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PrimaryServiceSpecialistPersonReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Primary service specialist.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:AlternateServiceSpecialistPersonReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Secondary service specialist.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:WarrantyItemReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to an Item which is the warranty for the item.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:WarrantySupplierPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Service supplier identifier. If the SupplierWarrantyIndicator is true for the item, then this reference identifies the Supplier.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ItemATPRuleReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to a rule or option which are used in Available To Promise, ATP for short, computation. It specifies how the global order promising system should evaluate which supplies to match with incoming demand. E.g. include/ exclude internal orders to satisfy a sales order or include/exclude supplies before a cut-off time to satisfy a sales order, etc.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:InvoicingRuleReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refer to an Invoicing Rule which is used for determining the accounting period in which the receivable amount is recorded.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:AccountingRuleReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to an Accounting Rule which is used for determining the accounting period or periods in which the revenue distributions for an invoice line are recorded.. It allows for specification of the number of periods and the percentage of the total revenue to recognize in each period.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ItemPickingRuleReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to a rule which defines the pick criteria. The picking criteria consists of the selections of picking preferences
+regarding an item's revision, lot, subinventory and locator.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemAttachment" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Binary, URI or other attachments that apply to the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemCatalog" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The reference to the catalog to which the item is associated
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemSpecificationGroup" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the logical grouping of a set of user defined attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemLifecycleCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The lifecycle specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemPhysicalCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The physical properties of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="InventoryCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Inventory specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemPurchasingCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Purchasing and receiving specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemPlanningCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+MPS/MRP and general planning specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemManufacturingCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Manufacturing specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemOrderManagementCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Sales and Order Management specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemServiceCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Service specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemClassification" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the classification scheme (such as UNSPSC or Commodity Code) and code corresponding to the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemSupplier" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the approved suppliers for the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemManufacturer" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the manufacturers of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="RelatedItem" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to other items e.g., for substitute, up-sell, cross-sell, product recommendation etc.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemRevisionHistory" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the revisions for the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemUOMConversion" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+This identifies a set of related UOMs and their conversions from the Item's UOM. This should usually be applicable only to packaging UOMs and not to weight, volume or dimension UOMs
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="InventoryLocation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The locations where this item resides in inventory
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemPriceList" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the related pricelist for an item.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemMarketingCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Marketing characteristics for an Item.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemLogisticCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Logistic characteristics of an Item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemContainerCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Container Characteristics of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemInternetCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Web characteristics of an Item.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemAssetCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Asset characteristics of an Item.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemProcessManufacturingCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Process manufacturing characteristics of an Item.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemGLAcccount" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The GLAccounts for the item. Examples are CostOfSalesAccount, ExpenseAccount, EncumbranceAccount, SalesAccount etc.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CurrentItem" type="ItemType"/>
+	<xsd:element name="InventoryCharacteristics" type="InventoryCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Inventory specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="InventoryCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="CycleCountEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item can be cycle counted
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotExpirationOnReceiptIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the lot expiration date for this item is defined when the lot is received
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotMergeEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether many lots of a lot controlled item may merge during the production of a batch
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotSplitEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether a lot controlled item may split into many lots during the production of a batch
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReservationAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether material reservations can be created for this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SerializationEventCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The event of serial generation for the item e.g., at inventory receipt, at sales order issue, Predefined serial numbers, No control etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SerialStatusEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether an item is subject to status control at the Serial Level
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShelfLifeDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the number of days from receipt after which the item lot expires
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InitialLotNumberSuffix" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Starting suffix for the item lot number
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InitialLotNumberPrefix" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Prefix for all lot numbers for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InitialSerialNumberSuffix" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the starting suffix for all serial numbers for this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InitialSerialNumberPrefix" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the prefix for serial numbers for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="StockingAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether this item can be stocked in inventory
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UnitCost" type="corecom:CostType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the cost of a unit of this item regardless of whether the item is manufactured or procured
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaterialTransactionEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating Material transaction enabled item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShortageCheckIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating material shortages should be checked for this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShelfLifeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Shelf life code. Sample values: No shelf life control, Item shelf life days, User defined expiration date
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="NegativeCycleCountDeviationPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Percent error below measured quantity. The percentage of negative variance acceptable before cycle count creates an adjustment transaction. A physical cycle count quantity can be less than the quantity on hand by less than or equal to this percentage. For example, suppose quantity on hand is 100 and negative tolerance is 10%. Inventory does not create an adjustment for physical counts between 90 and 100 units. This means the quantity on hand remains 100 units. For physical counts under 90 units, Inventory creates an adjustment, changing the quantity on hand to the physical count.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PositiveCycleCountDeviationPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Percent error above measured quantity. The percentage of positive variance acceptable before cycle count creates an adjustment transaction. A physical count quantity can be greater than the quantity on hand by less than or equal to this percentage. For example, suppose quantity on hand is 100 and positive tolerance is 10%. Inventory does not create an adjustment transaction for physical counts between 100 and 110 units. This means the quantity on hand remains 100 units. For physical counts over 110 units, Inventory creates an adjustment, changing the quantity on hand to the physical count.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="NextSerialNumber" type="corecom:IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Next auto assigned serial number
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LocationControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Stock locator control code. Sample values: No locator control, Prespecified locator control, Dynamic entry locator control, Locator control determined at subinventory level, Locator control
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RestrictionTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Inventory restrictions type, eg. Inventories restricted to predefined list, Inventories not restricted to predefined list
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LocationRestrictionTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Locators restrictions type. Sample values: Locators restricted to predefined list, Locators not restricted
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotTranslationEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This is to indicate that lot translation is enabled
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotSubstitutionEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lot Substitution Enabled
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BulkPickIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate item to be bulk material picked.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RevisionQuantityControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Revision quantity control code. Sample values: Not under revision quantity control, Under revision quantity control
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RetestFrequency" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Number of days specifying how often lot controlled items should be retested
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExpirationActionDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Interval between the time lot expires and the time expiration action should be taken
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExpirationActionCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifier code for action to take when a lot expires. This is a Lookup field. Samples: Adjust Mositure, Adjust Line Speed, Adjust pH etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lot control code. Sample values: No lot control, Full lot control
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="NextLotNumber" type="corecom:IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Next auto assigned lot number
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaturityDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Days to maturity
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HoldDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Number of hold days
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="GradeControlIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Whether the item is grade controlled
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultGradeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default Grade assigned to a newly created lot
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultMaterialStatusCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default material status. EXP and description: Expired etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotStatusEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lot status enabled
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultLotStatusCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default lot status. This is a lookup. Sample values: EXP and description: Expired etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultSerialStatusCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default serial status. This is a lookup. Sample values: EXP and description: Expired etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ChildLotAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Whether a child lot can be created for items
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ChildLotNumberGenerationMethodAvailabilityIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate Generation method for child lot numbers is associated
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ChildLotNumberPrefix" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Item-level prefix for child lot numbers
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="NextChildLotNumber" type="corecom:IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Next auto assigned child lot number
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ChildLotNumberValidationIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to ensure that the child lot number conforms to the parameters defined for the item/organization
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotAttributeInheritanceIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If it is set to yes, a new child lot will inherit all attributes from the parent lot. If set to no, the lot attributes for a new child lot will not inherit the parent lot attributes and will default to values similar to a new lot.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotDivisibleIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Whether or not a lot may be transacted against for a quantity less than total onhand for lot
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReservableTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Sample values: Reservable, Not reservable
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:CarryingCost" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Annual carrying cost
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomInventoryCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="InventoryLocation" type="InventoryLocationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The locations where this item resides in inventory
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="InventoryLocationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the association between the item and a storage location
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="StorageUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The storage unit of measure of the item in this inventory location
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SerialNumberSpecificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the specification for serial numbers assigned to the item in this location
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotNumberSpecificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the specification for lot numbers assigned to the item in this location
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UsageCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the relationship between the item and the Inventory locations. Examples are: DefaultShipping, SourceInventory, MasterInventory etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:LocationReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the location where the item is maintained in inventory
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:OwnerPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the owner party of the vendor managed inventory in this location
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomInventoryLocationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemAssetCharacteristics" type="ItemAssetCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Asset characteristics of an Item.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemAssetCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Asset item type. This is a Picklist. Sample values: Asset Group, Asset Activity and Rebuildable.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ActivityTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Asset activity type. This is a lookup field. Sample values: Calibration, Inspection etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ActivityReasonCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Asset activity cause. This is a lookup field. Sample values: Breakdown, Damage, Preventive etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShutdownActivityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Asset activity shutdown type. This is a lookup.Sample values: Not Required, Required etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ActivityNotificationRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Asset activity notification required
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ActivitySourceCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Activity Source. This is a lookup.Sample values: Regulatory, Warranty, Accident etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemAssetCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemAttachment" type="ItemAttachmentType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Binary, URI or other attachments that apply to the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemAttachmentType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The unique identifier for an item attachment
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Attachment" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to an attachment for the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemAttachmentType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemCatalog" type="ItemCatalogType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The reference to the catalog to which the item is associated
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemCatalogType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The unique identifier for the association between the item and a catalog
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ItemCatalogReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the catalog to which the item is associated
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemCatalogType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemClassification" type="ItemClassificationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Identifies the classification scheme (such as UNSPSC or Commodity Code) and code corresponding to the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemClassificationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for an item classification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ClassificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the categories to which the item is associated within the catalog
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ItemCatalogReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The reference to the catalog to which the item is associated
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemClassificationSpecificationOverride" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specification overrides for the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemClassificationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemClassificationSpecificationExclusion" type="ItemClassificationSpecificationExclusionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Identifies a value that is disallowed or invalid for the specification within the context of the classification. This value may be a legal value defined within the value set on which the specification is based but excluded for this classification
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemClassificationSpecificationExclusionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier of the excluded value
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Value" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Value that is excluded
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemClassificationSpecificationExclusionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemClassificationSpecificationOverride" type="ItemClassificationSpecificationOverrideType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Specification overrides for the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemClassificationSpecificationOverrideType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification for the item specification override
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the specification is mandatory for the classification
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultValue" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default value of the specification
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReadOnlyIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This indicator allows users to make the attribute read-only, so the user cannot change the value.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HiddenIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This indicator  prevents the attribute from displaying in quote, agreement, order, or asset views.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SearchableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This indicator allows an attribute and its values to be used in parametric searches. For example, if the attribute is Color, you can search for products that have Color = Red.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CheckEligibilityIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This indicator is to check eligibility for a specific attribute to indicate whether the transaction attributes of a Classification are eligible in context of the Classification.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ClassificationSpecificationIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification for the classification specification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemClassificationSpecificationExclusion" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies a value that is disallowed or invalid for the specification within the context of the classification. This value may be a legal value defined within the value set on which the specification is based but excluded for this classification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemClassificationSpecificationOverrideType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemCompatibility" type="ItemCompatibilityType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Compatibility rules for an Item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemCompatibilityType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification of the compatibility rule
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The type of the rule. Sample Values: Requires and Excludes
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="GroupName" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The compatibility group used for grouping this rule.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period for the rule.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ClassificationReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Classification associated with the rule.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemCompatibilityType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemContainerCharacteristics" type="ItemContainerCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Container Characteristics of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemContainerCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="ContainerTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Container type code for container items.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InternalVolume" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Internal volume for container items. Used by Shipping to calculate container capacity restrictions
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumLoadWeight" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum load weight of a container or a vehicle that can be used for shipping sales orders
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MinimumFillPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Minimum fill condition under which the container or vehicle should be used
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemContainerCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemGLAcccount" type="ItemGLAcccountType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The GLAccounts for the item. Examples are CostOfSalesAccount, ExpenseAccount, EncumbranceAccount, SalesAccount etc.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemGLAcccountType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the association between the item and chart of accounts.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UsageCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the relationship between the item and the GLAccount. Examples are CostOfSalesAccount, ExpenseAccount, EncumbranceAccount, SalesAccount etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:GLAccount" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the related GLAccount. Aka. account code combination
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemGLAcccountType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemInternetCharacteristics" type="ItemInternetCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Web characteristics of an Item.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemInternetCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="InternetOrderEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether an item is orderable on the web or not. iStore will only sell items with this flag to be true
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specifies item web status, which can be web enabled, web published, or neither
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemInternetCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemLifecycleCharacteristics" type="ItemLifecycleCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The lifecycle specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemLifecycleCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="LifecycleCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lifecycle code of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LifecyclePhaseCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lifecycle phase code of the item e.g., concept, design, build, maintenance, obsolescence etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RevisionLifecyclePhaseCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lifecycle phase code of the item revision e.g., concept, design, build, maintenance, obsolescence etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemLifecycleCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemLogisticCharacteristics" type="ItemLogisticCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Logistic characteristics of an Item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemLogisticCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="ModeOfTransportCodeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The shipping mode: air ground, and so on.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BelowReorderQuantityAllocationAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If allow allocation below the safe inventory level of this product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AutomaticSubstitutionAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If allow auto-substitution.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AutomaticAllocationAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If using automatic allocation during the fulfillment process.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AutomaticExplodeIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate auto explode.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShippingRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate if shipping is required.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:CarrierPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The name of the shipping carrier for this product.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemLogisticCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemManufacturer" type="ItemManufacturerType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Represents the manufacturers of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemManufacturerType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the association between the item and a manufacturer
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriorityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The priority or ranking of the item manufacturer with respect to other manufacturers of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The time period for which the item manufacturer relationship is valid
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The status of the manufacturer in the context of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ManufacturerPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the approved manufacturer of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="RelatedManufacturerItem" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Association between the Item Manufacturer and the corresponding manufacturer part
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemManufacturerType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemManufacturingCharacteristics" type="ItemManufacturingCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Manufacturing specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemManufacturingCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="StructureAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item may have a structure
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BOMItemTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the BOM Item Type such as Model, Option Class, Planning, Standard etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ConfiguratorModelTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the configurator model type (Standard / Container)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EffectivityControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effectivity control code. Indicates whether the item is under date effectivity or model/unit number effectivity control
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EngineeringItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is an engineering item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CostingEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates that cost information is maintained
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InventoryAssetIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates that the item is an inventory asset
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="StandardLotSizeQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the standard lot size for the lot controlled item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WIPSupplyTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the source of WIP material supply (e.g., Push, Assembly Pull, Operation Pull, Bulk, Supplier, Phantom)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SumComponentTaxIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+To compute the tax on a bundle by adding up the tax on its components.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WIPIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate that item is still being built
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OverCompletionToleranceTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Overcompletion tolerance type. Sample values: Amount and Percent
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OverCompletionTolerancePercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Overcompletion tolerance value
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InventoryCarryingPenaltyAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Penalty incurred for holding this item inventory
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OperationSlackPenaltyAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Penalty incurred for a time in between two operations
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BillsOfMaterialsConfigurationOptionCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Allows to Create Configured Item BOM with the following options: Based on Sourcing, Items Based on Model, BOM and Routing based on Sourcing, Based on Model.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ConfigurationMatchingMethodCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Matching the Configurations based on the following Choices: Standard Match, Custom Match, No.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RollUpInclusionIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag Indicating whether to include an item in the cost roll up.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ReturnPercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The percent by which the amount of shipment can vary from the ordered quantity at the time of receiving or receipt creation
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ShipmentPercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The percent by which the amount of shipment can vary from the ordered quantity at ship confirmation
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:BaseModelItemReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The base model from which this Assemble-to-order (ATO) item configuration was created
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EngineeringChangeOrderReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to engineering change order
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemManufacturingCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemMarketingCharacteristics" type="ItemMarketingCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Marketing characteristics for an Item.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemMarketingCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="TargetIndustryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The industry to target with this product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TargetMinimumAge" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The minimum age of buyers for this product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TargetPostalCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The postal code where to target sales of this product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TargetCountryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The country where you want to sell this product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TargetMaximumAge" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The maximum age of buyers for this product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemMarketingCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemOrderManagementCharacteristics" type="ItemOrderManagementCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Sales and Order Management specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemOrderManagementCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="AssembleToOrderIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is built for sales order demand (ATO)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BackOrderEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item may be back ordered (if it is out of stock)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SaleableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is a saleable product or service. An item may be saleable but not orderable (such as when pricing has not been done)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OrderableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item may be ordered by a customer
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReturnAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether to allow customers to return this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReturnInspectionRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether inspection is required if this item is returned by the customer
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InvoicingEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item can be invoiced
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShippableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item may be shipped to a customer
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FulfillmentCompositionTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Determines the granularity of the item for fulfillment. Examples: PartialItem - constitutes an indivisible element of another order item, WholeItem - represents a self-contained item and could be a group of partial items
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FulfillmentSuccessCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether all items of a bundle or offer must fulfill or the whole bundle or offer fails. E.g., All or none, Default etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BillingStartCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates when the billing needs to commence e.g., upon first usage, upon sale, upon service start etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriceTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Price type. Options are:
+One-Time. The customer pays once to buy the product.
+Recurring. The customer pays a fixed recurring fee to use the
+product. An example is a fixed monthly fee for local telephone service.
+Usage. The customer pays for the product based on usage. An example is the charge for electricity, based on how much you consume.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InternalOrderAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating internally orderable item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InternalOrderEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item is internally orderable
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SalesOrderTransactionAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate that the item can be used for order type 'SalesOrder'
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PickComponentIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating whether all shippable components should be picked
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ModelItemShipTogetherRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating model must be complete to ship. A model item with the Ship Model Complete item attribute set to Yes. This indicates that the entire configuration must be delivered in the same shipment. If the item attribute is set to No, components can ship separately.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OrderingATPCheckRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating ATP must be checked when item is ordered
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ComponentATPCheckRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating whether item may have components requiring ATP check
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultSalesOrderSourceTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default Sales Order Source Type. Sample values: Internal and External
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FinancingEligibileIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Item is eligible for financing
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TaxCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Tax code
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VolumeDiscountExclusionIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates an item does not contribute to volume discount for any order
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CouponExclusionIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates an item is excluded from coupons even if it is part of the group that any coupon applies
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PickToOrderIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates it's "Pick To Order" Model or Option Class item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MinimumOrderQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Minimum quantity that needs to be ordered for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumOrderQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum quantity allowed on the order for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InvoiceAppearanceAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item may appear on invoices
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemOrderManagementCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemPhysicalCharacteristics" type="ItemPhysicalCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The physical properties of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemPhysicalCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="HeightMeasure" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Height of one unit of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LengthMeasure" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Length of one unit of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WidthMeasure" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Width of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VolumeMeasure" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Volume of the item in the base unit of measure
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WeightMeasure" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Weight of the item in the base unit of measure
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TrainingFormatCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+For training products, this attribute indicates a training format such as Instructor led and Web-based.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ElectronicFormatIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating an item exists only in electronic format and not physical
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DownloadableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating an item is downloadable
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IndivisibleIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Item unit is indivisible
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemPhysicalCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemPlanningCharacteristics" type="ItemPlanningCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+MPS/MRP and general planning specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemPlanningCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="ConsignmentItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is consigned i.e., residing at the enterprise location but owned by the customer
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LotSizeMultiplier" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Fixed lot size multiplier of the work order - the planned order quantity must be a multiple of this value
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InventoryPlanningCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The inventory planning method for this item e.g., Min-max Planning, Reorder Point Planning, Not Planned etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MakeOrBuyCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is planned as manufactured or purchased
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumProductionOrderQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum order quantity of the work order for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MinimumProductionOrderQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Minimum order quantity of the work order for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReplenishmentSourceCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the source for replenishment - Inventory, Supplier or Sub-Inventory
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShrinkageRate" type="corecom:RateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The proportion of material expected to be lost during manufacture or storage of this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PlanTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Code that identifies the type of plan
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FixedSupplyDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Fixed days supply
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VMIMinimumSupplyDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The minimum number of days of inventory to be maintained based on consumption when it's Vender Managed.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VMIMaximumSupplyDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The maximum number of days of inventory to be maintained based on consumption when it's Vender Managed.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VMIFixedOrderQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Fixed order quantity in units when it's Vender Managed.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VMIForecastTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Forecast type for average daily demand calculation. Sample values: order forecast (default), sales forecast, historical sales
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ForecastHorizon" type="corecom:MeasureType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Forecast horizon for average daily demand calculation. This could be quantity or duration.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MRPPlanningMethodCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+MRP Planning option. Sample values: MRP planning, MPS planning, Not planned, MRP and DRP planning, MPS and DRP planning, DRP planning
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PlanningExceptionControlSet" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Exception control set
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ATOForecastControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Type of forecast control for Assemble To Order. Sample values: Consume, Consume and derive, None
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EndAssemblyPeggingCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+End assembly pegging flag for MRP. Sample values: Full Pegging, End Assembly/Full Pegging, Net by Project/Ignore Excess, None, Net by Project/Net Excess, End Assembly Pegging
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AcceptableEarlyDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Days an order may be early before rescheduling is recommended
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OrderQuantityRoundingCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Sample values: Round order quantities, Do not round order quantities
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SupplyCreationIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Create Supply Flag
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="NonBudgetableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Exclude from budget flag
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CriticalIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Critical Component flag
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RepetitivePlanningIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item to be planned as repetitive schedule
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CalculateATPIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Calculate ATP flag (y/n) for MRP planning routine
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MPSAutoDeletionCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Automatically deletes Master Production Schedule  entries within a time period. Sample values: None, Past due, Within demand time fence, Within planning time fence
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PlanningTimeFenceCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Planning time fence code. It is the time range or limit. Sample values:Cumulative total lead time, Cumulative manufacturing lead time, Total lead time, User defined time fence
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PlanningTimeFenceDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Planning time fence days
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DemandTimeFenceCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Demand time fence code. Sample values: Cumulative total lead time, Cumulative manufacturing lead time, Total lead time, User defined time fence
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DemandTimeFenceDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Demand time fence days
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReleaseTimeFenceCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Release time fence code. Sample values: Cumulative total lead time, Cumulative manufacturing lead time, Item total lead time, User defined time fence, No not autorelease, Kanban Item (Do Not Release)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReleaseTimeFenceDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Number of days within which this item should be auto released
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SubstitutionWindowCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This window determines until what time a substitute could be considered for a particular item.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SubstitutionWindowDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If the substitution window type is "User Defined", you are able to specify the number of days using this attribute.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ContinuousInterOrganizationTransferCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Code indicating the mode of Continuous Inter Organization transfers. Sample values are Yes,  No, Use Global Value (default). This is a code to indicate whether the item can be transferred between inventory locations or cannot be transferred from the original location or always stored at the global location, etc. For example between Manufcaturing partner inventory locations
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DistributionPlannedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This is to indicate that a distribution plan is associated
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumInventoryQuantityCalculationDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum Inventory Level Calculation Window
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TargetInventoryQuantitySupplyDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum Inventory Level Days of Supply
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TargetInventoryQuantityCalculationDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Target Inventory Level Calculation Window
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SubcontractingComponentCategoryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the sub-contracting type associated to this item when it is used as a sub-contracting component. This is a code. Values are 'Pre-positioned' and 'Synchronized'. 1. Pre-positioned: Components that are shipped to the Manufacturing Partner (MP)without reference to any subcontracting order ahead of assembly requirements. Pre-positioned components are generally low cost items, and the Original Equipment Manufacturer (OEM) stores these components in larger quantities at the MP. 2. Synchronized - Components that are shipped to the MP with reference to a specific subcontracting order along with the order. Synchronized components are generally high cost items and are shipped when the order is placed with the MP and in the quantities required to produce the outsourced assembly in the subcontracting order.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReleaseAuthorizationRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Sales Order release authorization flag: authorization by customer required, authorization not required (default),
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AutoASNExpirationIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Auto-expiring ASN flag: ASN auto-expired (default), ASN not auto-expired
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PlannedInventoryPointEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate that an inventory point for the item has been enabled
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SupplyConsumptionConvergenceCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Convergent Supply Consumption Pattern. Sample values: Series, Parallel, Use Global Value (default)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SupplyFeedingDivergenceCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Divergent Supply Feeding Pattern. Sample values: Series, Series with MTQ, Use Global Value (default)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RepairProgram" type="corecom:StringType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Defines the relationship with the vendor for the repair item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RepairYieldPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Yield when a defective part is repaired/upgraded to a new part
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SupplierRepairLeadtime" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Time to repair the part at the supplier site
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PrepositionPointIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The Pre-positioning Point represents the Push type of relationship with the trading partner. The item is a subcontracting component sold to a manufacturing partner independently of subcontracting components.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Cost" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Order cost incurred during planning
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="SafetyStockCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Safety stock characteristics
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemRepetitivePlanning" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The repetitive planning process uses the planning time fence to help stabilize material plans and minimize disruption to short term shop floor and supplier schedules. The nervousness of repetitive material plans can be controlled by specifying minimum and maximum rate changes that are enforced by the repetitive planning process inside the planning time fence.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ReorderCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reorder planning specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ProcessingLeadTimeCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Lead time specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="MinMaxCharacteristics" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Min-max planning specific attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemPlanningCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemPriceList" type="ItemPriceListType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Indicates the related pricelist for an item.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemPriceListType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PriceListReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to a pricelist
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemPriceListType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemProcessManufacturingCharacteristics" type="ItemProcessManufacturingCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Process manufacturing characteristics of an Item.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemProcessManufacturingCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="ProcessQualityEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item may be used in OPM (Oracle Process Manufacturing) Process Quality
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProcessCostingEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating cost information may be maintained in OPM (Oracle Process Manufacturing)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RecipeEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item may appear on a Recipe in OPM (Oracle Process Manufacturing) Process
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HazardousIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item is hazardous
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CASID" type="corecom:IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Chemical abstracts service registry number
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProcessExecutionEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item may be used in OPM (Oracle Process Manufacturing) Process Excecution
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemProcessManufacturingCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemPurchasingCharacteristics" type="ItemPurchasingCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Purchasing and receiving specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemPurchasingCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="AssetClassificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The fixed asset category to classify this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DebitGLAccountCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The default GL inventory account to be debited when this item is received in inventory
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HazardClassificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The hazard class code of the item used to identify the category of hazardous material for international trade
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptInspectionRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether inspection of the received item is required before making the invoice payment
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UnitListPrice" type="corecom:PriceType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the default price of a unit of this item on a purchase order, requisition, RFQ, or quotation
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PurchasingAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is allowed to be purchased
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item must be received before paying the invoice
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RFQRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether an RFQ (request for quotation) is required before purchasing the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TaxableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the supplier charges a tax on this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TaxCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The purchasing tax code which indicates the tax rates available to use for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IssueUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The unit of measure used to issue the item from inventory
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UseApprovedSupplierIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item purchases are restricted to approved suppliers
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptSubstitutionAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether receipt of substitutes is allowed for this item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UnorderedReceiptAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item may be received without a purchase order
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OverReceiptQuantityPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum acceptable over-receipt percentage
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptRoutingCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the type of routing of the item to its location
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PurchasingDescriptionUpdateAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Allow item description updates on PO lines
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OutsourcingAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating item may be sourced from external vendor and appearing on a purchase order to outside vendor.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OutsourcingUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unit of measure when sourced from external vendor.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RoundingFactor" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Rounding factor used to determine order quantity
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptWindowControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Exception processing for early/late receipts. Sample values: NONE No Receiving Control Enforced 
+REJECT Prevent Receipt of Goods or
+Services
+WARNING Display Warning Message
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExpressDeliveryAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating express delivery allowed
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="QuantityReceiptExceptionControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Over tolerance receipts processing method code. 
+NONE No Receiving Control Enforced
+REJECT Prevent Receipt of Goods or
+Services
+WARNING Display Warning Message
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LocationReceiptExceptionControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Require receipt location to match ship-to location. Sample values:
+NONE No Receiving Control Enforced
+REJECT Prevent Receipt of Goods or
+Services
+WARNING Display Warning Message
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PurchasingItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating purchasing item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OutsourcedAssemblyItemIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies whether an item is Outsourced Assembly item or not
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UNNumberID" type="corecom:IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Purchasing UN (United Nations) number to indentify specific materials(hazardous material for example) for International trade purpose.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WarehouseUpdateDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Warehouse update date for tracking changes relevant to data collected in Data Warehouse
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ReceivingDurationTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the number of days before or after planned receipt that item may be received
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PurchasingClosePercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Receipt percentage tolerance within which purchasing automatically close purchase order shipments.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:InvoicingClosePercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Percentage tolerance within which a shipment is automatically closed for invoicing when billed
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:MarketUnitPrice" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Purchasing market price. Market price is usually a discount from the UnitListPrice.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PriceUpdatePercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Percentage tolerance within which a price is allowed to change (via price catalog message such as EDI 832) based on an agreed upon price, e.g., used in blanket purchase agreement
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemPurchasingCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemRepetitivePlanning" type="ItemRepetitivePlanningType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The repetitive planning process uses the planning time fence to help stabilize material plans and minimize disruption to short term shop floor and supplier schedules. The nervousness of repetitive material plans can be controlled by specifying minimum and maximum rate changes that are enforced by the repetitive planning process inside the planning time fence.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemRepetitivePlanningType">
+		<xsd:sequence>
+			<xsd:element name="AcceptableRateIncreasePercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This field represents the percentage of the current aggregate rate by which your suggested daily rates can vary from current aggregate rates within a repetitive planning period inside the planning time fence. The repetitive planning process calculates acceptable rate increase by multiplying the current aggregate rate by the acceptable rate increase percent. For example, if the current aggregate rate is 100/day and the acceptable rate increase percent is 10%, the acceptable rate increase amount is 10/day. Inside the planning time fence, the repetitive planning process could not suggest a daily rate greater than 110/day.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AcceptableRateDecreasePercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This field represents the percentage of the current aggregate rate by which your suggested daily rates can vary from current aggregate rates within a repetitive planning period inside the planning time fence. An acceptable rate decrease is calculated by multiplying the current aggregate rate by the acceptable rate decrease percent. For example, if the current aggregate rate is 100/day and the acceptable rate decrease percent is 10%, the acceptable rate decrease amount is 10/day. Inside the planning time fence, the repetitive planning process could not suggest a daily rate greater than 90/day.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OverrunRatePercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The overrun percent can also be used to control the nervousness of material plans by allowing current repetitive schedules to overbuild by a small quantity without incurring new suggested daily rates. In this way, the planning overrun rate reduces minor and unnecessary rate change suggestions. The overrun  rate is equal to the optimal rate for the planning period multiplied by the overrun percent. For example, if the optimal rate is 100/day and the overrun percent is 10%, the repetitive planning process calculates an overrun rate of 10/day.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemRepetitivePlanningType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemRevisionHistory" type="ItemRevisionHistoryType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Represents the revisions for the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemRevisionHistoryType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the revision history of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Describes the item revision
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The time period for which the item revision is valid
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemRevisionHistoryType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemServiceCharacteristics" type="ItemServiceCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Service specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemServiceCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="BillingTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The material, labor, event or expense billing type of the item. This identifies the categories for a specific billing rules to be applied to identify the final price.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ContractTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The contract type of the item e.g., service, subscription, usage, warranty, etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CreateFixedAssetIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether a depreciable asset should be created when an instance of this item is sold
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultServiceContractDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The default service contract or warranty duration applicable to the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultServiceContractPeriodCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The period code in which the default duration is expressed (e.g., Month, Year etc.)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ContractCoverageEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is eligible to be covered by a service contract
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefectTrackingEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether defects of the item need to be tracked
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProvisioningEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is eligible for electronic fulfillment
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ServiceBillingEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether service billing is enabled for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ServiceRequestEnabledIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether service request may be created for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WarrantyDelayDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the number of days after shipment that warranty begins for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TrackInstanceIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies whether an instance of the item should be tracked as an installed product or asset
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriceTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicated the type of pricing (ie. one-time, recurring, or usage)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BillingTimePeriodCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Frequency of applying the charge. Sample values:  One Time, Weekly, Monthly, Yearly
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MeanTimeBetweenFailureDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The mean time between failure for the product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MeanTimeToRepairDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The mean time to repair the product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FieldReplacableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If this is a field-replaceable unit.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefectiveReturnRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+If a defective product should be returned by the customer when a replacement is shipped.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumOwnershipQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the maximum quantity of the product that can be owned by the customer at any given point of time
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MinimumOwnershipQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the minimum quantity of the product that can be owned by the customer at any given point of time
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PartialPurchaseAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to indicate whether customers are allowed to purchase a part of the product.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MultiRatingUsageMetricsSupportIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating support for rating usage metrics. RUM - ratable usage metrics
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProvisioningTagCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Billing tag to link extended rating/provisioning attributes to the item.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SpecialRatingMaximumQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The field identifies the quantity allowed for the item when the Item represents a Special rating list like Friends and Family list
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SpecialRatingTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the type of special rating list. Eg. Friends, Family
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BillableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This is a flag. It identifies the purchased products that will be sent to billing applications during order submission.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ServiceInstanceIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag to identify a product which is also a service bundle and can be ordered independently
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RecoveredPartReturnControlCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates return is required for recovered parts, scrap in field, which is used for spare parts. Sample values: Fast Return. No Return and Slow Return
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ActivationRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates an item requires activation
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ServiceableComponentIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is serviceable by other service-type items and whether it can be referenced as the component of another item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreventiveMaintainableComponentIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating whether item can be a preventatively maintained by other service type items
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ServiceCostProrateAllowedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating cost of service may be prorated
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SubscriptionDependencyIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Subscription dependency enabled
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriorityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Service Importance Level
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SupplierWarrantyIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating service for the item is provided by a supplier
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TimeBillableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating service labor hours are billable
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExpenseBillableIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating service expenses are billable
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumWarrantyAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Monetary value of service costs covered by the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ResponseTimePeriodCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Period code for service response time. Sample values: Seconds, Minutes, Hours, Days, Weeks, Months, Years
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DefaultResponseDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default response time
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BillingEntityTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This identifies the type of billing entity that the item represents. Sample values: System, Subscription, Event, Special Rating.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssetLinearityClassificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+It is to identify whether assets of an item are going to be linear assets (not a single location. They are laid out in multiple 
+locations. For example:a road between two x-roads) or equipment asset type of thing
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ServiceContractCoverageTemplateReference" minOccurs="0"/>
+			<xsd:element ref="corecom:ServiceContractSubscriptionTemplateReference" minOccurs="0"/>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemServiceCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemSpecificationGroup" type="ItemSpecificationGroupType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Represents the logical grouping of a set of user defined attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemSpecificationGroupType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies a set of user defined attributes of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:SpecificationGroup" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Group of user defined attributes for the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemSpecificationGroupType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemSupplier" type="ItemSupplierType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Represents the approved suppliers for the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemSupplierType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the association between the item and an approved supplier
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriorityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The priority or ranking of the approved supplier for the item with respect to other approved suppliers for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The status of the approved supplier in the context of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The time period for which the approved supplier relationship is valid for the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:SupplierPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the approved supplier
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemSupplierSpecificationGroup" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the logical grouping of a set of user defined attributes of the item supplier association
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemSupplierLocation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The supplier location from which the item could be supplied
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemSupplierType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemSupplierLocation" type="ItemSupplierLocationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The supplier location from which the item could be supplied
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemSupplierLocationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the association between the item and supplier location
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriorityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The priority or ranking of the supplier locaiton for the item with respect to other supplier locations
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The status of the supplier location in the context of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The time period for which the supplier location is valid for the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:LocationReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies the address of the supplier
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemSupplierLocationSpecificationGroup" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Represents the logical grouping of a set of user defined attributes of the item supplier location association
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemSupplierLocationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemSupplierLocationSpecificationGroup" type="ItemSupplierLocationSpecificationGroupType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Represents the logical grouping of a set of user defined attributes of the item supplier location association
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemSupplierLocationSpecificationGroupType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies a set of user defined attributes of the association between the item and a supplier location
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:SpecificationGroup" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Group of user defined attributes for the association between the item and the supplier location
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemSupplierLocationSpecificationGroupType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemSupplierSpecificationGroup" type="ItemSupplierSpecificationGroupType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Represents the logical grouping of a set of user defined attributes of the item supplier association
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemSupplierSpecificationGroupType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identifies a set of user defined attributes of the item supplier association
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:SpecificationGroup" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Group of user defined attributes for the item supplier association
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemSupplierSpecificationGroupType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ItemUOMConversion" type="ItemUOMConversionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+This identifies a set of related UOMs and their conversions from the Item's UOM. This should usually be applicable only to packaging UOMs and not to weight, volume or dimension UOMs
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemUOMConversionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the UOM conversion of the item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FromUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The source unit of measure for the conversion
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ToUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The target unit of measure for the conversion
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ConversionRate" type="corecom:RateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The conversion factor for the conversion from the source to the target unit of measure for the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomItemUOMConversionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="MinMaxCharacteristics" type="MinMaxCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Min-max planning specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="MinMaxCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="MaximumQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The maximum threshold for min-max planning. The item quantity should not exceed this level
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MinimumQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The minimum threshold for min-max planning. The item should be ordered when the quantity drops to this level
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomMinMaxCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ProcessingLeadTimeCharacteristics" type="ProcessingLeadTimeCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Lead time specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ProcessingLeadTimeCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="CumulativeManufacturingDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Cumulative manufacturing lead time
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CumulativeTotalDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Cumulative total lead time
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FixedDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Fixed portion of the assembly's lead time (independent of order quantity) such as that required for setup or teardown
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DurationUOMCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The unit of measure in which the lead time for this item is maintained
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReferenceLotSizeQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The item quantity used to compute the processing lead time. The default value would be the item's standard lot size
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PostprocessingDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Time required to receive a purchased item into inventory from the initial supplier receipt
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreprocessingDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Time to be added to the purchasing or manufacturing lead time to place an order
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProcessingDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The time required to procure or manufacture the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UnitProductionDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The time required to produce a single unit of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomProcessingLeadTimeCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="RelatedItem" type="RelatedItemType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Reference to other items e.g., for substitute, up-sell, cross-sell, product recommendation etc.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RelatedItemType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the association between the item and a related item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RelationshipCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the relationship between the item and the related item. Examples are substitute, up-sell, cross-sell, etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriorityRanking" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The rank of the related item with respect to other related items for a given relationship type. As an example, item substitutes could be ranked
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Conversion" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The conversion factor between the item and the related item. As an example, one may need two units of a substitute item against a single unit of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The time period for which the item relationship is valid
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ItemReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the related item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ItemCompatibility" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Compatibility rules for an Item
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomRelatedItemType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="RelatedManufacturerItem" type="RelatedManufacturerItemType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Association between the Item Manufacturer and the corresponding manufacturer part
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RelatedManufacturerItemType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the association between the Item Manufacturer and the Manufacturer Part Number
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ManufacturerItemID" type="corecom:IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The manufacturer's identification of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriorityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The priority or ranking of the manufacturer item with respect to other related manufacturer items
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomRelatedManufacturerItemType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ReorderCharacteristics" type="ReorderCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Reorder planning specific attributes of the item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ReorderCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="ReorderQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The fixed reorder quantity in units
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumReorderQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum quantity allowed for replenishment reorder of the item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MinimumInventoryQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The minimum quantity allowed before replenishment must occur
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MaximumSupplyDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates the maximum allowed days of supply for replenishment reorder
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MinimumSupplyDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The minimum allowed days of supply of the item before replenishment must occur
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomReorderCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="RevisedItem" type="ItemType"/>
+	<xsd:element name="SafetyStockCharacteristics" type="SafetyStockCharacteristicsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Safety stock characteristics
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SafetyStockCharacteristicsType">
+		<xsd:sequence>
+			<xsd:element name="SafetyStockTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Safety stock code. 1 Non-MRP planned
+2 MRP planned percent
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SafetyStockDuration" type="corecom:DurationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Safety stock bucket days
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SafetyStockPercent" type="corecom:PercentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Safety stock percentage
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreitemcust:CustomSafetyStockCharacteristicsType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+</xsd:schema>

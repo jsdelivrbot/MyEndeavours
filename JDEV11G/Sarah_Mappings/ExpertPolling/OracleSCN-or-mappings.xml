@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 11g Release 1 (11.1.1.1.0) (Build 090430)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>OracleSCN-OR</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:object-relational-class-mapping-descriptor">
+         <opm:class>OracleSCN.MoviesIn</opm:class>
+         <opm:alias>MOVIES_IN</opm:alias>
+         <opm:primary-key>
+            <opm:field table="MOVIES_IN" name="TITLE" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="OracleSCNSelect" xsi:type="toplink:read-all-query">
+                  <opm:criteria operator="equal" xsi:type="toplink:relation-expression">
+                     <toplink:left name="pollingStrategy" xsi:type="toplink:query-key-expression">
+                        <toplink:base xsi:type="toplink:base-expression"/>
+                     </toplink:left>
+                     <toplink:right xsi:type="toplink:constant-expression">
+                        <toplink:value xsi:type="xsd:string">OracleSCN</toplink:value>
+                     </toplink:right>
+                  </opm:criteria>
+                  <toplink:reference-class>OracleSCN.MoviesIn</toplink:reference-class>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>title</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="TITLE" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>director</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="DIRECTOR" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>starring</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="STARRING" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>synopsis</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="SYNOPSIS" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>genre</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="GENRE" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>runTime</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="RUN_TIME" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>releaseDate</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="RELEASE_DATE" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.sql.Timestamp</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>rated</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="RATED" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>rating</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="RATING" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>viewerRating</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="VIEWER_RATING" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>status</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="STATUS" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>totalGross</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="TOTAL_GROSS" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>deleted</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="DELETED" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>sequenceno</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="SEQUENCENO" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>lastUpdated</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="LAST_UPDATED" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.sql.Timestamp</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>pollingStrategy</opm:attribute-name>
+               <opm:field table="MOVIES_IN" name="POLLING_STRATEGY" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:one-to-many-mapping">
+               <opm:attribute-name>movieReviewsInCollection</opm:attribute-name>
+               <opm:reference-class>OracleSCN.MovieReviewsIn</opm:reference-class>
+               <opm:private-owned>true</opm:private-owned>
+               <opm:target-foreign-key>
+                  <opm:field-reference>
+                     <opm:source-field table="MOVIE_REVIEWS_IN" name="TITLE" xsi:type="opm:column"/>
+                     <opm:target-field table="MOVIES_IN" name="TITLE" xsi:type="opm:column"/>
+                  </opm:field-reference>
+               </opm:target-foreign-key>
+               <toplink:batch-reading>true</toplink:batch-reading>
+               <toplink:container xsi:type="toplink:list-container-policy">
+                  <toplink:collection-type>oracle.toplink.indirection.IndirectList</toplink:collection-type>
+               </toplink:container>
+               <toplink:indirection xsi:type="toplink:value-holder-indirection-policy"/>
+               <toplink:selection-query xsi:type="toplink:read-all-query">
+                  <toplink:reference-class>OracleSCN.MovieReviewsIn</toplink:reference-class>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>oracle.toplink.indirection.IndirectList</toplink:collection-type>
+                  </toplink:container>
+               </toplink:selection-query>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:tables>
+            <toplink:table name="MOVIES_IN"/>
+         </toplink:tables>
+         <toplink:structure>structureName</toplink:structure>
+      </opm:class-mapping-descriptor>
+      <opm:class-mapping-descriptor xsi:type="toplink:object-relational-class-mapping-descriptor">
+         <opm:class>OracleSCN.MovieReviewsIn</opm:class>
+         <opm:alias>MOVIE_REVIEWS_IN</opm:alias>
+         <opm:primary-key>
+            <opm:field table="MOVIE_REVIEWS_IN" name="CRITIC" xsi:type="opm:column"/>
+            <opm:field table="MOVIE_REVIEWS_IN" name="TITLE" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy"/>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>title</opm:attribute-name>
+               <opm:read-only>true</opm:read-only>
+               <opm:properties>
+                  <opm:property name="fkPlaceholder">
+                     <opm:value>true</opm:value>
+                  </opm:property>
+               </opm:properties>
+               <opm:field table="MOVIE_REVIEWS_IN" name="TITLE" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>critic</opm:attribute-name>
+               <opm:field table="MOVIE_REVIEWS_IN" name="CRITIC" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>source</opm:attribute-name>
+               <opm:field table="MOVIE_REVIEWS_IN" name="SOURCE" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>grade</opm:attribute-name>
+               <opm:field table="MOVIE_REVIEWS_IN" name="GRADE" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>quote</opm:attribute-name>
+               <opm:field table="MOVIE_REVIEWS_IN" name="QUOTE" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>deleted</opm:attribute-name>
+               <opm:field table="MOVIE_REVIEWS_IN" name="DELETED" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>sequenceno</opm:attribute-name>
+               <opm:field table="MOVIE_REVIEWS_IN" name="SEQUENCENO" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>lastUpdated</opm:attribute-name>
+               <opm:field table="MOVIE_REVIEWS_IN" name="LAST_UPDATED" xsi:type="opm:column"/>
+               <toplink:attribute-classification>java.sql.Timestamp</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:one-to-one-mapping">
+               <opm:attribute-name>title</opm:attribute-name>
+               <opm:reference-class>OracleSCN.MoviesIn</opm:reference-class>
+               <opm:private-owned>true</opm:private-owned>
+               <opm:foreign-key>
+                  <opm:field-reference>
+                     <opm:source-field table="MOVIE_REVIEWS_IN" name="TITLE" xsi:type="opm:column"/>
+                     <opm:target-field table="MOVIES_IN" name="TITLE" xsi:type="opm:column"/>
+                  </opm:field-reference>
+               </opm:foreign-key>
+               <opm:foreign-key-fields>
+                  <opm:field table="MOVIE_REVIEWS_IN" name="TITLE" xsi:type="opm:column"/>
+               </opm:foreign-key-fields>
+               <toplink:batch-reading>true</toplink:batch-reading>
+               <toplink:indirection xsi:type="toplink:value-holder-indirection-policy"/>
+               <toplink:selection-query xsi:type="toplink:read-object-query">
+                  <toplink:reference-class>OracleSCN.MoviesIn</toplink:reference-class>
+               </toplink:selection-query>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:tables>
+            <toplink:table name="MOVIE_REVIEWS_IN"/>
+         </toplink:tables>
+         <toplink:structure>structureName</toplink:structure>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+   <toplink:login xsi:type="toplink:database-login">
+      <toplink:platform-class>oracle.toplink.platform.database.oracle.Oracle9Platform</toplink:platform-class>
+      <toplink:user-name></toplink:user-name>
+      <toplink:connection-url>null</toplink:connection-url>
+   </toplink:login>
+</toplink:object-persistence>

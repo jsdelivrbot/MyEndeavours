@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version 2.00 **
+** Date: 01 Nov 2007 **
+ 
+Copyright (c) 2007, Oracle. All rights reserved 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjects\Release2\Core\CommonEBO\V1\ItemStructure\ItemStructure.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO ItemStructure EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:coreitemstructurecust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- ====================================================================== -->
+	<!-- ==============  Imports and Includes   =============================== -->
+	<!-- ====================================================================== -->
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomItemStructure.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- ==============  ItemStructure Components ================ -->
+	<!-- ====================================================================== -->
+	<xsd:element name="ItemStructure" type="ItemStructureType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Item Structure EBO is used for describing the composition of different types of item structures such as Sales Kit, Product Bundle etc. It provides a single level of item composition. Thus, the Item Structure EBO gives only the immediate children items but not the composition of the children items. If a child item is a complex item, it will have its own item structure which will provide its composition.
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description> 
+Item Structure EBO is used for describing the composition of different types of item structures such as Sales Kit, Product Bundle etc. It provides a single level of item composition. Thus, the Item Structure EBO gives only the immediate children items but not the composition of the children items. If a child item is a complex item, it will have its own item structure which will provide its composition.
+            </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry/>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="ItemStructureType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:ItemStructureType">
+				<xsd:sequence>
+					<xsd:element ref="corecom:ItemStructureSpecificationGroup" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the group of user defined attributes for the item structure
+                            </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:ItemStructureAttachment" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Binary, URI or other attachments that apply to the item
+                            </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="ItemStructureComponentItem" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the component items that make up the item structure
+                            </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Custom" type="coreitemstructurecust:CustomItemStructureType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="ItemStructureComponentItem" type="ItemStructureComponentItemType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Identifies the component items that make up the item structure
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemStructureComponentItemType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:ComponentItemType">
+				<xsd:sequence>
+					<xsd:element ref="corecom:ComponentItemSpecificationGroup" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the group of user defined attributes for the component item
+                            </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="SubstituteComponentItem" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+References the substitute items for the component item
+                            </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Custom" type="coreitemstructurecust:CustomItemStructureComponentItemType" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="SubstituteComponentItem" type="SubstituteComponentItemType">
+		<xsd:annotation>
+			<xsd:documentation> 
+References the substitute items for the component item
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SubstituteComponentItemType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:SubstituteComponentItemType">
+				<xsd:sequence>
+					<xsd:element ref="corecom:ComponentItemSpecificationGroup" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the group of user defined attributes for the substitute component item
+                            </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Custom" type="coreitemstructurecust:CustomSubstituteComponentItemType" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.oracle.com/pcbpel/Attachments" targetNamespace="http://www.oracle.com/pcbpel/Attachments">
+	<xsd:complexType name="AttachmentType">
+		<xsd:sequence>
+			<xsd:element name="AttachmentComment" type="xsd:string"/>
+			<xsd:element name="Attachment" type="xsd:anyType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AttachmentList">
+	   <xsd:sequence>
+	       <xsd:element name="Attachment" type="AttachmentType"/>
+	   </xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_FL_RD_Sarah"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_RD_Sarah"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_RD_Sarah"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://www.openapplications.org/003_process_po_007"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="ReadSarah_plt" >
+    <plt:role name="ReadSarah_role" >
+      <plt:portType name="tns:ReadSarah_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.openapplications.org/003_process_po_007" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationObjectLibrary/ETH/OAGIS721/SARAH/V1/PROCESS_PO_007_SarahS0.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="ReadSarah_msg">
+        <wsdl:part name="body" element="imp1:PROCESS_PO_007"/>
+    </wsdl:message>
+    <wsdl:portType name="ReadSarah_ptt">
+        <wsdl:operation name="ReadSarah">
+            <wsdl:input message="tns:ReadSarah_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

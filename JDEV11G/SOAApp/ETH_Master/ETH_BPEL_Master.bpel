@@ -1,0 +1,77 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Aug 27 11:47:26 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_Master"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/ETH_Master/ETH_BPEL_Master"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/ETH_Master/ETH_BPEL_Master"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/SOAApp/ETH_SLAVE/ETH_BPEL_Slave"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+
+  <import namespace="http://xmlns.oracle.com/SOAApp/ETH_Master/ETH_BPEL_Master" location="ETH_BPEL_Master.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eth_bpel_master_client" partnerLinkType="client:ETH_BPEL_Master" myRole="ETH_BPEL_MasterProvider"/>
+    <partnerLink name="ETH_Call_Slave" partnerLinkType="ns1:ETH_BPEL_Slave"
+                 partnerRole="ETH_BPEL_SlaveProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_BPEL_MasterRequestMessage"/>
+    <variable name="Invoke1_process_InputVariable"
+              messageType="ns1:ETH_BPEL_SlaveRequestMessage"/>
+    <variable name="Invoke1_process_OutputVariable"
+              messageType="ns1:ETH_BPEL_SlaveResponseMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_BPEL_Master.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_bpel_master_client" portType="client:ETH_BPEL_Master" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$inputVariable.payload/client:input</from>
+        <to>$Invoke1_process_InputVariable.payload/ns1:input</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke1"
+            partnerLink="ETH_Call_Slave" portType="ns1:ETH_BPEL_Slave"
+            operation="process" inputVariable="Invoke1_process_InputVariable"
+            outputVariable="Invoke1_process_OutputVariable"
+            bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

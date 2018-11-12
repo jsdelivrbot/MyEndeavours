@@ -1,0 +1,14 @@
+<adapter-config name="ReadOracleB2BErrorDetails" adapter="Database Adapter" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/db/aiaB2BInfraDBCF" UIConnectionName="ap6002idmz" adapterRef=""/>
+  <endpoint-interaction portType="ReadOracleB2BErrorDetails_ptt" operation="readOracleB2BErrorDetails">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="ReadOracleB2BErrorDetails.B2BBusinessMessage"/>
+      <property name="QueryName" value="readOracleB2BErrorDetails"/>
+      <property name="MappingsMetaDataURL" value="ReadOracleB2BErrorDetails-or-mappings.xml"/>
+      <property name="OXMappingsMetaDataURL" value="ReadOracleB2BErrorDetails-ox-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

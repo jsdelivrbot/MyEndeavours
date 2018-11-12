@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="SOA_MDSConnection" className="oracle.tip.tools.ide.common.resourcepalette.adapter.mds.MDSProvider" credentialStoreKey="SOA_MDSConnection" xmlns="">
+      <Factory className="oracle.tip.tools.ide.common.resourcepalette.adapter.mds.MDSProviderFactory"/>
+      <RefAddresses>
+         <SecureRefAddr addrType="DBMDSJDBCPASSWORD"/>
+         <StringRefAddr addrType="ConnectionName">
+            <Contents>SOA_MDSConnection</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DBMDS_JDBC_USERID">
+            <Contents>SOA2_MDS</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="ConnectionType">
+            <Contents>oracle.mds.persistence.stores.db.DBMetadataStore</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="MDS_PARTITION_NAME">
+            <Contents>soa-infra</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DBMDSDBCONNECTIONNAME">
+            <Contents>DEV_SOA2_MDS</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DBMDS_JDBC_URL">
+            <Contents>jdbc:oracle:thin:@orionddb.emerson.com:34002:oriond2</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="Local_MDS" className="oracle.tip.tools.ide.common.resourcepalette.adapter.mds.MDSProvider" xmlns="">
+      <Factory className="oracle.tip.tools.ide.common.resourcepalette.adapter.mds.MDSProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="ConnectionName">
+            <Contents>Local_MDS</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="ConnectionType">
+            <Contents>oracle.mds.persistence.stores.file.FileMetadataStore</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="MDS_PARTITION_NAME">
+            <Contents>seed</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="metadata-path">
+            <Contents>C:\jdeveloper\integration</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="USER_FILEMDS_ROOT">
+            <Contents>C:\jdeveloper\integration\seed</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="ETHCustomDatabase_Dev" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="ETHCustomDatabase_Dev" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>oriond2</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>eth_custom_schema</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>orionddb.emerson.com</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>34002</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

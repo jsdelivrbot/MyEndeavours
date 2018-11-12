@@ -1,0 +1,97 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Jan 21 17:11:39 GMT+05:30 2011
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="RND_BPEL_JMSPublisher"
+               targetNamespace="http://services.emerson.com/Dhami_SOA_jws/RND_JMSPublisher/RND_BPEL_JMSPublisher"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://services.emerson.com/Dhami_SOA_jws/RND_JMSPublisher/RND_BPEL_JMSPublisher"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/RND_JMSPublisher/RND_JMS_ENQ_Message"
+         xmlns:ns2="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ns6="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns4="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns9="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns7="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns3="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/opaque/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="rnd_bpel_jmspublisher_client" partnerLinkType="client:RND_BPEL_JMSPublisher" myRole="RND_BPEL_JMSPublisherProvider"/>
+    <partnerLink name="RND_JMS_ENQ_Message"
+                 partnerRole="Produce_ETHMessage_role"
+                 partnerLinkType="ns1:Produce_ETHMessage_plt"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:RND_BPEL_JMSPublisherRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:RND_BPEL_JMSPublisherResponseMessage"/>
+    <variable name="Invoke_Produce_ETHMessage_InputVariable"
+              messageType="ns1:Produce_ETHMessage_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in RND_BPEL_JMSPublisher.wsdl) -->
+    <receive name="receiveInput" partnerLink="rnd_bpel_jmspublisher_client" portType="client:RND_BPEL_JMSPublisher" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_JMS">
+      <copy>
+        <from expression="string('Inderpal')"/>
+        <to variable="Invoke_Produce_ETHMessage_InputVariable" part="opaque"
+            query="/ns10:opaqueElement"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_JMS"
+            inputVariable="Invoke_Produce_ETHMessage_InputVariable"
+            partnerLink="RND_JMS_ENQ_Message"
+            portType="ns1:Produce_ETHMessage_ptt"
+            operation="Produce_ETHMessage"/>
+    <assign name="Assign_Result">
+      <copy>
+        <from expression="string('bale bale')"/>
+        <to variable="outputVariable" part="payload"
+            query="/client:processResponse/client:result"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="rnd_bpel_jmspublisher_client" portType="client:RND_BPEL_JMSPublisher" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

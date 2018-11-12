@@ -1,0 +1,14 @@
+<adapter-config name="Test_XML_AQ_ENQ" adapter="AQ Adapter" wsdlLocation="Test_XML_AQ_ENQ.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/ETH/B2B_DB" UIConnectionName="DEV_ETHAPP_DB"/>
+  <endpoint-interaction portType="Enqueue_ptt" operation="Enqueue">
+    <interaction-spec className="oracle.tip.adapter.aq.outbound.AQEnqueueInteractionSpec">
+      <property name="PayloadHeaderRequired" value="true"/>
+      <property name="RecipientList" value="REAWIRE"/>
+      <property name="QueueName" value="REAWIRE_OUT_QUEUE"/>
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+      <property name="DatabaseSchema" value="ETH_SOAINFRA"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

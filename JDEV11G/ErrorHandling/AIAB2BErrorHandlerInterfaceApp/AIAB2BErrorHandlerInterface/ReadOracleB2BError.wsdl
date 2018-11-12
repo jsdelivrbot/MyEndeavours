@@ -1,0 +1,40 @@
+<?binding.jca ReadOracleB2BError_aq.jca?>
+<wsdl:definitions name="ReadOracleB2BError"
+targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/AIAB2BErrorHandlerInterface/ReadOracleB2BError"
+xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/AIAB2BErrorHandlerInterface/ReadOracleB2BError"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:obj1="http://xmlns.oracle.com/xdb/SH_SOAINFRA" 
+xmlns:msg_out="http://integration.oracle.com/B2B/Exception"
+xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="Dequeue_plt">
+        <plt:role name="Dequeue_role">
+            <plt:portType name="tns:Dequeue_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/AIAB2BErrorHandlerInterface/ReadOracleB2BError" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/AIAB2BErrorHandlerInterface/ReadOracleB2BError" xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/" xmlns:obj1="http://xmlns.oracle.com/xdb/SH_SOAINFRA">
+            <import namespace="http://xmlns.oracle.com/xdb/SH_SOAINFRA" schemaLocation="xsd/SH_SOAINFRA_IP_MESSAGE_TYPE.xsd"/>
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/" schemaLocation="xsd/aqAdapterInboundHeader.xsd"/>
+            <complexType name="HeaderCType">
+                <sequence>
+                    <element name="QueueHeader" type="hdr:HeaderType"/>
+                    <element name="PayloadHeader" type="obj1:IP_MESSAGE_TYPE"/>
+                </sequence>
+            </complexType>
+            <element name="Header" type="tns:HeaderCType"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://integration.oracle.com/B2B/Exception" schemaLocation="xsd/IPException.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Exception_msg_out">
+        <wsdl:part name="Exception" element="msg_out:Exception"/>
+    </wsdl:message>
+    <wsdl:message name="Header_msg">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:portType name="Dequeue_ptt">
+        <wsdl:operation name="Dequeue">
+            <wsdl:input message="tns:Exception_msg_out"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

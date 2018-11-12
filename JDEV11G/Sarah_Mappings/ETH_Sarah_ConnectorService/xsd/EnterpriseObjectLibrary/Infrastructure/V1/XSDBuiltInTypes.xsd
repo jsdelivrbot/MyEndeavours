@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version 1.0 **
+** Date: January 30 2010 **
+
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+
+License information for this file is provided in the file 
+
+"Oracle AIA EBO License.txt" that is provided with this package.
+
+XML Schema 
+
+Name: \EnterpriseObjects\Infrastructure\V1\XSDBuiltInTypes.xsd
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO add-on to XML Schema Specification built-in data types. This schema module includes primitive data types used for defining Core Data Types compliance to UN/CEFACT Core Data Types specification version 3.0.           ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- ====================================================================== -->
+	<xsd:simpleType name="AnyDateTimePointBaseType">
+		<xsd:annotation>
+			<xsd:documentation>From UN/CEFACT XML NDR, this is considered a built-in type.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="xsd:gYear xsd:gYearMonth xsd:date xsd:dateTime"/>
+	</xsd:simpleType>
+</xsd:schema>

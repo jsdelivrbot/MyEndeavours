@@ -1,0 +1,13 @@
+<adapter-config name="ETH_FL_WR_PO_OAGIS" adapter="File Adapter" wsdlLocation="ETH_FL_WR_PO_OAGIS.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter"/>
+  <endpoint-interaction portType="Write_PO_OAGIS_ptt" operation="Write_PO_OAGIS">
+    <interaction-spec className="oracle.tip.adapter.file.outbound.FileInteractionSpec">
+      <property name="LogicalDirectory" value="PO_OAGIS_OUT_DIR"/>
+      <property name="Append" value="false"/>
+      <property name="FileNamingConvention" value="PO_OAGIS.xml"/>
+      <property name="NumberMessages" value="1"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

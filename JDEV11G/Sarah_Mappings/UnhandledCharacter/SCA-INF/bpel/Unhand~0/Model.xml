@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Unhandled_BPEL" targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/UnhandledCharacter/Unhandled_BPEL" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/UnhandledCharacter/Unhandled_BPEL" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/UnhandledCharacter/FL_GET_UnhandledCharacter" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns2="http://schema.emerson.com/FL_GET_UnhandledCharacter" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/UnhandledCharacter/FL_WR_UnhandledCharacter" xmlns:ns5="http://schema.emerson.com/FL_PUT_OutUnhandledCharacter" xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/UnhandledCharacter/FL_RD_Base64Binary" xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/UnhandledCharacter/FL_PUT_UnhandledCharacter" id="BpPrc0">
+          <bpelx:exec import="java.util.*" id="BxExe0"/>
+          <bpelx:exec import="java.lang.*" id="BxExe1"/>
+          <bpelx:exec import="java.math.*" id="BxExe2"/>
+          <bpelx:exec import="java.io.*" id="BxExe3"/>
+          <bpelx:exec import="oracle.soa.common.util.Base64Decoder" id="BxExe4"/>
+  <partnerLinks>
+    <partnerLink name="FL_RD_Base64Binary" partnerLinkType="ns6:Read_plt" myRole="Read_role"/>
+    <partnerLink name="FL_PUT_UnhandledCharacter" partnerLinkType="ns7:Write_plt" partnerRole="Write_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_Input" messageType="ns6:Read_msg"/>
+    <variable name="gvarDecodedMessage" type="xsd:string"/>
+    <variable name="PayloadXML" element="ns2:Head"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns7:Write_msg"/>
+  </variables>
+ 
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+    <receive name="Receive1" createInstance="yes" variable="Receive_Input" partnerLink="FL_RD_Base64Binary" portType="ns6:Read_ptt" operation="Read" id="BpRcv0">
+      <!--<bpelx:property name="jca.message.encoding" expression="string('UTF-8')"/>-->
+    </receive>
+    
+    <bpelx:exec name="Java_Embedding1" version="1.5" language="java" id="BxExe5">
+      <![CDATA[/*Write your java code below e.g.            
+	System.out.println("Hello, World");           
+*/           
+try{         
+addAuditTrailEntry("System_Encoding - ",System.getProperty("file.encoding")); 
+System.out.println(System.setProperty("file.encoding","UTF8")); 
+ addAuditTrailEntry("System_Encoding Changed - ",System.getProperty("file.encoding"));                                          
+String System_base64string = ((oracle.xml.parser.v2.XMLElement)getVariableData("Receive_Input","opaque","/ns3:opaqueElement")).getFirstChild().getNodeValue();                  
+addAuditTrailEntry("System_base64string",System_base64string);                 
+ String decoded = Base64Decoder.decode(System_base64string);                                         
+ addAuditTrailEntry("decoded string is ",decoded);                                       
+ setVariableData("gvarDecodedMessage",decoded);                  
+            
+}                                                                                        
+catch(Exception e)                      
+{                    
+    e.printStackTrace();                   
+}]]>
+    </bpelx:exec>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from expression="oraext:parseXML(string(bpws:getVariableData('gvarDecodedMessage')))"/>
+        <to variable="Invoke1_Write_InputVariable" part="body" query="/ns2:Head"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" bpelx:invokeAsDetail="no" inputVariable="Invoke1_Write_InputVariable" partnerLink="FL_PUT_UnhandledCharacter" portType="ns7:Write_ptt" operation="Write" id="BpInv0"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Nov 24 23:45:38 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_FL_PUT_APLL"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_FTP_TEST/ETH_FL_PUT_APLL"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_FTP_TEST/ETH_FL_PUT_APLL"
+     xmlns:imp1="http://xmlns.oracle.com/SOAApp/ETH_FTP_TEST/ETH_FTP_TEST_BPPEL"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="WriteAPLL_plt" >
+    <plt:role name="WriteAPLL_role" >
+      <plt:portType name="tns:WriteAPLL_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_FTP_TEST/ETH_FL_PUT_APLL"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/SOAApp/ETH_FTP_TEST/ETH_FTP_TEST_BPPEL" schemaLocation="xsd/ETH_FTP_TEST_BPPEL.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="WriteAPLL_msg">
+        <wsdl:part name="body" element="imp1:process"/>
+    </wsdl:message>
+    <wsdl:portType name="WriteAPLL_ptt">
+        <wsdl:operation name="WriteAPLL">
+            <wsdl:input message="tns:WriteAPLL_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

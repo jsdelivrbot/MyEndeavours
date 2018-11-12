@@ -1,0 +1,140 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri May 13 16:59:52 CDT 2011
+  Author:  nhelder
+  Type: BPEL 2.0 Process
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ALESup_MX_ProjectDetails_SubImpl"
+         targetNamespace="http://xmlns.oracle.com/BPO/ALESup_MX_ProjectDetails_Sub/ALESup_MX_ProjectDetails_SubImpl"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/BPO/ALESup_MX_ProjectDetails_Sub/ALESup_MX_ProjectDetails_SubImpl"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/BPO/ALESup_MX_ProjectDetails_Sub/DB_Insert_AlePpWoSubscribe"
+         xmlns:ns2="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoSvc/V1"
+         xmlns:ns3="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/DB_Insert_AlePpWoSubscribe"
+         xmlns:ns5="http://www.allete.com/ns/interfaceMetadata/v1"
+         xmlns:ns4="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoTypes/V1"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+    <import namespace="http://xmlns.oracle.com/BPO/ALESup_MX_ProjectDetails_Sub/ALESup_MX_ProjectDetails_SubImpl" location="ALESup_MX_ProjectDetails_SubImpl.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="alesup_mx_projectdetails_subimpl_client" partnerLinkType="client:ALESup_MX_ProjectDetails_SubImpl" myRole="ALESup_MX_ProjectDetails_SubImplProvider" partnerRole="ALESup_MX_ProjectDetails_SubImplRequester"/>
+        <partnerLink name="DB_Insert_AlePpWoSubscribe"
+                     partnerLinkType="ns1:DB_Insert_AlePpWoSubscribe_plt"
+                     partnerRole="DB_Insert_AlePpWoSubscribe_role"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable" messageType="client:ALESup_MX_ProjectDetails_SubImplRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable" messageType="client:ALESup_MX_ProjectDetails_SubImplResponseMessage"/>
+        <variable name="dbInsertAlePpWoSubscribeInput"
+                  messageType="ns1:AleppwosubscribeCollection_msg"/>
+        <variable name="dbInsertAlePpWoSubscribeOutput"
+                  messageType="ns1:AleppwosubscribeCollection_msg"/>
+    </variables>
+    <faultHandlers>
+        <catchAll>
+            <sequence name="faultSequence">
+                <rethrow name="rethrow"/>
+                <exit name="exit"/>
+            </sequence>
+        </catchAll>
+    </faultHandlers>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in ALESup_MX_ProjectDetails_SubImpl.wsdl) -->
+        <receive name="receiveInput" partnerLink="alesup_mx_projectdetails_subimpl_client" portType="client:ALESup_MX_ProjectDetails_SubImpl" operation="process" variable="inputVariable" createInstance="yes"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <if name="ifFundingWoIndicatorEqualsOne">
+            <documentation>fundingWoIndicatorEqualsOne</documentation>
+            <condition>$inputVariable.payload/ns4:projectDetails/ns4:FundingWorkOrderIndicator = 1</condition>
+            <assign name="transformAlePpWoSubscribeInputWithWoNumAndId">
+                <bpelx:annotation>
+                    <bpelx:pattern patternName="bpelx:transformation"/>
+                </bpelx:annotation>
+                <copy>
+                    <from>ora:doXSLTransformForDoc("xsl/transformDbInsertAlePpWoSubscribeInputWithWoNumAndId.xsl", $inputVariable.payload)</from>
+                    <to variable="dbInsertAlePpWoSubscribeInput"
+                        part="AleppwosubscribeCollection"/>
+                </copy>
+            </assign>
+            <else>
+                <documentation>fundingWoIndicatorNotEqualToOne</documentation>
+                <assign name="transformDbInsertAlePpWoSubscribeInput">
+                    <bpelx:annotation>
+                        <bpelx:pattern patternName="bpelx:transformation"/>
+                    </bpelx:annotation>
+                    <copy>
+                        <from>ora:doXSLTransformForDoc("xsl/transformDbInsertAlePpWoSubscribeInput.xsl", $inputVariable.payload)</from>
+                        <to variable="dbInsertAlePpWoSubscribeInput"
+                            part="AleppwosubscribeCollection"/>
+                    </copy>
+                </assign>
+            </else>
+        </if>
+        <invoke name="invokeDbInsertAlePpWoSubscribe"
+                partnerLink="DB_Insert_AlePpWoSubscribe"
+                portType="ns1:DB_Insert_AlePpWoSubscribe_ptt"
+                operation="insert"
+                inputVariable="dbInsertAlePpWoSubscribeInput"
+                outputVariable="dbInsertAlePpWoSubscribeOutput"
+                bpelx:invokeAsDetail="no"/>
+        <assign name="transformOutputVariable">
+            <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:transformation"/>
+            </bpelx:annotation>
+            <copy>
+                <from>ora:doXSLTransformForDoc("xsl/transformOutputVariable.xsl", $inputVariable.payload, "dbInsertAlePpWoSubscribeOutput.AleppwosubscribeCollection", $dbInsertAlePpWoSubscribeOutput.AleppwosubscribeCollection)</from>
+                <to variable="outputVariable" part="payload"/>
+            </copy>
+        </assign>
+        <invoke name="callbackClient" partnerLink="alesup_mx_projectdetails_subimpl_client" portType="client:ALESup_MX_ProjectDetails_SubImplCallback" operation="processResponse" inputVariable="outputVariable"/>
+    </sequence>
+</process>

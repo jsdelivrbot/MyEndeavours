@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.00 **
+** Date: Jan 27, 2009 **
+ 
+Copyright (c) 2007, Oracle. All rights reserved
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\ItemFormula.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO ItemFormula EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:coreitemformulacust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00.00" > 
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomItemFormula.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<!-- ====================================================================== -->
+<!-- ==============  ItemFormula Components ================ -->
+<!-- ====================================================================== -->
+                      <xsd:element name="ItemFormula" type="ItemFormulaType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Contains information about the item formula used to produce the item/product, such as the item formula name, item formula version, item formula output quantity, etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                 <xsd:annotation> 
+                      <xsd:documentation> 
+                           <svcdoc:EBO> 
+                                   <svcdoc:Description> 
+Contains information about the item formula used to produce the item/product, such as the item formula name, item formula version, item formula output quantity, etc.
+                                   </svcdoc:Description> 
+                                   <svcdoc:Type>EBO</svcdoc:Type> 
+                                   <svcdoc:Industry/> 
+                           </svcdoc:EBO> 
+                      </xsd:documentation> 
+                 </xsd:annotation> 
+            <xsd:complexType name="ItemFormulaType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier for the Item Formula.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Name" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Item Formula name.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of Item Formula
+e.g. Standard ItemFormula, Packaged Item ItemFormula etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ScalabilityIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicates if the Item Formula is scalable.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the Item Formula.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ClassificationCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Classification to which this Item Formula belongs to.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ActiveIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicates if the Item Formula is Active.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TotalInputQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The total quantity of materials used to produce a batch.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TotalOutputQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total material yielded by the Item Formula.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:Status"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Status of the Item Formula.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Attachment"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Document Attachment for Item Formula.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:OwnerPersonReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the owner of the Item Formula.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ProjectReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the Project associated with this Item Formula.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:OwnerBusinessUnitReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the owner business unit for the Item Formula. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ItemFormulaMaterial"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies material details for a Item Formula, such as quantity, Type, Ingredient, usage of the material etc., in the production of product.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreitemformulacust:CustomItemFormulaType" minOccurs="0"/>
+                 </xsd:sequence>
+            </xsd:complexType>
+                      <xsd:element name="ItemFormulaMaterial" type="ItemFormulaMaterialType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies material details for a Item Formula, such as quantity, Type, Ingredient, usage of the material etc., in the production of product.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ItemFormulaMaterialType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique Identifier for the Item Formula Material.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of material
+e.g. Product, Ingredient, Byproduct.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ItemQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Quantity of material produced or consumed.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ReleaseTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of Material Release
+e.g. Automatic, Partial etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ScrapFactor" type="corecom:NumericType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Decimal used to calculate required quantity.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ScaleTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of Scaling
+e.g. Fixed, Proportional etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PhantomTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of Phantom
+ e.g. Not a phantom,   Automatic phantom replacement, Manual phantom
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="QuantityContributorIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicates if the item contributes to operation/step quantity.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="YieldContributorIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicates if the item ( product or ingredient ) contributes to yield.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ByProductTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The type of byproduct being yielded.
+e.g. rework, waste etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ItemReference" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Reference to the Inventory Item.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:EffectiveTimePeriod"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A period of time for which the material is effective.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Attachment"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Document Attachment for Item Formula Material.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreitemformulacust:CustomItemFormulaMaterialType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+</xsd:schema>

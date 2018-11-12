@@ -1,0 +1,12 @@
+<adapter-config name="JMS_TriggerPublish_ProjectDetails" adapter="JMS Adapter" wsdlLocation="JMS_TriggerPublish_ProjectDetails.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/aqjms/Allete_Pp_Wo_Pub_JQ" UIJmsProvider="OJMS" UIConnectionName="localhost"/>
+  <endpoint-activation portType="consumeMessage_ptt" operation="consumeMessage">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="PayloadType" value="TextMessage"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="DestinationName" value="aqjms/Allete_Pp_Wo_Pub_JQ"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

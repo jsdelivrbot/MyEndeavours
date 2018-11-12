@@ -1,0 +1,23 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ALESup_MX_ProjectDetails_SubProxy"
+     targetNamespace="http://xmlns.oracle.com/BPO/ALESup_MX_ProjectDetails_Sub/ALESup_MX_ProjectDetails_SubProxy"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:inp1="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoSvc/V1"
+     xmlns:tns="http://xmlns.oracle.com/BPO/ALESup_MX_ProjectDetails_Sub/ALESup_MX_ProjectDetails_SubProxy"
+    >
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoSvc/V1"
+                 schemaLocation="xsd/projectWoSvc.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="payload" element="inp1:projectDetailsCanonical"/>
+    </wsdl:message>
+    <wsdl:portType name="subscribeProjectDetails_ptt">
+        <wsdl:operation name="subscribeProjectDetails">
+            <wsdl:input message="tns:requestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

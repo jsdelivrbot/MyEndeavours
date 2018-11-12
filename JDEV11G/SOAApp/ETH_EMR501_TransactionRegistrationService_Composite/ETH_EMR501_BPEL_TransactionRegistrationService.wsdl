@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ETH_EMR501_BPEL_TransactionRegistrationService"
+             targetNamespace="http://xmlns.oracle.com/TrainingAppl/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_BPEL_TransactionRegistrationService"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/TrainingAppl/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_BPEL_TransactionRegistrationService"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://xmlns.oracle.com/TrainingAppl/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_BPEL_TransactionRegistrationService" schemaLocation="xsd/ETH_EMR501_BPEL_TransactionRegistrationService.xsd" />
+		</schema>
+    
+	</wsdl:types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<wsdl:message name="ETH_EMR501_BPEL_TransactionRegistrationServiceRequestMessage">
+		<wsdl:part name="payload" element="client:process"/>
+	</wsdl:message>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!-- portType implemented by the ETH_EMR501_BPEL_TransactionRegistrationService BPEL process -->
+	<wsdl:portType name="ETH_EMR501_BPEL_TransactionRegistrationService">
+		<wsdl:operation name="txnprocess">
+			<wsdl:input  message="client:ETH_EMR501_BPEL_TransactionRegistrationServiceRequestMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="ETH_EMR501_BPEL_TransactionRegistrationService">
+		<plnk:role name="ETH_EMR501_BPEL_TransactionRegistrationServiceProvider">
+			<plnk:portType name="client:ETH_EMR501_BPEL_TransactionRegistrationService"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</wsdl:definitions>

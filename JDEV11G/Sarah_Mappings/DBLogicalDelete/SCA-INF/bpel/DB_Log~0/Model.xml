@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="DB_LogicalDelete" targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/DBLogicalDelete/DB_LogicalDelete" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/DBLogicalDelete/DB_LogicalDelete" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/Sarah_Mappings/DBLogicalDelete/DBLogicalDelete" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBLogicalDelete" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="DBLogicalDelete" partnerLinkType="ns1:DBLogicalDelete_plt" myRole="DBLogicalDelete_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_receive_InputVariable" messageType="ns1:ProcessSchedulerTableCollection_msg"/>
+    <variable name="Input" element="ns2:ProcessSchedulerTableCollection"/>
+  </variables>
+  <sequence name="main" id="BpSeq0">
+    <receive name="Receive1" createInstance="yes" variable="Receive1_receive_InputVariable" partnerLink="DBLogicalDelete" portType="ns1:DBLogicalDelete_ptt" operation="receive" id="BpRcv0"/>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from variable="Receive1_receive_InputVariable" part="ProcessSchedulerTableCollection" query="/ns2:ProcessSchedulerTableCollection/ns2:ProcessSchedulerTable/ns2:processName"/>
+        <to variable="Input" query="/ns2:ProcessSchedulerTableCollection/ns2:ProcessSchedulerTable/ns2:processName"/>
+      </copy>
+      <copy>
+        <from variable="Receive1_receive_InputVariable" part="ProcessSchedulerTableCollection" query="/ns2:ProcessSchedulerTableCollection/ns2:ProcessSchedulerTable/ns2:pollFlag"/>
+        <to variable="Input" query="/ns2:ProcessSchedulerTableCollection/ns2:ProcessSchedulerTable/ns2:pollFlag"/>
+      </copy>
+    </assign>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Aug 03 16:31:51 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

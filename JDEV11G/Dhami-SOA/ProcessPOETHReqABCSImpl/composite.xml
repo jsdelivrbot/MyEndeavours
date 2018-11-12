@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite name="ProcessPOETHReqABCSImpl" revision="1.0" mode="active" state="on" xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:ui="http://xmlns.oracle.com/soa/designer/"   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <import namespace="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL" location="ETH_CommonService_BPELRef.wsdl"/>
+    <import location="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl"/>
+    <import namespace="http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1" location="ProcessPOETHReqABCSImpl.wsdl" importType="wsdl"/>
+        <!--<svcdoc:AIA>
+               <svcdoc:ServiceSolutionComponentAssociation>
+                   <svcdoc:GUID>24b7bd4c-2e0d-4634-867c-42000bb1cb6c</svcdoc:GUID>
+               </svcdoc:ServiceSolutionComponentAssociation>
+        </svcdoc:AIA>-->
+    <service ui:wsdlLocation="ProcessPOETHReqABCSImpl.wsdl" name="ProcessPOETHReqABCSImpl">
+    <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1#wsdl.interface(ProcessPOETHReqABCSImpl)"/> 
+    <binding.ws port="http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1#wsdl.endpoint(ProcessPOETHReqABCSImpl/ProcessPOETHReqABCSImpl_pt)" 	xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+         <!--<svcdoc:AIA>
+               <svcdoc:Service>
+                        <svcdoc:ImplementationDetails>
+                           <svcdoc:ApplicationName>ETH</svcdoc:ApplicationName>
+                            <svcdoc:BaseVersion>Provide participating application version details here</svcdoc:BaseVersion>
+                            <svcdoc:DevelopedBy>Oracle</svcdoc:DevelopedBy>
+                            <svcdoc:OracleCertified>Yes</svcdoc:OracleCertified>
+                            <svcdoc:ArtifactType>RequesterABCSImplementation</svcdoc:ArtifactType>   
+                            <svcdoc:ServiceOperation>
+                                <svcdoc:Name>PO</svcdoc:Name>
+                            </svcdoc:ServiceOperation>
+                        </svcdoc:ImplementationDetails>
+                </svcdoc:Service>
+         </svcdoc:AIA>-->
+    </service>
+    <property name="oracle.composite.faultPolicyFile">oramds:/apps/AIAMetaData/faultPolicies/fault-policies.xml</property>
+    <property name="oracle.composite.faultBindingFile">oramds:/apps/AIAMetaData/faultPolicies/fault-bindings.xml</property>
+    <component name="ProcessPOETHReqABCSImplProcess">
+    <implementation.bpel src="ProcessPOETHReqABCSImplProcess.bpel"/>
+    <property name="bpel.config.transaction">required</property>
+    <property name="bpel.config.oneWayDeliveryPolicy">sync</property>
+    </component>
+    <reference ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl" name="AIAAsyncErrorHandlingBPELProcess">
+        <interface.wsdl interface="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.interface(AIAAsyncErrorHandlingBPELProcess)" callbackInterface="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.interface(AIAAsyncErrorHandlingBPELProcessCallback)" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+        <binding.ws port="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.endpoint(AIAAsyncErrorHandlingBPELProcess/AIAAsyncErrorHandlingBPELProcess)" location="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+        <!--<svcdoc:AIA>
+            <svcdoc:Reference>
+                        <svcdoc:ArtifactType>UtilityService</svcdoc:ArtifactType>
+                        <svcdoc:ServiceOperation>
+                        <svcdoc:Name>initiate</svcdoc:Name>
+                        </svcdoc:ServiceOperation>
+                    </svcdoc:Reference>
+                    </svcdoc:AIA>-->
+    </reference>
+    <reference ui:wsdlLocation="ETH_CommonService_BPELRef.wsdl" name="ETH_CommonService_BPEL">
+        <interface.wsdl interface="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL#wsdl.interface(ETH_CommonService_BPEL)" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+        <binding.ws port="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL#wsdl.endpoint(eth_commonservice_bpel_client_ep/ETH_CommonService_BPEL_pt)" location="http://usmtnz-dinfap19.dev.emrsn.org:8120/soa-infra/services/ETH_Temp/ETH_CommonServices_EBS/eth_commonservice_bpel_client_ep?WSDL" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+        <!--<svcdoc:AIA>
+                    <svcdoc:Reference>
+                        <svcdoc:ArtifactType>EnterpriseBusinessService</svcdoc:ArtifactType>
+                        <svcdoc:ServiceOperation>
+                        <svcdoc:Name>ETH_CommonService_BPEL</svcdoc:Name>
+                        </svcdoc:ServiceOperation>
+                    </svcdoc:Reference>
+                </svcdoc:AIA>-->
+            </reference>
+    <wire>
+        <source.uri>ProcessPOETHReqABCSImpl</source.uri>
+        <target.uri>ProcessPOETHReqABCSImplProcess/ProcessPOETHReqABCSImpl</target.uri>
+    </wire>
+    <wire>
+        <source.uri>ProcessPOETHReqABCSImplProcess/AIAAsyncErrorHandlingBPELProcess</source.uri>
+        <target.uri>AIAAsyncErrorHandlingBPELProcess</target.uri>
+    </wire>
+    <wire>
+        <source.uri>ProcessPOETHReqABCSImplProcess/ETH_CommonService_BPEL</source.uri>
+        <target.uri>ETH_CommonService_BPEL</target.uri>
+    </wire>
+
+</composite>

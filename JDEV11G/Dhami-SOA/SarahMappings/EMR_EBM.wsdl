@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="EMR_EBM"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/SarahMappings/EMR_EBM"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/SarahMappings/EMR_EBM"
+     xmlns:imp1="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/EmersonPurchaseOrder/V1"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="WriteEMR_EBM_plt" >
+    <plt:role name="WriteEMR_EBM_role" >
+      <plt:portType name="tns:WriteEMR_EBM_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/SarahMappings/EMR_EBM"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/EmersonPurchaseOrder/V1" schemaLocation="xsd/Core/EBO/PurchaseOrder/V1/EmersonPurchaseOrderEBM.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="WriteEMR_EBM_msg">
+        <wsdl:part name="body" element="imp1:CreatePurchaseOrderEBM"/>
+    </wsdl:message>
+    <wsdl:portType name="WriteEMR_EBM_ptt">
+        <wsdl:operation name="WriteEMR_EBM">
+            <wsdl:input message="tns:WriteEMR_EBM_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

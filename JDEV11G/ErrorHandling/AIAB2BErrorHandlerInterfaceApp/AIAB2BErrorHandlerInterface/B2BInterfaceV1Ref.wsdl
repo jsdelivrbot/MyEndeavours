@@ -1,0 +1,16 @@
+<wsdl:definitions
+     name="B2BInterfaceServiceV1"
+     targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="B2BInterface_PL">
+        <plnk:role name="B2BInterface_Role">
+            <plnk:portType name="corecom:B2BInterface"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" location="oramds:/apps/AIAMetaData/AIAComponents/B2BServiceLibrary/Infrastructure/wsdls/V1/B2BInterfaceV1.wsdl"/>
+</wsdl:definitions>

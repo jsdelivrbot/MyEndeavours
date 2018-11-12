@@ -1,0 +1,25 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/ETHWorkAPPL/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_FL_Listing_Files"
+        xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <element name="filelist">
+    <complexType>
+      <sequence>
+        <element name="file" minOccurs="0" maxOccurs="unbounded">
+          <complexType>
+            <sequence>
+              <element name="directory" type="string"/>
+              <element name="filename" type="string"/>
+              <element name="lastModifiedTime" type="string"/>
+              <element name="creationTime" type="string"/>
+              <element name="size" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+      <attribute name="size" type="string"/>
+    </complexType>
+  </element>
+  <element name="empty">
+    <complexType/>
+  </element>
+  <element name="FilenameWOExtsn" type="string"/>
+</schema>

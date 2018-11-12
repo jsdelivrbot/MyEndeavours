@@ -1,0 +1,14 @@
+<adapter-config name="ETH_AQ_DEQ_PMSarah" adapter="AQ Adapter" wsdlLocation="ETH_AQ_DEQ_PMSarah.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/ETH/PMSarah" UIConnectionName="SarahS0" adapterRef=""/>
+  <endpoint-activation portType="Dequeue_ptt" operation="Dequeue">
+    <activation-spec className="oracle.tip.adapter.aq.inbound.AQDequeueActivationSpec">
+      <property name="QueueName" value="ECX_OUTBOUND"/>
+      <property name="DatabaseSchema" value="APPLSYS"/>
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+      <property name="PayloadHeaderRequired" value="true"/>
+      <property name="DequeueCondition" value="Correlation='ETHPO' and MessagId is not null"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

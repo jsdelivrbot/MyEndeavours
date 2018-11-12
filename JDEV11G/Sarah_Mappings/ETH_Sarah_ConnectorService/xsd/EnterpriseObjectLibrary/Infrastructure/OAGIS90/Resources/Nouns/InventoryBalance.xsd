@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\InventoryBalance.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="InventoryBalance" type="InventoryBalanceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Includes all stocked items and primarily represents the quantities of each item by location.  Other item-by-location information, such as serial numbers or lot numbers, can also be included.  The use of this noun does not include basic item master data that is independent of location, such as item description and dimensions.
+
+All Quantity information will be updated as replacing the entire field, not incremented by the quantity</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="InventoryBalanceType">
+                <xsd:annotation>
+                        <xsd:documentation>The Status indicates whether an item is active, inactive, or in other various states.  Examples of values for this field include:	Active, Inactive, Hold, Deleted, Obsolete</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:group ref="InventoryTransactionGroup"/>
+                        <xsd:element ref="AvailableQuantity" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Number of inventory items that are available to be used.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="InspectedQuantity" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Number of inventory items that have been inspected.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="AllocatedQuantity" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Number of inventory items that have been allocated for other uses as such are no longer availble. Unless the allocation is overriden.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="BlockedQuantity" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Number of inventory items that are blocked or unavailable.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="StorageUOMCode" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation>This is the storage unit of measure of the item. This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ValueClassification" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9"> Is a grouping used to determine the General Ledger accounting effect. These are user defined values, with the exception of the values TOTAL, MATERIAL, LABOR, BURDEN, OVERHEAD, SUBCONTRACT.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="DensityConversionFactor" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The density factor is a simple field with a numeric value that enables a conversion rate to the standard density of a liquid.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="CatchWeightQuantity" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the quantity of product as it is shipped.  This quantity is generally used with the CatchWeightConversion Factor.  This provides for the business case in process manufacturing when one is converting such things as the number of chickens that go into a box.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="CatchWeightConversionFactor" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The catch weight conversion factor is a stock keeping conversion factor for inventory goods.  This is a special conversion factor for when the units of measure can not be converted using arithmetic.  This conversion factor is used with the CatchWeightQuantity.
+
+Examples of the use of this factor include:	
+Number of Chickens to a Box
+Number of units of a chemical in a barrel</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ActualTemperature" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ProductionOrderReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="SalesOrderReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

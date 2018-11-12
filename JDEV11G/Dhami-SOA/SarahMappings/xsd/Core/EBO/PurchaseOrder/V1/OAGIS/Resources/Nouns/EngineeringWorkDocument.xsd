@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\EngineeringWorkDocument.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="EngineeringWorkOrder" type="OpenEngineeringWorkOrderType"/>
+        <xsd:complexType name="EngineeringWorkDocumentType">
+                <xsd:sequence>
+                        <xsd:element ref="EngineeringWorkRequest" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "work_request" entity.  AP214-FDIS Definition: A Work_request is the solicitation for some work to be done.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="WorkOrders" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "work_order" entity.  AP214-FDIS Definition: A Work_order is the authorization for one or more Activity objects to be performed.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="EngineeringActivity" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ReferencesGroup"/>
+                        <xsd:element ref="EngineeringApproval" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "approval" entity.  AP214-FDIS-Definition: An Approval is a judgement concerning the quality of those product data that are subject of the Approval.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="Item" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="DesignInstance" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="NextHigherAssembly" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "next_higher_assembly" entity.  AP214-FDIS Definition: A Next_higher_assembly is a relationship where the attribute 'related' specifies a constituent of an assembly and the attribute 'relating' specifies the immediate parent assembly of the constituent.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="EngineeringWorkRequestType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="RequesterParty" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The person requesting the work.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ItemDesignReference" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:attribute name="type" type="EngineeringWorkRequestCodeContentType">
+                                        <xsd:annotation>
+                                                <xsd:documentation>Identifies the type of Work Request.</xsd:documentation>
+                                        </xsd:annotation>
+                                </xsd:attribute>
+                                <xsd:attribute name="status" type="EngineeringWorkRequestStatusCodeContentType">
+                                        <xsd:annotation>
+                                                <xsd:documentation>Identifies the status of the Work Request.</xsd:documentation>
+                                        </xsd:annotation>
+                                </xsd:attribute>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="EngineeringActivityType">
+                <xsd:complexContent>
+                        <xsd:extension base="ProjectBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ResolvedRequestID" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ConcernedParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SupplierParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RequesterParty" minOccurs="0"/>
+                                        <xsd:element ref="ActualTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="PlannedTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="MethodName" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="MethodConsequenceText" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="MethodDescription" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ParentEngineeringActivityID" minOccurs="0"/>
+                                        <xsd:element name="ChildEngineeringActivityIDs" type="SequencedIDsType" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>Identifies the child engineering Activity IDs. These may have a sequence indicator that specifies the order in which they are to be performed. </xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="EngineeringApprovalType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "approval" entity.  AP214-FDIS-Definition: An Approval is a judgement concerning the quality of those product data that are subject of the Approval.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="LevelCode" minOccurs="0"/>
+                        <xsd:element ref="Status" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the status of the Approval.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="IsAppliedTo" minOccurs="0"/>
+                        <xsd:element ref="ApprovedByParty" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="PlannedDateTime" minOccurs="0"/>
+                        <xsd:element ref="ActualDateTime" minOccurs="0"/>
+                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="EngineeringActivity" type="EngineeringActivityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "activity" entity.  AP214-FDIS-Definition: An Activity is the act of achieving or accomplishing an action.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="NextHigherAssemblyType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "next_higher_assembly" entity.  AP214-FDIS Definition: A next_higher_assembly is a relationship where the attribute 'related' specifies a constituent of an assembly and the attribute 'relating' specifies the immediate parent assembly of the constituent.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="AssemblyID" minOccurs="0"/>
+                        <xsd:element ref="ParentAssemblyDesignReference" minOccurs="0"/>
+                        <xsd:element ref="ChildAssemblyDesignReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="PlacementText" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="DesignInstanceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the STEP quantified_instance and single_instance.  If the Quantity element has value zero or is not present, then this is a single_instance.  STEP "item_instance" entity.  AP214-FDIS Definition: An item_instance is the occurrence of an object in a product structure that is defined eiher by a Design_discipline_item_definition or by a Product_identification.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="InstanceDefinition" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="Quantity" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="DesignInstance" type="DesignInstanceType"/>
+        <xsd:element name="EngineeringWorkRequest" type="EngineeringWorkRequestType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "work_request" entity.  AP214-FDIS Definition: A Work_request is the solicitation for some work to be done.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="WorkOrdersType">
+                <xsd:sequence>
+                        <xsd:element ref="EngineeringWorkOrder" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="DesignDeviationPermitWorkOrder" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="DesignReleaseWorkOrder" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ManagementResolutionWorkOrder" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ProductDeviationPermitWorkOrder" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ManufacturingReleaseWorkOrder" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="WorkOrders" type="WorkOrdersType">
+                <xsd:annotation>
+                        <xsd:documentation>STEP "work_order" entity.  AP214-FDIS Definition: A Work_order is the authorization for one or more Activity objects to be performed.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="EngineeringWorkOrderBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="DocumentReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ItemDesignReference" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SemanticEngineeringWorkOrderType">
+                <xsd:complexContent>
+                        <xsd:extension base="EngineeringWorkOrderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="OpenEngineeringWorkOrderType">
+                <xsd:complexContent>
+                        <xsd:extension base="EngineeringWorkOrderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:attribute name="type" type="EngineeringWorkRequestCodeContentType"/>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="DesignDeviationPermitWorkOrder" type="SemanticEngineeringWorkOrderType"/>
+        <xsd:element name="DesignReleaseWorkOrder" type="SemanticEngineeringWorkOrderType"/>
+        <xsd:element name="ManagementResolutionWorkOrder" type="SemanticEngineeringWorkOrderType"/>
+        <xsd:element name="ManufacturingReleaseWorkOrder" type="SemanticEngineeringWorkOrderType"/>
+        <xsd:element name="ProductDeviationPermitWorkOrder" type="SemanticEngineeringWorkOrderType"/>
+        <xsd:element name="EngineeringApproval" type="EngineeringApprovalType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "approval" entity.  AP214-FDIS-Definition: An Approval is a judgement concerning the quality of those product data that are subject of the Approval.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="NextHigherAssembly" type="NextHigherAssemblyType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">STEP "next_higher_assembly" entity.  AP214-FDIS Definition: A Next_higher_assembly is a relationship where the attribute 'related' specifies a constituent of an assembly and the attribute 'relating' specifies the immediate parent assembly of the constituent.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EngineeringWorkDocument" type="EngineeringWorkDocumentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This document encompasses
+(1) EngineeringWorkRequest
+(2) EngineeringWorkOrder
+(3) EngineeringBOM. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="IsAppliedTo" type="ItemDesignReferenceType"/>
+        <xsd:element name="InstanceDefinition" type="ItemDesignReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Refers to he DesignItem or DesignDisciplineItemDefinition that this is an instance of.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ItemDesignReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Reference to an entity involved in describing designs.  Refers either to a DesignItem (using ItemIds), an OrderItem (using ItemIds) a DesignDisciplineItemDefinition (using a DesignDisciplineItemDefinitionId), an Instance (using a DesignInstanceId), or a NextHigherAssembly (using a NextHigherAssemblyId).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ItemIDs" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="DesignDisciplineItemDefinitionID" minOccurs="0"/>
+                        <xsd:element ref="DesignInstanceID" minOccurs="0"/>
+                        <xsd:element ref="NextHigherAssemblyID" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="ParentAssemblyDesignReference" type="ItemDesignReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Refers to an ItemInstance: the immediate parent assembly of the constituent.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ChildAssemblyDesignReference" type="ItemDesignReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Refers to an ItemInstance: a constituent of an assembly.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemDesignReference" type="ItemDesignReferenceType"/>
+</xsd:schema>

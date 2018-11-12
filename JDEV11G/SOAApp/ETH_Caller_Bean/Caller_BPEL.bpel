@@ -1,0 +1,185 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Aug 24 17:48:36 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Caller_BPEL"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/ETH_Caller_Bean/Caller_BPEL"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/ETH_Caller_Bean/Caller_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_Caller_Bean/ETH_TEST_FL_RD"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/SOAApp/ETH_Called_Bean/ETH_BPEL_Async"
+         xmlns:ns4="http://xmlns.oracle.com/SOAApp/ETH_Called_Bean/ETH_BPEL_Called_FF"
+         xmlns:ns5="http://xmlns.oracle.com/SOAApp/ETH_Called_Bean/ETH_BPEL_Sync">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ETH_TEST_FL_RD" partnerLinkType="ns1:Read_plt"
+                 myRole="Read_role"/>
+    <partnerLink name="Call_ASync" partnerLinkType="ns3:ETH_BPEL_Async"
+                 partnerRole="ETH_BPEL_AsyncProvider"
+                 myRole="ETH_BPEL_AsyncRequester"/>
+    <partnerLink name="Call_FF" partnerLinkType="ns4:ETH_BPEL_Called_FF"
+                 partnerRole="ETH_BPEL_Called_FFProvider"/>
+    <partnerLink name="Call_Sync" partnerLinkType="ns5:ETH_BPEL_Sync"
+                 partnerRole="ETH_BPEL_SyncProvider"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="gvarFileName" type="xsd:string"/>
+    <variable name="gvarFaultString" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes" partnerLink="ETH_TEST_FL_RD"
+             portType="ns1:Read_ptt" operation="Read"
+             variable="Receive1_Read_InputVariable">
+      <bpelx:fromProperties>
+        <bpelx:fromProperty name="jca.file.FileName" variable="gvarFileName"/>
+      </bpelx:fromProperties>
+    </receive>
+    <assign name="Assign_Title">
+      <copy>
+        <from>ora:setCompositeInstanceTitle($gvarFileName)</from>
+        <to>$gvarFileName</to>
+      </copy>
+    </assign>
+    <scope name="Scope_Call_FF" exitOnStandardFault="no">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Call_FF</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="Invoke1_process_FF"
+                  messageType="ns4:ETH_BPEL_Called_FFRequestMessage"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <assign name="Assign_Error">
+            <copy>
+              <from>ora:getFaultAsString()</from>
+              <to>$gvarFaultString</to>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence>
+        <assign name="Assign_Input">
+          <copy>
+            <from>$gvarFileName</from>
+            <to>$Invoke1_process_FF.payload/ns4:input</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_FF" partnerLink="Call_FF"
+                portType="ns4:ETH_BPEL_Called_FF" operation="process"
+                inputVariable="Invoke1_process_FF" bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </scope>
+    <scope name="Scope_Call_Sync" exitOnStandardFault="no">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Call_Sync</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="Invoke_Sync_InputVariable"
+                  messageType="ns5:ETH_BPEL_SyncRequestMessage"/>
+        <variable name="Invoke_Sync_OutputVariable"
+                  messageType="ns5:ETH_BPEL_SyncResponseMessage"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <assign name="Assign_Error">
+            <copy>
+              <from>ora:getFaultAsString()</from>
+              <to>$gvarFaultString</to>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence>
+        <assign name="Assign_Input">
+          <copy>
+            <from>$gvarFileName</from>
+            <to>$Invoke_Sync_InputVariable.payload/ns5:input</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_Sync" partnerLink="Call_Sync"
+                portType="ns5:ETH_BPEL_Sync" operation="process"
+                inputVariable="Invoke_Sync_InputVariable"
+                outputVariable="Invoke_Sync_OutputVariable"
+                bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </scope>
+    <scope name="Scope_Call_Async" exitOnStandardFault="no">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Call_Async</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="Invoke1_Async_InputVariable"
+                  messageType="ns3:ETH_BPEL_AsyncRequestMessage"/>
+        <variable name="Receive2_Async_OutputVariable"
+                  messageType="ns3:ETH_BPEL_AsyncResponseMessage"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <assign name="Assign_Error">
+            <copy>
+              <from>ora:getFaultAsString()</from>
+              <to>$gvarFaultString</to>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_Call_Async">
+        <assign name="Assign_Input">
+          <copy>
+            <from>$gvarFileName</from>
+            <to>$Invoke1_Async_InputVariable.payload/ns3:input</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_Async" partnerLink="Call_ASync"
+                portType="ns3:ETH_BPEL_Async" operation="process"
+                inputVariable="Invoke1_Async_InputVariable"
+                bpelx:invokeAsDetail="no"/>
+        <empty name="Empty_Void"/>
+        <receive name="Receive_Async" createInstance="no"
+                 partnerLink="Call_ASync" portType="ns3:ETH_BPEL_AsyncCallback"
+                 operation="processResponse"
+                 variable="Receive2_Async_OutputVariable"/>
+      </sequence>
+    </scope>
+    <empty name="Empty_Complete"/>
+  </sequence>
+</process>

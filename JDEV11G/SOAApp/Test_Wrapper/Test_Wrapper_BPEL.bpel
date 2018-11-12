@@ -1,0 +1,128 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Oct 12 09:56:39 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Test_Wrapper_BPEL"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/Test_Wrapper/Test_Wrapper_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/Test_Wrapper/Test_Wrapper_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SOAApp/Test_Wrapper/Call_Procedure"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/BPEL_COM_SRVC_LOOKUP_WRAP/BPEL_COM_SRVC_LOOKUP_PKG-24BPEL/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/SOAApp/Test_Wrapper/CallProcedure">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="test_wrapper_bpel_client" partnerLinkType="client:Test_Wrapper_BPEL" myRole="Test_Wrapper_BPELProvider"/>
+    <partnerLink name="CallProcedure" partnerLinkType="ns3:CallProcedure_plt"
+                 partnerRole="CallProcedure_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:Test_Wrapper_BPELRequestMessage"/>
+    <variable name="Invoke1_CallProcedure_InputVariable"
+              messageType="ns3:args_in_msg"/>
+    <variable name="Invoke1_CallProcedure_OutputVariable"
+              messageType="ns3:args_out_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Test_Wrapper_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="test_wrapper_bpel_client" portType="client:Test_Wrapper_BPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from expression="string('ETH_Common_BPEL_PurchaseOrderEBF')"/>
+        <to variable="Invoke1_CallProcedure_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:P_CALLER_NAME"/>
+      </copy>
+      <copy>
+        <from expression="101"/>
+        <to variable="Invoke1_CallProcedure_InputVariable"
+            part="InputParameters" query="/ns2:InputParameters/ns2:P_TEMP_ID"/>
+      </copy>
+      <copy>
+        <from expression="string('EMR240')"/>
+        <to variable="Invoke1_CallProcedure_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:P_SENDER_ID"/>
+      </copy>
+      <copy>
+        <from expression="string('PO')"/>
+        <to variable="Invoke1_CallProcedure_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:P_TRXN_TYPE"/>
+      </copy>
+      <copy>
+        <from expression="string('PO')"/>
+        <to variable="Invoke1_CallProcedure_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:P_TRXN_SUBTYPE"/>
+      </copy>
+      <copy>
+        <from expression="string('17311163')"/>
+        <to variable="Invoke1_CallProcedure_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:P_SOA_INSTANCE_ID"/>
+      </copy>
+      <copy>
+        <from expression="string('640580')"/>
+        <to variable="Invoke1_CallProcedure_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:P_TXN_RECORD_ID"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1"
+            inputVariable="Invoke1_CallProcedure_InputVariable"
+            outputVariable="Invoke1_CallProcedure_OutputVariable"
+            partnerLink="CallProcedure" portType="ns3:CallProcedure_ptt"
+            operation="CallProcedure" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

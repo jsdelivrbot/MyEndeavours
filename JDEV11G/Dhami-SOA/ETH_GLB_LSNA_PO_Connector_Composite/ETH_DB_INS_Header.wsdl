@@ -1,0 +1,22 @@
+<?binding.jca ETH_DB_INS_Header_db.jca?>
+<wsdl:definitions name="ETH_DB_INS_Header" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_Connector_Composite/ETH_DB_INS_Header" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_Connector_Composite/ETH_DB_INS_Header" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETH_DB_INS_Header">
+    <plt:partnerLinkType name="ETH_DB_INS_Header_plt">
+        <plt:role name="ETH_DB_INS_Header_role">
+            <plt:portType name="tns:ETH_DB_INS_Header_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETH_DB_INS_Header" schemaLocation="xsd/ETH_DB_INS_Header_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="MasterCollection_msg">
+        <wsdl:part name="MasterCollection" element="top:MasterCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="ETH_DB_INS_Header_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:MasterCollection_msg"/>
+            <wsdl:output message="tns:MasterCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

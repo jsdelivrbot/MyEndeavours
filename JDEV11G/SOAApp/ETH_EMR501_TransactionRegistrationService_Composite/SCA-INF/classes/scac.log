@@ -1,0 +1,38 @@
+Aug 25, 2011 11:08:29 AM oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
+INFO: XMLSchema incremental build enabled.
+Aug 25, 2011 11:08:29 AM com.collaxa.cube.CubeLogger info
+INFO: validating "ETH_EMR501_BPEL_TransactionRegistrationService.bpel" ...
+oracle.jrf.UnknownPlatformException: JRF is unable to determine the current application server platform.
+	at oracle.jrf.ServerPlatformSupportFactory.getInstance(ServerPlatformSupportFactory.java:79)
+	at oracle.integration.platform.blocks.WLSPlatformConfigurationProvider.<clinit>(WLSPlatformConfigurationProvider.java:44)
+	at oracle.integration.platform.blocks.FabricConfigManager.<clinit>(FabricConfigManager.java:155)
+	at oracle.integration.platform.blocks.xpath.FabricXPathFunctionResolver.loadXpathFunctions(FabricXPathFunctionResolver.java:271)
+	at oracle.integration.platform.blocks.xpath.FabricXPathFunctionResolver.loadXPathConfigFile(FabricXPathFunctionResolver.java:153)
+	at oracle.integration.platform.blocks.xpath.FabricXPathFunctionResolver.init(FabricXPathFunctionResolver.java:51)
+	at com.collaxa.cube.xml.xpath.BPELXPathFunctionNameResolver.loadFabricXpathFunctions(BPELXPathFunctionNameResolver.java:57)
+	at com.collaxa.cube.xml.xpath.BPELXPathFunctionNameResolver.<init>(BPELXPathFunctionNameResolver.java:48)
+	at com.collaxa.cube.xml.xpath.BPELXPathFunctionNameResolver.<clinit>(BPELXPathFunctionNameResolver.java:44)
+	at com.collaxa.cube.lang.compiler.bpel.XPathExprValidatorVisitor.<init>(XPathExprValidatorVisitor.java:122)
+	at com.collaxa.cube.lang.compiler.bpel.AssignValidator.<init>(AssignValidator.java:89)
+	at com.collaxa.cube.lang.compiler.bpel.BpelParser.<init>(BpelParser.java:452)
+	at com.collaxa.cube.lang.compiler.bpel.BPELValidator.validate(BPELValidator.java:60)
+	at com.collaxa.cube.lang.compiler.BPEL1Processor.validate(BPEL1Processor.java:329)
+	at com.collaxa.cube.lang.compiler.BPEL1Processor.process(BPEL1Processor.java:153)
+	at com.collaxa.cube.lang.compiler.CubeParserHelper.compile(CubeParserHelper.java:47)
+	at oracle.fabric.bpel.bpelc.BPELComponentValidator.validate(BPELComponentValidator.java:40)
+	at oracle.soa.scac.ValidateComposite.validateComponentTypeServicesReferences(ValidateComposite.java:1117)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:500)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:150)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:135)
+SAXParseException in file oramds:/apps/ETH3/FaultPolicies/EMR501/EMR501-fault-policies.xml
+org.xml.sax.SAXParseException: <Line 2, Column 16>: XML-24538: (Error) Can not find definition for element 'faultPolicies'
+	at oracle.xml.parser.v2.XMLError.flushErrorHandler(XMLError.java:422)
+	at oracle.xml.parser.v2.XMLError.flushErrors1(XMLError.java:287)
+	at oracle.xml.parser.v2.NonValidatingParser.parseDocument(NonValidatingParser.java:343)
+	at oracle.xml.parser.v2.XMLParser.parse(XMLParser.java:319)
+	at oracle.soa.scac.ValidationFaultUtil.validateStreamWithSchema(ValidationFaultUtil.java:146)
+	at oracle.soa.scac.ValidationFaultUtil.validateWithSchema(ValidationFaultUtil.java:196)
+	at oracle.soa.scac.ValidateComposite.validateFaultPolicy(ValidateComposite.java:1439)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:506)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:150)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:135)

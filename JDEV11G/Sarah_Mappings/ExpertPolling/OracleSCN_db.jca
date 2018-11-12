@@ -1,0 +1,25 @@
+<adapter-config name="OracleSCN" adapter="Database Adapter" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/SOADemo" UIConnectionName="SOADemo" adapterRef=""/>
+  <endpoint-activation portType="OracleSCN_ptt" operation="receive">
+    <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
+      <property name="DescriptorName" value="OracleSCN.MoviesIn"/>
+      <property name="QueryName" value="OracleSCNSelect"/>
+      <property name="MappingsMetaDataURL" value="OracleSCN-or-mappings.xml"/>
+      <property name="PollingStrategy" value="SequencingPollingStrategy"/>
+      <property name="SequencingTable" value="SEQUENCING_HELPER"/>
+      <property name="SequencingColumn" value="ora_rowscn"/>
+      <property name="SequencingTableKeyColumn" value="TABLE_NAME"/>
+      <property name="SequencingTableValueColumn" value="LAST_READ_ID"/>
+      <property name="SequencingTableKey" value="MOVIES_IN_SCN"/>
+      <property name="PollingInterval" value="5"/>
+      <property name="MaxRaiseSize" value="1"/>
+      <property name="MaxTransactionSize" value="10"/>
+      <property name="DelayCommit" value="true"/>
+      <property name="PollForChildUpdates" value="true"/>
+      <property name="NumberOfThreads" value="1"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

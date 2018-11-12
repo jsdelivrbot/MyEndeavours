@@ -1,0 +1,12 @@
+<adapter-config name="ETH_JMS_DEQ_SarahRP1" adapter="JMS Adapter" wsdlLocation="ETH_JMS_DEQ_SarahRP1.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/jms/eth/outbound" UIJmsProvider="WLSJMS" UIConnectionName="DEV_SOA2_ETH"/>
+  <endpoint-activation portType="Consume_SarahRP1_ptt" operation="Consume_SarahRP1">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="PayloadType" value="TextMessage"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="DestinationName" value="jms/eth/queue/sarah/rp1"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

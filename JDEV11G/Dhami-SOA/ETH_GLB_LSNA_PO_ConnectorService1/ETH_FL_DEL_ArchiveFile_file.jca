@@ -1,0 +1,12 @@
+<adapter-config name="ETH_FL_DEL_ArchiveFile" adapter="File Adapter" wsdlLocation="ETH_FL_DEL_ArchiveFile.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" adapterRef=""/>
+  <endpoint-interaction portType="SynchRead_ptt" operation="SynchRead">
+    <interaction-spec className="oracle.tip.adapter.file.outbound.FileReadInteractionSpec">
+      <property name="LogicalDirectory" value="LSNA_ArchiveLocation"/>
+      <property name="DeleteFile" value="true"/>
+      <property name="FileName" value="$File_Name"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

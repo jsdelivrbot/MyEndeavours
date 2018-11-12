@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<adf-config xmlns="http://xmlns.oracle.com/adf/config" xmlns:adf="http://xmlns.oracle.com/adf/config/properties">
+   <adf:adf-properties-child xmlns="http://xmlns.oracle.com/adf/config/properties">
+      <adf-property name="adfAppUID" value="LBTCRM_App_Prod-2436"/>
+   </adf:adf-properties-child>
+   <adf-mds-config xmlns="http://xmlns.oracle.com/adf/mds/config">
+      <mds-config xmlns="http://xmlns.oracle.com/mds/config">
+         <persistence-config>
+            <metadata-namespaces>
+               <namespace metadata-store-usage="mstore-usage_2" path="/apps/LBTCRM"/>
+            </metadata-namespaces>
+            <metadata-store-usages>
+               <metadata-store-usage id="mstore-usage_2">
+                  <metadata-store class-name="oracle.mds.persistence.stores.db.DBMetadataStore">
+                     <property value="DEV_MDS" name="jdbc-userid"/>
+                     <property value="tea4two" name="jdbc-password"/>
+                     <property value="jdbc:oracle:thin:@orionddb.emerson.com:34001:oriond1" name="jdbc-url"/>
+                     <property value="soa-infra" name="partition-name"/>
+                  </metadata-store>
+               </metadata-store-usage>
+            </metadata-store-usages>
+         </persistence-config>
+      </mds-config>
+   </adf-mds-config>
+</adf-config>

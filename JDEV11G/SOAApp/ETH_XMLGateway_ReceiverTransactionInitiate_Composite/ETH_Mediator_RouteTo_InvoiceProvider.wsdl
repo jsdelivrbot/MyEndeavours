@@ -1,0 +1,41 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ETH_Mediator_RouteTo_InvoiceProvider"
+     targetNamespace="http://xmlns.oracle.com/ETH_INBOUND_Receiver_Listener/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_Mediator_RouteTo_InvoiceProvider"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:ns1="http://schema.emerson.com/ETH/Header"    
+     xmlns:inp1="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/Invoice/Emerson"
+     xmlns:tns="http://xmlns.oracle.com/ETH_INBOUND_Receiver_Listener/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_Mediator_RouteTo_InvoiceProvider"
+    >
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/Invoice/Emerson"
+                 schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Industry/Manufacturing/EBO/Invoice/Emerson/InvoiceEBM.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="http://schema.emerson.com/ETH/Header" schemaLocation="oramds:/apps/ETH3/CommonServices/commonSchemas/ETH_Header.xsd"/>
+      </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="request" element="inp1:ProcessInvoiceEBM"/>
+    </wsdl:message>
+     <wsdl:message name="ETH_HeaderMsg">
+      <wsdl:part name="ETH_HeaderMsg" element="ns1:ETHHEADER"/>
+   </wsdl:message>
+    <wsdl:portType name="execute_ptt">
+        <wsdl:operation name="execute">
+            <wsdl:input message="tns:requestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="execute_pttBinding" type="tns:execute_ptt">
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="execute">
+         <soap:operation style="document" soapAction="execute"/>
+         <wsdl:input>
+            <soap:body use="literal" namespace="http://xmlns.oracle.com/ETH_INBOUND_Receiver_Listener/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_Mediator_RouteTo_InvoiceProvider" parts="request"/>
+            <soap:header message="tns:ETH_HeaderMsg" part="ETH_HeaderMsg" use="literal"/>
+         </wsdl:input>
+      </wsdl:operation>
+   </wsdl:binding>
+</wsdl:definitions>

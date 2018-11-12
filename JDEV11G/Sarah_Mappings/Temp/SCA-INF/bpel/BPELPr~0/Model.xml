@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="BPELProcess1" targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/Temp/BPELProcess1" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/Temp/BPELProcess1" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions" xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ns1="http://schema.emerson.com/FL_GET_ForeignCharacter" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" id="BpPrc0">
+
+          <bpelx:exec import="java.util.*" id="BxExe0"/>
+          <bpelx:exec import="java.lang.*" id="BxExe1"/>
+          <bpelx:exec import="java.math.*" id="BxExe2"/>
+          <bpelx:exec import="java.io.*" id="BxExe3"/>
+          <bpelx:exec import="oracle.soa.common.util.Base64Decoder" id="BxExe4"/>
+          <bpelx:exec import="oracle.soa.common.util.Base64Encoder" id="BxExe5"/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelprocess1_client" partnerLinkType="client:BPELProcess1" myRole="BPELProcess1Provider"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="Receive1_process_InputVariable" messageType="client:BPELProcess1RequestMessage"/>
+    <variable name="Payload" type="xsd:string"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProcess1.wsdl) -->
+    <receive name="Receive1" createInstance="yes" variable="Receive1_process_InputVariable" partnerLink="bpelprocess1_client" portType="client:BPELProcess1" operation="process" id="BpRcv0"/>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from expression="string('&lt;Head xmlns=&quot;http://schema.emerson.com/FL_GET_UnhandledCharacter&quot;> &lt;Line>&lt;COLUMN1>Prag&lt;/COLUMN1>&lt;COLUMN2>Customer Number +420 234 262 000&lt;/COLUMN2>&lt;COLUMN3>This is the note from éèçà&lt;/COLUMN3>&lt;/Line>&lt;/Head>')"/>
+        <to variable="Payload"/>
+      </copy>
+    </assign>
+    <bpelx:exec name="Java_Embedding1" version="1.5" language="java" id="BxExe6">
+      <![CDATA[/*Write your java code below e.g.     
+	System.out.println("Hello, World");    
+*/    
+try{             
+addAuditTrailEntry("System_Encoding - ",System.getProperty("file.encoding"));     
+String System_base64string = "<Head xmlns=\"http://schema.emerson.com/FL_GET_UnhandledCharacter\"><Line><COLUMN1>Prag</COLUMN1><COLUMN2>Customer Number +420 234 262 000</COLUMN2><COLUMN3>This is the note from éèçà</COLUMN3></Line></Head>";  
+addAuditTrailEntry("XML String - ",System_base64string);   
+String encoded = Base64Encoder.encode(System_base64string);   
+addAuditTrailEntry("Encoded String - ",encoded);   
+String decoded = Base64Decoder.decode(encoded);                                             
+addAuditTrailEntry("Decoded String - ",decoded);   
+}                                                                                            
+catch(Exception e)                          
+{                        
+    e.printStackTrace();                       
+}]]>
+    </bpelx:exec>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Nov 22 22:14:51 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

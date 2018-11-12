@@ -1,0 +1,16 @@
+<adapter-config name="ETH_FL_RD_FLatFile" adapter="File Adapter" wsdlLocation="ETH_FL_RD_FLatFile.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" UIincludeWildcard="ETH_FlatFile.xml"/>
+  <endpoint-activation portType="ReadFlatFile_ptt" operation="ReadFlatFile">
+    <activation-spec className="oracle.tip.adapter.file.inbound.FileActivationSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="60"/>
+      <property name="Recursive" value="true"/>
+      <property name="PollingFrequency" value="60"/>
+      <property name="LogicalDirectory" value="IN_DIR"/>
+      <property name="IncludeFiles" value="ETH_FlatFile\.xml"/>
+      <property name="UseHeaders" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

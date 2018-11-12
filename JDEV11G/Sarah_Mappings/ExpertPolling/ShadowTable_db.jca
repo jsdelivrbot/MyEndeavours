@@ -1,0 +1,20 @@
+<adapter-config name="ShadowTable" adapter="Database Adapter" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/SOADemo" UIConnectionName="SOADemo" adapterRef=""/>
+  <endpoint-activation portType="ShadowTable_ptt" operation="receive">
+    <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
+      <property name="DescriptorName" value="ShadowTable.MoviesIn"/>
+      <property name="QueryName" value="ShadowTableSelect"/>
+      <property name="MappingsMetaDataURL" value="ShadowTable-or-mappings.xml"/>
+      <property name="PollingStrategy" value="DeletePollingStrategy"/>
+      <property name="PollingInterval" value="5"/>
+      <property name="MaxRaiseSize" value="1"/>
+      <property name="MaxTransactionSize" value="10"/>
+      <property name="SequencingColumn" value="TITLE"/>
+      <property name="NumberOfThreads" value="1"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="DeleteDetailRows" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

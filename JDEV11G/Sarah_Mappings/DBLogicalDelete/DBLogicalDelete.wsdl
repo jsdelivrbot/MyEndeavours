@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<?binding.jca DBLogicalDelete_db.jca?>
+<wsdl:definitions
+     name="DBLogicalDelete"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Sarah_Mappings/DBLogicalDelete/DBLogicalDelete"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Sarah_Mappings/DBLogicalDelete/DBLogicalDelete"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBLogicalDelete"
+    >
+    <plt:partnerLinkType name="DBLogicalDelete_plt">
+        <plt:role name="DBLogicalDelete_role">
+            <plt:portType name="tns:DBLogicalDelete_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Sarah_Mappings/DBLogicalDelete/DBLogicalDelete"
+             xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBLogicalDelete">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBLogicalDelete" schemaLocation="xsd/DBLogicalDelete_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ProcessSchedulerTableCollection_msg">
+        <wsdl:part name="ProcessSchedulerTableCollection" element="top:ProcessSchedulerTableCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="DBLogicalDelete_ptt">
+        <wsdl:operation name="receive">
+            <wsdl:input message="tns:ProcessSchedulerTableCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

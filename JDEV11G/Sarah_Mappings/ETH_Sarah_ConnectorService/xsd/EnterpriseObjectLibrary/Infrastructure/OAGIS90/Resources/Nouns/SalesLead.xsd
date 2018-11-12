@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\SalesLead.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Operational/CRMComponents.xsd"/>
+        <xsd:element name="SalesLead" type="SalesLeadType">
+                <xsd:annotation>
+                        <xsd:documentation source="Open Applications Group - OAGIS 9.0-Build">Defines how leads interact with other Partner systems and Opportunity systems.
+
+Life cycle of an order typically is as follows:
+SalesLead -&gt; Opportunity -&gt; Quote -&gt; PurchaseOrder -&gt; SalesOrder</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="SalesLeadType">
+                <xsd:sequence>
+                        <xsd:element ref="SalesLeadHeader" minOccurs="0"/>
+                        <xsd:element ref="SalesLeadDetail" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="SalesLeadHeader" type="SalesLeadHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="Open Applications Group - OAGIS 9.0-Build"/>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SalesLeadDetail" type="SalesLeadDetailType">
+                <xsd:annotation>
+                        <xsd:documentation source="Open Application Group - OAGIS 9.0-Build">.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="SalesLeadHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="CRMHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="AcceptedIndicator" minOccurs="0"/>
+                                        <xsd:element ref="QualifiedIndicator" minOccurs="0"/>
+                                        <xsd:element ref="PriorityCode" minOccurs="0"/>
+                                        <xsd:element ref="RankCode" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SalesLeadDetailType">
+                <xsd:complexContent>
+                        <xsd:extension base="CRMLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="PreventIndicator" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Financing" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="Open Applications Group - OAGIS 9.0-Build">This is used if there is one financing arrangement for all SalesProduct instances, otherwise it is nested in each SalesProduct.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Appointment" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SalesActivity" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+   <composite name="*">
+      <import>
+         <searchReplace>
+            <search>usmtnz-dinfap18.dev.emrsn.org</search>
+            <replace>soa1.emerson.com</replace>
+         </searchReplace>
+      </import>
+      <component name="BPEL_UpdateOpportunityAndAccount">
+         <property name="bpel.preference.CRM_URL">
+            <searchReplace>
+               <search>ausomxfza</search>
+               <replace>ausomxfya</replace>
+            </searchReplace>
+         </property>
+      </component>
+      <reference name="*">
+         <binding type="ws">
+            <attribute name="location">
+               <searchReplace>
+                  <search>usmtnz-dinfap18.dev.emrsn.org</search>
+                  <replace>soa1.emerson.com</replace>
+               </searchReplace>
+            </attribute>
+         </binding>
+      </reference>
+   </composite>
+   <wsdlAndSchema name="Account.wsdl|Opportunity.wsdl">
+      <searchReplace>
+         <search>ausomxfza</search>
+         <replace>ausomxfya</replace>
+      </searchReplace>
+   </wsdlAndSchema>
+</SOAConfigPlan>

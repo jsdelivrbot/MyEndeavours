@@ -1,0 +1,103 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Jul 21 14:25:50 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FileDelete_11GAdapter"
+               targetNamespace="http://xmlns.oracle.com/Dhami_SOA/FileDelete_11GAdapter/FileDelete_11GAdapter"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Dhami_SOA/FileDelete_11GAdapter/FileDelete_11GAdapter"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/FileDelete_11GAdapter/FileDelete_FL_DL_File"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="filedelete_11gadapter_client" partnerLinkType="client:FileDelete_11GAdapter" myRole="FileDelete_11GAdapterProvider"/>
+    <partnerLink name="FileDelete_FL_DL_File"
+                 partnerLinkType="ns1:FileDelete_plt"
+                 partnerRole="FileDelete_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:FileDelete_11GAdapterRequestMessage"/>
+    <variable name="Invoke1_FileDelete_InputVariable"
+              messageType="ns1:Empty_msg"/>
+    <variable name="Invoke1_FileDelete_OutputVariable"
+              messageType="ns1:FileDelete_msg"/>
+    <variable name="targetDirectory" type="xsd:string"/>
+    <variable name="targetFileName" type="xsd:string"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FileDelete_11GAdapter.wsdl) -->
+    <receive name="receiveInput" partnerLink="filedelete_11gadapter_client" portType="client:FileDelete_11GAdapter" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:filename"/>
+        <to variable="targetFileName"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:filepath"/>
+        <to variable="targetDirectory"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1"
+            inputVariable="Invoke1_FileDelete_InputVariable"
+            outputVariable="Invoke1_FileDelete_OutputVariable"
+            partnerLink="FileDelete_FL_DL_File" portType="ns1:FileDelete_ptt"
+            operation="FileDelete" bpelx:invokeAsDetail="no">
+            <bpelx:inputProperty name="jca.file.TargetDirectory" variable="targetDirectory"/>
+            <bpelx:inputProperty name="jca.file.TargetFileName" variable="targetFileName"/>
+            
+            </invoke>
+  </sequence>
+</process>

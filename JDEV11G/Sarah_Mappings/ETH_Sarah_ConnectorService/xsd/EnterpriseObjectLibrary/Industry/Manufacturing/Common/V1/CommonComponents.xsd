@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version 1.00 **
+** Date: 01 Nov 2007 **
+
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+  
+    XML Schema 
+    
+    Name: \EnterpriseObjects\Release1\Core\Common\V1\CommonComponents.xsd
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Common Components Schema Module            ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- ====================================================================== -->
+	<!-- =====      Imports                                                                                                      ===== -->
+	<!-- ====================================================================== -->
+	<xsd:include schemaLocation="DataTypes.xsd"/>
+	<xsd:include schemaLocation="CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V1" schemaLocation="../../Custom/Common/V1/CustomCommonComponents.xsd"/>
+	<!-- ====================================================================== -->
+	<!--  =====       Identification                                                                                            =====      -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="IdentificationType">
+		<xsd:sequence>
+			<xsd:element name="BusinessComponentID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ContextID" type="IdentifierType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ApplicationObjectKey" type="ObjectKeyType" minOccurs="0"/>
+			<xsd:element name="AlternateObjectKey" type="ObjectKeyType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Identification" type="IdentificationType"/>
+	<xsd:complexType name="ObjectKeyType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ContextID" type="IdentifierType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ObjectKey" type="ObjectKeyType"/>
+	<xsd:complexType name="CustomerItemIdentificationType">
+		<xsd:sequence>
+			<xsd:element name="CustomerID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ItemID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCustomerItemIdentificationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemIdentificationType">
+		<xsd:sequence>
+			<xsd:element name="BusinessComponentID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ContextID" type="IdentifierType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ApplicationObjectKey" type="ObjectKeyType" minOccurs="0"/>
+			<xsd:element name="AlternateObjectKey" type="ObjectKeyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="RevisionNumber" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="GTIN" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ManufacturerItemIdentification" type="ManufacturerItemIdentificationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="SupplierItemIdentification" type="SupplierItemIdentificationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CustomerItemIdentification" type="CustomerItemIdentificationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomItemIdentificationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ManufacturerItemIdentificationType">
+		<xsd:sequence>
+			<xsd:element name="ManufacturerID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ItemID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomManufacturerItemIdentificationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SupplierItemIdentificationType">
+		<xsd:sequence>
+			<xsd:element name="SupplierID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ItemID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSupplierItemIdentificationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CustomerItemIdentification" type="CustomerItemIdentificationType"/>
+	<xsd:element name="ManufacturerItemIdentification" type="ManufacturerItemIdentificationType"/>
+	<xsd:element name="ItemIdentification" type="ItemIdentificationType"/>
+	<xsd:element name="SupplierItemIdentification" type="SupplierItemIdentificationType"/>
+	<!-- ====================================================================== -->
+	<!-- =====      Common Components                                                                               ===== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="ContactType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Department" type="TextType" minOccurs="0"/>
+			<xsd:element name="JobTitle" type="TextType" minOccurs="0"/>
+			<xsd:element name="Responsibility" type="TextType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element name="PersonName" type="PersonNameType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="AddressCommunication" type="AddressCommunicationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PhoneCommunication" type="PhoneCommunicationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="FaxCommunication" type="FaxCommunicationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="EmailCommunication" type="EmailCommunicationType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Preference" type="PreferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomContactType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="preferredLanguageID" type="LanguageCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="Contact" type="ContactType"/>
+	<!---->
+	<xsd:complexType name="PreferenceType">
+		<xsd:sequence>
+			<xsd:element name="PriorityRanking" type="NumericType" minOccurs="0"/>
+			<xsd:element name="PreferredIndicator" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPreferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Preference" type="PreferenceType"/>
+	<!---->
+	<xsd:complexType name="PersonNameType">
+		<xsd:sequence>
+			<xsd:element name="FullName" type="NameType" minOccurs="0"/>
+			<xsd:element name="FirstName" type="NameType" minOccurs="0"/>
+			<xsd:element name="MiddleName" type="NameType" minOccurs="0"/>
+			<xsd:element name="FamilyName" type="NameType" minOccurs="0"/>
+			<xsd:element name="Title" type="TextType" minOccurs="0"/>
+			<xsd:element name="Salutation" type="TextType" minOccurs="0"/>
+			<xsd:element name="PreferredName" type="NameType" minOccurs="0"/>
+			<xsd:element name="Alias" type="TextType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPersonNameType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PersonName" type="PersonNameType"/>
+	<!---->
+	<xsd:complexType name="AddressType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="FormatCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="LineOne" type="TextType" minOccurs="0"/>
+			<xsd:element name="LineTwo" type="TextType" minOccurs="0"/>
+			<xsd:element name="LineThree" type="TextType" minOccurs="0"/>
+			<xsd:element name="LineFour" type="TextType" minOccurs="0"/>
+			<xsd:element name="LineFive" type="TextType" minOccurs="0"/>
+			<xsd:element name="CityName" type="NameType" minOccurs="0"/>
+			<xsd:element name="AttentionOf" type="TextType" minOccurs="0"/>
+			<xsd:element name="CareOf" type="NameType" minOccurs="0"/>
+			<xsd:element name="CountryCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CountrySubDivisionID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="CitySubDivisionName" type="NameType" minOccurs="0"/>
+			<xsd:element name="DeliveryPointCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="PostalCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="GEOCodeID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomAddressType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Address" type="AddressType"/>
+	<!---->
+	<xsd:complexType name="BankAccountType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="SWIFTCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="RoutingNumber" type="StringType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0"/>
+			<xsd:element name="AccountNumber" type="StringType" minOccurs="0"/>
+			<xsd:element name="IBANNumber" type="StringType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CurrencyCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CheckDigits" type="StringType" minOccurs="0"/>
+			<xsd:element ref="Contact" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBankAccountReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="BankAccount" type="BankAccountType"/>
+	<!---->
+	<xsd:complexType name="CommunicationType" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="CompleteNumber" type="TextType" minOccurs="0"/>
+				<xsd:sequence>
+					<xsd:element name="CountryCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="AreaCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="LocalNumber" type="TextType" minOccurs="0"/>
+					<xsd:element name="ExtensionNumber" type="TextType" minOccurs="0"/>
+					<xsd:element name="Access" type="TextType" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="URI" type="URIType" minOccurs="0"/>
+					<xsd:element name="HTMLPreferredIndicator" type="IndicatorType" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:element ref="Address" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="UseCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Preference" type="PreferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Communication" type="CommunicationType"/>
+	<xsd:complexType name="AddressCommunicationType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="UseCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Preference" type="PreferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomAddressCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="AddressCommunication" type="AddressCommunicationType"/>
+	<xsd:complexType name="FaxCommunicationType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="CompleteNumber" type="TextType" minOccurs="0"/>
+				<xsd:sequence>
+					<xsd:element name="CountryCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="AreaCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="LocalNumber" type="TextType" minOccurs="0"/>
+					<xsd:element name="ExtensionNumber" type="TextType" minOccurs="0"/>
+					<xsd:element name="Access" type="TextType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:element name="UseCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Preference" type="PreferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomFaxCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="FaxCommunication" type="FaxCommunicationType"/>
+	<xsd:complexType name="PhoneCommunicationType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="CompleteNumber" type="TextType" minOccurs="0"/>
+				<xsd:sequence>
+					<xsd:element name="CountryCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="AreaCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="LocalNumber" type="TextType" minOccurs="0"/>
+					<xsd:element name="ExtensionNumber" type="TextType" minOccurs="0"/>
+					<xsd:element name="Access" type="TextType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:element name="UseCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Preference" type="PreferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPhoneCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PhoneCommunication" type="PhoneCommunicationType"/>
+	<xsd:complexType name="EmailCommunicationType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="HTMLPreferredIndicator" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="URI" type="URIType" minOccurs="0"/>
+			<xsd:element name="UseCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Preference" type="PreferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomEmailCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="EmailCommunication" type="EmailCommunicationType"/>
+	<!---->
+	<xsd:complexType name="AllowanceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="BasisAmount" type="AmountType" minOccurs="0"/>
+				<xsd:element name="BasisQuantity" type="QuantityType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="CalculationPercent" type="PercentType" minOccurs="0"/>
+				<xsd:element name="Calculation" type="TextType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="ReasonCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CurrencyExchangeRate" type="RateType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="EffectiveTimePeriod" type="TimePeriodType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomAllowanceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Allowance" type="AllowanceType"/>
+	<!---->
+	<xsd:complexType name="ChargeType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="BasisAmount" type="AmountType" minOccurs="0"/>
+				<xsd:element name="BasisQuantity" type="QuantityType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			<xsd:element name="Calculation" type="TextType" minOccurs="0"/>
+			<xsd:element name="ReasonCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CurrencyExchangeRate" type="RateType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="TimePeriod" type="TimePeriodType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomChargeType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Charge" type="ChargeType"/>
+	<!---->
+	<xsd:complexType name="TaxExemptionType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="ReasonCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CertificateNumber" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="LicenseIndicator" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="IssueDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="ExpirationDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+			<xsd:element name="EffectiveTimePeriod" type="TimePeriodType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Note" type="NoteType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomTaxExemptionType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="TaxExemption" type="TaxExemptionType"/>
+	<!---->
+	<xsd:complexType name="TaxType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="TaxJurisdictionCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="TaxAuthorityAmount" type="AmountType" minOccurs="0"/>
+			<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			<xsd:element name="DeclarationDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="BasisAmount" type="AmountType" minOccurs="0"/>
+				<xsd:element name="BasisQuantity" type="QuantityType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="TaxExemption" type="TaxExemptionType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Note" type="NoteType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomTaxType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Tax" type="TaxType"/>
+	<!---->
+	<xsd:complexType name="CurrencyExchangeType">
+		<xsd:sequence>
+			<xsd:element name="SourceCurrencyCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="SourceUnitBase" type="NumericType" minOccurs="0"/>
+			<xsd:element name="TargetCurrencyCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="TargetUnitBase" type="NumericType" minOccurs="0"/>
+			<xsd:element name="ConversionRate" type="RateType" minOccurs="0"/>
+			<xsd:element name="RoundingFactor" type="NumericType" minOccurs="0"/>
+			<xsd:element name="ConversionRateDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="SourceCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCurrencyExchangeType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CurrencyExchange" type="CurrencyExchangeType"/>
+	<!---->
+	<xsd:complexType name="DistributionType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="LedgerID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Percentage" type="PercentType" minOccurs="0"/>
+			<xsd:element name="Quantity" type="QuantityType" minOccurs="0"/>
+			<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			<xsd:element name="GLEntityID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="GLAccountCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CostCenterCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="ProfitCenterCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomDistributionType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Distribution" type="DistributionType"/>
+	<!---->
+	<xsd:complexType name="PaymentMethodType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="Code" type="CodeType" minOccurs="0"/>
+				<xsd:element ref="CreditCard" minOccurs="0"/>
+				<xsd:element ref="DebitCard" minOccurs="0"/>
+				<xsd:element ref="Check" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="Custom" type="corecomcust:CustomPaymentMethodType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PaymentMethod" type="PaymentMethodType"/>
+	<xsd:complexType name="CreditCardPaymentMethodType">
+		<xsd:sequence>
+			<xsd:element ref="CreditCard" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCreditCardPaymentMethodType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CreditCardPaymentMethod" type="CreditCardPaymentMethodType"/>
+	<!---->
+	<xsd:complexType name="PaymentTermType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="EffectiveDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="DueDateTime" type="DateTimeType" minOccurs="0"/>
+				<xsd:sequence>
+					<xsd:element name="PaymentBasisCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="Duration" type="DurationType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:choice>
+				<xsd:element name="DiscountPercent" type="PercentType" minOccurs="0"/>
+				<xsd:element name="SurchargePercent" type="PercentType" minOccurs="0"/>
+				<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="ProxMonth" type="NumericType" minOccurs="0"/>
+			<xsd:element name="ProxDayofMonth" type="NumericType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPaymentTermType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="NormalizedStringType"/>
+	</xsd:complexType>
+	<xsd:element name="PaymentTerm" type="PaymentTermType"/>
+	<!---->
+	<xsd:complexType name="StatusType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="CodeType" minOccurs="0"/>
+			<xsd:element name="EffectiveDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="ReasonCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomStatusType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Status" type="StatusType"/>
+	<!---->
+	<xsd:complexType name="TimePeriodType">
+		<xsd:sequence>
+			<xsd:element name="StartDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="Duration" type="DurationType" minOccurs="0"/>
+				<xsd:element name="EndDateTime" type="DateTimeType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="Custom" type="corecomcust:CustomTimePeriodType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="TimePeriod" type="TimePeriodType"/>
+	<!---->
+	<xsd:complexType name="GeographicalCoordinateType">
+		<xsd:sequence>
+			<xsd:element name="AltitudeMeasure" type="MeasureType" minOccurs="0"/>
+			<xsd:element name="LatitudeMeasure" type="MeasureType" minOccurs="0"/>
+			<xsd:element name="LongitudeMeasure" type="MeasureType" minOccurs="0"/>
+			<xsd:element name="LatitudeDirectionCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="LongitudeDirectionCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="SystemID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomGeographicalCoordinateType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="GeographicalCoordinate" type="GeographicalCoordinateType"/>
+	<!---->
+	<xsd:complexType name="ProblemType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Note" type="NoteType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomProblemType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Problem" type="ProblemType"/>
+	<!---->
+	<xsd:complexType name="ResolutionType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Note" type="NoteType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomResolutionType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Resolution" type="ResolutionType"/>
+	<!---->
+	<xsd:complexType name="SpecificationGroupType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="Specification" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSpecificationGroupType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="SpecificationGroup" type="SpecificationGroupType"/>
+	<xsd:complexType name="SpecificationType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:choice>
+				<xsd:element name="ValueText" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="ValueNumeric" type="NumericType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="ValueDate" type="DateType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="ValueDateTime" type="DateTimeType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="ValueQuantity" type="QuantityType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="ValueAmount" type="AmountType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="ValueCode" type="CodeType" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:sequence>
+					<xsd:element name="DataTypeCode" type="CodeType" minOccurs="0"/>
+					<xsd:element name="Value" type="StringType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:element name="EffectiveTimePeriod" type="TimePeriodType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSpecificationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Specification" type="SpecificationType"/>
+	<!---->
+	<xsd:complexType name="PriceType">
+		<xsd:sequence>
+			<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			<xsd:element name="PerQuantity" type="QuantityType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPriceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Price" type="PriceType"/>
+	<!---->
+	<xsd:complexType name="CostType">
+		<xsd:sequence>
+			<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			<xsd:element name="PerQuantity" type="QuantityType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCostType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Cost" type="CostType"/>
+	<!---->
+	<xsd:complexType name="AttachmentType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0"/>
+			<xsd:element name="Title" type="TextType" minOccurs="0"/>
+			<xsd:element name="SizeQuantity" type="QuantityType" minOccurs="0"/>
+			<xsd:element name="CreationDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="EmbeddedData" type="BinaryObjectType" minOccurs="0"/>
+				<xsd:element name="URI" type="URIType" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Note" type="NoteType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomAttachmentType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="NormalizedStringType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="Attachment" type="AttachmentType"/>
+	<!---->
+	<xsd:complexType name="DurationToleranceType">
+		<xsd:sequence>
+			<xsd:element name="UnderDuration" type="DurationType" minOccurs="0"/>
+			<xsd:element name="OverDuration" type="DurationType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomDurationToleranceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DurationTolerance" type="DurationToleranceType"/>
+	<!---->
+	<xsd:complexType name="QuantityToleranceType">
+		<xsd:sequence>
+			<xsd:element name="UnderQuantity" type="QuantityType" minOccurs="0"/>
+			<xsd:element name="OverQuantity" type="QuantityType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomQuantityToleranceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="QuantityTolerance" type="QuantityToleranceType"/>
+	<!---->
+	<xsd:complexType name="PercentToleranceType">
+		<xsd:sequence>
+			<xsd:element name="UnderPercent" type="PercentType" minOccurs="0"/>
+			<xsd:element name="OverPercent" type="PercentType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPercentToleranceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="PercentTolerance" type="PercentToleranceType"/>
+	<!---->
+	<xsd:complexType name="ShipmentToleranceType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element ref="QuantityTolerance" minOccurs="0"/>
+				<xsd:element ref="PercentTolerance" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element name="Custom" type="corecomcust:CustomShipmentToleranceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ShipmentTolerance" type="ShipmentToleranceType"/>
+	<!---->
+	<xsd:complexType name="NoteType">
+		<xsd:attribute name="author" type="NormalizedStringType"/>
+		<xsd:attribute name="entryDateTime" type="DateTimeType"/>
+		<xsd:attribute name="status" type="NormalizedStringType"/>
+		<xsd:attribute name="languageID" type="LanguageCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="Note" type="NoteType"/>
+	<!---->
+	<xsd:complexType name="CreditCardType">
+		<xsd:sequence>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Number" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="CardHolderName" type="NameType" minOccurs="0"/>
+			<xsd:element name="CompanyName" type="NameType" minOccurs="0"/>
+			<xsd:element name="ExpirationDate" type="DateType" minOccurs="0"/>
+			<xsd:element name="ExpirationMonth" type="MonthDateType" minOccurs="0"/>
+			<xsd:element name="ExpirationYear" type="YearDateType" minOccurs="0"/>
+			<xsd:element name="CardHolderAddress" type="AddressType" minOccurs="0"/>
+			<xsd:element name="CardHolderBillingAddress" type="AddressType" minOccurs="0"/>
+			<xsd:element name="SecurityCode" type="StringType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCreditCardType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CreditCard" type="CreditCardType"/>
+	<!---->
+	<xsd:complexType name="DebitCardType">
+		<xsd:sequence>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Number" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="CardHolderName" type="NameType" minOccurs="0"/>
+			<xsd:element name="ExpirationDate" type="DateType" minOccurs="0"/>
+			<xsd:element name="ExpirationMonth" type="MonthDateType" minOccurs="0"/>
+			<xsd:element name="ExpirationYear" type="YearDateType" minOccurs="0"/>
+			<xsd:element name="CompanyName" type="NameType" minOccurs="0"/>
+			<xsd:element name="PIN" type="StringType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomDebitCardType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DebitCard" type="DebitCardType"/>
+	<!---->
+	<xsd:complexType name="CheckType">
+		<xsd:sequence>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="AccountHolder" type="NameType" minOccurs="0"/>
+			<xsd:element name="BankName" type="NameType" minOccurs="0"/>
+			<xsd:element name="Number" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="RoutingNumber" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Memo" type="TextType" minOccurs="0"/>
+			<xsd:element name="MaturityDate" type="DateType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCheckType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Check" type="CheckType"/>
+	<!-- ====================================================================== -->
+	<!-- =====     Party Reference Components                                                            ===== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="PartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BankAccountHolderPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBankAccountHolderPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BillFromPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBillFromPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CarrierPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCarrierPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomerPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="AccountIdentification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCustomerPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EmployeePartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element ref="PersonName" minOccurs="0"/>
+			<xsd:element name="GenderCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="AgeMeasure" type="MeasureType" minOccurs="0"/>
+			<xsd:element name="LanguageCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="NationalityCountryCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="JobTitle" type="TextType" minOccurs="0"/>
+			<xsd:element name="JobCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Responsibility" type="TextType" minOccurs="0"/>
+			<xsd:element name="DepartmentID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ResidenceAddress" type="AddressCommunicationType" minOccurs="0"/>
+			<xsd:element ref="PhoneCommunication" minOccurs="0"/>
+			<xsd:element ref="FaxCommunication" minOccurs="0"/>
+			<xsd:element ref="EmailCommunication" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomEmployeePartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MandateSignerPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomMandateSignerPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OwnerPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomOwnerPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PayeePartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPayeePartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PublisherPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPublisherPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RemitToPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomRemitToPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ShipFromPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomShipFromPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ShipToPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomShipToPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SubscriberPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSubscriberPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SupplierPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSupplierPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UltimateBeneficiaryPartyReference">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomUltimateBeneficiaryPartyReference" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!---->
+	<xsd:complexType name="BankPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+			<xsd:element name="SWIFTCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="RoutingNumber" type="StringType" minOccurs="0"/>
+			<xsd:element ref="Contact" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBankPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!---->
+	<!---->
+	<xsd:complexType name="BillToPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="BillingProfileReference" type="BillingProfileReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBillToPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PayFromPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:choice>
+				<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+				<xsd:element ref="PersonName" minOccurs="0"/>
+			</xsd:choice>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="BillingProfileReference" type="BillingProfileReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPayFromPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BillingProfileReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBillingProfileReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ShippingProfileReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomShippingProfileReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!---->
+	<xsd:complexType name="ManufacturerPartyReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="OrganizationName" type="NameType" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomManufacturerPartyReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!---->
+	<xsd:element name="BankAccountHolderPartyReference" type="BankAccountHolderPartyReferenceType"/>
+	<xsd:element name="BankPartyReference" type="BankPartyReferenceType"/>
+	<xsd:element name="BillToPartyReference" type="BillToPartyReferenceType"/>
+	<xsd:element name="BillFromPartyReference" type="BillFromPartyReferenceType"/>
+	<xsd:element name="CarrierPartyReference" type="CarrierPartyReferenceType"/>
+	<xsd:element name="CustomerPartyReference" type="CustomerPartyReferenceType"/>
+	<xsd:element name="CustomerPartyAccountReference" type="CustomerPartyReferenceType"/>
+	<xsd:element name="EmployeePartyReference" type="EmployeePartyReferenceType"/>
+	<xsd:element name="MandateSignerPartyReference" type="MandateSignerPartyReferenceType"/>
+	<xsd:element name="ManufacturerPartyReference" type="ManufacturerPartyReferenceType"/>
+	<xsd:element name="OwnerPartyReference" type="OwnerPartyReferenceType"/>
+	<xsd:element name="PayeePartyReference" type="PayeePartyReferenceType"/>
+	<xsd:element name="PayFromPartyReference" type="PayFromPartyReferenceType"/>
+	<xsd:element name="PublisherPartyReference" type="PublisherPartyReferenceType"/>
+	<xsd:element name="RemitToPartyReference" type="RemitToPartyReferenceType"/>
+	<xsd:element name="ShipFromPartyReference" type="ShipFromPartyReferenceType"/>
+	<xsd:element name="ShipToPartyReference" type="ShipToPartyReferenceType"/>
+	<xsd:element name="SubscriberPartyReference" type="SubscriberPartyReferenceType"/>
+	<xsd:element name="SupplierPartyReference" type="SupplierPartyReferenceType"/>
+	<xsd:element name="UltimateBeneficiaryPartyReference" type="UltimateBeneficiaryPartyReference"/>
+	<!-- ====================================================================== -->
+	<!-- =====     Document References                                                                             ===== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="ContractReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="LineReference" type="ContractLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomContractReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvoiceReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="LineReference" type="InvoiceLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomInvoiceReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PriceListReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="LineReference" type="PriceListLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPriceListReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PurchaseOrderReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="LineReference" type="PurchaseOrderLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPurchaseOrderReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomerPurchaseOrderReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="LineReference" type="CustomerPurchaseOrderLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCustomerPurchaseOrderReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SalesOrderReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="LineReference" type="SalesOrderLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSalesOrderReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="SourceCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="LineReference" type="DocumentLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomDocumentReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemPublicationReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="LineReference" type="ItemPublicationLineReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomItemPublicationReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- ====================================================================== -->
+	<!-- =====     Supporting Types - Document References                                                ===== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="ContractLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomContractLineReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvoiceLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomInvoiceLineReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PriceListLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPriceListLineReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PurchaseOrderLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ScheduleReference" type="PurchaseOrderLineScheduleReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPurchaseOrderLineReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PurchaseOrderLineScheduleReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPurchaseOrderLineScheduleReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomerPurchaseOrderLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ScheduleReference" type="CustomerPurchaseOrderLineScheduleReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPurchaseOrderLineScheduleReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomerPurchaseOrderLineScheduleReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="NetItemPrice" type="PriceType" minOccurs="0"/>
+			<xsd:element ref="PaymentTerm" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCustomerPurchaseOrderLineScheduleReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SalesOrderLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ScheduleReference" type="SalesOrderLineScheduleReferenceType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSalesOrderLineReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SalesOrderLineScheduleReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSalesOrderLineScheduleReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomDocumentLineReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemPublicationLineReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomItemPublicationLineReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- ====================================================================== -->
+	<!---->
+	<xsd:complexType name="BankAccountReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element ref="BankPartyReference" minOccurs="0"/>
+			<xsd:element name="AccountHolderParty" type="BankAccountHolderPartyReferenceType" minOccurs="0"/>
+			<xsd:element name="Branch" type="BankBranchReferenceType" minOccurs="0"/>
+			<xsd:element name="Name" type="TextType" minOccurs="0"/>
+			<xsd:element name="AccountNumber" type="StringType" minOccurs="0"/>
+			<xsd:element name="IBANNumber" type="StringType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CurrencyCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CheckDigits" type="StringType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBankAccountReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BankBranchReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element ref="Contact" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBankBranchReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BillOfLadingReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomBillOfLadingReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CatalogReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCatalogReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClaimReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomClaimReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreditMemoReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomCreditMemoReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DirectDebitMandateReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomDirectDebitMandateReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FundReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomFundReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InstalledProductReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0"/>
+			<xsd:element name="SerialNumber" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="AlternateTrackingNumber" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomInstalledProductReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemInstanceReferenceType">
+		<xsd:sequence>
+			<xsd:element name="SerialNumber" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="LotNumber" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ExpirationDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="RFID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomItemInstanceReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="ItemIdentificationType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0"/>
+			<xsd:element name="ClassificationCode" type="CodeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ServiceIndicator" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="SpecificationGroup" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomItemReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemStructureReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomItemStructureReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LegalEntityReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomLegalEntityReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LocationReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="TypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0"/>
+			<xsd:element name="Directions" type="TextType" minOccurs="0"/>
+			<xsd:element name="GeographicalCoordinate" type="GeographicalCoordinateType" minOccurs="0"/>
+			<xsd:element ref="Address" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomLocationReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OfferReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomOfferReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentProfileReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPaymentProfileReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentReceiptReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Amount" type="AmountType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPaymentReceiptReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PriceFormulaReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Name" type="NameType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPriceFormulaReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProjectReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="TaskReference" type="ProjectTaskReferenceType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomProjectReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProjectTaskReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomProjectTaskReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PromotionReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomPromotionReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RMAReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomRMAReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ShipmentReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomShipmentReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ServiceRequestReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomServiceRequestReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SupportTeamReferenceType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="IdentificationType" minOccurs="0"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomSupportTeamReferenceType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- ====================================================================== -->
+	<!---->
+	<xsd:element name="BankAccountReference" type="BankAccountReferenceType"/>
+	<xsd:element name="BankBranchReference" type="BankBranchReferenceType"/>
+	<xsd:element name="BillOfLadingReference" type="BillOfLadingReferenceType"/>
+	<xsd:element name="CatalogReference" type="CatalogReferenceType"/>
+	<xsd:element name="ClaimReference" type="ClaimReferenceType"/>
+	<xsd:element name="CreditMemoReference" type="CreditMemoReferenceType"/>
+	<xsd:element name="ContractReference" type="ContractReferenceType"/>
+	<xsd:element name="ContractLineReference" type="ContractLineReferenceType"/>
+	<xsd:element name="CustomerPurchaseOrderReference" type="CustomerPurchaseOrderReferenceType"/>
+	<xsd:element name="CustomerPurchaseOrderLineReference" type="CustomerPurchaseOrderLineReferenceType"/>
+	<xsd:element name="CustomerPurchaseOrderLineScheduleReference" type="CustomerPurchaseOrderLineScheduleReferenceType"/>
+	<xsd:element name="DirectDebitMandateReference" type="DirectDebitMandateReferenceType"/>
+	<xsd:element name="DocumentReference" type="DocumentReferenceType"/>
+	<xsd:element name="FundReference" type="FundReferenceType"/>
+	<xsd:element name="InstalledProductReference" type="InstalledProductReferenceType"/>
+	<xsd:element name="InvoiceReference" type="InvoiceReferenceType"/>
+	<xsd:element name="InvoiceLineReference" type="InvoiceLineReferenceType"/>
+	<xsd:element name="ItemInstanceReference" type="ItemInstanceReferenceType"/>
+	<xsd:element name="ItemPublicationReference" type="ItemPublicationReferenceType"/>
+	<xsd:element name="ItemPublicationLineReference" type="ItemPublicationLineReferenceType"/>
+	<xsd:element name="ItemReference" type="ItemReferenceType"/>
+	<xsd:element name="ItemStructureReference" type="ItemStructureReferenceType"/>
+	<xsd:element name="LegalEntityReference" type="LegalEntityReferenceType"/>
+	<xsd:element name="LocationReference" type="LocationReferenceType"/>
+	<xsd:element name="OfferReference" type="OfferReferenceType"/>
+	<xsd:element name="OriginalItemReference" type="ItemReferenceType"/>
+	<xsd:element name="BillingProfileReference" type="BillingProfileReferenceType"/>
+	<xsd:element name="ShippingProfileReference" type="ShippingProfileReferenceType"/>
+	<xsd:element name="PaymentProfileReference" type="PaymentProfileReferenceType"/>
+	<xsd:element name="PaymentReceiptReference" type="PaymentReceiptReferenceType"/>
+	<xsd:element name="PriceFormulaReference" type="PriceFormulaReferenceType"/>
+	<xsd:element name="PriceListReference" type="PriceListReferenceType"/>
+	<xsd:element name="PriceListLineReference" type="PriceListLineReferenceType"/>
+	<xsd:element name="ProjectReference" type="ProjectReferenceType"/>
+	<xsd:element name="ProjectTaskReference" type="ProjectTaskReferenceType"/>
+	<xsd:element name="PromotionReference" type="PromotionReferenceType"/>
+	<xsd:element name="PurchaseOrderReference" type="PurchaseOrderReferenceType"/>
+	<xsd:element name="PurchaseOrderLineReference" type="PurchaseOrderLineReferenceType"/>
+	<xsd:element name="PurchaseOrderLineScheduleReference" type="PurchaseOrderLineScheduleReferenceType"/>
+	<xsd:element name="RMAReference" type="ContractReferenceType"/>
+	<xsd:element name="SalesOrderReference" type="SalesOrderReferenceType"/>
+	<xsd:element name="SalesOrderLineReference" type="SalesOrderLineReferenceType"/>
+	<xsd:element name="SalesOrderLineScheduleReference" type="SalesOrderLineScheduleReferenceType"/>
+	<xsd:element name="ServiceRequestReference" type="ServiceRequestReferenceType"/>
+	<xsd:element name="ShipmentReference" type="ContractReferenceType"/>
+	<xsd:element name="SupportTeamReference" type="SupportTeamReferenceType"/>
+	<!-- ====================================================================== -->
+</xsd:schema>

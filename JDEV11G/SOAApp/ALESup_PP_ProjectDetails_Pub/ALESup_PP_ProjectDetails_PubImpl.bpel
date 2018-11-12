@@ -1,0 +1,208 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon May 09 16:49:25 CDT 2011
+  Author:  nhelder
+  Type: BPEL 2.0 Process
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ALESup_PP_ProjectDetails_PubImpl"
+         targetNamespace="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns2="http://www.allete.com/ns/interfaceMetadata/v1"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/BPO/ALESup_PP_ProjectDetails_Pub/DB_Execute_PpWoPublishPkg_CloseProjectDetails"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/BPO/ALESup_PP_ProjectDetails_Pub/DB_Execute_PpWoPublishPkg_GetProjectDetails"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/ALE_ESB_CONNECT/ALLETE_PP_WO_PUBLISH_PKG/GET_PROJECT_DETAILS/"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/BPO/ALESup_PP_ProjectDetails_Pub/DB_Execute_PpWoPublishPkg_GetFundingNumber"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/ALE_ESB_CONNECT/ALLETE_PP_WO_PUBLISH_PKG/GET_FUNDING_NUMBER_FROM_ID/"
+         xmlns:ns8="http://xmlns.oracle.com/BPO/ALESup_FMW_ProjectDetails/ALESup_FMW_ProjectDetails_Route"
+         xmlns:ns9="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoSvc/V1"
+         xmlns:ns10="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoTypes/V1"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/ALE_ESB_CONNECT/ALLETE_PP_WO_PUBLISH_PKG/CLOSE_PROJECT_DETAILS/">
+
+    <import namespace="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl" location="ALESup_PP_ProjectDetails_PubImpl.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="alesup_pp_projectdetails_pubimpl_client" partnerLinkType="client:ALESup_PP_ProjectDetails_PubImpl" myRole="ALESup_PP_ProjectDetails_PubImplProvider" partnerRole="ALESup_PP_ProjectDetails_PubImplRequester"/>
+        <partnerLink name="DB_Execute_PpWoPublishPkg_CloseProjectDetails"
+                     partnerLinkType="ns3:DB_Execute_PpWoPublishPkg_CloseProjectDetails_plt"
+                     partnerRole="DB_Execute_PpWoPublishPkg_CloseProjectDetails_role"
+                     initializePartnerRole="no"/>
+        <partnerLink name="DB_Execute_PpWoPublishPkg_GetProjectDetails"
+                     partnerLinkType="ns4:DB_Execute_PpWoPublishPkg_GetProjectDetails_plt"
+                     partnerRole="DB_Execute_PpWoPublishPkg_GetProjectDetails_role"
+                     initializePartnerRole="no"/>
+        <partnerLink name="DB_Execute_PpWoPublishPkg_GetFundingNumber"
+                     partnerLinkType="ns6:DB_Execute_PpWoPublishPkg_GetFundingNumber_plt"
+                     partnerRole="DB_Execute_PpWoPublishPkg_GetFundingNumber_role"
+                     initializePartnerRole="no"/>
+        <partnerLink name="ALESup_FMW_ProjectDetails_Route"
+                     partnerLinkType="ns8:ALESup_FMW_ProjectDetails_Route"
+                     partnerRole="routeProjectDetails_ppt"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable" messageType="client:ALESup_PP_ProjectDetails_PubImplRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable" messageType="client:ALESup_PP_ProjectDetails_PubImplResponseMessage"/>
+        <variable name="getProjectDetailsInput" messageType="ns4:args_in_msg"/>
+        <variable name="getProjectDetailsOutput"
+                  messageType="ns4:args_out_msg"/>
+        <variable name="getFundingNumberInput" messageType="ns6:args_in_msg"/>
+        <variable name="getFundingNumberOutput" messageType="ns6:args_out_msg"/>
+        <variable name="publishProjectDetailsInput"
+                  messageType="ns8:projectDetailsMessage"/>
+        <variable name="closeProjectDetailsInput"
+                  messageType="ns3:args_in_msg"/>
+        <variable name="closeProjectDetailsOutput"
+                  messageType="ns3:args_out_msg"/>
+    </variables>
+    <faultHandlers>
+        <catchAll>
+            <sequence name="faultSequence">
+                <rethrow name="rethrow"/>
+                <exit name="exit"/>
+            </sequence>
+        </catchAll>
+    </faultHandlers>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in ALESup_PP_ProjectDetails_PubImpl.wsdl) -->
+        <receive name="receiveInput" partnerLink="alesup_pp_projectdetails_pubimpl_client" portType="client:ALESup_PP_ProjectDetails_PubImpl" operation="process" variable="inputVariable" createInstance="yes"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <assign name="assignGetProjectDetailsInput">
+            <copy>
+                <from>$inputVariable.payload/ns2:TransactionId</from>
+                <to>$getProjectDetailsInput.InputParameters/ns5:V_TRANSACTION_ID_IN</to>
+            </copy>
+        </assign>
+        <invoke name="invokeGetProjectDetails"
+                partnerLink="DB_Execute_PpWoPublishPkg_GetProjectDetails"
+                portType="ns4:DB_Execute_PpWoPublishPkg_GetProjectDetails_ptt"
+                operation="DB_Execute_PpWoPublishPkg_GetProjectDetails"
+                inputVariable="getProjectDetailsInput"
+                outputVariable="getProjectDetailsOutput"
+                bpelx:invokeAsDetail="no"/>
+        <if name="ifFundingIdIsNotNullAndFundingNumberIsNull">
+            <documentation>idIsNotNullAndNumberIsNull</documentation>
+            <condition>string-length($getProjectDetailsOutput.OutputParameters/ns5:T_REFERENCE_CURSOR_OUT/ns5:T_REFERENCE_CURSOR_OUT_Row/ns5:FUNDING_WO_ID) &gt; 0 and string-length($getProjectDetailsOutput.OutputParameters/ns5:T_REFERENCE_CURSOR_OUT/ns5:T_REFERENCE_CURSOR_OUT_Row/ns5:FUNDING_PROJECT_NUMBER) &lt;= 0</condition>
+            <sequence name="Sequence1">
+                <assign name="transformGetFundingNumberInput">
+                    <bpelx:annotation>
+                        <bpelx:pattern patternName="bpelx:transformation"/>
+                    </bpelx:annotation>
+                    <copy>
+                        <from>ora:doXSLTransformForDoc("xsl/transformGetFundingNumberInput.xsl", $getProjectDetailsOutput.OutputParameters)</from>
+                        <to variable="getFundingNumberInput"
+                            part="InputParameters"/>
+                    </copy>
+                </assign>
+                <invoke name="invokeGetFundingNumber"
+                        partnerLink="DB_Execute_PpWoPublishPkg_GetFundingNumber"
+                        portType="ns6:DB_Execute_PpWoPublishPkg_GetFundingNumber_ptt"
+                        operation="DB_Execute_PpWoPublishPkg_GetFundingNumber"
+                        inputVariable="getFundingNumberInput"
+                        outputVariable="getFundingNumberOutput"
+                        bpelx:invokeAsDetail="no"/>
+                <assign name="transformPublishProjectDetailsInputWithFundingNumber">
+                    <bpelx:annotation>
+                        <bpelx:pattern patternName="bpelx:transformation"/>
+                    </bpelx:annotation>
+                    <copy>
+                        <from>ora:doXSLTransformForDoc("xsl/transformPublishProjectDetailsInputWithFundingNumber.xsl", $getFundingNumberOutput.OutputParameters, "getProjectDetailsOutput.OutputParameters", $getProjectDetailsOutput.OutputParameters)</from>
+                        <to variable="publishProjectDetailsInput"
+                            part="payload"/>
+                    </copy>
+                </assign>
+            </sequence>
+            <else>
+                <documentation>idIsNullOrNumberIsNotNull</documentation>
+                <assign name="transformPublishProjectDetailsInput">
+                    <bpelx:annotation>
+                        <bpelx:pattern patternName="bpelx:transformation"/>
+                    </bpelx:annotation>
+                    <copy>
+                        <from>ora:doXSLTransformForDoc("xsl/transformPublishProjectDetailsInput.xsl", $getProjectDetailsOutput.OutputParameters)</from>
+                        <to variable="publishProjectDetailsInput"
+                            part="payload"/>
+                    </copy>
+                </assign>
+            </else>
+        </if>
+        <invoke name="invokePublishProjectDetails"
+                partnerLink="ALESup_FMW_ProjectDetails_Route"
+                portType="ns8:routeProjectDetails_ppt"
+                inputVariable="publishProjectDetailsInput" operation="routePpProjectDetails"
+                bpelx:invokeAsDetail="no"/>
+        <assign name="assignCloseProjectDetailsInput">
+            <copy>
+                <from>$inputVariable.payload/ns2:TransactionId</from>
+                <to>$closeProjectDetailsInput.InputParameters/ns11:V_TRANSACTION_ID_IN</to>
+            </copy>
+        </assign>
+        <invoke name="invokeCloseProjectDetails"
+                partnerLink="DB_Execute_PpWoPublishPkg_CloseProjectDetails"
+                portType="ns3:DB_Execute_PpWoPublishPkg_CloseProjectDetails_ptt"
+                operation="DB_Execute_PpWoPublishPkg_CloseProjectDetails"
+                inputVariable="closeProjectDetailsInput"
+                outputVariable="closeProjectDetailsOutput"
+                bpelx:invokeAsDetail="no"/>
+        <assign name="transformOutputVariable">
+            <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:transformation"/>
+            </bpelx:annotation>
+            <copy>
+                <from>ora:doXSLTransformForDoc("xsl/transformOutputVariable.xsl", $inputVariable.payload, "closeProjectDetailsOutput.OutputParameters", $closeProjectDetailsOutput.OutputParameters)</from>
+                <to variable="outputVariable" part="payload"/>
+            </copy>
+        </assign>
+        <invoke name="callbackClient" partnerLink="alesup_pp_projectdetails_pubimpl_client" portType="client:ALESup_PP_ProjectDetails_PubImplCallback" operation="processResponse" inputVariable="outputVariable"
+                bpelx:invokeAsDetail="yes"/>
+    </sequence>
+</process>

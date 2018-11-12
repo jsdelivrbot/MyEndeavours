@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.00 **
+** Date: Apr 8, 2008 **
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\EBO\AdvanceShipmentNotice\V1\AdvanceShipmentNoticeEBM.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO AdvanceShipmentNotice EBM Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:coreadvanceshipmentnoticecust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/AdvanceShipmentNotice/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns:corecomEBO="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:xacml-context="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" xmlns:xacml="urn:oasis:names:tc:xacml:2.0:policy:schema:cd:04" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AdvanceShipmentNotice/V1" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AdvanceShipmentNotice/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- ====================================================================== -->
+	<!-- ==============  Imports and Includes   =============================== -->
+	<!-- ====================================================================== -->
+	<xsd:include schemaLocation="AdvanceShipmentNoticeEBO.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/Meta.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/AdvanceShipmentNotice/V1" schemaLocation="../../../Custom/EBO/AdvanceShipmentNotice/V1/CustomAdvanceShipmentNoticeEBO.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+	<xsd:import namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing" schemaLocation="../../../Common/V2/WS-Addressing.xsd"/>
+	<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" schemaLocation="../../../Common/V2/access_control-xacml-2.0-context-schema-cd-04.xsd"/>
+	<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:policy:schema:cd:04" schemaLocation="../../../Common/V2/access_control-xacml-2.0-policy-schema-cd-04.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" schemaLocation="../../../CommonEBO/V1/ShipmentUnit.xsd"/>
+	<!-- ====================================================================== -->
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description>AdvanceShipmentNotice EBM identifies all the service operations that are supported for the AdvanceShipmentNotice EBO</svcdoc:Description>
+				<svcdoc:Type>EBM</svcdoc:Type>
+				<svcdoc:Industry/>
+				<svcdoc:EBOName>AdvanceShipmentNoticeEBO</svcdoc:EBOName>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<!-- ====================================================================== -->
+	<xsd:complexType name="AdvanceShipmentNoticeEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBOType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- ====================================================================== -->
+	<!-- ==================Query AdvanceShipmentNotice Service=================== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="QueryAdvanceShipmentNoticeEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QueryAdvanceShipmentNoticeEBM" type="QueryAdvanceShipmentNoticeEBMType"/>
+	<xsd:complexType name="QueryAdvanceShipmentNoticeDataAreaType">
+		<xsd:sequence>
+			<xsd:element name="Query" type="corecom:SimpleQueryType" minOccurs="0"/>
+			<xsd:element ref="QueryAdvanceShipmentNotice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QueryAdvanceShipmentNoticeType">
+		<xsd:sequence>
+			<xsd:element name="Identification" type="corecom:IdentificationType" minOccurs="0"/>
+			<xsd:element name="Custom" type="coreadvanceshipmentnoticecust:CustomAdvanceShipmentNoticeEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="QueryAdvanceShipmentNotice" type="QueryAdvanceShipmentNoticeType"/>
+	<!-- ====================================================================== -->
+	<!-- ============= Query AdvanceShipmentNotice Response Service ============= -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="QueryAdvanceShipmentNoticeResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QueryAdvanceShipmentNoticeResponseEBM" type="QueryAdvanceShipmentNoticeResponseEBMType"/>
+	<xsd:complexType name="QueryAdvanceShipmentNoticeResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:QueryResponse"/>
+			<xsd:element ref="QueryAdvanceShipmentNoticeResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QueryAdvanceShipmentNoticeResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QueryAdvanceShipmentNoticeResponse" type="QueryAdvanceShipmentNoticeResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ================ Query AdvanceShipmentNotice List Service ============== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="QueryAdvanceShipmentNoticeListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryAdvanceShipmentNoticeListDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QueryAdvanceShipmentNoticeListEBM" type="QueryAdvanceShipmentNoticeListEBMType"/>
+	<xsd:complexType name="AdvanceShipmentNoticeComplexQueryType">
+		<xsd:sequence>
+			<xsd:element name="QueryCode" type="AdvanceShipmentNoticeQueryCodeType" minOccurs="0"/>
+			<xsd:element name="ResponseCode" type="AdvanceShipmentNoticeResponseCodeType" minOccurs="0"/>
+			<xsd:element ref="corecom:QueryCriteria" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="corecom:ResponseFilter" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="getAllTranslationsIndicator" type="corecom:IndicatorType" use="optional"/>
+		<xsd:attribute name="recordSetStart" type="corecom:PositiveIntegerType" use="optional"/>
+		<xsd:attribute name="recordSetCount" type="corecom:PositiveIntegerType" use="optional"/>
+		<xsd:attribute name="maxItems" type="corecom:PositiveIntegerType" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="QueryAdvanceShipmentNoticeListDataAreaType">
+		<xsd:sequence>
+			<xsd:element name="Query" type="AdvanceShipmentNoticeComplexQueryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AdvanceShipmentNoticeQueryCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="corecom:CodeType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="AdvanceShipmentNoticeResponseCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="corecom:CodeType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<!-- ====================================================================== -->
+	<!-- =========== Query AdvanceShipmentNotice List Response Service ==========-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="QueryAdvanceShipmentNoticeListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryAdvanceShipmentNoticeListResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QueryAdvanceShipmentNoticeListResponseEBM" type="QueryAdvanceShipmentNoticeListResponseEBMType"/>
+	<xsd:complexType name="QueryAdvanceShipmentNoticeListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:QueryResponse"/>
+			<xsd:element ref="QueryAdvanceShipmentNoticeListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QueryAdvanceShipmentNoticeListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QueryAdvanceShipmentNoticeListResponse" type="QueryAdvanceShipmentNoticeListResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ==================Create AdvanceShipmentNotice Service=================== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="CreateAdvanceShipmentNoticeEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNoticeEBM" type="CreateAdvanceShipmentNoticeEBMType"/>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Create"/>
+			<xsd:element ref="CreateAdvanceShipmentNotice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNotice" type="CreateAdvanceShipmentNoticeType"/>
+	<!-- ====================================================================== -->
+	<!-- ============= Create AdvanceShipmentNotice Response Service ============= -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="CreateAdvanceShipmentNoticeResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNoticeResponseEBM" type="CreateAdvanceShipmentNoticeResponseEBMType"/>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:CreateResponse"/>
+			<xsd:element ref="CreateAdvanceShipmentNoticeResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNoticeResponse" type="CreateAdvanceShipmentNoticeResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ================ Create AdvanceShipmentNotice List Service ============== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="CreateAdvanceShipmentNoticeListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateAdvanceShipmentNoticeListDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNoticeListEBM" type="CreateAdvanceShipmentNoticeListEBMType"/>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Create"/>
+			<xsd:element ref="CreateAdvanceShipmentNoticeList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeListType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNoticeList" type="CreateAdvanceShipmentNoticeListType"/>
+	<!-- ====================================================================== -->
+	<!-- =========== Create AdvanceShipmentNotice List Response Service ==========-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="CreateAdvanceShipmentNoticeListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateAdvanceShipmentNoticeListResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNoticeListResponseEBM" type="CreateAdvanceShipmentNoticeListResponseEBMType"/>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:CreateResponse"/>
+			<xsd:element ref="CreateAdvanceShipmentNoticeListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreateAdvanceShipmentNoticeListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CreateAdvanceShipmentNoticeListResponse" type="CreateAdvanceShipmentNoticeListResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ==================Delete AdvanceShipmentNotice Service=================== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNoticeEBM" type="DeleteAdvanceShipmentNoticeEBMType"/>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Delete"/>
+			<xsd:element ref="DeleteAdvanceShipmentNotice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+AdvanceShipmentNotice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreadvanceshipmentnoticecust:CustomAdvanceShipmentNoticeEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNotice" type="DeleteAdvanceShipmentNoticeType"/>
+	<!-- ====================================================================== -->
+	<!-- ============= Delete AdvanceShipmentNotice Response Service ============= -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNoticeResponseEBM" type="DeleteAdvanceShipmentNoticeResponseEBMType"/>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:DeleteResponse"/>
+			<xsd:element ref="DeleteAdvanceShipmentNoticeResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeResponseType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+AdvanceShipmentNotice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreadvanceshipmentnoticecust:CustomAdvanceShipmentNoticeEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNoticeResponse" type="DeleteAdvanceShipmentNoticeResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ================ Delete AdvanceShipmentNotice List Service ============== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteAdvanceShipmentNoticeListDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNoticeListEBM" type="DeleteAdvanceShipmentNoticeListEBMType"/>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Delete"/>
+			<xsd:element ref="DeleteAdvanceShipmentNoticeList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeListType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+AdvanceShipmentNotice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreadvanceshipmentnoticecust:CustomAdvanceShipmentNoticeEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNoticeList" type="DeleteAdvanceShipmentNoticeListType"/>
+	<!-- ====================================================================== -->
+	<!-- =========== Delete AdvanceShipmentNotice List Response Service ==========-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteAdvanceShipmentNoticeListResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNoticeListResponseEBM" type="DeleteAdvanceShipmentNoticeListResponseEBMType"/>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:DeleteResponse"/>
+			<xsd:element ref="DeleteAdvanceShipmentNoticeListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeleteAdvanceShipmentNoticeListResponseType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+AdvanceShipmentNotice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreadvanceshipmentnoticecust:CustomAdvanceShipmentNoticeEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DeleteAdvanceShipmentNoticeListResponse" type="DeleteAdvanceShipmentNoticeListResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ================ Sync AdvanceShipmentNotice List Service ============== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="SyncAdvanceShipmentNoticeListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="SyncAdvanceShipmentNoticeListDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="SyncAdvanceShipmentNoticeListEBM" type="SyncAdvanceShipmentNoticeListEBMType"/>
+	<xsd:complexType name="SyncAdvanceShipmentNoticeListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Sync"/>
+			<xsd:element ref="SyncAdvanceShipmentNoticeList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SyncAdvanceShipmentNoticeListType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="SyncAdvanceShipmentNoticeList" type="SyncAdvanceShipmentNoticeListType"/>
+	<!-- ====================================================================== -->
+	<!-- =========== Sync AdvanceShipmentNotice List Response Service ==========-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="SyncAdvanceShipmentNoticeListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="SyncAdvanceShipmentNoticeListResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="SyncAdvanceShipmentNoticeListResponseEBM" type="SyncAdvanceShipmentNoticeListResponseEBMType"/>
+	<xsd:complexType name="SyncAdvanceShipmentNoticeListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:SyncResponse"/>
+			<xsd:element ref="SyncAdvanceShipmentNoticeListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SyncAdvanceShipmentNoticeListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="SyncAdvanceShipmentNoticeListResponse" type="SyncAdvanceShipmentNoticeListResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ==================Update AdvanceShipmentNotice Service=================== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNoticeEBM" type="UpdateAdvanceShipmentNoticeEBMType"/>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Update"/>
+			<xsd:element ref="UpdateAdvanceShipmentNotice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNotice" type="UpdateAdvanceShipmentNoticeType"/>
+	<!-- ====================================================================== -->
+	<!-- ============= Update AdvanceShipmentNotice Response Service ============= -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateAdvanceShipmentNoticeDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNoticeResponseEBM" type="UpdateAdvanceShipmentNoticeResponseEBMType"/>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:UpdateResponse"/>
+			<xsd:element ref="UpdateAdvanceShipmentNoticeResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNoticeResponse" type="UpdateAdvanceShipmentNoticeResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- ================ Update AdvanceShipmentNotice List Service ============== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateAdvanceShipmentNoticeListDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNoticeListEBM" type="UpdateAdvanceShipmentNoticeListEBMType"/>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Update"/>
+			<xsd:element ref="UpdateAdvanceShipmentNoticeList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeListType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNoticeList" type="UpdateAdvanceShipmentNoticeListType"/>
+	<!-- ====================================================================== -->
+	<!-- =========== Update AdvanceShipmentNotice List Response Service ==========-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateAdvanceShipmentNoticeListResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNoticeListResponseEBM" type="UpdateAdvanceShipmentNoticeListResponseEBMType"/>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:UpdateResponse"/>
+			<xsd:element ref="UpdateAdvanceShipmentNoticeListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateAdvanceShipmentNoticeListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="AdvanceShipmentNoticeEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="UpdateAdvanceShipmentNoticeListResponse" type="UpdateAdvanceShipmentNoticeListResponseType"/>
+	<!---->
+	<!-- ====================================================================== -->
+	<!-- =====    Process Manifest Service                                                            ===== -->
+	<!-- ====================================================================== -->
+	<xsd:element name="ProcessManifestEBM" type="ProcessManifestEBMType">
+		<xsd:annotation>
+			<xsd:documentation> </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ProcessManifestEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="ProcessManifestDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessManifestDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Process"/>
+			<xsd:element ref="ProcessManifest"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessManifestType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Advance Shipment Notice
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Shipment" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates manifest request cancellation status - whether Accepted or Rejected
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecomEBO:ShipmentUnit" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Defines/holds the attributes of an outermost Container. For e.g. BOX, PALLET, VEHICLE, etc.
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreadvanceshipmentnoticecust:CustomAdvanceShipmentNoticeEBOType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType"/>
+	</xsd:complexType>
+	<xsd:element name="ProcessManifest" type="ProcessManifestType"/>
+	<!-- ====================================================================== -->
+	<!-- =====      Process Manifest Response Service                                          ===== -->
+	<!-- ====================================================================== -->
+	<xsd:element name="ProcessManifestResponseEBM" type="ProcessManifestResponseEBMType"/>
+	<xsd:complexType name="ProcessManifestResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="ProcessManifestResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessManifestResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:ProcessResponse"/>
+			<xsd:element ref="ProcessManifestResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessManifestResponseType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Advance Shipment Notice
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Shipment" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates manifest request cancellation status - whether Accepted or Rejected
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecomEBO:ShipmentUnit" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Defines/holds the attributes of an outermost Container. For e.g. BOX, PALLET, VEHICLE, etc.
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="coreadvanceshipmentnoticecust:CustomAdvanceShipmentNoticeEBOType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType"/>
+	</xsd:complexType>
+	<xsd:element name="ProcessManifestResponse" type="ProcessManifestResponseType"/>
+	<!---->
+</xsd:schema>

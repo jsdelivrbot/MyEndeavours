@@ -1,0 +1,14 @@
+<adapter-config name="CallProcedure" adapter="Database Adapter" wsdlLocation="CallProcedure.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/ETH/DB/NXAppDB" UIConnectionName="DEV_ETHAPP_DB" adapterRef=""/>
+  <endpoint-interaction portType="CallProcedure_ptt" operation="CallProcedure">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="PackageName" value="BPEL_COM_SRVC_LOOKUP_WRAP"/>
+      <property name="ProcedureName" value="BPEL_COM_SRVC_LOOKUP_PKG$BPEL"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,13 @@
+<adapter-config name="JMS_DEQUEUE_DIST" adapter="JMS Adapter" wsdlLocation="JMS_DEQUEUE_DIST.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/JMS/ETH/Inbound/Topic" UIJmsProvider="WLSJMS" UIConnectionName="DEV_SOA2"/>
+  <endpoint-activation portType="Consume_Message_ptt" operation="Consume_Message">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="DurableSubscriber" value="subscriber1"/>
+      <property name="PayloadType" value="TextMessage"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="DestinationName" value="Test/Topic"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

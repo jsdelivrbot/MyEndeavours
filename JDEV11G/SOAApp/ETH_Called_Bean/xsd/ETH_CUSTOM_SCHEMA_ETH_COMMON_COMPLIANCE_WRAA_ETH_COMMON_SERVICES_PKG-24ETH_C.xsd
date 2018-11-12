@@ -1,0 +1,38 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_COMMON_COMPLIANCE_WRAA/ETH_COMMON_SERVICES_PKG-24ETH_C/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_COMMON_COMPLIANCE_WRAA/ETH_COMMON_SERVICES_PKG-24ETH_C/" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CALLER_NAME" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_SOA_INSTANCE_ID" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_TXN_RECORD_ID" type="decimal" db:index="3" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_IDVAL_TAB" type="db:ETH_CUSTOM_SCHEMA.ETH_COMMON_SERVICX111792X7X4" db:index="4" db:type="Array" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_RESPONSECODE" type="decimal" db:index="5" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ERRORCODENUMBER" type="string" db:index="6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_ERRORDESCRIPTION" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="ETH_CUSTOM_SCHEMA.ETH_COMMON_SERVICX111792X7X4">
+      <sequence>
+         <element name="P_IDVAL_TAB_ITEM" type="db:ETH_CUSTOM_SCHEMA.ETH_COMMON_SERVICX111792X7X5" db:type="Struct" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="ETH_CUSTOM_SCHEMA.ETH_COMMON_SERVICX111792X7X5">
+      <sequence>
+         <element name="ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         <element name="VALUE" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="60"/>
+               </restriction>
+            </simpleType>
+         </element>
+      </sequence>
+   </complexType>
+</schema>

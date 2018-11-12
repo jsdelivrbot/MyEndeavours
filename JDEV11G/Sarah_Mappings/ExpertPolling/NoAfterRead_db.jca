@@ -1,0 +1,19 @@
+<adapter-config name="NoAfterRead" adapter="Database Adapter" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/SOADemo" UIConnectionName="SOADemo" adapterRef=""/>
+  <endpoint-activation portType="NoAfterRead_ptt" operation="receive">
+    <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
+      <property name="DescriptorName" value="NoAfterRead.MoviesIn"/>
+      <property name="QueryName" value="NoAfterReadSelect"/>
+      <property name="MappingsMetaDataURL" value="NoAfterRead-or-mappings.xml"/>
+      <property name="PollingStrategy" value="NoAfterReadPollingStrategy"/>
+      <property name="PollingInterval" value="5"/>
+      <property name="MaxRaiseSize" value="1"/>
+      <property name="MaxTransactionSize" value="10"/>
+      <property name="SequencingColumn" value="TITLE"/>
+      <property name="NumberOfThreads" value="1"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

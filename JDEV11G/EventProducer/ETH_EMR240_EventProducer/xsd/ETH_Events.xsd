@@ -1,0 +1,12 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schema.emerson.com/eth/events"
+     targetNamespace="http://schema.emerson.com/eth/events" elementFormDefault="qualified"
+     attributeFormDefault="unqualified">
+    <element name="TransactionSubmission1" type="ns1:transactionSubmissionType"/>
+    <element name="TransactionSubmission2" type="ns1:transactionSubmissionType"/>
+    <complexType name="transactionSubmissionType">
+        <sequence>
+            <element name="tradingPartnerSystemID" type="string"/>
+        </sequence>
+    </complexType>
+</schema>

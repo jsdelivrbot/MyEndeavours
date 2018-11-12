@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ETH_BPEL_EMR240_EventSubmission1" targetNamespace="http://services.emerson.com/eth/event/emr240/consumer/submission1" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://services.emerson.com/eth/event/emr240/consumer/submission1" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns1="http://schema.emerson.com/eth/events/edl/Event_TransactionSubmission" xmlns:ns2="http://schema.emerson.com/eth/events" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" id="BpPrc0">
+
+
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable0" element="ns2:TransactionSubmission1"/>
+        <variable name="Event" type="xsd:string"/>
+    </variables>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main" id="BpSeq0">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_BPEL_EMR240_EventSubmission1.wsdl) -->
+        <receive name="receiveInput0" bpelx:eventName="ns1:EMR240_TransactionSubmission1" variable="inputVariable0" createInstance="yes" id="BpRcv0"/>
+        <assign name="Assign1" id="BpAss0">
+            <copy>
+                <from variable="inputVariable0" query="/ns2:TransactionSubmission1/ns2:tradingPartnerSystemID"/>
+                <to variable="Event"/>
+            </copy>
+            <copy>
+                <from expression="ora:setCompositeInstanceTitle(string(bpws:getVariableData('inputVariable0','/ns2:TransactionSubmission1/ns2:tradingPartnerSystemID')))"/>
+                <to variable="Event"/>
+            </copy>
+        </assign>
+    </sequence></process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Jun 24 19:28:30 GMT+05:30 2011
+  Author:  idhami
+  Purpose: BPEL Process for event subscription
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

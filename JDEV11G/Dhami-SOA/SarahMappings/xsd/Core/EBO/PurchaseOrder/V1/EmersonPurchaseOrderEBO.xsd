@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - 30 Day Trial Edition 7.0.4.795 (http://www.liquid-technologies.com)-->
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.00 **
+** Date: Apr 3, 2008 **
+ 
+Copyright (c) 2007, Oracle. All rights reserved 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\EBO\PurchaseOrder\V1\PurchaseOrderEBO.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO PurchaseOrder EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/EmersonPurchaseOrder/V1" xmlns:oagis="http://www.openapplications.org/oagis/9" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/EmersonPurchaseOrder/V1" version="1.00.00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- ====================================================================== -->
+  <!-- ==============  Imports and Includes   =============================== -->
+  <!-- ====================================================================== -->
+  <xsd:import schemaLocation="OAGIS/ProcessPurchaseOrder.xsd" namespace="http://www.openapplications.org/oagis/9" />
+  <!-- ====================================================================== -->
+  <!-- ==============  PurchaseOrder EBO ====================== -->
+  <!-- ====================================================================== -->
+  <xsd:element name="EmersonPurchaseOrderEBO" type="EmersonPurchaseOrderEBOType">
+    <xsd:annotation>
+      <xsd:documentation> 
+A document used to request vendor to supply a product or service in return for payment and providing specifications and quantities. For example, Purchase Order 1357 with Supplier Dell for 10 Computers, Purchase Order 1243 for buying 5 pens.
+        </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="EmersonPurchaseOrderEBOType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="oagis:ProcessPurchaseOrderType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:annotation>
+    <xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description> 
+A document used to request vendor to supply a product or service in return for payment and providing specifications and quantities. For example, Purchase Order 1357 with Supplier Dell for 10 Computers, Purchase Order 1243 for buying 5 pens.
+            </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry />
+			</svcdoc:EBO>
+		</xsd:documentation>
+  </xsd:annotation>
+</xsd:schema>

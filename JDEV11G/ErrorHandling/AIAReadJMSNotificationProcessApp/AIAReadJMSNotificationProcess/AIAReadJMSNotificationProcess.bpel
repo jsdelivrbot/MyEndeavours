@@ -1,0 +1,129 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Dec 24 11:45:23 IST 2008
+  Author:  vsangana
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process xml:id="id1" name="AIAReadJMSNotificationProcess"
+               targetNamespace="http://xmlns.oracle.com/EH/AIAReadJMSNotificationProcess/AIAReadJMSNotificationProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/EH/AIAReadJMSNotificationProcess/AIAReadJMSNotificationProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+               xmlns:xpath20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+               xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns3="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.GetRequestHeaderExtnFunction"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/EH/AIAReadJMSNotificationProcess/ConsumeFaultMessage/"
+         xmlns:ns4="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+         xmlns:ns5="http://xmlns.oracle.com/EH/AIAReadJMSNotificationProcess/AIAErrorHandlingAdministrationProcess"
+         xmlns:ns6="http://xmlns.oracle.com/SendNotificationProcess/MessageNotification/SendMessage"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns7="http://xmlns.oracle.com/AIAErrorTaskAdministrationProcess"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ns0="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks xml:id="id2">
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink xml:id="id143" myRole="Consume_Message_role"
+                 name="ConsumeFaultMessage"
+                 partnerLinkType="ns2:Consume_Message_plt"/>
+    <partnerLink myRole="AIAErrorTaskAdministrationProcessRequester"
+                 name="AIAErrorTaskAdministrationProcess"
+                 partnerRole="AIAErrorTaskAdministrationProcessProvider"
+                 partnerLinkType="ns4:AIAErrorTaskAdministrationProcess"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables xml:id="id4">
+    <!-- Reference to the message passed as input during initiation -->
+   
+    <variable xml:id="id144" name="receiveInput_Consume_Message_InputVariable"
+              messageType="ns2:Consume_Message_msg"/>
+    <variable name="AIAErrorTaskProcess_InputVariable"
+              messageType="ns4:AIAErrorTaskAdministrationProcessRequestMessage"/>
+    <variable name="SystemID_Variable" type="xsd:string"/>
+    <variable name="ErrorCode_Variable" type="xsd:string"/>
+    <variable name="ProcessName_Variable" type="xsd:string"/>
+    <variable name="ServiceName_Variable" type="xsd:string"/>
+    <variable name="BSRRoles_Variable" element="ns7:BSRData"/>
+    <variable name="RolesString_Variable" type="xsd:string"/>
+    <variable name="BSRActor_Variable" type="xsd:string"/>
+    <variable name="BSRFYI_Variable" type="xsd:string"/>
+  </variables>
+  <faultHandlers xml:id="id263">
+    <catchAll xml:id="id264"/>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence xml:id="id6" name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in AIAReadJMSNotificationProcess.wsdl) -->
+    <receive xml:id="id7" name="receiveInput" portType="ns2:Consume_Message_ptt"
+             variable="receiveInput_Consume_Message_InputVariable" createInstance="yes"
+             partnerLink="ConsumeFaultMessage" operation="Consume_Message"/>
+    <flow name="Flow_1">
+      <sequence name="HWFSequence">
+        <switch name="Decide_HWFInvocation">
+          <case condition="aia:getSystemModuleProperty('ErrorHandler','EH.INVOKE.HWF',true())= 'true'">
+            <bpelx:annotation>
+              <bpelx:pattern>Check, if HWF invocation enabled</bpelx:pattern>
+            </bpelx:annotation>
+            <sequence>
+              <assign name="Assign_AIAFaultTo_AIAErrorTaskInput">
+                <copy>
+                  <from variable="receiveInput_Consume_Message_InputVariable"
+                        part="body"/>
+                  <to variable="AIAErrorTaskProcess_InputVariable"
+                      part="payload"/>
+                </copy>
+              </assign>
+              <invoke name="Invoke_ErrorTaskAdminProcess"
+                      inputVariable="AIAErrorTaskProcess_InputVariable"
+                      portType="ns4:AIAErrorTaskAdministrationProcess"
+                      partnerLink="AIAErrorTaskAdministrationProcess" operation="process"/>
+            </sequence>
+          </case>
+          <otherwise>
+            <empty name="Empty_HWFNotEnabled"/>
+          </otherwise>
+        </switch>
+      </sequence>
+    </flow>
+  </sequence>
+</process>

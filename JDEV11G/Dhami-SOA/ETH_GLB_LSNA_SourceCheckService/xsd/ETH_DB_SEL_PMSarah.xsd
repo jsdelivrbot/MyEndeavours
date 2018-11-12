@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="ETH_DB_SEL_PMSarahInput" type="xs:string"/>
+   <xs:element name="ETH_DB_SEL_PMSarahOutputCollection" type="ETH_DB_SEL_PMSarahOutputCollection"/>
+   <xs:complexType name="ETH_DB_SEL_PMSarahOutputCollection">
+      <xs:sequence>
+         <xs:element name="ETH_DB_SEL_PMSarahOutput" type="ETH_DB_SEL_PMSarahOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ETH_DB_SEL_PMSarahOutput">
+      <xs:sequence>
+         <xs:element name="Q_NAME" type="xs:string" nillable="true"/>
+         <xs:element name="MSGID" type="xs:base64Binary" nillable="true"/>
+         <xs:element name="CORRID" type="xs:string" nillable="true"/>
+         <xs:element name="PRIORITY" type="xs:decimal" nillable="true"/>
+         <xs:element name="STATE" type="xs:decimal" nillable="true"/>
+         <xs:element name="DELAY" type="xs:dateTime" nillable="true"/>
+         <xs:element name="EXPIRATION" type="xs:decimal" nillable="true"/>
+         <xs:element name="TIME_MANAGER_INFO" type="xs:dateTime" nillable="true"/>
+         <xs:element name="LOCAL_ORDER_NO" type="xs:decimal" nillable="true"/>
+         <xs:element name="CHAIN_NO" type="xs:decimal" nillable="true"/>
+         <xs:element name="CSCN" type="xs:decimal" nillable="true"/>
+         <xs:element name="DSCN" type="xs:decimal" nillable="true"/>
+         <xs:element name="ENQ_TIME" type="xs:dateTime" nillable="true"/>
+         <xs:element name="ENQ_UID" type="xs:decimal" nillable="true"/>
+         <xs:element name="ENQ_TID" type="xs:string" nillable="true"/>
+         <xs:element name="DEQ_TIME" type="xs:dateTime" nillable="true"/>
+         <xs:element name="DEQ_UID" type="xs:decimal" nillable="true"/>
+         <xs:element name="DEQ_TID" type="xs:string" nillable="true"/>
+         <xs:element name="RETRY_COUNT" type="xs:decimal" nillable="true"/>
+         <xs:element name="EXCEPTION_QSCHEMA" type="xs:string" nillable="true"/>
+         <xs:element name="EXCEPTION_QUEUE" type="xs:string" nillable="true"/>
+         <xs:element name="STEP_NO" type="xs:decimal" nillable="true"/>
+         <xs:element name="RECIPIENT_KEY" type="xs:decimal" nillable="true"/>
+         <xs:element name="DEQUEUE_MSGID" type="xs:base64Binary" nillable="true"/>
+         <xs:element name="SENDER_NAME" type="xs:string" nillable="true"/>
+         <xs:element name="SENDER_ADDRESS" type="xs:string" nillable="true"/>
+         <xs:element name="SENDER_PROTOCOL" type="xs:decimal" nillable="true"/>
+         <xs:element name="USER_DATA" type="xs:string" nillable="true"/>
+         <xs:element name="USER_PROP" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

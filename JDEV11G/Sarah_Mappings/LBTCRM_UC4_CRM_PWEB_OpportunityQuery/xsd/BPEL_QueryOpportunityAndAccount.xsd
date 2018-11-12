@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount" targetNamespace="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount" xmlns:common="http://LBTCRMIntegration.com">
+   <xsd:import namespace="http://LBTCRMIntegration.com" schemaLocation="LBTCRM_Common.xsd"/>
+   <xsd:complexType name="OpportunityDetailsType">
+      <xsd:sequence>
+         <xsd:element name="OpportunityId" type="xsd:string"/>
+         <xsd:element name="OpportunityName" type="xsd:string"/>
+         <xsd:element name="CloseDate" type="xsd:date"/>
+         <xsd:element name="OpportunityType" type="xsd:string"/>
+         <xsd:element name="ElnetFolderType" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="AccountDetailsType">
+      <xsd:sequence>
+         <xsd:element name="AccountId" type="xsd:string"/>
+         <xsd:element name="AccountName" type="xsd:string"/>
+         <xsd:element name="stNext_BillTo_Cust__Calculated" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToStreetAddress" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToStreetAddress2" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToStreetAddress3" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToCity" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToProvince" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToState" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToCountry" type="xsd:string"/>
+         <xsd:element name="PrimaryBillToPostalCode" type="xsd:string"/>
+         <xsd:element name="MainPhone" type="xsd:string"/>
+         <xsd:element name="MainFax" type="xsd:string"/>
+         <xsd:element name="stTax_ID_Number" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="queryParameters">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="OpportunityID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="queryResults">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="ResponseHeader" type="common:ResponseHeaderType"/>
+            <xsd:element name="OpportunityDetails" type="OpportunityDetailsType"/>
+            <xsd:element name="AccountDetails" type="AccountDetailsType"/>
+            <xsd:element name="Status" type="common:StatusType"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

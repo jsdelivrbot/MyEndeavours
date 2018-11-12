@@ -1,0 +1,12 @@
+<adapter-config name="sdfsdfsd" adapter="AQ Adapter" wsdlLocation="sdfsdfsd.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/ETH/SOA_AQ_DB" UIConnectionName="DEV_SOA2_INFRA_DB"/>
+  <endpoint-interaction portType="Enqueue_ptt" operation="Enqueue">
+    <interaction-spec className="oracle.tip.adapter.aq.outbound.AQEnqueueInteractionSpec">
+      <property name="RecipientList" value="ETH_Process_B2BStatusUpdateEvent_Composite"/>
+      <property name="QueueName" value="ETH_B2BStatusUpdateEvent"/>
+      <property name="DatabaseSchema" value="ETH_SOAINFRA"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

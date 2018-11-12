@@ -1,0 +1,149 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Dec 22 17:01:25 GMT+05:30 2010
+  Author:  idhami
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_GLB_LSNA_PO_Connector_BPEL"
+               targetNamespace="http://services.emerson.com/ETH_GLB_LSNA_PO_Connector_Composite/ETH_GLB_LSNA_PO_Connector_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://services.emerson.com/ETH_GLB_LSNA_PO_Connector_Composite/ETH_GLB_LSNA_PO_Connector_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/aq/Dhami-SOA/ETH_GLB_LSNA_PO_Connector_Composite/ETH_AQ_DEQ_PMSarah"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_Connector_Composite/ETH_DB_SEL_PMSarah"
+         xmlns:ns3="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ns7="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns9="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns10="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns4="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:bpmn="http://schemas.oracle.com/bpm/xpath"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_Connector_Composite/ETH_DB_INS_Header"
+         xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETH_DB_INS_Header">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eth_glb_lsna_po_connector_bpel_client" partnerLinkType="client:ETH_GLB_LSNA_PO_Connector_BPEL" myRole="ETH_GLB_LSNA_PO_Connector_BPELProvider"/>
+    <partnerLink name="ETH_DB_SEL_PMSarah" partnerRole="ETH_DB_SEL_PMSarah_role"
+                 partnerLinkType="ns2:ETH_DB_SEL_PMSarah_plt"/>
+    <partnerLink myRole="EnqueueSarah_role" name="ETH_AQ_DEQ_PMSarah1"
+                 partnerRole="DequeueSarah_role"
+                 partnerLinkType="ns1:ETH_AQ_DEQ_PMSarah_plt"/>
+    <partnerLink name="ETH_DB_INS_Header" partnerRole="ETH_DB_INS_Header_role"
+                 partnerLinkType="ns13:ETH_DB_INS_Header_plt"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_GLB_LSNA_PO_Connector_BPELRequestMessage"/>
+    <variable name="Interrogate_Queue_InputVariable"
+              messageType="ns2:ETH_DB_SEL_PMSarahInput_msg"/>
+    <variable name="Interrogate_Queue_OutputVariable"
+              messageType="ns2:ETH_DB_SEL_PMSarahOutputCollection_msg"/>
+    <variable name="Fetch_Transaction_DequeueSarah_InputVariable"
+              messageType="ns1:DequeueSarah_msg_in"/>
+    <variable name="TransactionCount" type="xsd:int"/>
+    <variable name="Insert_Header_InputVariable"
+              messageType="ns13:MasterCollection_msg"/>
+    <variable name="Insert_Header_OutputVariable"
+              messageType="ns13:MasterCollection_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_GLB_LSNA_PO_Connector_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_glb_lsna_po_connector_bpel_client" portType="client:ETH_GLB_LSNA_PO_Connector_BPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <invoke name="Interrogate_Queue" partnerLink="ETH_DB_SEL_PMSarah"
+            portType="ns2:ETH_DB_SEL_PMSarah_ptt"
+            operation="ETH_DB_SEL_PMSarah"
+            inputVariable="Interrogate_Queue_InputVariable"
+            outputVariable="Interrogate_Queue_OutputVariable"
+            bpelx:invokeAsDetail="true"/>
+    <assign name="Assign_HeaderElements">
+      <copy>
+        <from variable="Insert_Header_InputVariable" part="MasterCollection"
+              query="/ns14:MasterCollection"/>
+        <to variable="Insert_Header_InputVariable" part="MasterCollection"
+            query="/ns14:MasterCollection"/>
+      </copy>
+    </assign>
+    <invoke name="Insert_Header" inputVariable="Insert_Header_InputVariable"
+            outputVariable="Insert_Header_OutputVariable"
+            partnerLink="ETH_DB_INS_Header"
+            portType="ns13:ETH_DB_INS_Header_ptt" operation="insert"/>
+    <assign name="Assign_CountNodes">
+      <copy>
+        <from expression="ora:countNodes('Interrogate_Queue_OutputVariable','ETH_DB_SEL_PMSarahOutputCollection','/ns3:ETH_DB_SEL_PMSarahOutputCollection/ns3:ETH_DB_SEL_PMSarahOutput')"/>
+        <to variable="TransactionCount"/>
+      </copy>
+    </assign>
+    <switch name="Switch_1">
+      <case condition="bpws:getVariableData('TransactionCount')>0">
+        <bpelx:annotation>
+          <bpelx:pattern>Transactions are there to be processed</bpelx:pattern>
+          <bpelx:general>
+            <bpelx:property name="userLabel">TransactionsExist</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence>
+          <assign name="Assign_AQ_Fetch">
+            <copy>
+              <from expression="string('Hello')"/>
+              <to variable="Fetch_Transaction_DequeueSarah_InputVariable"
+                  part="opaque" query="/ns11:opaqueElement"/>
+            </copy>
+          </assign>
+          <invoke name="Fetch_Transaction"
+                  inputVariable="Fetch_Transaction_DequeueSarah_InputVariable" portType="ns1:Dequeue_ptt"
+                  partnerLink="ETH_AQ_DEQ_PMSarah1" operation="DequeueSarah"/>
+          <invoke name="Insert_Transaction"/>
+          <invoke name="Insert_Tracking"/>
+        </sequence>
+      </case>
+      <otherwise>
+        <empty name="Empty_DoNothing"/>
+      </otherwise>
+    </switch>
+  </sequence>
+</process>

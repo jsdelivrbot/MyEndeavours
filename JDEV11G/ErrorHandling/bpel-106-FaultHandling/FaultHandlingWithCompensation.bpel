@@ -1,0 +1,116 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Dec 02 19:45:08 PST 2009
+  Author:  cutschig
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FaultHandlingWithCompensation"
+               targetNamespace="http://example.com/bpel_106_FaultHandling/FaultHandlingWithCompensation"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://example.com/bpel_106_FaultHandling/FaultHandlingWithCompensation"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://example.com/bpel_106_FaultHandling/SyncFaultHandling"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xpath20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="faulthandlingwithcompensation_client" partnerLinkType="ns1:SyncFaultHandling" myRole="SyncFaultHandlingProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:SyncFaultHandlingRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:SyncFaultHandlingResponseMessage"/>
+  </variables>
+  <faultHandlers>
+    <catch faultName="ns1:businessFault">
+      <sequence>
+        <compensate name="Compensate_AllScopes"/>
+        <reply name="Reply_WithOutput" variable="outputVariable"
+               partnerLink="faulthandlingwithcompensation_client"
+               portType="ns1:SyncFaultHandling" operation="process"/>
+      </sequence>
+    </catch>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FaultHandlingWithCompensation.wsdl) -->
+    <receive name="receiveInput" partnerLink="faulthandlingwithcompensation_client" portType="ns1:SyncFaultHandling" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <scope name="Scope_ExecuteSomeLogic">
+      <compensationHandler>
+        <assign name="Assign_CompensateScope1">
+            <copy>
+              <from expression="concat(bpws:getVariableData('outputVariable','payload','/ns1:processResponse/ns1:result'), ' | ', 'Scope (1) - compensation')"/>
+              <to variable="outputVariable" part="payload"
+                  query="/ns1:processResponse/ns1:result"/>
+            </copy>
+        </assign>
+      </compensationHandler>
+      <assign name="Assign_Success">
+        <copy>
+          <from expression="concat('Got input: ', bpws:getVariableData('inputVariable','payload','/ns1:process/ns1:input') ,' -> Scope (1) executed')"/>
+          <to variable="outputVariable" part="payload"
+              query="/ns1:processResponse/ns1:result"/>
+        </copy>
+      </assign>
+    </scope>
+    <scope name="Scope_ExecuteSomeOtherLogic">
+      <compensationHandler>
+        <assign name="Assign_CompensateScope2">
+            <copy>
+              <from expression="concat(bpws:getVariableData('outputVariable','payload','/ns1:processResponse/ns1:result'), ' | ', 'Scope (2) - compensation')"/>
+              <to variable="outputVariable" part="payload"
+                  query="/ns1:processResponse/ns1:result"/>
+            </copy>
+        </assign>
+      </compensationHandler>
+      <assign name="Assign_SuccessOtherLogic">
+        <copy>
+          <from expression="concat(bpws:getVariableData('outputVariable','payload','/ns1:processResponse/ns1:result'), ' | ', 'Scope (2) - executed')"/>
+          <to variable="outputVariable" part="payload"
+              query="/ns1:processResponse/ns1:result"/>
+        </copy>
+      </assign>
+    </scope>
+    <throw name="Throw_BizFault" faultName="ns1:businessFault"/>
+    <reply name="replyOutput" partnerLink="faulthandlingwithcompensation_client" portType="ns1:SyncFaultHandling" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,17 @@
+<definitions
+     name="PurchaseOrderEBS"
+     targetNamespace="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:ebs="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson"
+    >
+    <import namespace="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson" location="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseBusinessServiceLibrary/Industry/Manufacturing/EBO/PurchaseOrder/Emerson/PurchaseOrderEmersonEBS.wsdl"/>
+    
+    <plnk:partnerLinkType name="PurchaseOrderEBS">
+        <plnk:role name="PurchaseOrderEBS_Role">
+            <plnk:portType name="ebs:PurchaseOrderEBS"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

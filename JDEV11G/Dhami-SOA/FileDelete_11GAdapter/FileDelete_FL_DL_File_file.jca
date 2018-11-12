@@ -1,0 +1,12 @@
+<adapter-config name="FileDelete_FL_DL_File" adapter="File Adapter" wsdlLocation="FileDelete_FL_DL_File.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter"/>
+  <endpoint-interaction portType="FileDelete_ptt" operation="FileDelete">
+    <interaction-spec className="oracle.tip.adapter.file.outbound.FileIoInteractionSpec">
+      <property name="Type" value="DELETE"/>
+      <property name="TargetFileName" value="dummy.txt"/>
+      <property name="TargetPhysicalDirectory" value="/orionap/u01/app_SOA2/oracle/workingfolder/ETH/runtime/EMR501/outbound/PO/input"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

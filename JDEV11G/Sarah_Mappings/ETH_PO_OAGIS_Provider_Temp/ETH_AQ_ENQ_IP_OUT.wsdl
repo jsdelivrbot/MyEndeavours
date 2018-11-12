@@ -1,0 +1,45 @@
+<wsdl:definitions
+     name="ETH_AQ_ENQ_IP_OUT"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_PO_OAGIS_Provider_Temp/ETH_AQ_ENQ_IP_OUT"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_PO_OAGIS_Provider_Temp/ETH_AQ_ENQ_IP_OUT"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA"
+     xmlns:msg_out="http://www.openapplications.org/oagis/9"
+     xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="EnqueueIPOUT_plt" >
+    <plt:role name="EnqueueIPOUT_role" >
+      <plt:portType name="tns:EnqueueIPOUT_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:import namespace="http://www.openapplications.org/oagis/9" location="ETH_FL_RD_PO_OAGIS.wsdl"/>
+    <wsdl:types>
+    <!-- Define AQ Headers = Payload Headers -->
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:obj1="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA" >
+      <import namespace="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA" schemaLocation="xsd/SOA2_SOAINFRA_IP_MESSAGE_TYPE.xsd"/>
+      <complexType name="ETH_AQ_ENQ_IP_OUTHeaderCType" >
+        <sequence>
+          <!-- payload header -->
+          <element name="PayloadHeader" type="obj1:IP_MESSAGE_TYPE" />
+        </sequence>
+      </complexType>
+      <element name="ETH_AQ_ENQ_IP_OUTHeader" type="ph:ETH_AQ_ENQ_IP_OUTHeaderCType" />
+    </schema>
+    </wsdl:types>
+    <wsdl:message name="ProcessPurchaseOrder_msg">
+        <wsdl:part name="ProcessPurchaseOrder" element="msg_out:ProcessPurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:message name="Header_msg">
+        <wsdl:part name="Header" element="ph:ETH_AQ_ENQ_IP_OUTHeader"/>
+    </wsdl:message>
+    <wsdl:portType name="EnqueueIPOUT_ptt">
+        <wsdl:operation name="EnqueueIPOUT">
+            <wsdl:input message="tns:ProcessPurchaseOrder_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

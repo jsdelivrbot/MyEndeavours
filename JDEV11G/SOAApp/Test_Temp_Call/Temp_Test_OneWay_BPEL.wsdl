@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="Temp_Test_OneWay_BPEL"
+     targetNamespace="http://xmlns.oracle.com/SOAApp/Temp_Test_OneWay/Temp_Test_OneWay_BPEL"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:client="http://xmlns.oracle.com/SOAApp/Temp_Test_OneWay/Temp_Test_OneWay_BPEL"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="Temp_Test_OneWay_BPEL">
+        <plnk:role name="Temp_Test_OneWay_BPELProvider" portType="client:Temp_Test_OneWay_BPEL"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/SOAApp/Temp_Test_OneWay/Temp_Test_OneWay_BPEL"
+                 schemaLocation="xsd/Temp_Test_OneWay_BPEL.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Temp_Test_OneWay_BPELRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="Temp_Test_OneWay_BPEL">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:Temp_Test_OneWay_BPELRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

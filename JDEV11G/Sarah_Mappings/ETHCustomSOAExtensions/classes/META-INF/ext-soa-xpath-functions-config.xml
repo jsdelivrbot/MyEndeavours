@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soa-xpath-functions version="11.1.1"
+ xmlns="http://xmlns.oracle.com/soa/config/xpath"
+ xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension">
+  <function name="ethCustomSOA:evaluateDBResponse">
+    <className>com.emerson.eth3.customSOA.ETHCustomSOAExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="responseCode" type="number" minOccurs="1"/>
+      <param name="errorCodeNumber" type="string" minOccurs="1"/>
+      <param name="rollbackFlag" type="number" minOccurs="1"/>
+    </params>
+    <desc><![CDATA[      /**
+   * This Function is used to evaluate ETH DB Procedure response. 
+   * If the ResponseCode is 0(ZERO) then it will return 'SUCCESS'.
+   * If the ResponseCode is 99 OR (98 with ErrorCodeNumber not starting with SOA or B2B or DB) then it will return 'DB_FAILURE'
+   * If the ResponseCode is anything else, it will return 'FAILURE'
+   * If there is an exception in the function, it will return 'JAVA_ERROR'
+   * @param responseCode - A Number
+   * @param errorCodeNumber - A String.
+   * @param rollbackFlag - A Number. Not used as of now, but mandatory to pass.
+   * @return responseFlag - A String 
+   * */]]></desc>    
+    <detail>
+      <![CDATA[     /**
+   * This Function is used to evaluate ETH DB Procedure response. 
+   * If the ResponseCode is 0(ZERO) then it will return 'SUCCESS'.
+   * If the ResponseCode is 99 OR (98 with ErrorCodeNumber not starting with SOA or B2B or DB) then it will return 'DB_FAILURE'
+   * If the ResponseCode is anything else, it will return 'FAILURE'
+   * If there is an exception in the function, it will return 'JAVA_ERROR'
+   * @param responseCode - A Number
+   * @param errorCodeNumber - A String.
+   * @param rollbackFlag - A Number. Not used as of now, but mandatory to pass.
+   * @return responseFlag - A String 
+   * */]]></detail>
+  </function>
+  <function name="ethCustomSOA:validateFileName">
+    <className>com.emerson.eth3.customSOA.ETHCustomSOAExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="fileName" type="string" minOccurs="1"/>
+    </params>
+    <desc><![CDATA[  /**
+   * This Function will validate a fileName and return back the validated file name. 
+   * A file name is not valid if it has any character other than Alphanumeric, .(period) and _(underscore).
+   * This function will replace any illegal character found, with a replacement character.
+   * We are using 'X' as replacement character.
+   * If no Illegal chracters are found, the file name is returned as it is.
+   * If NULL or "" or whitespaces are passed as file name, it will return back a random type 4 UUID prefixed with string 'ETH_'.
+   * If the filename passed is over 100 characters, it will be truncated to 100 and return back.
+   * If there is any Java Exception encountered, orignal file name will be returned back without any change.
+   * @param fileName - A String.
+   * @return validFileName - A String
+   * */]]></desc>    
+    <detail>
+      <![CDATA[  /**
+   * This Function will validate a fileName and return back the validated file name. 
+   * A file name is not valid if it has any character other than Alphanumeric, .(period) and _(underscore).
+   * This function will replace any illegal character found, with a replacement character.
+   * We are using 'X' as replacement character.
+   * If no Illegal chracters are found, the file name is returned as it is.
+   * If NULL or "" or whitespaces are passed as file name, it will return back a random type 4 UUID prefixed with string 'ETH_'.
+   * If the filename passed is over 100 characters, it will be truncated to 100 and return back.
+   * If there is any Java Exception encountered, orignal file name will be returned back without any change.
+   * @param fileName - A String.
+   * @return validFileName - A String
+   * */]]></detail>
+  </function>
+  <!--<function name="ethCustomSOA:filterControlCharacters">
+    <className>com.emerson.eth3.customSOA.ETHCustomSOAExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="inputString" type="string" minOccurs="1"/>
+    </params>
+    <desc><![CDATA[  /**
+   * This Function will filter out any ISO Control Characters found in the input string.
+   * If NULL or "" or Whitespaces are passed as input, same will be returned back without any alteration.
+   * If there is any Java Exception encountered, orignal input will be returned back without any filteration.
+   * @param inputString - A String.
+   * @return filteredString - A String 
+   * */]]></desc>    
+    <detail>
+      <![CDATA[  /**
+   * This Function will filter out any ISO Control Characters found in the input string.
+   * If NULL or "" or Whitespaces are passed as input, same will be returned back without any alteration.
+   * If there is any Java Exception encountered, orignal input will be returned back without any filteration.
+   * @param inputString - A String.
+   * @return filteredString - A String 
+   * */]]></detail>
+  </function>-->
+</soa-xpath-functions>

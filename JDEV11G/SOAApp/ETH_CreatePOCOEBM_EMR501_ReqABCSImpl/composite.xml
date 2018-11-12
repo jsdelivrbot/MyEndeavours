@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite name="ETH_CreatePOCOEBM_EMR501_ReqABCSImpl" revision="1.0" mode="active" state="on" xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:ui="http://xmlns.oracle.com/soa/designer/"   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <import namespace="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson" location="PurchaseOrderEBSRef.wsdl"/>
+       
+    <import namespace="http://xmlns.oracle.com/ABCSImpl/EBM_/Industry/EMR501_/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/V1"
+            location="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/ETH/Requesters/FlatFile/PO/EMR501/V1/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl.wsdl"
+            importType="wsdl"/>
+    <service ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/ETH/Requesters/FlatFile/PO/EMR501/V1/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl.wsdl" name="ETH_CreatePOCOEBM_EMR501_ReqABCSImpl">
+        <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/EBM_/Industry/EMR501_/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/V1#wsdl.interface(ETH_CreatePOCOEBM_EMR501_ReqABCSImpl)"/>
+         
+        <binding.ws port="http://xmlns.oracle.com/ABCSImpl/EBM_/Industry/EMR501_/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/V1#wsdl.endpoint(ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl_pt)">
+            <property name="weblogic.wsee.wsat.transaction.flowOption"
+                      type="xs:string" many="false">NEVER</property>
+        </binding.ws>
+    </service>
+    <property name="oracle.composite.faultPolicyFile">oramds:/apps/AIAMetaData/faultPolicies/fault-policies.xml</property>
+    <property name="oracle.composite.faultBindingFile">oramds:/apps/AIAMetaData/faultPolicies/fault-bindings.xml</property>
+    <component name="ETH_CreatePOCOEBM_EMR501_ReqABCSImplProcess">
+    <implementation.bpel src="ETH_CreatePOCOEBM_EMR501_ReqABCSImplProcess.bpel"/>
+    <property name="bpel.config.transaction">required</property>
+    <property name="bpel.config.oneWayDeliveryPolicy">sync</property>
+    <property name="bpel.preference.JDBC_URL">jdbc:oracle:thin:@orionddb.emerson.com:34002:oriond2 eth_custom_schema eth_custom_schema</property>
+    <property name="bpel.preference.JDBC_CONF_JNDI">jdbc/ETH/AppDB_DS_NXA</property>
+    
+     <property name="bpel.preference.messageEncoding">UTF-8</property>
+    </component>
+    <reference ui:wsdlLocation="PurchaseOrderEBSRef.wsdl" name="PurchaseOrderEBS">
+        <interface.wsdl interface="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson#wsdl.interface(PurchaseOrderEBS)" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+        <binding.ws port="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson#wsdl.endpoint(PurchaseOrderEBS/PurchaseOrderEBS_pt)" location="" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+        
+            </reference>
+    <wire>
+        <source.uri>ETH_CreatePOCOEBM_EMR501_ReqABCSImpl</source.uri>
+        <target.uri>ETH_CreatePOCOEBM_EMR501_ReqABCSImplProcess/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl</target.uri>
+    </wire>
+    <wire>
+        <source.uri>ETH_CreatePOCOEBM_EMR501_ReqABCSImplProcess/PurchaseOrderEBS</source.uri>
+        <target.uri>PurchaseOrderEBS</target.uri>
+    </wire>
+</composite>

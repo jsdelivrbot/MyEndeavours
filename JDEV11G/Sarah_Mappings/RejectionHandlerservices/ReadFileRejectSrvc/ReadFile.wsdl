@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ReadFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/testAppl/ReadFileRejectSrvc/ReadFile"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/testAppl/ReadFileRejectSrvc/ReadFile"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://TargetNamespace.com/ReadFile"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Read_plt" >
+    <plt:role name="Read_role" >
+      <plt:portType name="tns:Read_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://TargetNamespace.com/ReadFile" schemaLocation="xsd/RejectionFile_1.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Read_msg">
+        <wsdl:part name="body" element="imp1:Root-Element"/>
+    </wsdl:message>
+    <wsdl:portType name="Read_ptt">
+        <wsdl:operation name="Read">
+            <wsdl:input message="tns:Read_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

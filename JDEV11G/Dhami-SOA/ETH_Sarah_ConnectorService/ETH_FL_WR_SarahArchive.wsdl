@@ -1,0 +1,46 @@
+<wsdl:definitions
+     name="ETH_FL_WR_SarahArchive"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_Sarah_ConnectorService/ETH_FL_WR_SarahArchive"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:FILEAPP="http://xmlns.oracle.com/pcbpel/adapter/file/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_Sarah_ConnectorService/ETH_FL_WR_SarahArchive"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="WriteSarahArchive_plt" >
+    <plt:role name="WriteSarahArchive_role" >
+      <plt:portType name="tns:WriteSarahArchive_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/" xmlns="http://www.w3.org/2001/XMLSchema"
+            attributeFormDefault="qualified"
+            elementFormDefault="qualified" >
+       <element name="OutboundFileHeaderType" >
+         <complexType>
+           <sequence>
+             <element name="filename" type="string" />
+             <element name="directory" type="string" />
+            </sequence>
+           </complexType>
+       </element>
+    </schema>
+    </wsdl:types>
+    <wsdl:message name="WriteSarahArchive_msg">
+        <wsdl:part name="opaque" element="opaque:opaqueElement"/>
+    </wsdl:message>
+    <wsdl:message name="Output_msg">
+        <wsdl:part name="body" element="FILEAPP:OutboundFileHeaderType"/>
+    </wsdl:message>
+    <wsdl:portType name="WriteSarahArchive_ptt">
+        <wsdl:operation name="WriteSarahArchive">
+            <wsdl:input message="tns:WriteSarahArchive_msg"/>
+            <wsdl:output message="tns:Output_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

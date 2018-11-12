@@ -1,0 +1,135 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Jan 07 12:50:37 GMT+05:30 2011
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_GLB_LSNA_Connector_BPEL"
+               targetNamespace="http://services.emerson.com/Dhami_SOA_jws/ETH_GLB_LSNA_PO_ConnectorService1/ETH_GLB_LSNA_Connector_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                xmlns:client="http://services.emerson.com/Dhami_SOA_jws/ETH_GLB_LSNA_PO_ConnectorService1/ETH_GLB_LSNA_Connector_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/aq/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService1/ETH_AQ_DEQ_PMSarah"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService1/ETH_FL_RD_LSNA_ArchivedFile"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService1/ETH_DB_CALL_INSMasterRecord"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService1/ETH_FL_WR_LSNAArchive"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService1/ETH_FL_DEL_ArchiveFile"
+         xmlns:ns10="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ns7="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns11="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns9="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns13="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns14="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns12="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns8="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="DequeueETHSarah_role" name="ETH_AQ_DEQ_PMSarah"
+                 partnerLinkType="ns1:DequeueETHSarah_plt"/>
+    <partnerLink myRole="Read_role" name="ETH_FL_RD_LSNA_ArchivedFile"
+                 partnerLinkType="ns2:Read_plt"/>
+    <partnerLink name="ETH_DB_CALL_INSMasterRecord"
+                 partnerRole="ETH_DB_CALL_INSMasterRecord_role"
+                 partnerLinkType="ns3:ETH_DB_CALL_INSMasterRecord_plt"/>
+    <partnerLink name="ETH_FL_WR_LSNAArchive"
+                 partnerRole="WriteLSNAArchive_role"
+                 partnerLinkType="ns4:WriteLSNAArchive_plt"/>
+    <partnerLink name="ETH_FL_DEL_ArchiveFile" partnerRole="SynchRead_role"
+                 partnerLinkType="ns6:SynchRead_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="OnMessage_DequeueETHSarah_InputVariable"
+              messageType="ns1:DequeueETHSarah_msg"/>
+    <variable name="OnMessage_Read_InputVariable" messageType="ns2:Read_msg"/>
+    <variable name="Invoke_WriteLSNAArchive_InputVariable"
+              messageType="ns4:WriteLSNAArchive_msg"/>
+    <variable name="Invoke_InsTransaction_InputVariable"
+              messageType="ns3:args_in_msg"/>
+    <variable name="Invoke_DelFile_SynchRead_InputVariable"
+              messageType="ns6:Empty_msg"/>
+  </variables>
+  <sequence name="main">
+    <pick name="Pick_1">
+      <onMessage variable="OnMessage_DequeueETHSarah_InputVariable"
+                 partnerLink="ETH_AQ_DEQ_PMSarah"
+                 portType="ns1:DequeueETHSarah_ptt"
+                 operation="DequeueETHSarah">
+        <sequence>
+          <assign name="Assign_ArchiveFile">
+            <copy>
+              <from variable="OnMessage_DequeueETHSarah_InputVariable"
+                    part="opaque" query="/ns5:opaqueElement"/>
+              <to variable="Invoke_WriteLSNAArchive_InputVariable" part="opaque"
+                  query="/ns5:opaqueElement"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_Archive_File"
+                  inputVariable="Invoke_WriteLSNAArchive_InputVariable"
+                  partnerLink="ETH_FL_WR_LSNAArchive"
+                  portType="ns4:WriteLSNAArchive_ptt"
+                  operation="WriteLSNAArchive"/>
+        </sequence>
+      </onMessage>
+      <onMessage variable="OnMessage_Read_InputVariable"
+                 partnerLink="ETH_FL_RD_LSNA_ArchivedFile"
+                 portType="ns2:Read_ptt" operation="Read">
+        <bpelx:annotation>
+          <bpelx:pattern></bpelx:pattern>
+        </bpelx:annotation>
+        <empty name="Send_Alert"/>
+      </onMessage>
+    </pick>
+    <assign name="Assign_InsTransaction"/>
+    <invoke name="Invoke_InsTransaction"
+            inputVariable="Invoke_InsTransaction_InputVariable"
+            partnerLink="ETH_DB_CALL_INSMasterRecord"
+            portType="ns3:ETH_DB_CALL_INSMasterRecord_ptt"
+            operation="ETH_DB_CALL_INSMasterRecord"/>
+    <scope name="Scope_1">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_DeleteArchive</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="Invoke_DelFile_SynchRead_OutputVariable"
+                  messageType="ns6:SynchRead_msg"/>
+      </variables>
+      <sequence>
+        <assign name="Assign_DelFile">
+          <copy>
+            <from expression="String('delete')"/>
+            <to variable="Invoke_DelFile_SynchRead_InputVariable" part="Empty"
+                query="/ns5:empty"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_DelFile"
+                inputVariable="Invoke_DelFile_SynchRead_InputVariable"
+                outputVariable="Invoke_DelFile_SynchRead_OutputVariable"
+                partnerLink="ETH_FL_DEL_ArchiveFile"
+                portType="ns6:SynchRead_ptt" operation="SynchRead"/>
+      </sequence>
+    </scope>
+    <scope name="Scope_2">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_SendReceipt</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+    </scope>
+  </sequence>
+</process>

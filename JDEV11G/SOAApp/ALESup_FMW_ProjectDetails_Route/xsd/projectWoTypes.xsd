@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoTypes/V1"
+  xmlns:projWoTypes="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoTypes/V1"
+  targetNamespace="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoTypes/V1"
+  xmlns:intfMd="http://www.allete.com/ns/interfaceMetadata/v1" elementFormDefault="qualified">
+
+  <xsd:import namespace="http://www.allete.com/ns/interfaceMetadata/v1"
+    schemaLocation="interfaceMetadata.xsd"/>
+
+  <xsd:complexType name="ebsProjectInfoCollectionType">
+    <xsd:sequence>
+      <xsd:element name="ebsProjectInfo" type="ebsProjectInfoType" minOccurs="0"
+        maxOccurs="unbounded"/>
+      <xsd:element name="InterfaceMetadata" type="intfMd:InterfaceMetadataType" minOccurs="0"
+        nillable="true"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="projectDetailsCollectionType">
+    <xsd:sequence>
+      <xsd:element name="projectDetails" type="projectDetailsType" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="projectEstimate" type="projectEstimateType" minOccurs="0" maxOccurs="1"
+        nillable="true"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ebsProjectInfoType">
+    <xsd:sequence>
+      <xsd:element name="Funding_Wo_Id" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Funding_Wo_Number" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Funding_Wo_Indicator" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="Funding_Wo_Name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Funding_Wo_Long_Name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Funding_Wo_Status" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Funding_Wo_Type" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="TransDurationStartDate" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="TransDurationEndDate" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="ebsTaskDetails" type="ebsTaskDetailsType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ebsTaskDetailsType">
+    <xsd:sequence>
+      <xsd:element name="Wo_Task_Id" type="xsd:integer" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Number" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Top_Parent_Number" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Parent_Number" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Long_Name" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Status" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Trans_Duration_Start" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Trans_Duration_End" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Ac_Comb" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Wo_Task_Maximo_Site_Id" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="projectDetailsType">
+    <xsd:sequence>
+      <xsd:element name="AleStagingId" type="xsd:decimal"/>
+      <xsd:element name="AfudcEligible" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Capital" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Company" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="CompanyId" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="CompletionDate" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+      <xsd:element name="Cwip_Account" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="CueFlag" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Department" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="DepartmentId" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="EstimatedCompletionDate" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+      <xsd:element name="EstimatedStartDate" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+      <xsd:element name="FundingWorkOrderId" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="FundingWorkOrderIndicator" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="FundingWorkOrderNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="GLAccount" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="InServiceDate" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+      <xsd:element name="KeyMember" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Location" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="MaxStatus" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Parent" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="PpWorkOrder" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Processed" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="ProjectType" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="ProjectTypeId" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="Reason" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Rwip_Account" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="ServiceTypeCode" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="SiteId" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Status" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="TimeStamp" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+      <xsd:element name="UserId" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="WBSLevel1" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="WBSLevel2" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="WBSLevel3" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="WorkOrderDescription" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="WorkOrderId" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="WorkOrderLongDescription" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="WorkOrderNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="InterfaceMetadata" type="intfMd:InterfaceMetadataType" minOccurs="1"
+        maxOccurs="1" nillable="true"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="projectEstimateType">
+    <xsd:sequence>
+      <xsd:element name="AleEstStagingId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Company" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Department" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ExpenditureType" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="LaborAmount" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="MaterialAmount" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="PpWorkOrder" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="Quantity" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="RetirementUnit" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Revision" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="UtilityAccount" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="VintageYear" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="TimeStamp" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="UserId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Processed" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="WorkOrderId" type="xsd:decimal" minOccurs="0" nillable="true"/>
+      <xsd:element name="WorkOrderNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+      <xsd:element name="InterfaceMetadata" type="intfMd:InterfaceMetadataType" minOccurs="1"
+        maxOccurs="1" nillable="true"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ppFinancialProjectType">
+    <xsd:sequence>
+      <xsd:element name="AltPPID" type="xsd:integer" nillable="true"/>
+      <xsd:element name="PPDescription" type="xsd:string" nillable="true"/>
+      <xsd:element name="WorkOrderID" type="xsd:string" nillable="true"/>
+      <xsd:element name="WorkOrderNumber" type="xsd:string" nillable="true"/>
+      <xsd:element name="EstStartDate" type="xsd:dateTime" nillable="true"/>
+      <xsd:element name="CloseDate" type="xsd:dateTime" nillable="true"/>
+      <xsd:element name="ReasonCDID" type="xsd:string" nillable="true"/>
+      <xsd:element name="FundingWOIndicator" type="xsd:string" nillable="true"/>
+      <xsd:element name="FundingWOID" type="xsd:string" nillable="true"/>
+      <xsd:element name="WOStatusID" type="xsd:string" nillable="true"/>
+      <xsd:element name="CompanyID" type="xsd:string" nillable="true"/>
+      <xsd:element name="DepartmentID" type="xsd:string" nillable="true"/>
+      <xsd:element name="WorkOrderTypeID" type="xsd:string" nillable="true"/>
+      <xsd:element name="Location" type="xsd:string" nillable="true"/>
+      <xsd:element name="Company" type="xsd:string" nillable="true"/>
+      <xsd:element name="Department" type="xsd:string" nillable="true"/>
+      <xsd:element name="WorkOrderType" type="xsd:string" nillable="true"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>

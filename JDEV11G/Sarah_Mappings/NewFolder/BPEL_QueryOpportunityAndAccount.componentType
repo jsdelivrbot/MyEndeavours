@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<componentType xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+   <service name="bpel_queryopportunityandaccount_client" ui:wsdlLocation="BPEL_QueryOpportunityAndAccount.wsdl">
+      <interface.wsdl interface="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount#wsdl.interface(BPEL_QueryOpportunityAndAccount)"/>
+   </service>
+   <reference name="PL_OpportunityQuery" ui:wsdlLocation="OpportunityRef.wsdl">
+      <interface.wsdl interface="urn:crmondemand/ws/ecbs/opportunity/10/2004#wsdl.interface(Opportunity)"/>
+   </reference>
+   <reference name="PL_AccountQuery" ui:wsdlLocation="AccountRef.wsdl">
+      <interface.wsdl interface="urn:crmondemand/ws/ecbs/account/10/2004#wsdl.interface(Account)"/>
+   </reference>
+   <reference name="BPEL_Login" ui:wsdlLocation="http://usstlz-pinfap40.emrsn.org:8120/soa-infra/services/default/LBTCRM_Login/BPEL_Login.wsdl">
+      <interface.wsdl interface="http://LBTCRMIntegration.com/LBTCRM_Login/BPEL_Login#wsdl.interface(BPEL_Login)"/>
+   </reference>
+</componentType>

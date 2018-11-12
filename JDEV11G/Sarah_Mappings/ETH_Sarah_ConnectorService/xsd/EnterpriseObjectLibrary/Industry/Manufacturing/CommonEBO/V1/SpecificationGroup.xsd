@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.01 **
+** Date: May 4, 2009 **
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\SpecificationGroup.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO SpecificationGroup EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:corespecificationgroupcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.01.00" > 
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomSpecificationGroup.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<!-- ====================================================================== -->
+<!-- ==============  SpecificationGroup Components ================ -->
+<!-- ====================================================================== -->
+                      <xsd:element name="SpecificationGroup" type="SpecificationGroupType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A specification group is a group of specifications that are used together
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                 <xsd:annotation> 
+                      <xsd:documentation> 
+                           <svcdoc:EBO> 
+                                   <svcdoc:Description> 
+A specification group is a group of specifications that are used together
+                                   </svcdoc:Description> 
+                                   <svcdoc:Type>EBO</svcdoc:Type> 
+                                   <svcdoc:Industry/> 
+                           </svcdoc:EBO> 
+                      </xsd:documentation> 
+                 </xsd:annotation> 
+            <xsd:complexType name="SpecificationGroupType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier of the specification group
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Name" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Name of the specification group
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the specification group
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SingleCardinalityIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates whether the specifications within this specification group have single cardinality or not
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DisplayName" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Display name of the specification group
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="SpecificationGroupSpecification"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A specification group may have multiple specifications that are logically related. This is the association between the specification group and a specification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="SpecificationGroupApplicableBusinessEntity"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+List of Bussiness Entity to which the Specification Group is Associated. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="corespecificationgroupcust:CustomSpecificationGroupType" minOccurs="0"/>
+                 </xsd:sequence>
+            </xsd:complexType>
+                      <xsd:element name="SpecificationGroupApplicableBusinessEntity" type="SpecificationGroupApplicableBusinessEntityType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+List of Bussiness Entity to which the Specification Group is Associated. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="SpecificationGroupApplicableBusinessEntityType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:CodeIdentification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Bussiness Entity to which the Specification Group is Associated. Possible Business Entities are: Item, Item Organization, Item Supplier, Item Supplier Site, Item Supplier Site Organization, Item Revision
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="corespecificationgroupcust:CustomSpecificationGroupApplicableBusinessEntityType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="SpecificationGroupSpecification" type="SpecificationGroupSpecificationType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A specification group may have multiple specifications that are logically related. This is the association between the specification group and a specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="SpecificationGroupSpecificationType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier of the relationship between the specification group and specification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="DefaultValue" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Default value of the specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DisplaySequenceNumber" type="corecom:PositiveIntegerType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Sequence in which the specification appears within the specification group
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="RequiredIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates whether the specification is mandatory for the specification group
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="UOMCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The unit of measure of the specification within the context of the specification group. The default value is expressed in this UOM
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DefaultValueOverrideAllowedIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates whether the specification is read-only i.e., the value can't be assigned at the usage instance level (such as for item) and must be the default value
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Name" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Name of the specification.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DisplayName" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Display name of the specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ReadOnlyIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator allows users to make the attribute read-only, so the user cannot change the value.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="HiddenIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator  prevents the attribute from displaying in quote, agreement, order, or asset views. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SearchableIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator allows an attribute and its values to be used in parametric searches. For example, if the attribute is Color, you can search for products that have Color = Red.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="CheckEligibilityIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator is to check eligibility for a specific attribute.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="EnabledIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicator to enable specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="IndexedIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Flag to indicate if the specification is indexed
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TransactionalIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Flag to indicate if the specification is static or transactional. Transactional attributes are updated at order time. Static attributes are related to an entity definition and are set only during design time. 
+
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DataTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Data type of the sepcification. Eg., CharNumberStandard DateStandard Date Time and Translatable Text
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:EffectiveTimePeriod"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Effectivity of the specification for the specification group
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SpecificationReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Deprecated.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SpecificationValueSetReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the value set to which the specification is constrained
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="SpecificationGroupSpecificationExclusion"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies a value that is disallowed or invalid for the specification within the context of the classification. This value may be a legal value defined within the value set on which the specification is based but excluded for this classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="corespecificationgroupcust:CustomSpecificationGroupSpecificationType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="SpecificationGroupSpecificationExclusion" type="SpecificationGroupSpecificationExclusionType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies a value that is disallowed or invalid for the specification within the context of the classification. This value may be a legal value defined within the value set on which the specification is based but excluded for this classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="SpecificationGroupSpecificationExclusionType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier of the excluded value
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Value" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Value that is excluded
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="corespecificationgroupcust:CustomSpecificationGroupSpecificationExclusionType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+</xsd:schema>

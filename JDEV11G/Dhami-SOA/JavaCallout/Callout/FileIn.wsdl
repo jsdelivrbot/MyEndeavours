@@ -1,0 +1,21 @@
+<?binding.jca FileIn_file.jca?>
+<wsdl:definitions name="FileIn" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/App_Mediator_basic/Callout/FileIn/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/App_Mediator_basic/Callout/FileIn/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:imp1="http://xmlns.oracle.com/Esb/CustomerData" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="Read_plt">
+        <plt:role name="Read_role">
+            <plt:portType name="tns:Read_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/Esb/CustomerData" schemaLocation="xsd/LegacyCustomer.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Read_msg">
+        <wsdl:part name="body" element="imp1:CustomerData"/>
+    </wsdl:message>
+    <wsdl:portType name="Read_ptt">
+        <wsdl:operation name="Read">
+            <wsdl:input message="tns:Read_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

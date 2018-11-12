@@ -1,0 +1,13 @@
+<adapter-config name="ETH_EMR501_FL_SRD_TxnFile" adapter="File Adapter" wsdlLocation="ETH_EMR501_FL_SRD_TxnFile.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter"/>
+  <endpoint-interaction portType="SyncRead_EMR501_TxnFile_ptt" operation="SyncRead_EMR501_TxnFile">
+    <interaction-spec className="oracle.tip.adapter.file.outbound.FileReadInteractionSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="LogicalArchiveDirectory" value="EMR501_TXNFILE_ARCHIVE_DIR"/>
+      <property name="FileName" value="abc.txt"/>
+      <property name="LogicalDirectory" value="EMR501_TXNFILE_INPUT_DIR"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

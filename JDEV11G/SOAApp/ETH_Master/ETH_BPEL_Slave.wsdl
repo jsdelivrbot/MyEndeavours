@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="ETH_BPEL_Slave"
+     targetNamespace="http://xmlns.oracle.com/SOAApp/ETH_SLAVE/ETH_BPEL_Slave"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:client="http://xmlns.oracle.com/SOAApp/ETH_SLAVE/ETH_BPEL_Slave"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="ETH_BPEL_Slave">
+        <plnk:role name="ETH_BPEL_SlaveProvider" portType="client:ETH_BPEL_Slave"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/SOAApp/ETH_SLAVE/ETH_BPEL_Slave" schemaLocation="xsd/ETH_BPEL_Slave.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ETH_BPEL_SlaveRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="ETH_BPEL_SlaveResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ETH_BPEL_Slave">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ETH_BPEL_SlaveRequestMessage"/>
+            <wsdl:output message="client:ETH_BPEL_SlaveResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

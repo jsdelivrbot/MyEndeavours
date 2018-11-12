@@ -1,0 +1,14 @@
+<adapter-config name="ETH_EMR501_DB_SP_INSERT_PROCESS_MASTER_PROC" adapter="Database Adapter" wsdlLocation="ETH_EMR501_DB_SP_INSERT_PROCESS_MASTER_PROC.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/ETH/DB/NXAppDB" UIConnectionName="ETHCustomDatabase_Dev" adapterRef=""/>
+  <endpoint-interaction portType="ETH_EMR501_DB_SP_INSERT_PROCESS_MASTER_PROC_ptt" operation="ETH_EMR501_DB_SP_INSERT_PROCESS_MASTER_PROC">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="PackageName" value="ETH_STARTTRANSACTION_PKG"/>
+      <property name="ProcedureName" value="INSERT_PROCESS_MASTER_PRC"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

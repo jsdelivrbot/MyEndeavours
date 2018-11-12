@@ -1,0 +1,1023 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.01 **
+** Date: Jun 30, 2009 **
+****
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\Person.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Person EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:corepersoncust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.01.00">
+	<!-- ====================================================================== -->
+	<!-- ==============  Imports and Includes   =============================== -->
+	<!-- ====================================================================== -->
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomPerson.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- ==============  Person Components ================ -->
+	<!-- ====================================================================== -->
+	<xsd:element name="Person" type="PersonType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person refers to an individual who has a past, present or future relationship (e.g. employment, pensioner, dependent, beneficiary etc. - any role other than a customer) with the enterprise that creates and manages the person information
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description> 
+A person refers to an individual who has a past, present or future relationship (e.g. employment, pensioner, dependent, beneficiary etc. - any role other than a customer) with the enterprise that creates and manages the person information
+                                   </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry/>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="PersonType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of a Person 
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BirthDateTime" type="corecom:DateTimeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Date and Time of birth
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DeathDateTime" type="corecom:DateTimeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Date and Time of death
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BirthCountryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Country of birth. Validate from lookup.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BirthRegionName" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Region of birth. 
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BirthCityName" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+City of birth. 
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreferredCommunicationLanguageCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The preferred language of communication
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BloodTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Blood type.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="GenderCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Gender of the person (Male / Female)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonName" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the names that the person is known by
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonAddressCommunication" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's Addresses.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonPhoneCommunication" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's Phone Numbers.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonEmailCommunication" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's Email Addresses.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonDriversLicense" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's Drivers License details.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonAlternateCommunication" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Stores extra communication addresses for those methods that are not Email, Address, and Phone
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonExtraInformation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's effective-dated information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonLegislativeData" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's country-specific effective-dated information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonNationalIdentity" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's national IDs
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonCitizenship" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's citizenships
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonPassport" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's passports for each of their citizenships
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonVisa" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+A person's visas and work permits
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonContact" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Contact of the Person
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonImage" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person image component
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DriversLicenseClass" type="DriversLicenseClassType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Details about the types associated to a Drivers License for a person
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="DriversLicenseClassType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Person Drivers License Classification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LicenseClassCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specifies that the drivers license allows the owner to drive a certain category of vehicle. Commercial driver license class type
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomDriversLicenseClassType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonAddressCommunication" type="PersonAddressCommunicationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's Addresses.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonAddressCommunicationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Person Address
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:AddressCommunication" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person Address
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period of the person's address
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonAddressCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonAlternateCommunication" type="PersonAlternateCommunicationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Stores extra communication addresses for those methods that are not Email, Address, and Phone
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonAlternateCommunicationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of the alternate communication method
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CommunicationMethod" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Extra communication addresses for those methods that are not Email, Address, and Phone
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period of the communication method
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Preference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Preference and ranking of this communication method
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonAlternateCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonCitizenship" type="PersonCitizenshipType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's citizenships
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonCitizenshipType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+A unique identification for the person's citizenship
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CountryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The country of the person's citizenship
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Foreign key for the status of the person's citizenship
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The effectivity of the person's citizenship
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonCitizenshipType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonContact" type="PersonContactType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Contact of the Person
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonContactType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+A unique identification for the person's emergency contact
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RelationshipCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The relationship of the contact to the person (e.g. parent, spouse, friend, child)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EffectiveReasonCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The effective reason code of the person's contact
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IneffectiveReasonCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Ineffective reason code of the person contact
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BeneficiaryIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Beneficiary indicator of the person contact
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BondHolderIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Bond holder indicator of the person contact
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DependentIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Dependent indicator of the person contact
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EmergencyIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Emergency indicator of the person contact
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PersonalIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether or not the contact person is a personal or private contact (rather than business contact etc.)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PrimaryContactIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the emergency contact is the primary emergency contact for the person
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SamePersonAddressIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the contact shares the the same address as the Person
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ThirdPartyPayIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the contact receives third party payments from the person 
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The effectivity of the person's contact
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PersonReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference of the person which this contact represents
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonContactExtraInformation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person contact extra information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonContactType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonContactExtraInformation" type="PersonContactExtraInformationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Person contact extra information
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonContactExtraInformationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+A unique identification for the person's effective-dated information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This qualifies the meaning of the DataElement
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The effectivity of the person's information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:DataElement" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonContactExtraInformationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonDriversLicense" type="PersonDriversLicenseType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's Drivers License details.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonDriversLicenseType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Person Drivers License
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LegislationAuthorityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The country of Drivers license
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IssuingAuthority" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Authority that issued the license, i.e. International authority that issues internatical drivers permit, or state within a country. 
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IssuingCountryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Country that issued the license
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SuspendedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Flag indicating a suspended license
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SuspendedFromDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Date license was suspended
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PenaltyPointCount" type="corecom:IntegerType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Number of penalty points (endorsements)
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ViolationCount" type="corecom:IntegerType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Number of violations
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IssuingLocation" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The location of the authority where the license was issued
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Comment" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Comments about the driver license such as restrictions like glasses required or supporting notes for violations etc.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period of license
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="DriversLicenseClass" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Details about the types associated to a Drivers License for a person
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonDriversLicenseType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonEmailCommunication" type="PersonEmailCommunicationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's Email Addresses.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonEmailCommunicationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Person Address
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EmailCommunication" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person Email Address
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period of the person's email address
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonEmailCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonExtraInformation" type="PersonExtraInformationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's effective-dated information
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonExtraInformationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+A unique identification for the person's effective-dated information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This qualifies the meaning of the DataElement
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The effectivity of the person's information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:DataElement" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonExtraInformationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonImage" type="PersonImageType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Person image component
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonImageType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of a Person Image
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Image" type="corecom:BinaryObjectType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Image of the Person
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PrimaryImageIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Primary image indicator of the Person
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonImageType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonLegislativeData" type="PersonLegislativeDataType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's country-specific effective-dated information
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonLegislativeDataType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+A unique identification for the person's effective-dated country-specific information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LegislationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person legislation code
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+This qualifies the meaning of the DataElement
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The effectivity of the person's information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:DataElement" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonLegislativeDataType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonName" type="PersonNameType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Refers to the names that the person is known by
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonNameType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Person Name
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LegislationCountryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The country in which the name of the person is recorded.
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreviousFamilyName" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Previous Family Name, such as a maiden name
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DisplayName" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The person's display name
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The type of person Name
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PersonName" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person Name
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period of the person name.
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonNameType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonNationalIdentity" type="PersonNationalIdentityType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's national IDs
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonNationalIdentityType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The person's National ID
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IssuingCountryCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The country that issued the person's National ID
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+key for the type of the person's national ID
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PrimaryIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates if this the person's primary National ID
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TaxIDIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the person's national ID is also used as their employer tax reference number
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IssueDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person National Identiry Issue date
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExpirationDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person National Identiry expiration date
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonNationalIdentityType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonPassport" type="PersonPassportType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's passports for each of their citizenships
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonPassportType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The person's passport number
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LegislationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person legislation code
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Profession" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Profession of the Person as indicated on the passport
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Passport" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the details of the passport issued to the person
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonPassportType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonPhoneCommunication" type="PersonPhoneCommunicationType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's Phone Numbers.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonPhoneCommunicationType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of Person Address
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PhoneCommunication" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person Phone Number
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period of the person's phone
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonPhoneCommunicationType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PersonVisa" type="PersonVisaType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A person's visas and work permits
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PersonVisaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The person's visa Identification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LegislationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Person legislation code
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ValidIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether or not the visa is valid
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Profession" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Profession of the person used for the purpose of issuing the visa
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EntryDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The date on which the person used the visa to enter the country
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Effective time period of person's visa or work permit information
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The status of the visa
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Visa" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the details of the visa issued to the person
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepersoncust:CustomPersonVisaType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+</xsd:schema>

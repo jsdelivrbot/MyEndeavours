@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.55.36" id="taskDetails1PageDef"
+                Package="actornotnull_fyinull.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <methodIterator Binds="getTaskDetails.result"
+                    DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                    RangeSize="25"
+                    BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.getTaskDetails"
+                    id="getTaskDetailsIterator"/>
+    <accessorIterator MasterBinding="getTaskDetailsIterator" Binds="task"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.task"
+                      id="taskIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="systemAttributes"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.systemAttributesType"
+                      id="systemAttributesIterator"/>
+    <accessorIterator MasterBinding="systemAttributesIterator"
+                      Binds="systemActions" RangeSize="50"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.actionType"
+                      id="systemActionsIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="systemAttributesIterator"
+                      Binds="customActions" RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.actionType"
+                      id="customActionsIterator"/>
+    <accessorIterator MasterBinding="systemAttributesIterator" Binds="assignees"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.identityType"
+                      id="assigneesIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="payload"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.payloadType"
+                      id="payloadIterator"/>
+    <accessorIterator MasterBinding="payloadIterator" Binds="FaultMessage"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.FaultMessageType"
+                      id="FaultMessageIterator"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="userComment"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.commentType"
+                      id="userCommentIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="userCommentIterator" Binds="updatedBy"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.identityType"
+                      id="updatedByIterator" StateValidation="false"/>
+    <accessorIterator MasterBinding="taskIterator" Binds="attachment"
+                      RangeSize="25"
+                      DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                      BeanClass="ActorNotNull_FYINull_HumanTask_Actor_Only.attachmentType"
+                      id="attachmentIterator" StateValidation="false"/>
+  </executables>
+  <bindings>
+    <methodAction id="getTaskDetails" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getTaskDetails"
+                  IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  ReturnName="ActorNotNull_FYINull_HumanTask_Actor_Only.methodResults.getTaskDetails_ActorNotNull_FYINull_HumanTask_Actor_Only_getTaskDetails_result">
+      <NamedData NDName="bpmWorklistContext" NDType="java.lang.String"
+                 NDValue=""/>
+      <NamedData NDName="bpmWorklistTaskId" NDType="java.lang.String"
+                 NDValue=""/>
+      <NamedData NDName="bpmWorklistTaskVersion" NDType="java.lang.String"
+                 NDValue=""/>
+    </methodAction>
+    <methodAction IterBinding="taskIterator" id="UpdateAction"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="UpdateAction" IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true">
+      <NamedData NDName="action" NDType="java.lang.String" NDValue=""/>
+    </methodAction>
+    <attributeValues IterBinding="taskIterator" id="title">
+      <AttrNames>
+        <Item Value="title"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="taskIterator" id="update"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="update" IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <navigationlist IterBinding="systemActionsIterator"
+                    ListOperMode="navigation" ListIter="systemActionsIterator"
+                    id="systemActions">
+      <AttrNames>
+        <Item Value="action"/>
+        <Item Value="displayName"/>
+      </AttrNames>
+    </navigationlist>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="digitalSignatureRequired">
+      <AttrNames>
+        <Item Value="digitalSignatureRequired"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="passwordRequiredOnUpdate">
+      <AttrNames>
+        <Item Value="passwordRequiredOnUpdate"/>
+      </AttrNames>
+    </attributeValues>
+    <navigationlist IterBinding="customActionsIterator"
+                    ListOperMode="navigation" ListIter="customActionsIterator"
+                    id="customActions">
+      <AttrNames>
+        <Item Value="action"/>
+        <Item Value="displayName"/>
+      </AttrNames>
+    </navigationlist>
+    <methodAction IterBinding="taskIterator" id="Claim"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Claim" IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="Acknowledge"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Acknowledge" IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="Resume"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Resume" IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="Withdraw"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="Withdraw" IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <methodAction IterBinding="taskIterator" id="COMPLETED"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="COMPLETED" IsViewObjectMethod="false"
+                  DataControl="ActorNotNull_FYINull_HumanTask_Actor_Only"
+                  InstanceName="bindings.taskIterator.currentRow.dataProvider"
+                  IsLocalObjectReference="true"/>
+    <attributeValues IterBinding="taskIterator" id="creator">
+      <AttrNames>
+        <Item Value="creator"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="ownerUser">
+      <AttrNames>
+        <Item Value="ownerUser"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="priority">
+      <AttrNames>
+        <Item Value="priority"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="taskIterator" id="dueDate">
+      <AttrNames>
+        <Item Value="dueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="acquiredBy">
+      <AttrNames>
+        <Item Value="acquiredBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="assignedDate">
+      <AttrNames>
+        <Item Value="assignedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="createdDate">
+      <AttrNames>
+        <Item Value="createdDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="expirationDate">
+      <AttrNames>
+        <Item Value="expirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="outcome">
+      <AttrNames>
+        <Item Value="outcome"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="state">
+      <AttrNames>
+        <Item Value="state"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="taskNumber">
+      <AttrNames>
+        <Item Value="taskNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="updatedDate">
+      <AttrNames>
+        <Item Value="updatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="assigneesIterator" id="assignees">
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.identityType"
+                      Name="assignees0">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="FaultMessageIterator" id="EBMID">
+      <AttrNames>
+        <Item Value="EBMID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="EBMName">
+      <AttrNames>
+        <Item Value="EBMName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="EBOName">
+      <AttrNames>
+        <Item Value="EBOName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="VerbCode">
+      <AttrNames>
+        <Item Value="VerbCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="BusinessScopeReferenceID">
+      <AttrNames>
+        <Item Value="BusinessScopeReferenceID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="BusinessScopeReferenceInstanceID">
+      <AttrNames>
+        <Item Value="BusinessScopeReferenceInstanceID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="EnterpriseServiceName">
+      <AttrNames>
+        <Item Value="EnterpriseServiceName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="EnterpriseServiceOperationName">
+      <AttrNames>
+        <Item Value="EnterpriseServiceOperationName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="SenderReferenceID">
+      <AttrNames>
+        <Item Value="SenderReferenceID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="SenderMessageID">
+      <AttrNames>
+        <Item Value="SenderMessageID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="SenderReferenceTransactionCode">
+      <AttrNames>
+        <Item Value="SenderReferenceTransactionCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="SenderObjectIdentificationID">
+      <AttrNames>
+        <Item Value="SenderObjectIdentificationID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="ContextID">
+      <AttrNames>
+        <Item Value="ContextID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="EBOID">
+      <AttrNames>
+        <Item Value="EBOID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="ReportingDateTime">
+      <AttrNames>
+        <Item Value="ReportingDateTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="CorrectiveAction">
+      <AttrNames>
+        <Item Value="CorrectiveAction"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="FaultMessageCode">
+      <AttrNames>
+        <Item Value="FaultMessageCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="FaultMessageText">
+      <AttrNames>
+        <Item Value="FaultMessageText"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="Severity">
+      <AttrNames>
+        <Item Value="Severity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="Stack">
+      <AttrNames>
+        <Item Value="Stack"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="FaultingServiceID">
+      <AttrNames>
+        <Item Value="FaultingServiceID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="FaultingServiceImplementationCode">
+      <AttrNames>
+        <Item Value="FaultingServiceImplementationCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="FaultingServiceInstanceID">
+      <AttrNames>
+        <Item Value="FaultingServiceInstanceID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="B2BMessageID">
+      <AttrNames>
+        <Item Value="B2BMessageID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="B2BDocumentTypeCode">
+      <AttrNames>
+        <Item Value="B2BDocumentTypeCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="B2BDocumentTypeVersion">
+      <AttrNames>
+        <Item Value="B2BDocumentTypeVersion"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="B2BDocumentStandardType">
+      <AttrNames>
+        <Item Value="B2BDocumentStandardType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator"
+                     id="B2BDocumentStandardVersion">
+      <AttrNames>
+        <Item Value="B2BDocumentStandardVersion"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="B2BSender">
+      <AttrNames>
+        <Item Value="B2BSender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="B2BReceiver">
+      <AttrNames>
+        <Item Value="B2BReceiver"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="B2BGatewayName">
+      <AttrNames>
+        <Item Value="B2BGatewayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FaultMessageIterator" id="B2BGatewayVersion">
+      <AttrNames>
+        <Item Value="B2BGatewayVersion"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="userCommentIterator" id="userComment">
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.commentType"
+                      Name="userComment0">
+        <AttrNames>
+          <Item Value="comment"/>
+          <Item Value="updatedDate"/>
+          <Item Value="displayNameLanguage"/>
+          <Item Value="action"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="isSystemComment"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="updatedBy"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.identityType"
+                      Name="userComment1">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="userCommentIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <methodAction IterBinding="userCommentIterator" id="Delete"
+                  RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="userCommentIterator" id="comment">
+      <AttrNames>
+        <Item Value="comment"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="updatedByIterator" id="updatedBy">
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.identityType"
+                      Name="updatedBy0">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="attachmentIterator" id="attachment">
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.attachmentType"
+                      Name="attachment0">
+        <AttrNames>
+          <Item Value="content"/>
+          <Item Value="mimeType"/>
+          <Item Value="name"/>
+          <Item Value="updatedBy"/>
+          <Item Value="URI"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="taskId"/>
+          <Item Value="version"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="updatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="attachmentIterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="attachmentIterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="attachmentIterator" id="content">
+      <AttrNames>
+        <Item Value="content"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="mimeType">
+      <AttrNames>
+        <Item Value="mimeType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="name">
+      <AttrNames>
+        <Item Value="name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="attachmentIterator" id="URI">
+      <AttrNames>
+        <Item Value="URI"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator"
+                     id="numberOfTimesModified">
+      <AttrNames>
+        <Item Value="numberOfTimesModified"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="systemAttributesIterator" id="version">
+      <AttrNames>
+        <Item Value="version"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="userCommentIterator" id="userComment1">
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.commentType"
+                      Name="userComment10">
+        <AttrNames>
+          <Item Value="comment"/>
+          <Item Value="updatedDate"/>
+          <Item Value="displayNameLanguage"/>
+          <Item Value="action"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="isSystemComment"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="updatedBy"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.identityType"
+                      Name="userComment11">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="updatedByIterator" id="updatedBy1">
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.identityType"
+                      Name="updatedBy10">
+        <AttrNames>
+          <Item Value="id"/>
+          <Item Value="displayName"/>
+          <Item Value="type"/>
+          <Item Value="systemVersionFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="attachmentIterator" id="attachment1">
+      <nodeDefinition DefName="ActorNotNull_FYINull_HumanTask_Actor_Only.attachmentType"
+                      Name="attachment10">
+        <AttrNames>
+          <Item Value="content"/>
+          <Item Value="mimeType"/>
+          <Item Value="name"/>
+          <Item Value="updatedBy"/>
+          <Item Value="URI"/>
+          <Item Value="systemVersionFlag"/>
+          <Item Value="taskId"/>
+          <Item Value="version"/>
+          <Item Value="acl"/>
+          <Item Value="doesBelongToParent"/>
+          <Item Value="updatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

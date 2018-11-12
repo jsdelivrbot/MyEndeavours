@@ -1,0 +1,7 @@
+DROP TYPE BPEL_COM_SRVC_LOX183882X1X10 FORCE; 
+show errors
+-- uncomment to overwrite existing types
+-- DROP TYPE BPEL_COM_SRVC_LOOX183882X1X9 FORCE; 
+-- show errors
+DROP PACKAGE BPEL_COM_SRVC_LOOKUP_WRAP;
+exit

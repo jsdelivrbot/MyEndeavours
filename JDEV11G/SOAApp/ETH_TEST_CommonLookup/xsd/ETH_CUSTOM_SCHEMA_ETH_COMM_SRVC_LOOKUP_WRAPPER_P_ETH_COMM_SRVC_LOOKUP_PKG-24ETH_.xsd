@@ -1,0 +1,125 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_COMM_SRVC_LOOKUP_WRAPPER_P/ETH_COMM_SRVC_LOOKUP_PKG-24ETH_/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_COMM_SRVC_LOOKUP_WRAPPER_P/ETH_COMM_SRVC_LOOKUP_PKG-24ETH_/" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CALLER_NAME" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_SENDER_ID" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_TRXN_TYPE" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_TRXN_SUBTYPE" type="string" db:index="4" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_SOA_INSTANCE_ID" type="string" db:index="5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_SERVER_NAME" type="string" db:index="6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_OUT" type="db:ETH_CUSTOM_SCHEMA.ETH_COMM_SRVC_LOOX143989X1X7" db:index="7" db:type="Struct" minOccurs="0" nillable="true"/>
+            <element name="P_RESPONSECODE" type="decimal" db:index="8" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ERRORCODENUMBER" type="string" db:index="9" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_ERRORDESCRIPTION" type="string" db:index="10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="ETH_CUSTOM_SCHEMA.ETH_COMM_SRVC_LOOX143989X1X7">
+      <sequence>
+         <element name="LOOKUP_RECORD_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         <element name="TRANSACTION_SUBTYPE" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="8"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="COMMON_SERVICE_NAME" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="150"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="TRADING_PARTNER_ID" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="30"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="CALLING_SEQUENCE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         <element name="COMMON_SERVICE_URL" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="500"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="PAYLOAD_REQUIRED" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="5"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="COM_SRVC_IP_PARAMS" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="50"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="STOPONFAILURE1" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="10"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="STOPONFAILURE2" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="10"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="STOPONFAILURE3" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="10"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="STOPONFAILURE4" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="10"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="STOPONFAILURE5" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="10"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="CREATED_DT" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+         <element name="LAST_UPDATED_DT" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+         <element name="CREATED_BY" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="100"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="UPDATED_BY" db:type="VARCHAR2" minOccurs="0" nillable="true">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="100"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="EFFECTIVEDATE_FROM" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+         <element name="EFFECTIVEDATE_TO" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+      </sequence>
+   </complexType>
+</schema>

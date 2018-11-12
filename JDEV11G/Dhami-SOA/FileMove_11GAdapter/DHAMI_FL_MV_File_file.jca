@@ -1,0 +1,14 @@
+<adapter-config name="DHAMI_FL_MV_File" adapter="File Adapter" wsdlLocation="DHAMI_FL_MV_File.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter"/>
+  <endpoint-interaction portType="FileMove_ptt" operation="FileMove">
+    <interaction-spec className="oracle.tip.adapter.file.outbound.FileIoInteractionSpec">
+      <property name="SourcePhysicalDirectory" value="/orionap/u01/app_SOA2/oracle/workingfolder/ETH/runtime/EMR501/outbound/PO/input"/>
+      <property name="SourceFileName" value="DHAMI_BIG_MATRIX.txt"/>
+      <property name="TargetPhysicalDirectory" value="/orionap/u01/app_SOA2/oracle/workingfolder/ETH/runtime/EMR501/outbound/PO/archive"/>
+      <property name="TargetFileName" value="DHAMI_BIG_MATRIX_MOVED.txt"/>
+      <property name="Type" value="MOVE"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

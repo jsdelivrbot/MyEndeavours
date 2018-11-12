@@ -1,0 +1,14 @@
+<adapter-config name="DB_Execute_PpWoPublishPkg_CloseProjectDetails" adapter="Database Adapter" wsdlLocation="DB_Execute_PpWoPublishPkg_CloseProjectDetails.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/DB_PP_ALEConnect" UIConnectionName="DB_PP_ALEConnect" adapterRef=""/>
+  <endpoint-interaction portType="DB_Execute_PpWoPublishPkg_CloseProjectDetails_ptt" operation="DB_Execute_PpWoPublishPkg_CloseProjectDetails">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ALE_ESB_CONNECT"/>
+      <property name="PackageName" value="ALLETE_PP_WO_PUBLISH_PKG"/>
+      <property name="ProcedureName" value="CLOSE_PROJECT_DETAILS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

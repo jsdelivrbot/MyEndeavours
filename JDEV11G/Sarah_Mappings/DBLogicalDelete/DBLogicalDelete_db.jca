@@ -1,0 +1,21 @@
+<adapter-config name="DBLogicalDelete" adapter="Database Adapter" wsdlLocation="DBLogicalDelete.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/ETH/AppDB" UIConnectionName="SOA2_ETH_AppDB" adapterRef=""/>
+  <endpoint-activation portType="DBLogicalDelete_ptt" operation="receive">
+    <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
+      <property name="DescriptorName" value="DBLogicalDelete.ProcessSchedulerTable"/>
+      <property name="QueryName" value="DBLogicalDeleteSelect"/>
+      <property name="MappingsMetaDataURL" value="DBLogicalDelete-or-mappings.xml"/>
+      <property name="PollingStrategy" value="LogicalDeletePollingStrategy"/>
+      <property name="MarkReadColumn" value="POLL_FLAG"/>
+      <property name="MarkReadValue" value="Y"/>
+      <property name="MarkUnreadValue" value="N"/>
+      <property name="PollingInterval" value="60"/>
+      <property name="MaxRaiseSize" value="1"/>
+      <property name="MaxTransactionSize" value="10"/>
+      <property name="NumberOfThreads" value="1"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

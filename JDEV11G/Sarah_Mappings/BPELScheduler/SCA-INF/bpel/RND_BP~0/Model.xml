@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="RND_BPEL_Scheduled_FILE_PICK" targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/BPELScheduler/RND_BPEL_Scheduled_FILE_PICK" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/BPELScheduler/RND_BPEL_Scheduled_FILE_PICK" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/BPELScheduler/RND_FL_GET_Scheduled" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="RND_FL_GET_Scheduled" partnerLinkType="ns1:Read_plt" myRole="Read_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_File_Read_InputVariable" messageType="ns1:Read_msg"/>
+  </variables>
+  <sequence name="main" id="BpSeq0">
+    <receive name="Receive_File" createInstance="yes" variable="Receive_File_Read_InputVariable" partnerLink="RND_FL_GET_Scheduled" portType="ns1:Read_ptt" operation="Read" id="BpRcv0"/>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from variable="Receive_File_Read_InputVariable" part="opaque" query="/ns2:opaqueElement"/>
+        <to variable="Receive_File_Read_InputVariable" part="opaque" query="/ns2:opaqueElement"/>
+      </copy>
+    </assign>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Nov 21 09:46:41 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

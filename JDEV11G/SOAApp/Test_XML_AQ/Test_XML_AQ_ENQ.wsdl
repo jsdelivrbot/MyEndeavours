@@ -1,0 +1,47 @@
+<wsdl:definitions
+     name="Test_XML_AQ_ENQ"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/SOAApp/Test_XML_AQ/Test_XML_AQ_ENQ"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/SOAApp/Test_XML_AQ/Test_XML_AQ_ENQ"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/ETH_SOAINFRA"
+     xmlns:msg_out="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_BPEL"
+     xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Enqueue_plt" >
+    <plt:role name="Enqueue_role" >
+      <plt:portType name="tns:Enqueue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+    <!-- Define AQ Headers = Payload Headers -->
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:obj1="http://xmlns.oracle.com/xdb/ETH_SOAINFRA" >
+      <import namespace="http://xmlns.oracle.com/xdb/ETH_SOAINFRA" schemaLocation="xsd/ETH_SOAINFRA_IP_MESSAGE_TYPE.xsd"/>
+      <complexType name="Test_XML_AQ_ENQHeaderCType" >
+        <sequence>
+          <!-- payload header -->
+          <element name="PayloadHeader" type="obj1:IP_MESSAGE_TYPE" />
+        </sequence>
+      </complexType>
+      <element name="Test_XML_AQ_ENQHeader" type="ph:Test_XML_AQ_ENQHeaderCType" />
+    </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_BPEL" schemaLocation="xsd/Test_XML_AQ_BPEL.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="process_msg">
+        <wsdl:part name="process" element="msg_out:process"/>
+    </wsdl:message>
+    <wsdl:message name="Header_msg">
+        <wsdl:part name="Header" element="ph:Test_XML_AQ_ENQHeader"/>
+    </wsdl:message>
+    <wsdl:portType name="Enqueue_ptt">
+        <wsdl:operation name="Enqueue">
+            <wsdl:input message="tns:process_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

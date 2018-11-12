@@ -1,0 +1,69 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Nov 21 21:57:46 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ForeignCharacter_Issue"
+               targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/ForeignCharacter_Issue/ForeignCharacter_Issue"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/ForeignCharacter_Issue/ForeignCharacter_Issue"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ForeignCharacter_Issue/FL_GET_ForeignCharacter"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns2="http://schema.emerson.com/FL_GET_ForeignCharacter"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns3="http://xmlns.oracle.com/Sarah_Mappings/Temp/BPELProcess1"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ForeignCharacter_Issue/FL_PUT_ForeignCharacter">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="FL_GET_ForeignCharacter" partnerLinkType="ns1:Read_plt"
+                 myRole="Read_role"/>
+    <partnerLink name="FL_PUT_ForeignCharacter" partnerLinkType="ns4:Write_plt"
+                 partnerRole="Write_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_TextFile_Read_InputVariable"
+              messageType="ns1:Read_msg"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns4:Write_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive_TextFile" createInstance="yes"
+             variable="Receive_TextFile_Read_InputVariable"
+             partnerLink="FL_GET_ForeignCharacter" portType="ns1:Read_ptt"
+             operation="Read">
+      <!--<bpelx:property name="jca.message.encoding" expression="'UTF-8'"/>-->
+      <bpelx:property name="jca.message.encoding" expression="'UTF-8'"/>
+    </receive>
+    <assign name="Transform1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_to_OutFile.xsl', $Receive_TextFile_Read_InputVariable.body)"/>
+        <to variable="Invoke1_Write_InputVariable" part="body"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1"
+            inputVariable="Invoke1_Write_InputVariable"
+            partnerLink="FL_PUT_ForeignCharacter" portType="ns4:Write_ptt"
+            operation="Write" bpelx:invokeAsDetail="no">
+      <!--<bpelx:inputProperty name="jca.message.encoding" expression="'UTF-8'"/>-->
+      <bpelx:inputProperty name="jca.message.encoding" expression="'UTF-8'"/>
+    </invoke>
+  </sequence>
+</process>

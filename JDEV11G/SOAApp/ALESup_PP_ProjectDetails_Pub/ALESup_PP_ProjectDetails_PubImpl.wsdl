@@ -1,0 +1,44 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ALESup_PP_ProjectDetails_PubImpl"
+     targetNamespace="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl"
+     xmlns:ns1="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:client="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="ALESup_PP_ProjectDetails_PubImpl">
+        <plnk:role name="ALESup_PP_ProjectDetails_PubImplProvider" portType="client:ALESup_PP_ProjectDetails_PubImpl"/>
+        <plnk:role name="ALESup_PP_ProjectDetails_PubImplRequester" portType="client:ALESup_PP_ProjectDetails_PubImplCallback"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:client="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl"
+                 schemaLocation="xsd/ALESup_PP_ProjectDetails_PubImpl.xsd"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:client="http://xmlns.oracle.com/BPO/ALESup_PP_ProjectDetails_Pub/ALESup_PP_ProjectDetails_PubImpl"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1"
+                 schemaLocation="xsd/alleteInterfaceMetadata.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ALESup_PP_ProjectDetails_PubImplRequestMessage">
+        <wsdl:part name="payload" element="ns1:InterfaceMetadata"/>
+    </wsdl:message>
+    <wsdl:message name="ALESup_PP_ProjectDetails_PubImplResponseMessage">
+        <wsdl:part name="payload" element="ns1:InterfaceStatus"/>
+    </wsdl:message>
+    <wsdl:portType name="ALESup_PP_ProjectDetails_PubImplCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:ALESup_PP_ProjectDetails_PubImplResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="ALESup_PP_ProjectDetails_PubImpl">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ALESup_PP_ProjectDetails_PubImplRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

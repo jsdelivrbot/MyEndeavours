@@ -1,0 +1,14 @@
+<adapter-config name="Hello_DB" adapter="Database Adapter" wsdlLocation="Hello_DB.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/DEV_ETHAPP_DB" UIConnectionName="DEV_ETHAPP_DB" adapterRef=""/>
+  <endpoint-interaction portType="Hello_DB_ptt" operation="Hello_DB">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="PackageName" value="ETH_COMMON_COMPLIANCE_WRAA"/>
+      <property name="ProcedureName" value="ETH_COMMON_SERVICES_PKG$ETH_C"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

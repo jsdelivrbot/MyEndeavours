@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="TEST_AQ_ENQ"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/TEST_Enqueue_AQ/TEST_AQ_ENQ"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/TEST_Enqueue_AQ/TEST_AQ_ENQ"
+     xmlns:msg_out="http://xmlns.oracle.com/Sarah_Mappings/TEST_Enqueue_AQ/BPELProcess1"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Enqueue_plt" >
+    <plt:role name="Enqueue_role" >
+      <plt:portType name="tns:Enqueue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/Sarah_Mappings/TEST_Enqueue_AQ/BPELProcess1" schemaLocation="xsd/BPELProcess1.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="process_msg">
+        <wsdl:part name="process" element="msg_out:process"/>
+    </wsdl:message>
+    <wsdl:portType name="Enqueue_ptt">
+        <wsdl:operation name="Enqueue">
+            <wsdl:input message="tns:process_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

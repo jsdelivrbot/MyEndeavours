@@ -1,0 +1,30 @@
+<wsdl:definitions
+     name="ETH_FL_RD_Payload"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_DBListner_Composite/ETH_FL_RD_Payload"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_DBListner_Composite/ETH_FL_RD_Payload"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="ReadPayload_plt" >
+    <plt:role name="ReadPayload_role" >
+      <plt:portType name="tns:ReadPayload_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </wsdl:types>
+    <wsdl:message name="ReadPayload_msg">
+        <wsdl:part name="opaque" element="opaque:opaqueElement"/>
+    </wsdl:message>
+    <wsdl:portType name="ReadPayload_ptt">
+        <wsdl:operation name="ReadPayload">
+            <wsdl:input message="tns:ReadPayload_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

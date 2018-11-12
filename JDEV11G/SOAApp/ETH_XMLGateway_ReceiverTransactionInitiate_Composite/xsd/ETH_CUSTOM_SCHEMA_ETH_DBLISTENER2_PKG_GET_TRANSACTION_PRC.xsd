@@ -1,0 +1,34 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_DBLISTENER2_PKG/GET_TRANSACTION_PRC/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_DBLISTENER2_PKG/GET_TRANSACTION_PRC/" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CALLER_NAME" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_SUBMISSION_POINT" type="decimal" db:index="2" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TRADING_PARTNER_ID" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_REGISTRATION_CODE" type="string" db:index="4" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_SOA_INSTANCE_ID" type="string" db:index="5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_REG_DATETIME" type="dateTime" db:index="6" db:type="DATE" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_MASTER_RECORD_ID" type="decimal" db:index="7" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TXN_RECORD_ID" type="decimal" db:index="8" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_RECIPIENT_ID" type="decimal" db:index="9" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_REPROCESS_NUMBER" type="decimal" db:index="10" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TP_ID_SENDER" type="string" db:index="11" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_TRANSACTION_TYPE" type="string" db:index="12" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_TRANSACTION_SUBTYPE" type="string" db:index="13" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_DOCUMENT_KEY" type="string" db:index="14" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_PAYLOAD_CAN" type="string" db:index="15" db:type="CLOB" minOccurs="0" nillable="true"/>
+            <element name="P_HOST_TRADING_PARTNER" type="string" db:index="16" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_B2B_TP_ID_RCVR" type="string" db:index="17" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_RESPONSECODE" type="decimal" db:index="18" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ERRORCODENUMBER" type="string" db:index="19" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_ERRORDESCRIPTION" type="string" db:index="20" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

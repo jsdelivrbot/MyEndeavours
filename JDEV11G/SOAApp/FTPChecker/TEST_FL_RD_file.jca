@@ -1,0 +1,19 @@
+<adapter-config name="TEST_FL_RD" adapter="File Adapter" wsdlLocation="TEST_FL_RD.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" UIincludeWildcard="FILE_RD*.txt"/>
+  <endpoint-activation portType="Read_ptt" operation="Read">
+    <activation-spec className="oracle.tip.adapter.file.inbound.FileActivationSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="15"/>
+      <property name="Recursive" value="false"/>
+      <property name="PollingFrequency" value="120"/>
+      <property name="LogicalDirectory" value="INPUT_DIR"/>
+      <property name="IncludeFiles" value="FILE_RD.*\.txt"/>
+      <property name="UseHeaders" value="false"/>
+      <property name="ListSorter" value="oracle.tip.adapter.file.inbound.listing.TimestampSorterDescending"/>
+      <!--<property name="SingleThreadModel" value="true"/>-->
+      <property name="MaxRaiseSize" value="1"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

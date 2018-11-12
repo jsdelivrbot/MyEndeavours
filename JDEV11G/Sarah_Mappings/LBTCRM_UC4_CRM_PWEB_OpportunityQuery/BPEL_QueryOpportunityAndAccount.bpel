@@ -1,0 +1,519 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Oct 18 00:57:27 GMT+05:30 2010
+  Author:  agupta1
+  Purpose: Synchronous BPEL Process
+  
+  
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPEL_QueryOpportunityAndAccount"
+         targetNamespace="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/CrmLogin"
+         xmlns:ns2="urn:crmondemand/ws/ecbs/opportunity/10/2004"
+         xmlns:ns3="urn:/crmondemand/xml/Opportunity/Data"
+         xmlns:ns4="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns7="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns9="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns10="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns5="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns11="urn:/crmondemand/xml/Opportunity/Query"
+         xmlns:ns12="urn:crmondemand/ws/ecbs/account/10/2004"
+         xmlns:ns13="urn:/crmondemand/xml/Account/Query"
+         xmlns:ns14="urn:/crmondemand/xml/Account/Data"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ns15="ErrorNS"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns16="http://LBTCRMIntegration.com"
+         xmlns:ns17="http://LBTCRMIntegration.com/LBTCRM_Login/BPEL_Login"
+         xmlns:ns18="NoDataFound_NS">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpel_queryopportunityandaccount_client"
+                 partnerLinkType="client:BPEL_QueryOpportunityAndAccount"
+                 myRole="BPEL_QueryOpportunityAndAccountProvider"/>
+    <partnerLink name="PL_OpportunityQuery" partnerRole="Opportunity"
+                 partnerLinkType="ns2:PL_OpportunityQuery"/>
+    <partnerLink name="PL_AccountQuery" partnerRole="Account_Role"
+                 partnerLinkType="ns12:Account_PL"/>
+    <partnerLink name="BPEL_Login" partnerRole="BPEL_LoginProvider"
+                 partnerLinkType="ns17:BPEL_Login"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:BPEL_QueryOpportunityAndAccountRequestMessage"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable"
+              messageType="client:BPEL_QueryOpportunityAndAccountResponseMessage"/>
+    <variable name="Invoke_OpportunityQuery_InputVariable"
+              messageType="ns2:OpportunityQueryPage_Input"/>
+    <variable name="Invoke_OpportunityQuery_OutputVariable"
+              messageType="ns2:OpportunityQueryPage_Output"/>
+    <variable name="SessionID" type="xsd:string"/>
+    <variable name="Invoke_AccountQuery_InputVariable"
+              messageType="ns12:AccountQueryPage_Input"/>
+    <variable name="Invoke_AccountQuery_OutputVariable"
+              messageType="ns12:AccountQueryPage_Output"/>
+    <variable name="title" type="xsd:string"/>
+    <variable name="Invoke_CRMLogin_InputVariable"
+              messageType="ns17:BPEL_LoginRequestMessage"/>
+    <variable name="Invoke_CRMLogin_OutputVariable"
+              messageType="ns17:BPEL_LoginResponseMessage"/>
+    <variable name="ErrorStr" type="xsd:string"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- MANDATORY INPUTS FOR ANY OCOD CALL 
+          Xpath of field in <OBJECT>QueryPage_Input					Typical Value that we are passing
+          /ns2:<OBJECT>QueryPage_Input/ns2:ViewMode					'Broadest'
+          /ns2:<OBJECT>QueryPage_Input/ns2:IncludeSubBooks				'true'
+          /ns2:<OBJECT>QueryPage_Input/ns2:LOVLanguageMode				'LDC'
+          /ns2:<OBJECT>QueryPage_Input/ns11:ListOf<OBJECT>/ns11:<OBJECT>/@searchspec	'[CreatedDate] IS NOT NULL'
+          /ns2:<OBJECT>QueryPage_Input/ns11:ListOf<OBJECT>/@pagesize			'1'
+          /ns2:<OBJECT>QueryPage_Input/ns11:ListOf<OBJECT>/@startrownum			'0'
+          /ns2:<OBJECT>QueryPage_Input/ns11:ListOf<OBJECT>/@recordcountneeded		'false'
+-->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPEL_QueryOpportunityAndAccount.wsdl) -->
+    <receive name="receiveInput"
+             partnerLink="bpel_queryopportunityandaccount_client"
+             portType="client:BPEL_QueryOpportunityAndAccount"
+             operation="process" variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <scope name="Scope_1">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Main</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <faultHandlers>
+        <catch faultName="ns18:NoDataFound_LP">
+          <assign name="Assign_Title">
+            <copy>
+              <from expression="concat(bpws:getVariableData('outputVariable','payload','/client:queryResults/client:Status/ns16:StatusDetail'),':',bpws:getVariableData('title'))          "/>
+              <to variable="title"/>
+            </copy>
+            <copy>
+              <from expression="'LBTCRM_NO_SUCH_RECORD'"/>
+              <to variable="outputVariable" part="payload"
+                  query="/client:queryResults/client:Status/ns16:StatusCode"/>
+            </copy>
+          </assign>
+        </catch>
+        <catch faultName="ns15:ErrorLP">
+          <assign name="Assign_Title">
+            <copy>
+              <from expression="concat(bpws:getVariableData('outputVariable','payload','/client:queryResults/client:Status/ns16:StatusCode'),':',bpws:getVariableData('title'))          "/>
+              <to variable="title"/>
+            </copy>
+            <copy>
+              <from expression="'LBTCRM_ERR_LOGIN'"/>
+              <to variable="outputVariable" part="payload"
+                  query="/client:queryResults/client:Status/ns16:StatusCode"/>
+            </copy>
+          </assign>
+        </catch>
+        <catchAll>
+          <assign name="Assign_FaultAndTitle">
+            <copy>
+              <from expression="'LBTCRM_ERR_GEN'"/>
+              <to variable="outputVariable" part="payload"
+                  query="/client:queryResults/client:Status/ns16:StatusCode"/>
+            </copy>
+            <copy>
+              <from expression="ora:getFaultAsString()"/>
+              <to variable="outputVariable" part="payload"
+                  query="/client:queryResults/client:Status/ns16:StatusDetail"/>
+            </copy>
+            <copy>
+              <from expression="concat(bpws:getVariableData('outputVariable','payload','/client:queryResults/client:Status/ns16:StatusCode'),':',bpws:getVariableData('title'))"/>
+              <to variable="title"/>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence>
+        <assign name="Assign_TitleAndPid">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:queryParameters/client:OpportunityID"/>
+            <to variable="title"/>
+          </copy>
+          <copy>
+            <from expression="ora:getProcessId()"/>
+            <to variable="outputVariable" part="payload"
+                query="/client:queryResults/client:ResponseHeader/ns16:ProcessName"/>
+          </copy>
+          <copy>
+            <from expression="ora:getInstanceId()"/>
+            <to variable="outputVariable" part="payload"
+                query="/client:queryResults/client:ResponseHeader/ns16:ProcessId"/>
+          </copy>
+          <copy>
+            <from expression="ora:getCompositeInstanceId()"/>
+            <to variable="outputVariable" part="payload"
+                query="/client:queryResults/client:ResponseHeader/ns16:CompositeId"/>
+          </copy>
+          <copy>
+            <from expression="ora:getComponentName()"/>
+            <to variable="outputVariable" part="payload"
+                query="/client:queryResults/client:ResponseHeader/ns16:CompositeName"/>
+          </copy>
+          <copy>
+            <from expression="ora:setCompositeInstanceTitle(concat(bpws:getVariableData('title'),' being queried'))"/>
+            <to variable="title"/>
+          </copy>
+        </assign>
+        <scope name="Scope_Login">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">Scope_Login</bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <sequence>
+            <assign name="Assign_CRMLoginInput">
+              <copy>
+                <from expression="'N'"/>
+                <to part="payload"
+                    variable="Invoke_CRMLogin_InputVariable"
+                    query="/ns17:process/ns17:IfLogoutAfterLogin"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_CRMLogin" portType="ns17:BPEL_Login"
+                    inputVariable="Invoke_CRMLogin_InputVariable"
+                    outputVariable="Invoke_CRMLogin_OutputVariable"
+                    partnerLink="BPEL_Login" operation="process"/>
+            <switch name="Switch_CheckErrors_Login">
+              <case condition="bpws:getVariableData('Invoke_CRMLogin_OutputVariable','payload','/ns17:processResponse/ns17:Status/ns16:StatusCode')='LBTCRM_LOGIN_ERR_GEN'">
+                <bpelx:annotation>
+                  <bpelx:pattern>SomeOtherError</bpelx:pattern>
+                  <bpelx:general>
+                    <bpelx:property name="userLabel">SomeOtherError</bpelx:property>
+                  </bpelx:general>
+                </bpelx:annotation>
+                <sequence>
+                  <assign name="Assign_ErrorStatus_GeneralError">
+                    <copy>
+                      <from expression="'LBTCRM_LOGIN_ERR_GEN'"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/client:queryResults/client:Status/ns16:StatusCode"/>
+                    </copy>
+                    <copy>
+                      <from expression="'Some error while logging in'"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/client:queryResults/client:Status/ns16:StatusDetail"/>
+                    </copy>
+                  </assign>
+                  <throw name="Throw_GeneralLoginError"
+                         faultName="ns15:ErrorLP"/>
+                </sequence>
+              </case>
+              <case condition="bpws:getVariableData('Invoke_CRMLogin_OutputVariable','payload','/ns17:processResponse/ns17:Status/ns16:StatusCode')='LBTCRM_LOGIN_ERR_UIDPWD'">
+                <bpelx:annotation>
+                  <bpelx:pattern>UidPwdError</bpelx:pattern>
+                  <bpelx:general>
+                    <bpelx:property name="userLabel">UidPwdError</bpelx:property>
+                  </bpelx:general>
+                </bpelx:annotation>
+                <sequence>
+                  <assign name="Assign_ErrorStatus_UidPwdError">
+                    <copy>
+                      <from expression="'User ID or Password may have expired'"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/client:queryResults/client:Status/ns16:StatusDetail"/>
+                    </copy>
+                    <copy>
+                      <from expression="'LBTCRM_LOGIN_ERR_UIDPWD'"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/client:queryResults/client:Status/ns16:StatusCode"/>
+                    </copy>
+                  </assign>
+                  <throw name="Throw_SessionNotAvailable"
+                         faultName="ns15:ErrorLP"/>
+                </sequence>
+              </case>
+            </switch>
+            <assign name="Assign_PutJSessionId_In_WS_Url">
+              <copy>
+                <from part="payload"
+                      query="/ns17:processResponse/ns17:SessionId"
+                      variable="Invoke_CRMLogin_OutputVariable"/>
+                <to variable="SessionID"/>
+              </copy>
+              <copy>
+                <from expression="ora:parseEscapedXML(concat(string('&lt;EndpointReference xmlns=&quot;http://schemas.xmlsoap.org/ws/2003/03/addressing&quot;>                      &lt;Address>'),ora:getPreference('CRM_URL'),';jsessionid=',           bpws:getVariableData('SessionID') ,            string('&lt;/Address>&lt;ServiceName xmlns:ns1=&quot;urn:crmondemand/ws/ecbs/opportunity/10/2004&quot;>ns1:Opportunity&lt;/ServiceName>&lt;/EndpointReference>')))"/>
+                <to partnerLink="PL_OpportunityQuery"/>
+              </copy>
+              <copy>
+                <from expression="ora:parseEscapedXML(concat(string('&lt;EndpointReference xmlns=&quot;http://schemas.xmlsoap.org/ws/2003/03/addressing&quot;>                      &lt;Address>'),ora:getPreference('CRM_URL'),';jsessionid=',           bpws:getVariableData('SessionID') ,            string('&lt;/Address>&lt;ServiceName xmlns:ns1=&quot;urn:crmondemand/ws/ecbs/account/10/2004&quot;>ns1:Account&lt;/ServiceName>&lt;/EndpointReference>')))"/>
+                <to partnerLink="PL_AccountQuery"/>
+              </copy>
+            </assign>
+          </sequence>
+        </scope>
+        <scope name="Scope_3">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">Scope_OpportunityQuery</bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <sequence>
+            <assign name="Assign_OpportunityQueryInputs">
+              <copy>
+                <from expression="concat(&quot;='&quot;,bpws:getVariableData('inputVariable','payload','/client:queryParameters/client:OpportunityID'),&quot;'&quot;)"/>
+                <to variable="Invoke_OpportunityQuery_InputVariable"
+                    part="OpportunityQueryPage_Input"
+                    query="/ns2:OpportunityQueryPage_Input/ns11:ListOfOpportunity/ns11:Opportunity/ns11:Id"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_OpportunityQuery_InputVariable"
+                    part="OpportunityQueryPage_Input"
+                    query="/ns2:OpportunityQueryPage_Input/ns11:ListOfOpportunity/ns11:Opportunity/ns11:OpportunityName"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_OpportunityQuery_InputVariable"
+                    part="OpportunityQueryPage_Input"
+                    query="/ns2:OpportunityQueryPage_Input/ns11:ListOfOpportunity/ns11:Opportunity/ns11:AccountId"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_OpportunityQuery_InputVariable"
+                    part="OpportunityQueryPage_Input"
+                    query="/ns2:OpportunityQueryPage_Input/ns11:ListOfOpportunity/ns11:Opportunity/ns11:dCustomer_Required_Date"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_OpportunityQuery_InputVariable"
+                    part="OpportunityQueryPage_Input"
+                    query="/ns2:OpportunityQueryPage_Input/ns11:ListOfOpportunity/ns11:Opportunity/ns11:OpportunityType"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_OpportunityQuery_InputVariable"
+                    part="OpportunityQueryPage_Input"
+                    query="/ns2:OpportunityQueryPage_Input/ns11:ListOfOpportunity/ns11:Opportunity/ns11:plELNet_Folder_Type"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_OpportunityQuery"
+                    inputVariable="Invoke_OpportunityQuery_InputVariable"
+                    outputVariable="Invoke_OpportunityQuery_OutputVariable"
+                    partnerLink="PL_OpportunityQuery" portType="ns2:Opportunity"
+                    operation="OpportunityQueryPage"/>
+            <switch name="Switch_CheckIfNoSuchOpportunity">
+              <case condition="ora:countNodes('Invoke_OpportunityQuery_OutputVariable','OpportunityQueryPage_Output','/ns2:OpportunityQueryPage_Output/ns3:ListOfOpportunity/ns3:Opportunity')=0">
+                <bpelx:annotation>
+                  <bpelx:general>
+                    <bpelx:property name="userLabel">NoOpportunityFound</bpelx:property>
+                  </bpelx:general>
+                </bpelx:annotation>
+                <sequence>
+                  <assign name="Assign_ErrorStr">
+                    <copy>
+                      <from expression="concat('NoOptyFound_',bpws:getVariableData('inputVariable','payload','/client:queryParameters/client:OpportunityID'))"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/client:queryResults/client:Status/ns16:StatusDetail"/>
+                    </copy>
+                  </assign>
+                  <throw name="Throw_NoDataFound"
+                         faultName="ns18:NoDataFound_LP"/>
+                </sequence>
+              </case>
+            </switch>
+          </sequence>
+        </scope>
+        <scope name="Scope_4">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">Scope_AccountQuery</bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <sequence>
+            <assign name="Assign_AccountQueryInputs">
+              <!-- ACCOUNT_ID IS THE REAL INPUT -->
+              <!-- FIELDS TO BE RETRIEVED NEED TO BE PASSED AS EMPTY STRING IN THE INPUT 
+          i.	AccountName
+          ii.	stNext_BillTo_Cust__Calculated
+          iii.	PrimaryBillToStreetAddress 
+          iv.	PrimaryBillToStreetAddress2 
+          v.	PrimaryBillToStreetAddress3 
+          vi.	PrimaryBillToCity 
+          vii.	PrimaryBillToProvince
+          viii.	PrimaryBillToCountry 
+          ix.	PrimaryBillToPostalCode
+          x.	MainPhone
+          xi.	MainFax
+          xii.	stTax_ID_Number
+          Xiii. PrimaryBillToState
+
+-->
+              <copy>
+                <from expression="concat(&quot;='&quot;,bpws:getVariableData('Invoke_OpportunityQuery_OutputVariable','OpportunityQueryPage_Output','/ns2:OpportunityQueryPage_Output/ns3:ListOfOpportunity/ns3:Opportunity/ns3:AccountId'),&quot;'&quot;)"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:Id"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:AccountName"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:stNext_BillTo_Cust__Calculated"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToStreetAddress"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToStreetAddress2"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToStreetAddress3"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToCity"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToProvince"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToState"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToCountry"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:PrimaryBillToPostalCode"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:MainPhone"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:MainFax"/>
+              </copy>
+              <copy>
+                <from expression="''"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"
+                    query="/ns12:AccountQueryPage_Input/ns13:ListOfAccount/ns13:Account/ns13:stTax_ID_"/>
+              </copy>
+            </assign>
+            <!--assign name="Transform_1">
+              <bpelx:annotation>
+                <bpelx:pattern>transformation</bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from expression="ora:processXSLT('xsl/Tfm_OpportunityQueryOutputToAccountQueryInput.xsl',bpws:getVariableData('Invoke_OpportunityQuery_OutputVariable','OpportunityQueryPage_Output'))"/>
+                <to variable="Invoke_AccountQuery_InputVariable"
+                    part="AccountQueryPage_Input"/>
+              </copy>
+            </assign-->
+            <invoke name="Invoke_AccountQuery"
+                    inputVariable="Invoke_AccountQuery_InputVariable"
+                    outputVariable="Invoke_AccountQuery_OutputVariable"
+                    partnerLink="PL_AccountQuery" portType="ns12:Account"
+                    operation="AccountQueryPage"/>
+          </sequence>
+        </scope>
+        <assign name="Transform_OpAcctOutputs_to_OutputVariable">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/Tfm_OpAcctOutputs_to_OutputVariable.xsl',bpws:getVariableData('Invoke_OpportunityQuery_OutputVariable','OpportunityQueryPage_Output'),'Invoke_AccountQuery_OutputVariable.AccountQueryPage_Output',bpws:getVariableData('Invoke_AccountQuery_OutputVariable','AccountQueryPage_Output'))"/>
+            <to variable="outputVariable" part="payload"/>
+          </copy>
+        </assign>
+        <assign name="Assign_TitleDone">
+          <copy>
+            <from expression="'Done'"/>
+            <to variable="title"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <assign name="Assign_CompositeTitle">
+      <copy>
+        <from expression="ora:setCompositeInstanceTitle(bpws:getVariableData('title'))"/>
+        <to variable="title"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput"
+           partnerLink="bpel_queryopportunityandaccount_client"
+           portType="client:BPEL_QueryOpportunityAndAccount" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

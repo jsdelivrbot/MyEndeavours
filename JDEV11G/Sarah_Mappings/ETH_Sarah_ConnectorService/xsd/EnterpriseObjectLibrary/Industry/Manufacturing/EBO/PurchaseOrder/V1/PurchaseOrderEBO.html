@@ -1,0 +1,3177 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>PurchaseOrderEBO</title>
+<meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
+<link href="../../../../eboschemadoc.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<h2>PurchaseOrder</h2>
+<!-- ******************************* PurchaseOrder ************************************************-->
+<h3><a name="PurchaseOrder"></a>PurchaseOrder</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Enterprise Business Object</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+A document used to request vendor to supply a product or service in return for payment and providing specifications and quantities. For example, Purchase Order 1357 with Supplier Dell for 10 Computers, Purchase Order 1243 for buying 5 pens.
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* PurchaseOrder Attributes ************************************************-->
+<a href="#PurchaseOrder/AcceptanceDueDate">AcceptanceDueDate</a><br/>
+<a href="#PurchaseOrder/AcceptanceRequiredIndicator">AcceptanceRequiredIndicator</a><br/>
+<a href="#PurchaseOrder/ApprovalRequiredIndicator">ApprovalRequiredIndicator</a><br/>
+<a href="#PurchaseOrder/ConfirmedOrderIndicator">ConfirmedOrderIndicator</a><br/>
+<a href="#PurchaseOrder/AutoSourcingIndicator">AutoSourcingIndicator</a><br/>
+<a href="#PurchaseOrder/CurrencyCode">CurrencyCode</a><br/>
+<a href="#PurchaseOrder/FOBCode">FOBCode</a><br/>
+<a href="#PurchaseOrder/FreightTermCode">FreightTermCode</a><br/>
+<a href="#PurchaseOrder/PayOnReceiptIndicator">PayOnReceiptIndicator</a><br/>
+<a href="#PurchaseOrder/TransportationResponsibilityCode">TransportationResponsibilityCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* PurchaseOrder Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Purchase Order.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Document header unique identifier
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ProcurementCard">ProcurementCard</a></td>
+             <td> Purchase Order.  Procurement Card.  Procurement Card</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identifier for the procurement card used for the order 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#EffectiveTimePeriod">EffectiveTimePeriod</a></td>
+             <td> Purchase Order.  Effective Time Period.  Effective Time Period</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#CurrencyExchange">CurrencyExchange</a></td>
+             <td> Purchase Order.  Currency Exchange.  Currency Exchange</td>
+     </tr>
+     <tr>
+             <td> 
+Currency conversion rate
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#PaymentTerm">PaymentTerm</a></td>
+             <td> Purchase Order.  Payment Term.  Payment Term</td>
+     </tr>
+     <tr>
+             <td> 
+Specifies the Payment Terms
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Status">Status</a></td>
+             <td> Purchase Order.  Status.  Status</td>
+     </tr>
+     <tr>
+             <td> 
+Status of the Purchase Order Document
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BuyerPartyReference">BuyerPartyReference</a></td>
+             <td>Purchase Order.  Buyer Party Reference.  Buyer Party</td>
+     </tr>
+     <tr>
+             <td> 
+Buyer unique identifier. 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ShipToPartyReference">ShipToPartyReference</a></td>
+             <td>Purchase Order.  Ship To Party Reference.  Ship To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to Default Ship To Location
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BillToPartyReference">BillToPartyReference</a></td>
+             <td>Purchase Order.  Bill To Party Reference.  Bill To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Bill-to location unique identifier. Used for invoicing 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#QuoteReference">QuoteReference</a></td>
+             <td>Purchase Order.  Quote Reference.  Quote</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identifier of the quotation 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#PurchaseAgreementReference">PurchaseAgreementReference</a></td>
+             <td>Purchase Order.  Purchase Agreement Reference.  Purchase Agreement</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identifier of the global agreement
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#SupplierPartyReference">SupplierPartyReference</a></td>
+             <td>Purchase Order.  Supplier Party Reference.  Supplier Party</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identifier of the Supplier Party
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#CarrierPartyReference">CarrierPartyReference</a></td>
+             <td>Purchase Order.  Carrier Party Reference.  Carrier Party</td>
+     </tr>
+     <tr>
+             <td> 
+Default carrier to be used 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#PurchaseOrderLine">PurchaseOrderLine</a></td>
+             <td> Purchase Order.  Purchase Order Line.  Purchase Order Line</td>
+     </tr>
+     <tr>
+             <td> 
+Purchase Order Line has the line level information for a Purchase Order. For example, Purchase Order Line 1 for Item Pen, Purchase Order Line 2 for Item Computer
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#PurchaseOrderAttachment">PurchaseOrderAttachment</a></td>
+             <td> Purchase Order.  Purchase Order Attachment.  Purchase Order Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Attachment at the Purchase Order Header Level. For example, a Paper Contract for Purchase Order 123, a Paper Contract for Purchase Order 323
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#PurchaseOrderStatusHistory">PurchaseOrderStatusHistory</a></td>
+             <td> Purchase Order.  Purchase Order Status History.  Purchase Order Status History</td>
+     </tr>
+     <tr>
+             <td> 
+History of statuses for the Purchase Order Document
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/AcceptanceDueDate ************************************************-->
+<h3><a name="PurchaseOrder/AcceptanceDueDate"></a>PurchaseOrder/AcceptanceDueDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Acceptance Due.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date by which the supplier should accept the purchase order
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/AcceptanceRequiredIndicator ************************************************-->
+<h3><a name="PurchaseOrder/AcceptanceRequiredIndicator"></a>PurchaseOrder/AcceptanceRequiredIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Acceptance Required.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether acceptance from the supplier is required 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/ApprovalRequiredIndicator ************************************************-->
+<h3><a name="PurchaseOrder/ApprovalRequiredIndicator"></a>PurchaseOrder/ApprovalRequiredIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Approval Required.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the PO requires approval
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/ConfirmedOrderIndicator ************************************************-->
+<h3><a name="PurchaseOrder/ConfirmedOrderIndicator"></a>PurchaseOrder/ConfirmedOrderIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Confirmed Order.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the purchase order schedule can be modified
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/AutoSourcingIndicator ************************************************-->
+<h3><a name="PurchaseOrder/AutoSourcingIndicator"></a>PurchaseOrder/AutoSourcingIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Auto Sourcing.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether automatic sourcing is enabled 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/CurrencyCode ************************************************-->
+<h3><a name="PurchaseOrder/CurrencyCode"></a>PurchaseOrder/CurrencyCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Currency.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Unique identifier for the currency 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/FOBCode ************************************************-->
+<h3><a name="PurchaseOrder/FOBCode"></a>PurchaseOrder/FOBCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order. FOB.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Type of free-on-board terms for the document 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/FreightTermCode ************************************************-->
+<h3><a name="PurchaseOrder/FreightTermCode"></a>PurchaseOrder/FreightTermCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Freight Term.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Type of freight terms for the document 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/PayOnReceiptIndicator ************************************************-->
+<h3><a name="PurchaseOrder/PayOnReceiptIndicator"></a>PurchaseOrder/PayOnReceiptIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Pay On Receipt.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the purchase order will be paid upon receipt 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrder/TransportationResponsibilityCode ************************************************-->
+<h3><a name="PurchaseOrder/TransportationResponsibilityCode"></a>PurchaseOrder/TransportationResponsibilityCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order.  Transportation Responsibility.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Specifies of who is responsible for arranging transportation - Buyer or Supplier 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine ************************************************-->
+<h3><a name="PurchaseOrderLine"></a>PurchaseOrderLine</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Purchase Order Line has the line level information for a Purchase Order. For example, Purchase Order Line 1 for Item Pen, Purchase Order Line 2 for Item Computer
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* PurchaseOrderLine Attributes ************************************************-->
+<a href="#PurchaseOrderLine/MatchingBasisCode">MatchingBasisCode</a><br/>
+<a href="#PurchaseOrderLine/PurchaseBasisCode">PurchaseBasisCode</a><br/>
+<a href="#PurchaseOrderLine/CapitalExpenseIndicator">CapitalExpenseIndicator</a><br/>
+<a href="#PurchaseOrderLine/OverToleranceErrorIndicator">OverToleranceErrorIndicator</a><br/>
+<a href="#PurchaseOrderLine/PreferredGradeCode">PreferredGradeCode</a><br/>
+<a href="#PurchaseOrderLine/PriceTypeCode">PriceTypeCode</a><br/>
+<a href="#PurchaseOrderLine/Quantity">Quantity</a><br/>
+<a href="#PurchaseOrderLine/TaxCode">TaxCode</a><br/>
+<a href="#PurchaseOrderLine/Type1099Code">Type1099Code</a><br/>
+<a href="#PurchaseOrderLine/HazardousMaterialCode">HazardousMaterialCode</a><br/>
+<a href="#PurchaseOrderLine/ItemClassificationCode">ItemClassificationCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* PurchaseOrderLine Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Purchase Order Line.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique Identification of Purchase Order line
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ReceiptPercentTolerance">ReceiptPercentTolerance</a></td>
+             <td> Purchase Order Line.  Receipt Percent Tolerance.  Receipt Percent Tolerance</td>
+     </tr>
+     <tr>
+             <td> 
+Tolerance percentage of the Quantity received 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Status">Status</a></td>
+             <td> Purchase Order Line.  Status.  Status</td>
+     </tr>
+     <tr>
+             <td> 
+Status of the Purchase Order line
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#QuoteLineReference">QuoteLineReference</a></td>
+             <td>Purchase Order Line.  Quote Line Reference.  Quote Line</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to the Quote line
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ContractReference">ContractReference</a></td>
+             <td>Purchase Order Line.  Contract Reference.  Contract</td>
+     </tr>
+     <tr>
+             <td> 
+Contract identifier from Oracle Contracts. 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ItemReference">ItemReference</a></td>
+             <td>Purchase Order Line.  Item Reference.  Item</td>
+     </tr>
+     <tr>
+             <td> 
+Item description. 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BusinessUnitReference">BusinessUnitReference</a></td>
+             <td>Purchase Order Line.  Business Unit Reference.  Business Unit</td>
+     </tr>
+     <tr>
+             <td> 
+Operating unit unique identifier
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#PurchaseAgreementPriceBreakReference">PurchaseAgreementPriceBreakReference</a></td>
+             <td>Purchase Order Line.  Purchase Agreement Price Break Reference.  Purchase Agreement Price Break</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identifier of the Price Break referenced by this line. 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#PurchaseOrderLineStatusHistory">PurchaseOrderLineStatusHistory</a></td>
+             <td> Purchase Order Line.  Purchase Order Line Status History.  Purchase Order Line Status History</td>
+     </tr>
+     <tr>
+             <td> 
+History of statuses for the Purchase Order line
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#PurchaseOrderShipment">PurchaseOrderShipment</a></td>
+             <td> Purchase Order Line.  Purchase Order Shipment.  Purchase Order Shipment</td>
+     </tr>
+     <tr>
+             <td> 
+Purchase Order Shipment has Shipment level information for a Purchase Order. For example, Shipment 1 with Ship-to address 1, Shipment 2 with Ship-to address 2
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#PurchaseOrderLineAttachment">PurchaseOrderLineAttachment</a></td>
+             <td> Purchase Order Line.  Purchase Order Line Attachment.  Purchase Order Line Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Attachment at the Purchase Order Line Level. For example, a Paper Contract for Purchase Order Line 1, a Paper Contract for Purchase Order Line 3
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/MatchingBasisCode ************************************************-->
+<h3><a name="PurchaseOrderLine/MatchingBasisCode"></a>PurchaseOrderLine/MatchingBasisCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Matching Basis.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Matching basis of the line. Example values are : Amount or Quantity 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/PurchaseBasisCode ************************************************-->
+<h3><a name="PurchaseOrderLine/PurchaseBasisCode"></a>PurchaseOrderLine/PurchaseBasisCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Purchase Basis.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Purchase basis of the line type. Example values are : Services, Goods etc.
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/CapitalExpenseIndicator ************************************************-->
+<h3><a name="PurchaseOrderLine/CapitalExpenseIndicator"></a>PurchaseOrderLine/CapitalExpenseIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Capital Expense.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the line is for a capital expense
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/OverToleranceErrorIndicator ************************************************-->
+<h3><a name="PurchaseOrderLine/OverToleranceErrorIndicator"></a>PurchaseOrderLine/OverToleranceErrorIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Over Tolerance Error.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether receipts exceeding the tolerance should be rejected
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/PreferredGradeCode ************************************************-->
+<h3><a name="PurchaseOrderLine/PreferredGradeCode"></a>PurchaseOrderLine/PreferredGradeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Preferred Grade.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Preferred quality grade for the item ordered
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/PriceTypeCode ************************************************-->
+<h3><a name="PurchaseOrderLine/PriceTypeCode"></a>PurchaseOrderLine/PriceTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Price Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Price type of the line. Example values are : Variable, Fixed, Indexed
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/Quantity ************************************************-->
+<h3><a name="PurchaseOrderLine/Quantity"></a>PurchaseOrderLine/Quantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Quantity.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity ordered on the line
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/TaxCode ************************************************-->
+<h3><a name="PurchaseOrderLine/TaxCode"></a>PurchaseOrderLine/TaxCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Tax.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Unique identifier for the tax code. Used for defaulting for Shipments 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/Type1099Code ************************************************-->
+<h3><a name="PurchaseOrderLine/Type1099Code"></a>PurchaseOrderLine/Type1099Code</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Type1099.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+1099 type for the purchase order line
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/HazardousMaterialCode ************************************************-->
+<h3><a name="PurchaseOrderLine/HazardousMaterialCode"></a>PurchaseOrderLine/HazardousMaterialCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Hazardous Material.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Hazard class of the line item 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLine/ItemClassificationCode ************************************************-->
+<h3><a name="PurchaseOrderLine/ItemClassificationCode"></a>PurchaseOrderLine/ItemClassificationCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line.  Item Classification.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Classification of the item
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLineStatusHistory ************************************************-->
+<h3><a name="PurchaseOrderLineStatusHistory"></a>PurchaseOrderLineStatusHistory</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line Status History. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+History of statuses for the Purchase Order line
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* PurchaseOrderLineStatusHistory Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* PurchaseOrderLineStatusHistory Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Purchase Order Line Status History.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of the status history line
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#StatusHistory">StatusHistory</a></td>
+             <td> Purchase Order Line Status History.  Status History.  Status History</td>
+     </tr>
+     <tr>
+             <td> 
+Status history details
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment ************************************************-->
+<h3><a name="PurchaseOrderShipment"></a>PurchaseOrderShipment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Purchase Order Shipment has Shipment level information for a Purchase Order. For example, Shipment 1 with Ship-to address 1, Shipment 2 with Ship-to address 2
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* PurchaseOrderShipment Attributes ************************************************-->
+<a href="#PurchaseOrderShipment/OutsourcedAssemblyIndicator">OutsourcedAssemblyIndicator</a><br/>
+<a href="#PurchaseOrderShipment/AccrueOnReceiptIndicator">AccrueOnReceiptIndicator</a><br/>
+<a href="#PurchaseOrderShipment/AllowSubstituteItemReceiptIndicator">AllowSubstituteItemReceiptIndicator</a><br/>
+<a href="#PurchaseOrderShipment/AcceptedAmount">AcceptedAmount</a><br/>
+<a href="#PurchaseOrderShipment/BilledAmount">BilledAmount</a><br/>
+<a href="#PurchaseOrderShipment/CanceledAmount">CanceledAmount</a><br/>
+<a href="#PurchaseOrderShipment/ReceivedAmount">ReceivedAmount</a><br/>
+<a href="#PurchaseOrderShipment/RejectedAmount">RejectedAmount</a><br/>
+<a href="#PurchaseOrderShipment/ShippedAmount">ShippedAmount</a><br/>
+<a href="#PurchaseOrderShipment/ConsignmentIndicator">ConsignmentIndicator</a><br/>
+<a href="#PurchaseOrderShipment/CountryOfOriginCode">CountryOfOriginCode</a><br/>
+<a href="#PurchaseOrderShipment/DaysEarlyReceiptAllowed">DaysEarlyReceiptAllowed</a><br/>
+<a href="#PurchaseOrderShipment/DaysLateReceiptAllowed">DaysLateReceiptAllowed</a><br/>
+<a href="#PurchaseOrderShipment/Description">Description</a><br/>
+<a href="#PurchaseOrderShipment/DropShipmentIndicator">DropShipmentIndicator</a><br/>
+<a href="#PurchaseOrderShipment/EncumberedDate">EncumberedDate</a><br/>
+<a href="#PurchaseOrderShipment/EncumberedIndicator">EncumberedIndicator</a><br/>
+<a href="#PurchaseOrderShipment/ShipToLocationValidationCode">ShipToLocationValidationCode</a><br/>
+<a href="#PurchaseOrderShipment/FOBCode">FOBCode</a><br/>
+<a href="#PurchaseOrderShipment/FreightTermCode">FreightTermCode</a><br/>
+<a href="#PurchaseOrderShipment/InspectionRequiredIndicator">InspectionRequiredIndicator</a><br/>
+<a href="#PurchaseOrderShipment/LatestAcceptableReceiptDate">LatestAcceptableReceiptDate</a><br/>
+<a href="#PurchaseOrderShipment/MatchingBasisCode">MatchingBasisCode</a><br/>
+<a href="#PurchaseOrderShipment/InvoiceMatchOptionCode">InvoiceMatchOptionCode</a><br/>
+<a href="#PurchaseOrderShipment/RequiredByDate">RequiredByDate</a><br/>
+<a href="#PurchaseOrderShipment/PreferredGradeCode">PreferredGradeCode</a><br/>
+<a href="#PurchaseOrderShipment/PromisedDeliveryDate">PromisedDeliveryDate</a><br/>
+<a href="#PurchaseOrderShipment/ReceivedQuantity">ReceivedQuantity</a><br/>
+<a href="#PurchaseOrderShipment/RejectedQuantity">RejectedQuantity</a><br/>
+<a href="#PurchaseOrderShipment/ShippedQuantity">ShippedQuantity</a><br/>
+<a href="#PurchaseOrderShipment/OverReceiptToleranceActionCode">OverReceiptToleranceActionCode</a><br/>
+<a href="#PurchaseOrderShipment/OrderedQuantity">OrderedQuantity</a><br/>
+<a href="#PurchaseOrderShipment/AcceptedQuantity">AcceptedQuantity</a><br/>
+<a href="#PurchaseOrderShipment/BilledQuantity">BilledQuantity</a><br/>
+<a href="#PurchaseOrderShipment/CanceledQuantity">CanceledQuantity</a><br/>
+<a href="#PurchaseOrderShipment/ReceiptDaysValidationCode">ReceiptDaysValidationCode</a><br/>
+<a href="#PurchaseOrderShipment/ReceiptRequiredIndicator">ReceiptRequiredIndicator</a><br/>
+<a href="#PurchaseOrderShipment/ShipmentCloseDate">ShipmentCloseDate</a><br/>
+<a href="#PurchaseOrderShipment/ValueBasisCode">ValueBasisCode</a><br/>
+<a href="#PurchaseOrderShipment/VMIIndicator">VMIIndicator</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* PurchaseOrderShipment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Purchase Order Shipment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Shipment line number
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#OriginalPurchaseOrderShipmentIdentification">OriginalPurchaseOrderShipmentIdentification</a></td>
+             <td> Purchase Order Shipment.  Original Purchase Order Shipment Identification.  Original Purchase Order Shipment Identification</td>
+     </tr>
+     <tr>
+             <td> 
+References the shipment identification of the shipment from which this shipment was created
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#PaymentTerm">PaymentTerm</a></td>
+             <td> Purchase Order Shipment.  Payment Term.  Payment Term</td>
+     </tr>
+     <tr>
+             <td> 
+Details of the payment terms
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ReceiptPercentTolerance">ReceiptPercentTolerance</a></td>
+             <td> Purchase Order Shipment.  Receipt Percent Tolerance.  Receipt Percent Tolerance</td>
+     </tr>
+     <tr>
+             <td> 
+Maximum over-receipt quantity for a line expressed as a percentage of the order quantity
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#StopReceiptPercentTolerance">StopReceiptPercentTolerance</a></td>
+             <td> Purchase Order Shipment.  Stop Receipt Percent Tolerance.  Stop Receipt Percent Tolerance</td>
+     </tr>
+     <tr>
+             <td> 
+Percentage tolerance of the ordered quantity within which a shipment is automatically closed for receiving
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#InvoicingClosePercentTolerance">InvoicingClosePercentTolerance</a></td>
+             <td> Purchase Order Shipment.  Invoicing Close Percent Tolerance.  Invoicing Close Percent Tolerance</td>
+     </tr>
+     <tr>
+             <td> 
+Percentage tolerance within which a shipment is automatically closed for invoicing when billed
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Status">Status</a></td>
+             <td> Purchase Order Shipment.  Status.  Status</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#PurchaseAgreementReference">PurchaseAgreementReference</a></td>
+             <td>Purchase Order Shipment.  Purchase Agreement Reference.  Purchase Agreement</td>
+     </tr>
+     <tr>
+             <td> 
+For Standard Purchase Orders, captures the unique reference of Global Agreements
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BusinessUnitReference">BusinessUnitReference</a></td>
+             <td>Purchase Order Shipment.  Business Unit Reference.  Business Unit</td>
+     </tr>
+     <tr>
+             <td> 
+Business unit unique identifier
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ShipToPartyReference">ShipToPartyReference</a></td>
+             <td>Purchase Order Shipment.  Ship To Party Reference.  Ship To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to Ship To Location
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#CarrierPartyReference">CarrierPartyReference</a></td>
+             <td>Purchase Order Shipment.  Carrier Party Reference.  Carrier Party</td>
+     </tr>
+     <tr>
+             <td> 
+References the carrier of the shipment 
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ShipmentDistribution">ShipmentDistribution</a></td>
+             <td> Purchase Order Shipment.  Shipment Distribution.  Shipment Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+Purchase Order Distribution has Distribution level information for a Purchase Order. For example, Purchase Order Distribution 1 to deliver to Address 1, Purchase Order Distribution to deliver to Address 2
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ShipmentStatusHistory">ShipmentStatusHistory</a></td>
+             <td> Purchase Order Shipment.  Shipment Status History.  Shipment Status History</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ShipmentTax">ShipmentTax</a></td>
+             <td> Purchase Order Shipment.  Shipment Tax.  Shipment Tax</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ShipmentAttachment">ShipmentAttachment</a></td>
+             <td> Purchase Order Shipment.  Shipment Attachment.  Shipment Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Attachment at the Purchase Order Shipment level. For example, a Paper Contract for Purchase Order Shipment 1, a Paper Contract for Purchase Order Shipment 3
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/OutsourcedAssemblyIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/OutsourcedAssemblyIndicator"></a>PurchaseOrderShipment/OutsourcedAssemblyIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Outsourced Assembly.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the item is a shikyu (outsourced assembly) item 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/AccrueOnReceiptIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/AccrueOnReceiptIndicator"></a>PurchaseOrderShipment/AccrueOnReceiptIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Accrue On Receipt.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether items are accrued upon receipt
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/AllowSubstituteItemReceiptIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/AllowSubstituteItemReceiptIndicator"></a>PurchaseOrderShipment/AllowSubstituteItemReceiptIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Allow Substitute Item Receipt.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether substitute items can be received in place of the ordered items
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/AcceptedAmount ************************************************-->
+<h3><a name="PurchaseOrderShipment/AcceptedAmount"></a>PurchaseOrderShipment/AcceptedAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Accepted.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount Accepted for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/BilledAmount ************************************************-->
+<h3><a name="PurchaseOrderShipment/BilledAmount"></a>PurchaseOrderShipment/BilledAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Billed.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount billed for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/CanceledAmount ************************************************-->
+<h3><a name="PurchaseOrderShipment/CanceledAmount"></a>PurchaseOrderShipment/CanceledAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Canceled.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount canceled for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ReceivedAmount ************************************************-->
+<h3><a name="PurchaseOrderShipment/ReceivedAmount"></a>PurchaseOrderShipment/ReceivedAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Received.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount received for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/RejectedAmount ************************************************-->
+<h3><a name="PurchaseOrderShipment/RejectedAmount"></a>PurchaseOrderShipment/RejectedAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Rejected.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount rejected for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ShippedAmount ************************************************-->
+<h3><a name="PurchaseOrderShipment/ShippedAmount"></a>PurchaseOrderShipment/ShippedAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Shipped.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount pending for Work Confirmation
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ConsignmentIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/ConsignmentIndicator"></a>PurchaseOrderShipment/ConsignmentIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Consignment.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the shipment is consigned
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/CountryOfOriginCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/CountryOfOriginCode"></a>PurchaseOrderShipment/CountryOfOriginCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Country Of Origin.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Country of  manufacture for this shipment
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/DaysEarlyReceiptAllowed ************************************************-->
+<h3><a name="PurchaseOrderShipment/DaysEarlyReceiptAllowed"></a>PurchaseOrderShipment/DaysEarlyReceiptAllowed</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Days Early Receipt Allowed.  Numeric</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Maximum acceptable number of days items can be received early
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#NumericType">NumericType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/DaysLateReceiptAllowed ************************************************-->
+<h3><a name="PurchaseOrderShipment/DaysLateReceiptAllowed"></a>PurchaseOrderShipment/DaysLateReceiptAllowed</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Days Late Receipt Allowed.  Numeric</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Maximum acceptable number of days items can be received late
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#NumericType">NumericType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/Description ************************************************-->
+<h3><a name="PurchaseOrderShipment/Description"></a>PurchaseOrderShipment/Description</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Description.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Description of the shipment
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/DropShipmentIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/DropShipmentIndicator"></a>PurchaseOrderShipment/DropShipmentIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Drop Shipment.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the Shipment is dropshipped to a customer of the buyer
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/EncumberedDate ************************************************-->
+<h3><a name="PurchaseOrderShipment/EncumberedDate"></a>PurchaseOrderShipment/EncumberedDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Encumbered Date.  Date Time</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date of encumbrance for the shipment
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateTimeType">DateTimeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/EncumberedIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/EncumberedIndicator"></a>PurchaseOrderShipment/EncumberedIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Encumbered.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the shipment is encumbered 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ShipToLocationValidationCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/ShipToLocationValidationCode"></a>PurchaseOrderShipment/ShipToLocationValidationCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Ship To Location Validation.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Specifies what action is taken when the receiving location differs from the ship-to location
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/FOBCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/FOBCode"></a>PurchaseOrderShipment/FOBCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment. FOB.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Type of free-on-board terms for the shipment 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/FreightTermCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/FreightTermCode"></a>PurchaseOrderShipment/FreightTermCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Freight Term.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Type of freight terms for the RFQ or quotation shipment 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/InspectionRequiredIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/InspectionRequiredIndicator"></a>PurchaseOrderShipment/InspectionRequiredIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Inspection Required.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether shipment must be inspected before the invoice is paid
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/LatestAcceptableReceiptDate ************************************************-->
+<h3><a name="PurchaseOrderShipment/LatestAcceptableReceiptDate"></a>PurchaseOrderShipment/LatestAcceptableReceiptDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Latest Acceptable Receipt.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Latest acceptable receipt date for the shipment
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/MatchingBasisCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/MatchingBasisCode"></a>PurchaseOrderShipment/MatchingBasisCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Matching Basis.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Matching basis of the line location. Example values are : Amount or Quantity
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/InvoiceMatchOptionCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/InvoiceMatchOptionCode"></a>PurchaseOrderShipment/InvoiceMatchOptionCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Invoice Match Option.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicator of whether the invoice for the shipment should be matched to the purchase order or the receipt
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/RequiredByDate ************************************************-->
+<h3><a name="PurchaseOrderShipment/RequiredByDate"></a>PurchaseOrderShipment/RequiredByDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Required By.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Required  By date for the shipment schedule
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/PreferredGradeCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/PreferredGradeCode"></a>PurchaseOrderShipment/PreferredGradeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Preferred Grade.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Preferred quality grade for the ordered item
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/PromisedDeliveryDate ************************************************-->
+<h3><a name="PurchaseOrderShipment/PromisedDeliveryDate"></a>PurchaseOrderShipment/PromisedDeliveryDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Promised Delivery.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Supplier promised delivery date
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ReceivedQuantity ************************************************-->
+<h3><a name="PurchaseOrderShipment/ReceivedQuantity"></a>PurchaseOrderShipment/ReceivedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Received.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity received until today
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/RejectedQuantity ************************************************-->
+<h3><a name="PurchaseOrderShipment/RejectedQuantity"></a>PurchaseOrderShipment/RejectedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Rejected.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity rejected after inspection, up until today
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ShippedQuantity ************************************************-->
+<h3><a name="PurchaseOrderShipment/ShippedQuantity"></a>PurchaseOrderShipment/ShippedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Shipped.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity shipped
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/OverReceiptToleranceActionCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/OverReceiptToleranceActionCode"></a>PurchaseOrderShipment/OverReceiptToleranceActionCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Over Receipt Tolerance Action.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Describes what action is taken when the quantity received tolerance is exceeded
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/OrderedQuantity ************************************************-->
+<h3><a name="PurchaseOrderShipment/OrderedQuantity"></a>PurchaseOrderShipment/OrderedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Ordered.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity ordered 
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/AcceptedQuantity ************************************************-->
+<h3><a name="PurchaseOrderShipment/AcceptedQuantity"></a>PurchaseOrderShipment/AcceptedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Accepted.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity accepted after inspection, up until today
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/BilledQuantity ************************************************-->
+<h3><a name="PurchaseOrderShipment/BilledQuantity"></a>PurchaseOrderShipment/BilledQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Billed.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity invoiced up until today
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/CanceledQuantity ************************************************-->
+<h3><a name="PurchaseOrderShipment/CanceledQuantity"></a>PurchaseOrderShipment/CanceledQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Canceled.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity canceled
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ReceiptDaysValidationCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/ReceiptDaysValidationCode"></a>PurchaseOrderShipment/ReceiptDaysValidationCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Receipt Days Validation.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Describes what action is taken when items are received earlier or later than the allowed number of days specified
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ReceiptRequiredIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/ReceiptRequiredIndicator"></a>PurchaseOrderShipment/ReceiptRequiredIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Receipt Required.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether shipment must be received before the invoice is paid
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ShipmentCloseDate ************************************************-->
+<h3><a name="PurchaseOrderShipment/ShipmentCloseDate"></a>PurchaseOrderShipment/ShipmentCloseDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Shipment Close Date.  Date Time</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date when the Shipment is closed for both Receiving and Invoice
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateTimeType">DateTimeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/ValueBasisCode ************************************************-->
+<h3><a name="PurchaseOrderShipment/ValueBasisCode"></a>PurchaseOrderShipment/ValueBasisCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment.  Value Basis.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Value basis of the line. Whether the line is Amount based or Quantity based
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderShipment/VMIIndicator ************************************************-->
+<h3><a name="PurchaseOrderShipment/VMIIndicator"></a>PurchaseOrderShipment/VMIIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Shipment. VMI.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether shipment is managed by supplier at customer's location
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution ************************************************-->
+<h3><a name="ShipmentDistribution"></a>ShipmentDistribution</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Purchase Order Distribution has Distribution level information for a Purchase Order. For example, Purchase Order Distribution 1 to deliver to Address 1, Purchase Order Distribution to deliver to Address 2
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ShipmentDistribution Attributes ************************************************-->
+<a href="#ShipmentDistribution/OrderedQuantity">OrderedQuantity</a><br/>
+<a href="#ShipmentDistribution/DeliveredQuantity">DeliveredQuantity</a><br/>
+<a href="#ShipmentDistribution/BilledQuantity">BilledQuantity</a><br/>
+<a href="#ShipmentDistribution/CanceledQuantity">CanceledQuantity</a><br/>
+<a href="#ShipmentDistribution/BilledAmount">BilledAmount</a><br/>
+<a href="#ShipmentDistribution/OrderedAmount">OrderedAmount</a><br/>
+<a href="#ShipmentDistribution/DeliveredAmount">DeliveredAmount</a><br/>
+<a href="#ShipmentDistribution/CanceledAmount">CanceledAmount</a><br/>
+<a href="#ShipmentDistribution/DestinationTypeCode">DestinationTypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ShipmentDistribution Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Shipment Distribution.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique Identification of Purchase Order Distribution
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AccountingDistribution">AccountingDistribution</a></td>
+             <td> Shipment Distribution.  Accounting Distribution.  Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#RequisitionDistributionReference">RequisitionDistributionReference</a></td>
+             <td>Shipment Distribution.  Requisition Distribution Reference.  Requisition Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to Requisition Distribution
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#DestinationInventoryLocationReference">DestinationInventoryLocationReference</a></td>
+             <td>Shipment Distribution.  Destination Inventory Location Reference.  Destination Inventory Location</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to Inventory Organization
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#DeliverToPartyReference">DeliverToPartyReference</a></td>
+             <td>Shipment Distribution.  Deliver To Party Reference.  Deliver To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Unique Identification of Purchase Order Physical Distribution
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/OrderedQuantity ************************************************-->
+<h3><a name="ShipmentDistribution/OrderedQuantity"></a>ShipmentDistribution/OrderedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Ordered.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity ordered on the distribution
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/DeliveredQuantity ************************************************-->
+<h3><a name="ShipmentDistribution/DeliveredQuantity"></a>ShipmentDistribution/DeliveredQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Delivered.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity delivered against the distribution
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/BilledQuantity ************************************************-->
+<h3><a name="ShipmentDistribution/BilledQuantity"></a>ShipmentDistribution/BilledQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Billed.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity invoiced against the distribution
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/CanceledQuantity ************************************************-->
+<h3><a name="ShipmentDistribution/CanceledQuantity"></a>ShipmentDistribution/CanceledQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Canceled.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity canceled for the distribution
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/BilledAmount ************************************************-->
+<h3><a name="ShipmentDistribution/BilledAmount"></a>ShipmentDistribution/BilledAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Billed.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount invoiced against the distribution
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/OrderedAmount ************************************************-->
+<h3><a name="ShipmentDistribution/OrderedAmount"></a>ShipmentDistribution/OrderedAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Ordered.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount ordered for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/DeliveredAmount ************************************************-->
+<h3><a name="ShipmentDistribution/DeliveredAmount"></a>ShipmentDistribution/DeliveredAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Delivered.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount delivered for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/CanceledAmount ************************************************-->
+<h3><a name="ShipmentDistribution/CanceledAmount"></a>ShipmentDistribution/CanceledAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Canceled.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount canceled for service lines
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentDistribution/DestinationTypeCode ************************************************-->
+<h3><a name="ShipmentDistribution/DestinationTypeCode"></a>ShipmentDistribution/DestinationTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Distribution.  Destination Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Final destination of the purchased items. Example values are : ShopFloor, Expense, Inventory
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentStatusHistory ************************************************-->
+<h3><a name="ShipmentStatusHistory"></a>ShipmentStatusHistory</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Status History. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ShipmentStatusHistory Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ShipmentStatusHistory Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Shipment Status History.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#StatusHistory">StatusHistory</a></td>
+             <td> Shipment Status History.  Status History.  Status History</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentTax ************************************************-->
+<h3><a name="ShipmentTax"></a>ShipmentTax</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Tax. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ShipmentTax Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ShipmentTax Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Shipment Tax.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique Identification of Purchase Order Shipment Tax
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Tax">Tax</a></td>
+             <td> Shipment Tax.  Tax.  Tax</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AccountingDistribution">AccountingDistribution</a></td>
+             <td> Shipment Tax.  Accounting Distribution.  Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentAttachment ************************************************-->
+<h3><a name="ShipmentAttachment"></a>ShipmentAttachment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Attachment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Attachment at the Purchase Order Shipment level. For example, a Paper Contract for Purchase Order Shipment 1, a Paper Contract for Purchase Order Shipment 3
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ShipmentAttachment Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ShipmentAttachment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Shipment Attachment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Attachment">Attachment</a></td>
+             <td> Shipment Attachment.  Attachment.  Attachment</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderLineAttachment ************************************************-->
+<h3><a name="PurchaseOrderLineAttachment"></a>PurchaseOrderLineAttachment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Line Attachment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Attachment at the Purchase Order Line Level. For example, a Paper Contract for Purchase Order Line 1, a Paper Contract for Purchase Order Line 3
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* PurchaseOrderLineAttachment Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* PurchaseOrderLineAttachment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Purchase Order Line Attachment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of the PO line attachment
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Attachment">Attachment</a></td>
+             <td> Purchase Order Line Attachment.  Attachment.  Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Attachment details
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderAttachment ************************************************-->
+<h3><a name="PurchaseOrderAttachment"></a>PurchaseOrderAttachment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Attachment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Attachment at the Purchase Order Header Level. For example, a Paper Contract for Purchase Order 123, a Paper Contract for Purchase Order 323
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* PurchaseOrderAttachment Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* PurchaseOrderAttachment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Purchase Order Attachment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of the PO header attachment
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Attachment">Attachment</a></td>
+             <td> Purchase Order Attachment.  Attachment.  Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Attachment details
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* PurchaseOrderStatusHistory ************************************************-->
+<h3><a name="PurchaseOrderStatusHistory"></a>PurchaseOrderStatusHistory</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Purchase Order Status History. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+History of statuses for the Purchase Order Document
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* PurchaseOrderStatusHistory Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* PurchaseOrderStatusHistory Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Purchase Order Status History.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique Identification of the PO line
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#StatusHistory">StatusHistory</a></td>
+             <td> Purchase Order Status History.  Status History.  Status History</td>
+     </tr>
+     <tr>
+             <td> 
+History of statuses for the PO line
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+</body>
+</html>

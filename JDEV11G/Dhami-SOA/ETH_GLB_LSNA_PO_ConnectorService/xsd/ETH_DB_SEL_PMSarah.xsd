@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="ETH_DB_SEL_PMSarahInput" type="xs:string"/>
+   <xs:element name="ETH_DB_SEL_PMSarahOutputCollection" type="ETH_DB_SEL_PMSarahOutputCollection"/>
+   <xs:complexType name="ETH_DB_SEL_PMSarahOutputCollection">
+      <xs:sequence>
+         <xs:element name="ETH_DB_SEL_PMSarahOutput" type="ETH_DB_SEL_PMSarahOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ETH_DB_SEL_PMSarahOutput">
+      <xs:sequence>
+         <xs:element name="q_name" type="xs:string" nillable="true"/>
+         <xs:element name="msgid" type="xs:string" nillable="true"/>
+         <xs:element name="enq_time" type="xs:dateTime" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

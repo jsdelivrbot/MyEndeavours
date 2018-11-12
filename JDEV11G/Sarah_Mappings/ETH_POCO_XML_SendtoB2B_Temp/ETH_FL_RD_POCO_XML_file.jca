@@ -1,0 +1,16 @@
+<adapter-config name="ETH_FL_RD_POCO_XML" adapter="File Adapter" wsdlLocation="ETH_FL_RD_POCO_XML.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" UIincludeWildcard="ETH_Prov_POCO_OAGIS.xml"/>
+  <endpoint-activation portType="Read_POCOXML_ptt" operation="Read_POCOXML">
+    <activation-spec className="oracle.tip.adapter.file.inbound.FileActivationSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="10"/>
+      <property name="Recursive" value="true"/>
+      <property name="PollingFrequency" value="30"/>
+      <property name="LogicalDirectory" value="INDIR"/>
+      <property name="IncludeFiles" value="ETH_Prov_POCO_OAGIS\.xml"/>
+      <property name="UseHeaders" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

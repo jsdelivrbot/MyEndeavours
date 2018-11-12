@@ -1,0 +1,13 @@
+<adapter-config name="RND_JMS_ENQ_Message" adapter="Jms Adapter" wsdlLocation="RND_JMS_ENQ_Message.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/wls/jms/eth/queue" UIConnectionName="Dev-SOA2" UIJmsProvider="WLSJMS" adapterRef=""/>
+  <endpoint-interaction portType="Produce_ETHMessage_ptt" operation="Produce_ETHMessage">
+    <interaction-spec className="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec">
+      <property name="DestinationName" value="jms/eth/queue/rp1"/>
+      <property name="DeliveryMode" value="Persistent"/>
+      <property name="TimeToLive" value="0"/>
+      <property name="PayloadType" value="TextMessage"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

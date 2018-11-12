@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by KAY HATHCOCK (EMERSON ELECTRIC COMPANY) -->
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.00 **
+** Date: Apr 3, 2008 **
+ 
+Copyright (c) 2007, Oracle. All rights reserved 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\EBO\PurchaseOrder\V1\PurchaseOrderEBO.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO PurchaseOrder EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:corepurchaseordercust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/PurchaseOrder/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns:corecomEBO="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" xmlns:oagis="http://www.openapplications.org/oagis/9" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00.00">
+	<!-- ====================================================================== -->
+	<!-- ==============  Imports and Includes   =============================== -->
+	<!-- ====================================================================== -->
+	<!--	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/Meta.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/PurchaseOrder/V1" schemaLocation="../../../Custom/EBO/PurchaseOrder/V1/CustomPurchaseOrderEBO.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../../Custom/Common/V2/CustomCommonComponents.xsd"/>-->
+	<!--	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../Infrastructure/OAGIS90/Resources/Nouns/PurchaseOrder.xsd"/>-->
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../Infrastructure/OAGIS90/Resources/Nouns/PurchaseOrder.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- ==============  Emerson PurchaseOrder EBO ====================== -->
+	<!-- ====================================================================== -->
+	<xsd:element name="EmersonPurchaseOrderEBO" type="EmersonPurchaseOrderEBOType"/>
+	<xsd:complexType name="EmersonPurchaseOrderEBOType">
+		<xsd:complexContent>
+			<xsd:extension base="oagis:PurchaseOrderType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<!-- ====================================================================== -->
+	<!-- ==============  PurchaseOrder EBO ====================== -->
+	<!-- ====================================================================== -->
+	<!--<xsd:element name="PurchaseOrderEBO" type="PurchaseOrderEBOType">
+		<xsd:annotation>
+			<xsd:documentation> 
+A document used to request vendor to supply a product or service in return for payment and providing specifications and quantities. For example, Purchase Order 1357 with Supplier Dell for 10 Computers, Purchase Order 1243 for buying 5 pens.
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description> 
+A document used to request vendor to supply a product or service in return for payment and providing specifications and quantities. For example, Purchase Order 1357 with Supplier Dell for 10 Computers, Purchase Order 1243 for buying 5 pens.
+            </svcdoc:Description>
+				<svcdoc:Type>EBO</svcdoc:Type>
+				<svcdoc:Industry/>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="PurchaseOrderEBOType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Document header unique identifier
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AcceptanceDueDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Date by which the supplier should accept the purchase order
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AcceptanceRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether acceptance from the supplier is required 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ApprovalRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the PO requires approval
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ConfirmedOrderIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the purchase order schedule can be modified
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AutoSourcingIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether automatic sourcing is enabled 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CurrencyCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the currency 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FOBCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Type of free-on-board terms for the document 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FreightTermCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Type of freight terms for the document 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PayOnReceiptIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the purchase order will be paid upon receipt 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TransportationResponsibilityCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specifies of who is responsible for arranging transportation - Buyer or Supplier 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ProcurementCard" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the procurement card used for the order 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EffectiveTimePeriod" minOccurs="0"/>
+			<xsd:element ref="corecom:CurrencyExchange" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Currency conversion rate
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PaymentTerm" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specifies the Payment Terms
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Status of the Purchase Order Document
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:BuyerPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Buyer unique identifier. 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ShipToPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to Default Ship To Location
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:BillToPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Bill-to location unique identifier. Used for invoicing 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:QuoteReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier of the quotation 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PurchaseAgreementReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier of the global agreement
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:SupplierPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier of the Supplier Party
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:CarrierPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Default carrier to be used 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PurchaseOrderLine" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Purchase Order Line has the line level information for a Purchase Order. For example, Purchase Order Line 1 for Item Pen, Purchase Order Line 2 for Item Computer
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PurchaseOrderAttachment" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Attachment at the Purchase Order Header Level. For example, a Paper Contract for Purchase Order 123, a Paper Contract for Purchase Order 323
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PurchaseOrderStatusHistory" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+History of statuses for the Purchase Order Document
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomPurchaseOrderEBOType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PurchaseOrderAttachment" type="PurchaseOrderAttachmentType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Attachment at the Purchase Order Header Level. For example, a Paper Contract for Purchase Order 123, a Paper Contract for Purchase Order 323
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PurchaseOrderAttachmentType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of the PO header attachment
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Attachment" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Attachment details
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomPurchaseOrderAttachmentType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PurchaseOrderLine" type="PurchaseOrderLineType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Purchase Order Line has the line level information for a Purchase Order. For example, Purchase Order Line 1 for Item Pen, Purchase Order Line 2 for Item Computer
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PurchaseOrderLineType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique Identification of Purchase Order line
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MatchingBasisCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Matching basis of the line. Example values are : Amount or Quantity 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PurchaseBasisCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Purchase basis of the line type. Example values are : Services, Goods etc.
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CapitalExpenseIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the line is for a capital expense
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OverToleranceErrorIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether receipts exceeding the tolerance should be rejected
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreferredGradeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Preferred quality grade for the item ordered
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PriceTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Price type of the line. Example values are : Variable, Fixed, Indexed
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Quantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity ordered on the line
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TaxCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the tax code. Used for defaulting for Shipments 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Type1099Code" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+1099 type for the purchase order line
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HazardousMaterialCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Hazard class of the line item 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ItemClassificationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Classification of the item
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ReceiptPercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Tolerance percentage of the Quantity received 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Status of the Purchase Order line
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:QuoteLineReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to the Quote line
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ContractReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Contract identifier from Oracle Contracts. 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ItemReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Item description. 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:BusinessUnitReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Operating unit unique identifier
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PurchaseAgreementPriceBreakReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier of the Price Break referenced by this line. 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PurchaseOrderLineStatusHistory" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+History of statuses for the Purchase Order line
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PurchaseOrderShipment" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Purchase Order Shipment has Shipment level information for a Purchase Order. For example, Shipment 1 with Ship-to address 1, Shipment 2 with Ship-to address 2
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PurchaseOrderLineAttachment" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Attachment at the Purchase Order Line Level. For example, a Paper Contract for Purchase Order Line 1, a Paper Contract for Purchase Order Line 3
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomPurchaseOrderLineType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PurchaseOrderLineAttachment" type="PurchaseOrderLineAttachmentType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Attachment at the Purchase Order Line Level. For example, a Paper Contract for Purchase Order Line 1, a Paper Contract for Purchase Order Line 3
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PurchaseOrderLineAttachmentType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of the PO line attachment
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Attachment" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Attachment details
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomPurchaseOrderLineAttachmentType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PurchaseOrderLineStatusHistory" type="PurchaseOrderLineStatusHistoryType">
+		<xsd:annotation>
+			<xsd:documentation> 
+History of statuses for the Purchase Order line
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PurchaseOrderLineStatusHistoryType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of the status history line
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:StatusHistory" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Status history details
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomPurchaseOrderLineStatusHistoryType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PurchaseOrderShipment" type="PurchaseOrderShipmentType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Purchase Order Shipment has Shipment level information for a Purchase Order. For example, Shipment 1 with Ship-to address 1, Shipment 2 with Ship-to address 2
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PurchaseOrderShipmentType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Shipment line number
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OutsourcedAssemblyIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the item is a shikyu (outsourced assembly) item 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AccrueOnReceiptIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether items are accrued upon receipt
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AllowSubstituteItemReceiptIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether substitute items can be received in place of the ordered items
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AcceptedAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount Accepted for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BilledAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount billed for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CanceledAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount canceled for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceivedAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount received for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RejectedAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount rejected for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShippedAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount pending for Work Confirmation
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ConsignmentIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the shipment is consigned
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CountryOfOriginCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Country of  manufacture for this shipment
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DaysEarlyReceiptAllowed" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum acceptable number of days items can be received early
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DaysLateReceiptAllowed" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum acceptable number of days items can be received late
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Description of the shipment
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DropShipmentIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the Shipment is dropshipped to a customer of the buyer
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EncumberedDate" type="corecom:DateTimeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Date of encumbrance for the shipment
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EncumberedIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the shipment is encumbered 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShipToLocationValidationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specifies what action is taken when the receiving location differs from the ship-to location
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FOBCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Type of free-on-board terms for the shipment 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FreightTermCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Type of freight terms for the RFQ or quotation shipment 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InspectionRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether shipment must be inspected before the invoice is paid
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LatestAcceptableReceiptDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Latest acceptable receipt date for the shipment
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MatchingBasisCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Matching basis of the line location. Example values are : Amount or Quantity
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InvoiceMatchOptionCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicator of whether the invoice for the shipment should be matched to the purchase order or the receipt
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RequiredByDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Required  By date for the shipment schedule
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreferredGradeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Preferred quality grade for the ordered item
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PromisedDeliveryDate" type="corecom:DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Supplier promised delivery date
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceivedQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity received until today
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RejectedQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity rejected after inspection, up until today
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShippedQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity shipped
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OverReceiptToleranceActionCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Describes what action is taken when the quantity received tolerance is exceeded
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OrderedQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity ordered 
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AcceptedQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity accepted after inspection, up until today
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BilledQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity invoiced up until today
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CanceledQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity canceled
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptDaysValidationCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Describes what action is taken when items are received earlier or later than the allowed number of days specified
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptRequiredIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether shipment must be received before the invoice is paid
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ShipmentCloseDate" type="corecom:DateTimeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Date when the Shipment is closed for both Receiving and Invoice
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ValueBasisCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Value basis of the line. Whether the line is Amount based or Quantity based
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VMIIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether shipment is managed by supplier at customer's location
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:OriginalPurchaseOrderShipmentIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+References the shipment identification of the shipment from which this shipment was created
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:PaymentTerm" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Details of the payment terms
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ReceiptPercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Maximum over-receipt quantity for a line expressed as a percentage of the order quantity
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:StopReceiptPercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Percentage tolerance of the ordered quantity within which a shipment is automatically closed for receiving
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:InvoicingClosePercentTolerance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Percentage tolerance within which a shipment is automatically closed for invoicing when billed
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Status" minOccurs="0"/>
+			<xsd:element ref="corecom:PurchaseAgreementReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+For Standard Purchase Orders, captures the unique reference of Global Agreements
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:BusinessUnitReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Business unit unique identifier
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ShipToPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to Ship To Location
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:CarrierPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+References the carrier of the shipment 
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ShipmentDistribution" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Purchase Order Distribution has Distribution level information for a Purchase Order. For example, Purchase Order Distribution 1 to deliver to Address 1, Purchase Order Distribution to deliver to Address 2
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ShipmentStatusHistory" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="ShipmentTax" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="ShipmentAttachment" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Attachment at the Purchase Order Shipment level. For example, a Paper Contract for Purchase Order Shipment 1, a Paper Contract for Purchase Order Shipment 3
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomPurchaseOrderShipmentType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="PurchaseOrderStatusHistory" type="PurchaseOrderStatusHistoryType">
+		<xsd:annotation>
+			<xsd:documentation> 
+History of statuses for the Purchase Order Document
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PurchaseOrderStatusHistoryType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique Identification of the PO line
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:StatusHistory" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+History of statuses for the PO line
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomPurchaseOrderStatusHistoryType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ShipmentAttachment" type="ShipmentAttachmentType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Attachment at the Purchase Order Shipment level. For example, a Paper Contract for Purchase Order Shipment 1, a Paper Contract for Purchase Order Shipment 3
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ShipmentAttachmentType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element ref="corecom:Attachment" minOccurs="0"/>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomShipmentAttachmentType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ShipmentDistribution" type="ShipmentDistributionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Purchase Order Distribution has Distribution level information for a Purchase Order. For example, Purchase Order Distribution 1 to deliver to Address 1, Purchase Order Distribution to deliver to Address 2
+        </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ShipmentDistributionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique Identification of Purchase Order Distribution
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OrderedQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity ordered on the distribution
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DeliveredQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity delivered against the distribution
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BilledQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity invoiced against the distribution
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CanceledQuantity" type="corecom:QuantityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Quantity canceled for the distribution
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="BilledAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount invoiced against the distribution
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OrderedAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount ordered for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DeliveredAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount delivered for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CanceledAmount" type="corecom:AmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Amount canceled for service lines
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DestinationTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Final destination of the purchased items. Example values are : ShopFloor, Expense, Inventory
+        </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:AccountingDistribution" minOccurs="0"/>
+			<xsd:element ref="corecom:RequisitionDistributionReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to Requisition Distribution
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:DestinationInventoryLocationReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Reference to Inventory Organization
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:DeliverToPartyReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique Identification of Purchase Order Physical Distribution
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomShipmentDistributionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ShipmentStatusHistory" type="ShipmentStatusHistoryType"/>
+	<xsd:complexType name="ShipmentStatusHistoryType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element ref="corecom:StatusHistory" minOccurs="0"/>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomShipmentStatusHistoryType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="ShipmentTax" type="ShipmentTaxType"/>
+	<xsd:complexType name="ShipmentTaxType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique Identification of Purchase Order Shipment Tax
+                            </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Tax" minOccurs="0"/>
+			<xsd:element ref="corecom:AccountingDistribution" minOccurs="0"/>
+			<xsd:element name="Custom" type="corepurchaseordercust:CustomShipmentTaxType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>-->
+</xsd:schema>

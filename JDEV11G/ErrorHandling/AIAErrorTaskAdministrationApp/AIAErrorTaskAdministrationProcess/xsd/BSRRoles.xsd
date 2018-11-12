@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="http://xmlns.oracle.com/AIAErrorTaskAdministrationProcess"
+targetNamespace="http://xmlns.oracle.com/AIAErrorTaskAdministrationProcess"
+elementFormDefault="qualified">
+<xsd:element name="BSRData" type="BSRDataType">
+<xsd:annotation>
+<xsd:documentation>
+A sample element
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="BSRDataType">
+<xsd:sequence>
+<xsd:element name="Roles">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="fyi" type="xsd:string" nillable="true"/>
+<xsd:element name="actor" type="xsd:string" nillable="true"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

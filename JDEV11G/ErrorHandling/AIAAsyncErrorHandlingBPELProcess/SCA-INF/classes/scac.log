@@ -1,0 +1,29 @@
+Load of wsdl "oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl" failed
+oracle.fabric.common.FabricException: Error in getting XML input stream: oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl: oracle.mds.exception.MDSException: MDS-00054: The file to be loaded oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl does not exist.
+	at oracle.fabric.common.metadata.MetadataManagerImpl.getInputStreamFromAbsoluteURL(MetadataManagerImpl.java:276)
+	at oracle.integration.platform.common.MDSMetadataManagerImpl.getInputStreamFromAbsoluteURL(MDSMetadataManagerImpl.java:545)
+	at oracle.fabric.common.metadata.MetadataManagerImpl.getDocumentAsInputStream(MetadataManagerImpl.java:155)
+	at oracle.integration.platform.common.MDSMetadataManagerImpl.getDocumentAsInputStream(MDSMetadataManagerImpl.java:407)
+	at oracle.fabric.common.wsdl.WSDLManager.loadWSDL(WSDLManager.java:176)
+	at oracle.fabric.common.wsdl.WSDLManager.loadWSDL(WSDLManager.java:239)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:974)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:568)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:156)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:141)
+Caused by: java.io.IOException: oracle.mds.exception.MDSException: MDS-00054: The file to be loaded oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl does not exist.
+	at oracle.mds.internal.net.AbstractOraMDSURLConnection.getPDocStream(AbstractOraMDSURLConnection.java:388)
+	at oracle.mds.internal.net.AbstractOraMDSURLConnection.getInputStream(AbstractOraMDSURLConnection.java:176)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:67)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.fabric.common.metadata.MetadataManagerImpl.getInputStreamFromAbsoluteURL(MetadataManagerImpl.java:272)
+	... 9 more
+Caused by: oracle.mds.exception.MDSException: MDS-00054: The file to be loaded oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl does not exist.
+	at oracle.mds.internal.net.AbstractOraMDSURLConnection.getPDocStream(AbstractOraMDSURLConnection.java:339)
+	... 13 more
+Service "client" does not exist in wsdl
+oracle.fabric.common.FabricException: Cannot find Port Type "{http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess}AIAAsyncErrorHandlingBPELProcess" for "client" in WSDL Manager
+	at oracle.soa.scac.ValidateComposite.checkInterfaceInWsdlManager(ValidateComposite.java:465)
+	at oracle.soa.scac.ValidateComposite.validateServices(ValidateComposite.java:1280)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:569)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:156)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:141)

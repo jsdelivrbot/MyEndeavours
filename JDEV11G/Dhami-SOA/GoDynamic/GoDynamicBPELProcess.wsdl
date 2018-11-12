@@ -1,0 +1,37 @@
+<definitions
+     name="GoDynamicBPELProcess"
+     targetNamespace="http://xmlns.oracle.com/GoDynamic/GoDynamic/GoDynamicBPELProcess"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/GoDynamic/GoDynamic/GoDynamicBPELProcess"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/GoDynamic/GoDynamic/GoDynamicBPELProcess">
+            <import namespace="http://xmlns.oracle.com/GoDynamic/GoDynamic/GoDynamicBPELProcess"
+                 schemaLocation="xsd/GoDynamicBPELProcess.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/GoDynamic/GoDynamic/GoDynamicBPELProcess">
+            <xsd:import namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing" schemaLocation="xsd/ws-addressing.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="GoDynamicBPELProcessRequestMessage">
+        <part name="payload" element="client:GoDynamicBPELProcessProcessRequest"/>
+    </message>
+    <message name="GoDynamicBPELProcessResponseMessage">
+        <part name="payload" element="client:GoDynamicBPELProcessProcessResponse"/>
+    </message>
+    <portType name="GoDynamicBPELProcess">
+        <operation name="process">
+            <input message="client:GoDynamicBPELProcessRequestMessage"/>
+            <output message="client:GoDynamicBPELProcessResponseMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="GoDynamicBPELProcess">
+        <plnk:role name="GoDynamicBPELProcessProvider">
+            <plnk:portType name="client:GoDynamicBPELProcess"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

@@ -1,0 +1,21 @@
+<?binding.jca NoAfterRead_db.jca?>
+<wsdl:definitions name="NoAfterRead" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/AdaptersDB/ExpertPolling/NoAfterRead%2F" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/AdaptersDB/ExpertPolling/NoAfterRead%2F" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/NoAfterRead">
+    <plt:partnerLinkType name="NoAfterRead_plt">
+        <plt:role name="NoAfterRead_role">
+            <plt:portType name="tns:NoAfterRead_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/NoAfterRead" schemaLocation="xsd/NoAfterRead_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="MoviesInCollection_msg">
+        <wsdl:part name="MoviesInCollection" element="top:MoviesInCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="NoAfterRead_ptt">
+        <wsdl:operation name="receive">
+            <wsdl:input message="tns:MoviesInCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

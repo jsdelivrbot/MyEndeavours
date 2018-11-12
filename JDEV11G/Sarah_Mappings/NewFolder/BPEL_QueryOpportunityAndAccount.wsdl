@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="BPEL_QueryOpportunityAndAccount" targetNamespace="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount" xmlns:ns1="http://LBTCRMIntegration.com" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plnk:partnerLinkType name="BPEL_QueryOpportunityAndAccount">
+      <plnk:role name="BPEL_QueryOpportunityAndAccountProvider">
+         <plnk:portType name="client:BPEL_QueryOpportunityAndAccount"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount" schemaLocation="xsd/BPEL_QueryOpportunityAndAccount.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="BPEL_QueryOpportunityAndAccountRequestMessage">
+      <wsdl:part name="payload" element="client:queryParameters"/>
+   </wsdl:message>
+   <wsdl:message name="BPEL_QueryOpportunityAndAccountResponseMessage">
+      <wsdl:part name="payload" element="client:queryResults"/>
+   </wsdl:message>
+   <wsdl:portType name="BPEL_QueryOpportunityAndAccount">
+      <wsdl:operation name="process">
+         <wsdl:input message="client:BPEL_QueryOpportunityAndAccountRequestMessage"/>
+         <wsdl:output message="client:BPEL_QueryOpportunityAndAccountResponseMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

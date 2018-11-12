@@ -1,0 +1,17 @@
+<definitions
+     name="ETH_CommonService_BPEL"
+     targetNamespace="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:client="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL"
+    >
+    <import namespace="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL" location="http://usmtnz-dinfap19.dev.emrsn.org:8120/soa-infra/services/ETH_Temp/ETH_CommonServices_EBS/eth_commonservice_bpel_client_ep?WSDL"/>
+    
+    <plnk:partnerLinkType name="ETH_CommonService_BPEL">
+        <plnk:role name="ETH_CommonService_BPEL_Role">
+            <plnk:portType name="client:ETH_CommonService_BPEL"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

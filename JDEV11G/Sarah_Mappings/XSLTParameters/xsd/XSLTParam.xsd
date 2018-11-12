@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.oracle.com/service/bpel/common" targetNamespace="http://schemas.oracle.com/service/bpel/common" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<element name="parameters">
+		<complexType>
+			<sequence>
+				<element ref="ns1:item" minOccurs="1" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="item">
+		<complexType>
+			<sequence>
+				<element name="name" minOccurs="1" maxOccurs="1" type="string"/>
+				<element name="value" minOccurs="1" maxOccurs="1" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

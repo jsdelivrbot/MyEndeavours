@@ -1,0 +1,207 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Nov 07 19:38:38 PST 2008
+  Author:  pangulo
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process xml:id="id1" name="SendMessage"
+         targetNamespace="http://xmlns.oracle.com/SendNotificationProcess/MessageNotification/SendMessage"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://xmlns.oracle.com/SendNotificationProcess/MessageNotification/SendMessage"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xpath20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:ns2="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks xml:id="id2">
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink xml:id="id3" name="sendmessage_client" partnerLinkType="client:SendMessage" myRole="SendMessageProvider" partnerRole="SendMessageRequester"/>
+        <partnerLink xml:id="id33" name="NotificationService_1"
+                     partnerLinkType="ns1:NotificationServiceLink"
+                     partnerRole="NotificationServiceProvider"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables xml:id="id4">
+        <!-- Reference to the message passed as input during initiation -->
+        <variable xml:id="id5" name="inputVariable" messageType="client:SendMessageRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable xml:id="id6" name="outputVariable" messageType="client:SendMessageResponseMessage"/>
+    </variables>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence xml:id="id7" name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in SendMessage.wsdl) -->
+        <receive xml:id="id8" name="receiveInput" partnerLink="sendmessage_client" portType="client:SendMessage" operation="process" variable="inputVariable" createInstance="yes"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <scope xml:id="id10" name="UserNotification_2">
+            <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:usrnotif"></bpelx:pattern>
+            </bpelx:annotation>
+            <variables xml:id="id36">
+                <variable xml:id="id34" name="varNotificationReq"
+                          messageType="ns1:UserNotificationRequest"/>
+                <variable xml:id="id35" name="varNotificationResponse"
+                          messageType="ns1:ArrayOfResponse"/>
+                <variable xml:id="id37" name="NotificationServiceFaultVariable"
+                          messageType="ns1:NotificationServiceErrorMessage"/>
+            </variables>
+            <sequence xml:id="id11" name="Sequence_1">
+                <assign xml:id="id12" name="AssignUser">
+                    <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:to')"/>
+                        <to variable="varNotificationReq"
+                            part="UserNotificationPayload"
+                            query="/UserNotificationPayload/ns1:UserId"/>
+                    </copy>
+                </assign>
+                <assign xml:id="id16" name="AssignCommonPayload">
+                    <copy>
+                        <from expression="string('')"/>
+                        <to variable="varNotificationReq"
+                            part="UserNotificationPayload"
+                            query="/UserNotificationPayload/ns1:GenericPayload/ns1:CommonPayload/ns1:To"/>
+                    </copy>
+                    <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:subject')"/>
+                        <to variable="varNotificationReq"
+                            part="UserNotificationPayload"
+                            query="/UserNotificationPayload/ns1:GenericPayload/ns1:CommonPayload/ns1:Subject"/>
+                    </copy>
+                    <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:body')"/>
+                        <to variable="varNotificationReq"
+                            part="UserNotificationPayload"
+                            query="/UserNotificationPayload/ns1:GenericPayload/ns1:CommonPayload/ns1:Content/ns1:ContentBody"/>
+                    </copy>
+                    <copy>
+                        <from expression="string('text/plain; charset=UTF-8')"/>
+                        <to variable="varNotificationReq"
+                            part="UserNotificationPayload"
+                            query="/UserNotificationPayload/ns1:GenericPayload/ns1:CommonPayload/ns1:Content/ns1:MimeType"/>
+                    </copy>
+                    <copy>
+                        <from expression="string('')"/>
+                        <to variable="varNotificationReq"
+                            part="UserNotificationPayload"
+                            query="/UserNotificationPayload/ns1:GenericPayload/ns1:CommonPayload/ns1:From"/>
+                    </copy>
+                </assign>
+                <scope name="AdvancedScope_1">
+                    <sequence name="Sequence_2">
+                        <assign name="CreatePrefInstance">
+                            <copy>
+                                <from>
+                                    <PreferenceProperties xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                                        <Parameter xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                                            <Name xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                                            <Value xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                                        </Parameter>
+                                        <Parameter xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                                            <Name xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                                            <Value xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                                        </Parameter>
+                                        <Parameter xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                                            <Name xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                                            <Value xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                                        </Parameter>
+                                    </PreferenceProperties>
+                                </from>
+                                <to variable="varNotificationReq"
+                                    part="UserNotificationPayload"
+                                    query="/UserNotificationPayload/ns1:PreferenceProperties"/>
+                            </copy>
+                        </assign>
+                        <assign name="AssignPrefProp">
+                            <copy>
+                                <from expression="string('To')"/>
+                                <to variable="varNotificationReq"
+                                    part="UserNotificationPayload"
+                                    query="/UserNotificationPayload/ns1:PreferenceProperties/ns1:Parameter[1]/ns1:Name"/>
+                            </copy>
+                            <copy>
+                                <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:to')"/>
+                                <to variable="varNotificationReq"
+                                    part="UserNotificationPayload"
+                                    query="/UserNotificationPayload/ns1:PreferenceProperties/ns1:Parameter[1]/ns1:Value"/>
+                            </copy>
+                            <copy>
+                                <from expression="string('Status')"/>
+                                <to variable="varNotificationReq"
+                                    part="UserNotificationPayload"
+                                    query="/UserNotificationPayload/ns1:PreferenceProperties/ns1:Parameter[2]/ns1:Name"/>
+                            </copy>
+                            <copy>
+                                <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:subject')"/>
+                                <to variable="varNotificationReq"
+                                    part="UserNotificationPayload"
+                                    query="/UserNotificationPayload/ns1:PreferenceProperties/ns1:Parameter[2]/ns1:Value"/>
+                            </copy>
+                            <copy>
+                                <from expression="string('User')"/>
+                                <to variable="varNotificationReq"
+                                    part="UserNotificationPayload"
+                                    query="/UserNotificationPayload/ns1:PreferenceProperties/ns1:Parameter[3]/ns1:Name"/>
+                            </copy>
+                            <copy>
+                                <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:body')"/>
+                                <to variable="varNotificationReq"
+                                    part="UserNotificationPayload"
+                                    query="/UserNotificationPayload/ns1:PreferenceProperties/ns1:Parameter[3]/ns1:Value"/>
+                            </copy>
+                        </assign>
+                    </sequence>
+                </scope>
+                <invoke xml:id="id32" name="InvokeNotificationService"
+                        portType="ns1:NotificationService"
+                        partnerLink="NotificationService_1"
+                        inputVariable="varNotificationReq"
+                        outputVariable="varNotificationResponse"
+                        operation="sendNotificationToUser"/>
+            </sequence>
+        </scope>
+        <invoke xml:id="id9" name="callbackClient" partnerLink="sendmessage_client" portType="client:SendMessageCallback" operation="processResponse" inputVariable="outputVariable"/>
+    </sequence>
+</process>

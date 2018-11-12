@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoE_DB_INS_Table1" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoE_DB_INS_Table1" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="ShivaniTab1Collection" type="ShivaniTab1Collection"/>
+   <xs:complexType name="ShivaniTab1Collection">
+      <xs:sequence>
+         <xs:element name="ShivaniTab1" type="ShivaniTab1" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ShivaniTab1">
+      <xs:sequence>
+         <xs:element name="recordId">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="20"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="recordDetails" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="20"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed May 11 15:34:20 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_POCO_XML_SendtoB2B_Temp"
+               targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_BPEL_POCO_XML_SendtoB2B_Temp"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_BPEL_POCO_XML_SendtoB2B_Temp"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_FL_RD_POCO_XML"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_AQ_ENQ_POCO_XML"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns3="http://www.openapplications.org/oagis/9"
+         xmlns:ns4="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ETH_FL_RD_POCO_XML"
+                 partnerLinkType="ns1:Read_POCOXML_plt"
+                 myRole="Read_POCOXML_role"/>
+    <partnerLink name="ETH_AQ_ENQ_POCO_XML" partnerLinkType="ns2:Enqueue_plt"
+                 partnerRole="Enqueue_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Read_POCOXML_InputVariable"
+              messageType="ns1:Read_POCOXML_msg"/>
+    <variable name="Invoke_REAQueue_Enqueue_InputVariable"
+              messageType="ns2:ChangePurchaseOrder_msg"/>
+    <variable name="B2BHeader" element="ns4:IP_MESSAGE_TYPE"/>
+    <variable name="B2BHeader_String" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_Read_POCOXML_InputVariable"
+             partnerLink="ETH_FL_RD_POCO_XML" portType="ns1:Read_POCOXML_ptt"
+             operation="Read_POCOXML"/>
+    <assign name="Assign_B2B_Header"/>
+    <assign name="Assign_Payload">
+      <copy>
+        <from variable="Receive1_Read_POCOXML_InputVariable" part="body"
+              query="/ns3:ChangePurchaseOrder"/>
+        <to variable="Invoke_REAQueue_Enqueue_InputVariable"
+            part="ChangePurchaseOrder" query="/ns3:ChangePurchaseOrder"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_REAQueue"
+            inputVariable="Invoke_REAQueue_Enqueue_InputVariable"
+            partnerLink="ETH_AQ_ENQ_POCO_XML" portType="ns2:Enqueue_ptt"
+            operation="Enqueue" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 11g Release 1 (11.1.1.1.0) (Build 081027)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>ReadOracleB2BErrorDetails-OX</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:xml-class-mapping-descriptor">
+         <opm:class>oracle.toplink.internal.xr.CollectionHelper</opm:class>
+         <opm:alias>collectionHelper</opm:alias>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy"/>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:xml-any-collection-mapping">
+               <opm:attribute-name>v</opm:attribute-name>
+               <toplink:container xsi:type="toplink:list-container-policy">
+                  <toplink:collection-type>java.util.Vector</toplink:collection-type>
+               </toplink:container>
+               <toplink:keep-as-element-policy>KEEP_NONE_AS_ELEMENT</toplink:keep-as-element-policy>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>aggregate</toplink:descriptor-type>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+      </opm:class-mapping-descriptor>
+      <opm:class-mapping-descriptor xsi:type="toplink:xml-class-mapping-descriptor">
+         <opm:class>ReadOracleB2BErrorDetails.B2BBusinessMessage</opm:class>
+         <opm:alias>B2B_BUSINESS_MESSAGE</opm:alias>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy"/>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>messageId</opm:attribute-name>
+               <opm:field name="messageId/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>referToMessageId</opm:attribute-name>
+               <opm:field name="referToMessageId/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>senderIdType</opm:attribute-name>
+               <opm:field name="senderIdType/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>senderIdValue</opm:attribute-name>
+               <opm:field name="senderIdValue/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>receiverIdType</opm:attribute-name>
+               <opm:field name="receiverIdType/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>receiverIdValue</opm:attribute-name>
+               <opm:field name="receiverIdValue/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>senderName</opm:attribute-name>
+               <opm:field name="senderName/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>receiverName</opm:attribute-name>
+               <opm:field name="receiverName/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>tpaId</opm:attribute-name>
+               <opm:field name="tpaId/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>tpaName</opm:attribute-name>
+               <opm:field name="tpaName/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>doctypeName</opm:attribute-name>
+               <opm:field name="doctypeName/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>docProtocolName</opm:attribute-name>
+               <opm:field name="docProtocolName/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>docProtocolVersion</opm:attribute-name>
+               <opm:field name="docProtocolVersion/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>documentDefinition</opm:attribute-name>
+               <opm:field name="documentDefinition/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>messageType</opm:attribute-name>
+               <opm:field name="messageType/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>direction</opm:attribute-name>
+               <opm:field name="direction/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>state</opm:attribute-name>
+               <opm:field name="state/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>ackMode</opm:attribute-name>
+               <opm:field name="ackMode/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>ackType</opm:attribute-name>
+               <opm:field name="ackType/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>timeToAck</opm:attribute-name>
+               <opm:field name="timeToAck/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>responseMode</opm:attribute-name>
+               <opm:field name="responseMode/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>created</opm:attribute-name>
+               <opm:field name="created/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.sql.Timestamp</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>modified</opm:attribute-name>
+               <opm:field name="modified/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.sql.Timestamp</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>sendTimestamp</opm:attribute-name>
+               <opm:field name="sendTimestamp/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.sql.Timestamp</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>receiveTimestamp</opm:attribute-name>
+               <opm:field name="receiveTimestamp/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.sql.Timestamp</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>docRetryInterval</opm:attribute-name>
+               <opm:field name="docRetryInterval/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>docAttemptCount</opm:attribute-name>
+               <opm:field name="docAttemptCount/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>docRemainingRetry</opm:attribute-name>
+               <opm:field name="docRemainingRetry/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>nativeMsgSize</opm:attribute-name>
+               <opm:field name="nativeMsgSize/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>translatedMsgSize</opm:attribute-name>
+               <opm:field name="translatedMsgSize/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>batchId</opm:attribute-name>
+               <opm:field name="batchId/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathName1</opm:attribute-name>
+               <opm:field name="xpathName1/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathValue1</opm:attribute-name>
+               <opm:field name="xpathValue1/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathExpression1</opm:attribute-name>
+               <opm:field name="xpathExpression1/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathName2</opm:attribute-name>
+               <opm:field name="xpathName2/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathValue2</opm:attribute-name>
+               <opm:field name="xpathValue2/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathExpression2</opm:attribute-name>
+               <opm:field name="xpathExpression2/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathName3</opm:attribute-name>
+               <opm:field name="xpathName3/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathValue3</opm:attribute-name>
+               <opm:field name="xpathValue3/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>xpathExpression3</opm:attribute-name>
+               <opm:field name="xpathExpression3/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>correlationFromXpathName</opm:attribute-name>
+               <opm:field name="correlationFromXpathName/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>correlationFromXpathXpr</opm:attribute-name>
+               <opm:field name="correlationFromXpathXpr/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>correlationFromXpathValue</opm:attribute-name>
+               <opm:field name="correlationFromXpathValue/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>correlationToXpathName</opm:attribute-name>
+               <opm:field name="correlationToXpathName/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>correlationToXpathXpr</opm:attribute-name>
+               <opm:field name="correlationToXpathXpr/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>correlationToXpathValue</opm:attribute-name>
+               <opm:field name="correlationToXpathValue/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>resubmitCount</opm:attribute-name>
+               <opm:field name="resubmitCount/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.math.BigDecimal</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>extBusinessMessage</opm:attribute-name>
+               <opm:field name="extBusinessMessage/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>wireMessage</opm:attribute-name>
+               <opm:field name="wireMessage/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>payloadStorage</opm:attribute-name>
+               <opm:field name="payloadStorage/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>attachmentStorage</opm:attribute-name>
+               <opm:field name="attachmentStorage/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>nativeDataStorage</opm:attribute-name>
+               <opm:field name="nativeDataStorage/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>translatedDataStorage</opm:attribute-name>
+               <opm:field name="translatedDataStorage/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>appMessage</opm:attribute-name>
+               <opm:field name="appMessage/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>attribute1</opm:attribute-name>
+               <opm:field name="attribute1/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>attribute2</opm:attribute-name>
+               <opm:field name="attribute2/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>attribute3</opm:attribute-name>
+               <opm:field name="attribute3/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>attribute4</opm:attribute-name>
+               <opm:field name="attribute4/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>attribute5</opm:attribute-name>
+               <opm:field name="attribute5/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>label</opm:attribute-name>
+               <opm:field name="label/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>jobId</opm:attribute-name>
+               <opm:field name="jobId/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:xml-direct-mapping">
+               <opm:attribute-name>id</opm:attribute-name>
+               <opm:field name="id/text()" xsi:type="toplink:node"/>
+               <toplink:attribute-classification>java.lang.String</toplink:attribute-classification>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>aggregate</toplink:descriptor-type>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:default-root-element>B2BBusinessMessage</toplink:default-root-element>
+         <toplink:default-root-element-field name="B2BBusinessMessage" xsi:type="toplink:node"/>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+   <toplink:login xsi:type="toplink:xml-login">
+      <toplink:platform-class>oracle.toplink.ox.platform.SAXPlatform</toplink:platform-class>
+   </toplink:login>
+</toplink:object-persistence>

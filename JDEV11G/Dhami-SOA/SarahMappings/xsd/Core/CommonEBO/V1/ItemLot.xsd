@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.00 **
+** Date: Jun 15, 2009 **
+ 
+ Copyright (c) 2007, 2009, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\ItemLot.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO ItemLot EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:coreitemlotcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00.00" > 
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomItemLot.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<!-- ====================================================================== -->
+<!-- ==============  ItemLot Components ================ -->
+<!-- ====================================================================== -->
+                      <xsd:element name="ItemLot" type="ItemLotType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This object identifies an item lot, its current state and its specific physical property values.  
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                 <xsd:annotation> 
+                      <xsd:documentation> 
+                           <svcdoc:EBO> 
+                                   <svcdoc:Description> 
+This object identifies an item lot, its current state and its specific physical property values.  
+                                   </svcdoc:Description> 
+                                   <svcdoc:Type>EBO</svcdoc:Type> 
+                                   <svcdoc:Industry/> 
+                           </svcdoc:EBO> 
+                      </xsd:documentation> 
+                 </xsd:annotation> 
+            <xsd:complexType name="ItemLotType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier for the Item Lot.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="ExpirationDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Lot expiration date.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the Item Lot.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="CountryOfOriginCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Country of Origin.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="GradeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Grade Code.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="CreationDateTime" type="corecom:DateTimeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Lot creation date and time
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="LastModificationDateTime" type="corecom:DateTimeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The date and time at which the Item Lot is physically modified.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Age" type="corecom:DurationType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The age of the lot or sublot in days after the creation date.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="RetestDateTime" type="corecom:DateTimeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Retest date and time.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MaturityDateTime" type="corecom:DateTimeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The date and time on which the item lot matures.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Volume" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The volume of the lot or sublot.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Length" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The length dimension of the lot or sublot.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="RecycledContentPercent" type="corecom:PercentType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The content, usually expressed as a percentage, of the product that is made up of recycled materials.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Height" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The height dimension of the lot.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Width" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The width dimension of the lot.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SourceTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The origin of the lot, e.g., Inventory, Production etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="NettableIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Non-nettable meams item lot that is not to be shipped to customers or used in the manufacturing process, e.g., item lot which is defective or reserved for some other use.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ExpirationActionCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The action that needs to be taken when the lot expires. E.g. Adjust Moisture, Adjust Line Speed, Adjust Temperature, Dispose etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ExpirationActionDateTime" type="corecom:DateTimeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Expiration Action date and time.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ReservableIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if the lot can be reserved for some purpose such as sales order.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="BestByDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The date on or before which the lot or sublot is best used.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SellByDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The date to have the product sold by.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:Status"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Status of the item lot.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ItemReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the Item
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SupplierItemLotReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Lot number given by the supplier.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SupplierPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the Supplier Party.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ParentItemLotReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the Parent Item Lot.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreitemlotcust:CustomItemLotType" minOccurs="0"/>
+                 </xsd:sequence>
+            </xsd:complexType>
+</xsd:schema>

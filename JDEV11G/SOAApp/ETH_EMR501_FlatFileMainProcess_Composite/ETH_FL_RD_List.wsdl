@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_FL_RD_List"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_EMR501_FlatFileMainProcess_Composite/ETH_FL_RD_List"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_EMR501_FlatFileMainProcess_Composite/ETH_FL_RD_List"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://xmlns.oracle.com/pcbpel/adapter/file/ETHWorkAPPL/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_FL_Listing_Files"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="ReadFileList_plt" >
+    <plt:role name="ReadFileList_role" >
+      <plt:portType name="tns:ReadFileList_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/ETHWorkAPPL/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_FL_Listing_Files" schemaLocation="xsd/input.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="ReadFileList_msg">
+        <wsdl:part name="body" element="imp1:filelist"/>
+    </wsdl:message>
+    <wsdl:portType name="ReadFileList_ptt">
+        <wsdl:operation name="ReadFileList">
+            <wsdl:input message="tns:ReadFileList_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

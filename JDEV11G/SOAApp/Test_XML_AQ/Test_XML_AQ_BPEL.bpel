@@ -1,0 +1,142 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun Mar 18 13:24:06 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Test_XML_AQ_BPEL"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_MDT"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/aq/Enq_Message/"
+         xmlns:ns3="http://www.openapplications.org/oagis/9"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/aq/SOAApp/Test_XML_AQ/Test_XML_AQ_ENQ">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="test_xml_aq_bpel_client" partnerLinkType="client:Test_XML_AQ_BPEL" myRole="Test_XML_AQ_BPELProvider"/>
+    <partnerLink name="Test_XML_AQ_MDT.Test_XML_AQ_MDT"
+                 partnerLinkType="ns1:Test_XML_AQ_MDT.Test_XML_AQ_MDT"
+                 partnerRole="execute_ptt"/>
+    <partnerLink name="Test_XML_AQ_ENQ" partnerLinkType="ns4:Enqueue_plt"
+                 partnerRole="Enqueue_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:Test_XML_AQ_BPELRequestMessage"/>
+    <variable name="Invoke1_execute_InputVariable"
+              messageType="ns1:requestMessage"/>
+    <variable name="Invoke2_Enqueue_InputVariable"
+              messageType="ns4:process_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Test_XML_AQ_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="test_xml_aq_bpel_client" portType="client:Test_XML_AQ_BPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:Name"/>
+        <to variable="Invoke1_execute_InputVariable" part="request"
+            query="/client:process/client:Person/client:Name"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:Name"/>
+        <to variable="Invoke2_Enqueue_InputVariable" part="process"
+            query="/client:process/client:Person/client:Name"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:Age"/>
+        <to variable="Invoke2_Enqueue_InputVariable" part="process"
+            query="/client:process/client:Person/client:Age"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:City"/>
+        <to variable="Invoke2_Enqueue_InputVariable" part="process"
+            query="/client:process/client:Person/client:City"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:Pincode"/>
+        <to variable="Invoke2_Enqueue_InputVariable" part="process"
+            query="/client:process/client:Person/client:Pincode"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:Age"/>
+        <to variable="Invoke1_execute_InputVariable" part="request"
+            query="/client:process/client:Person/client:Age"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:City"/>
+        <to variable="Invoke1_execute_InputVariable" part="request"
+            query="/client:process/client:Person/client:City"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:Person/client:Pincode"/>
+        <to variable="Invoke1_execute_InputVariable" part="request"
+            query="/client:process/client:Person/client:Pincode"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" bpelx:invokeAsDetail="no"
+            inputVariable="Invoke1_execute_InputVariable"
+            partnerLink="Test_XML_AQ_MDT.Test_XML_AQ_MDT"
+            portType="ns1:execute_ptt" operation="execute"/>
+    <assign name="Transform1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/process_To_process_removeNS.xsl', $Invoke2_Enqueue_InputVariable.process)"/>
+        <to variable="Invoke2_Enqueue_InputVariable" part="process"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke2"
+            inputVariable="Invoke2_Enqueue_InputVariable"
+            partnerLink="Test_XML_AQ_ENQ" portType="ns4:Enqueue_ptt"
+            operation="Enqueue" bpelx:invokeAsDetail="no">
+      <bpelx:inputProperty name="jca.aq.HeaderDocument"
+                           expression="string('&lt;ETH_AQ_SendtoB2B_XML_PO_Out_QueueHeader xmlns=&quot;http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/&quot;>&lt;PayloadHeader>&lt;MSG_ID xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ns=&quot;http://www.w3.org/2001/XMLSchema&quot; xsi:type=&quot;ns:string&quot; xmlns=&quot;&quot;>oraext:generate-guid()&lt;/MSG_ID>&lt;FROM_PARTY xmlns=&quot;&quot;>EMERSOND&lt;/FROM_PARTY>&lt;TO_PARTY xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ns=&quot;http://www.w3.org/2001/XMLSchema&quot; xsi:type=&quot;ns:string&quot; xmlns=&quot;&quot;>REAWIRE&lt;/TO_PARTY>&lt;ACTION_NAME xmlns=&quot;&quot;>contentType:application/octet-stream;filename:ETH_PO_20111115_142916&lt;/ACTION_NAME>&lt;DOCTYPE_NAME xmlns=&quot;&quot;>ProcessPo&lt;/DOCTYPE_NAME>&lt;DOCTYPE_REVISION xmlns=&quot;&quot;>9.0&lt;/DOCTYPE_REVISION>&lt;MSG_TYPE xmlns=&quot;&quot;>1&lt;/MSG_TYPE>&lt;PAYLOAD xmlns=&quot;&quot;>PAYLOAD&lt;/PAYLOAD>&lt;/PayloadHeader>&lt;/ETH_AQ_SendtoB2B_XML_PO_Out_QueueHeader>')"/>
+    </invoke>
+  </sequence>
+</process>

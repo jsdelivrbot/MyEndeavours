@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ETH_Deueue_BPEL" targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/ETH_Dequeue_Temp/ETH_Deueue_BPEL" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/ETH_Dequeue_Temp/ETH_Deueue_BPEL" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/Sarah_Mappings/ETH_Dequeue_Temp/ETH_JMS_DEQ_SarahRP1" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ETH_JMS_DEQ_SarahRP1" partnerLinkType="ns1:Consume_SarahRP1_plt" myRole="Consume_SarahRP1_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Consume_SarahRP1_InputVariable" messageType="ns1:Consume_SarahRP1_msg"/>
+    <variable name="SENDER_ID" type="xsd:string"/>
+    <variable name="Sender" type="xsd:string"/>
+  </variables>
+  <sequence name="main" id="BpSeq0">
+    <receive name="Receive1" createInstance="yes" variable="Receive1_Consume_SarahRP1_InputVariable" partnerLink="ETH_JMS_DEQ_SarahRP1" portType="ns1:Consume_SarahRP1_ptt" operation="Consume_SarahRP1" id="BpRcv0">
+      <bpelx:property name="jca.jms.JMSProperty.SENDER_ID" variable="SENDER_ID"/>
+    </receive>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from variable="SENDER_ID"/>
+        <to variable="Sender"/>
+      </copy>
+    </assign>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Mar 16 19:33:22 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

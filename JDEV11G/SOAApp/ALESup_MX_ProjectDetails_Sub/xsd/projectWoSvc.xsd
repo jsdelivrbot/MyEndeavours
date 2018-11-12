@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:projWo="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoSvc/V1"
+  targetNamespace="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoSvc/V1"
+  xmlns:projWoTypes="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoTypes/V1"
+  elementFormDefault="qualified">
+
+  <xsd:import namespace="http://www.allete.com/ns/Allete/BusinessSupport/Projects/projectWoTypes/V1" schemaLocation="projectWoTypes.xsd"/>
+
+  <xsd:element name="subscribePpToEbsProjectInfo" type="projWoTypes:ebsProjectInfoCollectionType"/>
+  <xsd:element name="publishPpToEbsProjectInfo" type="projWoTypes:ebsProjectInfoCollectionType"/>
+  <xsd:element name="projectDetailsCanonical" type="projWoTypes:projectDetailsCollectionType"/>
+</xsd:schema>

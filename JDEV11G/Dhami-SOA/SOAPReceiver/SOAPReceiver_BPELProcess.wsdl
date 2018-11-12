@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SOAPReceiver_BPELProcess"
+             targetNamespace="http://xmlns.oracle.com/Dhami_SOA/SOAPReceiver/SOAPReceiver_BPELProcess"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/Dhami_SOA/SOAPReceiver/SOAPReceiver_BPELProcess"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://xmlns.oracle.com/Dhami_SOA/SOAPReceiver/SOAPReceiver_BPELProcess" schemaLocation="xsd/SOAPReceiver_BPELProcess.xsd" />
+		</schema>
+	</wsdl:types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<wsdl:message name="SOAPReceiver_BPELProcessRequestMessage">
+		<wsdl:part name="payload" element="client:process"/>
+	</wsdl:message>
+	<wsdl:message name="SOAPReceiver_BPELProcessResponseMessage">
+		<wsdl:part name="payload" element="client:processResponse"/>
+	</wsdl:message>
+  <wsdl:message name="SOAPReceiver_BPELProcessHeader">
+		<wsdl:part name="header" element="client:header"/>
+	</wsdl:message>
+  
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!-- portType implemented by the SOAPReceiver_BPELProcess BPEL process -->
+	<wsdl:portType name="SOAPReceiver_BPELProcess">
+		<wsdl:operation name="process">
+			<wsdl:input name="Input"  message="client:SOAPReceiver_BPELProcessRequestMessage" />
+			<wsdl:output name="Output" message="client:SOAPReceiver_BPELProcessResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+  
+  
+  <wsdl:binding name="execute_pttBinding" type="client:SOAPReceiver_BPELProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input name="Input">
+                <soap:body use="literal"
+                           namespace="http://xmlns.oracle.com/Dhami_SOA/SOAPReceiver/SOAPReceiver_BPELProcess"
+                           parts="payload"/>
+                <soap:header message="client:SOAPReceiver_BPELProcessHeader" part="header"
+                             use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="Output">
+                <soap:body use="literal"
+                           namespace="http://xmlns.oracle.com/Dhami_SOA/SOAPReceiver/SOAPReceiver_BPELProcess"
+                           parts="payload"/>
+            </wsdl:output>
+            
+        </wsdl:operation>
+        
+    </wsdl:binding>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="SOAPReceiver_BPELProcess">
+		<plnk:role name="SOAPReceiver_BPELProcessProvider">
+			<plnk:portType name="client:SOAPReceiver_BPELProcess"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</wsdl:definitions>

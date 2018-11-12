@@ -1,0 +1,16 @@
+<adapter-config name="FL_GET_ForeignCharacter" adapter="File Adapter" wsdlLocation="FL_GET_ForeignCharacter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" UIincludeWildcard="FILE_*.txt"/>
+  <endpoint-activation portType="Read_ptt" operation="Read">
+    <activation-spec className="oracle.tip.adapter.file.inbound.FileActivationSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="30"/>
+      <property name="Recursive" value="false"/>
+      <property name="PollingFrequency" value="30"/>
+      <property name="LogicalDirectory" value="IN_DIR"/>
+      <property name="IncludeFiles" value="FILE_.*\.txt"/>
+      <property name="UseHeaders" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

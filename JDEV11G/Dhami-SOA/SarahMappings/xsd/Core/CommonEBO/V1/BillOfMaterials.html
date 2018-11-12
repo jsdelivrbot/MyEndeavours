@@ -1,0 +1,2137 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>BillOfMaterials</title>
+<meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
+<link href="../../../eboschemadoc.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<h2>BillOfMaterials</h2>
+<!-- ******************************* BillOfMaterials ************************************************-->
+<h3><a name="BillOfMaterials"></a>BillOfMaterials</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Enterprise Business Object</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Bill of Materials (BOM) EBO is used for describing the composition of different types Bill of Materials such as Engineering BOM, Manufacturing BOM, Planning BOM etc. It provides a single level of item composition - thus, in a multi-level Bill of Materials, this EBO gives only the immediate children items but not the composition of the children items. If a child item is a sub-assembly, it will have its own BOM which will provide its composition.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href="../../Common/V2/CommonComponents.html#ItemStructure">ItemStructureType</a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterials Attributes ************************************************-->
+<a href="#BillOfMaterials/EngineeringIndicator">EngineeringIndicator</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterials Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ItemStructureSpecificationGroup">ItemStructureSpecificationGroup</a></td>
+             <td> Bill Of Materials.  Item Structure Specification Group.  Item Structure Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the group of user defined attributes for the BOM
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ItemStructureAttachment">ItemStructureAttachment</a></td>
+             <td> Bill Of Materials.  Item Structure Attachment.  Item Structure Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Binary, URI or other attachments that apply to the BOM
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ProjectTaskReference">ProjectTaskReference</a></td>
+             <td>Bill Of Materials.  Project Task Reference.  Project Task</td>
+     </tr>
+     <tr>
+             <td> 
+Refers to the project and task for usage of the BOM for Project Manufacturing
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#EngineeringChangeOrderReference">EngineeringChangeOrderReference</a></td>
+             <td>Bill Of Materials.  Engineering Change Order Reference.  Engineering Change Order</td>
+     </tr>
+     <tr>
+             <td> 
+Refers to the change order that created / modified this BOM
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#OriginalBillOfMaterialsReference">OriginalBillOfMaterialsReference</a></td>
+             <td>Bill Of Materials.  Original Bill Of Materials Reference.  Original Bill Of Materials</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the BOM whose definition (current / future and current) has been copied to create this BOM. Once copied, the definition of the BOM can be changed independent of the BOM that was used as the source
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItem">BillOfMaterialsComponentItem</a></td>
+             <td> Bill Of Materials.  Bill Of Materials Component Item.  Bill Of Materials Component Item</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the component items that make up the Bill of Materials
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemExclusion">BillOfMaterialsComponentItemExclusion</a></td>
+             <td> Bill Of Materials.  Bill Of Materials Component Item Exclusion.  Bill Of Materials Component Item Exclusion</td>
+     </tr>
+     <tr>
+             <td> 
+Component item exclusions
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsSpecificationDefaultValueOverride">BillOfMaterialsSpecificationDefaultValueOverride</a></td>
+             <td> Bill Of Materials.  Bill Of Materials Specification Default Value Override.  Bill Of Materials Specification Default Value Override</td>
+     </tr>
+     <tr>
+             <td> 
+Component item Specification value override
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsSpecificationValueExclusion">BillOfMaterialsSpecificationValueExclusion</a></td>
+             <td> Bill Of Materials.  Bill Of Materials Specification Value Exclusion.  Bill Of Materials Specification Value Exclusion</td>
+     </tr>
+     <tr>
+             <td> 
+Component item specification value exclusion
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterials/EngineeringIndicator ************************************************-->
+<h3><a name="BillOfMaterials/EngineeringIndicator"></a>BillOfMaterials/EngineeringIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials.  Engineering.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the BOM is an engineering BOM. By default, the BOM is deemed to be a Manufacturing BOM unless this indicator is turned on
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem"></a>BillOfMaterialsComponentItem</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the component items that make up the Bill of Materials
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href="../../Common/V2/CommonComponents.html#ComponentItem">ComponentItemType</a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItem Attributes ************************************************-->
+<a href="#BillOfMaterialsComponentItem/YieldFactor">YieldFactor</a><br/>
+<a href="#BillOfMaterialsComponentItem/PlanningQuantityMultiplier">PlanningQuantityMultiplier</a><br/>
+<a href="#BillOfMaterialsComponentItem/ChangeTypeCode">ChangeTypeCode</a><br/>
+<a href="#BillOfMaterialsComponentItem/OperationSequence">OperationSequence</a><br/>
+<a href="#BillOfMaterialsComponentItem/EffectivityCode">EffectivityCode</a><br/>
+<a href="#BillOfMaterialsComponentItem/Name">Name</a><br/>
+<a href="#BillOfMaterialsComponentItem/TypeCode">TypeCode</a><br/>
+<a href="#BillOfMaterialsComponentItem/DefaultIndicator">DefaultIndicator</a><br/>
+<a href="#BillOfMaterialsComponentItem/MaximumQuantity">MaximumQuantity</a><br/>
+<a href="#BillOfMaterialsComponentItem/MinimumQuantity">MinimumQuantity</a><br/>
+<a href="#BillOfMaterialsComponentItem/DefaultQuantity">DefaultQuantity</a><br/>
+<a href="#BillOfMaterialsComponentItem/DisplaySequenceNumber">DisplaySequenceNumber</a><br/>
+<a href="#BillOfMaterialsComponentItem/PriceAdjustmentTypeCode">PriceAdjustmentTypeCode</a><br/>
+<a href="#BillOfMaterialsComponentItem/PriceAdjustmentQuantity">PriceAdjustmentQuantity</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItem Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#OverrideComponentItemIdentification">OverrideComponentItemIdentification</a></td>
+             <td> Bill Of Materials Component Item.  Override Component Item Identification.  Override Component Item Identification</td>
+     </tr>
+     <tr>
+             <td> 
+When an BOM is based on another BOM (say of the same item in another organization), some of the attributes of a component may be different from those of the component from the referenced BOM. This refers to the component item within the same BOM which has the overriding attributes
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ComponentItemSpecificationGroup">ComponentItemSpecificationGroup</a></td>
+             <td> Bill Of Materials Component Item.  Component Item Specification Group.  Component Item Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the group of user defined attributes for the component item
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#EngineeringChangeOrderReference">EngineeringChangeOrderReference</a></td>
+             <td>Bill Of Materials Component Item.  Engineering Change Order Reference.  Engineering Change Order</td>
+     </tr>
+     <tr>
+             <td> 
+Refers to the change order applicable to this component
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ClassificationReference">ClassificationReference</a></td>
+             <td>Bill Of Materials Component Item.  Classification Reference.  Classification</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the classification scheme associated to the component item if the TypeCode is Class in context of the parent.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsSubstituteComponentItem">BillOfMaterialsSubstituteComponentItem</a></td>
+             <td> Bill Of Materials Component Item.  Bill Of Materials Substitute Component Item.  Bill Of Materials Substitute Component Item</td>
+     </tr>
+     <tr>
+             <td> 
+References the substitute items for the component item
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ComponentItemProcessingInstruction">ComponentItemProcessingInstruction</a></td>
+             <td> Bill Of Materials Component Item.  Component Item Processing Instruction.  Component Item Processing Instruction</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the sequenced comments and instructions applicable to a component item
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/YieldFactor ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/YieldFactor"></a>BillOfMaterialsComponentItem/YieldFactor</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Yield Factor.  Rate</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Factor used to multiply component quantity with to obtain required component quantity
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#RateType">RateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/PlanningQuantityMultiplier ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/PlanningQuantityMultiplier"></a>BillOfMaterialsComponentItem/PlanningQuantityMultiplier</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Planning Quantity Multiplier.  Rate</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Factor used to multiply component quantity with to obtain planning quantity
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#RateType">RateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/ChangeTypeCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/ChangeTypeCode"></a>BillOfMaterialsComponentItem/ChangeTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Change Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates the change type (Add, Change, or Disable) for the component item on the change order
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/OperationSequence ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/OperationSequence"></a>BillOfMaterialsComponentItem/OperationSequence</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Operation Sequence.  Numeric</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Refers to the operation sequence number of the component item. This is used for routing operations
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#PositiveIntegerType">PositiveIntegerType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/EffectivityCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/EffectivityCode"></a>BillOfMaterialsComponentItem/EffectivityCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Effectivity.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates the effectivity of the component item e.g., Current, Future etc.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/Name ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/Name"></a>BillOfMaterialsComponentItem/Name</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Name.  Name</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the name of the association of the component item to the parent. 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#NameType">NameType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/TypeCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/TypeCode"></a>BillOfMaterialsComponentItem/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of association of the component item to the parent. Sample values are product and class
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/DefaultIndicator ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/DefaultIndicator"></a>BillOfMaterialsComponentItem/DefaultIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Default.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+This flag represents the default product among the set of products for the parent if the domain type is of type 'Class'.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/MaximumQuantity ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/MaximumQuantity"></a>BillOfMaterialsComponentItem/MaximumQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Maximum.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Maximum cardinality of the component  in context of the parent
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/MinimumQuantity ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/MinimumQuantity"></a>BillOfMaterialsComponentItem/MinimumQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Minimum.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Minimum cardinality of the component  in context of the parent
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/DefaultQuantity ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/DefaultQuantity"></a>BillOfMaterialsComponentItem/DefaultQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Default.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Default cardinality of the component  in context of the parent
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/DisplaySequenceNumber ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/DisplaySequenceNumber"></a>BillOfMaterialsComponentItem/DisplaySequenceNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Display Sequence Number.  Numeric</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Represents the sequence of the children in context of the parent. 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#PositiveIntegerType">PositiveIntegerType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/PriceAdjustmentTypeCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/PriceAdjustmentTypeCode"></a>BillOfMaterialsComponentItem/PriceAdjustmentTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Price Adjustment Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Adjustment type when a component item is added to a parent. Sample values: Override, Markdown 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItem/PriceAdjustmentQuantity ************************************************-->
+<h3><a name="BillOfMaterialsComponentItem/PriceAdjustmentQuantity"></a>BillOfMaterialsComponentItem/PriceAdjustmentQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item.  Price Adjustment.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The value of adjustment.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsSubstituteComponentItem ************************************************-->
+<h3><a name="BillOfMaterialsSubstituteComponentItem"></a>BillOfMaterialsSubstituteComponentItem</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Substitute Component Item. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+References the substitute items for the component item
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href="../../Common/V2/CommonComponents.html#SubstituteComponentItem">SubstituteComponentItemType</a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsSubstituteComponentItem Attributes ************************************************-->
+<a href="#BillOfMaterialsSubstituteComponentItem/ChangeTypeCode">ChangeTypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsSubstituteComponentItem Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#OverrideComponentItemIdentification">OverrideComponentItemIdentification</a></td>
+             <td> Bill Of Materials Substitute Component Item.  Override Component Item Identification.  Override Component Item Identification</td>
+     </tr>
+     <tr>
+             <td> 
+When an BOM is based on another BOM (say of the same item in another organization), some of the attributes of a component substitute may be different from those of the corresponding component substitute from the referenced BOM. This refers to the component item within the same BOM which has the overriding attributes for the component substitute
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ComponentItemSpecificationGroup">ComponentItemSpecificationGroup</a></td>
+             <td> Bill Of Materials Substitute Component Item.  Component Item Specification Group.  Component Item Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the group of user defined attributes for the substitute component item
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#EngineeringChangeOrderReference">EngineeringChangeOrderReference</a></td>
+             <td>Bill Of Materials Substitute Component Item.  Engineering Change Order Reference.  Engineering Change Order</td>
+     </tr>
+     <tr>
+             <td> 
+Refers to the change order applicable to this substitute component
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsSubstituteComponentItem/ChangeTypeCode ************************************************-->
+<h3><a name="BillOfMaterialsSubstituteComponentItem/ChangeTypeCode"></a>BillOfMaterialsSubstituteComponentItem/ChangeTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Substitute Component Item.  Change Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Type to indicate add or delete on an engineering change order
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ComponentItemProcessingInstruction ************************************************-->
+<h3><a name="ComponentItemProcessingInstruction"></a>ComponentItemProcessingInstruction</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Component Item Processing Instruction. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the sequenced comments and instructions applicable to a component item
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ComponentItemProcessingInstruction Attributes ************************************************-->
+<a href="#ComponentItemProcessingInstruction/ChangeTypeCode">ChangeTypeCode</a><br/>
+<a href="#ComponentItemProcessingInstruction/QuantityIndicator">QuantityIndicator</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ComponentItemProcessingInstruction Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Component Item Processing Instruction.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identifier for the processing instruction
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#Note">Note</a></td>
+             <td> Component Item Processing Instruction.  Note.  Note</td>
+     </tr>
+     <tr>
+             <td> 
+Note for the processing instruction
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#OverrideComponentItemIdentification">OverrideComponentItemIdentification</a></td>
+             <td> Component Item Processing Instruction.  Override Component Item Identification.  Override Component Item Identification</td>
+     </tr>
+     <tr>
+             <td> 
+When an BOM is based on another BOM (say of the same item in another organization), some of the attributes of a component processing instruction may be different from those of the corresponding component processing instruction from the referenced BOM. This refers to the component item within the same BOM which has the overriding attributes for the component processing instruction
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#EngineeringChangeOrderReference">EngineeringChangeOrderReference</a></td>
+             <td>Component Item Processing Instruction.  Engineering Change Order Reference.  Engineering Change Order</td>
+     </tr>
+     <tr>
+             <td> 
+Refers to the change order applicable to this processing instruction
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ComponentItemProcessingInstruction/ChangeTypeCode ************************************************-->
+<h3><a name="ComponentItemProcessingInstruction/ChangeTypeCode"></a>ComponentItemProcessingInstruction/ChangeTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Component Item Processing Instruction.  Change Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Type to indicate add or delete on an engineering change order
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ComponentItemProcessingInstruction/QuantityIndicator ************************************************-->
+<h3><a name="ComponentItemProcessingInstruction/QuantityIndicator"></a>ComponentItemProcessingInstruction/QuantityIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Component Item Processing Instruction.  Quantity.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the processing instruction applies to the quantity on the parent component item
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemExclusion ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemExclusion"></a>BillOfMaterialsComponentItemExclusion</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Exclusion. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Component item exclusions
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemExclusion Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemExclusion Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Exclusion.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification for the component item exclusions
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemPath">BillOfMaterialsComponentItemPath</a></td>
+             <td> Bill Of Materials Component Item Exclusion.  Bill Of Materials Component Item Path.  Bill Of Materials Component Item Path</td>
+     </tr>
+     <tr>
+             <td> 
+Path in the bill of materials for the component item exclusions
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemPath ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemPath"></a>BillOfMaterialsComponentItemPath</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Path. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Path in the bill of materials for the component item 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemPath Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemPath Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemLevel">BillOfMaterialsComponentItemLevel</a></td>
+             <td> Bill Of Materials Component Item Path.  Bill Of Materials Component Item Level.  Bill Of Materials Component Item Level</td>
+     </tr>
+     <tr>
+             <td> 
+The level in the path for the component item 
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemLevel ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemLevel"></a>BillOfMaterialsComponentItemLevel</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Level. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The level in the path for the component item 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemLevel Attributes ************************************************-->
+<a href="#BillOfMaterialsComponentItemLevel/SequenceNumber">SequenceNumber</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemLevel Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Level.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification for the level 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#BillOfMaterialsComponentItemReference">BillOfMaterialsComponentItemReference</a></td>
+             <td>Bill Of Materials Component Item Level.  Bill Of Materials Component Item Reference.  Bill Of Materials Component Item</td>
+     </tr>
+     <tr>
+             <td> 
+The item reference in the level
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemLevel/SequenceNumber ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemLevel/SequenceNumber"></a>BillOfMaterialsComponentItemLevel/SequenceNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Level.  Sequence Number.  Numeric</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Sequence number identifying the level of the component item in the path
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#NumericType">NumericType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsSpecificationDefaultValueOverride ************************************************-->
+<h3><a name="BillOfMaterialsSpecificationDefaultValueOverride"></a>BillOfMaterialsSpecificationDefaultValueOverride</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Specification Default Value Override. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Component item Specification value override
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsSpecificationDefaultValueOverride Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsSpecificationDefaultValueOverride Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Specification Default Value Override.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification for the component item specification value override
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemPath">BillOfMaterialsComponentItemPath</a></td>
+             <td> Bill Of Materials Specification Default Value Override.  Bill Of Materials Component Item Path.  Bill Of Materials Component Item Path</td>
+     </tr>
+     <tr>
+             <td> 
+Path in the bill of materials for the component item 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemSpecificationGroupOverride">BillOfMaterialsComponentItemSpecificationGroupOverride</a></td>
+             <td> Bill Of Materials Specification Default Value Override.  Bill Of Materials Component Item Specification Group Override.  Bill Of Materials Component Item Specification Group Override</td>
+     </tr>
+     <tr>
+             <td> 
+Overrides under component item specification group
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemSpecificationDefaultValue">BillOfMaterialsComponentItemSpecificationDefaultValue</a></td>
+             <td> Bill Of Materials Specification Default Value Override.  Bill Of Materials Component Item Specification Default Value.  Bill Of Materials Component Item Specification Default Value</td>
+     </tr>
+     <tr>
+             <td> 
+Specification value overrides
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupOverride ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationGroupOverride"></a>BillOfMaterialsComponentItemSpecificationGroupOverride</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Group Override. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Overrides under component item specification group
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupOverride Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupOverride Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Specification Group Override.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ClassificationSpecificationGroupReference">ClassificationSpecificationGroupReference</a></td>
+             <td>Bill Of Materials Component Item Specification Group Override.  Classification Specification Group Reference.  Classification Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Classification and Specification group reference
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue">BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue</a></td>
+             <td> Bill Of Materials Component Item Specification Group Override.  Bill Of Materials Component Item Specification Group Specification Default Value.  Bill Of Materials Component Item Specification Group Specification Default Value</td>
+     </tr>
+     <tr>
+             <td> 
+The component item specification overriden value
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue"></a>BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Group Specification Default Value. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The component item specification overriden value
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue Attributes ************************************************-->
+<a href="#BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/DataTypeCode">DataTypeCode</a><br/>
+<a href="#BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/Value">Value</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Specification Group Specification Default Value.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#SpecificationIdentification">SpecificationIdentification</a></td>
+             <td> Bill Of Materials Component Item Specification Group Specification Default Value.  Specification Identification.  Specification Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of a Specification
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/DataTypeCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/DataTypeCode"></a>BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/DataTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Group Specification Default Value.  Data Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Data type of the value being expressed
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/Value ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/Value"></a>BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue/Value</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Group Specification Default Value.  Value.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Value
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationDefaultValue ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationDefaultValue"></a>BillOfMaterialsComponentItemSpecificationDefaultValue</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Default Value. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Specification value overrides
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationDefaultValue Attributes ************************************************-->
+<a href="#BillOfMaterialsComponentItemSpecificationDefaultValue/DataTypeCode">DataTypeCode</a><br/>
+<a href="#BillOfMaterialsComponentItemSpecificationDefaultValue/Value">Value</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationDefaultValue Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Specification Default Value.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ClassificationSpecificationIdentification">ClassificationSpecificationIdentification</a></td>
+             <td> Bill Of Materials Component Item Specification Default Value.  Classification Specification Identification.  Classification Specification Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification of Specification
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationDefaultValue/DataTypeCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationDefaultValue/DataTypeCode"></a>BillOfMaterialsComponentItemSpecificationDefaultValue/DataTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Default Value.  Data Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Data type of the value being expressed
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationDefaultValue/Value ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationDefaultValue/Value"></a>BillOfMaterialsComponentItemSpecificationDefaultValue/Value</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Default Value.  Value.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Value
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsSpecificationValueExclusion ************************************************-->
+<h3><a name="BillOfMaterialsSpecificationValueExclusion"></a>BillOfMaterialsSpecificationValueExclusion</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Specification Value Exclusion. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Component item specification value exclusion
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsSpecificationValueExclusion Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsSpecificationValueExclusion Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Specification Value Exclusion.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification for the component item specification value exclusions
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemPath">BillOfMaterialsComponentItemPath</a></td>
+             <td> Bill Of Materials Specification Value Exclusion.  Bill Of Materials Component Item Path.  Bill Of Materials Component Item Path</td>
+     </tr>
+     <tr>
+             <td> 
+Path in the bill of materials for the component item 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemSpecificationGroupExclusion">BillOfMaterialsComponentItemSpecificationGroupExclusion</a></td>
+             <td> Bill Of Materials Specification Value Exclusion.  Bill Of Materials Component Item Specification Group Exclusion.  Bill Of Materials Component Item Specification Group Exclusion</td>
+     </tr>
+     <tr>
+             <td> 
+Exclusions under component item specification group
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemSpecificationValueExclusion">BillOfMaterialsComponentItemSpecificationValueExclusion</a></td>
+             <td> Bill Of Materials Specification Value Exclusion.  Bill Of Materials Component Item Specification Value Exclusion.  Bill Of Materials Component Item Specification Value Exclusion</td>
+     </tr>
+     <tr>
+             <td> 
+Specification value exclusions
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupExclusion ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationGroupExclusion"></a>BillOfMaterialsComponentItemSpecificationGroupExclusion</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Group Exclusion. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Exclusions under component item specification group
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupExclusion Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupExclusion Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Specification Group Exclusion.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ClassificationSpecificationGroupReference">ClassificationSpecificationGroupReference</a></td>
+             <td>Bill Of Materials Component Item Specification Group Exclusion.  Classification Specification Group Reference.  Classification Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Classification and Specification group reference
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion">BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion</a></td>
+             <td> Bill Of Materials Component Item Specification Group Exclusion.  Bill Of Materials Component Item Specification Group Specification Value Exclusion.  Bill Of Materials Component Item Specification Group Specification Value Exclusion</td>
+     </tr>
+     <tr>
+             <td> 
+The component item specification value exclusion
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion"></a>BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Group Specification Value Exclusion. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The component item specification value exclusion
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion Attributes ************************************************-->
+<a href="#BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion/DataTypeCode">DataTypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Specification Group Specification Value Exclusion.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#SpecificationIdentification">SpecificationIdentification</a></td>
+             <td> Bill Of Materials Component Item Specification Group Specification Value Exclusion.  Specification Identification.  Specification Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of a Specification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsExcludedSpecificationGroupSpecificationValue">BillOfMaterialsExcludedSpecificationGroupSpecificationValue</a></td>
+             <td> Bill Of Materials Component Item Specification Group Specification Value Exclusion.  Bill Of Materials Excluded Specification Group Specification Value.  Bill Of Materials Excluded Specification Group Specification Value</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion/DataTypeCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion/DataTypeCode"></a>BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion/DataTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Group Specification Value Exclusion.  Data Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Data type of the value being expressed
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsExcludedSpecificationGroupSpecificationValue ************************************************-->
+<h3><a name="BillOfMaterialsExcludedSpecificationGroupSpecificationValue"></a>BillOfMaterialsExcludedSpecificationGroupSpecificationValue</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Excluded Specification Group Specification Value. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsExcludedSpecificationGroupSpecificationValue Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsExcludedSpecificationGroupSpecificationValue Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Excluded Specification Group Specification Value.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#SpecificationValueSetLineReference">SpecificationValueSetLineReference</a></td>
+             <td>Bill Of Materials Excluded Specification Group Specification Value.  Specification Value Set Line Reference.  Specification Value Set Line</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationValueExclusion ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationValueExclusion"></a>BillOfMaterialsComponentItemSpecificationValueExclusion</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Value Exclusion. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Specification value exclusions
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationValueExclusion Attributes ************************************************-->
+<a href="#BillOfMaterialsComponentItemSpecificationValueExclusion/DataTypeCode">DataTypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsComponentItemSpecificationValueExclusion Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Component Item Specification Value Exclusion.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ClassificationSpecificationIdentification">ClassificationSpecificationIdentification</a></td>
+             <td> Bill Of Materials Component Item Specification Value Exclusion.  Classification Specification Identification.  Classification Specification Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification of Specification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#BillOfMaterialsExcludedSpecificationValue">BillOfMaterialsExcludedSpecificationValue</a></td>
+             <td> Bill Of Materials Component Item Specification Value Exclusion.  Bill Of Materials Excluded Specification Value.  Bill Of Materials Excluded Specification Value</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsComponentItemSpecificationValueExclusion/DataTypeCode ************************************************-->
+<h3><a name="BillOfMaterialsComponentItemSpecificationValueExclusion/DataTypeCode"></a>BillOfMaterialsComponentItemSpecificationValueExclusion/DataTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Component Item Specification Value Exclusion.  Data Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Data type of the value being expressed
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* BillOfMaterialsExcludedSpecificationValue ************************************************-->
+<h3><a name="BillOfMaterialsExcludedSpecificationValue"></a>BillOfMaterialsExcludedSpecificationValue</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Bill Of Materials Excluded Specification Value. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* BillOfMaterialsExcludedSpecificationValue Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* BillOfMaterialsExcludedSpecificationValue Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Bill Of Materials Excluded Specification Value.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#SpecificationValueSetLineReference">SpecificationValueSetLineReference</a></td>
+             <td>Bill Of Materials Excluded Specification Value.  Specification Value Set Line Reference.  Specification Value Set Line</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+</body>
+</html>

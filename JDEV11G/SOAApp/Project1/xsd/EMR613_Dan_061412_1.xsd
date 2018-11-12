@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd"
+            xmlns:tns="http://TargetNamespace.com/InboundService"
+            targetNamespace="http://TargetNamespace.com/InboundService"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+
+            nxsd:version="NXSD"
+            nxsd:stream="chars"
+            nxsd:encoding="US-ASCII"
+            nxsd:hasHeader="true"
+            nxsd:headerLines="1"
+            nxsd:headerLinesTerminatedBy="${eol}"
+>
+
+
+  <xsd:element name="PurchaseOrder">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Line" minOccurs="1" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="HDISA01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA05" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA06" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA07" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA08" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA09" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA10" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA11" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA12" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA13" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA14" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA15" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDISA16" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS05" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS06" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS07" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDGS08" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDST01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDST02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDBEG01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDBEG02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDBEG03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDBEG04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDBEG05" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDBEG06" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDCUR01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HDCUR02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1REF01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1REF02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2REF01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2REF02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3REF01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3REF02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4REF01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4REF02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1FOB01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1FOB02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1FOB03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1FOB04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1FOB05" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1FOB06" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1FOB07" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD05" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD06" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD07" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD08" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD09" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD10" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD11" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1ITD12" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1TD504" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1TD505" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1TD401" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1TD402" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1TD403" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1TD404" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N901" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N903" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1MSG01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N103" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N104" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N201" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N301" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N302" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N303" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N304" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N401" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N402" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N403" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1N404" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5N101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5N102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5N103" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5N104" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD5PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD6PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD6PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD6PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD6PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N201" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N301" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N302" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N303" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N304" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N401" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N402" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N403" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD4N404" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N103" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N104" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N201" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N301" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N302" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N303" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N304" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N401" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N402" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N403" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3N404" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD1PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD3PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N201" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N301" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N302" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N303" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N304" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N401" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N402" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N403" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD2N404" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD7PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD7PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD7PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD7PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD8PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD8PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD8PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD8PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD9PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD9PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD9PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="HD9PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO103" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO104" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO105" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO106" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO107" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO108" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO109" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO110" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO111" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO112" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO113" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO114" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO115" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO116" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PO117" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1MEA01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1MEA02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2MEA01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2MEA02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PID01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1PID05" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1REF01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1REF02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2REF01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2REF02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1DTM01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1DTM02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2DTM01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2DTM02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3DTM01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3DTM02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN4DTM01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN4DTM02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN5DTM01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN5DTM02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN6DTM01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN6DTM02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1TC201" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1TC202" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1TC203" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1TC204" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1TC205" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1TC206" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN1MSG01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N103" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N104" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N201" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N301" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N302" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N303" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N304" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N401" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N402" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N403" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN3N404" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN4PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN4PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN4PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN4PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN5PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN5PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN5PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN5PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN6PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN6PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN6PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN6PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N101" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N102" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N201" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N301" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N302" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N303" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N304" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N401" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N402" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N403" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN2N404" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN7PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN7PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN7PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN7PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN8PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN8PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN8PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN8PER04" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN9PER01" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN9PER02" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+              <xsd:element name="LN9PER03" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="|" nxsd:quotedBy="&quot;" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>
+<!--NXSDWIZ:D:\temp\FlatFile_Test\Daniel\EMR613_Dan_061412.txt:-->
+<!--USE-HEADER:true:-->

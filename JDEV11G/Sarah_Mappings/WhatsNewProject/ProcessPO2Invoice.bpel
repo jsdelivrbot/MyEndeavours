@@ -1,0 +1,92 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Oct 09 12:53:41 PDT 2008
+  Author:  afreese
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ProcessPO2Invoice"
+               targetNamespace="http://xmlns.oracle.com/application/WhatsNewProject/ProcessPO2Invoice"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/application/WhatsNewProject/ProcessPO2Invoice"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+               xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+               xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://www.oracle.com/pcbpel/po">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="processpo2invoice_client" partnerLinkType="client:ProcessPO2Invoice" myRole="ProcessPO2InvoiceProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ProcessPO2InvoiceRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ProcessPO2InvoiceResponseMessage"/>
+    <variable name="DiscontinuedList" element="ns1:DiscontinuedList"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ProcessPO2Invoice.wsdl) -->
+    <receive name="receiveInput" partnerLink="processpo2invoice_client" portType="client:ProcessPO2Invoice" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="SetDiscontinuedProducts">
+      <copy>
+        <from>
+          <tns:DiscontinuedList xmlns:tns="http://www.oracle.com/pcbpel/po">
+            <ProductName xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+              Adjustable valve (Xlarge)
+            </ProductName>
+            <ProductName xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+              Product_12
+            </ProductName>
+          </tns:DiscontinuedList>
+        </from>
+        <to variable="DiscontinuedList" query="/ns1:DiscontinuedList"/>
+      </copy>
+    </assign>
+    <assign name="Po2Invoice">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransform('file:/C:/shared/documentation/XSLMapper/mapper-109-whats-new/WhatsNewApplication/WhatsNewProject/xsl/Po2Invoice.xsl',bpws:getVariableData('inputVariable','payload'),'DiscontinuedList',bpws:getVariableData('DiscontinuedList'))"/>
+        <to variable="outputVariable" part="payload"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="processpo2invoice_client" portType="client:ProcessPO2Invoice" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

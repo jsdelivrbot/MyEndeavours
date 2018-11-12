@@ -1,0 +1,25 @@
+<?binding.jca ETH_DB_SEL_PMSarah_db.jca?>
+<wsdl:definitions name="ETH_DB_SEL_PMSarah" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_Connector_Composite/ETH_DB_SEL_PMSarah" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_Connector_Composite/ETH_DB_SEL_PMSarah" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="ETH_DB_SEL_PMSarah_plt">
+        <plt:role name="ETH_DB_SEL_PMSarah_role">
+            <plt:portType name="tns:ETH_DB_SEL_PMSarah_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah" schemaLocation="xsd/ETH_DB_SEL_PMSarah.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ETH_DB_SEL_PMSarahInput_msg">
+        <wsdl:part name="ETH_DB_SEL_PMSarahInput_msg" element="db:ETH_DB_SEL_PMSarahInput"/>
+    </wsdl:message>
+    <wsdl:message name="ETH_DB_SEL_PMSarahOutputCollection_msg">
+        <wsdl:part name="ETH_DB_SEL_PMSarahOutputCollection" element="db:ETH_DB_SEL_PMSarahOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="ETH_DB_SEL_PMSarah_ptt">
+        <wsdl:operation name="ETH_DB_SEL_PMSarah">
+            <wsdl:input message="tns:ETH_DB_SEL_PMSarahInput_msg"/>
+            <wsdl:output message="tns:ETH_DB_SEL_PMSarahOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

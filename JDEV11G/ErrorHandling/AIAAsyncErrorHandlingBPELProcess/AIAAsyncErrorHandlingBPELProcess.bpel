@@ -1,0 +1,94 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Jul 04 16:33:36 IST 2007
+  Author:  sannapra
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="AIAAsyncErrorHandlingBPELProcess"
+         targetNamespace="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:customlogging="http://www.oracle.com/XSL/Transform/java/customlogging.WriteToLogXpathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="client"
+                     partnerLinkType="client:AIAAsyncErrorHandlingBPELProcess"
+                     myRole="AIAAsyncErrorHandlingBPELProcessProvider"
+                     partnerRole="AIAAsyncErrorHandlingBPELProcessRequester"/>
+    </partnerLinks>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable"
+                  messageType="client:AIAAsyncErrorHandlingBPELProcessRequestMessage"/>
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable"
+                  messageType="client:AIAAsyncErrorHandlingBPELProcessResponseMessage"/>
+    </variables>
+    <faultHandlers>
+        <catchAll/>
+    </faultHandlers>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in AIAAsyncErrorHandlingBPELProcess.wsdl) -->
+        <scope name="Scope_1">
+            <sequence name="Sequence_1">
+                <receive name="receiveInput" partnerLink="client"
+                         portType="client:AIAAsyncErrorHandlingBPELProcess"
+                         operation="initiate" variable="inputVariable"
+                         createInstance="yes"/>
+                <bpelx:exec name="InvokeCommonErrorHandler" language="java"
+                            version="1.5">
+                    <![CDATA[//oracle.apps.aia.core.eh.IAIAErrorHandler instance = oracle.apps.aia.core.eh.AIAErrorHandlerFactory.getErrorHandler();
+//instance.sendNotification((oracle.xml.parser.v2.XMLElement)getVariableData("inputVariable","FaultMessage","/ns1:Fault"));
+//instance.logErrorMessage((oracle.xml.parser.v2.XMLElement)getVariableData("inputVariable","FaultMessage","/ns1:Fault"));
+  
+oracle.apps.aia.core.eh.InvokeBusinessErrorHandler.process((oracle.xml.parser.v2.XMLElement)getVariableData("inputVariable","FaultMessage","/ns1:Fault"));]]>
+                </bpelx:exec>
+            </sequence>
+        </scope>
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+    </sequence>
+</process>

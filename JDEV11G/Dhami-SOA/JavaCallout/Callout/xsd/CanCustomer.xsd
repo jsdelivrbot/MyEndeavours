@@ -1,0 +1,66 @@
+<schema targetNamespace="http://xmlns.oracle.com/Esb/CustomerProvision" xmlns:CU="http://xmlns.oracle.com/Esb/CustomerProvision" xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="Customer" type="CU:CustomerType"/>
+	<complexType name="CustomerType">
+		<sequence>
+			<element name="CustomerId" type="string"/>
+			<element name="Name" type="string"/>
+			<element name="Description" type="string"/>
+			<element name="Profile" type="CU:ProfileType"/>
+			<element name="Address" type="CU:AddressType"/>
+			<element name="ShippingAddress" type="CU:AddressType"/>
+			<element name="Contacts" type="CU:ContactsType"/>
+		</sequence>
+	</complexType>
+	<complexType name="ProfileType">
+		<sequence>
+			<element name="ProfileId" type="string"/>
+			<element name="Status" type="string"/>
+			<element name="CreditRating" type="string"/>
+			<element name="CreditTerms" type="string"/>
+			<element name="PreferredCurrency" type="string"/>
+			<element name="NewDate" type="string"/>
+			<element name="LastDate" type="string"/>
+			<element name="ActivityRating" type="string"/>
+			<element name="Industry" type="string"/>
+			<element name="Size" type="string"/>
+			<element name="Revenue" type="string"/>
+			<element name="Duns" type="string"/>
+			<element name="AccountRep" type="CU:ContactType"/>
+		</sequence>
+	</complexType>
+	<complexType name="ContactsType">
+		<sequence>
+			<element name="Contact" type="CU:ContactType" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="NameType">
+		<sequence>
+			<element name="Salutation" type="string"/>
+			<element name="FirstName" type="string"/>
+			<element name="LastName" type="string"/>
+			<element name="Middle" type="string"/>
+			<element name="Fullname" type="string"/>
+		</sequence>
+	</complexType>
+	<complexType name="ContactType">
+		<sequence>
+			<element name="Title" type="string"/>
+			<element name="Description" type="string"/>
+			<element name="Name" type="CU:NameType"/>
+			<element name="Address" type="CU:AddressType"/>
+			<element name="Phone" type="string"/>
+			<element name="Mobile" type="string"/>
+			<element name="Email" type="string"/>
+		</sequence>
+	</complexType>
+	<complexType name="AddressType">
+		<sequence>
+			<element name="Title" type="string"/>
+			<element name="StreetAddress" type="string"/>
+			<element name="City" type="string"/>
+			<element name="State" type="string"/>
+			<element name="Zip" type="string"/>
+			<element name="Country" type="string"/>
+		</sequence>
+	</complexType>
+</schema>

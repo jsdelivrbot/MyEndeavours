@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+  <servlet>
+    <servlet-name>SOASchedulerServlet</servlet-name>
+    <servlet-class>com.emerson.eth.scheduler.SOASchedulerServlet</servlet-class>
+    <init-param>
+      <param-name>cronExpr</param-name>
+      <param-value>0 0,5,10,15,20,25,30,35,40,45,50,55 * * * ?</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SOASchedulerServlet</servlet-name>
+    <url-pattern>/soaschedulerservlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>/soaschedulerservlet</welcome-file>
+  </welcome-file-list>
+</web-app>

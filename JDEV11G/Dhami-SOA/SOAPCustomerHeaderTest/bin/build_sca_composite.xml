@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<project name="SOAPCustomerHeaderTest" default="build-deploy">
+
+  <description>Ant tasks for SCA composite projects</description>
+
+  <!-- The location of the global ant directory -->
+  <property name="global.ant.dir" value="../../../../bin"/>
+
+  <!-- Global build.properties -->
+  <property file="${global.ant.dir}/build.properties"/>
+
+  <!-- Location of library scripts -->
+  <property name="global.antlib.dir" value="${global.ant.dir}/antlib"/>
+  
+  <property name="composite.name" value="${ant.project.name}" />
+
+  <!-- import the property file -->
+  <property file="build_sca_composite.properties"/>           
+
+  <!-- This will be ignored if ${deploymentplan.name} is not set. -->
+  <property name="configplan.seed" value="${composite.name}_cfgplan.seed" />
+
+  <property name="deploy.dir" value="../deploy"/>
+
+  <!-- Create the deployable composite sar -->
+  <target name="build" 
+          description="Create and build the deployment files">
+    <echo>Calling lib task in ${global.antlib.dir}/composite_lib.xml</echo>
+    <ant antfile="${global.antlib.dir}/composite_lib.xml" target="build-composite"/>
+  </target>
+  
+  <!-- Setup of config plan -->
+  <target name="create-config-plan"
+          description="Create the config plan (if there is one defined)"
+          if="deploymentplan.name">
+    <echo>Calling lib task in ${global.antlib.dir}/composite_lib.xml</echo>
+    <ant antfile="${global.antlib.dir}/composite_lib.xml" target="create-config-plan"/>
+  </target>
+
+  <!-- Deploy the composite -->
+  <target name="deploy" 
+          description="Deploy the composite -- does not do a build first, will deploy from last build">
+    <echo>Calling lib task in ${global.antlib.dir}/composite_lib.xml</echo>
+    <ant antfile="${global.antlib.dir}/composite_lib.xml" target="deploy-composite"/>
+  </target>
+
+  <!-- Build and deploy the composite -->
+  <target name="build-deploy" 
+          description="Build and deploy the composite"
+          depends="build, deploy">
+  </target>
+
+  <!-- Build and deploy the composite -->
+  <target name="all" 
+          description="Build, deploy, and test the composite -- does it all"
+          depends="build, deploy, test">
+  </target>
+
+  <!-- Undeploy the composite -->
+  <target name="undeploy"
+          description="Undeploy the composite from the server">
+    <echo>Calling lib task in ${global.antlib.dir}/composite_lib.xml</echo>
+    <ant antfile="${global.antlib.dir}/composite_lib.xml" target="undeploy-composite"/>
+  </target>
+  
+  <!-- Run composite tests -->
+  <target name="test"
+          description="Tests the deployed composite">
+    <echo>Calling lib task in ${global.antlib.dir}/composite_lib.xml</echo>
+    <ant antfile="${global.antlib.dir}/composite_lib.xml" target="test-composite"/>
+  </target>
+
+  <!-- Clean the output directories -->  
+  <target name="clean"
+          description="Clean up output directories (e.g. class files, deployment sar file, etc)">
+    <echo>Calling lib task in ${global.antlib.dir}/composite_lib.xml</echo>
+    <ant antfile="${global.antlib.dir}/composite_lib.xml" target="clean"/>
+  </target>
+
+</project>

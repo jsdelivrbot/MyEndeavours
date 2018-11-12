@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.oracle.com/pcbpel/ReasonCodes" targetNamespace="http://www.oracle.com/pcbpel/ReasonCodes">
+	<xsd:element name="ShipFutureDate">
+	    <xsd:complexType>
+	        <xsd:sequence>
+	            <xsd:element name="ExpectedShipDate" type="xsd:date"/>
+	            <xsd:element name="Comment" type="xsd:anyType"/>
+	        </xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="NotAvailable">
+	    <xsd:complexType>
+	        <xsd:sequence>
+	            <xsd:element name="Reason" type="xsd:string"/>
+	        </xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\ProjectAccounting.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="ProjectAccounting" type="ProjectAccountingType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is used to enable all relevant sub-systems that submit single sided transactions to send information to a Project Accounting Application. This would include, but not necessarily be limited to: Accounts Payable, Accounts Receivable, Budget, Order Management, Purchasing, Time and Labor, Travel and Expense.
+
+ProjectAccounting is a synonym for Project, and the LoadProjectAccounting BOD has the effect of populating the Project's TotalCost field or the ProjectActivities' Cost fields.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ProjectAccountingType">
+                <xsd:complexContent>
+                        <xsd:extension base="ProjectBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="PaymentDateTime" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Item" minOccurs="0"/>
+                                        <xsd:element ref="ItemQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ProductLineID" minOccurs="0"/>
+                                        <xsd:element ref="EmployeeID" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="FixedAssetID" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="JobCode" minOccurs="0"/>
+                                        <xsd:element ref="EnterpriseUnit" minOccurs="0"/>
+                                        <xsd:element ref="PurchaseOrderReference" minOccurs="0"/>
+                                        <xsd:element ref="SalesOrderReference" minOccurs="0"/>
+                                        <xsd:element ref="VoucherReference" minOccurs="0"/>
+                                        <xsd:element ref="ProductionOrderReference" minOccurs="0"/>
+                                        <xsd:group ref="ReferencesGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

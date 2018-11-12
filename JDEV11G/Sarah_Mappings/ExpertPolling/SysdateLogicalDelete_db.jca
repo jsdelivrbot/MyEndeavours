@@ -1,0 +1,20 @@
+<adapter-config name="SysdateLogicalDelete" adapter="Database Adapter" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/SOADemo" UIConnectionName="SOADemo" adapterRef=""/>
+  <endpoint-activation portType="SysdateLogicalDelete_ptt" operation="receive">
+    <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
+      <property name="DescriptorName" value="SysdateLogicalDelete.MoviesIn"/>
+      <property name="QueryName" value="SysdateLogicalDeleteSelect"/>
+      <property name="MappingsMetaDataURL" value="SysdateLogicalDelete-or-mappings.xml"/>
+      <property name="PollingStrategy" value="DeletePollingStrategy"/>
+      <property name="PollingInterval" value="5"/>
+      <property name="MaxRaiseSize" value="1"/>
+      <property name="MaxTransactionSize" value="10"/>
+      <property name="SequencingColumn" value="TITLE"/>
+      <property name="NumberOfThreads" value="1"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="DeleteDetailRows" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

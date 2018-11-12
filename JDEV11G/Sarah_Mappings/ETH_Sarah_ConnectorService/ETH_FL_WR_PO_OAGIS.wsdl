@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_FL_WR_PO_OAGIS"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_WR_PO_OAGIS"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_WR_PO_OAGIS"
+     xmlns:imp1="http://www.openapplications.org/oagis/9"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Write_PO_OAGIS_plt" >
+    <plt:role name="Write_PO_OAGIS_role" >
+      <plt:portType name="tns:Write_PO_OAGIS_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_WR_PO_OAGIS"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.openapplications.org/oagis/9" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Infrastructure/OAGIS90/ProcessPurchaseOrder.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Write_PO_OAGIS_msg">
+        <wsdl:part name="body" element="imp1:ProcessPurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:portType name="Write_PO_OAGIS_ptt">
+        <wsdl:operation name="Write_PO_OAGIS">
+            <wsdl:input message="tns:Write_PO_OAGIS_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,14 @@
+<adapter-config name="ETH_GLB_OAP_Betsy" adapter="Oracle Applications Adapter" wsdlLocation="ETH_GLB_OAP_Betsy.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/Apps/ETH/Betsy" UIConnectionName="Betsy_Dev" UIOracleAppType="XMLGATEWAY" adapterRef=""/>
+  <endpoint-activation portType="Dequeue_ptt" operation="Dequeue">
+    <activation-spec className="oracle.tip.adapter.apps.AppsXMLGatewayDequeueActivationSpec">
+      <property name="Correlation" value="BPEL"/>
+      <property name="PayloadHeaderRequired" value="true"/>
+      <property name="QueueName" value="ECX_OUTBOUND"/>
+      <property name="DatabaseSchema" value="APPS"/>
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

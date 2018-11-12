@@ -1,0 +1,52 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ETH_AQ_ENQ_POCO_XML"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_AQ_ENQ_POCO_XML"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_AQ_ENQ_POCO_XML"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA"
+     xmlns:msg_out="http://www.openapplications.org/oagis/9"
+     xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+    <plt:partnerLinkType name="Enqueue_plt">
+        <plt:role name="Enqueue_role">
+            <plt:portType name="tns:Enqueue_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+             xmlns="http://www.w3.org/2001/XMLSchema" xmlns:obj1="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA"
+             xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_AQ_ENQ_POCO_XML"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:msg_out="http://www.openapplications.org/oagis/9"
+             xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+             xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+            <import namespace="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA" schemaLocation="xsd/SOA2_SOAINFRA_IP_MESSAGE_TYPE.xsd"/>
+            <complexType name="ETH_AQ_ENQ_POCO_XMLHeaderCType">
+                <sequence>
+                    <element name="PayloadHeader" type="obj1:IP_MESSAGE_TYPE"/>
+                </sequence>
+            </complexType>
+            <element name="ETH_AQ_ENQ_POCO_XMLHeader" type="ph:ETH_AQ_ENQ_POCO_XMLHeaderCType"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+             xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_AQ_ENQ_POCO_XML"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:obj1="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA"
+             xmlns:msg_out="http://www.openapplications.org/oagis/9" xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+             xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+            <import namespace="http://www.openapplications.org/oagis/9" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Infrastructure/OAGIS90/PurchaseOrderOAGIS90.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ChangePurchaseOrder_msg">
+        <wsdl:part name="ChangePurchaseOrder" element="msg_out:ChangePurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:message name="Header_msg">
+        <wsdl:part name="Header" element="ph:ETH_AQ_ENQ_POCO_XMLHeader"/>
+    </wsdl:message>
+    <wsdl:portType name="Enqueue_ptt">
+        <wsdl:operation name="Enqueue">
+            <wsdl:input message="tns:ChangePurchaseOrder_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

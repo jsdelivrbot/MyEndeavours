@@ -1,0 +1,23 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eth="http://schema.emerson.com/ETH/ErrorData"
+     targetNamespace="http://schema.emerson.com/ETH/ErrorData" elementFormDefault="qualified">
+    <xsd:element name="ETH_ErrorData">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="SENDER_ID" type="xsd:string"/>
+                <xsd:element name="MASTER_RECORD_ID" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="TRANSACTION_RECORD_ID" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="DOCUMENT_KEY" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="ERROR_NUMBER" type="xsd:string"/>
+                <xsd:element name="ERROR_DESCRIPTION" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="ERROR_EXCEPTIONS" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="RECEIVER_ID" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="COMPOSITE_NAME" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="COMPONENT_NAME" type="xsd:string"/>
+                <xsd:element name="COMPOSITE_INSTANCE_ID" type="xsd:string"/>
+                <xsd:element name="ERRORDATETIME" type="xsd:dateTime" minOccurs="0"/>
+                <xsd:element name="PAYLOAD" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

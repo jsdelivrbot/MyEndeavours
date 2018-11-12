@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faultPolicies xmlns="http://schemas.oracle.com/bpel/faultpolicy">
+    <faultPolicy version="1.0" id="CreatePurchaseOrderETH_LbtFtpReqABCSImplFaults"
+                 xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns="http://schemas.oracle.com/bpel/faultpolicy"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Conditions>
+            <faultName xmlns:bpelx="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                       name="selectionFailure">
+                <condition>
+                    <action ref="ora-java"/>
+                </condition>
+            </faultName>
+        </Conditions>
+        <Actions>
+            <Action id="ora-retry">
+                <retry>
+                    <retryCount>2</retryCount>
+                    <retryInterval>2</retryInterval>
+                    <exponentialBackoff/>
+                </retry>
+            </Action>
+            <Action id="ora-replay-scope">
+                <replayScope/>
+            </Action>
+            <Action id="ora-rethrow-fault">
+                <rethrowFault/>
+            </Action>
+            <Action id="ora-human-intervention">
+                <humanIntervention/>
+            </Action>
+            <Action id="ora-terminate">
+                <abort/>
+            </Action>
+            <Action id="ora-java">
+                <javaAction className="com.common.ErrorHandler"
+                            defaultAction="ora-terminate">
+                    <returnValue value="FAIL" ref="ora-rethrow-fault"/>
+                    <returnValue value="SUCCESS" ref="ora-terminate"/>
+                </javaAction>
+            </Action>
+        </Actions>
+    </faultPolicy>
+</faultPolicies>

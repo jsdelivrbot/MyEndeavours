@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faultPolicies>
+      <faultPolicy version="2.0.1" id="RejectedMessages">
+    <Conditions>
+      <!-- All the fault conditions are defined here -->
+      <faultName xmlns:rjm="http://schemas.oracle.com/sca/rejectedmessages"
+                 name="rjm:ReadFile">
+          <condition>
+            <action ref="ora-ws"/>
+          </condition>
+      </faultName>
+    </Conditions>
+
+    <Actions>
+      <Action id="ora-ws">
+        <invokeWS uri="http://usmtnz-dinfap19.dev.emrsn.org:8120/soa-infra/services/ETH_Temp/RejectionHandlerSrvc/rejectbpel_client_ep?WSDL|rejectbpel_client_ep|RejectBPEL_pt"/>
+      </Action>
+   
+    </Actions>
+
+  </faultPolicy>
+  </faultPolicies>
+
+

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" 
+xmlns:echoserv="http://xmlns.oracle.com/AIAReadB2BErrorDetailsEchoServletExtensionService"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V[Documentation Version Number]"
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+name="AIAReadB2BErrorDetailsEchoServletExtensionService"
+targetNamespace="http://xmlns.oracle.com/AIAReadB2BErrorDetailsEchoServletExtensionService"
+xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
+
+	<documentation>
+	    <svcdoc:Service>
+		 <svcdoc:Description />
+		 <svcdoc:ServiceType>AIAReadB2BErrorDetailsEchoServletExtension</svcdoc:ServiceType>
+		 <svcdoc:DisplayName>AIAReadB2BErrorDetailsEchoServletExtension</svcdoc:DisplayName>
+		 <svcdoc:Version>1</svcdoc:Version>
+	       <svcdoc:EBOName></svcdoc:EBOName>
+	        <svcdoc:ABOName />
+	       <svcdoc:LifecycleStatus>Active</svcdoc:LifecycleStatus>
+	       <svcdoc:ImplementationTechnology>Java servlet</svcdoc:ImplementationTechnology>
+	    </svcdoc:Service>
+	 </documentation>
+
+	 <!-- Type Definitions -->
+	 <types>
+		<xsd:schema targetNamespace="http://xmlns.oracle.com/AIAReadB2BErrorDetailsEchoServletExtensionService" elementFormDefault="qualified">
+						
+			<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Core/Common/V2/Meta.xsd" />
+
+		</xsd:schema>
+	</types>
+
+	<!-- Message Definitions  -->
+	
+	<message name="AIAFaultMsg">
+		<part name="AIAFault" element = "corecom:Fault"/>
+	</message>
+		
+		
+
+	<!-- portType implemented by the CustomCreateCustomerABCSExt Extension BPEL process -->
+	<portType name="AIAReadB2BErrorDetailsEchoServletExtension">
+	
+		<documentation>
+			 <svcdoc:Interface>
+				<svcdoc:Description>This interface contains operations that can act upon the ABO / EBO object</svcdoc:Description>
+				<svcdoc:DisplayName />
+				<svcdoc:LifecycleStatus>Active / Deprecated / Obsolete / 
+				Planned</svcdoc:LifecycleStatus>
+			 </svcdoc:Interface>
+		</documentation>
+
+		<operation name="EchoAIAFault">
+			<input message="echoserv:AIAFaultMsg" />
+			<output message="echoserv:AIAFaultMsg" />
+		</operation>
+		
+	</portType>
+
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="AIAReadB2BErrorDetailsEchoServletExtensionService">
+		<plnk:role name="AIAReadB2BErrorDetailsEchoServletExtensionServiceProvider">
+			<plnk:portType name="echoserv:AIAReadB2BErrorDetailsEchoServletExtension" />
+		</plnk:role>
+	</plnk:partnerLinkType>
+		
+	<binding name="AIAReadB2BErrorDetailsEchoServletExtensionService_Binding" type="echoserv:AIAReadB2BErrorDetailsEchoServletExtension">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="EchoAIAFault">
+			    <soap:operation style="document" soapAction="EchoAIAFault" />
+			    <input>
+				<soap:body use="literal" />
+			    </input>
+			    <output>
+				<soap:body use="literal" />
+			    </output>
+			  <fault name="fault">
+				<soap:fault name="fault" use="literal" encodingStyle="" />
+			    </fault>
+		</operation>
+	</binding>
+		    
+	    <service name="mirrorAnyService">
+		<port name="AIAReadB2BErrorDetailsEchoServletExtensionService" binding="echoserv:AIAReadB2BErrorDetailsEchoServletExtensionService_Binding">
+		    <soap:address location="http://144.20.198.143:8001/Mirror/mirror" />
+		</port>
+	    </service>
+
+</definitions>

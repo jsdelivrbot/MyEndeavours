@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="Daniel_FTP"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/SOAApp/Test_FTP/Daniel_FTP"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/SOAApp/Test_FTP/Daniel_FTP"
+     xmlns:imp1="http://xmlns.oracle.com/SOAApp/Test_FTP/BPELProcess1"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Put_plt" >
+    <plt:role name="Put_role" >
+      <plt:portType name="tns:Put_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/SOAApp/Test_FTP/Daniel_FTP"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/SOAApp/Test_FTP/BPELProcess1" schemaLocation="xsd/BPELProcess1.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Put_msg">
+        <wsdl:part name="body" element="imp1:process"/>
+    </wsdl:message>
+    <wsdl:portType name="Put_ptt">
+        <wsdl:operation name="Put">
+            <wsdl:input message="tns:Put_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

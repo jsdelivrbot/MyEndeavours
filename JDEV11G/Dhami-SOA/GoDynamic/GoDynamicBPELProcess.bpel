@@ -1,0 +1,124 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jun 16 19:49:40 EDT 2008
+  Author:  dearora
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="GoDynamicBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/GoDynamic/GoDynamic/GoDynamicBPELProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/GoDynamic/GoDynamic/GoDynamicBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+               xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+               xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/HelloWorld/HelloWorlf/HelloWorld"
+         xmlns:ns2="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:GoDynamicBPELProcess" myRole="GoDynamicBPELProcessProvider"/>
+    <partnerLink myRole="HelloWorldRequester" name="HelloWorlf"
+                 partnerRole="HelloWorldProvider"
+                 partnerLinkType="ns1:HelloWorld"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="inputVariable"
+              messageType="client:GoDynamicBPELProcessRequestMessage"/>
+    <variable name="outputVariable"
+              messageType="client:GoDynamicBPELProcessResponseMessage"/>
+    <variable name="endPointReference" element="ns2:EndpointReference"/>
+    <variable name="Invoke_1_initiate_InputVariable"
+              messageType="ns1:HelloWorldRequestMessage"/>
+    <variable name="Receive_1_onResult_InputVariable"
+              messageType="ns1:HelloWorldResponseMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in GoDynamicBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="client" portType="client:GoDynamicBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="AssignPartnerLink">
+      <copy>
+        <from><EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+                                 xmlns:ns1="http://xmlns.oracle.com/HelloWorld/HelloWorlf/HelloWorld">
+            <Address/>
+            <ServiceName/>
+          </EndpointReference></from>
+        <to variable="endPointReference"/>
+      </copy>
+      <copy>
+        <from expression='"ns1:client"'/>
+        <to variable="endPointReference"
+            query="/ns2:EndpointReference/ns2:ServiceName"/>
+      </copy>
+      <copy>
+        <from expression='"http://localhost:8888/soa-infra/services/default/HelloWorlf!2.0*2008-06-16_19-39-38_560/client"'/>
+        <to variable="endPointReference"
+            query="/ns2:EndpointReference/ns2:Address"/>
+      </copy>
+      <copy>
+        <from variable="endPointReference"/>
+        <to partnerLink="HelloWorlf"/>
+      </copy>
+    </assign>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:GoDynamicBPELProcessProcessRequest/client:input"/>
+        <to variable="Invoke_1_initiate_InputVariable" part="payload"
+            query="/ns1:HelloWorldProcessRequest/ns1:input"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" inputVariable="Invoke_1_initiate_InputVariable"
+            partnerLink="HelloWorlf" portType="ns1:HelloWorld"
+            operation="initiate"/>
+    <receive name="Receive_1" variable="Receive_1_onResult_InputVariable"
+             partnerLink="HelloWorlf" portType="ns1:HelloWorldCallback"
+             operation="onResult" createInstance="no"/>
+    <assign name="Assign_2">
+      <copy>
+        <from variable="Receive_1_onResult_InputVariable" part="payload"
+              query="/ns1:HelloWorldProcessResponse"/>
+        <to variable="outputVariable" part="payload"
+            query="/client:GoDynamicBPELProcessProcessResponse"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="client" portType="client:GoDynamicBPELProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

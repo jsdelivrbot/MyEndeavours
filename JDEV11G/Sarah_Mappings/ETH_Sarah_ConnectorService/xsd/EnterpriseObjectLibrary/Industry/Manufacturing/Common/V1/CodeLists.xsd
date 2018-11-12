@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version 1.00 **
+** Date: 01 Nov 2007 **
+
+Copyright (c) 2007, Oracle. All rights reserved
+
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+  
+    XML Schema 
+    
+    Name: \EnterpriseObjects\Release1\Core\Common\V1\CodeLists.xsd
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Code Lists Schema Module            ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- ====================================================================== -->
+	<!-- =====      Imports                                                                                                      ===== -->
+	<!-- ====================================================================== -->
+	<xsd:include schemaLocation="DataTypes.xsd"/>
+	<xsd:import namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing" schemaLocation="WS-Addressing.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- =====          Code Lists                                                                                             =====-->
+	<!-- ====================================================================== -->
+	<xsd:simpleType name="LanguageCodeType">
+		<xsd:restriction base="NormalizedStringType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ImplementationCodeType">
+		<xsd:restriction base="NormalizedStringType">
+			<xsd:enumeration value="BPEL"/>
+			<xsd:enumeration value="ESB"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="JAVA"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SortDirectionCodeType">
+		<xsd:restriction base="NormalizedStringType">
+			<xsd:enumeration value="ASC"/>
+			<xsd:enumeration value="DESC"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LogicalOperatorCodeType">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AND"/>
+			<xsd:enumeration value="OR"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="QueryOperatorCodeType">
+		<xsd:restriction base="NormalizedStringType">
+			<xsd:enumeration value="EQUALS"/>
+			<xsd:enumeration value="NOT_EQUALS"/>
+			<xsd:enumeration value="GREATER_THAN"/>
+			<xsd:enumeration value="GREATER_THAN_EQUALS"/>
+			<xsd:enumeration value="LESS_THAN"/>
+			<xsd:enumeration value="LESS_THAN_EQUALS"/>
+			<xsd:enumeration value="CONTAINS"/>
+			<xsd:enumeration value="DOES_NOT_CONTAIN"/>
+			<xsd:enumeration value="LIKE"/>
+			<xsd:enumeration value="NOT_LIKE"/>
+			<xsd:enumeration value="LIKE_IGNORE_CASE"/>
+			<xsd:enumeration value="NOT_LIKE_IGNORE_CASE"/>
+			<xsd:enumeration value="IS_BLANK"/>
+			<xsd:enumeration value="IS_NOT_BLANK"/>
+			<xsd:enumeration value="BETWEEN"/>
+			<xsd:enumeration value="NOT_BETWEEN"/>
+			<xsd:enumeration value="IN"/>
+			<xsd:enumeration value="NOT_IN"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ResponseCode">
+		<xsd:restriction base="NormalizedStringType">
+			<xsd:enumeration value="ID"/>
+			<xsd:enumeration value="OBJECT"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ActionCodeType">
+		<xsd:restriction base="NormalizedStringType">
+			<xsd:enumeration value="ADD"/>
+			<xsd:enumeration value="UPDATE"/>
+			<xsd:enumeration value="DELETE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="StandardQueryCodeType">
+		<xsd:restriction base="NormalizedStringType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="StandardResponseCodeType">
+		<xsd:restriction base="NormalizedStringType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="BusinessScopeCodeType">
+		<xsd:restriction base="StringType">
+			<xsd:enumeration value="BUSINESSPROCESS"/>
+			<xsd:enumeration value="MESSAGE"/>
+			<xsd:enumeration value="PIP"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DebugLevelCodeType">
+		<xsd:restriction base="NormalizedStringType">
+			<xsd:enumeration value="None"/>
+			<xsd:enumeration value="Low"/>
+			<xsd:enumeration value="Medium"/>
+			<xsd:enumeration value="High"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,86 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun Dec 13 16:01:00 PST 2009
+  Author:  cutschig
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="DetailRemoteFaultThrowingProcess"
+               targetNamespace="http://example.com/bpel_106_FaultHandling/DetailRemoteFaultThrowingProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://example.com/bpel_106_FaultHandling/DetailRemoteFaultThrowingProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns6="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns1="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns3="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns2="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="detailremotefaultthrowingprocess_client" partnerLinkType="client:DetailRemoteFaultThrowingProcess" myRole="DetailRemoteFaultThrowingProcessProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:DetailRemoteFaultThrowingProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:DetailRemoteFaultThrowingProcessResponseMessage"/>
+    <variable name="FaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in DetailRemoteFaultThrowingProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="detailremotefaultthrowingprocess_client" portType="client:DetailRemoteFaultThrowingProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_RuntimeFaultData">
+      <copy>
+        <from expression="string('custom code')"/>
+        <to variable="FaultVar" part="code"/>
+      </copy>
+      <copy>
+        <from expression="string('custom detail')"/>
+        <to variable="FaultVar" part="detail"/>
+      </copy>
+      <copy>
+        <from expression="string('custom summary')"/>
+        <to variable="FaultVar" part="summary"/>
+      </copy>
+    </assign>
+    <throw name="Throw_BPELRuntimeFault" faultName="client:aCustomBusinessFault"
+           faultVariable="FaultVar"/>
+    <reply name="replyOutput" partnerLink="detailremotefaultthrowingprocess_client" portType="client:DetailRemoteFaultThrowingProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

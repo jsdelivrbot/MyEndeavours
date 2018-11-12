@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="ETH_Common_BPEL_PurchaseOrderEBF"
+     targetNamespace="http://service.emerson.com/ETH/ETH_Common_BPEL_PurchaseOrderEBF"
+     xmlns:ns2="http://schema.emerson.com/ETH/Header"
+     xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://service.emerson.com/ETH/ETH_Common_BPEL_PurchaseOrderEBF"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="ETH_Common_BPEL_PurchaseOrderEBF">
+        <plnk:role name="ETH_Common_BPEL_PurchaseOrderEBFProvider">
+            <plnk:portType name="client:ETH_Common_BPEL_PurchaseOrderEBF"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson"
+                 schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Industry/Manufacturing/EBO/PurchaseOrder/Emerson/PurchaseOrderEBM.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://schema.emerson.com/ETH/Header" schemaLocation="oramds:/apps/ETH3/CommonServices/commonSchemas/ETH_Header.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="ETH_Common_BPEL_PurchaseOrderEBFRequestMessage">
+        <wsdl:part name="payload" element="ns1:CreatePurchaseOrderEBM"/>
+    </wsdl:message>
+    <wsdl:portType name="ETH_Common_BPEL_PurchaseOrderEBF">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ETH_Common_BPEL_PurchaseOrderEBFRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

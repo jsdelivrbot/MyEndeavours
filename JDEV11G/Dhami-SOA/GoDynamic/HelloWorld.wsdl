@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions
+     name="HelloWorld"
+     targetNamespace="http://xmlns.oracle.com/HelloWorld/HelloWorlf/HelloWorld"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/HelloWorld/HelloWorlf/HelloWorld"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <documentation>
+        <abstractWSDL>http://localhost:8888/soa-infra/services/default/HelloWorlf!1.0/HelloWorld.wsdl</abstractWSDL>
+    </documentation>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HelloWorld/HelloWorlf/HelloWorld" schemaLocation="xsd/HelloWorld.xsd"/>
+        </schema>
+
+    </types>
+    <message name="HelloWorldRequestMessage">
+        <part name="payload" element="client:HelloWorldProcessRequest"/>
+    </message>
+    <message name="HelloWorldResponseMessage">
+        <part name="payload" element="client:HelloWorldProcessResponse"/>
+    </message>
+    <portType name="HelloWorld">
+        <operation name="initiate">
+
+            <input message="client:HelloWorldRequestMessage"/>
+        </operation>
+    </portType>
+    <portType name="HelloWorldCallback">
+        <operation name="onResult">
+            <input message="client:HelloWorldResponseMessage"/>
+        </operation>
+    </portType>
+    <binding name="HelloWorldBinding" type="client:HelloWorld">
+
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="initiate">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="initiate"/>
+            <input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/HelloWorld/HelloWorlf/HelloWorld"/>
+            </input>
+        </operation>
+    </binding>
+    <binding name="HelloWorldCallbackBinding" type="client:HelloWorldCallback">
+
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="onResult">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="onResult"/>
+            <input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/HelloWorld/HelloWorlf/HelloWorld"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="client">
+
+        <port name="HelloWorld_pt" binding="client:HelloWorldBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://localhost:8888/soa-infra/services/default/HelloWorlf!1.0*2008-06-16_19-39-38_560/client"/>
+        </port>
+    </service>
+    <plnk:partnerLinkType name="HelloWorld">
+        <plnk:role name="HelloWorldProvider">
+            <plnk:portType name="client:HelloWorld"/>
+        </plnk:role>
+        <plnk:role name="HelloWorldRequester">
+
+            <plnk:portType name="client:HelloWorldCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>
+

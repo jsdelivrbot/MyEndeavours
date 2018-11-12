@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\MergeWIP.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="MergeWIP" type="MergeWIPType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">MergeWIP is used to notify a Manufacturing Application of the creation of a single production lot from multiple production lots of a product being made on a production order.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MergeWIPHeader" type="WIPEventHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation>Provides information about the merge event.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MergeWIPSource" type="MergeWIPSourceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Source Orders to be merged.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information concerning the specific production order in the WIP Merge transaction to be processed.  Instances of this Component are the source (children) production orders from which to perform the merge transaction.  The resulting merged production order (specified in the MergeWIPDestination Component must also be specified as an instance of the MergeWIPDestination Component unless it is not an existing production order.  Note that all source production orders are assumed to be at the same standard operation sequence, intraoperation steps and departments for the merge transaction to be processed successfully.  This Component is mandatory and at least one occurrence of this Component is required for each MergeWIPLine Component.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MergeWIPDestination" type="MergeWIPDestinationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Destination Order in which the Merger creates.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information concerning the specific production order in the WIP Merge transaction to be processed.  This Component specifies the end resulting production order (the target) to which to process the merge transaction.   This Component is mandatory for each occurrence of the MergeWIPLine for all BODs except the Request BODs (Get and GetList).</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="MergeWIPType">
+                <xsd:sequence>
+                        <xsd:element ref="MergeWIPHeader" minOccurs="0"/>
+                        <xsd:element ref="MergeWIPSource" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="MergeWIPDestination" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MergeWIPDestinationType">
+                <xsd:sequence>
+                        <xsd:element ref="ItemQuantity" minOccurs="0"/>
+                        <xsd:element ref="ProductionOrderReference" minOccurs="0"/>
+                        <xsd:element ref="OperationReference" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MergeWIPSourceType">
+                <xsd:sequence>
+                        <xsd:element ref="ProductionOrderReference" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

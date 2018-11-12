@@ -1,0 +1,146 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Apr 29 21:18:09 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_DBListner_Composite"
+               targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/ETH_DBListner_Composite/ETH_BPEL_DBListner_Composite"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/ETH_DBListner_Composite/ETH_BPEL_DBListner_Composite"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_DBListner_Composite/ETH_FL_RD_Payload"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://xmlns.oracle.com/Sarah_Mappings/ETH_POCOEBM_OAGIS_Provider/ETH_BPEL_POCOEBM_OAGIS_Provider"
+         xmlns:ns3="http://xmlns.oracle.com/Sarah_Mappings/ETH_POEBM_OAGIS_Provider/ETH_BPEL_POEBM_OAGIS_Provider"
+         xmlns:ns6="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+         xmlns:ns4="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson"
+         xmlns:ns5="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+         xmlns:ns8="http://www.openapplications.org/oagis/9"
+         xmlns:ns7="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+         
+         <bpelx:exec import="java.util.*"/>
+          <bpelx:exec import="java.lang.*"/>
+          <bpelx:exec import="java.math.*"/>
+          <bpelx:exec import="java.io.*"/>
+          <bpelx:exec import="oracle.soa.common.util.Base64Decoder"/>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ETH_FL_RD_Payload" partnerLinkType="ns1:ReadPayload_plt"
+                 myRole="ReadPayload_role"/>
+    <partnerLink name="ETH_POCOEBM_Provider"
+                 partnerLinkType="ns2:ETH_BPEL_POCOEBM_OAGIS_Provider"
+                 partnerRole="ETH_BPEL_POCOEBM_OAGIS_ProviderProvider"/>
+    <partnerLink name="ETH_POEBM_Provider"
+                 partnerLinkType="ns3:ETH_BPEL_POEBM_OAGIS_Provider"
+                 partnerRole="ETH_BPEL_POEBM_OAGIS_ProviderProvider"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_ReadPayload_InputVariable"
+              messageType="ns1:ReadPayload_msg"/>
+    <variable name="FileName" type="xsd:string"/>
+    <variable name="G_decodedString" type="xsd:string"/>
+    <variable name="InvokePOEBM_process_InputVariable"
+              messageType="ns3:ETH_BPEL_POEBM_OAGIS_ProviderRequestMessage"/>
+    <variable name="Invoke_POCOEBM_process_InputVariable"
+              messageType="ns2:ETH_BPEL_POCOEBM_OAGIS_ProviderRequestMessage"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_ReadPayload_InputVariable"
+             partnerLink="ETH_FL_RD_Payload" portType="ns1:ReadPayload_ptt"
+             operation="ReadPayload">
+      <bpelx:property name="jca.ftp.FileName" variable="FileName"/>
+    </receive>
+    <bpelx:exec name="Java_Embedding" version="1.5" language="java">
+      <![CDATA[/*Write your java code below e.g.  
+	System.out.println("Hello, World"); 
+*/ 
+addAuditTrailEntry("System_base64string");                            
+String System_base64string = ((oracle.xml.parser.v2.XMLElement)getVariableData("Receive1_ReadPayload_InputVariable","opaque","/ns2:opaqueElement")).getFirstChild().getNodeValue();    
+addAuditTrailEntry("System_base64string",System_base64string);                            
+try                                                         
+{                                                                          
+ String decoded = Base64Decoder.decode(System_base64string);                           
+ addAuditTrailEntry("decoded string is ",decoded);                         
+ setVariableData("G_decodedString",decoded);                                
+}                                                                          
+catch(Exception e)        
+{      
+    e.printStackTrace();      
+}]]>
+    </bpelx:exec>
+    <switch name="Switch1">
+      <case condition="contains(bpws:getVariableData('FileName'),'CHANGE')">
+        <bpelx:annotation>
+          <bpelx:pattern>POCO</bpelx:pattern>
+          <bpelx:general>
+            <bpelx:property name="userLabel">POCO</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence name="Sequence1">
+          <assign name="AssignPOCO">
+            <copy>
+              <from expression="oraext:parseXML(bpws:getVariableData('G_decodedString'))"/>
+              <to variable="Invoke_POCOEBM_process_InputVariable"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_POCOEBM" bpelx:invokeAsDetail="no"
+                  inputVariable="Invoke_POCOEBM_process_InputVariable"
+                  partnerLink="ETH_POCOEBM_Provider"
+                  portType="ns2:ETH_BPEL_POCOEBM_OAGIS_Provider"
+                  operation="process"/>
+        </sequence>
+      </case>
+      <case condition="contains(bpws:getVariableData('FileName'),'PROCESS')">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">PO</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence>
+          <assign name="AssignPO">
+            <copy>
+              <from expression="oraext:parseXML(bpws:getVariableData('G_decodedString'))"/>
+              <to variable="InvokePOEBM_process_InputVariable"/>
+            </copy>
+          </assign>
+          <invoke name="InvokePOEBM"
+                  inputVariable="InvokePOEBM_process_InputVariable"
+                  partnerLink="ETH_POEBM_Provider"
+                  portType="ns3:ETH_BPEL_POEBM_OAGIS_Provider"
+                  operation="process" bpelx:invokeAsDetail="no"/>
+        </sequence>
+      </case>
+      <otherwise>
+        <empty name="Empty1"/>
+      </otherwise>
+    </switch>
+  </sequence>
+</process>

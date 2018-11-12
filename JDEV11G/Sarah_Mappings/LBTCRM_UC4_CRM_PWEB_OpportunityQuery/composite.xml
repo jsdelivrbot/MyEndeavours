@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<composite name="LBTCRM_UC4_CRM_PWEB_OpportunityQuery" revision="1.0" label="2010-10-18_00-55-34_020" mode="active" state="on" xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+   <import namespace="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount" location="BPEL_QueryOpportunityAndAccount.wsdl" importType="wsdl"/>
+   <import namespace="urn:crmondemand/ws/ecbs/opportunity/10/2004" location="Opportunity.wsdl" importType="wsdl"/>
+   <import namespace="urn:crmondemand/ws/ecbs/opportunity/10/2004" location="OpportunityRef.wsdl" importType="wsdl"/>
+   <import namespace="urn:crmondemand/ws/ecbs/account/10/2004" location="AccountRef.wsdl" importType="wsdl"/>
+   <import namespace="http://LBTCRMIntegration.com/LBTCRM_Login/BPEL_Login" location="http://usstlz-pinfap40.emrsn.org:8120/soa-infra/services/default/LBTCRM_Login/BPEL_Login.wsdl" importType="wsdl"/>
+   <service name="bpel_queryopportunityandaccount_client_ep" ui:wsdlLocation="BPEL_QueryOpportunityAndAccount.wsdl">
+      <interface.wsdl interface="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount#wsdl.interface(BPEL_QueryOpportunityAndAccount)"/>
+      <binding.ws port="http://LBTCRMIntegration.com/LBTCRM_UC4_CRM_PWEB_OpportunityQuery/BPEL_QueryOpportunityAndAccount#wsdl.endpoint(bpel_queryopportunityandaccount_client_ep/BPEL_QueryOpportunityAndAccount_pt)"/>
+   </service>
+   <property name="oracle.composite.faultPolicyFile">oramds:/apps/LBTCRM/fault-policies.xml</property>
+   <component name="BPEL_QueryOpportunityAndAccount">
+      <implementation.bpel src="BPEL_QueryOpportunityAndAccount.bpel"/>
+      <property name="bpel.preference.CRM_URL">https://secure-ausomxfya.crmondemand.com/Services/Integration</property>
+   </component>
+   <reference name="PL_OpportunityQuery" ui:wsdlLocation="Opportunity.wsdl">
+      <interface.wsdl interface="urn:crmondemand/ws/ecbs/opportunity/10/2004#wsdl.interface(Opportunity)"/>
+      <binding.ws port="urn:crmondemand/ws/ecbs/opportunity/10/2004#wsdl.endpoint(Opportunity/Opportunity)" location="Opportunity.wsdl" soapVersion="1.1">
+         <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+      </binding.ws>
+   </reference>
+   <reference name="PL_AccountQuery" ui:wsdlLocation="AccountRef.wsdl">
+      <interface.wsdl interface="urn:crmondemand/ws/ecbs/account/10/2004#wsdl.interface(Account)"/>
+      <binding.ws port="urn:crmondemand/ws/ecbs/account/10/2004#wsdl.endpoint(Account/Account)" location="AccountRef.wsdl" soapVersion="1.1"/>
+   </reference>
+   <reference name="BPEL_Login" ui:wsdlLocation="http://usstlz-pinfap40.emrsn.org:8120/soa-infra/services/default/LBTCRM_Login/BPEL_Login.wsdl">
+      <interface.wsdl interface="http://LBTCRMIntegration.com/LBTCRM_Login/BPEL_Login#wsdl.interface(BPEL_Login)"/>
+      <binding.ws port="http://LBTCRMIntegration.com/LBTCRM_Login/BPEL_Login#wsdl.endpoint(bpel_login_client_ep/BPEL_Login_pt)" location="http://usstlz-pinfap40.emrsn.org:8120/soa-infra/services/default/LBTCRM_Login/bpel_login_client_ep?WSDL" soapVersion="1.1"/>
+   </reference>
+   <wire>
+      <source.uri>bpel_queryopportunityandaccount_client_ep</source.uri>
+      <target.uri>BPEL_QueryOpportunityAndAccount/bpel_queryopportunityandaccount_client</target.uri>
+   </wire>
+   <wire>
+      <source.uri>BPEL_QueryOpportunityAndAccount/PL_OpportunityQuery</source.uri>
+      <target.uri>PL_OpportunityQuery</target.uri>
+   </wire>
+   <wire>
+      <source.uri>BPEL_QueryOpportunityAndAccount/PL_AccountQuery</source.uri>
+      <target.uri>PL_AccountQuery</target.uri>
+   </wire>
+   <wire>
+      <source.uri>BPEL_QueryOpportunityAndAccount/BPEL_Login</source.uri>
+      <target.uri>BPEL_Login</target.uri>
+   </wire>
+</composite>

@@ -1,0 +1,12 @@
+<adapter-config name="ReadB2BError" adapter="Jms Adapter" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/jms/aiaB2BQueueCF" UIConnectionName="ap6036fems" UIJmsProvider="WLSJMS" adapterRef=""/>
+  <endpoint-activation portType="Dequeue_ptt" operation="ProcessAIAFault">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="DestinationName" value="jms/aia/AIA_B2B_ERROR_QUEUE"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="PayloadType" value="TextMessage"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

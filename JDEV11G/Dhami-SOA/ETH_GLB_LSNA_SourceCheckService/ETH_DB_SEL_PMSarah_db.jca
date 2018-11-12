@@ -1,0 +1,14 @@
+<adapter-config name="ETH_DB_SEL_PMSarah" adapter="Database Adapter" wsdlLocation="ETH_DB_SEL_PMSarah.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/ETH/PMSarah" UIConnectionName="SarahS0" adapterRef=""/>
+  <endpoint-interaction portType="ETH_DB_SEL_PMSarah_ptt" operation="ETH_DB_SEL_PMSarah">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select * from applsys.ecx_outqueue where corrid='ETHPO'"/>
+      <property name="QueryTimeout" value="60"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

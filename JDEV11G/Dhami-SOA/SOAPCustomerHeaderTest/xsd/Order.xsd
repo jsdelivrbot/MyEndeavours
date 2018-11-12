@@ -1,0 +1,19 @@
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+        targetNamespace="http://xmlns.oracle.com/mediator/order"
+        xmlns:inp1="http://xmlns.oracle.com/mediator/order"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="priority" type="inp1:customHeader"/>
+    <complexType name="customHeader">
+        <sequence>
+            <element name="priority" type="int"/>
+        </sequence>
+    </complexType>
+    <element name="Order">
+        <complexType>
+            <sequence>
+                <element name="orderAmount" type="int"/>
+                <element name="oderPriority" type="int" minOccurs="0"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

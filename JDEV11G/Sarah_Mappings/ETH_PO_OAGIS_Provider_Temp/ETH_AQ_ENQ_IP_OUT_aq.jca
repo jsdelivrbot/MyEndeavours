@@ -1,0 +1,14 @@
+<adapter-config name="ETH_AQ_ENQ_IP_OUT" adapter="AQ Adapter" wsdlLocation="ETH_AQ_ENQ_IP_OUT.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/ETH/B2B_DB" UIConnectionName="SOA2_ETH_B2BDB"/>
+  <endpoint-interaction portType="EnqueueIPOUT_ptt" operation="EnqueueIPOUT">
+    <interaction-spec className="oracle.tip.adapter.aq.outbound.AQEnqueueInteractionSpec">
+      <property name="PayloadHeaderRequired" value="true"/>
+      <property name="RecipientList" value="B2BUSER"/>
+      <property name="QueueName" value="IP_OUT_QUEUE"/>
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+      <property name="DatabaseSchema" value="SOA2_SOAINFRA"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

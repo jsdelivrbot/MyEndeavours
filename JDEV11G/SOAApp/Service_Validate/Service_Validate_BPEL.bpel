@@ -1,0 +1,136 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun Dec 09 14:45:23 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Service_Validate_BPEL"
+               targetNamespace="http://services.emerson.com/SOAApp/Service_Validate/Service_Validate_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://services.emerson.com/SOAApp/Service_Validate/Service_Validate_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://services.emerson.com/sca/soapservice/SOAApp/Service_Validate/Validate"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_COMMON_SERVICES_Phase3/ETH_Common_ErrorListener_Composite/ETH_JMS_NQ"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/SOAApp/Service_Validate/ETH_DB_CALL_ValidatePRC"
+         xmlns:ns4="http://schema.emerson.com/ETH/Validate"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/VALIDATE_TEST/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns6="http://schema.emerson.com/ETH/ErrorData"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ETH_WS_Validate" partnerLinkType="ns1:ETH_WS_Validate"
+                 myRole="execute_ptt"/>
+    <partnerLink name="ETH_JMS_NQ" partnerLinkType="ns2:Produce_Message_plt"
+                 partnerRole="Produce_Message_role"/>
+    <partnerLink name="ETH_DB_CALL_ValidatePRC"
+                 partnerLinkType="ns3:ETH_DB_CALL_ValidatePRC_plt"
+                 partnerRole="ETH_DB_CALL_ValidatePRC_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_execute_InputVariable"
+              messageType="ns1:requestMessage"/>
+    <variable name="Invoke1_ETH_DB_CALL_ValidatePRC_InputVariable"
+              messageType="ns3:args_in_msg"/>
+    <variable name="Invoke1_ETH_DB_CALL_ValidatePRC_OutputVariable"
+              messageType="ns3:args_out_msg"/>
+    <variable name="Invoke2_Produce_Message_InputVariable"
+              messageType="ns2:Produce_Message_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_execute_InputVariable"
+             partnerLink="ETH_WS_Validate" portType="ns1:execute_ptt"
+             operation="execute"/>
+    <assign name="Assign1">
+      <copy>
+        <from variable="Receive1_execute_InputVariable" part="Validate"
+              query="/ns4:Validate/ns4:Receiver"/>
+        <to variable="Invoke1_ETH_DB_CALL_ValidatePRC_InputVariable"
+            part="InputParameters"
+            query="/ns5:InputParameters/ns5:P_RECEIVERID"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_DB_PRC" bpelx:invokeAsDetail="no"
+            inputVariable="Invoke1_ETH_DB_CALL_ValidatePRC_InputVariable"
+            outputVariable="Invoke1_ETH_DB_CALL_ValidatePRC_OutputVariable"
+            partnerLink="ETH_DB_CALL_ValidatePRC"
+            portType="ns3:ETH_DB_CALL_ValidatePRC_ptt"
+            operation="ETH_DB_CALL_ValidatePRC"/>
+    <assign name="Assign2">
+      <copy>
+        <from expression="string('SOA')"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:ERROR_SOURCE"/>
+      </copy>
+      <copy>
+        <from expression="string('1000')"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:ERROR_NUMBER"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCompositeName()"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:COMPOSITE_NAME"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCompositeName()"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:COMPONENT_NAME"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCompositeInstanceId()"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:COMPOSITE_INSTANCE_ID"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-dateTime()"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:ERRORDATETIME"/>
+      </copy>
+      <copy>
+        <from variable="Invoke1_ETH_DB_CALL_ValidatePRC_OutputVariable"
+              part="OutputParameters"
+              query="/ns5:OutputParameters/ns5:P_MASTER_RECORD_ID"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:MASTER_RECORD_ID"/>
+      </copy>
+      <copy>
+        <from variable="Invoke1_ETH_DB_CALL_ValidatePRC_OutputVariable"
+              part="OutputParameters"
+              query="/ns5:OutputParameters/ns5:P_TP_ID_SENDER"/>
+        <to variable="Invoke2_Produce_Message_InputVariable" part="body"
+            query="/ns6:ETH_ErrorData/ns6:SENDER_ID"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_ErrorTopic" bpelx:invokeAsDetail="no"
+            inputVariable="Invoke2_Produce_Message_InputVariable"
+            partnerLink="ETH_JMS_NQ" portType="ns2:Produce_Message_ptt"
+            operation="Produce_Message"/>
+  </sequence>
+</process>

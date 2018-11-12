@@ -1,0 +1,21 @@
+<?binding.jca ShadowTable_db.jca?>
+<wsdl:definitions name="ShadowTable" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/AdaptersDB/ExpertPolling/ShadowTable%2F" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/AdaptersDB/ExpertPolling/ShadowTable%2F" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ShadowTable">
+    <plt:partnerLinkType name="ShadowTable_plt">
+        <plt:role name="ShadowTable_role">
+            <plt:portType name="tns:ShadowTable_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ShadowTable" schemaLocation="xsd/ShadowTable_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="MoviesInCollection_msg">
+        <wsdl:part name="MoviesInCollection" element="top:MoviesInCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="ShadowTable_ptt">
+        <wsdl:operation name="receive">
+            <wsdl:input message="tns:MoviesInCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

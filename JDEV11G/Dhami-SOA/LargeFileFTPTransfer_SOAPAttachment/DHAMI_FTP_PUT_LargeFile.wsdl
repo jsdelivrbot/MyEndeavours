@@ -1,0 +1,33 @@
+<wsdl:definitions
+     name="DHAMI_FTP_PUT_LargeFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/Dhami-SOA/LargeFileFTPTransfer_SOAPAttachment/DHAMI_FTP_PUT_LargeFile"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Dhami-SOA/LargeFileFTPTransfer_SOAPAttachment/DHAMI_FTP_PUT_LargeFile"
+     xmlns:attach="http://xmlns.oracle.com/pcbpel/adapter/file/attachment/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Put_plt" >
+    <plt:role name="Put_role" >
+      <plt:portType name="tns:Put_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/attachment/"
+            xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+      <element name="attachFile">
+        <complexType>
+          <attribute name="href" type="string"/>
+        </complexType>
+      </element>
+    </schema>
+    </wsdl:types>
+    <wsdl:message name="Put_msg">
+        <wsdl:part name="file" element="attach:attachFile"/>
+    </wsdl:message>
+    <wsdl:portType name="Put_ptt">
+        <wsdl:operation name="Put">
+            <wsdl:input message="tns:Put_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,112 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Jan 19 15:43:34 GMT+05:30 2011
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="RND_ErrorFaultPolicy_BPEL" targetNamespace="http://xmlns.oracle.com/Dhami_SOA_jws/RND_BPEL_ErrorFaultPolicy/RND_ErrorFaultPolicy_BPEL" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Dhami_SOA_jws/RND_BPEL_ErrorFaultPolicy/RND_ErrorFaultPolicy_BPEL" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/RND_BPEL_ErrorFaultPolicy/RND_DEQ_QueueRP1" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/RND_BPEL_ErrorFaultPolicy/RND_DB_INS_ICoE"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/RND_DB_INS_ICoE">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Consume_RP1Queue_role" name="RND_DEQ_QueueRP1" partnerLinkType="ns1:Consume_RP1Queue_plt"/>
+    <partnerLink name="RND_DB_INS_ICoE" partnerRole="RND_DB_INS_ICoE_role"
+                 partnerLinkType="ns3:RND_DB_INS_ICoE_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_JMSMessage_InputVariable" messageType="ns1:Consume_RP1Queue_msg"/>
+    <variable name="JMS_CorrelationID" type="xsd:string" bpelx:sdoCapable="true"/>
+    <variable name="JMS_DestinationName" type="xsd:string" bpelx:sdoCapable="true"/>
+    <variable name="JMS_MessageID" type="xsd:string" bpelx:sdoCapable="true"/>
+    <variable name="JMS_Priority" type="xsd:string" bpelx:sdoCapable="true"/>
+    <variable name="JMS_Propertes" type="xsd:string" bpelx:sdoCapable="true"/>
+    <variable name="JMS_Timestamp" type="xsd:dateTime"/>
+    <variable name="PayloadAsString" type="xsd:string"/>
+    <variable name="Invoke_DB_insert_InputVariable"
+              messageType="ns3:ErrorTableCollection_msg"/>
+  </variables>
+  <faultHandlers>
+    <catch faultName="bpws:selectionFailure">
+      <empty name="Empty_SelectionFailure"/>
+    </catch>
+    <catchAll>
+      <empty name="Empty_CatchAll"/>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main">
+    <receive name="Receive_JMSMessage" createInstance="yes"
+             variable="Receive_JMSMessage_InputVariable"
+             partnerLink="RND_DEQ_QueueRP1" portType="ns1:Consume_RP1Queue_ptt"
+             operation="Consume_RP1Queue">
+      <bpelx:property name="jca.jms.JMSCorrelationID"
+                      variable="JMS_CorrelationID"/>
+      <bpelx:property name="jca.jms.JMSDestinationName"
+                      variable="JMS_DestinationName"/>
+      <bpelx:property name="jca.jms.JMSMessageID" variable="JMS_MessageID"/>
+      <bpelx:property name="jca.jms.JMSPriority" variable="JMS_Priority"/>
+      <bpelx:property name="jca.jms.JMSProperty" variable="JMS_Propertes"/>
+      <bpelx:property name="jca.jms.JMSTimestamp" variable="JMS_Timestamp"/>
+    </receive>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="JMS_CorrelationID"/>
+        <to variable="JMS_CorrelationID"/>
+      </copy>
+      <copy>
+        <from variable="JMS_DestinationName"/>
+        <to variable="JMS_DestinationName"/>
+      </copy>
+      <copy>
+        <from variable="JMS_MessageID"/>
+        <to variable="JMS_MessageID"/>
+      </copy>
+      <copy>
+        <from variable="JMS_Priority"/>
+        <to variable="JMS_Priority"/>
+      </copy>
+      <copy>
+        <from variable="JMS_Propertes"/>
+        <to variable="JMS_Propertes"/>
+      </copy>
+      <copy>
+        <from variable="JMS_Timestamp"/>
+        <to variable="JMS_Timestamp"/>
+      </copy>
+      <copy>
+        <from variable="Receive_JMSMessage_InputVariable" part="opaque"
+              query="/ns2:opaqueElement"/>
+        <to variable="PayloadAsString"/>
+      </copy>
+      <copy>
+        <from expression="oraext:generate-guid()"/>
+        <to variable="Invoke_DB_insert_InputVariable"
+            part="ErrorTableCollection"
+            query="/ns4:ErrorTableCollection/ns4:ErrorTable/ns4:guuid"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_DB" inputVariable="Invoke_DB_insert_InputVariable"
+            partnerLink="RND_DB_INS_ICoE" portType="ns3:RND_DB_INS_ICoE_ptt"
+            operation="insert"/>
+    <throw name="Throw_selectionFault" faultName="bpws:selectionFailure"/>
+    <empty name="Empty_ProcessEnd"/></sequence>
+</process>

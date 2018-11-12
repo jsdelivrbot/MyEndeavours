@@ -1,0 +1,21 @@
+<?binding.jca oagis_sarah_file.jca?>
+<wsdl:definitions name="oagis_sarah" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/SarahMappings/oagis_sarah" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/SarahMappings/oagis_sarah" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:imp1="http://TargetNamespace.com/dsfgxcv" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="ReadSarah_plt">
+        <plt:role name="ReadSarah_role">
+            <plt:portType name="tns:ReadSarah_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://TargetNamespace.com/dsfgxcv" schemaLocation="xsd/PROCESS_PO_007_SarahS0.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ReadSarah_msg">
+        <wsdl:part name="body" element="imp1:PROCESS_PO_007"/>
+    </wsdl:message>
+    <wsdl:portType name="ReadSarah_ptt">
+        <wsdl:operation name="ReadSarah">
+            <wsdl:input message="tns:ReadSarah_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

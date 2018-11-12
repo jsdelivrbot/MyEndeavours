@@ -1,0 +1,4 @@
+UPDATE MOVIES_IN SET LAST_UPDATED = null, POLLING_STRATEGY = 'SysdateLogicalDelete';
+
+COMMIT;
+

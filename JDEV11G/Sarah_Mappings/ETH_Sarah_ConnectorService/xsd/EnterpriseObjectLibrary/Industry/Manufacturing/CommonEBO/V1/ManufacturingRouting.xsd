@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.00 **
+** Date: Feb 6, 2009 **
+ 
+Copyright (c) 2007, Oracle. All rights reserved
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\ManufacturingRouting.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO ManufacturingRouting EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:coremanufacturingroutingcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00.00" > 
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomManufacturingRouting.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<!-- ====================================================================== -->
+<!-- ==============  ManufacturingRouting Components ================ -->
+<!-- ====================================================================== -->
+                      <xsd:element name="ManufacturingRouting" type="ManufacturingRoutingType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Includes information on production process in terms of manufacturing operations and their sequence, materials and equipment required, cost to be incurred, time required to carry out the work etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                 <xsd:annotation> 
+                      <xsd:documentation> 
+                           <svcdoc:EBO> 
+                                   <svcdoc:Description> 
+Includes information on production process in terms of manufacturing operations and their sequence, materials and equipment required, cost to be incurred, time required to carry out the work etc.
+                                   </svcdoc:Description> 
+                                   <svcdoc:Type>EBO</svcdoc:Type> 
+                                   <svcdoc:Industry/> 
+                           </svcdoc:EBO> 
+                      </xsd:documentation> 
+                 </xsd:annotation> 
+            <xsd:complexType name="ManufacturingRoutingType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier for the Manufacturing Routing.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Name" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Manufacturing Routing name.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Manufacturing Routing Description.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ClassificationCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+User defined class for Manufacturing Routing.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="RoutingQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Quantity that is processed through this routing.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="EstimatedLossPercent" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Estimated percentage of material lost for this routing.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="EnforceOperationDependencyIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicates if operation/step dependencies will be enforced in the batch.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:EffectiveTimePeriod"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A period of time for which this routing is effective.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Status"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Status of this routing
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Attachment"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Document Attachment for ManufacturingRouting.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:OwnerPersonReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the owner of the routing.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ProjectReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the project associated with this routing.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:OwnerBusinessUnitReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the owner business unit for the routing. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ManufacturingRoutingOperation"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A Manufacturing Routing comprises of one or more Operations. Each  Operation defines the requirement for a specific operation of production.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coremanufacturingroutingcust:CustomManufacturingRoutingType" minOccurs="0"/>
+                 </xsd:sequence>
+            </xsd:complexType>
+                      <xsd:element name="ManufacturingRoutingActivity" type="ManufacturingRoutingActivityType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A Manufacturing Routing Operation is made up of one or more Activities. Each Activity can have multiple resource requirement.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ManufacturingRoutingActivityType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique Identifier for the Manufacturing Routing Activity.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="OperationOffsetInterval" type="corecom:DurationType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Time delay from the start of the operation/step to the start of the activity.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ActivityFactor" type="corecom:NumericType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Defines the number of times an activity is performed.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SequenceDependencyIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if the activities are sequence dependent.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="BreakableIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if the activity can be broken.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MaximumBreakDuration" type="corecom:DurationType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The maximum duration of the break if the activity is breakable.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:ActivityReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the activity definition.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ManufacturingRoutingResource"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Contains the definition of the equipment resources required for the Manufacturing Routing Operation.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coremanufacturingroutingcust:CustomManufacturingRoutingActivityType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ManufacturingRoutingOperation" type="ManufacturingRoutingOperationType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A Manufacturing Routing comprises of one or more Operations. Each  Operation defines the requirement for a specific operation of production.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ManufacturingRoutingOperationType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique Identifier for the Manufacturing Routing Operation.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="InputQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Quantity to be processed by this operation.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ReleaseTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of operation/step release
+e.g. Automatic, Manual etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MinimumOutputQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Minimum amount of material that must be produced at a given production operation and resource, that will be transferred to the next operation and resource before it can begin processing.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="OutsourcedIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if the work at this operation sequence is outsourced to an outside vendor
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:Attachment"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Document Attachment for Manufacturing Routing Operation.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:OperationReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the operation definition.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SupplierPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the outside vendor to whom the work at this operation sequence is outsourced.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ManufacturingRoutingOperationMaterial"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Contains the definition of the material resources required for the Manufacturing Routing Operation.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ManufacturingRoutingActivity"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A Manufacturing Routing Operation is made up of one or more Activities. Each Activity can have multiple resource requirement.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coremanufacturingroutingcust:CustomManufacturingRoutingOperationType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ManufacturingRoutingOperationMaterial" type="ManufacturingRoutingOperationMaterialType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Contains the definition of the material resources required for the Manufacturing Routing Operation.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ManufacturingRoutingOperationMaterialType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier for the Manufacturing Routing Operation Material.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="MinimumOutputQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The offset for the dependent routing to start. The quantity is based in the same UOM of the product that is being associated to the routing operation/step.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MinimumDelay" type="corecom:DurationType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The minimum delay in hours after the MinimumTransferQuantity (MTQ) point
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MaximumDelay" type="corecom:DurationType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The maximum delay in hours after the MinimumTransferQuantity (MTQ) point
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:ItemFormulaMaterialReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the Item Formula Material.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coremanufacturingroutingcust:CustomManufacturingRoutingOperationMaterialType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ManufacturingRoutingResource" type="ManufacturingRoutingResourceType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Contains the definition of the equipment resources required for the Manufacturing Routing Operation.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ManufacturingRoutingResourceType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier for the Manufacturing Routing Resource.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="ResourceUsage" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Usage of resources.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ResourceCount" type="corecom:NonNegativeIntegerType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Count of resources.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ProcessQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Quantity that is processed by the resource.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PrimaryResourceIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if the resource is primary.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ScaleTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of Scaling
+e.g. proportional, fixed etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ActivityOffsetInterval" type="corecom:DurationType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The time delay from the start of the activity to the point where the resource is actually required.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MinimumCapacity" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Minimum capacity of the resource.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MaximumCapacity" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Maximum capacity of the resource.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:ResourceReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the Resources required for the Manufacturing Routing.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ManufacturingRoutingResourceSpecification"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Contains the specifications of the equipment resources required for the Manufacturing Routing Activity, including references to the generic resources.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coremanufacturingroutingcust:CustomManufacturingRoutingResourceType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ManufacturingRoutingResourceSpecification" type="ManufacturingRoutingResourceSpecificationType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Contains the specifications of the equipment resources required for the Manufacturing Routing Activity, including references to the generic resources.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ManufacturingRoutingResourceSpecificationType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier for the Manufacturing Routing Resource Specification.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="SequenceNumberID" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This uniquely identifies the order in which the Process Parameters are stored.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TargetValue" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Ideal Value of the process parameter  for this Resource.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MinimumValue" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Minimum value of the Process Parameter for this Resource.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MaximumValue" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Maximum value of the Process Parameter for this Resource.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:ProcessParameter"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Process parameter definition.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coremanufacturingroutingcust:CustomManufacturingRoutingResourceSpecificationType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+</xsd:schema>

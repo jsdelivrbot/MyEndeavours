@@ -1,0 +1,20 @@
+<adapter-config name="DHAMI_FTP_GET_LargeFile" adapter="FTP Adapter" wsdlLocation="DHAMI_FTP_GET_LargeFile.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FTP/ETH2/Test" UIincludeWildcard="DHAMI_BIG_MOMMA*.txt"/>
+  <endpoint-activation portType="Get_ptt" operation="Get">
+    <activation-spec className="oracle.tip.adapter.ftp.inbound.FTPActivationSpec">
+      <property name="AsAttachment" value="true"/>
+      <property name="Recursive" value="false"/>
+      <property name="FileModificationTime" value="FileSystem"/>
+      <property name="PollingFrequency" value="30"/>
+      <property name="LogicalDirectory" value="IN_DIR"/>
+      <property name="IncludeFiles" value="DHAMI_BIG_MOMMA.*\.txt"/>
+      <property name="UseHeaders" value="false"/>
+      <property name="ModificationTimeFormat" value="4,18,yyyyMMddHHmmSS"/>
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="30"/>
+      <property name="FileType" value="ascii"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

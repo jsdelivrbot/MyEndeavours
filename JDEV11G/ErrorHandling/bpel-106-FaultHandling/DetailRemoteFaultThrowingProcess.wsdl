@@ -1,0 +1,34 @@
+<wsdl:definitions
+     name="DetailRemoteFaultThrowingProcess"
+     targetNamespace="http://example.com/bpel_106_FaultHandling/DetailRemoteFaultThrowingProcess"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://example.com/bpel_106_FaultHandling/DetailRemoteFaultThrowingProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+    >
+    <plnk:partnerLinkType name="DetailRemoteFaultThrowingProcess">
+        <plnk:role name="DetailRemoteFaultThrowingProcessProvider">
+            <plnk:portType name="client:DetailRemoteFaultThrowingProcess"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://schemas.oracle.com/bpel/extension" location="oramds:/soa/shared/bpel/RuntimeFault.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://example.com/bpel_106_FaultHandling/DetailRemoteFaultThrowingProcess"
+                 schemaLocation="xsd/DetailRemoteFaultThrowingProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="DetailRemoteFaultThrowingProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="DetailRemoteFaultThrowingProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="DetailRemoteFaultThrowingProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:DetailRemoteFaultThrowingProcessRequestMessage"/>
+            <wsdl:output message="client:DetailRemoteFaultThrowingProcessResponseMessage"/>
+            <wsdl:fault name="aCustomBusinessFault" message="bpelx:RuntimeFaultMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

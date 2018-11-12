@@ -1,0 +1,41 @@
+<wsdl:definitions
+     name="ProcessPO2Invoice"
+     targetNamespace="http://xmlns.oracle.com/application/WhatsNewProject/ProcessPO2Invoice"
+     xmlns:ns2="http://www.oracle.com/pcbpel/Invoice"
+     xmlns:ns1="http://www.oracle.com/pcbpel/po"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/application/WhatsNewProject/ProcessPO2Invoice"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.oracle.com/pcbpel/Invoice"
+             xmlns:ns1="http://www.oracle.com/pcbpel/po" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/application/WhatsNewProject/ProcessPO2Invoice"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://www.oracle.com/pcbpel/po" schemaLocation="xsd/po.xsd"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.oracle.com/pcbpel/Invoice"
+             xmlns:ns1="http://www.oracle.com/pcbpel/po" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/application/WhatsNewProject/ProcessPO2Invoice"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://www.oracle.com/pcbpel/Invoice" schemaLocation="xsd/invoice.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ProcessPO2InvoiceRequestMessage">
+        <wsdl:part name="payload" element="ns1:PurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:message name="ProcessPO2InvoiceResponseMessage">
+        <wsdl:part name="payload" element="ns2:Invoice"/>
+    </wsdl:message>
+    <wsdl:portType name="ProcessPO2Invoice">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ProcessPO2InvoiceRequestMessage"/>
+            <wsdl:output message="client:ProcessPO2InvoiceResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <plnk:partnerLinkType name="ProcessPO2Invoice">
+        <plnk:role name="ProcessPO2InvoiceProvider">
+            <plnk:portType name="client:ProcessPO2Invoice"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</wsdl:definitions>

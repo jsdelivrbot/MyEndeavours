@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ETH_BPEL_POCOEBM_OAGIS_Provider" targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/ETH_POCOEBM_OAGIS_Provider/ETH_BPEL_POCOEBM_OAGIS_Provider" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/ETH_POCOEBM_OAGIS_Provider/ETH_BPEL_POCOEBM_OAGIS_Provider" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns3="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" xmlns:ns5="http://www.openapplications.org/oagis/9" xmlns:ns2="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:ns4="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eth_bpel_pocoebm_oagis_provider_client" partnerLinkType="client:ETH_BPEL_POCOEBM_OAGIS_Provider" myRole="ETH_BPEL_POCOEBM_OAGIS_ProviderProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_BPEL_POCOEBM_OAGIS_ProviderRequestMessage"/>
+    <variable name="Payload_String" type="xsd:string"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_BPEL_POCOEBM_OAGIS_Provider.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_bpel_pocoebm_oagis_provider_client" portType="client:ETH_BPEL_POCOEBM_OAGIS_Provider" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from expression="ora:getContentAsString(bpws:getVariableData('inputVariable','payload'))"/>
+        <to variable="Payload_String"/>
+      </copy>
+    </assign>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Apr 29 20:42:47 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

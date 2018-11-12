@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite name="AIAAsyncErrorHandlingBPELProcess" revision="1.0" mode="active" state="on" 
+           xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+    <import location="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl"/>
+    <!--<svcdoc:AIA>
+            <svcdoc:ServiceSolutionComponentAssociation>
+               <svcdoc:GUID></svcdoc:GUID>
+            </svcdoc:ServiceSolutionComponentAssociation>
+        </svcdoc:AIA>-->
+    <service ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl" name="client">
+        <interface.wsdl interface="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.interface(AIAAsyncErrorHandlingBPELProcess)" callbackInterface="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.interface(AIAAsyncErrorHandlingBPELProcessCallback)" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+        <binding.ws port="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.endpoint(AIAAsyncErrorHandlingBPELProcess/AIAAsyncErrorHandlingBPELProcess)" xmlns:ns="http://xmlns.oracle.com/sca/1.0"/>
+ <!--<svcdoc:AIA>
+  <svcdoc:Service>
+   <svcdoc:ImplementationDetails>
+    <svcdoc:ApplicationName>AIAAsyncErrorHandlingBPELProcess</svcdoc:ApplicationName>
+    <svcdoc:BaseVersion>1.0</svcdoc:BaseVersion>
+    <svcdoc:DevelopedBy>Oracle</svcdoc:DevelopedBy>
+    <svcdoc:OracleCertified>Yes</svcdoc:OracleCertified>
+    <svcdoc:ArtifactType>InfraService</svcdoc:ArtifactType>   
+    <svcdoc:ServiceOperation>
+     <svcdoc:Name>AIAAsyncErrorHandlingBPELProcess</svcdoc:Name>
+    </svcdoc:ServiceOperation>
+   </svcdoc:ImplementationDetails>
+  </svcdoc:Service>
+  </svcdoc:AIA>--> 
+    </service>
+    <component name="AIAAsyncErrorHandlingBPELProcess">
+        <implementation.bpel src="AIAAsyncErrorHandlingBPELProcess.bpel"/>
+        <property name="bpel.config.oneWayDeliveryPolicy">sync</property>
+    </component>
+    <wire>
+        <source.uri>client</source.uri>
+        <target.uri>AIAAsyncErrorHandlingBPELProcess/client</target.uri>
+    </wire>
+</composite>

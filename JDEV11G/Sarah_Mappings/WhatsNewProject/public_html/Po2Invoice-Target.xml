@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<tns1:Invoice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns1="http://www.oracle.com/pcbpel/Invoice" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.oracle.com/pcbpel/Invoice file:/C:/shared/documentation/XSLMapper/mapper-109-whats-new/WhatsNewApplication/WhatsNewProject/xsd/invoice.xsd">
+   <tns1:Comment xsi:type="xsd:string">PO33324564</tns1:Comment>
+   <Data>
+      <Attachments xmlns:tns="http://www.oracle.com/pcbpel/po">
+	<Attachment>
+		<AttachmentComment>Additional Items to ship from previous order</AttachmentComment>
+		<Attachment xsi:type="tns:SupplementalItemList" Source="PO1423567">
+		    <Item xsi:type="tns:ReadyToShipItemType" PartNum="112-XT">
+		       <ProductName>Pro Gadget</ProductName>
+		       <Quantity>2</Quantity>
+		       <Price>42.50</Price>
+		       <Currency>USD</Currency>
+		       <DateAvailable>2008-09-22</DateAvailable>
+		    </Item>
+		    <Item xsi:type="tns:ReadyToShipItemType" PartNum="113-YT">
+		       <ProductName>Pro Gadget II</ProductName>
+		       <Quantity>2</Quantity>
+		       <Price>55.50</Price>
+		       <Currency>USD</Currency>
+		       <DateAvailable>2008-09-22</DateAvailable>
+		    </Item>
+		    <ReasonCode>Items ready to ship</ReasonCode>
+		</Attachment>
+	</Attachment>
+	</Attachments>
+   </Data>
+   <ID>PO33324564</ID>
+   <ShippedTo>
+      <Recipient>Mary Smith</Recipient>
+      <Street>Smith Ave</Street>
+      <Street2/>
+      <City>Smithville</City>
+      <Region>CA</Region>
+      <PostCode>99999</PostCode>
+      <Country>US</Country>
+   </ShippedTo>
+   <Items>
+      <Item xsi:type="tns1:ShippedItemType">
+         <ProductName>Adjustable valve (small)</ProductName>
+         <Quantity>1</Quantity>
+         <PriceCharged>19.24</PriceCharged>
+      </Item>
+      <Item xsi:type="tns1:ShippedItemType">
+         <ProductName>Adjustable valve (large)</ProductName>
+         <Quantity>1</Quantity>
+         <PriceCharged>12.24</PriceCharged>
+      </Item>
+   </Items>
+</tns1:Invoice>

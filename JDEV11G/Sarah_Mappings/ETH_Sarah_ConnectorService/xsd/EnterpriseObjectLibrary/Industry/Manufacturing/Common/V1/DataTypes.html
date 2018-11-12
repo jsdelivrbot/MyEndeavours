@@ -1,0 +1,891 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+      
+      <title>DataTypes</title><meta http-equiv="Content-Type" content="text/xml; charset=UTF-8">
+      <style type="text/css">
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* More-configurable styles */
+
+/******** General ********/
+         
+/* Document body */
+body {
+   color: Black;
+   background-color: White;
+   font-family: Arial, sans-serif;
+   font-size: 10pt;
+}
+                  
+/* Horizontal rules */
+hr {
+   color: black;
+}
+/* Document title */
+h1 {
+   font-size: 18pt;
+   letter-spacing: 2px;
+   border-bottom: 1px #ccc solid;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+/* Main section headers */
+h2 {
+   font-size: 14pt;
+   letter-spacing: 1px;
+}
+/* Sub-section headers */
+h3, h3 a, h3 span {
+   font-size: 12pt;
+   font-weight: bold;
+   color: black;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties th, table.properties th a {
+   color: black;
+   background-color: #F99; /* Pink */
+}
+table.properties td {
+   background-color: #eee; /* Gray */
+}
+
+img{
+ border: 0;
+}         
+
+/********* Documentation style *************/
+p.documentation {
+   color:black;
+   font-style:italic;
+         background-color: #EEEEFF;
+         border: 1px solid #DDDDFF;
+         padding-top: 1px;
+         margin-right: 30px;
+         margin-top: 1px;
+}
+
+         
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   color: #963; /* Orange-brown */
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   border: 2px solid #999;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+   background-color: #ccc;
+}
+table.namespaces td {
+   background-color: #eee;
+}
+/* Target namespace of the schema */
+span.targetNS {
+   color: #06C;
+   font-weight: bold;
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+   color: #F93; /* Orange */
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   border: 2px solid #999; /* Gray */
+}
+
+/* XML Instance Representation table */
+div.sample div.contents {
+   border: 1px dashed black;
+}
+
+
+/* Schema Component Representation table */
+div.schemaComponent div.contents {
+   border: 2px black solid;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   color: #036; /* Blue */
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Printer-version styles */
+
+@media print {
+
+/* Ensures that controls are hidden when printing */
+div#printerControls {
+   visibility: hidden;
+}
+div#globalControls {
+   visibility: hidden;
+}
+#legend {
+   display: none;
+}
+#legendTOC {
+   display: none;
+}
+#glossary {
+   display: none;
+}
+#glossaryTOC {
+   display: none;
+}
+
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Base styles */
+
+/******** General ********/
+
+/* Unordered lists */
+ul {
+   margin-left: 1.5em;
+   margin-bottom: 0em;
+}
+/* Tables */
+table {
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 2px;
+   margin-right: 2px;
+}
+table th, table td {
+   font-size: 10pt;
+   vertical-align: top;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+table th {
+   font-weight: bold;
+   text-align: left;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties {
+   width: 90%;
+}
+table.properties th {
+   width: 30%;
+}
+/* Boxes that can make its content appear and disappear*/
+div.box {
+   margin: 1em;
+}
+   /* Box caption */
+div.box span.caption {
+   font-weight: bold;
+}
+   /* Button to open and close the box */
+div.box input.control {
+   width: 1.4em;
+   height: 1.4em;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 11pt;
+}
+   /* Box contents */
+div.box div.contents {
+   margin-top: 3px;
+}
+
+
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   white-space: nowrap;
+   font-weight: bold;
+   padding: 5px;
+   margin: 5px;
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   padding: 10px;
+   margin: 5px;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+}
+table.namespaces td {
+}
+/* Target namespace of the schema */
+span.targetNS {
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   width: 90%;
+}
+table.hierarchy th {
+   font-weight: normal;
+   font-style: italic;
+   width: 20%;
+}
+table.hierarchy th, table.hierarchy td {
+   padding: 5px;
+}
+
+/* XML Instance Representation table */
+div.sample {
+   width: 90%;
+}
+div.sample div.contents {
+   padding: 5px;
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+}
+   /* Normal elements and attributes */
+div.sample div.contents, div.sample div.contents a {
+   color: black;
+}
+   /* Group Headers */
+div.sample div.contents .group, div.sample div.contents .group a {
+   color: #999; /* Light gray */
+}
+   /* Type Information */
+div.sample div.contents .type, div.sample div.contents .type a {
+   color: #999; /* Light gray */
+}
+   /* Occurrence Information */
+div.sample div.contents .occurs, div.sample div.contents .occurs a {
+   color: #999; /* Light gray */
+}
+   /* Fixed values */
+div.sample div.contents .fixed {
+   color: #063; /* Green */
+   font-weight: bold;
+}
+   /* Simple type constraints */
+div.sample div.contents .constraint, div.sample div.contents .constraint a {
+   color: #999; /* Light gray */
+}
+   /* Elements and attributes inherited from base type */
+div.sample div.contents .inherited, div.sample div.contents .inherited a {
+   color: #666; /* Dark gray */
+}
+   /* Elements and attributes added to or changed from base type */
+div.sample div.contents .newFields {
+   font-weight: bold;
+}
+   /* Other type of information */
+div.sample div.contents .other, div.sample div.contents .other a {
+   color: #369; /* Blue */
+   font-style: italic;
+}
+   /* Link to open up window displaying documentation */
+div.sample div.contents a.documentation {
+   text-decoration: none;
+   padding-left: 3px;
+   padding-right: 3px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   font-weight: bold;
+   font-size: 11pt;
+   background-color: #FFD;
+   color: #069;
+}
+   /* Invert colors when hovering over link to open up window 
+      displaying documentation */
+div.sample div.contents a.documentation:hover {
+   color: #FFD;
+   background-color: #069;
+}
+
+/* Schema Component Representation table */
+div.schemaComponent {
+   width: 90%;
+}
+div.schemaComponent div.contents {
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+   padding: 5px;
+}
+   /* Syntax characters */
+div.schemaComponent div.contents {
+   color: #00f; /* blue */
+}
+   /* Element and attribute tags */
+div.schemaComponent div.contents .scTag {
+   color: #933; /* maroon */
+}
+   /* Element and attribute content */
+div.schemaComponent div.contents .scContent, div.schemaComponent div.contents .scContent a {
+   color: black;
+   font-weight: bold;
+}
+   /* Comments */
+div.schemaComponent div.contents .comment {
+   color: #999; /* Light gray */
+}
+
+/******** Legend Section ********/
+
+div#legend table, div#legend div {
+   margin-bottom: 3px;
+}
+div#legend div.hint {
+   color: #999; /* Light gray */
+   width: 90%;
+   margin-left: 1em;
+   margin-bottom: 2em;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   font-weight: bold;
+}
+
+/********* Details *************/
+.detailsToc {
+  color: #666; /* Light gray */
+}
+
+.details {
+  color: #666; /* Light gray */
+  text-decoration:none;
+}
+
+/******** Footer ********/
+
+.footer {
+   font-size: 8pt;
+}
+</style></head>
+<body><h3 style="color: rgb(0, 0, 0);">Data Types<br><span class="name"></span></h3><br><table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2"><tbody><tr><td colspan="4" rowspan="1" style="width: 25%;"><span style="font-weight: bold;">CCTS Core Data Types</span></td></tr><tr><td style="width: 25%;"><a href="#AmountType">AmountType</a></td><td style="width: 25%;"><a href="#BinaryObjectType">BinaryObjectType</a></td><td style="width: 25%;"><a href="#CodeType">CodeType</a></td><td style="width: 25%;"><a href="#DateTimeType">DateTimeType</a></td></tr><tr><td><a href="#DateType">DateType</a></td><td><a href="#DurationType">DurationType</a></td><td><a href="#IdentifierType">IdentifierType</a></td><td><a href="#IndicatorType">IndicatorType</a></td></tr><tr><td><a href="#IntegerType">IntegerType</a></td><td><a href="#MeasureType">MeasureType</a></td><td><a href="#NameType">NameType</a></td><td><a href="#NumericType">NumericType</a></td></tr><tr><td><a href="#PercentType">PercentType</a></td><td><a href="#QuantityType">QuantityType</a></td><td><a href="#RateType">RateType</a></td><td><a href="#TextType">TextType</a></td></tr><tr><td><a href="#TimeType">TimeType</a></td><td><a href="#StringType">StringType</a></td><td><a href="#URIType">URIType</a></td><td><a href="#YearType">YearType</a></td></tr></tbody></table><br><table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2"><tbody><tr><td colspan="4" rowspan="1" style="width: 25%;"><span style="font-weight: bold;">CCTS Business Data Types</span></td></tr><tr><td><a href="#PositiveIntegerType">PositiveIntegerType</a></td></tr><td style="width: 25%;"></td></tr></tbody></table><br><br><br><h3><a name="AmountType"></a>AmountType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Amount. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">An "<em>Amount. Type</em>" is a number of monetary units specified in a currency.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td>The unit of currency may be explicit or implied.<br><br>"Amount. Type" is used to represent amounts, such as costs, remunerations, and fees.
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#AmountCurrencyCode">currencyCode</a><a href="DataTypes.html#IdentifierTypeschemeID"><br></a><a href="DataTypes.html#IdentifierTypeschemeVersionID"></a></td></tr>
+      </tbody></table><br><h3><span class="name"></span><a name="AmountCurrencyCode"></a>AmountType/currencyCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Amount. Currency. Code<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The currency of the amount.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="BinaryObjectType"></a>BinaryObjectType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Binary Object. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Binary Object. Type</em>" is a sequence of bits.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><p><em>Binary Object. Type</em> is differentiated from its related types - Graphic. Type, Picture. Type, Sound. Type, and Video. Type.</p>
+
+<p>It is recommended to use the XOP/MTOM approach for instantiation of binara objects as attachments.</p><p><em>Binary Object. Type</em> should be used for embedding documents such as Word, PDF and / or engineering documents.</p>
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#BinaryObjectTypemimeCode">mimeCode</a><br><a href="#BinaryObjectTypecharacterSetCode">characterSetCode</a><br><a href="#BinaryObjectTypefileName">fileName</a><br></td></tr>
+      </tbody></table><br><h3><span class="name"></span><a name="BinaryObjectTypemimeCode"></a>BinaryObjectType/mimeCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Binary Object. MIME. Code<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The mime type of the binary object.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td> IETF RFC 2045, 2046, 2047 is recommended. </td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="BinaryObjectTypecharacterSetCode"></a>BinaryObjectType/characterSetCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Binary Object. Character Set. Code<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"><br></td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td> </td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table>
+      
+      <h3><a name="BinaryObjectTypefileName"></a>BinaryObjectType/fileName</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Binary Object. fileName. Text<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The filename of the binary object. </td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="CodeType"></a>CodeType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Code. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Code. Type</em>" is a character string (letters, figures or
+symbols) that for brevity and/or language independence may be used to
+represent a definitive value or text. The value or text is part of a
+finite list of allowed values.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><em>"Code. Type"</em> should be used in case of a finite list of allowed values and the "<em>Identifier. Type</em>" should be used in case of a infinite list of objects.<br><br>The "<em>Code. Type"</em> is used for all elements that are used in the
+communication between partners or systems to enable a common coded
+value representation. This code list should be relatively stable, and
+not subject to frequent or significant changes. Typical example of code
+types are: <em>Country_ Code. Type</em> and &nbsp;<em>Language_ Code. Type</em>. The <em>"Code. Type"</em> is intended to be used for building BBIEs and BCCs, but not for the definition of codelists.
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#CodeTypelistID">listID</a><br><a href="#CodeTypeListAgencyID">listAgencyID</a><br><a href="#CodeTypeListVersionID">listVersionID</a><br></td></tr>
+      </tbody></table>
+      
+      <br><h3><span class="name"></span><a name="CodeTypeListID"></a>CodeType/listID</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Code. List. Identifier<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The identification of a list of codes.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="CodeTypeListAgencyID"></a>CodeType/listAgencyID</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Code. List Agency. Identifier<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The Identification of the agency that maintains one or more lists of codes. </td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td> Defaults to the UN/EDIFACT data element 3055 code list. </td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table>
+      <br><h3><a name="CodeTypeListVersionID"></a>CodeType/listVersionID</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Code. List Version. Identifier<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The Version of the list of codes. </td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="DateTimeType"></a>DateTimeType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Date Time. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Date Time. Type</em>" is a particular point in time on a particular date.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><p>The coordinated universal time (UTC) is the standardized basis for time specifications that are used internationally.</p>
+
+<p>Date Time. Type is used for exact time stamps that must contain the
+day and time. For example, creation date/time, receipt date/time,
+processing date/time, delivery date/time, and expiry date/time.</p>
+
+<p>Only the Gregorian calendar will be used.</p>
+
+<p>The time part&nbsp;may be expressed with or without the UTC offset.</p>
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="DataTypes.html#IdentifierTypeschemeID"><br></a></td></tr>
+      </tbody></table><br><h3><a name="DateType"></a>DateType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Date. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Date. Type</em>" is used to represent a period beginning at midnight and ending next midnight in a given timezone.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><p><em>Date. Type</em> should not be used to specify periodic events.</p>
+
+<p>Only the Gregorian calendar should be used.</p><p><em>Date. Type</em> is used when it is only important to know the
+day in which something occurs, and not the time at which it occurs.
+When both the date and time are important use <em>Date Time. Type.</em></p></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="DataTypes.html#IdentifierTypeschemeID"><br></a></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="DurationType"></a>DurationType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Duration. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "Duration. Type" is a period of time of a particular length without a
+fixed start or end time. This period of time is expressed in years,
+months, days, hours, minutes, seconds, and fractions of a second.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td>The duration in years, months, days, hours, minutes, and seconds can be defined as required.
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>
+      <h3><a name="IdentifierType" class="name"></a>IdentifierType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Identifier. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">An "<em>Identifier. Type</em>" is a character string used to uniquely
+identify one instance of an object where the instance of an object may
+occur in an infinite list of objects.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><em>"Identifier. Type"</em> should be used in case of an infinite list of objects, and <em>"Code. Type"</em> should be used in case of a finite case of allowed values.<br><br>The "<em>Identifier. Type</em>" is used for all element that are used
+in communication of partners and systems to enable a common
+identification of objects. The common identification should be based on
+common identification scheme concept that are used to create the
+individual identifiers. Type samples are "<em>Product_ Identifier. Type</em>", "<em>Order_ Identifier. Type</em>". The "<em>Identifier. Type</em>" is intended to be used for building BBIEs, and BCCs but not for the definition of the identifier lists.
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#IdentifierTypeschemeID">schemeID</a><br><a href="#IdentifierTypeschemeAgencyID">schemeAgencyID</a><br><a href="#IdentifierTypeschemeVersionID">schemeVersionID</a></td></tr>
+      </tbody></table><br><h3><a name="IdentifierTypeschemeID" class="name"></a>IdentifierType/schemeID</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Identifier. Scheme. Identifier<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The identification of the identification scheme.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="IdentifierTypeschemeAgencyID" class="name"></a>IdentifierType/schemeAgencyID</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Identifier. Scheme Agency. Identifier<br></td>
+         </tr>
+         
+         <tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Description</span></td><td> The identification of the agency that maintains the identification scheme.</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Usage Rule</th>
+            <td style="width: 631px;" class="documentation"> Defaults to the UN/EDIFACT data element 3055 code list.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="IdentifierTypeschemeVersionID" class="name"></a>IdentifierType/schemeVersionID</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Identifier. Scheme Version. Identifier<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The Version of the identification scheme.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="IndicatorType"></a>IndicatorType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Indicator. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">An "<em>Indicator</em> Type" is a list of two mutually exclusive boolean values that express the only possible states of a property.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><p>The allowed values are: "<em>true</em>" and "<em>false</em>". Other values should be locally mapped to the values "<em>true</em>" and "<em>false</em>" in an appropriate manner.</p>
+
+<p>The semantics of the indicator based BBIEs should always consider the boolean concept of "true|false". For example:</p>
+
+<p><em>Door_ Open_ Indicator. Type</em> (true|false) and not <em>Door_ Position_ Indicator. Type</em> (wich might be "open|close").</p><em>Indicator. Type</em> is used for binary classifications, indicators, flags, etc.
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>
+      
+<br><h3><a name="IntegerType"></a>IntegerType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Integer. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">"Integer" is an element in the infinite set (...-2, -1, 0, 1, 2...)<br></td> 
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><br></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>      
+      
+      
+      <br><h3><a name="MeasureType"></a>MeasureType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Measure. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "Measure. Type" is a numeric value determined by measuring an object along with the specified unit of measure.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><p><em>"Measure. Type</em>" must not be confused with "<em>Quantity. Type</em>". The "<em>Measure. Type</em>"
+should always express a kind of physical dimension such as temperature,
+length, speed, width, weight, volume, latitude, etc. This semantics
+should be clearly expressed by the property (term + qualifier) of the
+specific BBIE.</p>
+
+<p>Typical BBIEs for representation of measures are:</p>
+<ul><li>Package. Length. Measure</li><li>Weather. Minimum_ Temperature. Measure</li></ul>
+
+
+<p>&nbsp;Typical BBIEs for representation of quantities are:</p>
+<ul><li>Product. Total. Quantity</li><li>Item. Minimum_ Shipped. Quantity</li><li>Shelf. Maximum_ Storage. Quantity</li></ul></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#MeasureTypeunitCode">unitCode</a><br></td></tr>
+      </tbody></table><br><h3><span class="name"></span><a name="MeasureTypeunitCode"></a>MeasureType/unitCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Measure. Unit. Code<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The unit of measure</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td> Default is the current version of UN/ECE Rec. 20.</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="NameType"></a>NameType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Name. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Name. Type</em>" is word or phrase that constitutes the distinctive designation of a person, place, thing, or concept.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td>The name can be language-specific. If the name is language-specific,
+the supplementary Name. Language. Code can be used to determine the
+relevant language of the name according to RFC 3066.<br><br>Name should be used for the object label that is usually used in a
+natural language context. This may be, e.g., the name of a person,
+location, service or product.
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#NameTypeLanguageCode">languageCode</a><br></td></tr>
+      </tbody></table><br><h3><span class="name"></span><a name="NameTypeLanguageCode"></a>NameType/languageCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Name. Language. Code<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The identifier of the language used in the corresponding text string.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td> Reference ISO 639 and IETF RFC 3066.</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="NumericType"></a>NumericType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Numeric. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Numeric. Type</em>" is an information that is assigned or is
+determined by calculation, counting, or sequencing. It does not require
+a unit of quantity or unit of measure or unit of currency.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td>Numeric. Type must not be used for an indication of quantity, measure or amount.
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table><br><h3><a name="PercentType"></a>PercentType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Percent. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Percent. Type</em>" is a number that relates to the comparison figure 100.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td>No measurements or currencies are specified in "Percent. Type".<br><br><p>Percent. Type can be used to represent a percentage that indicates
+how many hundredths of a basic value are to be calculated. The result
+of the calculation is the proportion in percent of, e.g., amounts,
+values, rates, discounts, and taxes.</p>
+
+<p>Further examples for the application of Percent are proportion and
+comparison information, such as dividends and earnings, or a percentage
+comparison of target and actual business results, or trade or amount
+margins.</p>
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table><br><h3><a name="QuantityType"></a>QuantityType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Quantity. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Quantity. Type</em>" is a counted number of non-monetary units, possibly including fractions.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><p><em>"Quantity. Type</em>" must not be confused with "<em>Measure. Type</em>". The "<em>Quantity. Type</em>"
+should always express a counted number of obejcts or services, such as
+total, shipped, loaded, stored, etc. This semantics should be clearly
+expressed by the property (term + qualifier) of the specific BBIE.</p>
+
+<p>Typical BBIEs for representation of quantities are:</p>
+<ul><li>Product. Total. Quantity</li><li>Item. Minimum_ Shipped. Quantity</li><li>Shelf. Maximum_ Storage. Quantity</li></ul>
+
+
+<p>Typical BBIEs for representation of measures are:</p>
+<ul><li>Package. Length. Measure</li><li>Weather. Minimum_ Temperature. Measure</li></ul>
+</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#QuantityTypeUnitCode">unitCode</a><br></td></tr>
+      </tbody></table><br><h3><span class="name"></span><a name="QuantityTypeUnitCode"></a>QuantityType/unitCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Quantity. Unit. Code<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The unit of the quantity.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td> Default is the current version of UN/ECE Rec. 20.</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="RateType"></a>RateType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Rate. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Rate. Type</em>" is a fraction whose numerator and denominator are quantities, values, or dimensionless factors, independent from each other.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><p><em>Rate</em> specifies a rate between two factors with specific units of measure, for example, the daily turnover of a business.</p><p>For a purely numerical ratio where the numerator and the denominator are used without units of measure, the <em>Ratio</em> should be used in accordance with UN/CEFACT CCTS</p></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#RateTypeunitCode">unitCode</a><br><a href="#RateTypebaseValue">baseValue</a><br><a href="#RateTypebaseUnitCode">baseUnitCode</a><br></td></tr>
+      </tbody></table><br><h3><span class="name"></span><a name="RateTypeunitCode"></a>RateType/unitCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Rate. Unit. Code</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> This is the coded representation of the unit of measure of the numerator according to the UN/ECE Recommendation&nbsp;20.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="RateTypebaseValue"></a>RateType/baseValue</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Rate. Base. Value<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">  This is the numerical value of the denominator of the rate. The default value is "1" if the element is omitted.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="RateTypebaseUnitCode"></a>RateType/baseUnitCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Rate. Base Unit. Code</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> This is the coded representation of the unit of measure of the denominator according to the UN/ECE Recommendation #20.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="StringType"></a>StringType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">String. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>String. Type</em>" "String" is sequence of characters in some suitable character set.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><br></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>
+
+      
+      
+      <br><h3><a name="TextType"></a>TextType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Text. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Text. Type</em>" is a character string (i.e. a finite set of characters) generally in the form of words of a language.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><br></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><a href="#TextTypeLanguageCode">languageCode</a><br></td></tr>
+      </tbody></table><br><h3><span class="name"></span><a name="TextTypeLanguageCode"></a>TextType/languageCode</h3><table class="properties">
+         <tbody><tr><td style="width: 180px; background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td style="width: 631px;">Supplementary Component</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Text. Language. Code<br></td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"> The identifier of the language used in the corresponding text string.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td> Reference ISO 639 and IETF RFC 3066.</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Type</span></td><td style="width: 631px;">String<br></td></tr>
+      </tbody></table><br><h3><a name="TimeType"></a>TimeType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Time. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation">A "<em>Time. Type</em>" represents a time point when the date is not important.</td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td>It could represented with or without the timezone offset.<br><br><em>Time. Type</em> is used to represent a time on any day, such as
+product delivery time or the start time and end time of a period of
+time such as the working day or lunch hour. If it is important to
+record the date as well as the time, use the <em>"Date Time. Type</em>".</td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="URIType"></a>URIType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">URI. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"><br></td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><br></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>
+      
+      <br><h3><a name="YearType"></a>YearType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Core Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Year. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"><br></td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><br></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>
+      
+      
+      
+      <br><h3><a name="PositiveIntegerType"></a>PositiveIntegerType</h3><table class="properties">
+         <tbody><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">CCTS Type</span></td><td>Business Data Type</td></tr><tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">CCTS Dictionary Entry Name</th>
+            <td style="width: 631px;">Positive_ Integer. Type</td>
+         </tr>
+         
+         <tr>
+            <th style="background-color: rgb(255, 204, 204); width: 180px;">Description</th>
+            <td style="width: 631px;" class="documentation"><br></td>
+         </tr><tr><td style="background-color: rgb(255, 204, 204);"><span style="font-weight: bold;">Usage Rule</span></td><td><br></td></tr><tr><td style="background-color: rgb(255, 204, 204); width: 180px;"><span style="font-weight: bold;">Attributes</span></td><td style="width: 631px;"><br></td></tr>
+      </tbody></table>
+      
+      <br><br><br><br><br></body></html>

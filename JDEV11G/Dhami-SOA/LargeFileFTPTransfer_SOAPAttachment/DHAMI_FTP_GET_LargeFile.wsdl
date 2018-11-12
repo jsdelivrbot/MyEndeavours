@@ -1,0 +1,34 @@
+<wsdl:definitions
+     name="DHAMI_FTP_GET_LargeFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/Dhami-SOA/LargeFileFTPTransfer_SOAPAttachment/DHAMI_FTP_GET_LargeFile"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Dhami-SOA/LargeFileFTPTransfer_SOAPAttachment/DHAMI_FTP_GET_LargeFile"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:attach="http://xmlns.oracle.com/pcbpel/adapter/file/attachment/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Get_plt" >
+    <plt:role name="Get_role" >
+      <plt:portType name="tns:Get_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/attachment/" xmlns="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified" >
+      <element name="attachmentElement" >
+         <complexType>
+           <attribute name="href" type="string" />
+         </complexType>
+      </element>
+    </schema>
+    </wsdl:types>
+    <wsdl:message name="Get_msg">
+        <wsdl:part name="attach" element="attach:attachmentElement"/>
+    </wsdl:message>
+    <wsdl:portType name="Get_ptt">
+        <wsdl:operation name="Get">
+            <wsdl:input message="tns:Get_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

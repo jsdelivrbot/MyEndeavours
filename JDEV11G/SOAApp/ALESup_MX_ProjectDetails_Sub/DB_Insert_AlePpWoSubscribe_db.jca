@@ -1,0 +1,15 @@
+<adapter-config name="DB_Insert_AlePpWoSubscribe" adapter="Database Adapter" wsdlLocation="DB_Insert_AlePpWoSubscribe.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/DB_MX_ALEConnect" UIConnectionName="DB_MX_ALEConnect" adapterRef=""/>
+  <endpoint-interaction portType="DB_Insert_AlePpWoSubscribe_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="DB_Insert_AlePpWoSubscribe.Aleppwosubscribe"/>
+      <property name="DmlType" value="insert"/>
+      <property name="OutputCompletedXml" value="true"/>
+      <property name="MappingsMetaDataURL" value="DB_Insert_AlePpWoSubscribe-or-mappings.xml"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,54 @@
+<wsdl:definitions
+     name="MainBPEL"
+     targetNamespace="http://xmlns.oracle.com/MyApp/TransformParamsPOC/MainBPEL"
+     xmlns:ns2="http://www.my.poc.in/empdata"
+     xmlns:ns1="http://www.my.poc.in/people"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MyApp/TransformParamsPOC/MainBPEL"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="MainBPEL">
+        <plnk:role name="MainBPELProvider">
+            <plnk:portType name="client:MainBPEL"/>
+        </plnk:role>
+        <plnk:role name="MainBPELRequester">
+            <plnk:portType name="client:MainBPELCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.my.poc.in/empdata"
+             xmlns:ns1="http://www.my.poc.in/people" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/MyApp/TransformParamsPOC/MainBPEL" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://xmlns.oracle.com/MyApp/TransformParamsPOC/MainBPEL" schemaLocation="xsd/MainBPEL.xsd"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.my.poc.in/empdata"
+             xmlns:ns1="http://www.my.poc.in/people" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/MyApp/TransformParamsPOC/MainBPEL" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://www.my.poc.in/people" schemaLocation="xsd/people.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.my.poc.in/empdata"
+             xmlns:ns1="http://www.my.poc.in/people" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/MyApp/TransformParamsPOC/MainBPEL" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <xsd:import namespace="http://www.my.poc.in/empdata" schemaLocation="xsd/empData.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="MainBPELResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:message name="MainBPELRequestMessage">
+        <wsdl:part name="payload" element="ns1:People"/>
+    </wsdl:message>
+    <wsdl:message name="EmpDataMessageType">
+        <wsdl:part name="payload" element="ns2:People"/>
+    </wsdl:message>
+    <wsdl:portType name="MainBPELCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:MainBPELResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="MainBPEL">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:MainBPELRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

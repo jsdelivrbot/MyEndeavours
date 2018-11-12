@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Trx_Bpel_Usecase" targetNamespace="http://xmlns.oracle.com/Dhami_SOA/Shivani_TrX_Usecase/Trx_Bpel_Usecase" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Dhami_SOA/Shivani_TrX_Usecase/Trx_Bpel_Usecase" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/Shivani_TrX_Usecase/ICoE_DB_INS_Table2" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/Shivani_TrX_Usecase/ICoE_DB_INS_Table1" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoE_DB_INS_Table1" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoE_DB_INS_Table2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="trx_bpel_usecase_client" partnerLinkType="client:Trx_Bpel_Usecase" myRole="Trx_Bpel_UsecaseProvider"/>
+    <partnerLink name="ICoE_DB_INS_Table2" partnerLinkType="ns1:ICoE_DB_INS_Table2_plt" partnerRole="ICoE_DB_INS_Table2_role"/>
+    <partnerLink name="ICoE_DB_INS_Table1" partnerLinkType="ns2:ICoE_DB_INS_Table1_plt" partnerRole="ICoE_DB_INS_Table1_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:Trx_Bpel_UsecaseRequestMessage"/>
+    <variable name="Invoke_Table1_insert_InputVariable" messageType="ns2:ShivaniTab1Collection_msg"/>
+    <variable name="Invoke_Table2_insert_InputVariable" messageType="ns1:ShivaniTab2Collection_msg"/>
+    <variable name="Error_String" type="xsd:string"/>
+  </variables>
+  <faultHandlers id="BpFhs0">
+    <catchAll id="BpCAl0">
+      <sequence name="Sequence1" id="BpSeq0">
+        <assign name="Assign_ErrorString" id="BpAss0">
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="Error_String"/>
+          </copy>
+        </assign>
+        <throw name="Throw1" faultName="bpelx:rollback" id="BpThw0"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq1">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Trx_Bpel_Usecase.wsdl) -->
+    <receive name="receiveInput" partnerLink="trx_bpel_usecase_client" portType="client:Trx_Bpel_Usecase" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <assign name="Assign_Table1" id="BpAss1">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:record_id"/>
+        <to variable="Invoke_Table1_insert_InputVariable" part="ShivaniTab1Collection" query="/ns3:ShivaniTab1Collection/ns3:ShivaniTab1/ns3:recordId"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:record_details"/>
+        <to variable="Invoke_Table1_insert_InputVariable" part="ShivaniTab1Collection" query="/ns3:ShivaniTab1Collection/ns3:ShivaniTab1/ns3:recordDetails"/>
+      </copy>
+    </assign>
+    <assign name="Assign_Table2" id="BpAss2">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:record_sub_id"/>
+        <to variable="Invoke_Table2_insert_InputVariable" part="ShivaniTab2Collection" query="/ns4:ShivaniTab2Collection/ns4:ShivaniTab2/ns4:recordSubId"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:record_sub_details"/>
+        <to variable="Invoke_Table2_insert_InputVariable" part="ShivaniTab2Collection" query="/ns4:ShivaniTab2Collection/ns4:ShivaniTab2/ns4:recordSubDetails"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_Table1" bpelx:invokeAsDetail="no" inputVariable="Invoke_Table1_insert_InputVariable" partnerLink="ICoE_DB_INS_Table1" portType="ns2:ICoE_DB_INS_Table1_ptt" operation="insert" id="BpInv0"/>
+    <invoke name="Invoke_Table2" inputVariable="Invoke_Table2_insert_InputVariable" partnerLink="ICoE_DB_INS_Table2" portType="ns1:ICoE_DB_INS_Table2_ptt" operation="insert" bpelx:invokeAsDetail="no" id="BpInv1"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Apr 05 09:55:40 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

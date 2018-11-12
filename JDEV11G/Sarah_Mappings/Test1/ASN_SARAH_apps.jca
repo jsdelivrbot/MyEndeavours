@@ -1,0 +1,14 @@
+<adapter-config name="ASN_SARAH" adapter="Oracle Applications Adapter" wsdlLocation="ASN_SARAH.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/Apps/SARAHS0_APPS" UIConnectionName="SARAHS0_APPS" UIOracleAppType="XMLGATEWAY" adapterRef=""/>
+  <endpoint-activation portType="Dequeue_ptt" operation="Dequeue">
+    <activation-spec className="oracle.tip.adapter.apps.AppsXMLGatewayDequeueActivationSpec">
+      <property name="Correlation" value="BPEL"/>
+      <property name="QueueName" value="ECX_OUTBOUND"/>
+      <property name="DatabaseSchema" value="APPLSYS"/>
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+      <property name="PayloadHeaderRequired" value="true"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

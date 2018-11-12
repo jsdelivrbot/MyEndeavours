@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_BPEL"
+  xmlns:tns="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_BPEL"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="process">
+		<complexType>
+			<sequence>
+				<element name="Person" type="tns:personType"/>
+			</sequence>
+		</complexType>
+	</element>
+  <complexType name="personType">
+    <sequence>
+      <element name="Name" type="string"/>
+      <element name="Age" type="integer"/>
+      <element name="City" type="string"/>
+      <element name="Pincode" type="string"/>
+    </sequence>
+  </complexType>
+</schema>

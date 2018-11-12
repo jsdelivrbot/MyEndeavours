@@ -1,0 +1,1695 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Shipment</title>
+<meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
+<link href="../../../eboschemadoc.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<h2>Shipment</h2>
+<!-- ******************************* Shipment ************************************************-->
+<h3><a name="Shipment"></a>Shipment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Enterprise Business Object</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+A Shipment identifies and describes a specific collection of goods to be transported by a carrier and delivered to one or more business partner destinations.   A Shipment document represents the extent and content of "transportation work" to be done by the carrier.  For transportation efficiency, a shipment document typically consolidates deliveries to multiple destinations within a certain geographic region and may provide carrier routing instructions to each delivery stop.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* Shipment Attributes ************************************************-->
+<a href="#Shipment/Name">Name</a><br/>
+<a href="#Shipment/Description">Description</a><br/>
+<a href="#Shipment/ServiceLevelCode">ServiceLevelCode</a><br/>
+<a href="#Shipment/ModeOfTransportationCode">ModeOfTransportationCode</a><br/>
+<a href="#Shipment/DestinationCountryCode">DestinationCountryCode</a><br/>
+<a href="#Shipment/OriginCountryCode">OriginCountryCode</a><br/>
+<a href="#Shipment/IntialPickupDate">IntialPickupDate</a><br/>
+<a href="#Shipment/UltimateDropOffDate">UltimateDropOffDate</a><br/>
+<a href="#Shipment/EarliestPickUpDate">EarliestPickUpDate</a><br/>
+<a href="#Shipment/LatestPickUpDate">LatestPickUpDate</a><br/>
+<a href="#Shipment/EarliestDropOffDate">EarliestDropOffDate</a><br/>
+<a href="#Shipment/LatestDropOffDate">LatestDropOffDate</a><br/>
+<a href="#Shipment/PointofStagingCode">PointofStagingCode</a><br/>
+<a href="#Shipment/FOBPointCode">FOBPointCode</a><br/>
+<a href="#Shipment/PointOfLoadingCode">PointOfLoadingCode</a><br/>
+<a href="#Shipment/DockCode">DockCode</a><br/>
+<a href="#Shipment/RoutingInstruction">RoutingInstruction</a><br/>
+<a href="#Shipment/ShipmentInstruction">ShipmentInstruction</a><br/>
+<a href="#Shipment/FreightTermCode">FreightTermCode</a><br/>
+<a href="#Shipment/TotalFreightAmount">TotalFreightAmount</a><br/>
+<a href="#Shipment/VehicleNumber">VehicleNumber</a><br/>
+<a href="#Shipment/PackingSlipNumber">PackingSlipNumber</a><br/>
+<a href="#Shipment/WaybillNumber">WaybillNumber</a><br/>
+<a href="#Shipment/GrossWeight">GrossWeight</a><br/>
+<a href="#Shipment/NetWeight">NetWeight</a><br/>
+<a href="#Shipment/TareWeight">TareWeight</a><br/>
+<a href="#Shipment/ShipmentVolume">ShipmentVolume</a><br/>
+<a href="#Shipment/ShipUnitQuantity">ShipUnitQuantity</a><br/>
+<a href="#Shipment/HazardousMaterialIndicator">HazardousMaterialIndicator</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* Shipment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Shipment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of Shipment
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#Status">Status</a></td>
+             <td> Shipment.  Status.  Status</td>
+     </tr>
+     <tr>
+             <td> 
+Indicates manifest request cancellation status - whether Accepted or Rejected
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ShipFromPartyReference">ShipFromPartyReference</a></td>
+             <td>Shipment.  Ship From Party Reference.  Ship From Party</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to Ship From Party
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ShipToPartyReference">ShipToPartyReference</a></td>
+             <td>Shipment.  Ship To Party Reference.  Ship To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to Ship To Party
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#CarrierPartyReference">CarrierPartyReference</a></td>
+             <td>Shipment.  Carrier Party Reference.  Carrier Party</td>
+     </tr>
+     <tr>
+             <td> 
+Carrier Party that is transporting the shipment Plan
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ShipmentItem">ShipmentItem</a></td>
+             <td> Shipment.  Shipment Item.  Shipment Item</td>
+     </tr>
+     <tr>
+             <td> 
+Defines/holds the attributes of a unpacked item or items within a container. For e.g. an item is packed in a container or loose item.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ShipmentCharge">ShipmentCharge</a></td>
+             <td> Shipment.  Shipment Charge.  Shipment Charge</td>
+     </tr>
+     <tr>
+             <td> 
+Defines/holds the attributes of charges for a Shipment or Unit or Container or Line in ASN. For example, charges belongs to the Shipment such as Freight Charge, Handling Charges, etc.
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/Name ************************************************-->
+<h3><a name="Shipment/Name"></a>Shipment/Name</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Name.  Name</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Name of the shipment
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#NameType">NameType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/Description ************************************************-->
+<h3><a name="Shipment/Description"></a>Shipment/Description</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Description.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Shipment Description
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/ServiceLevelCode ************************************************-->
+<h3><a name="Shipment/ServiceLevelCode"></a>Shipment/ServiceLevelCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Service Level.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+A generic code that specifies a particular type or quality of carrier delivery service to be used for transporting goods.  A generic service level code is often established by shippers to consolidate various equivalent, but differently named, carrier service levels for comparison when "rate shopping" for the lowest cost transportation provider
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/ModeOfTransportationCode ************************************************-->
+<h3><a name="Shipment/ModeOfTransportationCode"></a>Shipment/ModeOfTransportationCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Mode Of Transportation.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Unique identifier for Mode of transportation used
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/DestinationCountryCode ************************************************-->
+<h3><a name="Shipment/DestinationCountryCode"></a>Shipment/DestinationCountryCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Destination Country.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Destination Country
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/OriginCountryCode ************************************************-->
+<h3><a name="Shipment/OriginCountryCode"></a>Shipment/OriginCountryCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Origin Country.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Origin Country
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/IntialPickupDate ************************************************-->
+<h3><a name="Shipment/IntialPickupDate"></a>Shipment/IntialPickupDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Intial Pickup.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date of initial pickup
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/UltimateDropOffDate ************************************************-->
+<h3><a name="Shipment/UltimateDropOffDate"></a>Shipment/UltimateDropOffDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Ultimate Drop Off.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date of ultimate drop off
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/EarliestPickUpDate ************************************************-->
+<h3><a name="Shipment/EarliestPickUpDate"></a>Shipment/EarliestPickUpDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Earliest Pick Up.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date of Earliest Pick
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/LatestPickUpDate ************************************************-->
+<h3><a name="Shipment/LatestPickUpDate"></a>Shipment/LatestPickUpDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Latest Pick Up.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date of latest pickup
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/EarliestDropOffDate ************************************************-->
+<h3><a name="Shipment/EarliestDropOffDate"></a>Shipment/EarliestDropOffDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Earliest Drop Off.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date of earliest drop off
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/LatestDropOffDate ************************************************-->
+<h3><a name="Shipment/LatestDropOffDate"></a>Shipment/LatestDropOffDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Latest Drop Off.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date of latest drop off
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/PointofStagingCode ************************************************-->
+<h3><a name="Shipment/PointofStagingCode"></a>Shipment/PointofStagingCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Pointof Staging.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Code for Point of Staging
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/FOBPointCode ************************************************-->
+<h3><a name="Shipment/FOBPointCode"></a>Shipment/FOBPointCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment. FOB Point.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Code for FOB Point
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/PointOfLoadingCode ************************************************-->
+<h3><a name="Shipment/PointOfLoadingCode"></a>Shipment/PointOfLoadingCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Point Of Loading.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Code for Point Of Loading
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/DockCode ************************************************-->
+<h3><a name="Shipment/DockCode"></a>Shipment/DockCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Dock.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Customer Dock Code
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/RoutingInstruction ************************************************-->
+<h3><a name="Shipment/RoutingInstruction"></a>Shipment/RoutingInstruction</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Routing Instruction.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Instruction about Routing
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/ShipmentInstruction ************************************************-->
+<h3><a name="Shipment/ShipmentInstruction"></a>Shipment/ShipmentInstruction</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Shipment Instruction.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Instructions about Shipping
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/FreightTermCode ************************************************-->
+<h3><a name="Shipment/FreightTermCode"></a>Shipment/FreightTermCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Freight Term.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Freight Terms
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/TotalFreightAmount ************************************************-->
+<h3><a name="Shipment/TotalFreightAmount"></a>Shipment/TotalFreightAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Total Freight.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total Freight Amount
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/VehicleNumber ************************************************-->
+<h3><a name="Shipment/VehicleNumber"></a>Shipment/VehicleNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Vehicle Number.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Vehicle Number
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/PackingSlipNumber ************************************************-->
+<h3><a name="Shipment/PackingSlipNumber"></a>Shipment/PackingSlipNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Packing Slip Number.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Packing Slip Number
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/WaybillNumber ************************************************-->
+<h3><a name="Shipment/WaybillNumber"></a>Shipment/WaybillNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Waybill Number.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Waybill Number
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/GrossWeight ************************************************-->
+<h3><a name="Shipment/GrossWeight"></a>Shipment/GrossWeight</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Gross Weight.  Measure</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Shipment Gross Weight
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#MeasureType">MeasureType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/NetWeight ************************************************-->
+<h3><a name="Shipment/NetWeight"></a>Shipment/NetWeight</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Net Weight.  Measure</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Shipment net weight
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#MeasureType">MeasureType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/TareWeight ************************************************-->
+<h3><a name="Shipment/TareWeight"></a>Shipment/TareWeight</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Tare Weight.  Measure</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Shipment Tare weight
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#MeasureType">MeasureType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/ShipmentVolume ************************************************-->
+<h3><a name="Shipment/ShipmentVolume"></a>Shipment/ShipmentVolume</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Shipment Volume.  Measure</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Shipment Volume
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#MeasureType">MeasureType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/ShipUnitQuantity ************************************************-->
+<h3><a name="Shipment/ShipUnitQuantity"></a>Shipment/ShipUnitQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Ship Unit.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total Shipment Unit Count
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Shipment/HazardousMaterialIndicator ************************************************-->
+<h3><a name="Shipment/HazardousMaterialIndicator"></a>Shipment/HazardousMaterialIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment.  Hazardous Material.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates if the shipment is Hazardous
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem ************************************************-->
+<h3><a name="ShipmentItem"></a>ShipmentItem</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Defines/holds the attributes of a unpacked item or items within a container. For e.g. an item is packed in a container or loose item.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ShipmentItem Attributes ************************************************-->
+<a href="#ShipmentItem/Name">Name</a><br/>
+<a href="#ShipmentItem/Description">Description</a><br/>
+<a href="#ShipmentItem/ItemLotNumber">ItemLotNumber</a><br/>
+<a href="#ShipmentItem/OrderedQuantity">OrderedQuantity</a><br/>
+<a href="#ShipmentItem/ShippedQuantity">ShippedQuantity</a><br/>
+<a href="#ShipmentItem/BackorderedQuantity">BackorderedQuantity</a><br/>
+<a href="#ShipmentItem/CanceledQuantity">CanceledQuantity</a><br/>
+<a href="#ShipmentItem/ItemNetWeight">ItemNetWeight</a><br/>
+<a href="#ShipmentItem/ItemVolume">ItemVolume</a><br/>
+<a href="#ShipmentItem/HazardClassCode">HazardClassCode</a><br/>
+<a href="#ShipmentItem/RequestedDate">RequestedDate</a><br/>
+<a href="#ShipmentItem/PromisedDate">PromisedDate</a><br/>
+<a href="#ShipmentItem/ContainerSealNumber">ContainerSealNumber</a><br/>
+<a href="#ShipmentItem/TrackingID">TrackingID</a><br/>
+<a href="#ShipmentItem/PackingInstruction">PackingInstruction</a><br/>
+<a href="#ShipmentItem/EndingSerialNumber">EndingSerialNumber</a><br/>
+<a href="#ShipmentItem/StartingSerialNumber">StartingSerialNumber</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ShipmentItem Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#SalesOrderReference">SalesOrderReference</a></td>
+             <td>Shipment Item.  Sales Order Reference.  Sales Order</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to a Sales Order
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ItemReference">ItemReference</a></td>
+             <td>Shipment Item.  Item Reference.  Item</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to the item that's being transported
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#PurchaseOrderReference">PurchaseOrderReference</a></td>
+             <td>Shipment Item.  Purchase Order Reference.  Purchase Order</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to a Purchase Order
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ShipmentItemCharge">ShipmentItemCharge</a></td>
+             <td> Shipment Item.  Shipment Item Charge.  Shipment Item Charge</td>
+     </tr>
+     <tr>
+             <td> 
+Shipment Charge at (unpacked) Line level         
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/Name ************************************************-->
+<h3><a name="ShipmentItem/Name"></a>ShipmentItem/Name</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Name.  Name</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Item Name
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#NameType">NameType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/Description ************************************************-->
+<h3><a name="ShipmentItem/Description"></a>ShipmentItem/Description</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Description.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Description of the Container
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/ItemLotNumber ************************************************-->
+<h3><a name="ShipmentItem/ItemLotNumber"></a>ShipmentItem/ItemLotNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Item Lot Number.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Item Lot (only for lot ontrolled items)
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/OrderedQuantity ************************************************-->
+<h3><a name="ShipmentItem/OrderedQuantity"></a>ShipmentItem/OrderedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Ordered.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Ordered Quantity
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/ShippedQuantity ************************************************-->
+<h3><a name="ShipmentItem/ShippedQuantity"></a>ShipmentItem/ShippedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Shipped.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity Shipped
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/BackorderedQuantity ************************************************-->
+<h3><a name="ShipmentItem/BackorderedQuantity"></a>ShipmentItem/BackorderedQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Backordered.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Backordered Quantity
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/CanceledQuantity ************************************************-->
+<h3><a name="ShipmentItem/CanceledQuantity"></a>ShipmentItem/CanceledQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Canceled.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Canceled Quantity 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/ItemNetWeight ************************************************-->
+<h3><a name="ShipmentItem/ItemNetWeight"></a>ShipmentItem/ItemNetWeight</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Item Net Weight.  Measure</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Item Net Weight
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#MeasureType">MeasureType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/ItemVolume ************************************************-->
+<h3><a name="ShipmentItem/ItemVolume"></a>ShipmentItem/ItemVolume</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Item Volume.  Measure</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Volume of the Item
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#MeasureType">MeasureType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/HazardClassCode ************************************************-->
+<h3><a name="ShipmentItem/HazardClassCode"></a>ShipmentItem/HazardClassCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Hazard Class.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Hazard Class
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/RequestedDate ************************************************-->
+<h3><a name="ShipmentItem/RequestedDate"></a>ShipmentItem/RequestedDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Requested.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Requested Date
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/PromisedDate ************************************************-->
+<h3><a name="ShipmentItem/PromisedDate"></a>ShipmentItem/PromisedDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Promised.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Promised Date
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/ContainerSealNumber ************************************************-->
+<h3><a name="ShipmentItem/ContainerSealNumber"></a>ShipmentItem/ContainerSealNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Container Seal Number.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Container Seal Number
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/TrackingID ************************************************-->
+<h3><a name="ShipmentItem/TrackingID"></a>ShipmentItem/TrackingID</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Tracking.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Tracking ID
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/PackingInstruction ************************************************-->
+<h3><a name="ShipmentItem/PackingInstruction"></a>ShipmentItem/PackingInstruction</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Packing Instruction.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Packing Instruction
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/EndingSerialNumber ************************************************-->
+<h3><a name="ShipmentItem/EndingSerialNumber"></a>ShipmentItem/EndingSerialNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Ending Serial Number.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Ending Serial Number
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItem/StartingSerialNumber ************************************************-->
+<h3><a name="ShipmentItem/StartingSerialNumber"></a>ShipmentItem/StartingSerialNumber</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item.  Starting Serial Number.  Identifier</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Starting Serial Number
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../Common/V2/DataTypes.html#IdentifierType">IdentifierType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentItemCharge ************************************************-->
+<h3><a name="ShipmentItemCharge"></a>ShipmentItemCharge</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Item Charge. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Shipment Charge at (unpacked) Line level         
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ShipmentItemCharge Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ShipmentItemCharge Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Shipment Item Charge.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of a Shipment Item Charge.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#Charge">Charge</a></td>
+             <td> Shipment Item Charge.  Charge.  Charge</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ShipmentCharge ************************************************-->
+<h3><a name="ShipmentCharge"></a>ShipmentCharge</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Shipment Charge. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Defines/holds the attributes of charges for a Shipment or Unit or Container or Line in ASN. For example, charges belongs to the Shipment such as Freight Charge, Handling Charges, etc.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ShipmentCharge Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ShipmentCharge Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Shipment Charge.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Unique identification of a Shipment Charge.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#Charge">Charge</a></td>
+             <td> Shipment Charge.  Charge.  Charge</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+</body>
+</html>

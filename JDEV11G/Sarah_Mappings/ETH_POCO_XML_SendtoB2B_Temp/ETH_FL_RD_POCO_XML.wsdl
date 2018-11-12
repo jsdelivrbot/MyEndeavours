@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_FL_RD_POCO_XML"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_FL_RD_POCO_XML"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_POCO_XML_SendtoB2B_Temp/ETH_FL_RD_POCO_XML"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://www.openapplications.org/oagis/9"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Read_POCOXML_plt" >
+    <plt:role name="Read_POCOXML_role" >
+      <plt:portType name="tns:Read_POCOXML_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.openapplications.org/oagis/9" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Infrastructure/OAGIS90/PurchaseOrderOAGIS90.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Read_POCOXML_msg">
+        <wsdl:part name="body" element="imp1:ChangePurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:portType name="Read_POCOXML_ptt">
+        <wsdl:operation name="Read_POCOXML">
+            <wsdl:input message="tns:Read_POCOXML_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

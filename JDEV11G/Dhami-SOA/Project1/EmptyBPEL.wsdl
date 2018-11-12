@@ -1,0 +1,35 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="EmptyBPEL"
+     targetNamespace="http://xmlns.oracle.com/Dhami_SOA_jws/Project1/EmptyBPEL"
+     xmlns:ns2="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:ns1="http://TargetNamespace.com/ETH_GLB_OAP_Betsy"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/Dhami_SOA_jws/Project1/EmptyBPEL"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="EmptyBPEL">
+        <plnk:role name="EmptyBPELProvider">
+            <plnk:portType name="client:EmptyBPEL"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/Dhami_SOA_jws/Project1/EmptyBPEL" schemaLocation="xsd/EmptyBPEL.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/ETH_GLB_OAP_Betsy" schemaLocation="xsd/PROCESS_PO_007.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="xsd/CustomPurchaseOrderEBO_1.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="EmptyBPELRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="EmptyBPEL">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:EmptyBPELRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

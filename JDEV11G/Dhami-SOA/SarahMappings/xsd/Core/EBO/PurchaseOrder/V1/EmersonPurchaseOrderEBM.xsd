@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - 30 Day Trial Edition 7.0.4.795 (http://www.liquid-technologies.com)-->
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.00 **
+** Date: Apr 14, 2008 **
+ 
+Copyright (c) 2007, Oracle. All rights reserved 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\EBO\PurchaseOrder\V1\PurchaseOrderEBM.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO PurchaseOrder EBM Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:xacml="urn:oasis:names:tc:xacml:2.0:policy:schema:cd:04" xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:corepurchaseordercust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/PurchaseOrder/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:xacml-context="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/EmersonPurchaseOrder/V1" xmlns:corecomEBO="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/EmersonPurchaseOrder/V1" version="1.00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- ====================================================================== -->
+  <!-- ==============  Imports and Includes   =============================== -->
+  <!-- ====================================================================== -->
+  <xsd:include schemaLocation="EmersonPurchaseOrderEBO.xsd" />
+  <xsd:import schemaLocation="../../../Common/V2/Meta.xsd" namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" />
+  <xsd:import schemaLocation="../../../Common/V2/CommonComponents.xsd" namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" />
+  <xsd:import schemaLocation="../../../Common/V2/CodeLists.xsd" namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" />
+  <xsd:import schemaLocation="../../../Common/V2/DataTypes.xsd" namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" />
+  <xsd:import schemaLocation="../../../Custom/EBO/PurchaseOrder/V1/CustomPurchaseOrderEBO.xsd" namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/PurchaseOrder/V1" />
+  <xsd:import schemaLocation="../../../Custom/Common/V2/CustomCommonComponents.xsd" namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" />
+  <xsd:import schemaLocation="../../../Common/V2/WS-Addressing.xsd" namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing" />
+  <xsd:import schemaLocation="../../../Common/V2/access_control-xacml-2.0-context-schema-cd-04.xsd" namespace="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" />
+  <xsd:import schemaLocation="../../../Common/V2/access_control-xacml-2.0-policy-schema-cd-04.xsd" namespace="urn:oasis:names:tc:xacml:2.0:policy:schema:cd:04" />
+  <!-- ====================================================================== -->
+  <xsd:annotation>
+    <xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description>PurchaseOrder EBM identifies all the service operations that are supported for the PurchaseOrder EBO</svcdoc:Description>
+				<svcdoc:Type>EBM</svcdoc:Type>
+				<svcdoc:Industry />
+				<svcdoc:EBOName>PurchaseOrderEBO</svcdoc:EBOName>
+			</svcdoc:EBO>
+		</xsd:documentation>
+  </xsd:annotation>
+  <!-- ====================================================================== -->
+  <xsd:complexType name="PurchaseOrderEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="EmersonPurchaseOrderEBOType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ====================================================================== -->
+  <!-- ==================Create PurchaseOrder Service=================== -->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="CreatePurchaseOrderEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element name="DataArea" type="CreatePurchaseOrderDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrderEBM" type="CreatePurchaseOrderEBMType" />
+  <xsd:complexType name="CreatePurchaseOrderDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:Create" />
+      <xsd:element ref="CreatePurchaseOrder" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CreatePurchaseOrderType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrder" type="CreatePurchaseOrderType" />
+  <!-- ====================================================================== -->
+  <!-- ============= Create PurchaseOrder Response Service ============= -->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="CreatePurchaseOrderResponseEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element name="DataArea" type="CreatePurchaseOrderResponseDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrderResponseEBM" type="CreatePurchaseOrderResponseEBMType" />
+  <xsd:complexType name="CreatePurchaseOrderResponseDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:CreateResponse" />
+      <xsd:element ref="CreatePurchaseOrderResponse" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CreatePurchaseOrderResponseType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrderResponse" type="CreatePurchaseOrderResponseType" />
+  <!-- ====================================================================== -->
+  <!-- ================ Create PurchaseOrder List Service ============== -->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="CreatePurchaseOrderListEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="DataArea" type="CreatePurchaseOrderListDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrderListEBM" type="CreatePurchaseOrderListEBMType" />
+  <xsd:complexType name="CreatePurchaseOrderListDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:Create" />
+      <xsd:element ref="CreatePurchaseOrderList" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CreatePurchaseOrderListType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrderList" type="CreatePurchaseOrderListType" />
+  <!-- ====================================================================== -->
+  <!-- =========== Create PurchaseOrder List Response Service ==========-->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="CreatePurchaseOrderListResponseEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="DataArea" type="CreatePurchaseOrderListResponseDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrderListResponseEBM" type="CreatePurchaseOrderListResponseEBMType" />
+  <xsd:complexType name="CreatePurchaseOrderListResponseDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:CreateResponse" />
+      <xsd:element ref="CreatePurchaseOrderListResponse" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CreatePurchaseOrderListResponseType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CreatePurchaseOrderListResponse" type="CreatePurchaseOrderListResponseType" />
+  <!-- ====================================================================== -->
+  <!-- ==================Update PurchaseOrder Service=================== -->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="UpdatePurchaseOrderEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element name="DataArea" type="UpdatePurchaseOrderDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrderEBM" type="UpdatePurchaseOrderEBMType" />
+  <xsd:complexType name="UpdatePurchaseOrderDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:Update" />
+      <xsd:element ref="UpdatePurchaseOrder" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UpdatePurchaseOrderType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrder" type="UpdatePurchaseOrderType" />
+  <!-- ====================================================================== -->
+  <!-- ============= Update PurchaseOrder Response Service ============= -->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="UpdatePurchaseOrderResponseEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element name="DataArea" type="UpdatePurchaseOrderResponseDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrderResponseEBM" type="UpdatePurchaseOrderResponseEBMType" />
+  <xsd:complexType name="UpdatePurchaseOrderResponseDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:UpdateResponse" />
+      <xsd:element ref="UpdatePurchaseOrderResponse" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UpdatePurchaseOrderResponseType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrderResponse" type="UpdatePurchaseOrderResponseType" />
+  <!-- ====================================================================== -->
+  <!-- ================ Update PurchaseOrder List Service ============== -->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="UpdatePurchaseOrderListEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="DataArea" type="UpdatePurchaseOrderListDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrderListEBM" type="UpdatePurchaseOrderListEBMType" />
+  <xsd:complexType name="UpdatePurchaseOrderListDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:Update" />
+      <xsd:element ref="UpdatePurchaseOrderList" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UpdatePurchaseOrderListType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrderList" type="UpdatePurchaseOrderListType" />
+  <!-- ====================================================================== -->
+  <!-- =========== Update PurchaseOrder List Response Service ==========-->
+  <!-- ====================================================================== -->
+  <xsd:complexType name="UpdatePurchaseOrderListResponseEBMType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="corecom:EBMType">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="DataArea" type="UpdatePurchaseOrderListResponseDataAreaType" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrderListResponseEBM" type="UpdatePurchaseOrderListResponseEBMType" />
+  <xsd:complexType name="UpdatePurchaseOrderListResponseDataAreaType">
+    <xsd:sequence>
+      <xsd:element ref="corecom:UpdateResponse" />
+      <xsd:element ref="UpdatePurchaseOrderListResponse" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UpdatePurchaseOrderListResponseType">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="PurchaseOrderEBMType" />
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="UpdatePurchaseOrderListResponse" type="UpdatePurchaseOrderListResponseType" />
+</xsd:schema>

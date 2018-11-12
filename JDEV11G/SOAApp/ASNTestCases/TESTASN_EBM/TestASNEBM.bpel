@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Feb 21 12:46:01 GMT+05:30 2012
+  Author:  NCholanekar
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TestASNEBM"
+               targetNamespace="http://xmlns.oracle.com/SHREE_19THFeb_APP/TESTASN_EBM/TestASNEBM"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SHREE_19THFeb_APP/TESTASN_EBM/TestASNEBM"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/SHREE_19THFeb_APP/TESTASN_CommonService/BPELProcess1"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="testasnebm_client" partnerLinkType="client:TestASNEBM" myRole="TestASNEBMProvider"/>
+    <partnerLink name="Service1" partnerLinkType="ns1:BPELProcess1"
+                 partnerRole="BPELProcess1Provider"
+                 myRole="BPELProcess1Requester"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:TestASNEBMRequestMessage"/>
+    <variable name="Invoke1_process_InputVariable"
+              messageType="ns1:BPELProcess1RequestMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in TestASNEBM.wsdl) -->
+    <receive name="receiveInput" partnerLink="testasnebm_client" portType="client:TestASNEBM" operation="process" variable="inputVariable" createInstance="yes"/>
+    <invoke name="Invoke1"
+            inputVariable="Invoke1_process_InputVariable"
+            partnerLink="Service1" portType="ns1:BPELProcess1"
+            operation="process" bpelx:invokeAsDetail="no"/>
+  </sequence>
+</process>

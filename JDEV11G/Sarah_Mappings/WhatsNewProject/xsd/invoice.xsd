@@ -1,0 +1,67 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://www.oracle.com/pcbpel/Invoice" xmlns="http://www.oracle.com/pcbpel/Invoice" targetNamespace="http://www.oracle.com/pcbpel/Invoice" xmlns:rc="http://www.oracle.com/pcbpel/ReasonCodes">
+	<xsd:import namespace="http://www.oracle.com/pcbpel/ReasonCodes" schemaLocation="ReasonCodes.xsd"/>
+	<xsd:element name="Invoice" type="InvoiceType"/>
+	<xsd:element name="Comment" type="xsd:anyType"/>
+	<xsd:element name="CommentList" type="CommentListType"/>
+	<xsd:complexType name="CommentListType">
+	    <xsd:sequence>
+	        <xsd:element ref="Comment" minOccurs="0"/>
+	    </xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InvoiceType">
+		<xsd:sequence>
+			<xsd:element ref="Comment"/>
+			<xsd:element name="Data" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:any processContents="skip"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ID" type="xsd:string"/>
+			<xsd:element name="ShippedTo" type="Address"/>
+			<xsd:element name="Items" type="ItemList"/>
+		</xsd:sequence>
+		<xsd:attribute name="InvoiceDate" type="xsd:date"/>
+	</xsd:complexType>
+	<xsd:complexType name="Address">
+		<xsd:sequence>
+			<xsd:element name="Recipient" type="xsd:string"/>
+			<xsd:element name="Street" type="xsd:string"/>
+			<xsd:element name="Street2" type="xsd:string"/>
+			<xsd:element name="City" type="xsd:string"/>
+			<xsd:element name="Region" type="xsd:string"/>
+			<xsd:element name="PostCode" type="xsd:string"/>
+			<xsd:element name="Country" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemList">
+		<xsd:sequence>
+			<xsd:element name="Item" type="ItemType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemType" abstract="true"/>
+	<xsd:complexType name="ShippedItemType">
+		<xsd:complexContent>
+			<xsd:extension base="ItemType">
+				<xsd:sequence>
+					<xsd:element name="ProductName" type="xsd:string"/>
+					<xsd:element name="Quantity" type="xsd:positiveInteger"/>
+					<xsd:element name="PriceCharged" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="UnShippedItemType">
+		<xsd:complexContent>
+			<xsd:extension base="ItemType">
+				<xsd:sequence>
+					<xsd:element name="ProductName" type="xsd:string"/>
+					<xsd:element name="Quantity" type="xsd:positiveInteger"/>
+					<xsd:element name="Comment" type="xsd:string"/>
+					<xsd:any namespace="http://www.oracle.com/pcbpel/ReasonCodes"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

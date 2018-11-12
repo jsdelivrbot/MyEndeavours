@@ -1,0 +1,21 @@
+<?binding.jca ETH_JMS_ENQ_Transaction_jms.jca?>
+<wsdl:definitions name="ETH_JMS_ENQ_Transaction" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/ETH_GLB_LSNA_DBListenerService/ETH_JMS_ENQ_Transaction" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/ETH_GLB_LSNA_DBListenerService/ETH_JMS_ENQ_Transaction" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="Produce_Message_plt">
+        <plt:role name="Produce_Message_role">
+            <plt:portType name="tns:Produce_Message_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns="http://www.w3.org/2001/XMLSchema">
+            <element name="opaqueElement" type="base64Binary"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Produce_Message_msg">
+        <wsdl:part name="opaque" element="opaque:opaqueElement"/>
+    </wsdl:message>
+    <wsdl:portType name="Produce_Message_ptt">
+        <wsdl:operation name="Produce_Message">
+            <wsdl:input message="tns:Produce_Message_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

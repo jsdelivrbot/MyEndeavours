@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ETH_BPEL_ReceiverTransactionInitiate" targetNamespace="http://xmlns.oracle.com/OutputServices/ETH_ReceiverTransactionInitiate_Composite/ETH_BPEL_ReceiverTransactionInitiate" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/OutputServices/ETH_ReceiverTransactionInitiate_Composite/ETH_BPEL_ReceiverTransactionInitiate" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns10="http://schema.emerson.com/ETH/Header" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/OutputServices/ETH_ReceiverTransactionInitiate_Composite/ETH_Sarah_DB_Call_Get_Transaction_PRC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_DBLISTENER2_PKG/GET_TRANSACTION_PRC/" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns3="http://schema.emerson.com/ETH/ErrorData" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/jms/OutputServices/ETH_ReceiverTransactionInitiate_Composite/ETH_JMS_ENQ_ErrorData_Topic" xmlns:ns5="http://xmlns.oracle.com/OutputServices/ETH_ReceiverTransactionInitiate_Composite/ETH_Mediator_Route_to_POABCS" xmlns:ns6="http://xmlns.oracle.com/OutputServices/ETH_ReceiverTransactionInitiate_Composite/ETH_Mediator_Route_to_POCOABCS" xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/OutputServices/ETH_ReceiverTransactionInitiate_Composite/ETH_DB_CallSP_GetReceiverTransaction" xmlns:ns8="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" xmlns:ns13="http://www.openapplications.org/oagis/9" xmlns:ns11="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:ns9="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:ns12="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" xmlns:ns14="http://fault.emerson.com/ETH" xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension" xmlns:ethsoa="http://customFunctions.emerson.com/eth3/SOA/dbresponse" xmlns:samsoa="http://www.samsoa-functions.com/HelloWorld" xmlns:ns15="http://fault.emerson.com/ETH/calllback" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ETH_JMS_ENQ_ErrorData_Topic" partnerLinkType="ns4:Produce_Error_Msg_plt" partnerRole="Produce_Error_Msg_role"/>
+    <partnerLink name="ETH_Mediator_Route_to_POABCS.ETH_Mediator_Route_to_POABCS" partnerLinkType="ns5:ETH_Mediator_Route_to_POABCS.ETH_Mediator_Route_to_POABCS" partnerRole="execute_ptt"/>
+    <partnerLink name="ETH_Mediator_Route_to_POCOABCS.ETH_Mediator_Route_to_POCOABCS" partnerLinkType="ns6:ETH_Mediator_Route_to_POCOABCS.ETH_Mediator_Route_to_POCOABCS" partnerRole="execute_ptt"/>
+    <partnerLink name="ETH_DB_CallSP_GetReceiverTransaction" partnerLinkType="ns7:ETH_DB_CallSP_GetReceiverTransaction_plt" partnerRole="ETH_DB_CallSP_GetReceiverTransaction_role"/>
+    <partnerLink name="eth_bpel_receivertransactioninitiate_client_ep" partnerLinkType="client:ETH_BPEL_ReceiverTransactionInitiate" partnerRole="ETH_BPEL_ReceiverTransactionInitiateRequester" myRole="ETH_BPEL_ReceiverTransactionInitiateProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="input_TradingPartnerID" messageType="client:ETH_BPEL_ReceiverTransactionInitiateRequestMessage"/>
+    <variable name="gvarMasterRecordId" type="xsd:string"/>
+    <variable name="gvarTransactionRecordId" type="xsd:string"/>
+    <variable name="gvarDocumentkey" type="xsd:string"/>
+    <variable name="gvarCompositeName" type="xsd:string"/>
+    <variable name="gvarTransactionSubType" type="xsd:string"/>
+    <variable name="gvarCompositeInstanceId" type="xsd:string"/>  
+    <variable name="gvarComponentName" type="xsd:string"/>
+    <variable name="gvarRcvMessagePayload" type="xsd:string"/>
+    <variable name="gvarTransactionType" type="xsd:string"/>
+    <variable name="gvarCompositeTitle" type="xsd:string"/>
+    <variable name="gvarTPIdRcv" type="xsd:string"/>
+    <variable name="gvarRecipientId" type="xsd:string"/>
+    <variable name="gvarReceiverReprocessNumber" type="xsd:string"/>
+    <variable name="gvarHostTradingPartner" type="xsd:string"/>
+    <variable name="gvarFileName" type="xsd:string"/>
+    <variable name="gvarSenderId" type="xsd:string"/>
+    <variable name="SOAPHeader" element="ns10:ETHHEADER"/>
+    <variable name="gvarSOAPHeaderProperty" element="ns10:HEADER_PROPERTY"/>
+    <variable name="gvarEnqErrorDataInput" messageType="ns4:Produce_Error_Msg_msg"/>
+    <variable name="outputVariable" messageType="client:ETH_BPEL_ReceiverTransactionInitiateResponseMessage"/>
+    <variable name="gvarFaultState" type="xsd:string"/>
+  </variables>
+  <faultHandlers id="BpFhs0">
+    <catch faultName="ns15:faultCallback" id="BpCFt0">
+      <sequence name="Sequence_faultCallback_Handler" id="BpSeq0">
+        <assign name="Assign_fault" id="BpAss0">
+          <copy>
+            <from variable="gvarFaultState"/>
+            <to variable="outputVariable" part="payload" query="/client:processResponse/client:result"/>
+          </copy>
+        </assign>
+        <invoke name="callbackClient" inputVariable="outputVariable" bpelx:invokeAsDetail="no" partnerLink="eth_bpel_receivertransactioninitiate_client_ep" portType="client:ETH_BPEL_ReceiverTransactionInitiateCallback" operation="processResponse" id="BpInv0"/>
+      </sequence>
+    </catch>
+    <catchAll id="BpCAl0">
+      <sequence name="Sequence_FaultHandler" id="BpSeq1">
+        <assign name="Assign_Error_Input" id="BpAss1">
+          <copy>
+            <from expression="string('SOA')"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_SOURCE"/>
+          </copy>
+          <copy>
+            <from variable="gvarSenderId"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:SENDER_ID"/>
+          </copy>
+          <copy>
+            <from variable="gvarMasterRecordId"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:MASTER_RECORD_ID"/>
+          </copy>
+          <copy>
+            <from variable="gvarTransactionRecordId"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:TRANSACTION_RECORD_ID"/>
+          </copy>
+          <copy>
+            <from variable="gvarDocumentkey"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:DOCUMENT_KEY"/>
+          </copy>
+          <copy>
+            <from variable="gvarCompositeName"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_NAME"/>
+          </copy>
+          <copy>
+            <from variable="gvarComponentName"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPONENT_NAME"/>
+          </copy>
+          <copy>
+            <from variable="gvarRecipientId"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:RECEIVER_ID"/>
+          </copy>
+          <copy>
+            <from variable="gvarCompositeInstanceId"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_INSTANCE_ID"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERRORDATETIME"/>
+          </copy>
+          <copy>
+            <from expression="string('2011')"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_NUMBER"/>
+          </copy>
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_EXCEPTIONS"/>
+          </copy>
+          <copy>
+            <from expression="concat('Error Occurred in ReceiverTransactionInitiate SOA Process.Please look into Instance Number - ',string(ora:getComponentInstanceId()))"/>
+            <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_DESCRIPTION"/>
+          </copy>
+          <copy>
+            <from variable="gvarFaultState"/>
+            <to variable="outputVariable" part="payload" query="/client:processResponse/client:result"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_GlobalCatchAll_Handle" inputVariable="gvarEnqErrorDataInput" partnerLink="ETH_JMS_ENQ_ErrorData_Topic" portType="ns4:Produce_Error_Msg_ptt" operation="Produce_Error_Msg" bpelx:invokeAsDetail="no" id="BpInv1"/>
+        <invoke name="callbackClient" bpelx:invokeAsDetail="no" inputVariable="outputVariable" partnerLink="eth_bpel_receivertransactioninitiate_client_ep" portType="client:ETH_BPEL_ReceiverTransactionInitiateCallback" operation="processResponse" id="BpInv2"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq2">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_BPEL_ReceiverTransactionInitiate.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_bpel_receivertransactioninitiate_client_ep" portType="client:ETH_BPEL_ReceiverTransactionInitiate" operation="process" variable="input_TradingPartnerID" createInstance="yes" id="BpRcv0"/>
+    <assign name="Assign_Data_to_GlobalVariables" id="BpAss2">
+      <copy>
+        <from expression="ora:getCompositeInstanceId()"/>
+        <to variable="gvarCompositeInstanceId"/>
+      </copy>
+      <copy>
+        <from expression="string('FAILURE')"/>
+        <to variable="gvarFaultState"/>
+      </copy>
+      <copy>
+        <from expression="ora:getComponentName()"/>
+        <to variable="gvarComponentName"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCompositeName()"/>
+        <to variable="gvarCompositeName"/>
+      </copy>
+      <copy>
+        <from variable="input_TradingPartnerID" part="payload" query="/client:process/client:tradingPartnerSystemID"/>
+        <to variable="gvarTPIdRcv"/>
+      </copy>
+      <copy>
+        <from variable="input_TradingPartnerID" part="payload" query="/client:process/client:tradingPartnerSystemID"/>
+        <to variable="gvarSenderId"/>
+      </copy>
+    </assign>
+    <scope name="Scope_Get_Most_Eligible_Transaction" variableAccessSerializable="no" id="BpScp0">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Get_Most_Eligible_Transaction</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="lvarResponseCode" type="xsd:string"/>
+        <variable name="lvarErrorCodeNumber" type="xsd:string"/>
+        <variable name="lvarErrorDescription" type="xsd:string"/>
+        <variable name="lvarGetDBTransactionInput" messageType="ns7:args_in_msg"/>
+        <variable name="lvarGetDBTransactionOutput" messageType="ns7:args_out_msg"/>
+        <variable name="lvarRollbackFlag" type="xsd:int"/>
+        <variable name="lvargetDBResponse" type="xsd:string"/>
+        <variable name="lvarEnqErrorDataInput" messageType="ns4:Produce_Error_Msg_msg"/>
+      </variables>
+      <faultHandlers id="BpFhs1">
+        <catchAll id="BpCAl1">
+          <sequence name="Sequence_FaultHandler" id="BpSeq3">
+            <assign name="Assign_Error_Input" id="BpAss3">
+              <copy>
+                <from expression="string('SOA')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_SOURCE"/>
+              </copy>
+              <copy>
+                <from variable="gvarSenderId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:SENDER_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarMasterRecordId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:MASTER_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarTransactionRecordId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:TRANSACTION_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarDocumentkey"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:DOCUMENT_KEY"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeName"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarComponentName"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPONENT_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeInstanceId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_INSTANCE_ID"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_EXCEPTIONS"/>
+              </copy>
+              <copy>
+                <from expression="string('2138')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_NUMBER"/>
+              </copy>
+              <copy>
+                <from variable="gvarRecipientId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:RECEIVER_ID"/>
+              </copy>
+              <copy>
+                <from expression="xp20:current-dateTime()"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERRORDATETIME"/>
+              </copy>
+              <copy>
+                <from expression="string('Error While calling DBListener2 Database Procedure')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_DESCRIPTION"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_catchAll_Handle" bpelx:invokeAsDetail="no" inputVariable="gvarEnqErrorDataInput" partnerLink="ETH_JMS_ENQ_ErrorData_Topic" portType="ns4:Produce_Error_Msg_ptt" operation="Produce_Error_Msg" id="BpInv3"/>
+            <throw name="RethrowFaultforCallback" faultName="ns15:faultCallback" id="BpThw0"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_Get_Most_Eligible_Transaction" id="BpSeq4">
+        <assign name="Assign_Data_to_lvarGetDBTransactionInput" id="BpAss4">
+          <copy>
+            <from variable="gvarComponentName"/>
+            <to variable="lvarGetDBTransactionInput" part="InputParameters" query="/ns2:InputParameters/ns2:P_CALLER_NAME"/>
+          </copy>
+          <copy>
+            <from expression="2"/>
+            <to variable="lvarGetDBTransactionInput" part="InputParameters" query="/ns2:InputParameters/ns2:P_SUBMISSION_POINT"/>
+          </copy>
+          <copy>
+            <from expression="string('TPRT')"/>
+            <to variable="lvarGetDBTransactionInput" part="InputParameters" query="/ns2:InputParameters/ns2:P_REGISTRATION_CODE"/>
+          </copy>
+          <copy>
+            <from variable="gvarTPIdRcv"/>
+            <to variable="lvarGetDBTransactionInput" part="InputParameters" query="/ns2:InputParameters/ns2:P_TRADING_PARTNER_ID"/>
+          </copy>
+          <copy>
+            <from variable="gvarCompositeInstanceId"/>
+            <to variable="lvarGetDBTransactionInput" part="InputParameters" query="/ns2:InputParameters/ns2:P_SOA_INSTANCE_ID"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="lvarGetDBTransactionInput" part="InputParameters" query="/ns2:InputParameters/ns2:P_REG_DATETIME"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_ETH_DB_Call_Get_Transaction_PRC" inputVariable="lvarGetDBTransactionInput" outputVariable="lvarGetDBTransactionOutput" partnerLink="ETH_DB_CallSP_GetReceiverTransaction" portType="ns7:ETH_DB_CallSP_GetReceiverTransaction_ptt" operation="ETH_DB_CallSP_GetReceiverTransaction" bpelx:invokeAsDetail="no" id="BpInv4"/>
+        <assign name="Assign_lvarGetDBTransactionOutput_to_GlobalVariables" id="BpAss5">
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_MASTER_RECORD_ID"/>
+            <to variable="gvarMasterRecordId"/>
+          </copy>
+          <copy>
+            <from expression="1"/>
+            <to variable="lvarRollbackFlag"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_REPROCESS_NUMBER"/>
+            <to variable="gvarReceiverReprocessNumber"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_TRANSACTION_TYPE"/>
+            <to variable="gvarTransactionType"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_TP_ID_SENDER"/>
+            <to variable="gvarSenderId"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_TRANSACTION_SUBTYPE"/>
+            <to variable="gvarTransactionSubType"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_DOCUMENT_KEY"/>
+            <to variable="gvarDocumentkey"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_PAYLOAD_CAN"/>
+            <to variable="gvarRcvMessagePayload"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_HOST_TRADING_PARTNER"/>
+            <to variable="gvarHostTradingPartner"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_RESPONSECODE"/>
+            <to variable="lvarResponseCode"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_ERRORCODENUMBER"/>
+            <to variable="lvarErrorCodeNumber"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_ERRORDESCRIPTION"/>
+            <to variable="lvarErrorDescription"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_TXN_RECORD_ID"/>
+            <to variable="gvarTransactionRecordId"/>
+          </copy>
+          <copy>
+            <from variable="lvarGetDBTransactionOutput" part="OutputParameters" query="/ns2:OutputParameters/ns2:P_RECIPIENT_ID"/>
+            <to variable="gvarRecipientId"/>
+          </copy>
+        </assign>
+        <assign name="Assign_Mapped_DBResponse_to_lvargetDBResponse" id="BpAss6">
+          <copy>
+            <from expression="ethCustomSOA:evaluateDBResponse($lvarResponseCode, $lvarErrorCodeNumber, $lvarRollbackFlag)"/>
+            <to variable="lvargetDBResponse"/>
+          </copy>
+        </assign>
+        <switch name="Switch_Either_TransactionReceived" id="BpSwt0">
+          <case condition="bpws:getVariableData('lvargetDBResponse') = 'FAILURE' and bpws:getVariableData('lvarResponseCode') = 1">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">NO_TRANSACTION</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence_handle_No_Transaction" id="BpSeq5">
+              <assign name="Assign_CompositeTitle" id="BpAss7">
+                <copy>
+                  <from expression="ora:setCompositeInstanceTitle(concat('No Transaction - ',bpws:getVariableData('gvarSenderId')))"/>
+                  <to variable="gvarCompositeTitle"/>
+                </copy>
+                <copy>
+                  <from expression="string('NO_TRANSACTION')"/>
+                  <to variable="outputVariable" part="payload" query="/client:processResponse/client:result"/>
+                </copy>
+              </assign>
+              <invoke name="callbackClient" bpelx:invokeAsDetail="no" inputVariable="outputVariable" partnerLink="eth_bpel_receivertransactioninitiate_client_ep" portType="client:ETH_BPEL_ReceiverTransactionInitiateCallback" operation="processResponse" id="BpInv5"/>
+              <terminate name="NO_Transaction" id="BpTer0"/>
+            </sequence>
+          </case>
+          <case condition="bpws:getVariableData('lvargetDBResponse') = 'SUCCESS'">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">SUCCESS</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence_TransactionReceived" id="BpSeq6">
+              <assign name="Assign_DocumentKey_to_CompositeTitle" id="BpAss8">
+                <copy>
+                  <from expression="ora:setCompositeInstanceTitle(concat($gvarDocumentkey,' - ',bpws:getVariableData('gvarSenderId')))"/>
+                  <to variable="gvarCompositeTitle"/>
+                </copy>
+                <copy>
+                  <from expression="string('TRANSACTION_FAILURE')"/>
+                  <to variable="gvarFaultState"/>
+                </copy>
+                <copy>
+                  <from variable="gvarDocumentkey"/>
+                  <to variable="outputVariable" part="payload" query="/client:processResponse/client:result"/>
+                </copy>
+              </assign>
+              <empty name="Transaction_Received" id="BpEmp0"/>
+            </sequence>
+          </case>
+          <case condition="bpws:getVariableData('lvargetDBResponse') = 'DB_FAILURE'">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">DB_FAILURE</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence_Handle_DBFailure_Response" id="BpSeq7">
+              <assign name="Assign_Data_to_lvarEnqErrorDataInput" id="BpAss9">
+                <copy>
+                  <from expression="string('DEAD')"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_SOURCE"/>
+                </copy>
+                <copy>
+                  <from variable="input_TradingPartnerID" part="payload" query="/client:process/client:tradingPartnerSystemID"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:SENDER_ID"/>
+                </copy>
+                <copy>
+                  <from variable="gvarMasterRecordId"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:MASTER_RECORD_ID"/>
+                </copy>
+                <copy>
+                  <from variable="gvarTransactionRecordId"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:TRANSACTION_RECORD_ID"/>
+                </copy>
+                <copy>
+                  <from expression="concat(' DB procedure - GET_TRANSACTION_PRC  returned DB Error ', bpws:getVariableData('lvarErrorCodeNumber'),' with Response Code ', $lvarResponseCode)"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_DESCRIPTION"/>
+                </copy>
+                <copy>
+                  <from expression="concat(' DB procedure - GET_TRANSACTION_PRC   returned DB Error ', bpws:getVariableData('lvarErrorCodeNumber'),' with Response Code ', $lvarResponseCode)"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_EXCEPTIONS"/>
+                </copy>
+                <copy>
+                  <from variable="gvarRecipientId"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:RECEIVER_ID"/>
+                </copy>
+                <copy>
+                  <from variable="gvarComponentName"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPONENT_NAME"/>
+                </copy>
+                <copy>
+                  <from variable="gvarCompositeName"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_NAME"/>
+                </copy>
+                <copy>
+                  <from variable="gvarCompositeInstanceId"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_INSTANCE_ID"/>
+                </copy>
+                <copy>
+                  <from expression="ora:getCurrentDateTime()"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERRORDATETIME"/>
+                </copy>
+                <copy>
+                  <from variable="gvarRcvMessagePayload"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:PAYLOAD"/>
+                </copy>
+                <copy>
+                  <from variable="gvarDocumentkey"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:DOCUMENT_KEY"/>
+                </copy>
+                <copy>
+                  <from variable="lvarErrorCodeNumber"/>
+                  <to variable="lvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_NUMBER"/>
+                </copy>
+                <copy>
+                  <from expression="string('FAILURE')"/>
+                  <to variable="outputVariable" part="payload" query="/client:processResponse/client:result"/>
+                </copy>
+              </assign>
+              <invoke name="Invoke_ETH_JMS_ENQ_ErrorData_Topic" bpelx:invokeAsDetail="no" inputVariable="lvarEnqErrorDataInput" partnerLink="ETH_JMS_ENQ_ErrorData_Topic" portType="ns4:Produce_Error_Msg_ptt" operation="Produce_Error_Msg" id="BpInv6"/>
+              <invoke name="callbackClient" inputVariable="outputVariable" partnerLink="eth_bpel_receivertransactioninitiate_client_ep" portType="client:ETH_BPEL_ReceiverTransactionInitiateCallback" operation="processResponse" bpelx:invokeAsDetail="no" id="BpInv7"/>
+              <terminate name="Abort_The_Flow" id="BpTer1"/>
+            </sequence>
+          </case>
+          <otherwise>
+            <terminate name="Abort_The_Flow" id="BpTer2"/>
+          </otherwise>
+        </switch>
+      </sequence>
+    </scope>
+    <bpelx:exec name="Java_EvaluateReceiverReprocessCount" version="1.5" language="java" id="BxExe0">
+      <![CDATA[/*Write your java code below e.g.    
+	System.out.println("Hello, World");   
+*/   
+String reprocessCount = (String)getVariableData("gvarReceiverReprocessNumber");      
+       
+if(reprocessCount==null || "".equalsIgnoreCase(reprocessCount)){       
+  reprocessCount = "00";      
+  addAuditTrailEntry("gvarReceiverReprocessNumber is NULL so reset to 0");         
+}       
+else{       
+      reprocessCount = reprocessCount.trim();    
+      try{    
+        int reprocessCountNumber = Integer.parseInt(reprocessCount);  
+        reprocessCount = (reprocessCountNumber>=10)?reprocessCount:("0"+reprocessCount);  
+      }    
+      catch(Exception e){    
+        reprocessCount="00";    
+        addAuditTrailEntry("gvarReceiverReprocessNumber is Not A Number, so reset to 0");    
+      }    
+}       
+setVariableData("gvarReceiverReprocessNumber",reprocessCount);]]>
+    </bpelx:exec>
+    <assign name="Assign_SOAP_HEADER" id="BpAss10">
+      <copy>
+        <from expression="string('HOST_TRADING_PARTNER')"/>
+        <to variable="gvarSOAPHeaderProperty" query="/ns10:HEADER_PROPERTY/@name"/>
+      </copy>
+      <copy>
+        <from variable="gvarHostTradingPartner"/>
+        <to variable="gvarSOAPHeaderProperty" query="/ns10:HEADER_PROPERTY/@value"/>
+      </copy>
+      <copy>
+        <from variable="gvarSenderId"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:SENDER_ID"/>
+      </copy>
+      <copy>
+        <from variable="gvarMasterRecordId"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:MASTER_RECORD_ID"/>
+      </copy>
+      <copy>
+        <from variable="gvarTransactionRecordId"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:TRANSACTION_RECORD_ID"/>
+      </copy>
+      <copy>
+        <from variable="gvarDocumentkey"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:DOCUMENT_KEY"/>
+      </copy>
+      <copy>
+        <from variable="gvarTransactionSubType"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:TRANSACTION_SUBTYPE"/>
+      </copy>
+      <copy>
+        <from variable="gvarCompositeInstanceId"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:SOURCE_COMPOSITE_INSTANCE"/>
+      </copy>
+      <copy>
+        <from variable="gvarTransactionType"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:TRANSACTION_TYPE"/>
+      </copy>
+      <copy>
+        <from variable="gvarReceiverReprocessNumber"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:RECEIVER_REPROCESS_COUNT"/>
+      </copy>
+      <copy>
+        <from expression="string(null)"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:REPROCESS_COUNT"/>
+      </copy>
+      <copy>
+        <from variable="gvarRecipientId"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:RECEIVER_ID"/>
+      </copy>
+      <copy>
+        <from variable="gvarTPIdRcv"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:RECEIVER_SYSTEM_ID"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-dateTime()"/>
+        <to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:CURRENT_DATETIME"/>
+      </copy>
+      <bpelx:append>
+        <bpelx:from variable="gvarSOAPHeaderProperty" query="/ns10:HEADER_PROPERTY"/>
+        <bpelx:to variable="SOAPHeader" query="/ns10:ETHHEADER/ns10:HEADER_PROPERTY_SET"/>
+      </bpelx:append>
+    </assign>
+    <scope name="Scope_Parse_Payload_to_EBM" variableAccessSerializable="no" id="BpScp1">
+      <variables>
+        <variable name="Invoke_PORouter_InputVariable" messageType="ns5:requestMessage"/>
+        <variable name="Invoke_POCORouter_InputVariable" messageType="ns6:requestMessage"/>
+      </variables>
+      <faultHandlers id="BpFhs2">
+        <catch faultName="ns14:unidentifiedTransactionSubTypeFault" id="BpCFt1">
+          <sequence name="Sequence_FaultHandler" id="BpSeq8">
+            <assign name="Assign_Error_Input" id="BpAss11">
+              <copy>
+                <from expression="string('SOA')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_SOURCE"/>
+              </copy>
+              <copy>
+                <from variable="gvarSenderId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:SENDER_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarMasterRecordId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:MASTER_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarTransactionRecordId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:TRANSACTION_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarDocumentkey"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:DOCUMENT_KEY"/>
+              </copy>
+              <copy>
+                <from variable="gvarRecipientId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:RECEIVER_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeName"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarComponentName"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPONENT_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeInstanceId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_INSTANCE_ID"/>
+              </copy>
+              <copy>
+                <from expression="xp20:current-dateTime()"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERRORDATETIME"/>
+              </copy>
+              <copy>
+                <from expression="string('2140')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_NUMBER"/>
+              </copy>
+              <copy>
+                <from expression="concat('Unidentified Transaction SubType Encountered - ',bpws:getVariableData('gvarTransactionSubType'))"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_EXCEPTIONS"/>
+              </copy>
+              <copy>
+                <from expression="string('Transaction Sub-Type received is neither of following - PO, POCO, 850, 860')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_DESCRIPTION"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_unidentifiedTransactionSubTypeFault_Handle" bpelx:invokeAsDetail="no" inputVariable="gvarEnqErrorDataInput" partnerLink="ETH_JMS_ENQ_ErrorData_Topic" portType="ns4:Produce_Error_Msg_ptt" operation="Produce_Error_Msg" id="BpInv8"/>
+            <throw name="RethrowFaultforCallback" faultName="ns15:faultCallback" id="BpThw1"/>
+          </sequence>
+        </catch>
+        <catchAll id="BpCAl2">
+          <sequence name="Sequence_FaultHandler" id="BpSeq9">
+            <assign name="Assign_Error_Input" id="BpAss12">
+              <copy>
+                <from expression="string('SOA')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_SOURCE"/>
+              </copy>
+              <copy>
+                <from variable="gvarSenderId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:SENDER_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarMasterRecordId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:MASTER_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarTransactionRecordId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:TRANSACTION_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarDocumentkey"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:DOCUMENT_KEY"/>
+              </copy>
+              <copy>
+                <from expression="string('2134')"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_NUMBER"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERROR_EXCEPTIONS"/>
+              </copy>
+              <copy>
+                <from variable="gvarRecipientId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:RECEIVER_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeName"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarComponentName"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPONENT_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeInstanceId"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:COMPOSITE_INSTANCE_ID"/>
+              </copy>
+              <copy>
+                <from expression="xp20:current-dateTime()"/>
+                <to variable="gvarEnqErrorDataInput" part="body" query="/ns3:ETH_ErrorData/ns3:ERRORDATETIME"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_catchAll_Handle" bpelx:invokeAsDetail="no" partnerLink="ETH_JMS_ENQ_ErrorData_Topic" portType="ns4:Produce_Error_Msg_ptt" operation="Produce_Error_Msg" inputVariable="gvarEnqErrorDataInput" id="BpInv9"/>
+            <throw name="RethrowFaultforCallback" faultName="ns15:faultCallback" id="BpThw2"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <switch name="Switch_ProviderRouter" id="BpSwt1">
+        <case condition="(bpws:getVariableData('gvarTransactionSubType') = 'POCO'  or bpws:getVariableData('gvarTransactionSubType') = '860')">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">Transaction is POCO or 860</bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <sequence name="Sequence_POCORouter" id="BpSeq10">
+            <assign name="Assign_ParsedXML_to_RoutetoPOCOInput" id="BpAss13">
+              <copy>
+                <from expression="oraext:parseXML(bpws:getVariableData('gvarRcvMessagePayload'))"/>
+                <to variable="Invoke_POCORouter_InputVariable" part="request" query="/ns8:UpdatePurchaseOrderEBM"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_POCORouter" inputVariable="Invoke_POCORouter_InputVariable" partnerLink="ETH_Mediator_Route_to_POCOABCS.ETH_Mediator_Route_to_POCOABCS" portType="ns6:execute_ptt" operation="execute" bpelx:invokeAsDetail="no" bpelx:inputHeaderVariable="SOAPHeader" id="BpInv10"/>
+          </sequence>
+        </case>
+        <case condition="(bpws:getVariableData('gvarTransactionSubType') = 'PO'  or bpws:getVariableData('gvarTransactionSubType') = '850')">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">Transaction is PO or 850</bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <sequence name="Sequence_PORouter" id="BpSeq11">
+            <assign name="Assign_ParsedXML_to_RouteToPOInput" id="BpAss14">
+            <copy>
+                <from expression="oraext:parseXML(bpws:getVariableData('gvarRcvMessagePayload'))"/>
+                <to variable="Invoke_PORouter_InputVariable" part="request" query="/ns8:CreatePurchaseOrderEBM"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_PORouter" bpelx:invokeAsDetail="no" inputVariable="Invoke_PORouter_InputVariable" partnerLink="ETH_Mediator_Route_to_POABCS.ETH_Mediator_Route_to_POABCS" portType="ns5:execute_ptt" operation="execute" bpelx:inputHeaderVariable="SOAPHeader" id="BpInv11"/>
+          </sequence>
+        </case>
+        <otherwise>
+          <sequence name="Sequence_UnknownTransactionSubType" id="BpSeq12">
+            <empty name="Unidentified_TransactionSubType" id="BpEmp1"/>
+            <throw name="Throw_unidentifiedTransactionSubTypeFault" faultName="ns14:unidentifiedTransactionSubTypeFault" id="BpThw3"/>
+          </sequence>
+        </otherwise>
+      </switch>
+    </scope>
+    <invoke name="callbackClient" inputVariable="outputVariable" partnerLink="eth_bpel_receivertransactioninitiate_client_ep" portType="client:ETH_BPEL_ReceiverTransactionInitiateCallback" operation="processResponse" bpelx:invokeAsDetail="no" id="BpInv12"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed May 25 18:45:51 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

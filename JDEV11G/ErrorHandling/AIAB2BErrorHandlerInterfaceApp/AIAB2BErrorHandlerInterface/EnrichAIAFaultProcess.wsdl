@@ -1,0 +1,35 @@
+<wsdl:definitions
+     name="EnrichAIAFaultProcess"
+     targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:ns2="http://xmlns.oracle.com/AIAB2BErrorHandlerInterface/ProcessB2BError"
+     xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:pns1="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2/correlationset"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="EnrichAIAFaultProcess">
+        <plnk:role name="EnrichAIAFaultProcessProvider">
+            <plnk:portType name="corecom:EnrichAIAFaultProcess"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <bpws:propertyAlias propertyName="pns1:Prop1" xmlns:client="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+         messageType="client:ReceiveB2BErrorReqMsg" part="ReceiveB2BError" query="/client:Fault/client:FaultNotification"/>
+    <wsdl:import namespace="http://xmlns.oracle.com/AIAB2BErrorHandlerInterface/ProcessB2BError"
+         location="ProcessB2BError.wsdl"/>
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" elementFormDefault="qualified">
+            <xsd:include schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Core/Common/V2/Meta.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="EnrichAIAFaultProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:Fault"/>
+    </wsdl:message>
+    <wsdl:portType name="EnrichAIAFaultProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="ns1:EnrichAIAFaultProcessRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

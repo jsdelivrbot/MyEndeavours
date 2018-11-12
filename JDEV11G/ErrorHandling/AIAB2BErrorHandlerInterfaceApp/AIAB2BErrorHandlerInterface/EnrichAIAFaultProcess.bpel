@@ -1,0 +1,268 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Apr 15 15:49:35 IST 2009
+  Author:  pvaddana
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="EnrichAIAFaultProcess"
+               targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+               xmlns:xpath20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+               xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer/"
+               xmlns:task="http://xmlns.oracle.com/bpel/workflow/task"
+               xmlns:taskservice="http://xmlns.oracle.com/bpel/workflow/taskService"
+               xmlns:wfcommon="http://xmlns.oracle.com/bpel/workflow/common"
+               xmlns:wf="http://schemas.oracle.com/bpel/extension/workflow"
+               xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+               xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+               xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+        
+         xmlns:ns1="http://xmlns.oracle.com/AIAB2BErrorHandlerInterface/ProcessB2BError"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/top/ReadOracleB2BErrorDetails"
+         xmlns:ns4="http://xmlns.oracle.com/AIAB2BIntegrationApplication/AIAReadB2BErrorDetails"
+         xmlns:ns2="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess"
+         xmlns:ns5="http://xmlns.oracle.com/apps/aia/cavs/Any"
+         xmlns:ns6="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2/correlationset"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions">        
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="enrichaiafaultprocess_client"
+                 partnerLinkType="client:B2BInterface_PL"
+                 myRole="B2BInterface_Role"/>
+    <partnerLink myRole="AIAAsyncErrorHandlingBPELProcessRequester"
+                 name="AIAAsyncErrorHandlingProcessService"
+                 partnerRole="AIAAsyncErrorHandlingBPELProcessProvider"
+                 partnerLinkType="ns2:AIAAsyncErrorHandlingBPELProcess"/>
+    <partnerLink name="AIAReadB2BErrorDetails.AIAReadB2BErrorDetails"
+                 partnerRole="readB2BErrorDetails_ptt"
+                 partnerLinkType="ns4:AIAReadB2BErrorDetails.AIAReadB2BErrorDetails"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="AIAFault_InputVariable"
+              messageType="client:ReceiveB2BErrorReqMsg"/>
+    <variable name="AIAFault_ReadB2BMessageDetails_OutputVariable"
+              messageType="ns4:replyMessage"/>
+    <variable name="AIAFault_ReadB2BMessageDetails_InputVariable"
+              messageType="ns4:requestMessage"/>
+    <variable name="AIAAsyncEH_AIAFaultInputVariable"
+              messageType="ns2:AIAAsyncErrorHandlingBPELProcessRequestMessage"/>
+  </variables>
+  <faultHandlers/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in EnrichAIAFaultProcess.wsdl) -->
+    <receive name="receiveInput"
+             variable="AIAFault_InputVariable" createInstance="yes"
+             partnerLink="enrichaiafaultprocess_client"
+             portType="client:B2BInterface" operation="ReceiveB2BError"/>
+    <bpelx:exec name="TraceLog_AIAFaultInput" version="1.5" language="java">
+      <![CDATA[/*Write your java code below e.g.      
+	System.out.println("Hello, World");     
+*/     
+      
+	java.lang.Boolean traceLogEnabled;     
+         
+//java.lang.String AIAFault = (java.lang.String)getVariableData("AIAFault_InputVariable");    
+     
+traceLogEnabled = oracle.apps.aia.core.eh.logging.AIALogger.isTraceLoggingEnabled("INFO","{http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2}EnrichAIAFaultProcess");                                                                                       
+//setVariableData("TraceLogEnabled", traceLogEnabled);             
+     
+if (traceLogEnabled.booleanValue())                                                                                     
+{                                                                                                                                                                                           
+                            
+   System.out.println("****************Hello, World********************");    
+   //System.out.println("AIAFault----->"+AIAFault);       
+        
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("FINE",  null ,"*******Received AIAFault input to EnrichAIAFaultProcess********");    
+   //oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("INFO",  null ,AIAFault);    
+}]]>
+    </bpelx:exec>
+    <assign name="Assign_AIAFault_To_AIAFault">
+      <copy>
+        <from variable="AIAFault_InputVariable" part="ReceiveB2BError"
+              query="/client:Fault"/>
+        <to variable="AIAFault_ReadB2BMessageDetails_InputVariable"
+            part="request" query="/client:Fault"/>
+      </copy>
+    </assign>
+    <switch name="Switch_Invocation">
+      <case condition="aia:getSystemModuleProperty('ErrorHandler','EH.B2B.AIAFAULTENRICH.REQ',true())= 'true'">
+        <bpelx:annotation>
+          <bpelx:pattern>Check, if AIAReadB2BErrorDetails  invocation is enabled</bpelx:pattern>
+        </bpelx:annotation>
+        <sequence>
+          <invoke name="Invoke_ReadB2BErrorDetails"
+                  inputVariable="AIAFault_ReadB2BMessageDetails_InputVariable"
+                  outputVariable="AIAFault_ReadB2BMessageDetails_OutputVariable"
+                  portType="ns4:readB2BErrorDetails_ptt"
+                  partnerLink="AIAReadB2BErrorDetails.AIAReadB2BErrorDetails"
+                  operation="readB2BErrorDetails"/>
+          <assign name="Assign_PrepareFinal_AIAFault">
+            <copy>
+              <from variable="AIAFault_InputVariable" part="ReceiveB2BError"
+                    query="/client:Fault/client:B2BMReference/client:B2BMID"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:B2BMID"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_InputVariable" part="ReceiveB2BError"
+                    query="/client:Fault/client:B2BMReference/client:GatewayID"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:GatewayID"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_InputVariable" part="ReceiveB2BError"
+                    query="/client:Fault/client:FaultNotification/client:FaultMessage"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:FaultNotification/client:FaultMessage"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_ReadB2BMessageDetails_OutputVariable"
+                    part="reply"
+                    query="/client:Fault/client:B2BMReference/client:SenderTradingPartner/client:TradingPartnerID[1]"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:SenderTradingPartner/client:TradingPartnerID[1]"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_ReadB2BMessageDetails_OutputVariable"
+                    part="reply"
+                    query="/client:Fault/client:B2BMReference/client:ReceiverTradingPartner[1]/client:TradingPartnerID[1]"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:ReceiverTradingPartner[1]/client:TradingPartnerID[1]"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_ReadB2BMessageDetails_OutputVariable"
+                    part="reply"
+                    query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:TypeCode"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:TypeCode"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_ReadB2BMessageDetails_OutputVariable"
+                    part="reply"
+                    query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:Version"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:Version"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_ReadB2BMessageDetails_OutputVariable"
+                    part="reply"
+                    query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:TypeCode/@listAgencyID"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:TypeCode/@listAgencyID"/>
+            </copy>
+            <copy>
+              <from variable="AIAFault_ReadB2BMessageDetails_OutputVariable"
+                    part="reply"
+                    query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:TypeCode/@listVersionID"/>
+              <to variable="AIAAsyncEH_AIAFaultInputVariable"
+                  part="FaultMessage"
+                  query="/client:Fault/client:B2BMReference/client:B2BDocumentType/client:TypeCode/@listVersionID"/>
+            </copy>
+          </assign>
+        </sequence>
+      </case>
+      <otherwise>
+        <assign name="Assign_InputFaultToAIAAsyncFault">
+          <copy>
+            <from variable="AIAFault_InputVariable" part="ReceiveB2BError"
+                  query="/client:Fault"/>
+            <to variable="AIAAsyncEH_AIAFaultInputVariable" part="FaultMessage"
+                query="/client:Fault"/>
+          </copy>
+        </assign>
+      </otherwise>
+    </switch>
+    <bpelx:exec name="TraceLog_AIAFaultFinal" version="1.5" language="java">
+      <![CDATA[/*Write your java code below e.g.   
+	System.out.println("Hello, World");  
+*/  
+java.lang.Boolean traceLogEnabled;        
+//java.lang.String AIAFinalFault = (java.lang.String)getVariableData("AIAAsyncEH_AIAFaultInputVariable");    
+//oracle.xml.parser.v2.XMLElement 
+java.lang.String b2bdocType=""; 
+java.lang.String b2bdocTypeRev=""; 
+java.lang.String b2bdocSender=""; 
+java.lang.String b2bdocReceiver=""; 
+ 
+b2bdocType   = oracle.apps.aia.core.eh.AIAEHUtil.ConvertNodeToString((oracle.xml.parser.v2.XMLNode)getVariableData("AIAAsyncEH_AIAFaultInputVariable","FaultMessage","/client:Fault/client:B2BMReference/client:B2BDocumentType/client:TypeCode")); 
+ 
+b2bdocTypeRev= oracle.apps.aia.core.eh.AIAEHUtil.ConvertNodeToString((oracle.xml.parser.v2.XMLNode)getVariableData("AIAAsyncEH_AIAFaultInputVariable","FaultMessage","/client:Fault/client:B2BMReference/client:B2BDocumentType/client:Version")); 
+ 
+b2bdocSender = oracle.apps.aia.core.eh.AIAEHUtil.ConvertNodeToString((oracle.xml.parser.v2.XMLNode)getVariableData("AIAAsyncEH_AIAFaultInputVariable","FaultMessage","/client:Fault/client:B2BMReference/client:SenderTradingPartner/client:TradingPartnerID[1]")); 
+ 
+b2bdocReceiver = oracle.apps.aia.core.eh.AIAEHUtil.ConvertNodeToString((oracle.xml.parser.v2.XMLNode)getVariableData("AIAAsyncEH_AIAFaultInputVariable","FaultMessage","/client:Fault/client:B2BMReference/client:ReceiverTradingPartner[1]/client:TradingPartnerID[1]")); 
+    
+traceLogEnabled = oracle.apps.aia.core.eh.logging.AIALogger.isTraceLoggingEnabled("INFO","{http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2}EnrichAIAFaultProcess");                                                                                       
+//setVariableData("TraceLogEnabled", traceLogEnabled);             
+     
+if (traceLogEnabled.booleanValue())                                                                                     
+{                                                                                                                                                  
+                         
+   //System.out.println("AIAFinal with B2B Content----->"+b2bdocType+b2bdocTypeRev);             
+   //System.out.println("********B2BDetails**********"+AIAFinalFault);             
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("FINE",  null ,"*******Invoking AIAAsyncEHBPELProcess With AIAFault********");    
+   oracle.apps.aia.core.eh.logging.AIALogger.logTraceMessage("FINE",  null ,"B2BDocumentType-> "+b2bdocType+"\n"+ 
+                                                                           "B2BDocumentTypeVersion-> "+b2bdocTypeRev+"\n"+ 
+                                                                           "B2BDocumentSender-> "+b2bdocSender+"\n"+ 
+                                                                           "B2BDocumentReceiver-> "+b2bdocReceiver+"\n");    
+     
+}]]>
+    </bpelx:exec>
+    <invoke name="Invoke_AIAAsyncErrorHandler" inputVariable="AIAAsyncEH_AIAFaultInputVariable"
+            portType="ns2:AIAAsyncErrorHandlingBPELProcess"
+            partnerLink="AIAAsyncErrorHandlingProcessService"
+            operation="initiate"/>
+  </sequence>
+</process>

@@ -1,0 +1,15 @@
+<adapter-config name="aq_dq_mdn" adapter="AQ Adapter" wsdlLocation="aq_dq_mdn.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/ETH/B2B_DB" UIConnectionName="ethcustomschema"/>
+  <endpoint-activation portType="Dequeue_ptt" operation="Dequeue">
+    <activation-spec className="oracle.tip.adapter.aq.inbound.AQDequeueActivationSpec">
+<property name="DequeueCondition" value="msgid in (select msgid from ip_qtab tab where tab.user_data.msg_type='3' and tab.enq_time+(1/1440) &lt; sysdate)"/>
+      <property name="PayloadHeaderRequired" value="true"/>
+      <property name="Consumer" value="JEMISONDEMSEY"/>
+      <property name="QueueName" value="JEMISONDEMSEY_IN_QUEUE"/>
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+      <property name="DatabaseSchema" value="ETH_SOAINFRA"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

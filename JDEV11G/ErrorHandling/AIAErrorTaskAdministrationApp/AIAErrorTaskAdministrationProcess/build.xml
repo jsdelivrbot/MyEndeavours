@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+   <project name="ant-sca-deploy" default="CompileandDeploy" basedir=".">
+     <target name="CompileandDeploy">
+		<ant antfile="../scripts/ant-scap.xml"  inheritall="false">
+		<property file="build.properties"/>
+	</ant>
+		<ant antfile="../scripts/ant-sca-deploy.xml" inheritall="false">
+		<property file="build.properties"/>
+		</ant>
+      </target>
+ <target name="undeploy">
+		
+		<ant antfile="ant-sca-deploy.xml" target="undeploy"/>
+      </target>
+
+
+   </project>

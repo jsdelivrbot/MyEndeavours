@@ -1,0 +1,20 @@
+<adapter-config name="RND_FL_GET_Scheduled" adapter="File Adapter" wsdlLocation="RND_FL_GET_Scheduled.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" UIincludeWildcard="Scheduled*.txt"/>
+  <endpoint-activation portType="Read_ptt" operation="Read">
+    <activation-spec className="oracle.tip.adapter.file.inbound.FileActivationSpec" heartBeatInterval="10">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="30"/>
+      <property name="Recursive" value="false"/>
+      <property name="PollingFrequency" value="60"/>
+      <property name="LogicalDirectory" value="IN_DIR"/>
+      <property name="IncludeFiles" value="Scheduled.*\.txt"/>
+      <property name="UseHeaders" value="false"/>
+      <property name="heartBeatInterval">10</property>
+      <property name="schedulerCallout">DefaultSchedulerCalloutImpl</property>
+      <property name="endpointScheduleOn">0 0 11 * * ?</property>
+      <property name="endpointScheduleOff">0 0 12 * * ?</property>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

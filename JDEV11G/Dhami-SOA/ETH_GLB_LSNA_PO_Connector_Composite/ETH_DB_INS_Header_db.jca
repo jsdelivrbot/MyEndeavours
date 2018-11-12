@@ -1,0 +1,15 @@
+<adapter-config name="ETH_DB_INS_Header" adapter="Database Adapter" wsdlLocation="ETH_DB_INS_Header.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/ETH/AppDB" UIConnectionName="ETH_3" adapterRef=""/>
+  <endpoint-interaction portType="ETH_DB_INS_Header_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="ETH_DB_INS_Header.Master"/>
+      <property name="DmlType" value="insert"/>
+      <property name="OutputCompletedXml" value="true"/>
+      <property name="MappingsMetaDataURL" value="ETH_DB_INS_Header-or-mappings.xml"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,31 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="CustomHeaderSender_BPEL"
+     targetNamespace="http://xmlns.oracle.com/Dhami_SOA/SOAPCustomerHeaderSender/CustomHeaderSender_BPEL"
+     xmlns:ns1="http://xmlns.oracle.com/SOAPCustomerHeaderApp/SOAPCustomerHeaderTest/SOAPCustomerHeaderMediator"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/Dhami_SOA/SOAPCustomerHeaderSender/CustomHeaderSender_BPEL"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="CustomHeaderSender_BPEL">
+        <plnk:role name="CustomHeaderSender_BPELProvider">
+            <plnk:portType name="client:CustomHeaderSender_BPEL"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/SOAPCustomerHeaderApp/SOAPCustomerHeaderTest/SOAPCustomerHeaderMediator"
+         location="http://usmtnz-dinfap19.dev.emrsn.org:8120/soa-infra/services/ETH_Temp/SOAPCustomerHeaderTest/SOAPCustomerHeaderMediator.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/Dhami_SOA/SOAPCustomerHeaderSender/CustomHeaderSender_BPEL"
+                 schemaLocation="xsd/CustomHeaderSender_BPEL.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="CustomHeaderSender_BPELRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="CustomHeaderSender_BPEL">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:CustomHeaderSender_BPELRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

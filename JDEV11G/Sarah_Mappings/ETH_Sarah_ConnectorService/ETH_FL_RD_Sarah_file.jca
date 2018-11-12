@@ -1,0 +1,16 @@
+<adapter-config name="ETH_FL_RD_Sarah" adapter="File Adapter" wsdlLocation="ETH_FL_RD_Sarah.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter" UIincludeWildcard="PO*.xml"/>
+  <endpoint-activation portType="ReadSarah_ptt" operation="ReadSarah">
+    <activation-spec className="oracle.tip.adapter.file.inbound.FileActivationSpec">
+      <property name="DeleteFile" value="true"/>
+      <property name="MinimumAge" value="0"/>
+      <property name="Recursive" value="true"/>
+      <property name="PollingFrequency" value="60"/>
+      <property name="LogicalDirectory" value="INPUT_DIR"/>
+      <property name="IncludeFiles" value="PO.*\.xml"/>
+      <property name="UseHeaders" value="false"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

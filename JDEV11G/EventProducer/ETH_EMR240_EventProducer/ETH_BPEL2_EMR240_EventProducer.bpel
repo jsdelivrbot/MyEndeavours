@@ -1,0 +1,77 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Jun 24 19:37:39 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL2_EMR240_EventProducer"
+               targetNamespace="http://xmlns.oracle.com/EventProducer/ETH_EMR240_EventProducer/ETH_BPEL2_EMR240_EventProducer"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/EventProducer/ETH_EMR240_EventProducer/ETH_BPEL2_EMR240_EventProducer"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://schema.emerson.com/eth/events">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eth_bpel2_emr240_eventproducer_client" partnerLinkType="client:ETH_BPEL2_EMR240_EventProducer" myRole="ETH_BPEL2_EMR240_EventProducerProvider"/>
+    <partnerLink name="ETH_Mediator2_EMR240_EventProducer.ETH_Mediator2_EMR240_EventProducer"
+                 partnerLinkType="client:ETH_BPEL2_EMR240_EventProducer"
+                 partnerRole="ETH_BPEL2_EMR240_EventProducerProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_BPEL2_EMR240_EventProducerRequestMessage"/>
+    <variable name="Invoke1_process_InputVariable"
+              messageType="client:ETH_BPEL2_EMR240_EventProducerRequestMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_BPEL2_EMR240_EventProducer.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_bpel2_emr240_eventproducer_client" portType="client:ETH_BPEL2_EMR240_EventProducer" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/ns1:TransactionSubmission1/ns1:tradingPartnerSystemID"/>
+        <to variable="Invoke1_process_InputVariable" part="payload"
+            query="/ns1:TransactionSubmission1/ns1:tradingPartnerSystemID"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" bpelx:invokeAsDetail="no"
+            inputVariable="Invoke1_process_InputVariable"
+            partnerLink="ETH_Mediator2_EMR240_EventProducer.ETH_Mediator2_EMR240_EventProducer"
+            portType="client:ETH_BPEL2_EMR240_EventProducer"
+            operation="process"/>
+  </sequence>
+</process>

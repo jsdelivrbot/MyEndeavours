@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="ProcessPOETHReqABCSImpl"
+             targetNamespace="http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1"
+	     
+	     
+	     xmlns:oag7abo="http://xmlns.emrsn.com/CommonProcessPO_007"
+             xmlns:oag7abcs="http://xmlns.oracle.com/ABCSImpl/ETH/Core/ProcessPOETHReqABCSImpl/V1"
+	     xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" 
+             xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" 
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" >
+	
+	
+	<documentation>
+		<svcdoc:Service>
+		               <svcdoc:Description>
+ETH OAGIS ReqABCS Description
+</svcdoc:Description>
+		               
+			<svcdoc:ServiceType>RequesterABCSImpl</svcdoc:ServiceType>
+			<svcdoc:Version>1</svcdoc:Version>
+			<svcdoc:ProductCode>Ebiz</svcdoc:ProductCode>
+		</svcdoc:Service>
+	</documentation>  
+	
+	 <import namespace="http://schemas.oracle.com/bpel/extension" 
+ location="oramds:/apps/AIAMetaData/AIAComponents/UtilityArtifacts/RuntimeFault.wsdl"/>
+	 <types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+	            <import namespace="http://xmlns.emrsn.com/CommonProcessPO_007" schemaLocation="xsd/OAGIS_721_PO.xsd"/>
+		
+	  
+		</schema>
+	</types>
+	<message name="ProcessPOReqMsg">
+		<part name="ProcessPO" element="oag7abo:PROCESS_PO_007"/>
+	</message>
+	<portType name="ProcessPOETHReqABCSImpl">
+        <operation name="ProcessPO">
+                <documentation>
+				<svcdoc:Operation>
+					<svcdoc:Description>This operation is used to Process an PO
+                              object</svcdoc:Description>
+					<svcdoc:MEP>FireAndForget</svcdoc:MEP>
+				</svcdoc:Operation>
+			</documentation>
+			<input message="oag7abcs:ProcessPOReqMsg"/>
+		</operation>
+	   
+	    </portType>
+	<plnk:partnerLinkType name="ProcessPOETHReqABCSImpl">
+		<plnk:role name="ProcessPOETHReqABCSImplProvider">
+			<plnk:portType name="oag7abcs:ProcessPOETHReqABCSImpl"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</definitions>

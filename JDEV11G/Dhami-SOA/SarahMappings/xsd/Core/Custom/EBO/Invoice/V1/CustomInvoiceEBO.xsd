@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version 1.00 **
+** Date: 01 Nov 2007 **
+
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+  
+     XML Schema 
+     
+    Name: \EnterpriseObjects\Release1\Core\Custom\EBO\Invoice\CustomInvoiceEBO.xsd
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Custom Invoice EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/Invoice/V1" xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/Invoice/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- ====================================================================== -->
+	<!-- =====      Imports                                                                                                      ===== -->
+	<!-- ====================================================================== -->
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" schemaLocation="../../../../Common/V1/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" schemaLocation="../../../../Common/V1/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" schemaLocation="../../../../Common/V1/CodeLists.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- =====      Invoice Custom Components                                                                     ===== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="CustomInvoiceType"/>
+	<xsd:complexType name="CustomInvoiceBaseType"/>
+	<xsd:complexType name="CustomInvoiceLineType"/>
+	<xsd:complexType name="CustomInvoiceLineBaseType"/>
+	<xsd:complexType name="CustomDistributionType"/>
+	<xsd:complexType name="CustomAttachmentType"/>
+	<xsd:complexType name="CustomInvoiceLineTaxType"/>
+	<xsd:complexType name="CustomInvoiceLineAllowanceType"/>
+	<xsd:complexType name="CustomInvoiceLineChargeType"/>
+	<xsd:complexType name="CustomTaxTotalType"/>
+	<xsd:complexType name="CustomAllowanceTotalType"/>
+	<xsd:complexType name="CustomAllowanceDistributionType"/>
+	<xsd:complexType name="CustomChargeTotalType"/>
+	<xsd:complexType name="CustomChargeDistributionType"/>
+	<xsd:complexType name="CustomTaxTotalBaseType"/>
+	<xsd:complexType name="CustomChargeTotalBaseType"/>
+	<xsd:complexType name="CustomAllowanceTotalBaseType"/>
+</xsd:schema>

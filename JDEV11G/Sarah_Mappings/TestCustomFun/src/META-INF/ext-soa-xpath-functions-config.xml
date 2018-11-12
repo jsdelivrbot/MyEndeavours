@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soa-xpath-functions version="11.1.1"
+ xmlns="http://xmlns.oracle.com/soa/config/xpath"
+ xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.EvaluateDBResponseC"
+>
+  <function name="ethCustomSOA:EvaluateDBResponse">
+    <className>com.emerson.eth3.customSOA.EvaluateDBResponseC</className>
+    <return type="string"/>
+    <params>
+      
+      <param name="responseCode" type="number" minOccurs="1"/>
+      <param name="errorCodeNumber" type="string" minOccurs="1"/>
+      <param name="rollbackFlag" type="number" minOccurs="1"/>
+    </params>
+    <desc>Returns Status of the DB Procedure output</desc>
+    
+    
+  </function>
+  
+</soa-xpath-functions>

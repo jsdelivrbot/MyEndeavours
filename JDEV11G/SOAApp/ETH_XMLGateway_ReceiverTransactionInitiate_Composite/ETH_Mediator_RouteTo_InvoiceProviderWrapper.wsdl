@@ -1,0 +1,18 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ETH_Mediator_RouteTo_InvoiceProvider"
+     targetNamespace="http://xmlns.oracle.com/ETH_INBOUND_Receiver_Listener/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_Mediator_RouteTo_InvoiceProvider"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/ETH_INBOUND_Receiver_Listener/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_Mediator_RouteTo_InvoiceProvider"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="ETH_Mediator_RouteTo_InvoiceProvider.ETH_Mediator_RouteTo_InvoiceProvider">
+        <plnk:role name="execute_ptt">
+            <plnk:portType name="tns:execute_ptt"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/ETH_INBOUND_Receiver_Listener/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_Mediator_RouteTo_InvoiceProvider"
+         location="ETH_Mediator_RouteTo_InvoiceProvider.wsdl"/>
+</wsdl:definitions>

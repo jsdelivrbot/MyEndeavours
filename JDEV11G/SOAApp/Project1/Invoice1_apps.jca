@@ -1,0 +1,13 @@
+<adapter-config name="Invoice1" adapter="Oracle Applications Adapter" wsdlLocation="Invoice1.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/Apps/ETH_SARAHS0" UIConnectionName="ETH_SARAHS0" UIOracleAppType="XMLGATEWAY" adapterRef=""/>
+  <endpoint-interaction portType="Enqueue_ptt" operation="Enqueue">
+    <interaction-spec className="oracle.tip.adapter.apps.AppsXMLGatewayEnqueueInteractionSpec">
+      <property name="QueueName" value="ECX_INBOUND"/>
+      <property name="DatabaseSchema" value="APPLSYS"/>
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+      <property name="PayloadHeaderRequired" value="true"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,21 @@
+<?binding.jca Aia_ebm_file.jca?>
+<wsdl:definitions name="Aia_ebm" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/SarahMappings/Aia_ebm" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/SarahMappings/Aia_ebm" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:imp1="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/PurchaseOrder/V1" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="WriteEBM_plt">
+        <plt:role name="WriteEBM_role">
+            <plt:portType name="tns:WriteEBM_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/PurchaseOrder/V1" schemaLocation="xsd/PurchaseOrderEBM.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="WriteEBM_msg">
+        <wsdl:part name="body" element="imp1:CreatePurchaseOrderEBM"/>
+    </wsdl:message>
+    <wsdl:portType name="WriteEBM_ptt">
+        <wsdl:operation name="WriteEBM">
+            <wsdl:input message="tns:WriteEBM_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

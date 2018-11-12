@@ -1,0 +1,14 @@
+<adapter-config name="DBTest" adapter="Database Adapter" wsdlLocation="DBTest.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/SOA2_ETH_AppDB" UIConnectionName="SOA2_ETH_AppDB" adapterRef=""/>
+  <endpoint-interaction portType="DBTest_ptt" operation="DBTest">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="PackageName" value="BPEL_DBTEST"/>
+      <property name="ProcedureName" value="ETH_COMM_SRVC_LOOKUP_PKG$ETH_"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

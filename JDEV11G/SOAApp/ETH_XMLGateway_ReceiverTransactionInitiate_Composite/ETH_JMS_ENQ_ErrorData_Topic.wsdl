@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="ETH_JMS_ENQ_ErrorData_Topic"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/OutputServices/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_JMS_ENQ_ErrorData_Topic"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/OutputServices/ETH_XMLGateway_ReceiverTransactionInitiate_Composite/ETH_JMS_ENQ_ErrorData_Topic"
+     xmlns:imp1="http://schema.emerson.com/ETH/ErrorData"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Produce_Error_Msg_plt" >
+    <plt:role name="Produce_Error_Msg_role" >
+      <plt:portType name="tns:Produce_Error_Msg_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schema.emerson.com/ETH/ErrorData" schemaLocation="oramds:/apps/ETH3/CommonServices/commonSchemas/ETH_ErrorData.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Produce_Error_Msg_msg">
+        <wsdl:part name="body" element="imp1:ETH_ErrorData"/>
+    </wsdl:message>
+    <wsdl:portType name="Produce_Error_Msg_ptt">
+        <wsdl:operation name="Produce_Error_Msg">
+            <wsdl:input message="tns:Produce_Error_Msg_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

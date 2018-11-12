@@ -1,0 +1,284 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Dec 28 14:05:24 GMT+05:30 2010
+  Author:  idhami
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_GLB_LSNA_PO_Connector_BPEL" targetNamespace="http://services.emerson.com/ETH/ETH_GLB_LSNA_PO_ConnectorService/ETH_GLB_LSNA_PO_Connector_BPEL" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://services.emerson.com/ETH/ETH_GLB_LSNA_PO_ConnectorService/ETH_GLB_LSNA_PO_Connector_BPEL" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xml:id="id_1"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService/ETH_DB_CALL_INSTransactionTrackingRecords"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService/ETH_DB_CALL_INSMasterRecord"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService/ETH_DB_SEL_PMSarah"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/aq/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService/ETH_AQ_DEQ_PMSarah"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ns9="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns7="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns11="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns12="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns10="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns6="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB_SEL_PMSarah"
+         xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB3/ETH_INSERTMASTERRECORD_PD/"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpmn="http://schemas.oracle.com/bpm/xpath"
+         xmlns:ns15="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB3/ETH_INSTRANSTRACKRECORDS_PD/"
+         xmlns:ns16="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService/ETH_DB_CALL_GetTradingPartnerInfo"
+         xmlns:ns17="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB3/ETH_GETTPINFO_PD/"
+         xmlns:ns18="http://xmlns.oracle.com/pcbpel/adapter/apps/Dhami-SOA/ETH_GLB_LSNA_PO_ConnectorService/sdfsdfsd"
+         xmlns:ns19="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks xml:id="id_2">
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ETH_GLB_LSNA_PO_Connector_BPEL_Client" partnerLinkType="client:ETH_GLB_LSNA_PO_Connector_BPEL" myRole="ETH_GLB_LSNA_PO_Connector_BPELProvider" xml:id="id_3"/>
+    <partnerLink name="ETH_DB_CALL_INSTransactionTrackingRecords"
+                 partnerRole="ETH_DB_CALL_INSTransactionTrackingRecords_role"
+                 partnerLinkType="ns1:ETH_DB_CALL_INSTransactionTrackingRecords_plt"
+                 xml:id="id_8"/>
+    <partnerLink name="ETH_DB_CALL_INSMasterRecord"
+                 partnerRole="ETH_DB_CALL_INSMasterRecord_role"
+                 partnerLinkType="ns2:ETH_DB_CALL_INSMasterRecord_plt"
+                 xml:id="id_9"/>
+    <partnerLink name="ETH_DB_SEL_PMSarah" partnerRole="ETH_DB_SEL_PMSarah_role"
+                 partnerLinkType="ns3:ETH_DB_SEL_PMSarah_plt" xml:id="id_10"/>
+    <partnerLink myRole="Dequeue_role" name="ETH_AQ_DEQ_PMSarah"
+                 partnerLinkType="ns4:Dequeue_plt" xml:id="id_11"/>
+    <partnerLink name="ETH_DB_CALL_GetTradingPartnerInfo"
+                 partnerRole="ETH_DB_CALL_GetTradingPartnerInfo_role"
+                 partnerLinkType="ns16:ETH_DB_CALL_GetTradingPartnerInfo_plt"
+                 xml:id="id_65"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables xml:id="id_4">
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_GLB_LSNA_PO_Connector_BPELRequestMessage" xml:id="id_5"/>
+    <variable name="Interrogate_Queue_InputVariable"
+              messageType="ns3:ETH_DB_SEL_PMSarahInput_msg" xml:id="id_13"/>
+    <variable name="Interrogate_Queue_OutputVariable"
+              messageType="ns3:ETH_DB_SEL_PMSarahOutputCollection_msg"
+              xml:id="id_14"/>
+    <variable name="Invoke_INSMasterRecord_InputVariable"
+              messageType="ns2:args_in_msg" xml:id="id_20"/>
+    <variable name="Invoke_INSMasterRecord_OutputVariable"
+              messageType="ns2:args_out_msg" xml:id="id_21"/>
+    <variable name="Invoke_INSTransactionTrackingRecords_InputVariable"
+              messageType="ns1:args_in_msg" xml:id="id_55"/>
+    <variable name="Invoke_INSTransactionTrackingRecords_OutputVariable"
+              messageType="ns1:args_out_msg" xml:id="id_56"/>
+    <variable name="Receive_AQ_TransactionInputVariable"
+              messageType="ns4:Dequeue_msg" xml:id="id_59"/>
+    <variable name="Invoke_GetTradingInfo_InputVariable"
+              messageType="ns16:args_in_msg" xml:id="id_67"/>
+    <variable name="Invoke_GetTradingInfo_OutputVariable"
+              messageType="ns16:args_out_msg" xml:id="id_68"/>
+    <variable name="G_AQ_Header" messageType="ns4:Header_msg" xml:id="id_92"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" xml:id="id_6">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_GLB_LSNA_PO_Connector_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="ETH_GLB_LSNA_PO_Connector_BPEL_Client" portType="client:ETH_GLB_LSNA_PO_Connector_BPEL" operation="process" variable="inputVariable" createInstance="yes" xml:id="id_7"/>
+    <assign name="Assign_Interrogate" xml:id="id_15">
+      <copy xml:id="id_16">
+        <from expression="string('input')" xml:id="id_17"/>
+        <to variable="Interrogate_Queue_InputVariable"
+            part="ETH_DB_SEL_PMSarahInput_msg" xml:id="id_18"
+            query="/ns5:ETH_DB_SEL_PMSarahInput"/>
+      </copy>
+    </assign>
+    <invoke name="Interrogate_Queue" xml:id="id_12"
+            inputVariable="Interrogate_Queue_InputVariable"
+            outputVariable="Interrogate_Queue_OutputVariable"
+            partnerLink="ETH_DB_SEL_PMSarah"
+            portType="ns3:ETH_DB_SEL_PMSarah_ptt"
+            operation="ETH_DB_SEL_PMSarah"/>
+    <switch name="Switch_1" xml:id="id_47">
+      <case xml:id="id_48"
+            condition="ora:countNodes('Interrogate_Queue_OutputVariable','ETH_DB_SEL_PMSarahOutputCollection','/ns5:ETH_DB_SEL_PMSarahOutputCollection/ns5:ETH_DB_SEL_PMSarahOutput') > 0">
+        <bpelx:annotation xml:id="id_50">
+          <bpelx:pattern xml:id="id_91">Count_ResultSet</bpelx:pattern>
+          <bpelx:general xml:id="id_51">
+            <bpelx:property name="userLabel" xml:id="id_52">Got_Transaction</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence xml:id="id_53">
+          <receive name="Receive_AQ_Transaction" xml:id="id_58"
+                   createInstance="no"
+                   variable="Receive_AQ_TransactionInputVariable"
+                   partnerLink="ETH_AQ_DEQ_PMSarah" portType="ns4:Dequeue_ptt"
+                   operation="Dequeue" bpelx:headerVariable="G_AQ_Header">
+            <bpelx:property name="jca.aq.MessageId"
+                            variable="Interrogate_Queue_OutputVariable"
+                            part="ETH_DB_SEL_PMSarahOutputCollection"
+                            query="/ns13:ETH_DB_SEL_PMSarahOutputCollection/ns13:ETH_DB_SEL_PMSarahOutput/ns13:msgid"
+                            xml:id="id_60"/>
+          </receive>
+          <assign name="Assign_INSMasterRecord" xml:id="id_22">
+            <copy xml:id="id_23">
+              <from expression="string('ETH_GLB_LSNA_PO_ConnectorService')"
+                    xml:id="id_24"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:CALLER_NAME"
+                  xml:id="id_25"/>
+            </copy>
+            <copy xml:id="id_26">
+              <from expression="string('EMR240')" xml:id="id_27"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:PARAM1" xml:id="id_28"/>
+            </copy>
+            <copy xml:id="id_29">
+              <from expression="string('XML Gateway')" xml:id="id_30"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:PARAM3" xml:id="id_31"/>
+            </copy>
+            <copy xml:id="id_32">
+              <from expression="string('OAGIS721')" xml:id="id_33"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:PARAM4" xml:id="id_34"/>
+            </copy>
+            <copy xml:id="id_35">
+              <from variable="Interrogate_Queue_OutputVariable"
+                    part="ETH_DB_SEL_PMSarahOutputCollection"
+                    query="/ns5:ETH_DB_SEL_PMSarahOutputCollection/ns5:ETH_DB_SEL_PMSarahOutput/ns5:q_name"
+                    xml:id="id_36"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:PARAM5" xml:id="id_37"/>
+            </copy>
+            <copy xml:id="id_38">
+              <from expression="xp20:current-dateTime()" xml:id="id_39"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:PARAM6" xml:id="id_40"/>
+            </copy>
+            <copy xml:id="id_41">
+              <from expression="string('true')" xml:id="id_42"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:PARAM12" xml:id="id_43"/>
+            </copy>
+            <copy xml:id="id_44">
+              <from expression="string('true')" xml:id="id_45"/>
+              <to variable="Invoke_INSMasterRecord_InputVariable"
+                  part="InputParameters"
+                  query="/ns13:InputParameters/ns13:PARAM13" xml:id="id_46"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_INSMasterRecord" xml:id="id_19"
+                  inputVariable="Invoke_INSMasterRecord_InputVariable"
+                  outputVariable="Invoke_INSMasterRecord_OutputVariable"
+                  partnerLink="ETH_DB_CALL_INSMasterRecord"
+                  portType="ns2:ETH_DB_CALL_INSMasterRecord_ptt"
+                  operation="ETH_DB_CALL_INSMasterRecord"/>
+          <assign name="Assign_INSTransTrackingRecord" xml:id="id_57">
+            <copy xml:id="id_62">
+              <from expression="string('ETH_GLB_LSNA_PO_ConnectorService')"
+                    xml:id="id_63"/>
+              <to variable="Invoke_INSTransactionTrackingRecords_InputVariable"
+                  part="InputParameters"
+                  query="/ns15:InputParameters/ns15:CALLER_NAME"
+                  xml:id="id_64"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_INSTransTrackRecords" xml:id="id_54"
+                  inputVariable="Invoke_INSTransactionTrackingRecords_InputVariable"
+                  outputVariable="Invoke_INSTransactionTrackingRecords_OutputVariable"
+                  partnerLink="ETH_DB_CALL_INSTransactionTrackingRecords"
+                  portType="ns1:ETH_DB_CALL_INSTransactionTrackingRecords_ptt"
+                  operation="ETH_DB_CALL_INSTransactionTrackingRecords"/>
+          <assign name="Assign_GetTradingInfo_Input" xml:id="id_69">
+            <copy xml:id="id_70">
+              <from expression="string('ETH_GLB_LSNA_PO_ConnectorService')"
+                    xml:id="id_71"/>
+              <to variable="Invoke_GetTradingInfo_InputVariable"
+                  part="InputParameters"
+                  query="/ns17:InputParameters/ns17:CALLER_NAME"
+                  xml:id="id_72"/>
+            </copy>
+            <copy xml:id="id_73">
+              <from expression="string('EMR240')" xml:id="id_74"/>
+              <to variable="Invoke_GetTradingInfo_InputVariable"
+                  part="InputParameters"
+                  query="/ns17:InputParameters/ns17:PARAM1" xml:id="id_75"/>
+            </copy>
+            <copy xml:id="id_76">
+              <from expression="string('TRUE')" xml:id="id_77"/>
+              <to variable="Invoke_GetTradingInfo_InputVariable"
+                  part="InputParameters"
+                  query="/ns17:InputParameters/ns17:COMMITREQUIREDFLAG"
+                  xml:id="id_78"/>
+            </copy>
+            <copy xml:id="id_79">
+              <from expression="string('TRUE')" xml:id="id_80"/>
+              <to variable="Invoke_GetTradingInfo_InputVariable"
+                  part="InputParameters"
+                  query="/ns17:InputParameters/ns17:ROLLBACKONERRORFLAG"
+                  xml:id="id_81"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_GetTradingInfo" xml:id="id_66"
+                  inputVariable="Invoke_GetTradingInfo_InputVariable"
+                  outputVariable="Invoke_GetTradingInfo_OutputVariable"
+                  partnerLink="ETH_DB_CALL_GetTradingPartnerInfo"
+                  portType="ns16:ETH_DB_CALL_GetTradingPartnerInfo_ptt"
+                  operation="ETH_DB_CALL_GetTradingPartnerInfo"/>
+          <switch name="Switch_2" xml:id="id_82">
+            <case xml:id="id_83"
+                  condition="bpws:getVariableData('Invoke_GetTradingInfo_OutputVariable','OutputParameters','/ns17:OutputParameters/ns17:PARAM1')='TRUE'">
+              <bpelx:annotation xml:id="id_85">
+                <bpelx:pattern xml:id="id_90">SendReceiptFlag_Check</bpelx:pattern>
+                <bpelx:general xml:id="id_86">
+                  <bpelx:property name="userLabel" xml:id="id_87">SendReceiptFlag_ON</bpelx:property>
+                </bpelx:general>
+              </bpelx:annotation>
+              <empty name="Prepare_And_Send_Receipt" xml:id="id_88"/>
+            </case>
+            <otherwise xml:id="id_84">
+              <empty name="DoNothing" xml:id="id_89"/>
+            </otherwise>
+          </switch>
+        </sequence>
+      </case>
+      <otherwise xml:id="id_49">
+        <empty name="Empty_DoNothing" xml:id="id_61"/>
+      </otherwise>
+    </switch>
+  </sequence>
+</process>

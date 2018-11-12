@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="JMS_TriggerPublish_ProjectDetails"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/BPO/ALESup_PP_ProjectDetails_Pub/JMS_TriggerPublish_ProjectDetails"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/BPO/ALESup_PP_ProjectDetails_Pub/JMS_TriggerPublish_ProjectDetails"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="consumeMessage_plt" >
+    <plt:role name="consumeMessage_role" >
+      <plt:portType name="tns:consumeMessage_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.allete.com/ns/BusinessSupport/Common/alleteInterfaceMetadata/v1" schemaLocation="xsd/alleteInterfaceMetadata.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="consumeMessage_msg">
+        <wsdl:part name="body" element="imp1:InterfaceMetadata"/>
+    </wsdl:message>
+    <wsdl:portType name="consumeMessage_ptt">
+        <wsdl:operation name="consumeMessage">
+            <wsdl:input message="tns:consumeMessage_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

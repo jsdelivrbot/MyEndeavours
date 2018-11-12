@@ -1,0 +1,78 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jan 31 19:57:41 GMT+05:30 2011
+  Author:  idhami
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_CommonService_BPEL"
+               targetNamespace="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_CommonServices_EBS/ETH_CommonService_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_CommonServices_EBS/ETH_FL_PUT_Dummy"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns4="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+         xmlns:ns3="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+         xmlns:ns2="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/PurchaseOrder/V1"
+         xmlns:ns5="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eth_commonservice_bpel_client" partnerLinkType="client:ETH_CommonService_BPEL" myRole="ETH_CommonService_BPELProvider"/>
+    <partnerLink name="ETH_FL_PUT_Dummy" partnerRole="WriteETH_EBS_role"
+                 partnerLinkType="ns1:WriteETH_EBS_plt"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_CommonService_BPELRequestMessage"/>
+    <variable name="Invoke_1_WriteETH_EBS_InputVariable"
+              messageType="ns1:WriteETH_EBS_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_CommonService_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_commonservice_bpel_client" portType="client:ETH_CommonService_BPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/ns2:CreatePurchaseOrderEBM"/>
+        <to variable="Invoke_1_WriteETH_EBS_InputVariable" part="body"
+            query="/ns2:CreatePurchaseOrderEBM"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1"
+            inputVariable="Invoke_1_WriteETH_EBS_InputVariable"
+            partnerLink="ETH_FL_PUT_Dummy" portType="ns1:WriteETH_EBS_ptt"
+            operation="WriteETH_EBS"/>
+  </sequence>
+</process>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="JMS_ENQUEUE_BPEL" targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/JMS_ENQUEUE/JMS_ENQUEUE_BPEL" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/JMS_ENQUEUE/JMS_ENQUEUE_BPEL" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/Sarah_Mappings/JMS_ENQUEUE/JMS_ENQUEUE_DIST" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="jms_enqueue_bpel_client" partnerLinkType="client:JMS_ENQUEUE_BPEL" myRole="JMS_ENQUEUE_BPELProvider"/>
+    <partnerLink name="JMS_ENQUEUE_DIST" partnerLinkType="ns1:Produce_Message_plt" partnerRole="Produce_Message_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:JMS_ENQUEUE_BPELRequestMessage"/>
+    <variable name="Invoke1_Produce_Message_InputVariable" messageType="ns1:Produce_Message_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in JMS_ENQUEUE_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="jms_enqueue_bpel_client" portType="client:JMS_ENQUEUE_BPEL" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:input"/>
+        <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/client:process/client:input"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" inputVariable="Invoke1_Produce_Message_InputVariable" partnerLink="JMS_ENQUEUE_DIST" portType="ns1:Produce_Message_ptt" operation="Produce_Message" bpelx:invokeAsDetail="no" id="BpInv0"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun Sep 04 17:49:35 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

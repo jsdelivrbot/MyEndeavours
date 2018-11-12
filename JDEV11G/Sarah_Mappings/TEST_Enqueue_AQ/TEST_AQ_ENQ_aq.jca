@@ -1,0 +1,12 @@
+<adapter-config name="TEST_AQ_ENQ" adapter="AQ Adapter" wsdlLocation="TEST_AQ_ENQ.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/ETH/ETH_APP" UIConnectionName="SOA2_ETH_AppDB"/>
+  <endpoint-interaction portType="Enqueue_ptt" operation="Enqueue">
+    <interaction-spec className="oracle.tip.adapter.aq.outbound.AQEnqueueInteractionSpec">
+      <property name="RecipientList" value="TEST"/>
+      <property name="QueueName" value="ETH_DEAD_MESSAGE"/>
+      <property name="DatabaseSchema" value="ETH_CUSTOM_SCHEMA"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

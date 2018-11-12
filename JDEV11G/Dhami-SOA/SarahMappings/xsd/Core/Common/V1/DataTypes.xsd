@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version 1.00 **
+** Date: 01 Nov 2007 **
+
+Copyright (c) 2007, Oracle. All rights reserved
+
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+  
+     XML Schema 
+     
+    Name: \EnterpriseObjects\Release1\Core\Common\V1\DataTypes.xsd
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Data Types Schema Module            ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- ====================================================================== -->
+	<!-- =====      Imports                                                                                                      ===== -->
+	<!-- ====================================================================== -->
+	<xsd:import namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing" schemaLocation="WS-Addressing.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- =====      UN/CEFACT CCTS Core Data Types                                                         ===== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="AmountType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:decimal">
+				<xsd:attribute name="currencyID" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="BinaryObjectType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:base64Binary">
+				<xsd:attribute name="mimeCode" type="xsd:string" use="optional"/>
+				<xsd:attribute name="characterSetCode" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="CodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="listID" type="xsd:normalizedString" use="optional"/>
+				<xsd:attribute name="listAgencyID" type="xsd:normalizedString" use="optional"/>
+				<xsd:attribute name="listAgencyName" type="xsd:string" use="optional"/>
+				<xsd:attribute name="listName" type="xsd:string" use="optional"/>
+				<xsd:attribute name="listVersionID" type="xsd:normalizedString" use="optional"/>
+				<xsd:attribute name="name" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="DateTimeType">
+		<xsd:restriction base="xsd:dateTime"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DateType">
+		<xsd:restriction base="xsd:date"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DurationType">
+		<xsd:restriction base="xsd:duration"/>
+	</xsd:simpleType>
+	<xsd:complexType name="IdentifierType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString">
+				<xsd:attribute name="schemeID" type="xsd:normalizedString" use="optional"/>
+				<xsd:attribute name="schemeName" type="xsd:string" use="optional"/>
+				<xsd:attribute name="schemeAgencyID" type="xsd:normalizedString" use="optional"/>
+				<xsd:attribute name="schemeAgencyName" type="xsd:string" use="optional"/>
+				<xsd:attribute name="schemeVersionID" type="xsd:normalizedString" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="IndicatorType">
+		<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	<xsd:complexType name="MeasureType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:decimal">
+				<xsd:attribute name="unitCode" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="MonthDateType">
+		<xsd:restriction base="xsd:gMonthDay"/>
+	</xsd:simpleType>
+	<xsd:complexType name="NameType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="languageID" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="NumericType">
+		<xsd:restriction base="xsd:decimal"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="PercentType">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:complexType name="QuantityType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:decimal">
+				<xsd:attribute name="unitCode" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="RateType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:decimal">
+				<xsd:attribute name="unitCode" type="xsd:string" use="optional"/>
+				<xsd:attribute name="baseValue" type="xsd:decimal" use="optional"/>
+				<xsd:attribute name="baseUnitCode" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TextType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="languageID" type="xsd:string" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="TimeType">
+		<xsd:restriction base="xsd:time"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="TokenType">
+		<xsd:restriction base="xsd:token"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="URIType">
+		<xsd:restriction base="xsd:anyURI"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="YearDateType">
+		<xsd:restriction base="xsd:gYear"/>
+	</xsd:simpleType>
+	<!-- ====================================================================== -->
+	<!-- =====      CCTS Business Data Types                                                                      ===== -->
+	<!-- ====================================================================== -->
+	<xsd:simpleType name="IntegerNumericType">
+		<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="StringType">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="NormalizedStringType">
+		<xsd:restriction base="xsd:normalizedString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="PositiveIntegerNumericType">
+		<xsd:restriction base="IntegerNumericType"/>
+	</xsd:simpleType>
+	<!---->
+</xsd:schema>

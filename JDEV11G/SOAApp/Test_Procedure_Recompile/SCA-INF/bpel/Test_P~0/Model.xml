@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Test_Procedure_Recopile_BPEL" targetNamespace="http://xmlns.oracle.com/SOAApp/Test_Procedure_Recompile/Test_Procedure_Recopile_BPEL" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/SOAApp/Test_Procedure_Recompile/Test_Procedure_Recopile_BPEL" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SOAApp/Test_Procedure_Recompile/Call_Procedure" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/BPEL_PKG/HELLOWORLD_PRC/" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="test_procedure_recopile_bpel_client" partnerLinkType="client:Test_Procedure_Recopile_BPEL" myRole="Test_Procedure_Recopile_BPELProvider"/>
+    <partnerLink name="Call_Procedure" partnerLinkType="ns1:Call_Procedure_plt" partnerRole="Call_Procedure_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:Test_Procedure_Recopile_BPELRequestMessage"/>
+    <variable name="Invoke1_Call_Procedure_InputVariable" messageType="ns1:args_in_msg"/>
+    <variable name="Invoke1_Call_Procedure_OutputVariable" messageType="ns1:args_out_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Test_Procedure_Recopile_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="test_procedure_recopile_bpel_client" portType="client:Test_Procedure_Recopile_BPEL" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from variable="inputVariable" part="payload" query="/client:process/client:input"/>
+        <to variable="Invoke1_Call_Procedure_InputVariable" part="InputParameters" query="/ns2:InputParameters/ns2:P_PARAM_1"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" bpelx:invokeAsDetail="no" inputVariable="Invoke1_Call_Procedure_InputVariable" outputVariable="Invoke1_Call_Procedure_OutputVariable" partnerLink="Call_Procedure" portType="ns1:Call_Procedure_ptt" operation="Call_Procedure" id="BpInv0"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Oct 08 14:18:51 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

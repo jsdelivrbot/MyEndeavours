@@ -1,0 +1,33 @@
+<?binding.jca INvoice_apps.jca?>
+<wsdl:definitions name="INvoice" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/apps/SOAApp/Project1/INvoice" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/apps/SOAApp/Project1/INvoice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:obj1="http://xmlns.oracle.com/xdb/SYSTEM" xmlns:imp1="http://TargetNamespace.com/INvoice" xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="Enqueue_plt">
+        <plt:role name="Enqueue_role">
+            <plt:portType name="tns:Enqueue_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:obj1="http://xmlns.oracle.com/xdb/SYSTEM">
+            <import namespace="http://xmlns.oracle.com/xdb/SYSTEM" schemaLocation="xsd/SYSTEM_ECXMSG.xsd"/>
+            <complexType name="INvoiceHeaderCType">
+                <sequence>
+                    <element name="PayloadHeader" type="obj1:ECXMSG"/>
+                </sequence>
+            </complexType>
+            <element name="INvoiceHeader" type="ph:INvoiceHeaderCType"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://TargetNamespace.com/INvoice" schemaLocation="xsd/ACKNOWLEDGE_PO_008.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ACKNOWLEDGE_PO_008_msg">
+        <wsdl:part name="ACKNOWLEDGE_PO_008" element="imp1:ACKNOWLEDGE_PO_008"/>
+    </wsdl:message>
+    <wsdl:message name="Header_msg">
+        <wsdl:part name="Header" element="ph:INvoiceHeader"/>
+    </wsdl:message>
+    <wsdl:portType name="Enqueue_ptt">
+        <wsdl:operation name="Enqueue">
+            <wsdl:input message="tns:ACKNOWLEDGE_PO_008_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

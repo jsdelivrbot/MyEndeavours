@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.01 **
+** Date: Jul 21, 2009 **
+ 
+ Copyright (c) 2007, 2009, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\ShipmentUnit.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO ShipmentUnit EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:coreshipmentunitcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.01.00" > 
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomShipmentUnit.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<!-- ====================================================================== -->
+<!-- ==============  ShipmentUnit Components ================ -->
+<!-- ====================================================================== -->
+                      <xsd:element name="ShipmentUnit" type="ShipmentUnitType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+ShipmentUnit represents a logical or physical grouping of packages or items that form a unit of shipment (a unit of shipment may correspond to a particular order)
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                 <xsd:annotation> 
+                      <xsd:documentation> 
+                           <svcdoc:EBO> 
+                                   <svcdoc:Description> 
+ShipmentUnit represents a logical or physical grouping of packages or items that form a unit of shipment (a unit of shipment may correspond to a particular order)
+                                   </svcdoc:Description> 
+                                   <svcdoc:Type>EBO</svcdoc:Type> 
+                                   <svcdoc:Industry/> 
+                           </svcdoc:EBO> 
+                      </xsd:documentation> 
+                 </xsd:annotation> 
+            <xsd:complexType name="ShipmentUnitType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identification of Shipment Unit
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="DestinationCountryCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Code of Destination Country
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="OriginCountryCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Code of Origin Country
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="InitialPickupDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date of initial pickup 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="UltimateDropOffDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date of ultimate drop off
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="EarliestPickUpDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date of Earliest Pick
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="LatestPickUpDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date of latest pickup
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="EarliestDropOffDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date of earliest drop off
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="LatestDropOffDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date of latest drop off
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PointofStagingCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Code for Point of Staging
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="FOBPointCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Code for FOB Point
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PointOfLoadingCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Code for Point Of Loading
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DockCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Customer Dock Code
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="RoutingInstruction" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Instruction about Routing
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ShipmentInstruction" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Instructions about Shipping
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="FreightTermCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Freight Terms
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TotalFreightAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total Freight Amount
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="VehicleNumber" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Vehicle Number
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PackingSlipNumber" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Packing Slip Number
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="WaybillNumber" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Waybill Number
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="GrossWeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Shipment Gross Weight
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="NetWeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Shipment net weight
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TareWeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Shipment Tare weight
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ShipmentVolume" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Shipment Volume
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ShipUnitQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total Shipment Unit Count
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="HazardousMaterialIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if the shipment is Hazardous
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element ref="corecom:ParentShipmentUnitIdentification"  minOccurs="0" />
+                      <xsd:element ref="ShipmentUnitContainer"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Represent physical properties of a ShipmentUnit eg. Pallet, Box Vehicle etc
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ShipmentUnitCharge"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Defines/holds the attributes of charges for a Shipment Unit. For example, charges belongs to the Shipment such as Freight Charge, Handling Charges, etc.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreshipmentunitcust:CustomShipmentUnitType" minOccurs="0"/>
+                 </xsd:sequence>
+            </xsd:complexType>
+                      <xsd:element name="ContainerCharge" type="ContainerChargeType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Defines/holds the attributes of charges for a Shipment Container
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ContainerChargeType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identification of a Shipment Container Charge.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Charge"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Defines/holds the attributes of charges for a Shipment or Unit or Container or Line in ASN. For example, charges belongs to the Shipment such as Freight Charge, Handling Charges, etc.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreshipmentunitcust:CustomContainerChargeType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ContainerItem" type="ContainerItemType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+An order line item within a shipment container
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ContainerItemType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique Identification for Container Item
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ShipmentItemReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to Shipment Item.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ContainerItemInstance"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+An individual  serial number included in the container. The serial number may be specified using multiple occurrence of ContainerItemInstanceRanges (please note that multiple sets are only used when the serial number ranges are not continuous) or multiple occurrence of ContainerItemInstances or a combination of both.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ContainerItemInstanceRange"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A range of serial numbers, included in the container. The serial number may be specified using multiple occurrence of ContainerItemInstanceRanges (please note that multiple sets are only used when the serial number ranges are not continuous) or multiple occurrence of ContainerItemInstances or a combination of both.
+
+ContainerItemInstanceRange should not be used to specify an individual serial number, for example using the same starting and ending serial number or filling the starting serial number but leaving the ending serial number blank. This is ambiguous since a missing or empty element (tag) could be interpreted differently by various groups.
+
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreshipmentunitcust:CustomContainerItemType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ContainerItemInstance" type="ContainerItemInstanceType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+An individual  serial number included in the container. The serial number may be specified using multiple occurrence of ContainerItemInstanceRanges (please note that multiple sets are only used when the serial number ranges are not continuous) or multiple occurrence of ContainerItemInstances or a combination of both.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ContainerItemInstanceType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Means of identifying a component or object
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ItemInstance"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identification of a unique instance of an item including serial number, RFID and lot properties
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreshipmentunitcust:CustomContainerItemInstanceType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ContainerItemInstanceRange" type="ContainerItemInstanceRangeType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A range of serial numbers, included in the container. The serial number may be specified using multiple occurrence of ContainerItemInstanceRanges (please note that multiple sets are only used when the serial number ranges are not continuous) or multiple occurrence of ContainerItemInstances or a combination of both.
+
+ContainerItemInstanceRange should not be used to specify an individual serial number, for example using the same starting and ending serial number or filling the starting serial number but leaving the ending serial number blank. This is ambiguous since a missing or empty element (tag) could be interpreted differently by various groups.
+
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ContainerItemInstanceRangeType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+This identifies the Item Instance Range
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element ref="corecom:ItemInstanceRange"  minOccurs="0" />
+                     <xsd:element name="Custom" type="coreshipmentunitcust:CustomContainerItemInstanceRangeType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ShipmentPlanUnit" type="ShipmentUnitType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Defines/holds the attributes of an outermost Container. For e.g. BOX, PALLET, VEHICLE, etc
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ShipmentUnitCharge" type="ShipmentUnitChargeType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Defines/holds the attributes of charges for a Shipment Unit. For example, charges belongs to the Shipment such as Freight Charge, Handling Charges, etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ShipmentUnitChargeType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique Identification of ShipmentUnit charge
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Charge"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Defines/holds the attributes of charges for a Shipment Unit  For example, charges belongs to the Shipment such as Freight Charge, Handling Charges, etc.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreshipmentunitcust:CustomShipmentUnitChargeType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ShipmentUnitContainer" type="ShipmentUnitContainerType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Represent physical properties of a ShipmentUnit eg. Pallet, Box Vehicle etc
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ShipmentUnitContainerType" >
+                 <xsd:sequence>
+                      <xsd:element name="LicensePlateNumberID" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A unique identifier for each individual container. Within the course of the container s life, it may be associated with several LPNs depending on the number of times  the contianer was cycled through different warehouses and manufacturing plants as opposed to the serial number which is assigned only once throughout the container s life.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the Container
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Type of Code for the container
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ParentLicencePlateNumber" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Parent License Plate Number
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MasterSerialNumber" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Master Serial Number
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SerialNumber" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Serial Number
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="LotNumber" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Lot Number
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerHeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Height
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerLength" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Length
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerWidth" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Width
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerFillPercent" type="corecom:PercentType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Fill Percent
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerMinimumFillPercent" type="corecom:PercentType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Minimum Fill Percent
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerTareWeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Tare Weight
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerMaximumLoadWeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Maximum Load Weight
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerNetWeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Net Weight
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerGrossWeight" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Gross Weight
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerMaximumVolume" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Maximum Volume of the container
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerVolume" type="corecom:MeasureType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Volume of the container
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ServiceLevelCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Service Level Code
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ContainerSealCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Container Seal Code
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TrackingID" type="corecom:IdentifierType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Tracking Identifier
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="ContainerCharge"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Defines/holds the attributes of charges for a Shipment Container
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ContainerItem"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+An order line item within a shipment container
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreshipmentunitcust:CustomShipmentUnitContainerType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+</xsd:schema>

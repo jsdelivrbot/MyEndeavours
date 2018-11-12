@@ -1,0 +1,47 @@
+<wsdl:definitions
+     name="ETH_AQ_ENQ_B2BPO"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_B2B_Enqueue_PO_OAGIS/ETH_AQ_ENQ_B2BPO"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_B2B_Enqueue_PO_OAGIS/ETH_AQ_ENQ_B2BPO"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA"
+     xmlns:msg_out="http://www.openapplications.org/oagis/9"
+     xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="EnqueueB2BPO_plt" >
+    <plt:role name="EnqueueB2BPO_role" >
+      <plt:portType name="tns:EnqueueB2BPO_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+    <!-- Define AQ Headers = Payload Headers -->
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:obj1="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA" >
+      <import namespace="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA" schemaLocation="xsd/SOA2_SOAINFRA_IP_MESSAGE_TYPE.xsd"/>
+      <complexType name="ETH_AQ_ENQ_B2BPOHeaderCType" >
+        <sequence>
+          <!-- payload header -->
+          <element name="PayloadHeader" type="obj1:IP_MESSAGE_TYPE" />
+        </sequence>
+      </complexType>
+      <element name="ETH_AQ_ENQ_B2BPOHeader" type="ph:ETH_AQ_ENQ_B2BPOHeaderCType" />
+    </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.openapplications.org/oagis/9" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Infrastructure/OAGIS90/ProcessPurchaseOrder.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="ProcessPurchaseOrder_msg">
+        <wsdl:part name="ProcessPurchaseOrder" element="msg_out:ProcessPurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:message name="Header_msg">
+        <wsdl:part name="Header" element="ph:ETH_AQ_ENQ_B2BPOHeader"/>
+    </wsdl:message>
+    <wsdl:portType name="EnqueueB2BPO_ptt">
+        <wsdl:operation name="EnqueueB2BPO">
+            <wsdl:input message="tns:ProcessPurchaseOrder_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

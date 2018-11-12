@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faultPolicies xmlns="http://schemas.oracle.com/bpel/faultpolicy">
+    <faultPolicy version="1.0" id="RND_FaultCatch"
+                 xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns="http://schemas.oracle.com/bpel/faultpolicy"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Conditions>
+            <faultName xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+                       name="bpelx:remoteFault">
+                <condition>
+                    <action ref="ora-java"/>
+                </condition>
+            </faultName>
+            <faultName xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+                       name="bpelx:bindingFault">
+                <condition>
+                    <action ref="ora-retry"/>
+                </condition>
+            </faultName>
+            <faultName xmlns:bpels="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                       name="bpels:selectionFailure">
+                <condition>
+                    <action ref="ora-terminate"/>
+                </condition>
+            </faultName>
+            <faultName xmlns:rjm="http://schemas.oracle.com/sca/rejectedmessages"
+                       name="rjm:FileIn">
+                <condition>
+                    <action ref="ora-queue"/>
+                </condition>
+            </faultName>
+            <faultName xmlns:rjm="http://schemas.oracle.com/sca/rejectedmessages"
+                       name="rjm:FileIn">
+                <condition>
+                    <action ref="ora-file"/>
+                </condition>
+            </faultName>
+        </Conditions>
+        <Actions>
+            <Action id="ora-retry">
+                <retry>
+                    <retryCount>2</retryCount>
+                    <retryInterval>2</retryInterval>
+                    <exponentialBackoff/>
+                </retry>
+            </Action>
+            <Action id="ora-replay-scope">
+                <replayScope/>
+            </Action>
+            <Action id="ora-rethrow-fault">
+                <rethrowFault/>
+            </Action>
+            <Action id="ora-human-intervention">
+                <humanIntervention/>
+            </Action>
+            <Action id="ora-terminate">
+                <abort/>
+            </Action>
+            <Action id="ora-java">
+                <javaAction className="oracle.apps.aia.core.eh.CompositeJavaAction"
+                            defaultAction="ora-rethrow-fault">
+                    <returnValue value="REPLAY" ref="ora-terminate"/>
+                    <returnValue value="RETRHOW" ref="ora-rethrow-fault"/>
+                    <returnValue value="ABORT" ref="ora-terminate"/>
+                    <returnValue value="RETRY" ref="ora-retry"/>
+                    <returnValue value="MANUAL" ref="ora-human-intervention"/>
+                </javaAction>
+            </Action>
+            <Action id="ora-queue">
+                <enqueue uri="QueueURI"/>
+                <!-- QueueURI format -
+            jdbc:oracle:thin:@<host>:<port>:<sid>#<un>/<pw>#queue -->
+            </Action>
+            <Action id="ora-file">
+                <fileAction>
+                    <location>FOLDER_LOCATION</location>
+                    <fileName>FILE_NAME</fileName>
+                    <!-- FILE_NAME will support %ID%(rejected message instance id) or
+%TIMESTAMP% wildcards -->
+                </fileAction>
+            </Action>
+        </Actions>
+    </faultPolicy>
+</faultPolicies>

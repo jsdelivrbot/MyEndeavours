@@ -1,0 +1,52 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Apr 07 13:05:52 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="SendTOB2B_PO"
+               targetNamespace="http://xmlns.oracle.com/Dhami_SOA/Project1/SendTOB2B_PO"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Dhami_SOA/Project1/SendTOB2B_PO"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://oracle.com/sca/soapservice/OutputServices/ETH_PO_OAGIS90_SendToB2B/ETH_Bpel_PO_OAGIS90_Client"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ParshantService" partnerLinkType="ns1:ParshantService"
+                 myRole="execute_ptt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="OnMessage_sendToB2B_OAGISPO_InputVariable"
+              messageType="ns1:requestOAGISPOMessage"/>
+    <variable name="OnMessage_sendToB2B_OAGISPOCO_InputVariable"
+              messageType="ns1:requestOAGISPOCOMessage"/>
+  </variables>
+  <sequence name="main">
+    <pick name="Pick1">
+      <onMessage variable="OnMessage_sendToB2B_OAGISPO_InputVariable"
+                 partnerLink="ParshantService" portType="ns1:execute_ptt"
+                 operation="sendToB2B_OAGISPO">
+        <empty name="EmptyPO"/>
+      </onMessage>
+      <onMessage variable="OnMessage_sendToB2B_OAGISPOCO_InputVariable"
+                 partnerLink="ParshantService" portType="ns1:execute_ptt"
+                 operation="sendToB2B_OAGISPOCO">
+        <empty name="EmptyPOCO"/>
+      </onMessage>
+    </pick>
+  </sequence>
+</process>

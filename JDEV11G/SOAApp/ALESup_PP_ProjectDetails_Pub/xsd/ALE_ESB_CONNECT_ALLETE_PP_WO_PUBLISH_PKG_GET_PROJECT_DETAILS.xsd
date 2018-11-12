@@ -1,0 +1,146 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ALE_ESB_CONNECT/ALLETE_PP_WO_PUBLISH_PKG/GET_PROJECT_DETAILS/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ALE_ESB_CONNECT/ALLETE_PP_WO_PUBLISH_PKG/GET_PROJECT_DETAILS/" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="V_TRANSACTION_ID_IN" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="T_REFERENCE_CURSOR_OUT" type="db:T_REFERENCE_CURSOR_OUT_RowSet" db:index="2" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="T_REFERENCE_CURSOR_OUT_RowSet">
+      <sequence>
+         <element name="T_REFERENCE_CURSOR_OUT_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="ALLETE_PP_WO_SUB_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="AFUDC_ELIGIBLE" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="35"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="CLOSE_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="COMPANY" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="50"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="COMPANY_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CWIP_ACCOUNT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DEPARTMENT" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="50"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="DEPARTMENT_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EST_COMPLETE_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="EST_START_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="FUNDING_PROJECT_NUMBER" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="35"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="FUNDING_WO_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FUNDING_WO_INDICATOR" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GL_ACCOUNT_STRING" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="100"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="KEY_MEMBER" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="35"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="LOCATION" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="50"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="PROCESSED" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="PROJECT_TYPE" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="50"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="PROJECT_TYPE_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="REASON" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="35"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="RWIP_ACCOUNT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="STATUS" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="50"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="TIME_STAMP" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="TRANSACTION_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="TRANSACTION_ID" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="100"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="USER_ID" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="18"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="WORK_ORDER_DESCRIPTION" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="35"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="WORK_ORDER_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="WORK_ORDER_LONG_DESCRIPTION" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="2000"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+                  <element name="WORK_ORDER_NUMBER" db:type="VARCHAR2" minOccurs="0" nillable="true">
+                     <simpleType>
+                        <restriction base="string">
+                           <maxLength value="35"/>
+                        </restriction>
+                     </simpleType>
+                  </element>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+</schema>

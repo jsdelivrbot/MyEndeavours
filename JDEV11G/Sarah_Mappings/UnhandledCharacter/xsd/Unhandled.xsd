@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schema.emerson.com/FL_GET_UnhandledCharacter" targetNamespace="http://schema.emerson.com/FL_GET_UnhandledCharacter" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="Head">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Line" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="COLUMN1" type="xsd:string"/>
+							<xsd:element name="COLUMN2" type="xsd:string"/>
+							<xsd:element name="COLUMN3" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

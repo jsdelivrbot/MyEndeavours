@@ -1,0 +1,14 @@
+<adapter-config name="asdasd" adapter="Database Adapter" wsdlLocation="asdasd.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/ETH_MDS_DB" UIConnectionName="ETH_MDS_DB" adapterRef=""/>
+  <endpoint-interaction portType="asdasd_ptt" operation="asdasd">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="PackageName" value="ETH_COM_SRVC_LOOKUP_PKG_WRAP"/>
+      <property name="ProcedureName" value="ETH_COM_SRVC_LOOKUP_PKG$ETH_C"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

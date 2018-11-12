@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version 1.00 **
+** Date: 01 Nov 2007 **
+
+Copyright (c) 2007, Oracle. All rights reserved
+
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+  
+     XML Schema 
+
+     
+    Name: \EnterpriseObjects\Release1\Core\Common\V1\Meta.xsd
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Meta Schema Module            ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!-- ====================================================================== -->
+	<!-- =====      Imports                                                                                                      ===== -->
+	<!-- ====================================================================== -->
+	<xsd:include schemaLocation="CommonComponents.xsd"/>
+	<xsd:include schemaLocation="DataTypes.xsd"/>
+	<xsd:include schemaLocation="CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V1" schemaLocation="../../Custom/Common/V1/CustomCommonComponents.xsd"/>
+	<xsd:import namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing" schemaLocation="WS-Addressing.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- =====      EBM Header                                                                                               ===== -->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="EBMType">
+		<xsd:sequence>
+			<xsd:element ref="EBMHeader"/>
+		</xsd:sequence>
+		<xsd:attribute name="versionID" type="NormalizedStringType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the version of the given BOD defintion.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="languageCode" type="LanguageCodeType" use="optional" default="en-US">
+			<xsd:annotation>
+				<xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the language that the contents of the BOD is in unless otherwise stated.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="EBM" type="EBMType"/>
+	<!---->
+	<xsd:complexType name="EBMHeaderType">
+		<xsd:sequence>
+			<xsd:element name="EBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="EBMName" type="NameType" minOccurs="0"/>
+			<xsd:element name="EBOName" type="NameType" minOccurs="0"/>
+			<xsd:element name="CreationDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="VerbCode" type="CodeType"/>
+			<xsd:element ref="MessageProcessingInstruction" minOccurs="0"/>
+			<xsd:element ref="Sender"/>
+			<xsd:element ref="Target" minOccurs="0"/>
+			<xsd:element ref="BusinessScope" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="EBMTracking" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corecomcust:CustomEBMHeaderType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="languageCode" type="LanguageCodeType"/>
+	</xsd:complexType>
+	<xsd:element name="EBMHeader" type="EBMHeaderType"/>
+	<!---->
+	<xsd:complexType name="ApplicationType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="Version" type="NumericType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Application" type="ApplicationType"/>
+	<!---->
+	<xsd:complexType name="MessageProcessingInstructionType">
+		<xsd:sequence>
+			<xsd:element name="EnvironmentCode" type="CodeType"/>
+			<xsd:element name="DefinitionID" type="IdentifierType"/>
+			<xsd:element name="InstanceID" type="IdentifierType"/>
+			<xsd:element name="Custom" type="corecomcust:CustomMessageProcessingInstructionType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="MessageProcessingInstruction" type="MessageProcessingInstructionType"/>
+	<!---->
+	<xsd:complexType name="ObjectCrossReferenceType">
+		<xsd:sequence>
+			<xsd:element ref="SenderObjectIdentification" minOccurs="0"/>
+			<xsd:element name="EBOID" type="IdentifierType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ObjectCrossReference" type="ObjectCrossReferenceType"/>
+	<xsd:element name="SenderObjectIdentification" type="IdentificationType"/>
+	<!---->
+	<xsd:complexType name="SenderType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType"/>
+			<xsd:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="IPAddress" type="URIType" minOccurs="0"/>
+			<xsd:element name="SenderMessageID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="TransactionCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="CallingServiceName" type="NameType" minOccurs="0"/>
+			<xsd:element ref="Application" minOccurs="0"/>
+			<xsd:element name="ContactName" type="NameType" minOccurs="0"/>
+			<xsd:element name="ContactEmail" type="URIType" minOccurs="0"/>
+			<xsd:element name="ContactPhoneNumber" type="StringType" minOccurs="0"/>
+			<xsd:element ref="ESBHeaderExtension" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="ObjectCrossReference" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="WSAddress" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+   </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corecomcust:CustomSenderType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Sender" type="SenderType"/>
+	<xsd:element name="WSAddress">
+		<xsd:annotation>
+			<xsd:documentation>Placeholder to transport WS-Addressing information
+   </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="wsa:From" minOccurs="0"/>
+				<xsd:element ref="wsa:To" minOccurs="0"/>
+				<xsd:element ref="wsa:ReplyTo" minOccurs="0"/>
+				<xsd:element ref="wsa:FaultTo"/>
+				<xsd:element ref="wsa:Recipient"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!---->
+	<xsd:complexType name="EBMTrackingType">
+		<xsd:sequence>
+			<xsd:element name="SequenceNumber" type="NumericType"/>
+			<xsd:element name="ExecutionUnitID" type="IdentifierType"/>
+			<xsd:element name="ExecutionUnitName" type="NameType"/>
+			<xsd:element name="ImplementationCode" type="ImplementationCodeType"/>
+			<xsd:element name="ActivityDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomEBMTrackingType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="EBMTracking" type="EBMTrackingType"/>
+	<!---->
+	<xsd:complexType name="TargetType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="OverrideRoutingIndicator" type="IndicatorType" minOccurs="0"/>
+			<xsd:element name="ServiceName" type="NameType" minOccurs="0"/>
+			<xsd:element name="ApplicationTypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="EndPointURI" type="URIType" minOccurs="0"/>
+			<xsd:element name="Custom" type="corecomcust:CustomTargetType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Target" type="TargetType"/>
+	<!---->
+	<xsd:complexType name="BusinessScopeType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Name of the process
+     </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InstanceID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="BusinessScopeTypeCode" type="CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Indicates the type of the process
+     </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EnterpriseServiceName" type="NameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Name of the Enterprise business process service name
+     </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EnterpriseServiceOperationName" type="CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Action of the Enterprise busines serivce
+     </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corecomcust:CustomBusinessScopeType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="BusinessScope" type="BusinessScopeType"/>
+	<!---->
+	<xsd:complexType name="ESBHeaderExtensionType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="NameType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="DataTypeCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Value" type="StringType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ESBHeaderExtension" type="ESBHeaderExtensionType"/>
+	<!-- ====================================================================== -->
+	<!-- =====          Verbs                                                                                                    =====-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="CreateType">
+		<xsd:attribute name="responseCode" type="ResponseCode" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="CreateResponseType">
+		<xsd:sequence>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element ref="ResponseNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Create" type="CreateType"/>
+	<xsd:element name="CreateResponse" type="CreateResponseType"/>
+	<!---->
+	<xsd:complexType name="DeleteType"/>
+	<xsd:complexType name="DeleteResponseType">
+		<xsd:sequence>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element ref="ResponseNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Delete" type="DeleteType"/>
+	<xsd:element name="DeleteResponse" type="DeleteResponseType"/>
+	<!---->
+	<xsd:complexType name="ProcessType">
+		<xsd:attribute name="responseCode" type="ResponseCode" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessResponseType">
+		<xsd:sequence>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element ref="ResponseNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Process" type="ProcessType"/>
+	<xsd:element name="ProcessResponse" type="ProcessResponseType"/>
+	<!---->
+	<xsd:complexType name="ComplexQueryType">
+		<xsd:sequence>
+			<xsd:element name="QueryCode" type="StandardQueryCodeType" minOccurs="0"/>
+			<xsd:element name="ResponseCode" type="StandardResponseCodeType" minOccurs="0"/>
+			<xsd:element ref="QueryCriteria" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="ResponseFilter" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="getAllTranslationsIndicator" type="IndicatorType" use="optional"/>
+		<xsd:attribute name="recordSetStart" type="PositiveIntegerNumericType" use="optional"/>
+		<xsd:attribute name="recordSetCount" type="PositiveIntegerNumericType" use="optional"/>
+		<xsd:attribute name="maxItems" type="PositiveIntegerNumericType" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="QueryCriteriaType">
+		<xsd:sequence>
+			<xsd:element name="QualifiedElementPath" type="StringType" minOccurs="0"/>
+			<xsd:element ref="QueryExpression" minOccurs="0"/>
+			<xsd:element ref="SortElement" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ValueExpressionType">
+		<xsd:sequence>
+			<xsd:element name="ElementPath" type="StringType"/>
+			<xsd:element name="Value" type="StringType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="queryOperatorCode" type="QueryOperatorCodeType" use="optional" default="EQUALS"/>
+	</xsd:complexType>
+	<xsd:complexType name="ResponseFilterType">
+		<xsd:sequence>
+			<xsd:element name="QualifiedElementPath" type="StringType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="exclusionIndicator" type="IndicatorType" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="SortCriteriaType">
+		<xsd:sequence>
+			<xsd:element ref="SortElement" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SortElementType">
+		<xsd:simpleContent>
+			<xsd:extension base="StringType">
+				<xsd:attribute name="sortDirectionCode" type="SortDirectionCodeType" use="optional" default="ASC"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="QueryExpressionType">
+		<xsd:choice>
+			<xsd:element ref="ValueExpression" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="QueryExpression" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:choice>
+		<xsd:attribute name="logicalOperatorCode" type="LogicalOperatorCodeType" use="optional" default="AND"/>
+		<xsd:attribute name="logicalNegationIndicator" type="IndicatorType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="QueryCriteria" type="QueryCriteriaType"/>
+	<xsd:element name="ValueExpression" type="ValueExpressionType"/>
+	<xsd:element name="ResponseFilter" type="ResponseFilterType"/>
+	<xsd:element name="SortCriteria" type="SortCriteriaType"/>
+	<xsd:element name="SortElement" type="SortElementType"/>
+	<xsd:element name="QueryExpression" type="QueryExpressionType"/>
+	<xsd:complexType name="QueryResponseType"/>
+	<xsd:element name="QueryResponse" type="QueryResponseType"/>
+	<!---->
+	<xsd:complexType name="SimpleQueryType">
+		<xsd:attribute name="getAllTranslationsIndicator" type="IndicatorType" use="optional"/>
+	</xsd:complexType>
+	<!---->
+	<xsd:complexType name="ResponseType">
+		<xsd:sequence>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element ref="ResponseNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Response" type="ResponseType"/>
+	<xsd:complexType name="ResponseNotificationType">
+		<xsd:sequence>
+			<xsd:element name="ElementPath" type="StringType" minOccurs="0"/>
+			<xsd:element name="Value" type="StringType" minOccurs="0"/>
+			<xsd:element name="StatusCode" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Message" type="TextType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ResponseNotification" type="ResponseNotificationType"/>
+	<!---->
+	<xsd:complexType name="UpdateType">
+		<xsd:attribute name="returnObjectCode" type="NormalizedStringType" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="UpdateResponseType">
+		<xsd:sequence>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element ref="ResponseNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Update" type="UpdateType"/>
+	<xsd:element name="UpdateResponse" type="UpdateResponseType"/>
+	<!---->
+	<xsd:complexType name="SyncType"/>
+	<xsd:complexType name="SyncResponseType">
+		<xsd:sequence>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element ref="ResponseNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Sync" type="SyncType"/>
+	<xsd:element name="SyncResponse" type="SyncResponseType"/>
+	<!---->
+	<xsd:complexType name="ValidateType"/>
+	<xsd:element name="Validate" type="ValidateType"/>
+	<xsd:complexType name="ValidateResponseType">
+		<xsd:sequence>
+			<xsd:element name="RequestEBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element ref="ResponseNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ValidateResponse" type="ValidateResponseType"/>
+	<!-- ====================================================================== -->
+	<!-- =====          Fault Element                                                                                         =====-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="FaultType">
+		<xsd:sequence>
+			<xsd:element ref="EBMReference" minOccurs="0"/>
+			<xsd:element ref="FaultNotification" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="languageCode" type="LanguageCodeType" use="optional" default="en-US"/>
+	</xsd:complexType>
+	<xsd:complexType name="FaultNotificationType">
+		<xsd:sequence>
+			<xsd:element name="ReportingDateTime" type="DateTimeType" minOccurs="0"/>
+			<xsd:element name="CorrectiveAction" type="TextType" minOccurs="0"/>
+			<xsd:element ref="FaultMessage" minOccurs="0"/>
+			<xsd:element ref="FaultingService" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FaultMessageType">
+		<xsd:sequence>
+			<xsd:element name="Code" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Text" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Severity" type="CodeType" minOccurs="0"/>
+			<xsd:element name="Stack" type="TextType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FaultingServiceType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="ImplementationCode" type="ImplementationCodeType" minOccurs="0"/>
+			<xsd:element name="InstanceID" type="IdentifierType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Fault" type="FaultType">
+		<xsd:annotation>
+			<xsd:documentation>  </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FaultNotification" type="FaultNotificationType"/>
+	<xsd:element name="FaultMessage" type="FaultMessageType"/>
+	<xsd:element name="FaultingService" type="FaultingServiceType"/>
+	<!-- ====================================================================== -->
+	<!-- =====          Reference Components                                                                         =====-->
+	<!-- ====================================================================== -->
+	<xsd:complexType name="SenderReferenceType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="SenderMessageID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="TransactionCode" type="CodeType" minOccurs="0"/>
+			<xsd:element ref="ObjectCrossReference" minOccurs="0"/>
+			<xsd:element ref="Application" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="SenderReference" type="SenderReferenceType"/>
+	<xsd:complexType name="BusinessScopeReferenceType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="InstanceID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="EnterpriseServiceName" type="NameType" minOccurs="0"/>
+			<xsd:element name="EnterpriseServiceOperationName" type="NameType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="BusinessScopeReference" type="BusinessScopeReferenceType"/>
+	<xsd:complexType name="EBMReferenceType">
+		<xsd:sequence>
+			<xsd:element name="EBMID" type="IdentifierType" minOccurs="0"/>
+			<xsd:element name="EBMName" type="NameType" minOccurs="0"/>
+			<xsd:element name="EBOName" type="NameType" minOccurs="0"/>
+			<xsd:element name="VerbCode" type="CodeType" minOccurs="0"/>
+			<xsd:element ref="BusinessScopeReference" minOccurs="0"/>
+			<xsd:element ref="SenderReference" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="EBMReference" type="EBMReferenceType"/>
+	<!---->
+</xsd:schema>

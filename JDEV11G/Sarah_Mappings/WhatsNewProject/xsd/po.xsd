@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.oracle.com/pcbpel/po" xmlns:tns="http://www.oracle.com/pcbpel/po" xmlns:att="http://www.oracle.com/pcbpel/Attachments" targetNamespace="http://www.oracle.com/pcbpel/po">
+	<xsd:import namespace="http://www.oracle.com/pcbpel/Attachments" schemaLocation="Attachment.xsd"/>
+	<xsd:element name="PurchaseOrder" type="PurchaseOrderType"/>
+	<xsd:element name="Comment" type="xsd:string"/>
+	<xsd:element name="CustomerContacts" type="ContactListType"/>
+	<xsd:element name="DiscontinuedList" type="DiscontinuedListType"/>
+	<xsd:complexType name="DiscontinuedListType">
+		<xsd:sequence>
+		   <xsd:element name="ProductName" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ContactListType">
+		<xsd:sequence>
+			<xsd:element name="CustomerID" type="xsd:string"/>
+			<xsd:element ref="Contact" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Contact" abstract="true"/>
+	<xsd:element name="ShipToContact" type="ContactType" substitutionGroup="Contact"/>
+	<xsd:element name="BillToContact" type="ContactType" substitutionGroup="Contact"/>
+	<xsd:complexType name="ContactType">
+		<xsd:sequence>
+			<xsd:element name="ContactID" type="xsd:string"/>
+			<xsd:element ref="InternationalAddress"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Address" type="AddressType"/>
+	<xsd:element name="USAddress" type="USAddressType" substitutionGroup="Address"/>
+	<xsd:element name="InternationalAddress" type="InternationalAddressType" substitutionGroup="Address"/>
+	<xsd:complexType name="PurchaseOrderType">
+		<xsd:sequence>
+			<xsd:element name="ID" type="xsd:string"/>
+			<xsd:element ref="CustomerContacts"/>
+			<xsd:element name="Comment" type="xsd:string"/>
+			<xsd:element name="Attachments" type="att:AttachmentList"/>
+			<xsd:choice>
+				<xsd:element name="HQAccount" type="AccountType"/>
+				<xsd:element name="BranchAccount" type="AccountType"/>
+			</xsd:choice>
+			<xsd:element name="Items" type="ItemList"/>
+		</xsd:sequence>
+		<xsd:attribute name="OrderDate" type="xsd:date"/>
+	</xsd:complexType>
+	<xsd:complexType name="AccountType">
+		<xsd:sequence>
+			<xsd:element name="AccountNumber" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="USAddressType">
+		<xsd:complexContent>
+			<xsd:extension base="AddressType">
+				<xsd:sequence>
+					<xsd:element name="State" type="xsd:string"/>
+					<xsd:element name="Zip" type="xsd:decimal"/>
+				</xsd:sequence>
+				<xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="InternationalAddressType">
+		<xsd:complexContent>
+			<xsd:extension base="AddressType">
+				<xsd:sequence>
+					<xsd:element name="Region" type="xsd:string"/>
+					<xsd:element name="PostalCode" type="xsd:string"/>
+					<xsd:element name="PostOffice" type="xsd:string"/>
+					<xsd:element name="Country" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AddressType">
+		<xsd:sequence>
+			<xsd:element name="Recipient" type="xsd:string"/>
+			<xsd:element name="Street1" type="xsd:string"/>
+			<xsd:element name="Street2" type="xsd:string"/>
+			<xsd:element name="City" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Name">
+		<xsd:sequence>
+			<xsd:element name="Title" type="xsd:string"/>
+			<xsd:element name="First" type="xsd:string"/>
+			<xsd:element name="Last" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ItemList">
+		<xsd:sequence>
+			<xsd:element name="Item" type="ReadyToShipItemType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SupplementalItemList">
+		<xsd:complexContent>
+			<xsd:extension base="ItemList">
+				<xsd:sequence>
+					<xsd:element name="ReasonCode"/>
+				</xsd:sequence>
+				<xsd:attribute name="Source" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="SKU">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{3}-[A-Z]{2}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ItemType">
+		<xsd:attribute name="PartNum" type="SKU" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="ReadyToShipItemType">
+		<xsd:complexContent>
+			<xsd:extension base="ItemType">
+				<xsd:sequence>
+					<xsd:element name="ProductName" type="xsd:string"/>
+					<xsd:element name="Quantity">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:positiveInteger">
+								<xsd:maxExclusive value="100"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="Price" type="xsd:decimal"/>
+					<xsd:element name="Currency" type="xsd:string"/>
+					<xsd:element ref="Comment" minOccurs="0"/>
+					<xsd:element name="DateAvailable" type="xsd:date" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DelayedShipItemType">
+		<xsd:complexContent>
+			<xsd:extension base="ItemType">
+				<xsd:sequence>
+					<xsd:element name="ProductName" type="xsd:string"/>
+					<xsd:element name="Quantity">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:positiveInteger">
+								<xsd:maxExclusive value="100"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="DelayReason" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="ExpectedShipDate" type="xsd:date" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

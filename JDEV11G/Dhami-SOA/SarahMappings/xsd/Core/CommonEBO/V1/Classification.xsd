@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.02 **
+** Date: Aug 4, 2009 **
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\Classification.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Classification EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:coreclassificationcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.02.00" > 
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomClassification.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<!-- ====================================================================== -->
+<!-- ==============  Classification Components ================ -->
+<!-- ====================================================================== -->
+                      <xsd:element name="Classification" type="ClassificationType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+An organization of objects into groups based on common characteristics. As an example a supermarket may have classifications such as Grocery, Cleaning Supplies, Personal Care etc. Grocery may have child classifications such as Produce, Dairy, Beverages etc. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                 <xsd:annotation> 
+                      <xsd:documentation> 
+                           <svcdoc:EBO> 
+                                   <svcdoc:Description> 
+An organization of objects into groups based on common characteristics. As an example a supermarket may have classifications such as Grocery, Cleaning Supplies, Personal Care etc. Grocery may have child classifications such as Produce, Dairy, Beverages etc. 
+                                   </svcdoc:Description> 
+                                   <svcdoc:Type>EBO</svcdoc:Type> 
+                                   <svcdoc:Industry/> 
+                           </svcdoc:EBO> 
+                      </xsd:documentation> 
+                 </xsd:annotation> 
+            <xsd:complexType name="ClassificationType" >
+                 <xsd:sequence>
+                      <xsd:element name="ClassificationHierarchyPathURI" type="corecom:URIType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The xpath showing the position of the classification in the classification hierarchy
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Name" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Name of the  classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="AssignableIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Flag indicating that item creation is allowed under the Classification.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:CodeIdentification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identification of the classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:EffectiveTimePeriod"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Effective start and end date of the classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Status"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Refers to the status of the classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ParentClassificationReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the parent classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ClassificationSpecificationGroup"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A specification group is a logical group of specifications (attributes). A classification may have multiple specification groups to organize logical groups of specifications
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ClassificationSpecification"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+A specification is a property or attribute. A classification specification is the association between a classification and specification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ClassificationComponentItem"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies the component items for the classification. When assigning this classification to an item, this list of Classification Component Items is automatically populated as child components of that item.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreclassificationcust:CustomClassificationType" minOccurs="0"/>
+                 </xsd:sequence>
+            </xsd:complexType>
+                      <xsd:element name="ClassificationComponentItem" type="ClassificationComponentItemType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the component items for the classification. When assigning this classification to an item, this list of Classification Component Items is automatically populated as child components of that item.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ClassificationComponentItemType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identification of the classification component item
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Name" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the name of the association of the component item to the parent classification. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of association of the component item to the parent classification. Sample values are product and class
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description for the association of component item to the parent classification. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DisplaySequenceNumber" type="corecom:PositiveIntegerType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Represents the sequence of the item.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Quantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Quantity of item in the structure
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="EffectivityCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates the effectivity of the component item e.g., Current, Future etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DefaultIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This flag represents the default product among the set of products for the parent if the type is of 'Class'.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MaximumQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Maximum cardinality of the component  in context of the parent classification. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="MinimumQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Minimum cardinality of the component  in context of the parent classification. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DefaultQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Default cardinality of the component  in context of the parent classification. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:ComponentItemSpecificationGroup"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies the group of user defined attributes for the component item in context of the parent classification.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ItemReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to an item
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ClassificationReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies the classification scheme associated to the component item if the TypeCode is Class in context of the parent classification. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreclassificationcust:CustomClassificationComponentItemType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ClassificationSpecification" type="ClassificationSpecificationType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A specification is a property or attribute. A classification specification is the association between a classification and specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ClassificationSpecificationType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier of the relationship between the classification and specification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Name" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Name assigned to the specification within the context of the classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the specification within the context of the classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DefaultValue" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Default value of the specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DisplaySequenceNumber" type="corecom:PositiveIntegerType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Sequence in which the specification appears within the classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="RequiredIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates whether the specification is mandatory for the classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="UOMCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The unit of measure of the specification within the context of the classification. The default value is expressed in this UOM
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DefaultValueOverrideAllowedIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates whether the specification is read-only i.e., the value can't be assigned at the usage instance level (such as for item) and must be the default value
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DisplayName" type="corecom:NameType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Display name of the specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ReadOnlyIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator allows users to make the attribute read-only, so the user cannot change the value.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="HiddenIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator  prevents the attribute from displaying in quote, agreement, order, or asset views. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SearchableIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator allows an attribute and its values to be used in parametric searches. For example, if the attribute is Color, you can search for products that have Color = Red.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="CheckEligibilityIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+This indicator is to check eligibility for a specific attribute to indicate whether the transaction attributes of a Classification are eligible in context of the Classification.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="EnabledIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicator to enable specification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="IndexedIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Flag to indicate if the specification is indexed
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TransactionalIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Flag to indicate if the specification is static or transactional. Transactional attributes are updated at order time. Static attributes are related to an entity definition and are set only during design time. 
+
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DataTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Data type of the sepcification. Eg., CharNumberStandard DateStandard Date Time and Translatable Text
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:EffectiveTimePeriod"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Effectivity of the specification for the classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SpecificationReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Deprecated. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SpecificationValueSetReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the value set to which the specification is constrained
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="ClassificationSpecificationExclusion"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies a value that is disallowed or invalid for the specification within the context of the classification. This value may be a legal value defined within the value set on which the specification is based but excluded for this classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreclassificationcust:CustomClassificationSpecificationType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ClassificationSpecificationExclusion" type="ClassificationSpecificationExclusionType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies a value that is disallowed or invalid for the specification within the context of the classification. This value may be a legal value defined within the value set on which the specification is based but excluded for this classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ClassificationSpecificationExclusionType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier of the excluded value
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Value" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Value that is excluded
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="coreclassificationcust:CustomClassificationSpecificationExclusionType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="ClassificationSpecificationGroup" type="ClassificationSpecificationGroupType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+A specification group is a logical group of specifications (attributes). A classification may have multiple specification groups to organize logical groups of specifications
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="ClassificationSpecificationGroupType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Unique identifier of the relationship between the classification and specification group
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="DisplaySequenceNumber" type="corecom:PositiveIntegerType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Sequence in which the specification group appears within the parent  classification
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:SpecificationGroupReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the specification group related to the classification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreclassificationcust:CustomClassificationSpecificationGroupType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+</xsd:schema>

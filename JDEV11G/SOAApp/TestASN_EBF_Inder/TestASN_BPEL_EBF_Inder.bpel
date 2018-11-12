@@ -1,0 +1,97 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Feb 23 20:49:07 GMT+05:30 2012
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TestASN_BPEL_EBF_Inder"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/TestASN_EBF_Inder/TestASN_BPEL_EBF_Inder"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/TestASN_EBF_Inder/TestASN_BPEL_EBF_Inder"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://service.emerson.com/ETH/ETH_Common_BPEL_ASNEBF"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns2="http://service.emerson.com/ETH/ASN/CommonService/ComplianceCheckService"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns9="http://schema.emerson.com/ETH/ETH_ShowAdvancedShipmentNotice_CommonServices_Interaction"
+         xmlns:ns5="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+         xmlns:ns7="http://schemas.emerson.com/eth/customEBMHeader"
+         xmlns:ns3="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/AdvanceShipmentNotice/Emerson"
+         xmlns:ns4="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+         xmlns:ns8="http://www.openapplications.org/oagis/9"
+         xmlns:ns6="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="testasn_bpel_ebf_inder_client" partnerLinkType="ns1:ETH_Common_BPEL_ASNEBF" myRole="ETH_Common_BPEL_ASNEBFProvider"/>
+    <partnerLink name="ASN_ComplianceValidation"
+                 partnerLinkType="ns2:ASNComplianceValidation"
+                 partnerRole="ASNComplianceValidationProvider"
+                 myRole="ASNComplianceValidationRequester"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:ETH_Common_BPEL_ASNEBFRequestMessage"/>
+    <variable name="Invoke1_process_InputVariable"
+              messageType="ns2:ASNComplianceValidationRequestMessage"/>
+    <variable name="Receive1_processResponse_InputVariable"
+              messageType="ns2:ASNComplianceValidationResponseMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in TestASN_BPEL_EBF_Inder.wsdl) -->
+    <receive name="receiveInput" partnerLink="testasn_bpel_ebf_inder_client" portType="ns1:ETH_Common_BPEL_ASNEBF" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1"/>
+    <invoke name="Invoke1"
+            inputVariable="Invoke1_process_InputVariable"
+            partnerLink="ASN_ComplianceValidation"
+            portType="ns2:ASNComplianceValidation" operation="process"
+            bpelx:invokeAsDetail="no"/>
+    <receive name="Receive1" createInstance="no"
+             variable="Receive1_processResponse_InputVariable"
+             partnerLink="ASN_ComplianceValidation"
+             portType="ns2:ASNComplianceValidationCallback"
+             operation="processResponse"/>
+  </sequence>
+</process>

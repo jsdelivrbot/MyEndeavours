@@ -1,0 +1,17 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="Test_XML_AQ_MDT"
+     targetNamespace="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_MDT"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_MDT"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="Test_XML_AQ_MDT.Test_XML_AQ_MDT">
+        <plnk:role name="execute_ptt">
+            <plnk:portType name="tns:execute_ptt"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/SOAApp/Test_XML_AQ/Test_XML_AQ_MDT" location="Test_XML_AQ_MDT.wsdl"/>
+</wsdl:definitions>

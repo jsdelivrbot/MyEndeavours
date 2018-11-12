@@ -1,0 +1,127 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon May 02 16:40:51 GMT+05:30 2011
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_B2BMsg_Enqueue"
+               targetNamespace="http://services.emerson.com/OutputServices/ETH_B2B_Enqueue/ETH_PO_OAGIS_B2BMsg_Enqueue_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://services.emerson.com/OutputServices/ETH_B2B_Enqueue/ETH_PO_OAGIS_B2BMsg_Enqueue_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://services.emerson.com/OutputServices/ETH_B2B_Enqueue/ETH_PO_OAGIS_B2BMsg_Enqueue"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/aq/Sarah_Mappings/ETH_B2B_Enqueue_PO_OAGIS/ETH_AQ_ENQ_B2BPO"
+         xmlns:ns3="http://www.openapplications.org/oagis/9"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns4="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eth_bpel_b2bmsg_enqueue_client" partnerLinkType="ns1:ETH_BPEL_B2BMsg_Enqueue" myRole="execute_ptt"/>
+    <partnerLink name="ETH_AQ_ENQ_B2BPO" partnerLinkType="ns2:EnqueueB2BPO_plt"
+                 partnerRole="EnqueueB2BPO_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:requestMessage"/>
+    <variable name="Invoke_B2BPushMsg_EnqueueB2BPO_InputVariable"
+              messageType="ns2:ProcessPurchaseOrder_msg"/>
+    <variable name="B2B_Header" messageType="ns2:Header_msg"/>
+    <variable name="B2B_Header1" element="ns4:IP_MESSAGE_TYPE"/>
+    <variable name="B2B_FileName" type="xsd:string"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_BPEL_B2BMsg_Enqueue.wsdl) -->
+    <receive name="receiveInput" partnerLink="eth_bpel_b2bmsg_enqueue_client" portType="ns1:execute_ptt" operation="execute" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from variable="inputVariable" part="request"
+              query="/ns3:ProcessPurchaseOrder"/>
+        <to variable="Invoke_B2BPushMsg_EnqueueB2BPO_InputVariable"
+            part="ProcessPurchaseOrder" query="/ns3:ProcessPurchaseOrder"/>
+      </copy>
+      <copy>
+        <from expression="string('786687238')"/>
+        <to variable="B2B_Header1" query="/ns4:IP_MESSAGE_TYPE/MSG_ID"/>
+      </copy>
+      <copy>
+        <from expression="string('EMERSON')"/>
+        <to variable="B2B_Header1" query="/ns4:IP_MESSAGE_TYPE/FROM_PARTY"/>
+      </copy>
+      <copy>
+        <from expression="string('PENSKE')"/>
+        <to variable="B2B_Header1" query="/ns4:IP_MESSAGE_TYPE/TO_PARTY"/>
+      </copy>
+      <copy>
+        <from expression="concat(string('contentType:application/octet-stream;filename:'),bpws:getVariableData('B2B_FileName'))"/>
+        <to variable="B2B_Header1" query="/ns4:IP_MESSAGE_TYPE/ACTION_NAME"/>
+      </copy>
+      <copy>
+        <from expression="string('ProcessPo')"/>
+        <to variable="B2B_Header1" query="/ns4:IP_MESSAGE_TYPE/DOCTYPE_NAME"/>
+      </copy>
+      <copy>
+        <from expression="string('9.0')"/>
+        <to variable="B2B_Header1"
+            query="/ns4:IP_MESSAGE_TYPE/DOCTYPE_REVISION"/>
+      </copy>
+      <copy>
+        <from expression="1"/>
+        <to variable="B2B_Header1" query="/ns4:IP_MESSAGE_TYPE/MSG_TYPE"/>
+      </copy>
+      <copy>
+        <from expression="string('ETH_PO_20110502_120200')"/>
+        <to variable="B2B_FileName"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_B2BPushMsg"
+            inputVariable="Invoke_B2BPushMsg_EnqueueB2BPO_InputVariable"
+            partnerLink="ETH_AQ_ENQ_B2BPO" portType="ns2:EnqueueB2BPO_ptt"
+            operation="EnqueueB2BPO" bpelx:invokeAsDetail="no"
+            bpelx:inputHeaderVariable="B2B_Header1"/>
+  </sequence>
+</process>

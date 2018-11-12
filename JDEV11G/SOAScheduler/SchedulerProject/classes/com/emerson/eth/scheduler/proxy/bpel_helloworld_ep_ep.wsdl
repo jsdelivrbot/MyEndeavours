@@ -1,0 +1,50 @@
+<wsdl:definitions
+     name="BPEL_HelloWorld"
+     targetNamespace="http://xmlns.oracle.com/Dhami_SOA/BPEL_HelloWorld/BPEL_HelloWorld"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:client="http://xmlns.oracle.com/Dhami_SOA/BPEL_HelloWorld/BPEL_HelloWorld"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://usmtnz-dinfap19.dev.emrsn.org:8120/soa-infra/services/ETH_Temp/BPEL_HelloWorld!1.0/BPEL_HelloWorld.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="BPEL_HelloWorld">
+        <plnk:role name="BPEL_HelloWorldProvider" portType="client:BPEL_HelloWorld"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/Dhami_SOA/BPEL_HelloWorld/BPEL_HelloWorld"
+                 schemaLocation="BPEL_HelloWorld.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="BPEL_HelloWorldRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="BPEL_HelloWorldResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="BPEL_HelloWorld">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:BPEL_HelloWorldRequestMessage"/>
+            <wsdl:output message="client:BPEL_HelloWorldResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BPEL_HelloWorldBinding" type="client:BPEL_HelloWorld">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/Dhami_SOA/BPEL_HelloWorld/BPEL_HelloWorld"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/Dhami_SOA/BPEL_HelloWorld/BPEL_HelloWorld"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="bpel_helloworld_ep_ep">
+        <wsdl:port name="BPEL_HelloWorld_pt" binding="client:BPEL_HelloWorldBinding">
+            <soap:address location="http://usmtnz-dinfap19.dev.emrsn.org:8120/soa-infra/services/ETH_Temp/BPEL_HelloWorld/bpel_helloworld_ep_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,194 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Mar 19 20:27:57 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Test_Terminate_BPEL"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/Test_Terminate/Test_Terminate_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/Test_Terminate/Test_Terminate_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/Test_Terminate/FL_PUT">
+
+
+
+          <bpelx:exec import="java.util.*"/>
+          <bpelx:exec import="java.lang.*"/>
+          <bpelx:exec import="java.math.*"/>
+          <bpelx:exec import="java.io.*"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="test_terminate_bpel_client" partnerLinkType="client:Test_Terminate_BPEL" myRole="Test_Terminate_BPELProvider"/>
+    <partnerLink name="FL_PUT" partnerLinkType="ns1:Write_plt"
+                 partnerRole="Write_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:Test_Terminate_BPELRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:Test_Terminate_BPELResponseMessage"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns1:Write_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Test_Terminate_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="test_terminate_bpel_client" portType="client:Test_Terminate_BPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <scope name="Scope_ParallelFlow" variableAccessSerializable="no">
+      <flow name="Flow">
+        <sequence name="Sequence">
+          <scope name="Scope_CheckInput" variableAccessSerializable="no">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">Scope_CheckInput</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <variables>
+              <variable name="inputString" type="xsd:string"/>
+            </variables>
+            <sequence name="Sequence2">
+              <assign name="Assign_Input">
+                <copy>
+                  <from variable="inputVariable" part="payload"
+                        query="/client:process/client:input"/>
+                  <to variable="inputString"/>
+                </copy>
+              </assign>
+              <switch name="Switch_CheckInput">
+                <case condition="bpws:getVariableData('inputString') = 'SUCCESS'">
+                  <bpelx:annotation>
+                    <bpelx:general>
+                      <bpelx:property name="userLabel">INPUT_is_SUCCESS</bpelx:property>
+                    </bpelx:general>
+                  </bpelx:annotation>
+                  <assign name="Assign_Output">
+                    <copy>
+                      <from expression="string('Hurray!! We Won.')"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/client:processResponse/client:result"/>
+                    </copy>
+                  </assign>
+                </case>
+                <otherwise>
+                  <sequence name="Sequence1">
+                    <terminate name="Terminate_Failure"/>
+                    <assign name="Assign_AltOutput">
+                      <copy>
+                        <from expression="string('O My God!!!')"/>
+                        <to variable="outputVariable" part="payload"
+                            query="/client:processResponse/client:result"/>
+                      </copy>
+                    </assign>
+                  </sequence>
+                </otherwise>
+              </switch>
+            </sequence>
+          </scope>
+        </sequence>
+        <sequence name="Sequence3">
+          <scope name="Scope_Parallel" variableAccessSerializable="no">
+            <variables>
+              <variable name="inputParallelString" type="xsd:string"/>
+            </variables>
+            <sequence name="Sequence4">
+              <assign name="Assign_ParallelInput">
+                <copy>
+                  <from expression="string('Parallel is Fun')"/>
+                  <to variable="outputVariable" part="payload"
+                      query="/client:processResponse/client:result"/>
+                </copy>
+              </assign>
+              <bpelx:exec name="Java_Parallel" version="1.5" language="java">
+                <![CDATA[/*Write your java code below e.g.  
+	System.out.println("Hello, World"); 
+*/ 
+ 
+String inputAlt = ((oracle.xml.parser.v2.XMLElement)getVariableData("inputVariable","payload","/client:process/client:input")).getFirstChild().getNodeValue(); 
+System.out.println("[Test_Terminate][Test_Terminate_BPEL][INFO]:AltInput is - "+inputAlt);]]>
+              </bpelx:exec>
+            </sequence>
+          </scope>
+        </sequence>
+      </flow>
+    </scope>
+    <scope name="Scope_Log_Msg" variableAccessSerializable="no">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Log _Msg</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <sequence name="Sequence5">
+        <bpelx:exec name="Java_Log_Msg" version="1.5" language="java">
+          <![CDATA[/*Write your java code below e.g.     
+	System.out.println("Hello, World");    
+*/    
+    
+String output = ((oracle.xml.parser.v2.XMLElement)getVariableData("outputVariable","payload","/client:processResponse/client:result")).getFirstChild().getNodeValue();    
+addAuditTrailEntry("[Test_Terminate][Test_Terminate_BPEL][INFO]:Output is - ",output);  
+System.out.println("[Test_Terminate][Test_Terminate_BPEL][INFO]:Output is - "+output);]]>
+        </bpelx:exec>
+        <assign name="Assign1">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:process/client:input"/>
+            <to variable="Invoke1_Write_InputVariable" part="body"
+                query="/client:process/client:input"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke1" bpelx:invokeAsDetail="no"
+                inputVariable="Invoke1_Write_InputVariable"
+                partnerLink="FL_PUT" portType="ns1:Write_ptt"
+                operation="Write"/>
+      </sequence>
+    </scope>
+    <reply name="replyOutput" partnerLink="test_terminate_bpel_client" portType="client:Test_Terminate_BPEL" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

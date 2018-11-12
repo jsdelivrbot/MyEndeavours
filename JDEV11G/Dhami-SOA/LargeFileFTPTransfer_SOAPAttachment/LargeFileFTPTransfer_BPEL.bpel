@@ -1,0 +1,58 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Jul 20 19:10:27 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="LargeFileFTPTransfer_BPEL"
+               targetNamespace="http://services.dhami.com/Dhami_SOA/LargeFileFTPTransfer_SOAPAttachment/LargeFileFTPTransfer_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://services.dhami.com/Dhami_SOA/LargeFileFTPTransfer_SOAPAttachment/LargeFileFTPTransfer_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/Dhami-SOA/LargeFileFTPTransfer_SOAPAttachment/DHAMI_FTP_GET_LargeFile"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/ftp/Dhami-SOA/LargeFileFTPTransfer_SOAPAttachment/DHAMI_FTP_PUT_LargeFile"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/attachment/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="DHAMI_FTP_GET_LargeFile" partnerLinkType="ns1:Get_plt"
+                 myRole="Get_role"/>
+    <partnerLink name="DHAMI_FTP_PUT_LargeFile" partnerLinkType="ns2:Put_plt"
+                 partnerRole="Put_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Get_InputVariable" messageType="ns1:Get_msg"/>
+    <variable name="Invoke1_Put_InputVariable" messageType="ns2:Put_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_Get_InputVariable"
+             partnerLink="DHAMI_FTP_GET_LargeFile" portType="ns1:Get_ptt"
+             operation="Get"/>
+    <assign name="Assign1">
+      <copy>
+        <from variable="Receive1_Get_InputVariable" part="attach"
+              query="/ns3:attachmentElement/@href"/>
+        <to variable="Invoke1_Put_InputVariable" part="file"
+            query="/ns3:attachFile/@href"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" bpelx:invokeAsDetail="no"
+            inputVariable="Invoke1_Put_InputVariable"
+            partnerLink="DHAMI_FTP_PUT_LargeFile" portType="ns2:Put_ptt"
+            operation="Put"/>
+  </sequence>
+</process>

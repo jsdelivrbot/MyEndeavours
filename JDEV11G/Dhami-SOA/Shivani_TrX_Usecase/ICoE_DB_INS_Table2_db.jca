@@ -1,0 +1,14 @@
+<adapter-config name="ICoE_DB_INS_Table2" adapter="Database Adapter" wsdlLocation="ICoE_DB_INS_Table2.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/ICoE/XA_DB" UIConnectionName="ICoE_DB" adapterRef=""/>
+  <endpoint-interaction portType="ICoE_DB_INS_Table2_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="ICoE_DB_INS_Table2.ShivaniTab2"/>
+      <property name="DmlType" value="insert"/>
+      <property name="MappingsMetaDataURL" value="ICoE_DB_INS_Table2-or-mappings.xml"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

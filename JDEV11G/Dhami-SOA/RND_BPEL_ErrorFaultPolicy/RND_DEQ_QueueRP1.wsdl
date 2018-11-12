@@ -1,0 +1,21 @@
+<?binding.jca RND_DEQ_QueueRP1_jms.jca?>
+<wsdl:definitions name="RND_DEQ_QueueRP1" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/RND_BPEL_ErrorFaultPolicy/RND_DEQ_QueueRP1" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/RND_BPEL_ErrorFaultPolicy/RND_DEQ_QueueRP1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="Consume_RP1Queue_plt">
+        <plt:role name="Consume_RP1Queue_role">
+            <plt:portType name="tns:Consume_RP1Queue_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns="http://www.w3.org/2001/XMLSchema">
+            <element name="opaqueElement" type="base64Binary"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Consume_RP1Queue_msg">
+        <wsdl:part name="opaque" element="opaque:opaqueElement"/>
+    </wsdl:message>
+    <wsdl:portType name="Consume_RP1Queue_ptt">
+        <wsdl:operation name="Consume_RP1Queue">
+            <wsdl:input message="tns:Consume_RP1Queue_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

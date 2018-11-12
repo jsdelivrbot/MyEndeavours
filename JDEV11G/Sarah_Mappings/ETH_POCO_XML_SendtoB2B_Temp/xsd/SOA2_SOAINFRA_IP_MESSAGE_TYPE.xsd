@@ -1,0 +1,59 @@
+<schema targetNamespace="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:SOA2_SOAINFRA="http://xmlns.oracle.com/xdb/SOA2_SOAINFRA" elementFormDefault="unqualified" attributeFormDefault="qualified">
+   <complexType name="IP_MESSAGE_TYPE">
+      <sequence>
+         <element name="MSG_ID" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="128"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="INREPLYTO_MSG_ID" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="128"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="FROM_PARTY" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="512"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="TO_PARTY" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="512"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="ACTION_NAME" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="512"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="DOCTYPE_NAME" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="512"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="DOCTYPE_REVISION" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="512"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="MSG_TYPE" type="integer" nillable="true" minOccurs="0"/>
+         <element name="PAYLOAD" type="string" nillable="true" minOccurs="0"/>
+         <element name="ATTACHMENT" type="base64Binary" nillable="true" minOccurs="0"/>
+      </sequence>
+   </complexType>
+   <element name="IP_MESSAGE_TYPE" type="SOA2_SOAINFRA:IP_MESSAGE_TYPE" />
+</schema>

@@ -1,0 +1,176 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jan 03 19:01:48 GMT+05:30 2011
+  Author:  idhami
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_GLB_LSNA_DBListener_BPEL"
+               targetNamespace="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_GLB_LSNA_DBListenerService/ETH_GLB_LSNA_DBListener_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Dhami_SOA_jws/ETH_GLB_LSNA_DBListenerService/ETH_GLB_LSNA_DBListener_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/ETH_GLB_LSNA_DBListenerService/ETH_DB_CALL_GetTransaction"
+         xmlns:ns2="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ns6="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns4="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns9="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns7="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns3="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DB3/ETH_GETTRANSACTION_PD/"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/ETH_GLB_LSNA_DBListenerService/ETH_JMS_ENQ_Transaction"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:bpmn="http://schemas.oracle.com/bpm/xpath"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ETH_GLB_LSNA_DBLISTENER_BPEL_CLIENT" partnerLinkType="client:ETH_GLB_LSNA_DBListener_BPEL" myRole="ETH_GLB_LSNA_DBListener_BPELProvider"/>
+    <partnerLink name="ETH_DB_CALL_GetTransaction"
+                 partnerRole="ETH_DB_CALL_GetTransaction_role"
+                 partnerLinkType="ns1:ETH_DB_CALL_GetTransaction_plt"/>
+    <partnerLink name="ETH_JMS_ENQ_Transaction"
+                 partnerRole="Produce_Message_role"
+                 partnerLinkType="ns11:Produce_Message_plt"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ETH_GLB_LSNA_DBListener_BPELRequestMessage"/>
+    <variable name="Invoke_GetTransaction_InputVariable"
+              messageType="ns1:args_in_msg"/>
+    <variable name="Invoke_GetTransaction_OutputVariable"
+              messageType="ns1:args_out_msg"/>
+    <variable name="Invoke_JMS_InputVariable"
+              messageType="ns11:Produce_Message_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_GLB_LSNA_DBListener_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="ETH_GLB_LSNA_DBLISTENER_BPEL_CLIENT" portType="client:ETH_GLB_LSNA_DBListener_BPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign_GetTransaction">
+      <copy>
+        <from expression="string('ETH_GLB_LSNA_DBListener')"/>
+        <to variable="Invoke_GetTransaction_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:CALLER_NAME"/>
+      </copy>
+      <copy>
+        <from expression="string('EMR240')"/>
+        <to variable="Invoke_GetTransaction_InputVariable"
+            part="InputParameters" query="/ns2:InputParameters/ns2:PARAM1"/>
+      </copy>
+      <copy>
+        <from expression="string('true')"/>
+        <to variable="Invoke_GetTransaction_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:COMMITREQUIREDFLAG"/>
+      </copy>
+      <copy>
+        <from expression="string('true')"/>
+        <to variable="Invoke_GetTransaction_InputVariable"
+            part="InputParameters"
+            query="/ns2:InputParameters/ns2:ROLLBACKONERRORFLAG"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_GetTransaction"
+            inputVariable="Invoke_GetTransaction_InputVariable"
+            outputVariable="Invoke_GetTransaction_OutputVariable"
+            partnerLink="ETH_DB_CALL_GetTransaction"
+            portType="ns1:ETH_DB_CALL_GetTransaction_ptt"
+            operation="ETH_DB_CALL_GetTransaction">
+      <bpelx:annotation>
+        <bpelx:documentation>This is the BD Listener for LSNA Division</bpelx:documentation>
+      </bpelx:annotation>
+    </invoke>
+    <switch name="Switch_1">
+      <case condition="bpws:getVariableData('Invoke_GetTransaction_OutputVariable','OutputParameters','/ns10:OutputParameters/ns10:RESPONSECODE') = 0">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">Transaction Exists</bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence>
+          <assign name="Assign_JMS_Input">
+            <copy>
+              <from variable="Invoke_GetTransaction_OutputVariable"
+                    part="OutputParameters"
+                    query="/ns10:OutputParameters/ns10:PARAM7"/>
+              <to variable="Invoke_JMS_InputVariable" part="opaque"
+                  query="/ns12:opaqueElement"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_RP1_JMS" inputVariable="Invoke_JMS_InputVariable"
+                  partnerLink="ETH_JMS_ENQ_Transaction"
+                  portType="ns11:Produce_Message_ptt"
+                  operation="Produce_Message">
+            <bpelx:inputProperty name="jca.jms.JMSProperty.HEADER_ID"
+                                 variable="Invoke_GetTransaction_OutputVariable"
+                                 part="OutputParameters"
+                                 query="/ns2:OutputParameters/ns2:PARAM1"/>
+            <bpelx:inputProperty name="jca.jms.JMSProperty.TRANSACTION_ID"
+                                 variable="Invoke_GetTransaction_OutputVariable"
+                                 part="OutputParameters"
+                                 query="/ns2:OutputParameters/ns2:PARAM2"/>
+            <bpelx:inputProperty name="jca.jms.JMSProperty.SENDER_ID"
+                                 variable="Invoke_GetTransaction_OutputVariable"
+                                 part="OutputParameters"
+                                 query="/ns2:OutputParameters/ns2:PARAM3"/>
+            <bpelx:inputProperty name="jca.jms.JMSProperty.DOCUMENT_NUMBER"
+                                 variable="Invoke_GetTransaction_OutputVariable"
+                                 part="OutputParameters"
+                                 query="/ns2:OutputParameters/ns2:PARAM4"/>
+            <bpelx:inputProperty name="jca.jms.JMSProperty.TRANSACTION_TYPE"
+                                 variable="Invoke_GetTransaction_OutputVariable"
+                                 part="OutputParameters"
+                                 query="/ns2:OutputParameters/ns2:PARAM5"/>
+            <bpelx:inputProperty name="jca.jms.JMSProperty.TRANSACTION_SUBTYPE"
+                                 variable="Invoke_GetTransaction_OutputVariable"
+                                 part="OutputParameters"
+                                 query="/ns2:OutputParameters/ns2:PARAM6"/>
+          </invoke>
+        </sequence>
+      </case>
+      <otherwise>
+        <empty name="Empty_DoNothing"/>
+      </otherwise>
+    </switch>
+  </sequence>
+</process>

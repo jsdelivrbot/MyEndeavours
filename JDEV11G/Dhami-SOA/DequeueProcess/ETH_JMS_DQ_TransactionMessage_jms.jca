@@ -1,0 +1,12 @@
+<adapter-config name="ETH_JMS_DQ_TransactionMessage" adapter="Jms Adapter" wsdlLocation="ETH_JMS_DQ_TransactionMessage.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/wls/JMS/ETH/Queue/RP1" UIConnectionName="DEV_SOA_oriond1" UIJmsProvider="WLSJMS" adapterRef=""/>
+  <endpoint-activation portType="Consume_ETHMessage_ptt" operation="Consume_ETHMessage">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="DestinationName" value="jms/ETH/Queue/RP1"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="PayloadType" value="TextMessage"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

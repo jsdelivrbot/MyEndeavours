@@ -1,0 +1,229 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ItemStructure</title>
+<meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
+<link href="../../../eboschemadoc.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<h2>ItemStructure</h2>
+<!-- ******************************* ItemStructure ************************************************-->
+<h3><a name="ItemStructure"></a>ItemStructure</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Enterprise Business Object</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Item Structure. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Item Structure EBO is used for describing the composition of different types of item structures such as Sales Kit, Product Bundle etc. It provides a single level of item composition. Thus, the Item Structure EBO gives only the immediate children items but not the composition of the children items. If a child item is a complex item, it will have its own item structure which will provide its composition.
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href="../../Common/V2/CommonComponents.html#ItemStructure">ItemStructureType</a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ItemStructure Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ItemStructure Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ItemStructureSpecificationGroup">ItemStructureSpecificationGroup</a></td>
+             <td> Item Structure.  Item Structure Specification Group.  Item Structure Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the group of user defined attributes for the item structure
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ItemStructureAttachment">ItemStructureAttachment</a></td>
+             <td> Item Structure.  Item Structure Attachment.  Item Structure Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Binary, URI or other attachments that apply to the item
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#ItemStructureComponentItem">ItemStructureComponentItem</a></td>
+             <td> Item Structure.  Item Structure Component Item.  Item Structure Component Item</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the component items that make up the item structure
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* ItemStructureComponentItem ************************************************-->
+<h3><a name="ItemStructureComponentItem"></a>ItemStructureComponentItem</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Item Structure Component Item. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the component items that make up the item structure
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href="../../Common/V2/CommonComponents.html#ComponentItem">ComponentItemType</a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* ItemStructureComponentItem Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* ItemStructureComponentItem Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ComponentItemSpecificationGroup">ComponentItemSpecificationGroup</a></td>
+             <td> Item Structure Component Item.  Component Item Specification Group.  Component Item Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the group of user defined attributes for the component item
+                            </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#SubstituteComponentItem">SubstituteComponentItem</a></td>
+             <td> Item Structure Component Item.  Substitute Component Item.  Substitute Component Item</td>
+     </tr>
+     <tr>
+             <td> 
+References the substitute items for the component item
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* SubstituteComponentItem ************************************************-->
+<h3><a name="SubstituteComponentItem"></a>SubstituteComponentItem</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Substitute Component Item. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+References the substitute items for the component item
+        </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href="../../Common/V2/CommonComponents.html#SubstituteComponentItem">SubstituteComponentItemType</a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* SubstituteComponentItem Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* SubstituteComponentItem Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../Common/V2/CommonComponents.html#ComponentItemSpecificationGroup">ComponentItemSpecificationGroup</a></td>
+             <td> Substitute Component Item.  Component Item Specification Group.  Component Item Specification Group</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the group of user defined attributes for the substitute component item
+                            </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="TEST_BPEL_PO_EBF" targetNamespace="http://xmlns.oracle.com/SOAApp/TEST_PO_EBF/TEST_BPEL_PO_EBF" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/SOAApp/TEST_PO_EBF/TEST_BPEL_PO_EBF" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns1="http://service.emerson.com/ETH/ETH_Common_BPEL_PurchaseOrderEBF" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns2="http://service.emerson.com/ETH/ETH_Common_PO" xmlns:ns3="http://schema.emerson.com/ETH/ETH_ProcessPurchaseOrder_CommonServices_Interface" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="test_bpel_po_ebf_client" partnerLinkType="ns1:ETH_Common_BPEL_PurchaseOrderEBF" myRole="ETH_Common_BPEL_PurchaseOrderEBFProvider"/>
+    <partnerLink name="Call_Common3" partnerLinkType="ns2:ETH_PO_Common" partnerRole="ETH_PO_Common_Provider" myRole="ETH_PO_Common_Response_Requester"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:ETH_Common_BPEL_PurchaseOrderEBFRequestMessage"/>
+    <variable name="Invoke1_process_InputVariable_1" messageType="ns2:ETH_PO_Common_RequestMessage"/>
+    <variable name="Receive1_processResponse_InputVariable_1" messageType="ns2:ETH_PO_Common_ResponseMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in TEST_BPEL_PO_EBF.wsdl) -->
+    <receive name="receiveInput" partnerLink="test_bpel_po_ebf_client" portType="ns1:ETH_Common_BPEL_PurchaseOrderEBF" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <invoke name="Invoke1" bpelx:invokeAsDetail="no" inputVariable="Invoke1_process_InputVariable_1" partnerLink="Call_Common3" portType="ns2:ETH_PO_Common_Pt" operation="process" id="BpInv0"/>
+    <receive name="Receive1" createInstance="no" variable="Receive1_processResponse_InputVariable_1" partnerLink="Call_Common3" portType="ns2:ETH_PO_Common_Reponse_Pt" operation="processResponse" id="BpRcv1"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun Feb 26 01:51:37 GMT+05:30 2012
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

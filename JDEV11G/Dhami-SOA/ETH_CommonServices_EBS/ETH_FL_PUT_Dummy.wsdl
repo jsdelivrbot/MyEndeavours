@@ -1,0 +1,21 @@
+<?binding.jca ETH_FL_PUT_Dummy_file.jca?>
+<wsdl:definitions name="ETH_FL_PUT_Dummy" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_CommonServices_EBS/ETH_FL_PUT_Dummy" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Dhami-SOA/ETH_CommonServices_EBS/ETH_FL_PUT_Dummy" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:imp1="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/PurchaseOrder/V1" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="WriteETH_EBS_plt">
+        <plt:role name="WriteETH_EBS_role">
+            <plt:portType name="tns:WriteETH_EBS_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/PurchaseOrder/V1" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Core/EBO/PurchaseOrder/V1/PurchaseOrderEBM.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="WriteETH_EBS_msg">
+        <wsdl:part name="body" element="imp1:CreatePurchaseOrderEBM"/>
+    </wsdl:message>
+    <wsdl:portType name="WriteETH_EBS_ptt">
+        <wsdl:operation name="WriteETH_EBS">
+            <wsdl:input message="tns:WriteETH_EBS_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

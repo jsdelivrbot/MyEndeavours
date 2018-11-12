@@ -1,0 +1,89 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Jul 28 14:07:49 GMT+05:30 2011
+  Author:  DRao
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_EMR501_BPEL_FlatFileMainProcess"
+               targetNamespace="http://xmlns.emerson.com/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_BPEL_FlatFileMainProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.emerson.com/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_BPEL_FlatFileMainProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/ETHWorkAPPL/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_FL_Listing_Files"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns2="http://xmlns.emerson.com/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_BPEL_ListofFiles/Record"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ethDBCheck="http://customFunctions.emerson.com/eth3/SOA/EvaluateDBCheck"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/jms/Application1/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_JMS_ENQ_ErrorData_Topic"
+         xmlns:ns4="http://schema.emerson.com/ETH/ErrorData"
+         xmlns:ns5="http://xmlns.oracle.com/TrainingAppl/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_BPEL_TransactionRegistrationService"
+         xmlns:ns6="http://xmlns.emerson.com/ETH_EMR501_FlatFileMainProcess_Composite/ETH_EMR501_BPEL_SearchFileName"
+         xmlns:ns7="http://fault.emerson.com/eth"
+         xmlns:ns8="http://fault.emerson.com/"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/ETH_EMR501_FlatFileMainProcess_Composite/ETH_FL_RD_List">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="ETH_FL_RD_List" partnerLinkType="ns9:ReadFileList_plt"
+                 myRole="ReadFileList_role"/>
+  </partnerLinks>
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="Receive1_ReadFileList_InputVariable"
+              messageType="ns9:ReadFileList_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ETH_EMR501_BPEL_FlatFileMainProcess.wsdl) -->
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_ReadFileList_InputVariable"
+             partnerLink="ETH_FL_RD_List" portType="ns9:ReadFileList_ptt"
+             operation="ReadFileList"/>
+    <assign name="Transform1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transform_to_TxnFilesList.xsl', $Receive1_ReadFileList_InputVariable.body)"/>
+        <to variable="Receive1_ReadFileList_InputVariable" part="body"/>
+      </copy>
+    </assign>
+  </sequence>
+</process>

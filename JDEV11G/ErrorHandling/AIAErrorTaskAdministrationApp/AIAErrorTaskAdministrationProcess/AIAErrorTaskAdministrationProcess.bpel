@@ -1,0 +1,654 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Jan 15 14:18:43 IST 2009
+  Author:  vsangana
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process xml:id="id1" name="AIAErrorTaskAdministrationProcess"
+         targetNamespace="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xpath20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://xmlns.oracle.com/AIAErrorTaskAdministrationProcess"
+         xmlns:ns4="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns3="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns6="http://oracle.abs.eh.service.v1/"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.GetRequestHeaderExtnFunction"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:wf="http://schemas.oracle.com/bpel/extension/workflow"
+         xmlns:ns7="http://xmlns.oracle.com/bpel/workflow/common/tsc"
+         xmlns:ns8="http://xmlns.oracle.com/bpel/workflow/TaskEvidenceService"
+          xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:task="http://xmlns.oracle.com/bpel/workflow/task"
+         xmlns:taskservice="http://xmlns.oracle.com/bpel/workflow/taskService"
+         xmlns:wfcommon="http://xmlns.oracle.com/bpel/workflow/common">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks xml:id="id2">
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink xml:id="id3" name="aiaerrortaskadministrationprocess_client" partnerLinkType="client:AIAErrorTaskAdministrationProcess" myRole="AIAErrorTaskAdministrationProcessProvider" partnerRole="AIAErrorTaskAdministrationProcessRequester"/>
+        <partnerLink xml:id="id65" myRole="TaskServiceCallbackListener"
+                     name="HumanTask_Actor_Only.TaskService_1"
+                     partnerRole="TaskService"
+                     partnerLinkType="taskservice:TaskService"/>
+        <partnerLink xml:id="id214" myRole="TaskServiceCallbackListener"
+                     name="FYIHumanTask.TaskService_1" partnerRole="TaskService"
+                     partnerLinkType="taskservice:TaskService"/>
+        <partnerLink myRole="TaskServiceCallbackListener"
+                     name="HumanTask_Actor_1.TaskService_1"
+                     partnerRole="TaskService"
+                     partnerLinkType="taskservice:TaskService"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables xml:id="id4">
+        <!-- Reference to the message passed as input during initiation -->
+        <variable xml:id="id5" name="inputVariable" messageType="client:AIAErrorTaskAdministrationProcessRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable xml:id="id6" name="outputVariable" messageType="client:AIAErrorTaskAdministrationProcessResponseMessage"/>
+        <variable xml:id="id28" name="systemId" type="xsd:string"/>
+        <variable xml:id="id35" name="processName" type="xsd:string"/>
+        <variable xml:id="id36" name="errorCode" type="xsd:string"/>
+        <variable xml:id="id37" name="ServiceName" type="xsd:string"/>
+        <variable xml:id="id38" name="Variable_GetBSRRole"
+                  element="ns2:BSRData"/>
+        <variable xml:id="id39" name="RolesString" type="xsd:string"/>
+        <variable xml:id="id40" name="bsrActorString" type="xsd:string"/>
+        <variable xml:id="id41" name="bsrFyiString" type="xsd:string"/>
+        <variable xml:id="id66" name="HumanTask_Actor_Only_1_globalVariable"
+                  messageType="taskservice:taskMessage"/>
+        <variable xml:id="id215" name="FYIHumanTask_1_globalVariable"
+                  messageType="taskservice:taskMessage"/>
+        <variable xml:id="id331" name="HumanTask_Actor_1_1_globalVariable"
+                  messageType="taskservice:taskMessage"/>
+        <variable name="TaskListPayloadFault" element="ns6:FaultMessage"/>
+        <variable name="HTFaultVar"
+                  messageType="taskservice:workflowErrorMessage"/>
+        <variable name="HumanTask_2_1_globalVariable"
+                  messageType="taskservice:taskMessage"/>
+        <variable name="HumanTask_Actor_1_globalVariable"
+                  messageType="taskservice:taskMessage"/>
+    </variables>
+    <faultHandlers xml:id="id11">
+        <catchAll xml:id="id200">
+            <assign xml:id="id201" name="Assign_Error_Task">
+                <copy xml:id="id202">
+                    <from xml:id="id203" expression="'Task List Errored Out'"/>
+                    <to xml:id="id204" variable="outputVariable" part="payload"
+                        query="/client:processResponse/client:result"/>
+                </copy>
+            </assign>
+        </catchAll>
+    </faultHandlers>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence xml:id="id7" name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in AIAErrorTaskAdministrationProcess.wsdl) -->
+        <receive xml:id="id8" name="receiveInput" partnerLink="aiaerrortaskadministrationprocess_client" portType="client:AIAErrorTaskAdministrationProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <scope xml:id="id10" name="Actor_FYI">
+             <faultHandlers xml:id="id18">
+                <catch xml:id="id199"
+                       faultName="taskservice:operationErroredFault"
+                       faultVariable="HTFaultVar">
+                    <assign xml:id="id205" name="AssignErrorToOutput">
+                        <copy xml:id="id206">
+                            <from xml:id="id207"
+                                  expression="'Task List Errored Out'"/>
+                            <to xml:id="id208" variable="outputVariable"
+                                part="payload"
+                                query="/client:processResponse/client:result"/>
+                        </copy>
+                    </assign>
+                </catch>
+            </faultHandlers>
+            
+            <sequence xml:id="id17" name="Sequence_Actor_FYI">
+                <scope xml:id="id20" name="Scope_SystemID">
+                    <faultHandlers xml:id="id29">
+                        <catchAll xml:id="id30">
+                            <assign xml:id="id31" name="AssignBlnkSysID">
+                                <copy xml:id="id32">
+                                    <from xml:id="id33" expression='""'/>
+                                    <to xml:id="id34" variable="systemId"/>
+                                </copy>
+                            </assign>
+                        </catchAll>
+                    </faultHandlers>
+                    <assign xml:id="id21" name="AssignSystemID">
+                        <copy xml:id="id25">
+                            <from xml:id="id26" variable="inputVariable"
+                                  part="payload"
+                                  query="/ns1:Fault/ns1:EBMReference/ns1:SenderReference/ns1:ID"/>
+                            <to xml:id="id27" variable="systemId"/>
+                        </copy>
+                    </assign>
+                </scope>
+                 <scope name="Scope_ProcessName">
+                    <faultHandlers>
+                        <catchAll>
+                            <assign name="AssignBlnkProcessName">
+                                <copy>
+                                    <from expression='""'/>
+                                    <to variable="processName"/>
+                                </copy>
+                            </assign>
+                        </catchAll>
+                    </faultHandlers>
+                    <assign name="AssignProcessName">
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/ns1:Fault/ns1:EBMReference/ns1:BusinessScopeReference/ns1:InstanceID"/>
+                            <to variable="processName"/>
+                        </copy>
+                    </assign>
+                </scope>
+                <scope name="Scope_ErrorCode">
+                    <faultHandlers>
+                        <catchAll>
+                            <assign name="AssignBlnkErrorCode">
+                                <copy>
+                                    <from expression='""'/>
+                                    <to variable="errorCode"/>
+                                </copy>
+                            </assign>
+                        </catchAll>
+                    </faultHandlers>
+                    <assign name="AssignErrorCode">
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/ns1:Fault/ns1:FaultNotification/ns1:FaultMessage/ns1:Code"/>
+                            <to variable="errorCode"/>
+                        </copy>
+                    </assign>
+                </scope>
+                <scope name="Scope_ServiceName">
+                    <faultHandlers>
+                        <catchAll>
+                            <assign name="AssignBlnkServiceName">
+                                <copy>
+                                    <from expression='""'/>
+                                    <to variable="ServiceName"/>
+                                </copy>
+                            </assign>
+                        </catchAll>
+                    </faultHandlers>
+                    <assign name="AssignServiceName">
+                        <copy>
+                            <from variable="inputVariable"
+                                  query="/ns1:Fault/ns1:FaultNotification/ns1:FaultingService/ns1:ID"
+                                  part="payload"/>
+                            <to variable="ServiceName"/>
+                        </copy>
+                    </assign>
+                </scope>
+                <assign name="Assign_Value_Notification_Role">
+                    <copy>
+                        <from expression="aia:getNotificationRoles(bpws:getVariableData('systemId'),bpws:getVariableData('errorCode'),bpws:getVariableData('ServiceName'),bpws:getVariableData('processName'))"/>
+                        <to variable="Variable_GetBSRRole"
+                            query="/ns2:BSRData/ns2:Roles"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:getContentAsString(bpws:getVariableData('Variable_GetBSRRole'))"/>
+                        <to variable="RolesString"/>
+                    </copy>
+                    <copy>
+                        <from expression="substring-before(substring-after(bpws:getVariableData('RolesString'),'&lt;actor xmlns=&quot;&quot;>'),'&lt;/actor>')"/>
+                        <to variable="bsrActorString"/>
+                    </copy>
+                    <copy>
+                        <from expression="substring-before(substring-after(bpws:getVariableData('RolesString'),'&lt;fyi xmlns=&quot;&quot;>'),'&lt;/fyi>')"/>
+                        <to variable="bsrFyiString"/>
+                    </copy>
+                </assign>
+                <assign name="TransformFaultPayload">
+                    <bpelx:annotation>
+                        <bpelx:pattern>transformation</bpelx:pattern>
+                    </bpelx:annotation>
+                    <copy>
+                        <from expression="ora:processXSLT('xsl/Transformation_1.xsl',bpws:getVariableData('inputVariable','payload'))"/>
+                        <to variable="TaskListPayloadFault"/>
+                    </copy>
+                </assign>
+             <switch xml:id="id47" name="Switch_NotificationRoles">
+                    <case xml:id="id188"
+                          condition="bpws:getVariableData('bsrFyiString')!='' and bpws:getVariableData('bsrActorString')!=''">
+                        <bpelx:annotation>
+                            <bpelx:pattern>Actor and FYI not null</bpelx:pattern>
+                        </bpelx:annotation>
+                        <flow xml:id="id189" name="Flow_1">
+                            <sequence name="Sequence_2">
+                                <sequence>
+                                    <scope name="HumanTask_Actor_1_1"
+                                           xmlns:wf="http://schemas.oracle.com/bpel/extension/workflow"
+                                           wf:key="HumanTask_Actor_1_1_globalVariable">
+            <bpelx:annotation xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+            </bpelx:annotation>
+	    <variables>
+	        <variable name="initiateTaskInput"
+                   messageType="taskservice:initiateTaskMessage"/>
+        	<variable name="initiateTaskResponseMessage"
+                   messageType="taskservice:initiateTaskResponseMessage"/>
+            </variables>
+            <sequence>
+                <assign name="HumanTask_Actor_1_1_AssignTaskAttributes">
+                                                <copy>
+                                                    <from expression="number(3)"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:priority"/>
+                                                </copy>
+                                                <copy>
+                                                    <from>
+                                                        <payload xmlns="http://xmlns.oracle.com/bpel/workflow/task">
+                                                            <FaultMessage xmlns="http://oracle.abs.eh.service.v1/"/>
+                                                        </payload>
+                                                    </from>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:payload"/>
+                                                </copy>
+                                                <copy>
+                                                    <from variable="TaskListPayloadFault"
+                                                          query="/ns6:FaultMessage"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:payload/ns6:FaultMessage"/>
+                                                </copy>
+                                                <copy>
+                                                    <from expression="concat(string('Error in AIA  '), bpws:getVariableData('TaskListPayloadFault','/ns6:FaultMessage/ns6:FaultingServiceID'), string(' Process'))"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:title"/>
+                                                </copy>
+                                                <copy>
+                                                    <from variable="bsrActorString"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:systemMessageAttributes/task:textAttribute2"/>
+                                                </copy>
+                                                 <copy>
+                                                <from expression="concat(ora:getProcessURL(), string('/HumanTask_Actor/HumanTask_Actor.task'))"/>
+                                                 <to variable="initiateTaskInput"
+                                                    part="payload"
+                                                    query="/taskservice:initiateTask/task:task/task:taskDefinitionURI"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="string('weblogic')"/>
+                                                <to variable="initiateTaskInput"
+                                                    part="payload"
+                                                    query="/taskservice:initiateTask/task:task/task:ownerUser"/>
+                                            </copy>
+                                            </assign>
+                <invoke name="initiateTask_HumanTask_Actor_1_1"
+                        partnerLink="HumanTask_Actor_1.TaskService_1"
+                        portType="taskservice:TaskService"
+                        operation="initiateTask"
+                        inputVariable="initiateTaskInput"
+                        outputVariable="initiateTaskResponseMessage">
+                </invoke>
+                <receive name="receiveCompletedTask_HumanTask_Actor_1_1"
+                         partnerLink="HumanTask_Actor_1.TaskService_1"
+                         portType="taskservice:TaskServiceCallback"
+                         operation="onTaskCompleted"
+                         variable="HumanTask_Actor_1_1_globalVariable"
+                         createInstance="no">
+                </receive>
+            </sequence>
+        </scope>
+                                    <switch name="taskSwitch">
+                                        <case condition="bpws:getVariableData('HumanTask_Actor_1_1_globalVariable', 'payload', '/task:task/task:systemAttributes/task:state') = 'COMPLETED' and bpws:getVariableData('HumanTask_Actor_1_1_globalVariable', 'payload', '/task:task/task:systemAttributes/task:outcome') = 'COMPLETED'">
+                                            <bpelx:annotation>
+                                                <bpelx:pattern>Task outcome is COMPLETED</bpelx:pattern>
+                                            </bpelx:annotation>
+                                            <sequence>
+                                                <assign name="CopyPayloadFromTask">
+                                                    <copy>
+                                                        <from variable="HumanTask_Actor_1_1_globalVariable"
+                                                              part="payload"
+                                                              query="/task:task/task:payload/ns6:FaultMessage"/>
+                                                        <to variable="TaskListPayloadFault"
+                                                            query="/ns6:FaultMessage"/>
+                                                    </copy>
+                                                </assign>
+                                            </sequence>
+                                        </case>
+                                        <otherwise>
+                                            <sequence>
+                                                <assign name="CopyPayloadFromTask">
+                                                    <copy>
+                                                        <from variable="HumanTask_Actor_1_1_globalVariable"
+                                                              part="payload"
+                                                              query="/task:task/task:payload/ns6:FaultMessage"/>
+                                                        <to variable="TaskListPayloadFault"
+                                                            query="/ns6:FaultMessage"/>
+                                                    </copy>
+                                                </assign>
+                                                <assign name="AssignError">
+                                                    <copy>
+                                                        <from expression='"Error in Human Task"'/>
+                                                        <to variable="HTFaultVar"
+                                                            part="payload"
+                                                            query="/taskservice:operationErroredFault/taskservice:faultInfo"/>
+                                                    </copy>
+                                                </assign>
+                                                <throw name="Throw_1"
+                                                       faultName="taskservice:operationErroredFault"
+                                                       faultVariable="HTFaultVar"/>
+                                            </sequence>
+                                        </otherwise>
+                                    </switch>
+                                </sequence>
+                            </sequence>
+                            <sequence xml:id="id191" name="Sequence_1">
+                                <sequence xml:id="id216">
+                                    <scope name="FYIHumanTask_1"
+                                           xmlns:wf="http://schemas.oracle.com/bpel/extension/workflow"
+                                           wf:key="FYIHumanTask_1_globalVariable">
+            <bpelx:annotation xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+            </bpelx:annotation>
+	    <variables>
+	        <variable name="initiateTaskInput"
+                   messageType="taskservice:initiateTaskMessage"/>
+        	<variable name="initiateTaskResponseMessage"
+                   messageType="taskservice:initiateTaskResponseMessage"/>
+            </variables>
+            <sequence>
+              <assign name="FYIHumanTask_1_AssignTaskAttributes">
+                                                <copy>
+                                                    <from variable="bsrFyiString"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:systemMessageAttributes/task:textAttribute1"/>
+                                                </copy>
+                                                <copy>
+                                                    <from expression="concat(ora:getProcessURL(), string('/FYIHumanTask/FYIHumanTask.task'))"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:taskDefinitionURI"/>
+                                                </copy>
+                                                <copy>
+                                                    <from expression="number(3)"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:priority"/>
+                                                </copy>
+                                                <copy>
+                                                    <from>
+                                                        <payload xmlns="http://xmlns.oracle.com/bpel/workflow/task">
+                                                            <FaultMessage xmlns="http://oracle.abs.eh.service.v1/"/>
+                                                        </payload>
+                                                    </from>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:payload"/>
+                                                </copy>
+                                                <copy xml:id="id257">
+                                                    <from xml:id="id258"
+                                                          variable="TaskListPayloadFault"
+                                                          query="/ns6:FaultMessage"/>
+                                                    <to xml:id="id259"
+                                                        variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:payload/ns6:FaultMessage"/>
+                                                </copy>
+                                                <copy>
+                                                    <from expression="concat(string('Error in AIA '), bpws:getVariableData('TaskListPayloadFault','/ns6:FaultMessage/ns6:FaultingServiceID'), string(' Process FYI'))"/>
+                                                    <to variable="initiateTaskInput"
+                                                        part="payload"
+                                                        query="/taskservice:initiateTask/task:task/task:title"/>
+                                                </copy>
+                                            </assign>
+                <invoke name="initiateTask_FYIHumanTask_1"
+                        partnerLink="FYIHumanTask.TaskService_1"
+                        portType="taskservice:TaskService"
+                        operation="initiateTask"
+                        inputVariable="initiateTaskInput"
+                        outputVariable="initiateTaskResponseMessage">
+                </invoke>
+                <receive name="receiveCompletedTask_FYIHumanTask_1"
+                         partnerLink="FYIHumanTask.TaskService_1"
+                         portType="taskservice:TaskServiceCallback"
+                         operation="onTaskCompleted"
+                         variable="FYIHumanTask_1_globalVariable"
+                         createInstance="no">
+                </receive>
+            </sequence>
+        </scope>
+                                    <switch xml:id="id217" name="taskSwitch">
+                                        <case xml:id="id269"
+                                              condition="bpws:getVariableData('FYIHumanTask_1_globalVariable', 'payload', '/task:task/task:systemAttributes/task:state') = 'COMPLETED' and bpws:getVariableData('FYIHumanTask_1_globalVariable', 'payload', '/task:task/task:systemAttributes/task:outcome') = 'OK'">
+                                            <bpelx:annotation>
+                                                <bpelx:pattern>Task outcome is OK</bpelx:pattern>
+                                            </bpelx:annotation>
+                                            <sequence xml:id="id270">
+                                                <assign xml:id="id271"
+                                                        name="CopyPayloadFromTask">
+                                                    <copy>
+                                                        <from variable="FYIHumanTask_1_globalVariable"
+                                                              part="payload"
+                                                              query="/task:task/task:payload/ns6:FaultMessage"/>
+                                                        <to variable="TaskListPayloadFault"
+                                                            query="/ns6:FaultMessage"/>
+                                                    </copy>
+                                                </assign>
+                                            </sequence>
+                                        </case>
+                                        <otherwise xml:id="id226">
+                                            <sequence xml:id="id224">
+                                                <assign xml:id="id225"
+                                                        name="CopyPayloadFromTask">
+                                                    <copy>
+                                                        <from variable="FYIHumanTask_1_globalVariable"
+                                                              part="payload"
+                                                              query="/task:task/task:payload/ns6:FaultMessage"/>
+                                                        <to variable="TaskListPayloadFault"
+                                                            query="/ns6:FaultMessage"/>
+                                                    </copy>
+                                                </assign>
+                                            </sequence>
+                                        </otherwise>
+                                    </switch>
+                                </sequence>
+                            </sequence>
+                        </flow>
+                    </case>
+                    <!-- Here -->
+                    <case xml:id="id52"
+                          condition="bpws:getVariableData(&quot;bsrActorString&quot;)='' and bpws:getVariableData(&quot;bsrFyiString&quot;) = ''">
+                        <bpelx:annotation>
+                            <bpelx:pattern>Actor and FYI not present</bpelx:pattern>
+                        </bpelx:annotation>
+                        <terminate xml:id="id53"
+                                   name="Terminate_No_Actor_No_FYI"/>
+                    </case>
+                   
+                    <case xml:id="id50"
+                          condition="bpws:getVariableData('bsrActorString')!='' and bpws:getVariableData('bsrFyiString')=''">
+                        <bpelx:annotation>
+                            <bpelx:pattern>Actor present and FYI not present</bpelx:pattern>
+                        </bpelx:annotation>
+                        <sequence xml:id="id67" name="Sequence_Actor_Only">
+                            <scope name="HumanTask_Actor_Only_1"
+                                   xmlns:wf="http://schemas.oracle.com/bpel/extension/workflow"
+                                   wf:key="HumanTask_Actor_Only_1_globalVariable">
+            <bpelx:annotation xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+            </bpelx:annotation>
+	    <variables>
+	        <variable name="initiateTaskInput"
+                   messageType="taskservice:initiateTaskMessage"/>
+        	<variable name="initiateTaskResponseMessage"
+                   messageType="taskservice:initiateTaskResponseMessage"/>
+            </variables>
+            <sequence>
+                <assign name="HumanTask_Actor_Only_1_AssignTaskAttributes">
+                                        <copy>
+                                            <from expression="number(3)"/>
+                                            <to variable="initiateTaskInput"
+                                                part="payload"
+                                                query="/taskservice:initiateTask/task:task/task:priority"/>
+                                        </copy>
+                                        <copy>
+                                            <from>
+                                                <payload xmlns="http://xmlns.oracle.com/bpel/workflow/task">
+                                                    <FaultMessage xmlns="http://oracle.abs.eh.service.v1/"/>
+                                                </payload>
+                                            </from>
+                                            <to variable="initiateTaskInput"
+                                                part="payload"
+                                                query="/taskservice:initiateTask/task:task/task:payload"/>
+                                        </copy>
+                                        <copy>
+                                            <from variable="bsrActorString"/>
+                                            <to variable="initiateTaskInput"
+                                                part="payload"
+                                                query="/taskservice:initiateTask/task:task/task:systemMessageAttributes/task:textAttribute2"/>
+                                        </copy>
+                                        <copy>
+                                            <from variable="TaskListPayloadFault"
+                                                  query="/ns6:FaultMessage"/>
+                                            <to variable="initiateTaskInput"
+                                                part="payload"
+                                                query="/taskservice:initiateTask/task:task/task:payload/ns6:FaultMessage"/>
+                                        </copy>
+                                        <copy>
+                                            <from expression="concat(string('Error in AIA  '), bpws:getVariableData('TaskListPayloadFault','/ns6:FaultMessage/ns6:FaultingServiceID'), string('  Process'))"/>
+                                            <to variable="initiateTaskInput"
+                                                part="payload"
+                                                query="/taskservice:initiateTask/task:task/task:title"/>
+                                        </copy>
+                                    </assign>
+                <invoke name="initiateTask_HumanTask_Actor_Only_1"
+                        partnerLink="HumanTask_Actor_Only.TaskService_1"
+                        portType="taskservice:TaskService"
+                        operation="initiateTask"
+                        inputVariable="initiateTaskInput"
+                        outputVariable="initiateTaskResponseMessage">
+                </invoke>
+                <receive name="receiveCompletedTask_HumanTask_Actor_Only_1"
+                         partnerLink="HumanTask_Actor_Only.TaskService_1"
+                         portType="taskservice:TaskServiceCallback"
+                         operation="onTaskCompleted"
+                         variable="HumanTask_Actor_Only_1_globalVariable"
+                         createInstance="no">
+                </receive>
+            </sequence>
+        </scope>
+                            <switch xml:id="id68" name="taskSwitch">
+                                <case xml:id="id99"
+                                      condition="bpws:getVariableData('HumanTask_Actor_Only_1_globalVariable', 'payload', '/task:task/task:systemAttributes/task:state') = 'COMPLETED' and bpws:getVariableData('HumanTask_Actor_Only_1_globalVariable', 'payload', '/task:task/task:systemAttributes/task:outcome') = 'COMPLETED'">
+                                    <bpelx:annotation>
+                                        <bpelx:pattern>Task outcome is COMPLETED</bpelx:pattern>
+                                    </bpelx:annotation>
+                                    <sequence xml:id="id100">
+                                        <assign xml:id="id101"
+                                                name="CopyPayloadFromTask">
+                                            <copy>
+                                                <from variable="HumanTask_Actor_Only_1_globalVariable"
+                                                      part="payload"
+                                                      query="/task:task/task:payload/ns6:FaultMessage"/>
+                                                <to variable="TaskListPayloadFault"
+                                                    query="/ns6:FaultMessage"/>
+                                            </copy>
+                                        </assign>
+                                    </sequence>
+                                </case>
+                                <otherwise xml:id="id83">
+                                    <sequence xml:id="id81">
+                                        <assign xml:id="id82"
+                                                name="CopyPayloadFromTask">
+                                            <copy>
+                                                <from variable="HumanTask_Actor_Only_1_globalVariable"
+                                                      part="payload"
+                                                      query="/task:task/task:payload/ns6:FaultMessage"/>
+                                                <to variable="TaskListPayloadFault"
+                                                    query="/ns6:FaultMessage"/>
+                                            </copy>
+                                        </assign>
+                                        <assign xml:id="id177"
+                                                name="AssignError">
+                                            <copy xml:id="id181">
+                                                <from xml:id="id182"
+                                                      expression="'Error Occured in Human Task'"/>
+                                                <to xml:id="id183"
+                                                    variable="HTFaultVar"
+                                                    query="/taskservice:operationErroredFault/taskservice:faultInfo"
+                                                    part="payload"/>
+                                            </copy>
+                                        </assign>
+                                        <throw xml:id="id186"
+                                               name="ThrowOperationFault"
+                                               faultName="taskservice:operationErroredFault"
+                                               faultVariable="HTFaultVar"/>
+                                    </sequence>
+                                </otherwise>
+                            </switch>
+                        </sequence>
+                    </case>
+                    <case xml:id="id48"
+                          condition="bpws:getVariableData('bsrFyiString')!='' and bpws:getVariableData('bsrActorString')=''">
+                        <bpelx:annotation>
+                            <bpelx:pattern>FYI Present actor not present</bpelx:pattern>
+                        </bpelx:annotation>
+                        <terminate xml:id="id187" name="Terminate_No_Actor"/>
+                    </case>
+                    <otherwise xml:id="id49"/>
+                    
+                </switch>
+              
+                <assign xml:id="id363" name="AssignOutputSuccess">
+                    <copy xml:id="id364">
+                        <from xml:id="id365"
+                              expression="'TaskList is success'"/>
+                        <to xml:id="id366" variable="outputVariable"
+                            part="payload"
+                            query="/client:processResponse/client:result"/>
+                    </copy>
+                </assign>
+            </sequence>
+        </scope>
+        <invoke xml:id="id9" name="callbackClient" partnerLink="aiaerrortaskadministrationprocess_client" portType="client:AIAErrorTaskAdministrationProcessCallback" operation="processResponse" inputVariable="outputVariable"/>
+    </sequence>
+</process>

@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_EMR501_FL_RD_TxnFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_FL_RD_TxnFile"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_FL_RD_TxnFile"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://schema.emerson.com/ETH/FlatFile/V1"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Read_EMR501_TxnFile_plt" >
+    <plt:role name="Read_EMR501_TxnFile_role" >
+      <plt:portType name="tns:Read_EMR501_TxnFile_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schema.emerson.com/ETH/FlatFile/V1" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationObjectLibrary/ETH/FlatFile/V1/EMR501_ETH_PO.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="Read_EMR501_TxnFile_msg">
+        <wsdl:part name="body" element="imp1:PurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:portType name="Read_EMR501_TxnFile_ptt">
+        <wsdl:operation name="Read_EMR501_TxnFile">
+            <wsdl:input message="tns:Read_EMR501_TxnFile_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,14 @@
+<adapter-config name="DHAMI_FTP_PUT_LargeFile" adapter="FTP Adapter" wsdlLocation="DHAMI_FTP_PUT_LargeFile.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FTP/ETH3/Test"/>
+  <endpoint-interaction portType="Put_ptt" operation="Put">
+    <interaction-spec className="oracle.tip.adapter.ftp.outbound.FTPInteractionSpec">
+      <property name="LogicalDirectory" value="OUT_DIR"/>
+      <property name="FileType" value="ascii"/>
+      <property name="Append" value="false"/>
+      <property name="FileNamingConvention" value="LARGE_FILE%SEQ%"/>
+      <property name="NumberMessages" value="1"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

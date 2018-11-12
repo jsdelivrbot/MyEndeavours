@@ -1,0 +1,21 @@
+<?binding.jca ICoE_DB_INS_Table1_db.jca?>
+<wsdl:definitions name="ICoE_DB_INS_Table1" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/Shivani_TrX_Usecase/ICoE_DB_INS_Table1" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Dhami-SOA/Shivani_TrX_Usecase/ICoE_DB_INS_Table1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoE_DB_INS_Table1">
+    <plt:partnerLinkType name="ICoE_DB_INS_Table1_plt">
+        <plt:role name="ICoE_DB_INS_Table1_role">
+            <plt:portType name="tns:ICoE_DB_INS_Table1_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoE_DB_INS_Table1" schemaLocation="xsd/ICoE_DB_INS_Table1_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ShivaniTab1Collection_msg">
+        <wsdl:part name="ShivaniTab1Collection" element="top:ShivaniTab1Collection"/>
+    </wsdl:message>
+    <wsdl:portType name="ICoE_DB_INS_Table1_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:ShivaniTab1Collection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="ap6002idmz(SH_MDS)" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="ap6002idmz(SH_MDS)" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>aiab2brc3</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>ap6002idmz.us.oracle.com</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>SH_MDS</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="MDSConnection" className="oracle.tip.tools.ide.common.resourcepalette.adapter.mds.MDSProvider" credentialStoreKey="MDSConnection" xmlns="">
+      <Factory className="oracle.tip.tools.ide.common.resourcepalette.adapter.mds.MDSProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="ConnectionName">
+            <Contents>MDSConnection</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="ConnectionType">
+            <Contents>oracle.mds.persistence.stores.db.DBMetadataStore</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="jdbc-url">
+            <Contents>jdbc:oracle:thin:@ap6002idmz.us.oracle.com:1521:aiab2brc3</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="jdbc-userid">
+            <Contents>SH_MDS</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="jdbc-password"/>
+         <StringRefAddr addrType="partition-name">
+            <Contents>soa-infra</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

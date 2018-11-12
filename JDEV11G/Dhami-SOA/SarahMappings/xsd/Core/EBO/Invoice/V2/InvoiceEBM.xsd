@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 2.01 **
+** Date: Aug 23, 2008 **
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\EBO\Invoice\V2\InvoiceEBM.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Invoice EBM Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:coreinvoicecust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/Invoice/V2" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns:corecomEBO="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:xacml-context="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" xmlns:xacml="urn:oasis:names:tc:xacml:2.0:policy:schema:cd:04" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/Invoice/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/Invoice/V2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.01"> 
+
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:include schemaLocation="InvoiceEBO.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/Invoice/V2" schemaLocation="../../../Custom/EBO/Invoice/V2/CustomInvoiceEBO.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<xsd:import namespace="http://schemas.xmlsoap.org/ws/2003/03/addressing"   schemaLocation="../../../Common/V2/WS-Addressing.xsd"/>
+<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04"  schemaLocation="../../../Common/V2/access_control-xacml-2.0-context-schema-cd-04.xsd"/>
+<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:policy:schema:cd:04"   schemaLocation="../../../Common/V2/access_control-xacml-2.0-policy-schema-cd-04.xsd"/>
+
+<!-- ====================================================================== -->
+	<xsd:annotation>
+		<xsd:documentation>
+			<svcdoc:EBO>
+				<svcdoc:Description>Invoice EBM identifies all the service operations that are supported for the Invoice EBO</svcdoc:Description>
+				<svcdoc:Type>EBM</svcdoc:Type>
+				<svcdoc:Industry/>
+				<svcdoc:EBOName>InvoiceEBO</svcdoc:EBOName>
+			</svcdoc:EBO>
+		</xsd:documentation>
+	</xsd:annotation>
+
+<!-- ====================================================================== -->
+
+	<xsd:complexType name="InvoiceEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBOType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+
+<!-- ====================================================================== -->
+<!-- ==================QueryInvoice Service=================== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="QueryInvoiceEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryInvoiceDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="QueryInvoiceEBM" type="QueryInvoiceEBMType"/>
+	<xsd:complexType name="QueryInvoiceDataAreaType">
+		<xsd:sequence>
+			<xsd:element name="Query" type="corecom:SimpleQueryType" minOccurs="0"/>
+			<xsd:element ref="QueryInvoice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="QueryInvoiceType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="QueryInvoice" type="QueryInvoiceType"/>
+
+
+
+<!-- ====================================================================== -->
+<!-- ============= QueryInvoice Response Service ============= -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="QueryInvoiceResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryInvoiceResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="QueryInvoiceResponseEBM" type="QueryInvoiceResponseEBMType"/>
+
+	<xsd:complexType name="QueryInvoiceResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:QueryResponse"/>
+			<xsd:element ref="QueryInvoiceResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="QueryInvoiceResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="QueryInvoiceResponse" type="QueryInvoiceResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ================ QueryInvoice List Service ============== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="QueryInvoiceListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryInvoiceListDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="QueryInvoiceListEBM" type="QueryInvoiceListEBMType"/>
+	<xsd:complexType name="InvoiceComplexQueryType">
+		<xsd:sequence>
+			<xsd:element name="QueryCode" type="InvoiceQueryCodeType" minOccurs="0"/>
+			<xsd:element name="ResponseCode" type="InvoiceResponseCodeType" minOccurs="0"/>
+			<xsd:element ref="corecom:QueryCriteria" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="corecom:ResponseFilter" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="getAllTranslationsIndicator" type="corecom:IndicatorType" use="optional"/>
+		<xsd:attribute name="recordSetStart" type="corecom:PositiveIntegerType" use="optional"/>
+		<xsd:attribute name="recordSetCount" type="corecom:PositiveIntegerType" use="optional"/>
+		<xsd:attribute name="maxItems" type="corecom:PositiveIntegerType" use="optional"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="QueryInvoiceListDataAreaType">
+		<xsd:sequence>
+		<xsd:element name="Query" type="InvoiceComplexQueryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InvoiceQueryCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="corecom:CodeType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="InvoiceResponseCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="corecom:CodeType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+
+
+<!-- ====================================================================== -->
+<!-- =========== QueryInvoice List Response Service ==========-->
+<!-- ====================================================================== -->
+	<xsd:complexType name="QueryInvoiceListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="QueryInvoiceListResponseDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="QueryInvoiceListResponseEBM" type="QueryInvoiceListResponseEBMType"/>
+
+	<xsd:complexType name="QueryInvoiceListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:QueryResponse"/>
+			<xsd:element ref="QueryInvoiceListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="QueryInvoiceListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="QueryInvoiceListResponse" type="QueryInvoiceListResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ==================CreateInvoice Service=================== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="CreateInvoiceEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateInvoiceDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="CreateInvoiceEBM" type="CreateInvoiceEBMType"/>
+	<xsd:complexType name="CreateInvoiceDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Create"/>
+			<xsd:element ref="CreateInvoice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CreateInvoiceType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="CreateInvoice" type="CreateInvoiceType"/>
+
+
+
+<!-- ====================================================================== -->
+<!-- ============= CreateInvoice Response Service ============= -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="CreateInvoiceResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateInvoiceResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="CreateInvoiceResponseEBM" type="CreateInvoiceResponseEBMType"/>
+
+	<xsd:complexType name="CreateInvoiceResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:CreateResponse"/>
+			<xsd:element ref="CreateInvoiceResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CreateInvoiceResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="CreateInvoiceResponse" type="CreateInvoiceResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ================ CreateInvoice List Service ============== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="CreateInvoiceListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateInvoiceListDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="CreateInvoiceListEBM" type="CreateInvoiceListEBMType"/>
+	<xsd:complexType name="CreateInvoiceListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Create"/>
+			<xsd:element ref="CreateInvoiceList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CreateInvoiceListType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+<xsd:element name="CreateInvoiceList" type="CreateInvoiceListType"/>
+
+<!-- ====================================================================== -->
+<!-- =========== CreateInvoice List Response Service ==========-->
+<!-- ====================================================================== -->
+	<xsd:complexType name="CreateInvoiceListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="CreateInvoiceListResponseDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="CreateInvoiceListResponseEBM" type="CreateInvoiceListResponseEBMType"/>
+
+	<xsd:complexType name="CreateInvoiceListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:CreateResponse"/>
+			<xsd:element ref="CreateInvoiceListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CreateInvoiceListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="CreateInvoiceListResponse" type="CreateInvoiceListResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ==================DeleteInvoice Service=================== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteInvoiceEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteInvoiceDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="DeleteInvoiceEBM" type="DeleteInvoiceEBMType"/>
+	<xsd:complexType name="DeleteInvoiceDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Delete"/>
+			<xsd:element ref="DeleteInvoice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeleteInvoiceType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Invoice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			 <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="DeleteInvoice" type="DeleteInvoiceType"/>
+
+
+
+<!-- ====================================================================== -->
+<!-- ============= DeleteInvoice Response Service ============= -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteInvoiceResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteInvoiceResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="DeleteInvoiceResponseEBM" type="DeleteInvoiceResponseEBMType"/>
+
+	<xsd:complexType name="DeleteInvoiceResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:DeleteResponse"/>
+			<xsd:element ref="DeleteInvoiceResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeleteInvoiceResponseType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Invoice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			 <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="DeleteInvoiceResponse" type="DeleteInvoiceResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ================ DeleteInvoice List Service ============== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteInvoiceListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteInvoiceListDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="DeleteInvoiceListEBM" type="DeleteInvoiceListEBMType"/>
+	<xsd:complexType name="DeleteInvoiceListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Delete"/>
+			<xsd:element ref="DeleteInvoiceList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeleteInvoiceListType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Invoice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			 <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+<xsd:element name="DeleteInvoiceList" type="DeleteInvoiceListType"/>
+
+<!-- ====================================================================== -->
+<!-- =========== DeleteInvoice List Response Service ==========-->
+<!-- ====================================================================== -->
+	<xsd:complexType name="DeleteInvoiceListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="DeleteInvoiceListResponseDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="DeleteInvoiceListResponseEBM" type="DeleteInvoiceListResponseEBMType"/>
+
+	<xsd:complexType name="DeleteInvoiceListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:DeleteResponse"/>
+			<xsd:element ref="DeleteInvoiceListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeleteInvoiceListResponseType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+Invoice unique identifier 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			 <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceEBOType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="DeleteInvoiceListResponse" type="DeleteInvoiceListResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ================ SyncInvoice List Service ============== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="SyncInvoiceListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="SyncInvoiceListDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="SyncInvoiceListEBM" type="SyncInvoiceListEBMType"/>
+	<xsd:complexType name="SyncInvoiceListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Sync"/>
+			<xsd:element ref="SyncInvoiceList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="SyncInvoiceListType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+<xsd:element name="SyncInvoiceList" type="SyncInvoiceListType"/>
+
+<!-- ====================================================================== -->
+<!-- =========== SyncInvoice List Response Service ==========-->
+<!-- ====================================================================== -->
+	<xsd:complexType name="SyncInvoiceListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="SyncInvoiceListResponseDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="SyncInvoiceListResponseEBM" type="SyncInvoiceListResponseEBMType"/>
+
+	<xsd:complexType name="SyncInvoiceListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:SyncResponse"/>
+			<xsd:element ref="SyncInvoiceListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="SyncInvoiceListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="SyncInvoiceListResponse" type="SyncInvoiceListResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ==================UpdateInvoice Service=================== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateInvoiceEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateInvoiceDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="UpdateInvoiceEBM" type="UpdateInvoiceEBMType"/>
+	<xsd:complexType name="UpdateInvoiceDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Update"/>
+			<xsd:element ref="UpdateInvoice"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="UpdateInvoiceType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="UpdateInvoice" type="UpdateInvoiceType"/>
+
+
+
+<!-- ====================================================================== -->
+<!-- ============= UpdateInvoice Response Service ============= -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateInvoiceResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateInvoiceResponseDataAreaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="UpdateInvoiceResponseEBM" type="UpdateInvoiceResponseEBMType"/>
+
+	<xsd:complexType name="UpdateInvoiceResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:UpdateResponse"/>
+			<xsd:element ref="UpdateInvoiceResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="UpdateInvoiceResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="UpdateInvoiceResponse" type="UpdateInvoiceResponseType"/>
+
+
+<!-- ====================================================================== -->
+<!-- ================ UpdateInvoice List Service ============== -->
+<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateInvoiceListEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateInvoiceListDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="UpdateInvoiceListEBM" type="UpdateInvoiceListEBMType"/>
+	<xsd:complexType name="UpdateInvoiceListDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Update"/>
+			<xsd:element ref="UpdateInvoiceList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="UpdateInvoiceListType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+<xsd:element name="UpdateInvoiceList" type="UpdateInvoiceListType"/>
+
+<!-- ====================================================================== -->
+<!-- =========== UpdateInvoice List Response Service ==========-->
+<!-- ====================================================================== -->
+	<xsd:complexType name="UpdateInvoiceListResponseEBMType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:EBMType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="UpdateInvoiceListResponseDataAreaType" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="UpdateInvoiceListResponseEBM" type="UpdateInvoiceListResponseEBMType"/>
+
+	<xsd:complexType name="UpdateInvoiceListResponseDataAreaType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:UpdateResponse"/>
+			<xsd:element ref="UpdateInvoiceListResponse"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="UpdateInvoiceListResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="InvoiceEBMType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="UpdateInvoiceListResponse" type="UpdateInvoiceListResponseType"/>
+</xsd:schema>

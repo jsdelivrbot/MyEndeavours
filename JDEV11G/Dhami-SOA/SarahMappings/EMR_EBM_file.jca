@@ -1,0 +1,13 @@
+<adapter-config name="EMR_EBM" adapter="File Adapter" wsdlLocation="EMR_EBM.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter"/>
+  <endpoint-interaction portType="WriteEMR_EBM_ptt" operation="WriteEMR_EBM">
+    <interaction-spec className="oracle.tip.adapter.file.outbound.FileInteractionSpec">
+      <property name="LogicalDirectory" value="OUT_FILE_DIRECTORY"/>
+      <property name="Append" value="false"/>
+      <property name="FileNamingConvention" value="EMR_EBM_%SEQ%.xml"/>
+      <property name="NumberMessages" value="1"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

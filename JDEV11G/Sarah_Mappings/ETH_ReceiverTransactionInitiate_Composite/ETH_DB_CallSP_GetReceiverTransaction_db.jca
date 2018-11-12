@@ -1,0 +1,14 @@
+<adapter-config name="ETH_DB_CallSP_GetReceiverTransaction" adapter="Database Adapter" wsdlLocation="ETH_DB_CallSP_GetReceiverTransaction.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/ETH/DB/NXAppDB" UIConnectionName="ETH-Custom" adapterRef=""/>
+  <endpoint-interaction portType="ETH_DB_CallSP_GetReceiverTransaction_ptt" operation="ETH_DB_CallSP_GetReceiverTransaction">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="PackageName" value="ETH_DBLISTENER2_PKG"/>
+      <property name="ProcedureName" value="GET_TRANSACTION_PRC"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

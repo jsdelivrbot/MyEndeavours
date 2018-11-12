@@ -1,0 +1,3209 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>InvoiceEBO</title>
+<meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
+<link href="../../../../eboschemadoc.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+<h2>Invoice</h2>
+<!-- ******************************* Invoice ************************************************-->
+<h3><a name="Invoice"></a>Invoice</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Enterprise Business Object</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Details about the invoice. The invoice represents a document that is used in two different contexts to achieve two different objectives. From a Receivables point of view, the invoice is a billing document that is sent to the customer or other inter-unit entities. From a Payables point of view, the invoice represents the document that comes into payable interface table/services from suppliers or other inter-unit entities.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* Invoice Attributes ************************************************-->
+<a href="#Invoice/Description">Description</a><br/>
+<a href="#Invoice/TotalAmount">TotalAmount</a><br/>
+<a href="#Invoice/ExtendedAmount">ExtendedAmount</a><br/>
+<a href="#Invoice/PriorBalanceAmount">PriorBalanceAmount</a><br/>
+<a href="#Invoice/AdjustedIndicator">AdjustedIndicator</a><br/>
+<a href="#Invoice/TypeCode">TypeCode</a><br/>
+<a href="#Invoice/GroupCode">GroupCode</a><br/>
+<a href="#Invoice/BillingFrequencyCode">BillingFrequencyCode</a><br/>
+<a href="#Invoice/ConsolidationIndicator">ConsolidationIndicator</a><br/>
+<a href="#Invoice/InvoiceDateTime">InvoiceDateTime</a><br/>
+<a href="#Invoice/LatePaymentChargeApplicableDate">LatePaymentChargeApplicableDate</a><br/>
+<a href="#Invoice/AdjustmentAmount">AdjustmentAmount</a><br/>
+<a href="#Invoice/LastCyclePaymentAmount">LastCyclePaymentAmount</a><br/>
+<a href="#Invoice/CorrectionAmount">CorrectionAmount</a><br/>
+<a href="#Invoice/AutomaticPaymentIndicator">AutomaticPaymentIndicator</a><br/>
+<a href="#Invoice/DueDate">DueDate</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* Invoice Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Identification.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#PaymentTerm">PaymentTerm</a></td>
+             <td> Invoice.  Payment Term.  Payment Term</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the payment terms for the Invoice. 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Note">Note</a></td>
+             <td> Invoice.  Note.  Note</td>
+     </tr>
+     <tr>
+             <td> 
+Note about the invoice
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Status">Status</a></td>
+             <td> Invoice.  Status.  Status</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the the status of the invoice
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#EffectiveTimePeriod">EffectiveTimePeriod</a></td>
+             <td> Invoice.  Effective Time Period.  Effective Time Period</td>
+     </tr>
+     <tr>
+             <td> 
+For a recurring invoice, identifies the start and end date for recurring billing
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#CreditCard">CreditCard</a></td>
+             <td> Invoice.  Credit Card.  Credit Card</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the credit card that will be used to pay for the invoice.This is not the actual payment information - it is just information about how the invoice will be paid
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#CurrencyExchange">CurrencyExchange</a></td>
+             <td> Invoice.  Currency Exchange.  Currency Exchange</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Exchange Rate used to convert from the invoice currency indicated in the total amount to the base currency of the set of books to which the invoice accounting entries are posted
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#LegalEntityReference">LegalEntityReference</a></td>
+             <td>Invoice.  Legal Entity Reference.  Legal Entity</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the entity that is legally responsible for the invoice.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BillToPartyReference">BillToPartyReference</a></td>
+             <td>Invoice.  Bill To Party Reference.  Bill To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the party to whom the invoice is issued.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BillFromPartyReference">BillFromPartyReference</a></td>
+             <td>Invoice.  Bill From Party Reference.  Bill From Party</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the party that issues the invoice
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#RemitToPartyReference">RemitToPartyReference</a></td>
+             <td>Invoice.  Remit To Party Reference.  Remit To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the party to whom the payment is to be remitted
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ProjectReference">ProjectReference</a></td>
+             <td>Invoice.  Project Reference.  Project</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Project Accounting Project/ Task associated with the invoice.  If a ProjectReference is specified on the Invoice Header, it is assumed to apply to all lines that do not have a ProjectReference specified
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#SalespersonPartyReference">SalespersonPartyReference</a></td>
+             <td>Invoice.  Salesperson Party Reference.  Salesperson Party</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Sales person or Sales Group responsible for the sale of the goods on the invoice
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ConsolidatedInvoiceReference">ConsolidatedInvoiceReference</a></td>
+             <td>Invoice.  Consolidated Invoice Reference.  Consolidated Invoice</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the primary invoice that groups multiple invoices that have no lines but only header information. The invoices that are being consolidated will have the ConsolidationIndicator set to "Y" and the ConsolidatedInvoiceReference will have the ID of the primary invoice. If an invoice is not part of a consolidation group, this field will be left blank.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BusinessUnitReference">BusinessUnitReference</a></td>
+             <td>Invoice.  Business Unit Reference.  Business Unit</td>
+     </tr>
+     <tr>
+             <td> 
+Refers to the business unit within the context of which the Invoice is defined
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLine">InvoiceLine</a></td>
+             <td> Invoice.  Invoice Line.  Invoice Line</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Invoice Line
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceTaxTotal">InvoiceTaxTotal</a></td>
+             <td> Invoice.  Invoice Tax Total.  Invoice Tax Total</td>
+     </tr>
+     <tr>
+             <td> 
+Total Tax amount for various tax types . This is the sum of all the line Tax Amounts.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceChargeTotal">InvoiceChargeTotal</a></td>
+             <td> Invoice.  Invoice Charge Total.  Invoice Charge Total</td>
+     </tr>
+     <tr>
+             <td> 
+Total Charge amount for various charge types . This is the sum of all the line Charge Amounts.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceAllowanceTotal">InvoiceAllowanceTotal</a></td>
+             <td> Invoice.  Invoice Allowance Total.  Invoice Allowance Total</td>
+     </tr>
+     <tr>
+             <td> 
+Total Allowance amount for various allowance types . This is the sum of all the line Allowance Amounts.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceDeliverToParty">InvoiceDeliverToParty</a></td>
+             <td> Invoice.  Invoice Deliver To Party.  Invoice Deliver To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Details about who will receive additional copies of the invoice.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoicePayment">InvoicePayment</a></td>
+             <td> Invoice.  Invoice Payment.  Invoice Payment</td>
+     </tr>
+     <tr>
+             <td> 
+Details about all actual payments received for the invoice.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceAccountingDistribution">InvoiceAccountingDistribution</a></td>
+             <td> Invoice.  Invoice Accounting Distribution.  Invoice Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+The AP or AR accounting distribution of the sum of Invoice line ExtendedAmount. Accounting Distribution includes assignment of an amount to multiple GL Entities, Cost or Profit Centers, Projects and so on. If AP/AP distribution is indicated at header, then it should apply to all invoice lines and should not be indicated at invoice line level.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceAttachment">InvoiceAttachment</a></td>
+             <td> Invoice.  Invoice Attachment.  Invoice Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Binary, URI or other attachments that apply to the Invoice
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceStatusHistory">InvoiceStatusHistory</a></td>
+             <td> Invoice.  Invoice Status History.  Invoice Status History</td>
+     </tr>
+     <tr>
+             <td> 
+Capture the status history for the invoice.
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/Description ************************************************-->
+<h3><a name="Invoice/Description"></a>Invoice/Description</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Description.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Description of the invoice
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/TotalAmount ************************************************-->
+<h3><a name="Invoice/TotalAmount"></a>Invoice/TotalAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Total.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total value of the items billed on the invoice  including taxes or charges, this value does not include the prior balance amount and should be derived from Invoice Lines.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/ExtendedAmount ************************************************-->
+<h3><a name="Invoice/ExtendedAmount"></a>Invoice/ExtendedAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Extended.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total value of the items billed on the invoice not including taxes or charges. This is the sum of all the line item Extended Amounts
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/PriorBalanceAmount ************************************************-->
+<h3><a name="Invoice/PriorBalanceAmount"></a>Invoice/PriorBalanceAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Prior Balance.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates customer's prior balance amount.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/AdjustedIndicator ************************************************-->
+<h3><a name="Invoice/AdjustedIndicator"></a>Invoice/AdjustedIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Adjusted.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies if this invoice has been adjusted
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/TypeCode ************************************************-->
+<h3><a name="Invoice/TypeCode"></a>Invoice/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies whether the invoice is regular, credit, rebill, adjustment, regular with adjustment.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/GroupCode ************************************************-->
+<h3><a name="Invoice/GroupCode"></a>Invoice/GroupCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Group.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Categorization of the invoice (ie. Contract Invoice, sales order invoice, real estate invoice)
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/BillingFrequencyCode ************************************************-->
+<h3><a name="Invoice/BillingFrequencyCode"></a>Invoice/BillingFrequencyCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Billing Frequency.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies whether the invoice is a recurring bill, an installment bill, or regular bill
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/ConsolidationIndicator ************************************************-->
+<h3><a name="Invoice/ConsolidationIndicator"></a>Invoice/ConsolidationIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Consolidation.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies if the invoice is a consolidated invoice header. Consolidated invoice headers have no invoice lines.  The lines can be found in the invoices that make up the consolidated invoice.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/InvoiceDateTime ************************************************-->
+<h3><a name="Invoice/InvoiceDateTime"></a>Invoice/InvoiceDateTime</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Invoice.  Date Time</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date printed on invoice, basis of due date calculation.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateTimeType">DateTimeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/LatePaymentChargeApplicableDate ************************************************-->
+<h3><a name="Invoice/LatePaymentChargeApplicableDate"></a>Invoice/LatePaymentChargeApplicableDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Late Payment Charge Applicable.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date after which a late payment will be charged.  This is equal to the due date plus the grace days defined for the customer.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/AdjustmentAmount ************************************************-->
+<h3><a name="Invoice/AdjustmentAmount"></a>Invoice/AdjustmentAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Adjustment.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total adjustment amount appliable during the current billing cycle.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/LastCyclePaymentAmount ************************************************-->
+<h3><a name="Invoice/LastCyclePaymentAmount"></a>Invoice/LastCyclePaymentAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Last Cycle Payment.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total amount paid during the current billing cycle against prior bills.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/CorrectionAmount ************************************************-->
+<h3><a name="Invoice/CorrectionAmount"></a>Invoice/CorrectionAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Correction.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total invoice correction amount related to cancel/rebill.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/AutomaticPaymentIndicator ************************************************-->
+<h3><a name="Invoice/AutomaticPaymentIndicator"></a>Invoice/AutomaticPaymentIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Automatic Payment.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates if the invoice is to be paid via Auto Pay.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* Invoice/DueDate ************************************************-->
+<h3><a name="Invoice/DueDate"></a>Invoice/DueDate</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice.  Due.  Date</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Date the invoice is Due.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#DateType">DateType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine ************************************************-->
+<h3><a name="InvoiceLine"></a>InvoiceLine</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Details about the Invoice Line
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLine Attributes ************************************************-->
+<a href="#InvoiceLine/Description">Description</a><br/>
+<a href="#InvoiceLine/ExtendedAmount">ExtendedAmount</a><br/>
+<a href="#InvoiceLine/TotalAmount">TotalAmount</a><br/>
+<a href="#InvoiceLine/OpenItemIndicator">OpenItemIndicator</a><br/>
+<a href="#InvoiceLine/AdjustedIndicator">AdjustedIndicator</a><br/>
+<a href="#InvoiceLine/ReasonCode">ReasonCode</a><br/>
+<a href="#InvoiceLine/SourceCode">SourceCode</a><br/>
+<a href="#InvoiceLine/AdjustmentTypeCode">AdjustmentTypeCode</a><br/>
+<a href="#InvoiceLine/TransactionTypeCode">TransactionTypeCode</a><br/>
+<a href="#InvoiceLine/PointOfSaleCode">PointOfSaleCode</a><br/>
+<a href="#InvoiceLine/OrderQuantity">OrderQuantity</a><br/>
+<a href="#InvoiceLine/Quantity">Quantity</a><br/>
+<a href="#InvoiceLine/PayoffAmount">PayoffAmount</a><br/>
+<a href="#InvoiceLine/ServiceFinalChargeIndicator">ServiceFinalChargeIndicator</a><br/>
+<a href="#InvoiceLine/TaxCategoryCode">TaxCategoryCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLine Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Line Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#UnitPrice">UnitPrice</a></td>
+             <td> Invoice Line.  Unit Price.  Unit Price</td>
+     </tr>
+     <tr>
+             <td> 
+Price Per Quantity for the line item
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Note">Note</a></td>
+             <td> Invoice Line.  Note.  Note</td>
+     </tr>
+     <tr>
+             <td> 
+Note about the invoice line
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Status">Status</a></td>
+             <td> Invoice Line.  Status.  Status</td>
+     </tr>
+     <tr>
+             <td> 
+Status of the Invoice line like 'Open', 'Final','paid' etc.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#EffectiveTimePeriod">EffectiveTimePeriod</a></td>
+             <td> Invoice Line.  Effective Time Period.  Effective Time Period</td>
+     </tr>
+     <tr>
+             <td> 
+Effective Time Period for which the invoice line has been generated.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ItemReference">ItemReference</a></td>
+             <td>Invoice Line.  Item Reference.  Item</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the item being invoiced
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ShipToPartyReference">ShipToPartyReference</a></td>
+             <td>Invoice Line.  Ship To Party Reference.  Ship To Party</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Party to whom the line items on the invoice line are shipped or the services on the invoice line are provided. 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ShipFromPartyReference">ShipFromPartyReference</a></td>
+             <td>Invoice Line.  Ship From Party Reference.  Ship From Party</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Party that shipped the line item on the invoice line or provided the services on the invoice line. 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#PurchaseOrderReference">PurchaseOrderReference</a></td>
+             <td>Invoice Line.  Purchase Order Reference.  Purchase Order</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Purchase Order associated with the invoice line.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ContractReference">ContractReference</a></td>
+             <td>Invoice Line.  Contract Reference.  Contract</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Contract used to determine the prices and Terms and Conditions of the invoice line.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#SalesOrderReference">SalesOrderReference</a></td>
+             <td>Invoice Line.  Sales Order Reference.  Sales Order</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Sales Order line being invoiced
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ShipmentReference">ShipmentReference</a></td>
+             <td>Invoice Line.  Shipment Reference.  Shipment</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the shipment associated with the invoice line
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#BillOfLadingReference">BillOfLadingReference</a></td>
+             <td>Invoice Line.  Bill Of Lading Reference.  Bill Of Lading</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Bill of Lading document associated with the invoice line
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ServiceRequestReference">ServiceRequestReference</a></td>
+             <td>Invoice Line.  Service Request Reference.  Service Request</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Service Request associated with for the invoice.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#RMAReference">RMAReference</a></td>
+             <td>Invoice Line. RMA Reference. RMA</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the RMA associated with the invoice line
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ProjectReference">ProjectReference</a></td>
+             <td>Invoice Line.  Project Reference.  Project</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the Project Accounting Project/ Task associated with the invoice line
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#InstalledProductReference">InstalledProductReference</a></td>
+             <td>Invoice Line.  Installed Product Reference.  Installed Product</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to the service (service agreement) for which the invoice line has been generated.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#WorkOrderLineReference">WorkOrderLineReference</a></td>
+             <td>Invoice Line.  Work Order Line Reference.  Work Order Line</td>
+     </tr>
+     <tr>
+             <td> 
+Reference to work order line for which the Invoice Line / billable charge was generated. 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineAdjustment">InvoiceLineAdjustment</a></td>
+             <td> Invoice Line.  Invoice Line Adjustment.  Invoice Line Adjustment</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the invoice lines that are being adjusted by this invoice line.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineAccountingDistribution">InvoiceLineAccountingDistribution</a></td>
+             <td> Invoice Line.  Invoice Line Accounting Distribution.  Invoice Line Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+The accounting distribution of the InvoiceLine ExtendedAmount, could be of type AP/AR, Revenue, Revenue, etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineAttachment">InvoiceLineAttachment</a></td>
+             <td> Invoice Line.  Invoice Line Attachment.  Invoice Line Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Binary, URI or other attachments that apply to the Invoice Line
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineTaxTotal">InvoiceLineTaxTotal</a></td>
+             <td> Invoice Line.  Invoice Line Tax Total.  Invoice Line Tax Total</td>
+     </tr>
+     <tr>
+             <td> 
+Total Tax amount for various tax types . 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineChargeTotal">InvoiceLineChargeTotal</a></td>
+             <td> Invoice Line.  Invoice Line Charge Total.  Invoice Line Charge Total</td>
+     </tr>
+     <tr>
+             <td> 
+Total Charge amount for various Charge types . 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineAllowanceTotal">InvoiceLineAllowanceTotal</a></td>
+             <td> Invoice Line.  Invoice Line Allowance Total.  Invoice Line Allowance Total</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineAllowance">InvoiceLineAllowance</a></td>
+             <td> Invoice Line.  Invoice Line Allowance.  Invoice Line Allowance</td>
+     </tr>
+     <tr>
+             <td> 
+Details about the discount or allowance that the Customer is to receive off of the invoice line Extended Amount. Examples are Early Payment, Coupons etc. Discount is treated as a type of allowance. Allowance Amounts are subtracted to determine the Total Amount
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineTax">InvoiceLineTax</a></td>
+             <td> Invoice Line.  Invoice Line Tax.  Invoice Line Tax</td>
+     </tr>
+     <tr>
+             <td> 
+Details about Tax applicable for the invoice line.I.e. Sales Tax, VAT, Excise Duty. 
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceLineCharge">InvoiceLineCharge</a></td>
+             <td> Invoice Line.  Invoice Line Charge.  Invoice Line Charge</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/Description ************************************************-->
+<h3><a name="InvoiceLine/Description"></a>InvoiceLine/Description</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Description.  Text</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Description of the line item or service
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#TextType">TextType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/ExtendedAmount ************************************************-->
+<h3><a name="InvoiceLine/ExtendedAmount"></a>InvoiceLine/ExtendedAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Extended.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The total amount of the invoice line not including taxes or charges. This generally equals the Unit Price times the Order Quantity.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/TotalAmount ************************************************-->
+<h3><a name="InvoiceLine/TotalAmount"></a>InvoiceLine/TotalAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Total.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The total amount of the invoice line, including the Price and the total of all the charges, allowances and taxes.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/OpenItemIndicator ************************************************-->
+<h3><a name="InvoiceLine/OpenItemIndicator"></a>InvoiceLine/OpenItemIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Open Item.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates that the line is an open item and is not to be included in the document total
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/AdjustedIndicator ************************************************-->
+<h3><a name="InvoiceLine/AdjustedIndicator"></a>InvoiceLine/AdjustedIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Adjusted.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies if the invoice line has been adjusted or not
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/ReasonCode ************************************************-->
+<h3><a name="InvoiceLine/ReasonCode"></a>InvoiceLine/ReasonCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Reason.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Reason for an adjustment or credit, Used in conjunction with Invoice Line Adjustment Type. For Receivables, typical examples of reasons are WRONG TAX RATE, FREE PRODUCT, LATE PAYMENT, ORDER ENTRY ERROR, RETURN, SALES TAX ERROR,SHIPPING and HANDLING, WRONG FREIGHT,A/R ERROR, CANCELLATION, CREDIT and REBILL, DUPLICATE BILLING, FOREIGN
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/SourceCode ************************************************-->
+<h3><a name="InvoiceLine/SourceCode"></a>InvoiceLine/SourceCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Source.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies source of the invoice (ex. from Contracts, Order Management, etc.).  An invoice can have a mix of lines from different sources, so the value on InvoiceHeader would be blank in that case.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/AdjustmentTypeCode ************************************************-->
+<h3><a name="InvoiceLine/AdjustmentTypeCode"></a>InvoiceLine/AdjustmentTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Adjustment Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Used in conjunction with Invoice Type on invoice header.  Identifies whether the invoice line is regular, credit, rebill, adjustment, etc.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/TransactionTypeCode ************************************************-->
+<h3><a name="InvoiceLine/TransactionTypeCode"></a>InvoiceLine/TransactionTypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Transaction Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of transaction.  Some values are: revenue line, utilization line, discount line, surcharge line, customer deposit applied, tax, etc
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/PointOfSaleCode ************************************************-->
+<h3><a name="InvoiceLine/PointOfSaleCode"></a>InvoiceLine/PointOfSaleCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Point Of Sale.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies whether customer picks up goods or goods are delivered to customer.  Taxation depends on this flag.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/OrderQuantity ************************************************-->
+<h3><a name="InvoiceLine/OrderQuantity"></a>InvoiceLine/OrderQuantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Order.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The quantity of item ordered on the sales or purchase order. This is different from the quantity being invoiced.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/Quantity ************************************************-->
+<h3><a name="InvoiceLine/Quantity"></a>InvoiceLine/Quantity</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Quantity.  Quantity</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Quantity of the line item being invoiced
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#QuantityType">QuantityType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/PayoffAmount ************************************************-->
+<h3><a name="InvoiceLine/PayoffAmount"></a>InvoiceLine/PayoffAmount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Payoff.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Amount Balance required to pay the account off.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/ServiceFinalChargeIndicator ************************************************-->
+<h3><a name="InvoiceLine/ServiceFinalChargeIndicator"></a>InvoiceLine/ServiceFinalChargeIndicator</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Service Final Charge.  Indicator</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates if this is the final invoice line for this service being billed.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#IndicatorType">IndicatorType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLine/TaxCategoryCode ************************************************-->
+<h3><a name="InvoiceLine/TaxCategoryCode"></a>InvoiceLine/TaxCategoryCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line.  Tax Category.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Indicates whether the Invoice Line is taxable, non-taxable , exempt, non-exempt etc.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineAdjustment ************************************************-->
+<h3><a name="InvoiceLineAdjustment"></a>InvoiceLineAdjustment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Adjustment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the invoice lines that are being adjusted by this invoice line.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineAdjustment Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineAdjustment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Adjustment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Adjustment Line Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AdjustedInvoiceLineReference">AdjustedInvoiceLineReference</a></td>
+             <td>Invoice Line Adjustment.  Adjusted Invoice Line Reference.  Adjusted Invoice Line</td>
+     </tr>
+     <tr>
+             <td> 
+Identifies the invoice lines that are being adjusted by this invoice line.
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineAccountingDistribution ************************************************-->
+<h3><a name="InvoiceLineAccountingDistribution"></a>InvoiceLineAccountingDistribution</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Accounting Distribution. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The accounting distribution of the InvoiceLine ExtendedAmount, could be of type AP/AR, Revenue, Revenue, etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineAccountingDistribution Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineAccountingDistribution Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Accounting Distribution.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AccountingDistribution">AccountingDistribution</a></td>
+             <td> Invoice Line Accounting Distribution.  Accounting Distribution.  Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+The accounting distribution of the TotalAmount in Charge,could be of type AP/AR, Revenue, etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineAttachment ************************************************-->
+<h3><a name="InvoiceLineAttachment"></a>InvoiceLineAttachment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Attachment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Binary, URI or other attachments that apply to the Invoice Line
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineAttachment Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineAttachment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Attachment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Line Attachment Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Attachment">Attachment</a></td>
+             <td> Invoice Line Attachment.  Attachment.  Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Line Attachment details
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineTaxTotal ************************************************-->
+<h3><a name="InvoiceLineTaxTotal"></a>InvoiceLineTaxTotal</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Tax Total. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total Tax amount for various tax types . 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineTaxTotal Attributes ************************************************-->
+<a href="#InvoiceLineTaxTotal/Amount">Amount</a><br/>
+<a href="#InvoiceLineTaxTotal/TypeCode">TypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineTaxTotal Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Tax Total.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineTaxTotal/Amount ************************************************-->
+<h3><a name="InvoiceLineTaxTotal/Amount"></a>InvoiceLineTaxTotal/Amount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Tax Total.  Amount.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total amount for a given type of tax.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineTaxTotal/TypeCode ************************************************-->
+<h3><a name="InvoiceLineTaxTotal/TypeCode"></a>InvoiceLineTaxTotal/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Tax Total.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of tax
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineChargeTotal ************************************************-->
+<h3><a name="InvoiceLineChargeTotal"></a>InvoiceLineChargeTotal</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Charge Total. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total Charge amount for various Charge types . 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineChargeTotal Attributes ************************************************-->
+<a href="#InvoiceLineChargeTotal/Amount">Amount</a><br/>
+<a href="#InvoiceLineChargeTotal/TypeCode">TypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineChargeTotal Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Charge Total.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineChargeTotal/Amount ************************************************-->
+<h3><a name="InvoiceLineChargeTotal/Amount"></a>InvoiceLineChargeTotal/Amount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Charge Total.  Amount.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total amount for a given type of charge.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineChargeTotal/TypeCode ************************************************-->
+<h3><a name="InvoiceLineChargeTotal/TypeCode"></a>InvoiceLineChargeTotal/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Charge Total.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of Charge
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineAllowanceTotal ************************************************-->
+<h3><a name="InvoiceLineAllowanceTotal"></a>InvoiceLineAllowanceTotal</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Allowance Total. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineAllowanceTotal Attributes ************************************************-->
+<a href="#InvoiceLineAllowanceTotal/Amount">Amount</a><br/>
+<a href="#InvoiceLineAllowanceTotal/TypeCode">TypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineAllowanceTotal Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Allowance Total.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineAllowanceTotal/Amount ************************************************-->
+<h3><a name="InvoiceLineAllowanceTotal/Amount"></a>InvoiceLineAllowanceTotal/Amount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Allowance Total.  Amount.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total amount for a given type of allowance.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineAllowanceTotal/TypeCode ************************************************-->
+<h3><a name="InvoiceLineAllowanceTotal/TypeCode"></a>InvoiceLineAllowanceTotal/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Allowance Total.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of allowance
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineAllowance ************************************************-->
+<h3><a name="InvoiceLineAllowance"></a>InvoiceLineAllowance</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Allowance. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Details about the discount or allowance that the Customer is to receive off of the invoice line Extended Amount. Examples are Early Payment, Coupons etc. Discount is treated as a type of allowance. Allowance Amounts are subtracted to determine the Total Amount
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineAllowance Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineAllowance Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Allowance.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Allowance">Allowance</a></td>
+             <td> Invoice Line Allowance.  Allowance.  Allowance</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceAllowanceAccountingDistribution">InvoiceAllowanceAccountingDistribution</a></td>
+             <td> Invoice Line Allowance.  Invoice Allowance Accounting Distribution.  Invoice Allowance Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceAllowanceAccountingDistribution ************************************************-->
+<h3><a name="InvoiceAllowanceAccountingDistribution"></a>InvoiceAllowanceAccountingDistribution</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Allowance Accounting Distribution. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceAllowanceAccountingDistribution Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceAllowanceAccountingDistribution Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Allowance Accounting Distribution.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AccountingDistribution">AccountingDistribution</a></td>
+             <td> Invoice Allowance Accounting Distribution.  Accounting Distribution.  Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineTax ************************************************-->
+<h3><a name="InvoiceLineTax"></a>InvoiceLineTax</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Tax. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Details about Tax applicable for the invoice line.I.e. Sales Tax, VAT, Excise Duty. 
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineTax Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineTax Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Tax.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Tax">Tax</a></td>
+             <td> Invoice Line Tax.  Tax.  Tax</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceTaxAccountingDistribution">InvoiceTaxAccountingDistribution</a></td>
+             <td> Invoice Line Tax.  Invoice Tax Accounting Distribution.  Invoice Tax Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceTaxAccountingDistribution ************************************************-->
+<h3><a name="InvoiceTaxAccountingDistribution"></a>InvoiceTaxAccountingDistribution</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Tax Accounting Distribution. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceTaxAccountingDistribution Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceTaxAccountingDistribution Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Tax Accounting Distribution.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AccountingDistribution">AccountingDistribution</a></td>
+             <td> Invoice Tax Accounting Distribution.  Accounting Distribution.  Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+The accounting distribution of the TotalAmount in Tax,could be of type AP/AR, Revenue etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceLineCharge ************************************************-->
+<h3><a name="InvoiceLineCharge"></a>InvoiceLineCharge</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Line Charge. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"></td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceLineCharge Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceLineCharge Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Line Charge.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Charge">Charge</a></td>
+             <td> Invoice Line Charge.  Charge.  Charge</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="#InvoiceChargeAccountingDistribution">InvoiceChargeAccountingDistribution</a></td>
+             <td> Invoice Line Charge.  Invoice Charge Accounting Distribution.  Invoice Charge Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+Contains details about charge and it's accounting distribution
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceChargeAccountingDistribution ************************************************-->
+<h3><a name="InvoiceChargeAccountingDistribution"></a>InvoiceChargeAccountingDistribution</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Charge Accounting Distribution. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Contains details about charge and it's accounting distribution
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceChargeAccountingDistribution Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceChargeAccountingDistribution Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Charge Accounting Distribution.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification of the charge distribution.
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AccountingDistribution">AccountingDistribution</a></td>
+             <td> Invoice Charge Accounting Distribution.  Accounting Distribution.  Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceTaxTotal ************************************************-->
+<h3><a name="InvoiceTaxTotal"></a>InvoiceTaxTotal</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Tax Total. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total Tax amount for various tax types . This is the sum of all the line Tax Amounts.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceTaxTotal Attributes ************************************************-->
+<a href="#InvoiceTaxTotal/Amount">Amount</a><br/>
+<a href="#InvoiceTaxTotal/TypeCode">TypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceTaxTotal Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Tax Total.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceTaxTotal/Amount ************************************************-->
+<h3><a name="InvoiceTaxTotal/Amount"></a>InvoiceTaxTotal/Amount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Tax Total.  Amount.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total amount for a given type of tax.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceTaxTotal/TypeCode ************************************************-->
+<h3><a name="InvoiceTaxTotal/TypeCode"></a>InvoiceTaxTotal/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Tax Total.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of tax
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceChargeTotal ************************************************-->
+<h3><a name="InvoiceChargeTotal"></a>InvoiceChargeTotal</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Charge Total. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total Charge amount for various charge types . This is the sum of all the line Charge Amounts.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceChargeTotal Attributes ************************************************-->
+<a href="#InvoiceChargeTotal/Amount">Amount</a><br/>
+<a href="#InvoiceChargeTotal/TypeCode">TypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceChargeTotal Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Charge Total.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceChargeTotal/Amount ************************************************-->
+<h3><a name="InvoiceChargeTotal/Amount"></a>InvoiceChargeTotal/Amount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Charge Total.  Amount.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total amount for a given type of charge.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceChargeTotal/TypeCode ************************************************-->
+<h3><a name="InvoiceChargeTotal/TypeCode"></a>InvoiceChargeTotal/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Charge Total.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of Charge
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceAllowanceTotal ************************************************-->
+<h3><a name="InvoiceAllowanceTotal"></a>InvoiceAllowanceTotal</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Allowance Total. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total Allowance amount for various allowance types . This is the sum of all the line Allowance Amounts.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceAllowanceTotal Attributes ************************************************-->
+<a href="#InvoiceAllowanceTotal/Amount">Amount</a><br/>
+<a href="#InvoiceAllowanceTotal/TypeCode">TypeCode</a><br/>
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceAllowanceTotal Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Allowance Total.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceAllowanceTotal/Amount ************************************************-->
+<h3><a name="InvoiceAllowanceTotal/Amount"></a>InvoiceAllowanceTotal/Amount</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Allowance Total.  Amount.  Amount</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Total amount for a given type of allowance.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#AmountType">AmountType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceAllowanceTotal/TypeCode ************************************************-->
+<h3><a name="InvoiceAllowanceTotal/TypeCode"></a>InvoiceAllowanceTotal/TypeCode</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Basic Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Allowance Total.  Type.  Code</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Identifies the type of allowance
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Type</th>
+             <td><a href="../../../Common/V2/DataTypes.html#CodeType">CodeType</a></td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceDeliverToParty ************************************************-->
+<h3><a name="InvoiceDeliverToParty"></a>InvoiceDeliverToParty</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Deliver To Party. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Details about who will receive additional copies of the invoice.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceDeliverToParty Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceDeliverToParty Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Deliver To Party.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+DeliverToParty Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#DeliverToPartyReference">DeliverToPartyReference</a></td>
+             <td>Invoice Deliver To Party.  Deliver To Party Reference.  Deliver To Party</td>
+     </tr>
+     <tr>
+             <td> 
+DeliverToParty Reference
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoicePayment ************************************************-->
+<h3><a name="InvoicePayment"></a>InvoicePayment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Payment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Details about all actual payments received for the invoice.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoicePayment Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoicePayment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Payment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Payment Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#ReceivedPaymentReference">ReceivedPaymentReference</a></td>
+             <td>Invoice Payment.  Received Payment Reference.  Received Payment</td>
+     </tr>
+     <tr>
+             <td></td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceAccountingDistribution ************************************************-->
+<h3><a name="InvoiceAccountingDistribution"></a>InvoiceAccountingDistribution</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Accounting Distribution. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+The AP or AR accounting distribution of the sum of Invoice line ExtendedAmount. Accounting Distribution includes assignment of an amount to multiple GL Entities, Cost or Profit Centers, Projects and so on. If AP/AP distribution is indicated at header, then it should apply to all invoice lines and should not be indicated at invoice line level.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceAccountingDistribution Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceAccountingDistribution Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Accounting Distribution.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Distribution Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#AccountingDistribution">AccountingDistribution</a></td>
+             <td> Invoice Accounting Distribution.  Accounting Distribution.  Accounting Distribution</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice AccountingDistribution
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceAttachment ************************************************-->
+<h3><a name="InvoiceAttachment"></a>InvoiceAttachment</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Attachment. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Binary, URI or other attachments that apply to the Invoice
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceAttachment Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceAttachment Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Attachment.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Attachment Identification
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#Attachment">Attachment</a></td>
+             <td> Invoice Attachment.  Attachment.  Attachment</td>
+     </tr>
+     <tr>
+             <td> 
+Invoice Attachment
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+<!-- ******************************* InvoiceStatusHistory ************************************************-->
+<h3><a name="InvoiceStatusHistory"></a>InvoiceStatusHistory</h3>
+<table class="properties">
+     <tbody>
+     <tr>
+             <th>EBO Type</th>
+             <td>Business Component</td>
+     </tr>
+     <tr>
+             <th>CCTS Type</th>
+             <td>Aggregate Business Information Entity</td>
+     </tr>
+     <tr>
+             <th>CCTS Dictionary Entry Name</th>
+             <td> Invoice Status History. Details</td>
+     </tr>
+     <tr>
+             <th>Description</th>
+             <td class="documentation"> 
+Capture the status history for the invoice.
+                                </td>
+     </tr>
+     <tr>
+             <th>Usage Rule</th>
+             <td></td>
+     </tr>
+     <tr>
+             <th>Extends</th>
+             <td><a href=""></a></td>
+     </tr>
+     <tr>
+             <th>Attributes</th>
+             <td><!-- ******************************* InvoiceStatusHistory Attributes ************************************************-->
+
+             </td>
+     </tr>
+     <tr>
+             <th>Child Components</th>
+             <td><!-- ******************************* InvoiceStatusHistory Child Components ************************************************-->
+<table class="component">
+	<tbody>
+     <tr>
+             <th rowspan="2" width="30%">Name</th>
+             <th>CCTS Dictionary Entry Name</th>
+     </tr>
+     <tr>
+             <th>Description</th>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/Meta.html#Identification">Identification</a></td>
+             <td> Invoice Status History.  Identification.  Identification</td>
+     </tr>
+     <tr>
+             <td> 
+Identification for StatusHistory
+                               </td>
+     </tr>
+     <tr>
+             <td rowspan="2" width="30%"><a href="../../../Common/V2/CommonComponents.html#StatusHistory">StatusHistory</a></td>
+             <td> Invoice Status History.  Status History.  Status History</td>
+     </tr>
+     <tr>
+             <td> 
+StatusHistory details
+                               </td>
+     </tr>
+     </tbody>
+</table>
+
+             </td>
+     </tr>
+     </tbody>
+</table>
+</body>
+</html>

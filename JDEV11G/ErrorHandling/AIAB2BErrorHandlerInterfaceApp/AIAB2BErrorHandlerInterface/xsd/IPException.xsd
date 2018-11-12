@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xs:schema targetNamespace="http://integration.oracle.com/B2B/Exception" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns="http://integration.oracle.com/B2B/Exception">
+    <xs:element name="Exception">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="correlationId"/>
+                <xs:element ref="b2bMessageId"/>
+                <xs:element ref="errorCode"/>
+                <xs:element ref="errorText"/>
+                <xs:element ref="errorDescription"/>
+                <xs:element ref="errorSeverity"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="correlationId" type="xs:string"/>
+    <xs:element name="b2bMessageId" type="xs:string"/>
+    <xs:element name="errorCode" type="xs:string"/>
+    <xs:element name="errorText" type="xs:string"/>
+    <xs:element name="errorDescription" type="xs:string"/>
+    <xs:element name="errorSeverity" type="xs:string"/>
+</xs:schema>

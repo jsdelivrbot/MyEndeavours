@@ -1,0 +1,64 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Jan 12 12:48:57 GMT+05:30 2011
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="DequeueBPEL"
+               targetNamespace="http://services.emerson.com/Dhami_SOA_jws/DequeueProcess/DequeueBPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                xmlns:client="http://services.emerson.com/Dhami_SOA_jws/DequeueProcess/DequeueBPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/DequeueProcess/ETH_JMS_DQ_TransactionMessage"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Consume_ETHMessage_role"
+                 name="ETH_JMS_DQ_TransactionMessage"
+                 partnerLinkType="ns1:Consume_ETHMessage_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_ETHMessage_InputVariable"
+              messageType="ns1:Consume_ETHMessage_msg"/>
+    <variable name="L_variable" type="xsd:base64Binary" bpelx:entity.si=" "
+              bpelx:sdoCapable="true"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive_Message" createInstance="yes"
+             variable="Receive_ETHMessage_InputVariable"
+             partnerLink="ETH_JMS_DQ_TransactionMessage"
+             portType="ns1:Consume_ETHMessage_ptt"
+             operation="Consume_ETHMessage"/>
+    <scope name="Scope_1">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_Error</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <sequence>
+        <assign name="Assign_Activity">
+          <copy>
+            <from variable="Receive_ETHMessage_InputVariable" part="opaque"
+                  query="/ns2:opaqueElement"/>
+            <to variable="L_variable"/>
+          </copy>
+        </assign>
+        <throw name="Throw_SelectionFailure" faultName="bpws:selectionFailure"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

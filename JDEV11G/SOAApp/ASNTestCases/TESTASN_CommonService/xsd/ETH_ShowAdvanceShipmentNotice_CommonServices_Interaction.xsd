@@ -1,0 +1,72 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ethasn="http://schema.emerson.com/ETH/ETH_ShowAdvancedShipmentNotice_CommonServices_Interaction"
+     xmlns:asnebm="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/AdvanceShipmentNotice/Emerson"
+     targetNamespace="http://schema.emerson.com/ETH/ETH_ShowAdvancedShipmentNotice_CommonServices_Interaction"
+     elementFormDefault="qualified">
+    <xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/AdvanceShipmentNotice/Emerson"
+         schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Industry/Manufacturing/EBO/AdvanceShipmentNotice/Emerson/AdvanceShipmentNoticeEBM.xsd"/>
+    <xsd:element name="ShowAdvanceShipmentNotice_CommonService_Request" type="ethasn:ShowAdvanceShipmentNotice_CommonService_RequestType">
+        <xsd:annotation>
+            <xsd:documentation>This element represents the Request Payload for ShowAdvancedShipmentNotice_CommonService from RequesterService.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ShowAdvancedShipmentNotice_CommonService_Response" type="ethasn:ShowAdvancedShipmentNotice_CommonService_ResponseType">
+        <xsd:annotation>
+            <xsd:documentation>This element represents the Response Payload from ShowAdvancedShipmentNotice CommonService to RequesterService.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PayloadSent" type="xsd:boolean"/>
+    <xsd:element name="Property" type="ethasn:PropertyType"/>
+    <xsd:complexType name="PropertyType">
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="value" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="PropertySet">
+        <xsd:sequence>
+            <xsd:element ref="ethasn:Property" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ShowAdvanceShipmentNotice_CommonService_RequestType">
+        <xsd:sequence>
+            <xsd:element ref="ethasn:PayloadSent">
+                <xsd:annotation>
+                    <xsd:documentation>This element indicates whether EBM Payload has been sent from RequesterService to CommonService.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element ref="asnebm:ShowAdvanceShipmentNoticeEBM" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>This element represents the PurchaseOrderEBM sent from PurchaseOrderEBF to CommonService.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RequestPropertySet" type="ethasn:PropertySet" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>This PropertySet allows us to add new Request parameters as properties dynamically.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ShowAdvancedShipmentNotice_CommonService_ResponseType">
+        <xsd:sequence>
+            <xsd:element ref="ethasn:PayloadSent">
+                <xsd:annotation>
+                    <xsd:documentation>This element indicates whether edited EBM Payload has been sent back to RequesterService by CommonService.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ResponseCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>This element represents the responseCode of the DBProcedure returned in CommonService.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element ref="asnebm:ShowAdvanceShipmentNoticeEBM" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>This element represents the edited PurchaseOrderEBM being sent back to RequesterService from Common Service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ResponsePropertySet" type="ethasn:PropertySet" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>This PropertySet allows us to add new Response parameters as properties dynamically.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

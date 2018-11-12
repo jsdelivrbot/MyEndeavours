@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ETH_CreatePOCOEBM_EMR501_ReqABCSImplProcess" targetNamespace="http://xmlns.oracle.com/ABCSImpl/EBM_/Industry/EMR501_/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/V1" xmlns:ebo="http://xmlns.oracle.com/EnterpriseObjects/Manufacturing/EBO/PurchaseOrder/Emerson" xmlns:ebs="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson" xmlns:aboabo="http://schema.emerson.com/ETH/FlatFile/V1" xmlns:aboabcs="http://xmlns.oracle.com/ABCSImpl/EBM_/Industry/EMR501_/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/V1" xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions" xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:aiaeh="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess" xmlns:xacml="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/Application1/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/ETH_EMR501_JMS_ENQ_ErrorData_Topic" xmlns:ns2="http://schema.emerson.com/ETH/ErrorData" xmlns:ns3="http://schema.emerson.com/ETH/Header" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/Application1/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/ETH_DB_INSERT_PROCESS_TRACKING_PRC_db" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_STARTTRANSACTION_PKG/INSERT_PROCESS_TRACKING_PRC/" xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/Application1/ETH_CreatePOCOEBM_EMR501_ReqABCSImpl/ETH_DB_SP_InsertCanonicalPayload" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns8="http://www.openapplications.org/oagis/9" xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_UPDATE_TXN_PAYLOAD_PKG/ETH_UPDATE_TXN_PAYLOAD_PRC/" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension" xmlns:ethDBCheck="http://customFunctions.emerson.com/eth3/SOA/EvaluateDBCheck" xmlns:ns9="http://schemas.emerson.com/eth/customEBMHeader" id="BpPrc0">
+  <partnerLinks>
+    
+    <partnerLink name="ETH_CreatePOCOEBM_EMR501_ReqABCSImpl" partnerLinkType="aboabcs:ETH_CreatePOCOEBM_EMR501_ReqABCSImpl" myRole="ETH_CreatePOCOEBM_EMR501_ReqABCSImplProvider"/>
+
+    <partnerLink name="PurchaseOrderEBS" partnerRole="PurchaseOrderEBS_Role" partnerLinkType="ebs:PurchaseOrderEBS"/>
+    </partnerLinks>
+  <variables>
+    <variable name="ETH_CreatePOCOReqMsg" messageType="aboabcs:ETH_CreatePOCOReqMsg"/>
+
+    
+    <variable name="SystemFaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+  
+
+
+    <variable name="SystemFaultMsg" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="SystemID" type="xsd:string"/>
+    <variable name="Sender" element="corecom:Sender"/>
+    <variable name="Title" type="xsd:string"/>
+    <variable name="EBM_HEADER" element="corecom:EBMHeader"/>
+    <variable name="InstanceID" type="xsd:string"/>
+    <variable name="ServiceName" type="xsd:string"/>
+    <variable name="TraceLogEnabled" type="xsd:boolean"/>
+                   <!-- Global mandatory variables -->
+        <variable name="gvarCompositeTitle" type="xsd:string"/>
+    <variable name="gvarCompositeName" type="xsd:string"/>
+    <variable name="gvarComponentName" type="xsd:string"/>
+    <variable name="gvarCompositeInstanceId" type="xsd:string"/>
+    <variable name="gvarRegistrationCode" type="xsd:string"/>
+    <variable name="gvarMasterRecordId" type="xsd:string"/>
+    <variable name="gvarTransactionRecordId" type="xsd:string"/>
+    <variable name="gvarSenderID" type="xsd:string"/>
+    <variable name="gvarDocumentNumber" type="xsd:string"/>
+    <variable name="gvarCurrentDateTime" type="xsd:dateTime"/>
+    <variable name="gvarTransactionType" type="xsd:string"/>
+    <variable name="gvarTransactionSubType" type="xsd:string"/>
+    <variable name="gvarComponentInstanceID" type="xsd:string"/>
+        <variable name="gvarJDBC_URL" type="xsd:string"/>
+        <variable name="gvarJDBC_CONF_JNDI" type="xsd:string"/>
+    <variable name="gvarResponseCode" type="xsd:int"/>
+    <variable name="gvarErrorCodeNumber" type="xsd:string"/>
+    <variable name="gvargetDBResponse" type="xsd:string"/>
+    <variable name="gvarErrorDescription" type="xsd:string"/>
+    <variable name="gvarRollbackSuccessfulFlag" type="xsd:int"/>
+  <!-- end-->
+        <variable name="gvarSOAPETHHeader" element="ns3:ETHHEADER"/>
+        <variable name="gvarMessageEncoding" type="xsd:string"/>
+        <variable name="gvarB2BInboundRecordId" type="xsd:string"/>
+        <variable name="ETH_CreateEmersonPurchaseOrderEBSReqMsg" messageType="ebs:ChangePurchaseOrderReqMsg"/>
+    </variables>
+
+ 
+
+  <sequence name="main" id="BpSeq0">
+     <receive name="ReceivePOCO" partnerLink="ETH_CreatePOCOEBM_EMR501_ReqABCSImpl" portType="aboabcs:ETH_CreatePOCOEBM_EMR501_ReqABCSImpl" operation="ETH_CreatePOCO" variable="ETH_CreatePOCOReqMsg" createInstance="yes" id="BpRcv0"/>
+        <assign name="Assign1" id="BpAss0">
+            <copy>
+                <from expression="string('EMR501')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:SENDER_ID"/>
+            </copy>
+            <copy>
+                <from expression="string(null)"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:RECEIVER_REPROCESS_COUNT"/>
+            </copy>
+            <copy>
+                <from expression="string(null)"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:RECEIVER_ID"/>
+            </copy>
+            <copy>
+                <from expression="string(null)"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:RECEIVER_SYSTEM_ID"/>
+            </copy>
+            <copy>
+                <from expression="string(null)"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:SOURCE_COMPOSITE_INSTANCE"/>
+            </copy>
+            <copy>
+                <from expression="xp20:current-dateTime()"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:CURRENT_DATETIME"/>
+            </copy>
+            <copy>
+                <from expression="string('Kiddan')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET/ns3:HEADER_PROPERTY/@name"/>
+            </copy>
+            <copy>
+                <from expression="string('badhiya')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET/ns3:HEADER_PROPERTY/@value"/>
+            </copy>
+            <copy>
+                <from expression="string(null)"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:B2BINBOUND_RECORD_ID"/>
+            </copy>
+            <copy>
+                <from expression="string('726372')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:MASTER_RECORD_ID"/>
+            </copy>
+            <copy>
+                <from expression="string('77863')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:TRANSACTION_RECORD_ID"/>
+            </copy>
+            <copy>
+                <from expression="string('POID:RELEASE:REVISION:OU')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:DOCUMENT_KEY"/>
+            </copy>
+            <copy>
+                <from expression="string('PO')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:TRANSACTION_TYPE"/>
+            </copy>
+            <copy>
+                <from expression="string('860')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:TRANSACTION_SUBTYPE"/>
+            </copy>
+            <copy>
+                <from expression="string('0')"/>
+                <to variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:REPROCESS_COUNT"/>
+            </copy>
+        </assign>
+        <assign name="GetTitleandAssignGlobalVariables" id="BpAss1">
+            <copy>
+                <from expression="'ETH_Create POCO'"/>
+                <to variable="Title"/>
+            </copy>
+            <copy>
+                <from expression="string(null)"/>
+                <to variable="gvarB2BInboundRecordId"/>
+            </copy>
+            <copy>
+                <from variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:SENDER_ID"/>
+                <to variable="gvarSenderID"/>
+            </copy>
+            <copy>
+                <from variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:MASTER_RECORD_ID"/>
+                <to variable="gvarMasterRecordId"/>
+            </copy>
+            <copy>
+                <from expression="xp20:current-dateTime()"/>
+                <to variable="gvarCurrentDateTime"/>
+            </copy>
+            <copy>
+                <from variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:TRANSACTION_RECORD_ID"/>
+                <to variable="gvarTransactionRecordId"/>
+            </copy>
+            <copy>
+                <from variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:DOCUMENT_KEY"/>
+                <to variable="gvarDocumentNumber"/>
+            </copy>
+            <copy>
+                <from expression="ora:setCompositeInstanceTitle($gvarDocumentNumber)"/>
+                <to variable="gvarCompositeTitle"/>
+            </copy>
+            <copy>
+                <from variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:TRANSACTION_TYPE"/>
+                <to variable="gvarTransactionType"/>
+            </copy>
+            <copy>
+                <from variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER/ns3:TRANSACTION_SUBTYPE"/>
+                <to variable="gvarTransactionSubType"/>
+            </copy>
+            <copy>
+                <from expression="ora:getCompositeName()"/>
+                <to variable="gvarCompositeName"/>
+            </copy>
+            <copy>
+                <from expression="ora:getComponentName()"/>
+                <to variable="gvarComponentName"/>
+            </copy>
+            <copy>
+                <from expression="ora:getPreference('JDBC_URL')"/>
+                <to variable="gvarJDBC_URL"/>
+            </copy>
+            <copy>
+                <from expression="ora:getPreference('JDBC_CONF_JNDI')"/>
+                <to variable="gvarJDBC_CONF_JNDI"/>
+            </copy>
+            <copy>
+                <from expression="ora:getComponentInstanceId()"/>
+                <to variable="gvarComponentInstanceID"/>
+            </copy>
+            <copy>
+                <from expression="ora:getCompositeInstanceId()"/>
+                <to variable="gvarCompositeInstanceId"/>
+            </copy>
+            <copy>
+                <from expression="string('PTTCS')"/>
+                <to variable="gvarRegistrationCode"/>
+            </copy>
+            <copy>
+                <from expression="ora:getInstanceId()"/>
+                <to variable="InstanceID"/>
+            </copy>
+            <copy>
+                <from expression="ora:getProcessId()"/>
+                <to variable="ServiceName"/>
+            </copy>
+            <copy>
+                <from expression="ora:getPreference('messageEncoding')"/>
+                <to variable="gvarMessageEncoding"/>
+            </copy>
+        </assign>
+    
+     
+                <scope name="Scope_TransformationPOCO" variableAccessSerializable="no" id="BpScp0">
+                    <bpelx:annotation>
+                        <bpelx:general>
+                            <bpelx:property name="userLabel">Scope_TransformationPOCO</bpelx:property>
+                        </bpelx:general>
+                    </bpelx:annotation>
+            <variables>
+                <variable name="lvarXSLTParameter" messageType="ebs:ETH_HeaderMsg"/>
+                 <variable name="lvarHeaderProperty" element="ns3:HEADER_PROPERTY"/>         
+            </variables>
+                    <sequence name="Sequence_Transformation" id="BpSeq1">
+                <assign name="Assign_XSLTParameter" id="BpAss2">
+          <copy>
+            <from variable="gvarSOAPETHHeader" query="/ns3:ETHHEADER"/>
+            <to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER"/>
+          </copy>
+          <copy>
+                                <from expression="ora:getCurrentDateTime()"/>
+                                <to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER/ns3:CURRENT_DATETIME"/>
+                            </copy>
+                            <copy>
+                                <from expression="string('JDBC_URL')"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@name"/>
+                            </copy>
+                            <copy>
+                                <from variable="gvarJDBC_URL"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@value"/>
+                            </copy>
+                            <bpelx:append>
+                                <bpelx:from variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY"/>
+                                <bpelx:to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET"/>
+                            </bpelx:append>
+                            <copy>
+                                <from expression="string('JDBC_CONF_JNDI')"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@name"/>
+                            </copy>
+                            <copy>
+                                <from variable="gvarJDBC_CONF_JNDI"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@value"/>
+                            </copy>
+                            <bpelx:append>
+                                <bpelx:from variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY"/>
+                                <bpelx:to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET"/>
+                            </bpelx:append>
+                            <copy>
+                                <from expression="string('COMPOSITE_NAME')"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@name"/>
+                            </copy>
+                            <copy>
+                                <from variable="gvarCompositeName"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@value"/>
+                            </copy>
+                            <bpelx:append>
+                                <bpelx:from variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY"/>
+                                <bpelx:to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET"/>
+                            </bpelx:append>
+                            <copy>
+                                <from expression="string('COMPONENT_NAME')"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@name"/>
+                            </copy>
+                            <copy>
+                                <from variable="gvarComponentName"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@value"/>
+                            </copy>
+                            <bpelx:append>
+                                <bpelx:from variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY"/>
+                                <bpelx:to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET"/>
+                            </bpelx:append>
+                            <copy>
+                                <from expression="string('COMPOSITE_INSTANCE_ID')"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@name"/>
+                            </copy>
+                            <copy>
+                                <from variable="gvarCompositeInstanceId"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@value"/>
+                            </copy>
+                            <bpelx:append>
+                                <bpelx:from variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY"/>
+                                <bpelx:to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET"/>
+                            </bpelx:append>
+                            <copy>
+                                <from expression="string('COMPONENT_INSTANCE_ID')"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@name"/>
+                            </copy>
+                            <copy>
+                                <from variable="gvarComponentInstanceID"/>
+                                <to variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY/@value"/>
+                            </copy>
+                            <bpelx:append>
+                                <bpelx:from variable="lvarHeaderProperty" query="/ns3:HEADER_PROPERTY"/>
+                                <bpelx:to variable="lvarXSLTParameter" part="ETH_HeaderMsg" query="/ns3:ETHHEADER/ns3:HEADER_PROPERTY_SET"/>
+                            </bpelx:append>
+        </assign>
+                <assign name="Xform_POCOABMReqMsg_to_EmersonPurchaseOrderEBMReqMsg" id="BpAss3">
+                            <bpelx:annotation>
+                                <bpelx:pattern>transformation</bpelx:pattern>
+                            </bpelx:annotation>
+                            <copy>
+                                <from expression="ora:doXSLTransformForDoc('xsl/FlatFilePurchaseOrder_To_ChangePurchaseOrderEBM.xsl', $ETH_CreatePOCOReqMsg.ETH_CreatePOCO, 'lvarXSLTParameter.ETH_HeaderMsg', $lvarXSLTParameter.ETH_HeaderMsg)"/>
+                                <to variable="ETH_CreateEmersonPurchaseOrderEBSReqMsg" part="ChangePurchaseOrderEBM"/>
+                            </copy>
+                        </assign>
+                    </sequence>
+                </scope>
+                <scope name="Scope_Invoke_PurchaseOrder" variableAccessSerializable="no" id="BpScp1">
+                    <invoke name="InvokeEmersonPurchaseOrder" inputVariable="ETH_CreateEmersonPurchaseOrderEBSReqMsg" partnerLink="PurchaseOrderEBS" portType="ebs:PurchaseOrderEBS" operation="ChangePurchaseOrder" bpelx:invokeAsDetail="no" id="BpInv0"/>
+                </scope>
+   
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: 
+  Author:  
+  Purpose: 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ETH_EMR501_BPEL_TransactionRegistrationService" targetNamespace="http://xmlns.oracle.com/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_BPEL_TransactionRegistrationService" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_BPEL_TransactionRegistrationService" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_FL_RD_TxnFile" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_DB_SP_INSERT_PROCESS_MASTER_PROC" xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_STARTTRANSACTION_PKG/INSERT_PROCESS_MASTER_PRC/" xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_DB_SP_DATA_INSERTION_MAIN_PRC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_STARTTRANSACTION_PKG/DATA_INSERTION_MAIN_PRC/" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns7="http://schema.emerson.com/ETH/FlatFile/V1" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_DB_SP_INSERT_PROCESS_TRANSACTION_PRC" xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_STARTTRANSACTION_PKG/INSERT_PROCESS_TRANSACTION_PRC/" xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/jms/Application1/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_JMS_ENQ_ErrorData_Topic" xmlns:ns10="http://schema.emerson.com/ETH/ErrorData" xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions" xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_CUSTOM_SCHEMA/ETH_STARTTRANSACTION_PKG/DATA_INSERTION_SEC_PRC/" xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension" xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/file/ETHWorkAPPL/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_FL_RD_TxnFile_Resubmit" xmlns:ethDBCheck="http://customFunctions.emerson.com/eth3/SOA/EvaluateDBCheck" xmlns:ns13="http://xmlns.oracle.com/TrainingAppl/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_BPEL_TransactionRegistrationService" xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/file/ETHWorkAPPL/ETH_EMR501_TransactionRegistrationService_Composite/ETH_EMR501_FL_SRD_TxnFile" id="BpPrc0">
+          <bpelx:exec import="java.util.*" id="BxExe0"/>
+          <bpelx:exec import="java.lang.*" id="BxExe1"/>
+          <bpelx:exec import="java.math.*" id="BxExe2"/>
+          <bpelx:exec import="java.io.*" id="BxExe3"/>
+          <bpelx:exec import="oracle.soa.common.util.Base64Decoder" id="BxExe4"/> 
+          <bpelx:exec import="org.w3c.dom.Element" id="BxExe5"/>
+
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+   
+    <partnerLink name="ETH_EMR501_DB_SP_INSERT_PROCESS_TRANSACTION_PRC" partnerLinkType="ns2:ETH_EMR501_DB_SP_INSERT_PROCESS_TRANSACTION_PRC_plt" partnerRole="ETH_EMR501_DB_SP_INSERT_PROCESS_TRANSACTION_PRC_role"/>
+    <partnerLink name="ETH_EMR501_JMS_ENQ_ErrorData_Topic" partnerLinkType="ns9:Produce_EMR501_Error_Message_plt" partnerRole="Produce_EMR501_Error_Message_role"/>
+   
+    <partnerLink name="eth_emr501_bpel_transactionregistrationservice_client_ep" partnerLinkType="ns13:ETH_EMR501_BPEL_TransactionRegistrationService" myRole="ETH_EMR501_BPEL_TransactionRegistrationServiceProvider"/>
+    <partnerLink name="ETH_EMR501_FL_SRD_TxnFile" partnerLinkType="ns14:SyncRead_EMR501_TxnFile_plt" partnerRole="SyncRead_EMR501_TxnFile_role"/>
+  </partnerLinks>
+  <variables>
+     <variable name="gvarSenderId" type="xsd:string"/>
+    <variable name="gvarDocumentNumber" type="xsd:string"/>
+    <variable name="gvarRegistrationCode" type="xsd:string"/>
+    <variable name="gvarCompositeName" type="xsd:string"/>
+    <variable name="gvarTransactionType" type="xsd:string"/>
+    <variable name="gvarTransactionSubType" type="xsd:string"/>
+    <variable name="gvarComponentName" type="xsd:string"/>
+    <variable name="gvarMasterRecordId" type="xsd:string"/>
+    <variable name="gvarTransactionRecordId" type="xsd:string"/>
+    <variable name="gvarCurrentDateTime" type="xsd:string"/>
+    <variable name="gvarCompositeInstanceId" type="xsd:string"/>
+   
+    <variable name="gvarTxnFileName" type="xsd:string"/>
+    <variable name="gvarPurchaseOrderId" type="xsd:string"/>
+    <variable name="gvarPOReleaseNumber" type="xsd:string"/>
+      <variable name="gvarDecodedMessagePayload" type="xsd:string"/>
+    <variable name="gvarPORevisionNumber" type="xsd:string"/>
+    <variable name="gvarOperatingUnit" type="xsd:string"/>
+    <variable name="gvarDBMasterRecInputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="gvarDBMasterRecOutputVariable" messageType="ns2:args_out_msg"/>
+    <variable name="varEnqErrorDataInput" messageType="ns9:Produce_EMR501_Error_Message_msg"/>
+    <variable name="gvarResponseCode" type="xsd:int"/>
+    <variable name="gvarErrorCodeNumber" type="xsd:string"/>
+    <variable name="gvargetDBResponse" type="xsd:string"/>
+    <variable name="gvarRollbackSuccessfulFlag" type="xsd:int"/>
+    <variable name="gvarIsResubmit" type="xsd:string"/>
+    <variable name="Resubmit_InputVariable" messageType="ns12:Read_EMR501_TanFile_Resubmit_msg"/>
+    <variable name="gvarInputVariable" messageType="ns13:ETH_EMR501_BPEL_TransactionRegistrationServiceRequestMessage"/>
+    <variable name="gvarSyncRead_TxnFile_InputVariable" messageType="ns14:Empty_msg"/>
+    <variable name="gvarSyncRead_TxnFile_OutputVariable" messageType="ns14:SyncRead_EMR501_TxnFile_msg"/>
+    
+  </variables>
+  <faultHandlers id="BpFhs0">
+    <catchAll id="BpCAl0">
+      <sequence name="Sequence_ErrorHandler" id="BpSeq0">
+        <assign name="Assign_data_to_varEnqErrorDataInput" id="BpAss0">
+          <copy>
+            <from variable="gvarSenderId"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:SENDER_ID"/>
+          </copy>
+          <copy>
+            <from expression="string('2011')"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_NUMBER"/>
+          </copy>
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_EXCEPTIONS"/>
+          </copy>
+          <copy>
+            <from variable="gvarMasterRecordId"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:MASTER_RECORD_ID"/>
+          </copy>
+          <copy>
+            <from variable="gvarDocumentNumber"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:DOCUMENT_KEY"/>
+          </copy>
+          <copy>
+            <from variable="gvarCompositeName"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_NAME"/>
+          </copy>
+          <copy>
+            <from variable="gvarComponentName"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPONENT_NAME"/>
+          </copy>
+          <copy>
+            <from variable="gvarCompositeInstanceId"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_INSTANCE_ID"/>
+          </copy>
+          <copy>
+            <from expression="'SOA'"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_SOURCE"/>
+          </copy>
+          <copy>
+            <from expression="ora:getCurrentDateTime()"/>
+            <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERRORDATETIME"/>
+          </copy>
+           <copy>
+                <from expression="ora:getContentAsString(bpws:getVariableData('gvarSyncRead_TxnFile_OutputVariable','body'))"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:PAYLOAD"/>
+              </copy>
+              <copy>
+                <from expression="string(null)"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:RECEIVER_ID"/>
+              </copy>
+              <copy>
+                <from expression="concat('Error while executing Transaction registration service flow.  Check instance - ',string(ora:getCompositeInstanceId()))"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_DESCRIPTION"/>
+              </copy>
+        </assign>
+        <invoke name="Invoke_ETH_JMS_ENQ_ErrorData_Topic" bpelx:invokeAsDetail="no" inputVariable="varEnqErrorDataInput" partnerLink="ETH_EMR501_JMS_ENQ_ErrorData_Topic" portType="ns9:Produce_EMR501_Error_Message_ptt" operation="Produce_EMR501_Error_Message" id="BpInv0"/>
+        <terminate name="Terminate_Process" id="BpTer0"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main" id="BpSeq1">
+    <receive name="ReceiveInput" createInstance="yes" variable="gvarInputVariable" partnerLink="eth_emr501_bpel_transactionregistrationservice_client_ep" portType="ns13:ETH_EMR501_BPEL_TransactionRegistrationService" operation="txnprocess" id="BpRcv0"/>
+    <scope name="Scope_SyncfileRead" id="BpScp0">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_SyncfileRead</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <faultHandlers id="BpFhs1">
+        <catchAll id="BpCAl1">
+         <sequence name="Sequence_ErrorHandler" id="BpSeq2">
+            <assign name="Assign_data_to_varEnqErrorDataInput" id="BpAss1">
+              <copy>
+                <from variable="gvarSenderId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:SENDER_ID"/>
+              </copy>
+              <copy>
+                <from expression="string(null)"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:RECEIVER_ID"/>
+              </copy>
+              <copy>
+                <from expression="ora:getContentAsString(bpws:getVariableData('gvarSyncRead_TxnFile_OutputVariable','body'))"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:PAYLOAD"/>
+              </copy>
+              <copy>
+                <from expression="concat('Error while reading/parsing Transactional Flat File',$gvarTxnFileName,' Check instance - ',$gvarCompositeInstanceId)"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_DESCRIPTION"/>
+              </copy>
+              <copy>
+                <from expression="string('2157')"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_NUMBER"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_EXCEPTIONS"/>
+              </copy>
+              <copy>
+                <from variable="gvarMasterRecordId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:MASTER_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarDocumentNumber"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:DOCUMENT_KEY"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeName"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarComponentName"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPONENT_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeInstanceId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_INSTANCE_ID"/>
+              </copy>
+              <copy>
+                <from expression="'SOA'"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_SOURCE"/>
+              </copy>
+              <copy>
+                <from expression="ora:getCurrentDateTime()"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERRORDATETIME"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_ETH_JMS_ENQ_ErrorData_Topic" bpelx:invokeAsDetail="no" inputVariable="varEnqErrorDataInput" partnerLink="ETH_EMR501_JMS_ENQ_ErrorData_Topic" portType="ns9:Produce_EMR501_Error_Message_ptt" operation="Produce_EMR501_Error_Message" id="BpInv1"/>
+            <terminate name="Terminate_Process" id="BpTer1"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_SyncRead" id="BpSeq3">
+        <assign name="AssignFileName" id="BpAss2">
+          <copy>
+            <from variable="gvarInputVariable" part="payload" query="/ns13:process/ns13:FileName"/>
+            <to variable="gvarTxnFileName"/>
+          </copy>
+         
+        </assign>
+        <invoke name="Invoke_SyncRead_SRD_Txnfile" inputVariable="gvarSyncRead_TxnFile_InputVariable" outputVariable="gvarSyncRead_TxnFile_OutputVariable" partnerLink="ETH_EMR501_FL_SRD_TxnFile" portType="ns14:SyncRead_EMR501_TxnFile_ptt" operation="SyncRead_EMR501_TxnFile" bpelx:invokeAsDetail="no" id="BpInv2">
+          <bpelx:inputProperty name="jca.file.FileName" variable="gvarTxnFileName"/>
+        </invoke>
+        <assign name="Assign_FileHeaderInfo_To_gvariables" id="BpAss3">
+          <copy>
+            <from expression="ora:getCompositeName()"/>
+            <to variable="gvarCompositeName"/>
+          </copy>
+          <copy>
+            <from variable="gvarSyncRead_TxnFile_OutputVariable" part="body" query="/ns7:PurchaseOrder/ns7:Line[1]/ns7:HDBEG03"/>
+            <to variable="gvarDocumentNumber"/>
+          </copy>
+          <copy>
+            <from expression="ora:setCompositeInstanceTitle(string(bpws:getVariableData('gvarTxnFileName')))"/>
+            <to variable="gvarTxnFileName"/>
+          </copy>
+          <copy>
+            <from expression="bpws:getVariableData('gvarInputVariable','payload','/ns13:process/ns13:SenderID')"/>
+            <to variable="gvarSenderId"/>
+          </copy>
+          <copy>
+            <from variable="gvarInputVariable" part="payload" query="/ns13:process/ns13:MasterID"/>
+            <to variable="gvarMasterRecordId"/>
+          </copy>
+          <copy>
+            <from expression="ora:getCompositeInstanceId()"/>
+            <to variable="gvarCompositeInstanceId"/>
+          </copy>
+          <copy>
+            <from expression="'FFPF'"/>
+            <to variable="gvarRegistrationCode"/>
+          </copy>
+          <copy>
+            <from expression="ora:getComponentName()"/>
+            <to variable="gvarComponentName"/>
+          </copy>
+          <copy>
+            <from expression="ora:getCurrentDateTime()"/>
+            <to variable="gvarCurrentDateTime"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <scope name="Scope_PrepareDocumentKey" variableAccessSerializable="no" id="BpScp1">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_PrepareDocumentKey</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <variables>
+        <variable name="lvarMessagePayload" type="xsd:string"/>
+        <variable name="lvarTransactionTypeCode" type="xsd:string"/>
+      </variables>
+      <faultHandlers id="BpFhs2">
+        <catchAll id="BpCAl2">
+          <sequence name="Sequence_ErrorHandler" id="BpSeq4">
+            <assign name="Assign_data_to_varEnqErrorDataInput" id="BpAss4">
+              <copy>
+                <from variable="gvarSenderId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:SENDER_ID"/>
+              </copy>
+              <copy>
+                <from expression="ora:getContentAsString(bpws:getVariableData('gvarSyncRead_TxnFile_OutputVariable','body'))"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:PAYLOAD"/>
+              </copy>
+              <copy>
+                <from expression="string(null)"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:RECEIVER_ID"/>
+              </copy>
+              <copy>
+                <from expression="concat('Error while preparing documentkey.  Check instance - ',$gvarCompositeInstanceId)"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_DESCRIPTION"/>
+              </copy>
+              <copy>
+                <from expression="string('2101')"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_NUMBER"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_EXCEPTIONS"/>
+              </copy>
+              <copy>
+                <from variable="gvarMasterRecordId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:MASTER_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarDocumentNumber"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:DOCUMENT_KEY"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeName"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarComponentName"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPONENT_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeInstanceId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_INSTANCE_ID"/>
+              </copy>
+              <copy>
+                <from expression="'SOA'"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_SOURCE"/>
+              </copy>
+              <copy>
+                <from expression="ora:getCurrentDateTime()"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERRORDATETIME"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_ETH_JMS_ENQ_ErrorData_Topic" bpelx:invokeAsDetail="no" inputVariable="varEnqErrorDataInput" partnerLink="ETH_EMR501_JMS_ENQ_ErrorData_Topic" portType="ns9:Produce_EMR501_Error_Message_ptt" operation="Produce_EMR501_Error_Message" id="BpInv3"/>
+            <terminate name="Terminate_Process" id="BpTer2"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_PreapreDocKey" id="BpSeq5">
+        <assign name="Assign_PurchaseOrderDetailsInfo_To_gvariables" id="BpAss5">
+          <copy>
+            <from variable="gvarSyncRead_TxnFile_OutputVariable" part="body" query="/ns7:PurchaseOrder/ns7:Line[1]/ns7:HDBEG03"/>
+            <to variable="gvarPurchaseOrderId"/>
+          </copy>
+          <copy>
+            <from expression="normalize-space(bpws:getVariableData('gvarSyncRead_TxnFile_OutputVariable','body','/ns7:PurchaseOrder/ns7:Line[1]/ns7:HDBEG04'))"/>
+            <to variable="gvarPOReleaseNumber"/>
+          </copy>
+          <copy>
+            <from variable="gvarSyncRead_TxnFile_OutputVariable" part="body" query="/ns7:PurchaseOrder/ns7:Line[1]/ns7:HD1REF03"/>
+            <to variable="gvarPORevisionNumber"/>
+          </copy>
+          <copy>
+            <from variable="gvarSyncRead_TxnFile_OutputVariable" part="body" query="/ns7:PurchaseOrder/ns7:Line[1]/ns7:HDGS02"/>
+            <to variable="gvarOperatingUnit"/>
+          </copy>
+          <copy>
+            <from variable="gvarSyncRead_TxnFile_OutputVariable" part="body" query="/ns7:PurchaseOrder/ns7:Line[1]/ns7:HDBEG01"/>
+            <to variable="lvarTransactionTypeCode"/>
+          </copy>
+         
+        </assign>
+        <switch name="CheckPOandOU" id="BpSwt0">
+          <case condition="(bpws:getVariableData('gvarPurchaseOrderId') != '')  and (bpws:getVariableData('gvarOperatingUnit') != '')">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">POID and POUnit is not NULL</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            
+              <bpelx:exec name="Java_Embedding_Evaluate_Release_Revision_and_TRIM" version="1.5" language="java" id="BxExe6">
+              <![CDATA[/*Write your java code below e.g.        
+	System.out.println("Hello, World");       
+*/      
+     
+String purchaseOrderId = (String)getVariableData("gvarPurchaseOrderId");      
+String operatingUnitNumber = (String)getVariableData("gvarOperatingUnit");    
+     
+String releaseNumber = (String)getVariableData("gvarPOReleaseNumber");      
+String revisionNumber = (String)getVariableData("gvarPORevisionNumber");     
+  
+String key = "Original Key Received - '"+purchaseOrderId+":"+releaseNumber+":"+revisionNumber+":"+operatingUnitNumber+"'";  
+addAuditTrailEntry(key);  
+  
+if(releaseNumber==null || "".equalsIgnoreCase(releaseNumber)){     
+  releaseNumber = "0";    
+  addAuditTrailEntry("gvarPOReleaseNumber is NULL so reset to 0");       
+}     
+else{     
+  releaseNumber = releaseNumber.trim();    
+}     
+setVariableData("gvarPOReleaseNumber",releaseNumber);     
+    
+if(revisionNumber==null){     
+  addAuditTrailEntry("gvarPORevisionNumber is NULL so reseting to 0"); 
+  revisionNumber = "0";       
+} 
+else if("".equalsIgnoreCase(revisionNumber.trim())){ 
+  addAuditTrailEntry("gvarPORevisionNumber is EMPTY SPACE so reseting to 0"); 
+  revisionNumber = "0"; 
+} 
+else{     
+  revisionNumber = revisionNumber.trim(); 
+}    
+setVariableData("gvarPORevisionNumber",revisionNumber);    
+   
+if(operatingUnitNumber == null){ 
+  addAuditTrailEntry("gvarOperatingUnit is NULL so reseting to 'NONE'"); 
+  operatingUnitNumber = "NONE"; 
+}   
+else if(operatingUnitNumber.trim().length()>10){ 
+  int len = operatingUnitNumber.trim().length(); 
+  String out = "Operating Unit Number lenght is "+len; 
+  addAuditTrailEntry(out); 
+  addAuditTrailEntry("gvarOperatingUnit length is trimmed to TEN characters"); 
+  operatingUnitNumber = operatingUnitNumber.trim().substring(0, 10); 
+}   
+else{   
+  operatingUnitNumber = operatingUnitNumber.trim();   
+}   
+    
+purchaseOrderId = purchaseOrderId.trim();   
+    
+setVariableData("gvarPurchaseOrderId",purchaseOrderId);    
+setVariableData("gvarOperatingUnit",operatingUnitNumber);]]>
+            </bpelx:exec>
+        
+          </case>
+          <otherwise>
+            <sequence name="Sequence1" id="BpSeq6">
+              <terminate name="Throw_documentKeyPreparationException" id="BpTer3"/>
+              <empty name="Empty_RaiseError" id="BpEmp0"/>
+            </sequence>
+          </otherwise>
+        </switch>
+        <assign name="Assign_Prepare_Document_Key" id="BpAss6">
+          <copy>
+            <from expression="concat(bpws:getVariableData('gvarPurchaseOrderId'),':',bpws:getVariableData('gvarPOReleaseNumber'),':',bpws:getVariableData('gvarPORevisionNumber'),':',bpws:getVariableData('gvarOperatingUnit'))"/>
+            <to variable="gvarDocumentNumber"/>
+          </copy>
+          <copy>
+            <from expression="ora:setCompositeInstanceTitle(string(bpws:getVariableData('gvarDocumentNumber')))"/>
+            <to variable="gvarDocumentNumber"/>
+          </copy>
+        </assign>
+        <bpelx:exec name="Java_Embedding_SetTransactionSubType_MasterRecordID" version="1.5" language="java" id="BxExe7">
+          <![CDATA[addAuditTrailEntry("Get the transaction Code ");                                        
+      
+    String transactionCode = (String)getVariableData("lvarTransactionTypeCode");       
+    addAuditTrailEntry("transactionCode",transactionCode);       
+    
+    
+          
+    if(transactionCode.equals("00")){          
+      setVariableData("gvarTransactionSubType","850");         
+      //addAuditTrailEntry("is PO ",getVariableData("gvarTransactionSubType"));          
+    }        
+    else{          
+      setVariableData("gvarTransactionSubType","860");         
+      //addAuditTrailEntry("is POCO ",getVariableData("gvarTransactionSubType"));        
+    }]]>
+        </bpelx:exec>
+        
+      </sequence>
+    </scope>
+    <scope name="Scope_InsertTransaction_Record" id="BpScp2">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Scope_InsertTransaction_Record</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <faultHandlers id="BpFhs3">
+        <catchAll id="BpCAl3">
+          <sequence name="Sequence_ErrorHandler" id="BpSeq7">
+            <assign name="Assign_data_to_varEnqErrorDataInput" id="BpAss7">
+              <copy>
+                <from expression="string('SOA')"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_SOURCE"/>
+              </copy>
+              <copy>
+                <from variable="gvarSenderId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:SENDER_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarMasterRecordId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:MASTER_RECORD_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarDocumentNumber"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:DOCUMENT_KEY"/>
+              </copy>
+              <copy>
+                <from expression="string('2105')"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_NUMBER"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_EXCEPTIONS"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeName"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarComponentName"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPONENT_NAME"/>
+              </copy>
+              <copy>
+                <from variable="gvarCompositeInstanceId"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_INSTANCE_ID"/>
+              </copy>
+              <copy>
+                <from variable="gvarCurrentDateTime"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERRORDATETIME"/>
+              </copy>
+              <copy>
+                <from expression="ora:getContentAsString(bpws:getVariableData('gvarSyncRead_TxnFile_OutputVariable','body'))"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:PAYLOAD"/>
+              </copy>
+              <copy>
+                <from expression="string(null)"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:RECEIVER_ID"/>
+              </copy>
+              <copy>
+                <from expression="concat('Error while creating Transaction  record.  Check instance - ',$gvarCompositeInstanceId)"/>
+                <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_DESCRIPTION"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_ETH_JMS_ENQ_ErrorData_Topic" bpelx:invokeAsDetail="no" inputVariable="varEnqErrorDataInput" partnerLink="ETH_EMR501_JMS_ENQ_ErrorData_Topic" portType="ns9:Produce_EMR501_Error_Message_ptt" operation="Produce_EMR501_Error_Message" id="BpInv4"/>
+            <terminate name="Terminate_Process" id="BpTer4"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_InsertTransaction_Record" id="BpSeq8">
+        <assign name="Assign_TxnFileInfo_To_DB_SP_InputVariables" id="BpAss8">
+          <copy>
+            <from variable="gvarComponentName"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:P_CALLER_NAME"/>
+          </copy>
+          <copy>
+            <from variable="gvarSenderId"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM1"/>
+          </copy>
+          <copy>
+            <from variable="gvarTxnFileName"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM3"/>
+          </copy>
+          <copy>
+            <from expression="string('PO')"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM4"/>
+          </copy>
+          <copy>
+            <from variable="gvarTransactionSubType"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM5"/>
+          </copy>
+          <copy>
+            <from variable="gvarDocumentNumber"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM6"/>
+          </copy>
+          <copy>
+            <from expression="string(null)"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM7"/>
+          </copy>
+          <copy>
+            <from expression="string(null)"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM8"/>
+          </copy>
+          <copy>
+            <from expression="string(null)"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM9"/>
+          </copy>
+          <copy>
+            <from expression="string('TPFTP')"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM10"/>
+          </copy>
+          <copy>
+            <from variable="gvarCompositeInstanceId"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM11"/>
+          </copy>
+          <copy>
+            <from variable="gvarMasterRecordId"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM14"/>
+          </copy>
+          <copy>
+            <from variable="gvarCurrentDateTime"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM12"/>
+          </copy>
+          <copy>
+            <from variable="gvarCurrentDateTime"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM13"/>
+          </copy>
+          <copy>
+            <from expression="string(null)"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM17"/>
+          </copy>
+          <copy>
+            <from expression="ora:getContentAsString(bpws:getVariableData('gvarSyncRead_TxnFile_OutputVariable','body','/ns7:PurchaseOrder'))"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM16"/>
+          </copy>
+          <copy>
+            <from expression="string(null)"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM18"/>
+          </copy>
+          <copy>
+            <from expression="string(null)"/>
+            <to variable="gvarDBMasterRecInputVariable" part="InputParameters" query="/ns11:InputParameters/ns11:PARAM19"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_ETH_EMR501_DB_SP_InsertTxnRec" inputVariable="gvarDBMasterRecInputVariable" outputVariable="gvarDBMasterRecOutputVariable" partnerLink="ETH_EMR501_DB_SP_INSERT_PROCESS_TRANSACTION_PRC" portType="ns2:ETH_EMR501_DB_SP_INSERT_PROCESS_TRANSACTION_PRC_ptt" operation="ETH_EMR501_DB_SP_INSERT_PROCESS_TRANSACTION_PRC" bpelx:invokeAsDetail="no" id="BpInv5"/>
+       
+        <assign name="Assign_Output_to_Gvars" id="BpAss9">
+          <copy>
+            <from variable="gvarDBMasterRecOutputVariable" part="OutputParameters" query="/ns11:OutputParameters/ns11:P_RESPONSECODE"/>
+            <to variable="gvarResponseCode"/>
+          </copy>
+          <copy>
+            <from variable="gvarDBMasterRecOutputVariable" part="OutputParameters" query="/ns11:OutputParameters/ns11:P_ERRORCODENUMBER"/>
+            <to variable="gvarErrorCodeNumber"/>
+          </copy>
+          <copy>
+            <from variable="gvarDBMasterRecOutputVariable" part="OutputParameters" query="/ns11:OutputParameters/ns11:P_ROLLBACKSUCCESSFULLFLAG"/>
+            <to variable="gvarRollbackSuccessfulFlag"/>
+          </copy>
+          <copy>
+            <from expression="ethCustomSOA:evaluateDBResponse(bpws:getVariableData('gvarResponseCode'),bpws:getVariableData('gvarErrorCodeNumber'),bpws:getVariableData('gvarRollbackSuccessfulFlag'))"/>
+            <to variable="gvargetDBResponse"/>
+          </copy>
+        </assign>
+        <switch name="CheckDBResp" id="BpSwt1">
+          
+          <case condition="bpws:getVariableData('gvargetDBResponse')='DB_FAILURE'">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">DB FAILURE</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence_DBfailure" id="BpSeq9">
+            <assign name="Assign_data_to_varEnqErrorDataInput" id="BpAss10">
+                <copy>
+                  <from variable="gvarSenderId"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:SENDER_ID"/>
+                </copy>
+                <copy>
+                  <from expression="string(NULL)"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:TRANSACTION_RECORD_ID"/>
+                </copy>
+                <copy>
+                  <from expression="string(null)"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_NUMBER"/>
+                </copy>
+                <copy>
+                  <from variable="gvarMasterRecordId"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:MASTER_RECORD_ID"/>
+                </copy>
+                <copy>
+                  <from expression="string(null)"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:DOCUMENT_KEY"/>
+                </copy>
+                <copy>
+                  <from expression="concat('Transaction Registartion DB procedure - DATA_INSERTION_SEC_PRC  returned DB Error ', bpws:getVariableData('gvarErrorCodeNumber'),' with Response Code ', $gvarResponseCode)"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_DESCRIPTION"/>
+                </copy>
+                <copy>
+                  <from expression="concat('Transaction Registartion DB procedure - DATA_INSERTION_SEC_PRC  returned DB Error ', bpws:getVariableData('gvarErrorCodeNumber'),' with Response Code ', $gvarResponseCode)"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_EXCEPTIONS"/>
+                </copy>
+                <copy>
+                  <from variable="gvarCompositeName"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_NAME"/>
+                </copy>
+                <copy>
+                  <from variable="gvarComponentName"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPONENT_NAME"/>
+                </copy>
+                <copy>
+                  <from variable="gvarCompositeInstanceId"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:COMPOSITE_INSTANCE_ID"/>
+                </copy>
+                <copy>
+                  <from expression="string('DEAD')"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERROR_SOURCE"/>
+                </copy>
+                <copy>
+                  <from expression="ora:getCurrentDateTime()"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:ERRORDATETIME"/>
+                </copy>
+                <copy>
+                  <from expression="string(null)"/>
+                  <to variable="varEnqErrorDataInput" part="body" query="/ns10:ETH_ErrorData/ns10:RECEIVER_ID"/>
+                </copy>
+              </assign>
+              <invoke name="Invoke_ETH_JMS_ENQ_ErrorData_Topic" bpelx:invokeAsDetail="no" inputVariable="varEnqErrorDataInput" partnerLink="ETH_EMR501_JMS_ENQ_ErrorData_Topic" portType="ns9:Produce_EMR501_Error_Message_ptt" operation="Produce_EMR501_Error_Message" id="BpInv6"/>
+            <terminate name="Terminate_Process" id="BpTer5"/>
+            </sequence>
+          </case>
+          <case condition="bpws:getVariableData('gvargetDBResponse')='SUCCESS'">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">SUCCESS</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <assign name="Assign_ProcedureOutVariables_To_gvariables" id="BpAss11">
+              <copy>
+                <from variable="gvarDBMasterRecOutputVariable" part="OutputParameters" query="/ns11:OutputParameters/ns11:PARAM15"/>
+                <to variable="gvarTransactionRecordId"/>
+              </copy>
+            </assign>
+          </case>
+          <otherwise>
+            <terminate name="Abort_The_Flow" id="BpTer6"/>
+          </otherwise>
+        </switch>
+      </sequence>
+    </scope>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Apr 26 11:00:33 GMT+05:30 2011
+  Author:  APutrevu
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="ETH_Bpel_PO_OAGIS90_Client"
+     targetNamespace="http://oracle.com/sca/soapservice/OutputServices/ETH_PO_OAGIS90_SendToB2B/ETH_Bpel_PO_OAGIS90_Client"
+     xmlns:tns="http://oracle.com/sca/soapservice/OutputServices/ETH_PO_OAGIS90_SendToB2B/ETH_Bpel_PO_OAGIS90_Client"
+     xmlns:inp1="http://www.openapplications.org/oagis/9"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Infrastructure/OAGIS90/ChangePurchaseOrder.xsd"/>
+            <xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Infrastructure/OAGIS90/ProcessPurchaseOrder.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestOAGISPOMessage">
+        <wsdl:part name="Request_OAGIS_PO_Payload" element="inp1:ProcessPurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:message name="requestOAGISPOCOMessage">
+        <wsdl:part name="Request_OAGIS_POCO_Payload" element="inp1:ChangePurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:portType name="execute_ptt">
+        <wsdl:operation name="sendToB2B_OAGISPO">
+            <wsdl:input message="tns:requestOAGISPOMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="sendToB2B_OAGISPOCO">
+            <wsdl:input message="tns:requestOAGISPOCOMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

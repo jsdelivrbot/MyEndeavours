@@ -1,0 +1,18 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="PurchaseOrderEmersonEBS"
+     targetNamespace="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:ebs="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="TEST_BPEL_PO_EBS">
+        <plnk:role name="PurchaseOrderEBS">
+            <plnk:portType name="ebs:PurchaseOrderEBS"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/EnterpriseServices/Manufacturing/EBO/PurchaseOrder/Emerson"
+         location="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseBusinessServiceLibrary/Industry/Manufacturing/EBO/PurchaseOrder/Emerson/PurchaseOrderEmersonEBS.wsdl"/>
+</wsdl:definitions>

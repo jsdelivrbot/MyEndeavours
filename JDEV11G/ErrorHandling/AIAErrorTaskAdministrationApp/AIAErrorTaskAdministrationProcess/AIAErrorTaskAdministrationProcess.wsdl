@@ -1,0 +1,63 @@
+<wsdl:definitions
+     name="AIAErrorTaskAdministrationProcess"
+     targetNamespace="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+     xmlns:ns2="http://xmlns.oracle.com/AIAErrorTaskAdministrationProcess"
+     xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:ns="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns3="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+     xmlns:client="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+                 schemaLocation="xsd/AIAErrorTaskAdministrationProcess.xsd"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/EH/AIAErrorTaskAdministrationProcess/AIAErrorTaskAdministrationProcess"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+ schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Core/Common/V2/Meta.xsd"/>
+        </schema>
+         <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://oracle.abs.eh.service.v1/"
+             xmlns:fault="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/AIAErrorTaskAdministrationProcess" xmlns:taskfault="http://oracle.abs.eh.service.v1/"
+             xmlns:bsr1="http://www.bsr.org" xmlns:bsr2="http://www.bsr.com">
+            <xsd:import namespace="http://oracle.abs.eh.service.v1/" schemaLocation="xsd/FaultMessageType.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/AIAErrorTaskAdministrationProcess" schemaLocation="xsd/BSRRoles.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="AIAErrorTaskAdministrationProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:message name="AIAErrorTaskAdministrationProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:Fault"/>
+    </wsdl:message>
+    <wsdl:portType name="AIAErrorTaskAdministrationProcessCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:AIAErrorTaskAdministrationProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="AIAErrorTaskAdministrationProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:AIAErrorTaskAdministrationProcessRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <plnk:partnerLinkType name="AIAErrorTaskAdministrationProcess">
+        <plnk:role name="AIAErrorTaskAdministrationProcessProvider">
+            <plnk:portType name="client:AIAErrorTaskAdministrationProcess"/>
+        </plnk:role>
+        <plnk:role name="AIAErrorTaskAdministrationProcessRequester">
+            <plnk:portType name="client:AIAErrorTaskAdministrationProcessCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:message name="FaultMessage">
+     
+      <wsdl:part  name="Fault" element="ns1:FaultMessage"/>
+    </wsdl:message>
+</wsdl:definitions>

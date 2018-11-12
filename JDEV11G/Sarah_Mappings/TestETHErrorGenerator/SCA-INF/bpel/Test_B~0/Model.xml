@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Test_BPEL_ETHErrorGenerator" targetNamespace="http://xmlns.oracle.com/OutputServices/TestETHErrorGenerator/Test_BPEL_ETHErrorGenerator" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/OutputServices/TestETHErrorGenerator/Test_BPEL_ETHErrorGenerator" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/OutputServices/TestETHErrorGenerator/Test_JMS_ENQ_ETHErrorGenerator" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:ethCustomSOA="http://www.oracle.com/XSL/Transform/java/com.emerson.eth3.customSOA.ETHCustomSOAExtension" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ns2="http://schema.emerson.com/ETH/ErrorData" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns3="http://xmlns.oracle.com/ETHAppl/TestCustomFunSrvc/BPELProcess1" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="test_bpel_etherrorgenerator_client" partnerLinkType="client:Test_BPEL_ETHErrorGenerator" myRole="Test_BPEL_ETHErrorGeneratorProvider"/>
+    <partnerLink name="Test_JMS_ENQ_ETHErrorGenerator" partnerLinkType="ns1:Produce_Message_plt" partnerRole="Produce_Message_role"/>
+    <partnerLink name="Service1" partnerLinkType="ns3:BPELProcess1" partnerRole="BPELProcess1Provider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:Test_BPEL_ETHErrorGeneratorRequestMessage"/>
+    <variable name="Invoke1_Produce_Message_InputVariable" messageType="ns1:Produce_Message_msg"/>
+    <variable name="Invoke2_process_InputVariable" messageType="ns3:BPELProcess1RequestMessage"/>
+    <variable name="Invoke2_process_OutputVariable" messageType="ns3:BPELProcess1ResponseMessage"/>
+  </variables>
+  <faultHandlers id="BpFhs0">
+    <catchAll id="BpCAl0">
+      <sequence id="BpSeq0">
+        <assign name="Assign1" id="BpAss0">
+          <copy>
+            <from expression="string('SOA')"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:ERROR_SOURCE"/>
+          </copy>
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:ERROR_EXCEPTIONS"/>
+          </copy>
+          <copy>
+            <from expression="string('EMRXXX')"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:SENDER_ID"/>
+          </copy>
+          <copy>
+            <from expression="string('0000')"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:ERROR_NUMBER"/>
+          </copy>
+          <copy>
+            <from expression="string('Kalpana, Ryan - Error While calling DBListener2 Database Procedure')"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:ERROR_DESCRIPTION"/>
+          </copy>
+          <copy>
+            <from expression="ora:getCompositeName()"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:COMPOSITE_NAME"/>
+          </copy>
+          <copy>
+            <from expression="ora:getComponentName()"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:COMPONENT_NAME"/>
+          </copy>
+          <copy>
+            <from expression="ora:getCompositeInstanceId()"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:COMPOSITE_INSTANCE_ID"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="Invoke1_Produce_Message_InputVariable" part="body" query="/ns2:ETH_ErrorData/ns2:ERRORDATETIME"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke1" bpelx:invokeAsDetail="no" inputVariable="Invoke1_Produce_Message_InputVariable" partnerLink="Test_JMS_ENQ_ETHErrorGenerator" portType="ns1:Produce_Message_ptt" operation="Produce_Message" id="BpInv0"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq1">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Test_BPEL_ETHErrorGenerator.wsdl) -->
+    <receive name="receiveInput" partnerLink="test_bpel_etherrorgenerator_client" portType="client:Test_BPEL_ETHErrorGenerator" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <assign name="Assign2" id="BpAss1">
+      <copy>
+        <from expression="0"/>
+        <to variable="Invoke2_process_InputVariable" part="payload" query="/ns3:process/ns3:responseCode"/>
+      </copy>
+      <copy>
+        <from expression="string('DB-99999')"/>
+        <to variable="Invoke2_process_InputVariable" part="payload" query="/ns3:process/ns3:errorCodeNumber"/>
+      </copy>
+      <copy>
+        <from expression="1"/>
+        <to variable="Invoke2_process_InputVariable" part="payload" query="/ns3:process/ns3:rollbackFlag"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke2" inputVariable="Invoke2_process_InputVariable" partnerLink="Service1" portType="ns3:BPELProcess1" operation="process" outputVariable="Invoke2_process_OutputVariable" bpelx:invokeAsDetail="no" id="BpInv1"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Jun 08 13:26:45 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

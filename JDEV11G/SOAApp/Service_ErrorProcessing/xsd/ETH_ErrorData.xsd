@@ -1,0 +1,146 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eth="http://schema.emerson.com/ETH/ErrorData"
+     targetNamespace="http://schema.emerson.com/ETH/ErrorData" elementFormDefault="qualified">
+    <xsd:element name="ETH_ErrorData">
+        <xsd:annotation>
+            <xsd:documentation>This element is used to populate the ETH error details from composites and push the message into ETH Error Topic</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="ERROR_SOURCE" type="eth:errorSourceType">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is mandatory.
+This element is used to populate the source or the category of the error.
+The permitted values are:
+1. DEAD - If the Error is to be sent to Dead Letter Queue and not ETH database.
+2. DEAD_WARNING - An ERROR which was encountered while checking for Dead Error Queue and is not supposed to be retried again through Dead Error Process.
+3. DATABASE - If the error was generated in a DB activity in SOA.
+4. SOA - If the error was generated in SOA process due to a SOA error.
+5. SOA_WARNING - If the error generated in SOA is just a warning.
+6. JUST_STATUS_UPDATE - This is for Internal use by Error Hospital.
+7. BUSINESS - If the error in SOA processis is due to a Business Fault.
+8. B2B - If the error is propagated from B2B SOA Processes.
+9. SYSTEM - If the error is a system related error.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="SENDER_ID" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is manadtory.
+This element is used to populate the SenderID for the Transaction.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="B2BINBOUND_RECORD_ID" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the B2B Inbound RecordID for the Transaction from B2B. This element will be empty for a Tading Partner level Error. 
+This element will be empty even if the error occurred after B2BInbound Transaction was complete, i.e. when Master Record ID is generated.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="MASTER_RECORD_ID" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the Master RecordID for the Transaction. This element will be empty for a Tading Partner level Error.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TRANSACTION_RECORD_ID" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the Transaction RecordID for the Transaction.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="DOCUMENT_KEY" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the Document_Key for the Transaction.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="ERROR_NUMBER" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Manadtory.
+This element is used to populate the ErrorCode of the Error. Please see the ETH Error List for reference.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="ERROR_DESCRIPTION" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the Error Description for the Error. This will be a Literal Description of the Error at runtime.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="ERROR_EXCEPTIONS" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the Error Exception for the Error. This will contain the stack trace of the Error at runtime. It will be empty for all business errors.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="RECEIVER_ID" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the Receiver RecordID for the Transaction. This will be populated once the transaction is split into Receiver threads.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="COMPOSITE_NAME" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the Composite Name of the process where error occurred.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="COMPONENT_NAME" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Mandatory.
+This element is used to populate the Component Name of the process where error occurred.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="COMPOSITE_INSTANCE_ID" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Mandatory.
+This element is used to populate the Composite Instance ID of the process where error occurred.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="ERRORDATETIME" type="xsd:dateTime">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Mandatory.
+This element is used to populate the Date and Time when error occurred. Date and Time would server Date and Time and will be in GMT.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="PAYLOAD" type="xsd:string" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate the payload, if any, while error occurred.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element ref="eth:PROPERTY_SET" minOccurs="0">
+                    <xsd:annotation>
+                        <xsd:documentation>This element is Optional.
+This element is used to populate any number of additional Properties(Name-Value) data related to error.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="PROPERTY_SET">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="eth:PROPERTY" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="PROPERTY" type="eth:propertType"/>
+    <xsd:complexType name="propertType">
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="value" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:simpleType name="errorSourceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="DEAD"/>
+            <xsd:enumeration value="DEAD_WARNING"/>
+            <xsd:enumeration value="DATABASE"/>
+            <xsd:enumeration value="SOA"/>
+            <xsd:enumeration value="SOA_WARNING"/>
+            <xsd:enumeration value="BUSINESS"/>
+            <xsd:enumeration value="B2B"/>
+            <xsd:enumeration value="SYSTEM"/>
+            <xsd:enumeration value="JUST_STATUS_UPDATE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
+<!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by KAY HATHCOCK (EMERSON ELECTRIC COMPANY) -->

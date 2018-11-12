@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="ETH_FL_RD_FLatFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_RD_FLatFile"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/ETH_Sarah_ConnectorService/ETH_FL_RD_FLatFile"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://schema.emerson.com/ETH/FlatFile/V1"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="ReadFlatFile_plt" >
+    <plt:role name="ReadFlatFile_role" >
+      <plt:portType name="tns:ReadFlatFile_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schema.emerson.com/ETH/FlatFile/V1" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationObjectLibrary/ETH/FlatFile/V1/EMR501_ETH_PO.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="ReadFlatFile_msg">
+        <wsdl:part name="body" element="imp1:PurchaseOrder"/>
+    </wsdl:message>
+    <wsdl:portType name="ReadFlatFile_ptt">
+        <wsdl:operation name="ReadFlatFile">
+            <wsdl:input message="tns:ReadFlatFile_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

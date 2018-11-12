@@ -1,0 +1,16 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ALESup_FMW_ProjectDetails_Route"
+     targetNamespace="http://xmlns.oracle.com/BPO/ALESup_FMW_ProjectDetails/ALESup_FMW_ProjectDetails_Route"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/BPO/ALESup_FMW_ProjectDetails/ALESup_FMW_ProjectDetails_Route"
+     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="ALESup_FMW_ProjectDetails_Route">
+        <plnk:role name="routeProjectDetails_ppt" portType="tns:routeProjectDetails_ppt"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/BPO/ALESup_FMW_ProjectDetails/ALESup_FMW_ProjectDetails_Route"
+         location="ALESup_FMW_ProjectDetails_RouteSvc.wsdl"/>
+</wsdl:definitions>

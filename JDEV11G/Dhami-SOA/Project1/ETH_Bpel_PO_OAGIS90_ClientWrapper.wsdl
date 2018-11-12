@@ -1,0 +1,18 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ETH_Bpel_PO_OAGIS90_Client"
+     targetNamespace="http://oracle.com/sca/soapservice/OutputServices/ETH_PO_OAGIS90_SendToB2B/ETH_Bpel_PO_OAGIS90_Client"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/sca/soapservice/OutputServices/ETH_PO_OAGIS90_SendToB2B/ETH_Bpel_PO_OAGIS90_Client"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="ParshantService">
+        <plnk:role name="execute_ptt">
+            <plnk:portType name="tns:execute_ptt"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://oracle.com/sca/soapservice/OutputServices/ETH_PO_OAGIS90_SendToB2B/ETH_Bpel_PO_OAGIS90_Client"
+         location="ETH_Bpel_PO_OAGIS90_Client.wsdl"/>
+</wsdl:definitions>

@@ -1,0 +1,13 @@
+<adapter-config name="JMS_ENQUEUE_DIST" adapter="JMS Adapter" wsdlLocation="JMS_ENQUEUE_DIST.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/JMS/ETH/Outbound/Topic" UIJmsProvider="WLSJMS" UIConnectionName="DEV_SOA2"/>
+  <endpoint-interaction portType="Produce_Message_ptt" operation="Produce_Message">
+    <interaction-spec className="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec">
+      <property name="TimeToLive" value="0"/>
+      <property name="PayloadType" value="TextMessage"/>
+      <property name="DeliveryMode" value="Persistent"/>
+      <property name="DestinationName" value="Test/Topic"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

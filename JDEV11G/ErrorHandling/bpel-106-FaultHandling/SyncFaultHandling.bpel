@@ -1,0 +1,88 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Dec 02 19:37:18 PST 2009
+  Author:  cutschig
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="SyncFaultHandling"
+               targetNamespace="http://example.com/bpel_106_FaultHandling/SyncFaultHandling"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://example.com/bpel_106_FaultHandling/SyncFaultHandling"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns6="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns1="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns3="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns2="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="syncfaulthandling_client" partnerLinkType="client:SyncFaultHandling" myRole="SyncFaultHandlingProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:SyncFaultHandlingRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:SyncFaultHandlingResponseMessage"/>
+    <variable name="gBusinessFaultVariable"
+              messageType="client:ABusinessFaultMessage"/>
+  </variables>
+  <faultHandlers>
+    <catch faultName="client:businessFault"
+           faultVariable="gBusinessFaultVariable">
+      <sequence>
+        <throw name="Throw_AnotherBusinessFault"
+               faultName="client:anotherBusinessFault"
+               faultVariable="gBusinessFaultVariable"/>
+      </sequence>
+    </catch>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in SyncFaultHandling.wsdl) -->
+    <receive name="receiveInput" partnerLink="syncfaulthandling_client" portType="client:SyncFaultHandling" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_InputIntoSummary">
+      <copy>
+        <from expression="concat('Fault happened: ', bpws:getVariableData('inputVariable','payload','/client:process/client:input'))"/>
+        <to variable="gBusinessFaultVariable" part="payload"
+            query="/client:faultElement/client:summary"/>
+      </copy>
+    </assign>
+    <throw name="Throw_BusinessFault" faultName="client:businessFault"/>
+    <reply name="replyOutput" partnerLink="syncfaulthandling_client" portType="client:SyncFaultHandling" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

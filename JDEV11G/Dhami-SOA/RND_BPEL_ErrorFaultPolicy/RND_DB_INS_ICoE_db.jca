@@ -1,0 +1,14 @@
+<adapter-config name="RND_DB_INS_ICoE" adapter="Database Adapter" wsdlLocation="RND_DB_INS_ICoE.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/ETH/AppDB" UIConnectionName="DEV_ICoE" adapterRef=""/>
+  <endpoint-interaction portType="RND_DB_INS_ICoE_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="RND_DB_INS_ICoE.ErrorTable"/>
+      <property name="DmlType" value="insert"/>
+      <property name="MappingsMetaDataURL" value="RND_DB_INS_ICoE-or-mappings.xml"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

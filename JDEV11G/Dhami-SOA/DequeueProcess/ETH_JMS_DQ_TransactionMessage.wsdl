@@ -1,0 +1,21 @@
+<?binding.jca ETH_JMS_DQ_TransactionMessage_jms.jca?>
+<wsdl:definitions name="ETH_JMS_DQ_TransactionMessage" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/DequeueProcess/ETH_JMS_DQ_TransactionMessage" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Dhami-SOA/DequeueProcess/ETH_JMS_DQ_TransactionMessage" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="Consume_ETHMessage_plt">
+        <plt:role name="Consume_ETHMessage_role">
+            <plt:portType name="tns:Consume_ETHMessage_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns="http://www.w3.org/2001/XMLSchema">
+            <element name="opaqueElement" type="base64Binary"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Consume_ETHMessage_msg">
+        <wsdl:part name="opaque" element="opaque:opaqueElement"/>
+    </wsdl:message>
+    <wsdl:portType name="Consume_ETHMessage_ptt">
+        <wsdl:operation name="Consume_ETHMessage">
+            <wsdl:input message="tns:Consume_ETHMessage_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

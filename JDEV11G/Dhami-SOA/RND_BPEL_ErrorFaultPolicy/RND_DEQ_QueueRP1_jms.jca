@@ -1,0 +1,12 @@
+<adapter-config name="RND_DEQ_QueueRP1" adapter="Jms Adapter" wsdlLocation="RND_DEQ_QueueRP1.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/wls/jms/eth/queue" UIConnectionName="Dev-SOA2" UIJmsProvider="WLSJMS" adapterRef=""/>
+  <endpoint-activation portType="Consume_RP1Queue_ptt" operation="Consume_RP1Queue">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="DestinationName" value="jms/eth/queue/rp1"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="PayloadType" value="TextMessage"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

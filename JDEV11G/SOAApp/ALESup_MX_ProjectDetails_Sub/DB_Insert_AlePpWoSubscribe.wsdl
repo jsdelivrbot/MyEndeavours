@@ -1,0 +1,22 @@
+<?binding.jca DB_Insert_AlePpWoSubscribe_db.jca?>
+<wsdl:definitions name="DB_Insert_AlePpWoSubscribe" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/BPO/ALESup_MX_ProjectDetails_Sub/DB_Insert_AlePpWoSubscribe" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/BPO/ALESup_MX_ProjectDetails_Sub/DB_Insert_AlePpWoSubscribe" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/DB_Insert_AlePpWoSubscribe">
+    <plt:partnerLinkType name="DB_Insert_AlePpWoSubscribe_plt">
+        <plt:role name="DB_Insert_AlePpWoSubscribe_role">
+            <plt:portType name="tns:DB_Insert_AlePpWoSubscribe_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/DB_Insert_AlePpWoSubscribe" schemaLocation="xsd/DB_Insert_AlePpWoSubscribe_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="AleppwosubscribeCollection_msg">
+        <wsdl:part name="AleppwosubscribeCollection" element="top:AleppwosubscribeCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="DB_Insert_AlePpWoSubscribe_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:AleppwosubscribeCollection_msg"/>
+            <wsdl:output message="tns:AleppwosubscribeCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

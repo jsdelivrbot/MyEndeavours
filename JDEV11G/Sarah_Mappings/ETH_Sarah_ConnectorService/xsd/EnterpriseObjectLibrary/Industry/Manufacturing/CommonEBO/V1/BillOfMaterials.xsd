@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 1.03 **
+** Date: Jun 3, 2009 **
+ 
+ Copyright (c) 2007, 2009, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\CommonEBO\V1\\BillOfMaterials.xsd 
+ 
+-->
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO BillOfMaterials EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:corebillofmaterialscust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.03.00">
+	<!-- ====================================================================== -->
+	<!-- ==============  Imports and Includes   =============================== -->
+	<!-- ====================================================================== -->
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/Meta.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CommonComponents.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/CodeLists.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../Common/V2/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/CommonEBO/V1" schemaLocation="../../Custom/CommonEBO/V1/CustomBillOfMaterials.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+	<!-- ====================================================================== -->
+	<!-- ==============  BillOfMaterials Components ================ -->
+	<!-- ====================================================================== -->
+	<xsd:element name="BillOfMaterials" type="BillOfMaterialsType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Bill of Materials (BOM) EBO is used for describing the composition of different types Bill of Materials such as Engineering BOM, Manufacturing BOM, Planning BOM etc. It provides a single level of item composition - thus, in a multi-level Bill of Materials, this EBO gives only the immediate children items but not the composition of the children items. If a child item is a sub-assembly, it will have its own BOM which will provide its composition.
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:ItemStructureType">
+				<xsd:sequence>
+					<xsd:element name="EngineeringIndicator" type="corecom:IndicatorType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Indicates whether the BOM is an engineering BOM. By default, the BOM is deemed to be a Manufacturing BOM unless this indicator is turned on
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:ItemStructureSpecificationGroup" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the group of user defined attributes for the BOM
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:ItemStructureAttachment" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Binary, URI or other attachments that apply to the BOM
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:ProjectTaskReference" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Refers to the project and task for usage of the BOM for Project Manufacturing
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:EngineeringChangeOrderReference" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Refers to the change order that created / modified this BOM
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:OriginalBillOfMaterialsReference" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the BOM whose definition (current / future and current) has been copied to create this BOM. Once copied, the definition of the BOM can be changed independent of the BOM that was used as the source
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="BillOfMaterialsComponentItem" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the component items that make up the Bill of Materials
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="BillOfMaterialsComponentItemExclusion" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Component item exclusions
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="BillOfMaterialsSpecificationDefaultValueOverride" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Component item Specification value override
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="BillOfMaterialsSpecificationValueExclusion" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Component item specification value exclusion
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItem" type="BillOfMaterialsComponentItemType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Identifies the component items that make up the Bill of Materials
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:ComponentItemType">
+				<xsd:sequence>
+					<xsd:element name="YieldFactor" type="corecom:RateType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Factor used to multiply component quantity with to obtain required component quantity
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="PlanningQuantityMultiplier" type="corecom:RateType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Factor used to multiply component quantity with to obtain planning quantity
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ChangeTypeCode" type="corecom:CodeType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Indicates the change type (Add, Change, or Disable) for the component item on the change order
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="OperationSequence" type="corecom:PositiveIntegerType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Refers to the operation sequence number of the component item. This is used for routing operations
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="EffectivityCode" type="corecom:CodeType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Indicates the effectivity of the component item e.g., Current, Future etc.
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Name" type="corecom:NameType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the name of the association of the component item to the parent. 
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="TypeCode" type="corecom:CodeType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the type of association of the component item to the parent. Sample values are product and class
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DefaultIndicator" type="corecom:IndicatorType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+This flag represents the default product among the set of products for the parent if the domain type is of type 'Class'.
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="MaximumQuantity" type="corecom:QuantityType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Maximum cardinality of the component  in context of the parent
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="MinimumQuantity" type="corecom:QuantityType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Minimum cardinality of the component  in context of the parent
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DefaultQuantity" type="corecom:QuantityType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Default cardinality of the component  in context of the parent
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DisplaySequenceNumber" type="corecom:PositiveIntegerType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Represents the sequence of the children in context of the parent. 
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="PriceAdjustmentTypeCode" type="corecom:CodeType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Adjustment type when a component item is added to a parent. Sample values: Override, Markdown 
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="PriceAdjustmentQuantity" type="corecom:QuantityType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+The value of adjustment.
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:OverrideComponentItemIdentification" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+When an BOM is based on another BOM (say of the same item in another organization), some of the attributes of a component may be different from those of the component from the referenced BOM. This refers to the component item within the same BOM which has the overriding attributes
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:ComponentItemSpecificationGroup" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the group of user defined attributes for the component item
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:EngineeringChangeOrderReference" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Refers to the change order applicable to this component
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:ClassificationReference" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the classification scheme associated to the component item if the TypeCode is Class in context of the parent.
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="BillOfMaterialsSubstituteComponentItem" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+References the substitute items for the component item
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="ComponentItemProcessingInstruction" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the sequenced comments and instructions applicable to a component item
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemType" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemExclusion" type="BillOfMaterialsComponentItemExclusionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Component item exclusions
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemExclusionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification for the component item exclusions
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemPath" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Path in the bill of materials for the component item exclusions
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemExclusionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemLevel" type="BillOfMaterialsComponentItemLevelType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The level in the path for the component item 
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemLevelType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification for the level 
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="SequenceNumber" type="corecom:NumericType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Sequence number identifying the level of the component item in the path
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:BillOfMaterialsComponentItemReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+The item reference in the level
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemLevelType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemPath" type="BillOfMaterialsComponentItemPathType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Path in the bill of materials for the component item 
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemPathType">
+		<xsd:sequence>
+			<xsd:element ref="BillOfMaterialsComponentItemLevel" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The level in the path for the component item 
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemPathType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemSpecificationDefaultValue" type="BillOfMaterialsComponentItemSpecificationDefaultValueType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Specification value overrides
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemSpecificationDefaultValueType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element name="DataTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Data type of the value being expressed
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Value" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Value
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ClassificationSpecificationIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification of Specification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemSpecificationDefaultValueType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemSpecificationGroupExclusion" type="BillOfMaterialsComponentItemSpecificationGroupExclusionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Exclusions under component item specification group
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemSpecificationGroupExclusionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element ref="corecom:ClassificationSpecificationGroupReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Classification and Specification group reference
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The component item specification value exclusion
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemSpecificationGroupExclusionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemSpecificationGroupOverride" type="BillOfMaterialsComponentItemSpecificationGroupOverrideType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Overrides under component item specification group
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemSpecificationGroupOverrideType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element ref="corecom:ClassificationSpecificationGroupReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Classification and Specification group reference
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+The component item specification overriden value
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemSpecificationGroupOverrideType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValue" type="BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValueType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The component item specification overriden value
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValueType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element name="DataTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Data type of the value being expressed
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Value" type="corecom:TextType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Value
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:SpecificationIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of a Specification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemSpecificationGroupSpecificationDefaultValueType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusion" type="BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+The component item specification value exclusion
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element name="DataTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Data type of the value being expressed
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:SpecificationIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identification of a Specification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsExcludedSpecificationGroupSpecificationValue" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemSpecificationGroupSpecificationValueExclusionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsComponentItemSpecificationValueExclusion" type="BillOfMaterialsComponentItemSpecificationValueExclusionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Specification value exclusions
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsComponentItemSpecificationValueExclusionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element name="DataTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Data type of the value being expressed
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:ClassificationSpecificationIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification of Specification
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsExcludedSpecificationValue" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsComponentItemSpecificationValueExclusionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsExcludedSpecificationGroupSpecificationValue" type="BillOfMaterialsExcludedSpecificationGroupSpecificationValueType"/>
+	<xsd:complexType name="BillOfMaterialsExcludedSpecificationGroupSpecificationValueType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element ref="corecom:SpecificationValueSetLineReference" minOccurs="0"/>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsExcludedSpecificationGroupSpecificationValueType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsExcludedSpecificationValue" type="BillOfMaterialsExcludedSpecificationValueType"/>
+	<xsd:complexType name="BillOfMaterialsExcludedSpecificationValueType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0"/>
+			<xsd:element ref="corecom:SpecificationValueSetLineReference" minOccurs="0"/>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsExcludedSpecificationValueType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsSpecificationDefaultValueOverride" type="BillOfMaterialsSpecificationDefaultValueOverrideType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Component item Specification value override
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsSpecificationDefaultValueOverrideType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification for the component item specification value override
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemPath" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Path in the bill of materials for the component item 
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemSpecificationGroupOverride" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Overrides under component item specification group
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemSpecificationDefaultValue" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specification value overrides
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsSpecificationDefaultValueOverrideType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsSpecificationValueExclusion" type="BillOfMaterialsSpecificationValueExclusionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Component item specification value exclusion
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsSpecificationValueExclusionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Identification for the component item specification value exclusions
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemPath" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Path in the bill of materials for the component item 
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemSpecificationGroupExclusion" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Exclusions under component item specification group
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="BillOfMaterialsComponentItemSpecificationValueExclusion" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Specification value exclusions
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsSpecificationValueExclusionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="BillOfMaterialsSubstituteComponentItem" type="BillOfMaterialsSubstituteComponentItemType">
+		<xsd:annotation>
+			<xsd:documentation> 
+References the substitute items for the component item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BillOfMaterialsSubstituteComponentItemType">
+		<xsd:complexContent>
+			<xsd:extension base="corecom:SubstituteComponentItemType">
+				<xsd:sequence>
+					<xsd:element name="ChangeTypeCode" type="corecom:CodeType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Type to indicate add or delete on an engineering change order
+                                </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:OverrideComponentItemIdentification" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+When an BOM is based on another BOM (say of the same item in another organization), some of the attributes of a component substitute may be different from those of the corresponding component substitute from the referenced BOM. This refers to the component item within the same BOM which has the overriding attributes for the component substitute
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:ComponentItemSpecificationGroup" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Identifies the group of user defined attributes for the substitute component item
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="corecom:EngineeringChangeOrderReference" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation> 
+Refers to the change order applicable to this substitute component
+                               </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Custom" type="corebillofmaterialscust:CustomBillOfMaterialsSubstituteComponentItemType" minOccurs="0"/>
+				</xsd:sequence>
+				<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="ComponentItemProcessingInstruction" type="ComponentItemProcessingInstructionType">
+		<xsd:annotation>
+			<xsd:documentation> 
+Identifies the sequenced comments and instructions applicable to a component item
+                                </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ComponentItemProcessingInstructionType">
+		<xsd:sequence>
+			<xsd:element ref="corecom:Identification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Unique identifier for the processing instruction
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ChangeTypeCode" type="corecom:CodeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Type to indicate add or delete on an engineering change order
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="QuantityIndicator" type="corecom:IndicatorType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Indicates whether the processing instruction applies to the quantity on the parent component item
+                                </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:Note" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation> 
+Note for the processing instruction
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:OverrideComponentItemIdentification" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+When an BOM is based on another BOM (say of the same item in another organization), some of the attributes of a component processing instruction may be different from those of the corresponding component processing instruction from the referenced BOM. This refers to the component item within the same BOM which has the overriding attributes for the component processing instruction
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="corecom:EngineeringChangeOrderReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation> 
+Refers to the change order applicable to this processing instruction
+                               </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Custom" type="corebillofmaterialscust:CustomComponentItemProcessingInstructionType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+	</xsd:complexType>
+	<xsd:element name="CurrentBillOfMaterials" type="BillOfMaterialsType"/>
+	<xsd:element name="RevisedBillOfMaterials" type="BillOfMaterialsType"/>
+</xsd:schema>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="TestBPELProcess" targetNamespace="http://xmlns.oracle.com/EventProducer/EventProducer/TestBPELProcess" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/EventProducer/EventProducer/TestBPELProcess" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/EventProducer/EventProducer/PublishEvent" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ns2="http://schema.emerson.com/ETH/ErrorData" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="testbpelprocess_client" partnerLinkType="client:TestBPELProcess" myRole="TestBPELProcessProvider"/>
+    <partnerLink name="PublishEvent.PublishEvent" partnerLinkType="ns1:PublishEvent.PublishEvent" partnerRole="execute_ptt"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:TestBPELProcessRequestMessage"/>
+    <variable name="Invoke1_execute_InputVariable" messageType="ns1:requestMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq0">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in TestBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="testbpelprocess_client" portType="client:TestBPELProcess" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <assign name="Assign1" id="BpAss0">
+      <copy>
+        <from expression="string('EMR240')"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:SENDER_ID"/>
+      </copy>
+      <copy>
+        <from expression="string('20034')"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:MASTER_RECORD_ID"/>
+      </copy>
+      <copy>
+        <from expression="string('17')"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:TRANSACTION_RECORD_ID"/>
+      </copy>
+      <copy>
+        <from expression="string('200000:12')"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:DOCUMENT_KEY"/>
+      </copy>
+      <copy>
+        <from expression="string('12')"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:ERROR_NUMBER"/>
+      </copy>
+      <copy>
+        <from expression="string(null)"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:ERROR_DESCRIPTION"/>
+      </copy>
+      <copy>
+        <from expression="string(null)"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:ERROR_EXCEPTIONS"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCompositeName()"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:COMPOSITE_NAME"/>
+      </copy>
+      <copy>
+        <from expression="ora:getComponentName()"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:COMPONENT_NAME"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCompositeInstanceId()"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:COMPOSITE_INSTANCE_ID"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCurrentDateTime()"/>
+        <to variable="Invoke1_execute_InputVariable" part="ErrorData" query="/ns2:ETH_ErrorData/ns2:ERRORDATETIME"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke1" inputVariable="Invoke1_execute_InputVariable" partnerLink="PublishEvent.PublishEvent" portType="ns1:execute_ptt" operation="execute" bpelx:invokeAsDetail="no" id="BpInv0"/>
+  </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Apr 11 18:54:59 GMT+05:30 2011
+  Author:  PMehra
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

@@ -1,0 +1,14 @@
+<adapter-config name="Call_Procedure" adapter="Database Adapter" wsdlLocation="Call_Procedure.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/ETH/DB/NXAppDB" UIConnectionName="DEV_ETHAPP_DB" adapterRef=""/>
+  <endpoint-interaction portType="Call_Procedure_ptt" operation="Call_Procedure">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_CUSTOM_SCHEMA"/>
+      <property name="PackageName" value="BPEL_PKG"/>
+      <property name="ProcedureName" value="HELLOWORLD_PRC"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

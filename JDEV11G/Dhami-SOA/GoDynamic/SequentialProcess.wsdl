@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions
+     name="SequentialProcess"
+     targetNamespace="http://xmlns.oracle.com/AppsValidateEmail/SequentialService/SequentialProcess"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://xmlns.oracle.com/idm/idx"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/AppsValidateEmail/SequentialService/SequentialProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <documentation>
+        <abstractWSDL>http://localhost:8888/soa-infra/services/default/SequentialService!1.0/SequentialProcess.wsdl</abstractWSDL>
+    </documentation>
+    <types>
+        <!--schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://xmlns.oracle.com/idm/idx"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/AppsValidateEmail/SequentialService/SequentialProcess">
+            <import namespace="http://xmlns.oracle.com/AppsValidateEmail/SequentialService/SequentialProcess"
+                 schemaLocation="http://localhost:8888/soa-infra/services/default/SequentialService!1.0*2008-06-12_13-40-38_658/client?XSD=xsd/SequentialProcess.xsd"/>
+        </schema-->
+
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://xmlns.oracle.com/idm/idx"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/AppsValidateEmail/SequentialService/SequentialProcess">
+            <xsd:import namespace="http://xmlns.oracle.com/idm/idx" schemaLocation="xsd/IDxCanonical.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="SequentialProcessResponseMessage">
+        <part name="payload" type="ns1:ServiceResponse"/>
+    </message>
+    <message name="SequentialProcessRequestMessage">
+        <part name="payload" type="ns1:ServiceRequest"/>
+
+    </message>
+    <portType name="SequentialProcessCallback">
+        <operation name="onResult">
+            <input message="client:SequentialProcessResponseMessage"/>
+        </operation>
+    </portType>
+    <portType name="SequentialProcess">
+        <operation name="initiate">
+            <input message="client:SequentialProcessRequestMessage"/>
+
+        </operation>
+    </portType>
+    <binding name="SequentialProcessCallbackBinding" type="client:SequentialProcessCallback">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="onResult">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" soapAction="onResult"/>
+            <input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/AppsValidateEmail/SequentialService/SequentialProcess"/>
+            </input>
+
+        </operation>
+    </binding>
+    <binding name="SequentialProcessBinding" type="client:SequentialProcess">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="initiate">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" soapAction="initiate"/>
+            <input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/AppsValidateEmail/SequentialService/SequentialProcess"/>
+            </input>
+
+        </operation>
+    </binding>
+    <service name="client">
+        <port name="SequentialProcess_pt" binding="client:SequentialProcessBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://localhost:8888/soa-infra/services/default/SequentialService!1.0*2008-06-12_13-40-38_658/client"/>
+        </port>
+    </service>
+    <plnk:partnerLinkType name="SequentialProcess">
+        <plnk:role name="SequentialProcessProvider">
+
+            <plnk:portType name="client:SequentialProcess"/>
+        </plnk:role>
+        <plnk:role name="SequentialProcessRequester">
+            <plnk:portType name="client:SequentialProcessCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

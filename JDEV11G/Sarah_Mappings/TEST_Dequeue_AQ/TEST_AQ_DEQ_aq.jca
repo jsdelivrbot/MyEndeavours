@@ -1,0 +1,12 @@
+<adapter-config name="TEST_AQ_DEQ" adapter="AQ Adapter" wsdlLocation="TEST_AQ_DEQ.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/ETH/ETH_APP" UIConnectionName="SOA2_ETH_AppDB"/>
+  <endpoint-activation portType="Dequeue_ptt" operation="Dequeue">
+    <activation-spec className="oracle.tip.adapter.aq.inbound.AQDequeueActivationSpec">
+      <property name="Consumer" value="TEST"/>
+      <property name="QueueName" value="ETH_DEAD_MESSAGE"/>
+      <property name="DatabaseSchema" value="ETH_CUSTOM_SCHEMA"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

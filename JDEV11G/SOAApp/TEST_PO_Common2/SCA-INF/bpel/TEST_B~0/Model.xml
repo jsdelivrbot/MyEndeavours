@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="TEST_BPEL_PO_Common2" targetNamespace="http://xmlns.oracle.com/SOAApp/TEST_PO_Common2/TEST_BPEL_PO_Common2" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/SOAApp/TEST_PO_Common2/TEST_BPEL_PO_Common2" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns1="http://schema.emerson.com/ETH/ETH_ProcessPurchaseOrder_CommonServices_Interface" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" id="BpPrc0">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="test_bpel_po_common2_client" partnerLinkType="ns1:ETH_ProcessPurchaseOrder_CommonServices_Interface" myRole="ETH_ProcessPurchaseOrder_CommonServices_InterfaceProvider" partnerRole="ETH_ProcessPurchaseOrder_CommonServices_InterfaceRequester"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable" messageType="ns1:ETH_ProcessPurchaseOrder_CommonServices_InterfaceRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable" messageType="ns1:ETH_ProcessPurchaseOrder_CommonServices_InterfaceResponseMessage"/>
+    </variables>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main" id="BpSeq0">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in TEST_BPEL_PO_Common2.wsdl) -->
+        <receive name="receiveInput" partnerLink="test_bpel_po_common2_client" portType="ns1:ETH_ProcessPurchaseOrder_CommonServices_Interface" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <invoke name="callbackClient" partnerLink="test_bpel_po_common2_client" portType="ns1:ETH_ProcessPurchaseOrder_CommonServices_InterfaceCallback" operation="processResponse" inputVariable="outputVariable" id="BpInv0"/>
+    </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Feb 27 00:54:58 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

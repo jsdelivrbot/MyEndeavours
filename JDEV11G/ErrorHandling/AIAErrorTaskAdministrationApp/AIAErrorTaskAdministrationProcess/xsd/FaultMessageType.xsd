@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://oracle.abs.eh.service.v1/"
+            targetNamespace="http://oracle.abs.eh.service.v1/"
+            elementFormDefault="qualified">
+    <xsd:complexType name="FaultMessageType">
+        <xsd:sequence>
+            <xsd:element name="EBMID" type="xsd:string" nillable="true"/>
+            <xsd:element name="EBMName" type="xsd:string" nillable="true"/>
+            <xsd:element name="EBOName" type="xsd:string" nillable="true"/>
+            <xsd:element name="VerbCode" type="xsd:string"
+                         nillable="true"/>
+            <xsd:element name="BusinessScopeReferenceID" type="xsd:string" nillable="true"/>
+            <xsd:element name="BusinessScopeReferenceInstanceID"
+                         type="xsd:string" nillable="true"/>
+            <xsd:element name="EnterpriseServiceName" type="xsd:string" nillable="true"/>
+            <xsd:element name="EnterpriseServiceOperationName" type="xsd:string" nillable="true"/>
+            <xsd:element name="SenderReferenceID" type="xsd:string" nillable="true"/>
+            <xsd:element name="SenderMessageID" type="xsd:string" nillable="true"/>
+            <xsd:element name="SenderReferenceTransactionCode" type="xsd:string" nillable="true"/>
+            <xsd:element name="SenderObjectIdentificationID" type="xsd:string" nillable="true"/>
+            <xsd:element name="ContextID" type="xsd:string" nillable="true"/>
+            <xsd:element name="EBOID" type="xsd:string" nillable="true"/>
+            <xsd:element name="ReportingDateTime" type="xsd:string" nillable="true"/>
+            <xsd:element name="CorrectiveAction" type="xsd:string" nillable="true"/>
+            <xsd:element name="FaultMessageCode" type="xsd:string" nillable="true"/>
+            <xsd:element name="FaultMessageText" type="xsd:string" nillable="true"/>
+            <xsd:element name="Severity" type="xsd:string" nillable="true"/>
+            <xsd:element name="Stack" type="xsd:string" nillable="true"/>
+            <xsd:element name="FaultingServiceID" type="xsd:string" nillable="true"/>
+            <xsd:element name="FaultingServiceImplementationCode" type="xsd:string" nillable="true"/>
+            <xsd:element name="FaultingServiceInstanceID" type="xsd:string" nillable="true"/>
+            <!--B2B Specifc Elements -->
+            <xsd:element name="B2BMessageID" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BDocumentTypeCode" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BDocumentTypeVersion" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BDocumentStandardType" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BDocumentStandardVersion" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BSender" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BReceiver" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BGatewayName" type="xsd:string" nillable="true"/>
+            <xsd:element name="B2BGatewayVersion" type="xsd:string" nillable="true"/>
+            </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="FaultMessage" type="FaultMessageType"/>
+</xsd:schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:oagis="http://www.openapplications.org/oagis/9" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.00">
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../V1/DataTypes.xsd"/>
+	<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../V1/CodeLists.xsd"/>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../OAGIS90/ProcessPurchaseOrder.xsd"/>
+	<xsd:complexType name="CustomEBMHeaderType">
+		<xsd:sequence>
+			<xsd:element ref="oagis:ApplicationArea"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CustomMessageProcessingInstructionType"/>
+	<xsd:complexType name="CustomSenderType"/>
+	<xsd:complexType name="CustomEBMTrackingType"/>
+	<xsd:complexType name="CustomTargetType"/>
+	<xsd:complexType name="CustomBusinessScopeType"/>
+	<xsd:complexType name="CustomIntermediateMessageHopType"/>
+	<xsd:complexType name="CustomB2BProfileType"/>
+	<xsd:complexType name="CustomSenderTradingPartnerType"/>
+	<xsd:complexType name="CustomReceiverTradingPartnerType"/>
+	<xsd:complexType name="CustomB2BMHeaderType"/>
+	<xsd:complexType name="CustomB2BDocumentTypeType"/>
+	<xsd:complexType name="CustomB2BMReferenceType"/>
+</xsd:schema>

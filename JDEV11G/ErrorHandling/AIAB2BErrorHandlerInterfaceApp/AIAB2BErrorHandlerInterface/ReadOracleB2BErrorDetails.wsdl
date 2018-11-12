@@ -1,0 +1,30 @@
+<?binding.jca ReadOracleB2BErrorDetails_db.jca?>
+<wsdl:definitions name="ReadOracleB2BErrorDetails"
+targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/AIAB2BIntegrationApplication/AIAReadB2BErrorDetails/ReadOracleB2BErrorDetails" 
+xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/AIAB2BIntegrationApplication/AIAReadB2BErrorDetails/ReadOracleB2BErrorDetails" 
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" 
+xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ReadOracleB2BErrorDetails">
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ReadOracleB2BErrorDetails" schemaLocation="xsd/ReadOracleB2BErrorDetails_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ReadOracleB2BErrorDetailsSelect_inputParameters">
+        <wsdl:part name="ReadOracleB2BErrorDetailsSelect_inputParameters" element="top:ReadOracleB2BErrorDetailsSelect_B2B_MSGIDInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="B2BBusinessMessageCollection_msg">
+        <wsdl:part name="B2BBusinessMessageCollection" element="top:B2BBusinessMessageCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="ReadOracleB2BErrorDetails_ptt">
+        <wsdl:operation name="readOracleB2BErrorDetails">
+            <wsdl:input message="tns:ReadOracleB2BErrorDetailsSelect_inputParameters"/>
+            <wsdl:output message="tns:B2BBusinessMessageCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <plt:partnerLinkType name="ReadOracleB2BErrorDetails_plt">
+        <plt:role name="ReadOracleB2BErrorDetails_role">
+            <plt:portType name="tns:ReadOracleB2BErrorDetails_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+</wsdl:definitions>

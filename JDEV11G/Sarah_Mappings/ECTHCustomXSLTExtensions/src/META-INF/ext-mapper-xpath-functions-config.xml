@@ -1,0 +1,296 @@
+<soa-xpath-functions version="11.1.1" xmlns="http://xmlns.oracle.com/soa/config/xpath" xmlns:ecthCustomXSLT="http://www.oracle.com/XSL/Transform/java/com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension"> 
+  <function name="ecthCustomXSLT:getISODateFromEDI">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="editDate" type="string"/>
+      <param name="ediTime" type="string"/>
+      <param name="ediTimezone" type="string"/>
+      <param name="defaultResponse" type="string"/>
+    </params>
+    <desc><![CDATA[/*
+   * This function will get EDI Date(CCYYMMDD) and Time in format - 20110401 and (150723 or 1507) with time zone +05:30
+   * And will return back just the Date in ISO format - 2011-04-01T15:07:00.0000+05:30
+   * This function will not handle Date in YYMMDD. Caller can concatenate the CC with the ediDate before calling the method.
+   * If only Date with NO time is required back, i.e. 2011-04-01. Then pass "NO_TIME" in ediTime parameter
+   *
+   * @param ediDate - format CCYYMMDD
+   * @param ediTime - format HHmmss OR HHmm
+   * @param timezone - format (+/-)HH:mm
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return ISO DateTime in format CCYY-MM-DDTHH:mm:ss.SSSS+TT:TT
+   */]]></desc>
+    <detail>
+      <![CDATA[/*
+   * This function will get EDI Date(CCYYMMDD) and Time in format - 20110401 and (150723 or 1507) with time zone +05:30
+   * And will return back just the Date in ISO format - 2011-04-01T15:07:00.0000+05:30
+   * This function will not handle Date in YYMMDD. Caller can concatenate the CC with the ediDate before calling the method.
+   * If only Date with NO time is required back, i.e. 2011-04-01. Then pass "NO_TIME" in ediTime parameter
+   *
+   * @param ediDate - format CCYYMMDD
+   * @param ediTime - format HHmmss OR HHmm
+   * @param timezone - format (+/-)HH:mm
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return ISO DateTime in format CCYY-MM-DDTHH:mm:ss.SSSS+TT:TT
+   */]]>
+    </detail>
+  </function>
+  <function name="ecthCustomXSLT:getEDIDate">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="canonicalDateTime" type="string"/>
+      <param name="defaultResponse" type="string"/>
+    </params>
+    <desc><![CDATA[  /*
+   * This function will get canonical Date Time in format - 2011-04-01T09:39:44.0000+00:00
+   * And will return back just the Date in format - 20110401
+   * 
+   * @param canonicalDateTime - format CCYY-MM-DDTHH:mm:ss.SSSS+TT:TT
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return EDI Date in CCYYMMDD
+   */]]></desc>
+    <detail>
+      <![CDATA[  /*
+   * This function will get canonical Date Time in format - 2011-04-01T09:39:44.0000+00:00
+   * And will return back just the Date in format - 20110401
+   * 
+   * @param canonicalDateTime - format CCYY-MM-DDTHH:mm:ss.SSSS+TT:TT
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return EDI Date in CCYYMMDD
+   */]]>
+    </detail>
+  </function>
+  <function name="ecthCustomXSLT:split">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="inputString" type="string"/>
+      <param name="splitCharacter" type="string"/>
+      <param name="returnIndex" type="number"/>
+      <param name="defaultResponse" type="string"/>
+    </params>
+    <desc><![CDATA[ /*
+   * This Function will split the inputString passed using the splitCharacter and will return the [returnIndex-1]th value.
+   * Value of returnIndex passed should be from 1 to inputstring.length
+   *
+   * @param inputString - Input String
+   * @param splitCharacter - a string on base of that <code>inputString</code> will be split.
+   * @param returnIndex - number starting from 1 upto total length of <code>inputString</code>
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return string containing [returnIndex-1]th split part
+   */]]></desc>
+    <detail>
+      <![CDATA[ /*
+   * This Function will split the inputString passed using the splitCharacter and will return the [returnIndex-1]th value.
+   * Value of returnIndex passed should be from 1 to inputstring.length
+   *
+   * @param inputString - Input String
+   * @param splitCharacter - a string on base of that <code>inputString</code> will be split.
+   * @param returnIndex - number starting from 1 upto total length of <code>inputString</code>
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return string containing [returnIndex-1]th split part
+   */]]>
+    </detail>
+  </function>
+   <function name="ecthCustomXSLT:ecthParameterLookup">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="dataSourceJNDI" type="string"/>
+      <param name="jdbcURL" type="string"/>
+      <param name="useDataSourceFlag" type="string"/>
+      <param name="soa_caller_name" type="string"/>
+      <param name="soa_instance_id" type="string"/>
+      <param name="searchType" type="string"/>
+      <param name="lookupValue" type="string"/>
+    </params>
+    <desc><![CDATA[  /*
+   * This Function will be used to call the ECTH DB-Lookup (ECTH_GET_PARAMETERVALUES_PKG.ECTH_GET_PARAMETERVALUES_PRC) Procedure.
+   * 
+   * @param dataSourceJNDI - This will be the JNDI for the Datasource of database.
+   * @param jdbcURL - This will be the JDBC URL in format - jdbc:oracle:thin:@<DB_HOST_NAME>:<DB_PORT_NUMBER>:<SID> <Username> <Password>
+   * @useDataSource - This is a string flag. if 'true' it will use dataSource to get Connection else it will use the JDBCUrl to get the Connection.
+   * @param splitCharacter - a string on base of that <code>inputString</code> will be split.
+   * @param returnIndex - number starting from 1 upto total length of <code>inputString</code>
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return string containing [returnIndex-1]th split part
+   */]]></desc>
+    <detail>
+      <![CDATA[  /*
+   * This Function will be used to call the ECTH DB-Lookup (ECTH_GET_PARAMETERVALUES_PKG.ECTH_GET_PARAMETERVALUES_PRC) Procedure.
+   * 
+   * @param dataSourceJNDI - This will be the JNDI for the Datasource of database.
+   * @param jdbcURL - This will be the JDBC URL in format - jdbc:oracle:thin:@<DB_HOST_NAME>:<DB_PORT_NUMBER>:<SID> <Username> <Password>
+   * @useDataSource - This is a string flag. if 'true' it will use dataSource to get Connection else it will use the JDBCUrl to get the Connection.
+   * @param splitCharacter - a string on base of that <code>inputString</code> will be split.
+   * @param returnIndex - number starting from 1 upto total length of <code>inputString</code>
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return string containing [returnIndex-1]th split part
+   */]]>
+    </detail>
+  </function>
+  <function name="ecthCustomXSLT:lengthCheck">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="number"/>
+    <params>
+      <param name="input" type="string"/>
+      <param name="minLength" type="number"/>
+      <param name="maxlength" type="number"/>
+      <param name="defaultResponse" type="number"/>
+    </params>
+    <desc><![CDATA[  /*
+   * This function is used to check the length of <code>input</code>.
+   * It will return ZERO, if the length of input is between or equal any of minLength and maxLength.
+   * It will return the difference in negative if length is less than minLength.
+   * It will return the difference in positive if length is more than maxLength.
+   * 
+   * @param input - String whose length has to be checked
+   * @param minLength - Integer containing below threshold
+   * @param maxLength - Integer containing above threshold
+   * @param defaultResponse - Integer Response which will be returned if some error occurs.
+   * 
+   * @return Integer containing 0(ZERO) or a positive/negative number
+   */]]></desc>
+    <detail>
+      <![CDATA[  /*
+   * This function is used to check the length of <code>input</code>.
+   * It will return ZERO, if the length of input is between or equal any of minLength and maxLength.
+   * It will return the difference in negative if length is less than minLength.
+   * It will return the difference in positive if length is more than maxLength.
+   * 
+   * @param input - String whose length has to be checked
+   * @param minLength - Integer containing below threshold
+   * @param maxLength - Integer containing above threshold
+   * @param defaultResponse - Integer Response which will be returned if some error occurs.
+   * 
+   * @return Integer containing 0(ZERO) or a positive/negative number
+   */]]>
+    </detail>
+  </function>
+  <function name="ecthCustomXSLT:formatValue">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="input" type="string"/>
+      <param name="minLength" type="number"/>
+      <param name="maxlength" type="number"/>
+      <param name="strictCheck" type="number"/>
+      <param name="shortValue" type="string"/>
+      <param name="defaultResponse" type="string"/>
+    </params>
+    <desc><![CDATA[  /*
+   * This function is used to evaluate a String value on base of its length abd conditionally return values.
+   * If the inputValue String length falls in-between or equals minLength or maxLength, then inputValue will be returned as it is.
+   * If the inputValu is larger than maxLength then it is trim to (maxLength-1)
+   * If the inputValue is shorter than minLength then shortValue is returned.
+   * If there is any kind of error while processing, then defaultResponse is returned
+   * 
+   * @param inputValue - String to be evaluated
+   * @param minLength - below threshold
+   * @param maxLength - above threshold
+   * @strictCheck - Integer value pass 0(ZERO) or 1(ONE). if strictCheck is ON, i.e. its ONE. shortValue will be returned for below or above threshold case.
+   * @shortValue - Value to be used if string is smaller than minLength
+   * @defaultResponse - String returned incase of an unexpected error.
+   * 
+   * @return String containing final formatted Value.
+   */]]></desc>
+    <detail>
+      <![CDATA[  /*
+   * This function is used to evaluate a String value on base of its length abd conditionally return values.
+   * If the inputValue String length falls in-between or equals minLength or maxLength, then inputValue will be returned as it is.
+   * If the inputValu is larger than maxLength then it is trim to (maxLength-1)
+   * If the inputValue is shorter than minLength then shortValue is returned.
+   * If there is any kind of error while processing, then defaultResponse is returned
+   * 
+   * @param inputValue - String to be evaluated
+   * @param minLength - below threshold
+   * @param maxLength - above threshold
+   * @strictCheck - Integer value pass 0(ZERO) or 1(ONE). if strictCheck is ON, i.e. its ONE. shortValue will be returned for below or above threshold case.
+   * @shortValue - Value to be used if string is smaller than minLength
+   * @defaultResponse - String returned incase of an unexpected error.
+   * 
+   * @return String containing final formatted Value.
+   */]]>
+    </detail>
+  </function>
+  <function name="ecthCustomXSLT:truncate">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="inputValue" type="string"/>
+      <param name="truncateLength" type="number"/>
+      <param name="defaultResponse" type="string"/>
+    </params>
+    <desc><![CDATA[    /*
+   * This function is used to truncate Input Values.
+   * If the inputValue is NULL, then Empty String is returned.
+   * If the inputValue is Empty String, then Empty String is returned.
+   * If truncateValue is ZERO or Negative, then Empty String is returned.
+   * If truncateValue is more than or equal to InputValue actual length, then InputValue is returned as it is.
+   *
+   * @param inputValue - String to be evaluated
+   * @param truncateLength - Index after which String will be truncated. INDEX Starting is from 1.
+   * @defaultResponse - String returned incase of an unexpected error.
+   *
+   * @return String containing final truncated Value.
+   */]]></desc>
+    <detail>
+      <![CDATA[    /*
+   * This function is used to truncate Input Values.
+   * If the inputValue is NULL, then Empty String is returned.
+   * If the inputValue is Empty String, then Empty String is returned.
+   * If truncateValue is ZERO or Negative, then Empty String is returned.
+   * If truncateValue is more than or equal to InputValue actual length, then InputValue is returned as it is.
+   *
+   * @param inputValue - String to be evaluated
+   * @param truncateLength - Index after which String will be truncated. INDEX Starting is from 1.
+   * @defaultResponse - String returned incase of an unexpected error.
+   *
+   * @return String containing final truncated Value.
+   */]]>
+    </detail>
+  </function>
+  <function name="ecthCustomXSLT:formatAmount">
+    <className>com.emerson.ecth.customXSLT.ECTHCustomXSLTExtension</className>
+    <return type="string"/>
+    <params>
+      <param name="inputLongString" type="string"/>
+      <param name="decimalPointString" type="string"/>
+      <param name="sign" type="string"/>
+      <param name="defaultResponse" type="string"/>
+    </params>
+    <desc><![CDATA[  /* This function will get Amount as - number, decimalPoint and Sign.
+   * It will return back the actual amount figure.
+   * For Example - 
+   * Number(420020), decimalPoint(2) and sign(+) will return -> 4200.20
+   * Number(420020), decimalPoint(0) and sign(-) will return -> -420020
+   * Number(420020), decimalPoint(6) and sign(+) will return -> 0.420020
+   * Number(420020), decimalPoint(10) and sign(+) will return -> defaultResponse
+   * Number(4200.20), decimalPoint(2) and sign(+) will return -> defaultResponse
+   * 
+   * @param inputLongString - Input Amount Number
+   * @param decimalPointString - palce (from right end) at where decimal should come.
+   * @param sign - should be either '+' or '-'.
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return the actual amount
+   */]]></desc>
+    <detail>
+      <![CDATA[  /* This function will get Amount as - number, decimalPoint and Sign.
+   * It will return back the actual amount figure.
+   * For Example - 
+   * Number(420020), decimalPoint(2) and sign(+) will return -> 4200.20
+   * Number(420020), decimalPoint(0) and sign(-) will return -> -420020
+   * Number(420020), decimalPoint(6) and sign(+) will return -> 0.420020
+   * Number(420020), decimalPoint(10) and sign(+) will return -> defaultResponse
+   * Number(4200.20), decimalPoint(2) and sign(+) will return -> defaultResponse
+   * 
+   * @param inputLongString - Input Amount Number
+   * @param decimalPointString - palce (from right end) at where decimal should come.
+   * @param sign - should be either '+' or '-'.
+   * @param defaultResponse - any string. If any issue in processing the request, function will return this value.
+   * @return the actual amount
+   */]]>
+    </detail>
+  </function>
+</soa-xpath-functions>

@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+** Oracle Corporation  **
+** AIA Enterprise Object Library **
+** Version: 2.03 **
+** Date: Jun 25, 2009 **
+ 
+ Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved. 
+License information for this file is provided in the file 
+"Oracle AIA EBO License.txt" that is provided with this package.
+ 
+    XML Schema 
+    Name: \EnterpriseObjectsLibrary\Core\EBO\Invoice\V2\InvoiceEBO.xsd 
+ 
+-->
+ 
+<!-- ====================================================================== -->
+<!-- =====      Oracle EBO Invoice EBO Schema Module     ===== -->
+<!-- ====================================================================== -->
+<xsd:schema xmlns:corecom="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:coreinvoicecust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/Invoice/V2" xmlns:corecomcust="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns:corecomEBO="http://xmlns.oracle.com/EnterpriseObjects/Core/CommonEBO/V1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:svcdoc="http://xmlns.oracle.com/Services/Documentation/V1" xmlns="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/Invoice/V2" targetNamespace="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/Invoice/V2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.03.00" > 
+<!-- ====================================================================== -->
+<!-- ==============  Imports and Includes   =============================== -->
+<!-- ====================================================================== -->
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/Meta.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CommonComponents.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/CodeLists.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="../../../Common/V2/DataTypes.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/Invoice/V2" schemaLocation="../../../Custom/EBO/Invoice/V2/CustomInvoiceEBO.xsd"/>
+<xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" schemaLocation="../../../Custom/Common/V2/CustomCommonComponents.xsd"/>
+<!-- ====================================================================== -->
+<!-- ==============  Invoice EBO ====================== -->
+<!-- ====================================================================== -->
+                      <xsd:element name="InvoiceEBO" type="InvoiceEBOType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Details about the invoice. The invoice represents a document that is used in two different contexts to achieve two different objectives. From a Receivables point of view, the invoice is a billing document that is sent to the customer or other inter-unit entities. From a Payables point of view, the invoice represents the document that comes into payable interface table/services from suppliers or other inter-unit entities.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                 <xsd:annotation> 
+                      <xsd:documentation> 
+                           <svcdoc:EBO> 
+                                   <svcdoc:Description> 
+Details about the invoice. The invoice represents a document that is used in two different contexts to achieve two different objectives. From a Receivables point of view, the invoice is a billing document that is sent to the customer or other inter-unit entities. From a Payables point of view, the invoice represents the document that comes into payable interface table/services from suppliers or other inter-unit entities.
+                                   </svcdoc:Description> 
+                                   <svcdoc:Type>EBO</svcdoc:Type> 
+                                   <svcdoc:Industry/> 
+                           </svcdoc:EBO> 
+                      </xsd:documentation> 
+                 </xsd:annotation> 
+                <xsd:complexType name="InvoiceEBOType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Identification.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the invoice
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TotalAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total value of the items billed on the invoice  including taxes or charges, this value does not include the prior balance amount and should be derived from Invoice Lines.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ExtendedAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total value of the items billed on the invoice not including taxes or charges. This is the sum of all the line item Extended Amounts
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PriorBalanceAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates customer's prior balance amount.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="AdjustedIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies if this invoice has been adjusted
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies whether the invoice is regular, credit, rebill, adjustment, regular with adjustment.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="GroupCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Categorization of the invoice (ie. Contract Invoice, sales order invoice, real estate invoice)
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="BillingFrequencyCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies whether the invoice is a recurring bill, an installment bill, or regular bill
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ConsolidationIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies if the invoice is a consolidated invoice header. Consolidated invoice headers have no invoice lines.  The lines can be found in the invoices that make up the consolidated invoice.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="InvoiceDateTime" type="corecom:DateTimeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date printed on invoice, basis of due date calculation.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="LatePaymentChargeApplicableDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date after which a late payment will be charged.  This is equal to the due date plus the grace days defined for the customer.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="AdjustmentAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total adjustment amount appliable during the current billing cycle.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="LastCyclePaymentAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total amount paid during the current billing cycle against prior bills.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="CorrectionAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total invoice correction amount related to cancel/rebill.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="AutomaticPaymentIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if the invoice is to be paid via Auto Pay.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="DueDate" type="corecom:DateType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Date the invoice is Due.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:PaymentTerm"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the payment terms for the Invoice. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Note"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Note about the invoice
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Status"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the the status of the invoice
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:EffectiveTimePeriod"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+For a recurring invoice, identifies the start and end date for recurring billing
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:CreditCard"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the credit card that will be used to pay for the invoice.This is not the actual payment information - it is just information about how the invoice will be paid
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:CurrencyExchange"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Exchange Rate used to convert from the invoice currency indicated in the total amount to the base currency of the set of books to which the invoice accounting entries are posted
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:LegalEntityReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies the entity that is legally responsible for the invoice.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:BillToPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the party to whom the invoice is issued.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:BillFromPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the party that issues the invoice
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:RemitToPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the party to whom the payment is to be remitted
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ProjectReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Project Accounting Project/ Task associated with the invoice.  If a ProjectReference is specified on the Invoice Header, it is assumed to apply to all lines that do not have a ProjectReference specified
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SalespersonPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Sales person or Sales Group responsible for the sale of the goods on the invoice
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ConsolidatedInvoiceReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies the primary invoice that groups multiple invoices that have no lines but only header information. The invoices that are being consolidated will have the ConsolidationIndicator set to "Y" and the ConsolidatedInvoiceReference will have the ID of the primary invoice. If an invoice is not part of a consolidation group, this field will be left blank.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:BusinessUnitReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Refers to the business unit within the context of which the Invoice is defined
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceLine"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Invoice Line
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceTaxTotal"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Total Tax amount for various tax types . This is the sum of all the line Tax Amounts.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceChargeTotal"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Total Charge amount for various charge types . This is the sum of all the line Charge Amounts.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceAllowanceTotal"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Total Allowance amount for various allowance types . This is the sum of all the line Allowance Amounts.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceDeliverToParty"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about who will receive additional copies of the invoice.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoicePayment"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about all actual payments received for the invoice.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceAccountingDistribution"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+The AP or AR accounting distribution of the sum of Invoice line ExtendedAmount. Accounting Distribution includes assignment of an amount to multiple GL Entities, Cost or Profit Centers, Projects and so on. If AP/AP distribution is indicated at header, then it should apply to all invoice lines and should not be indicated at invoice line level.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceAttachment"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Binary, URI or other attachments that apply to the Invoice
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceStatusHistory"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Capture the status history for the invoice.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceEBOType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceAccountingDistribution" type="InvoiceAccountingDistributionType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The AP or AR accounting distribution of the sum of Invoice line ExtendedAmount. Accounting Distribution includes assignment of an amount to multiple GL Entities, Cost or Profit Centers, Projects and so on. If AP/AP distribution is indicated at header, then it should apply to all invoice lines and should not be indicated at invoice line level.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceAccountingDistributionType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Distribution Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:AccountingDistribution"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice AccountingDistribution
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceAccountingDistributionType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+        <xsd:element name="InvoiceAllowanceAccountingDistribution" type="InvoiceAllowanceAccountingDistributionType" /> 
+            <xsd:complexType name="InvoiceAllowanceAccountingDistributionType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                     <xsd:element ref="corecom:AccountingDistribution"  minOccurs="0" />
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceAllowanceAccountingDistributionType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceAllowanceTotal" type="InvoiceAllowanceTotalType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total Allowance amount for various allowance types . This is the sum of all the line Allowance Amounts.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceAllowanceTotalType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                      <xsd:element name="Amount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total amount for a given type of allowance.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of allowance
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceAllowanceTotalType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceAttachment" type="InvoiceAttachmentType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Binary, URI or other attachments that apply to the Invoice
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceAttachmentType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Attachment Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Attachment"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Attachment
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceAttachmentType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceChargeAccountingDistribution" type="InvoiceChargeAccountingDistributionType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Contains details about charge and it's accounting distribution
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceChargeAccountingDistributionType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identification of the charge distribution.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element ref="corecom:AccountingDistribution"  minOccurs="0" />
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceChargeAccountingDistributionType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceChargeTotal" type="InvoiceChargeTotalType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total Charge amount for various charge types . This is the sum of all the line Charge Amounts.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceChargeTotalType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                      <xsd:element name="Amount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total amount for a given type of charge.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of Charge
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceChargeTotalType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceDeliverToParty" type="InvoiceDeliverToPartyType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Details about who will receive additional copies of the invoice.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceDeliverToPartyType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+DeliverToParty Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:DeliverToPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+DeliverToParty Reference
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceDeliverToPartyType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLine" type="InvoiceLineType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Details about the Invoice Line
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Line Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element name="Description" type="corecom:TextType"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Description of the line item or service
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ExtendedAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The total amount of the invoice line not including taxes or charges. This generally equals the Unit Price times the Order Quantity.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TotalAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The total amount of the invoice line, including the Price and the total of all the charges, allowances and taxes.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="OpenItemIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates that the line is an open item and is not to be included in the document total
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="AdjustedIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies if the invoice line has been adjusted or not
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ReasonCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Reason for an adjustment or credit, Used in conjunction with Invoice Line Adjustment Type. For Receivables, typical examples of reasons are WRONG TAX RATE, FREE PRODUCT, LATE PAYMENT, ORDER ENTRY ERROR, RETURN, SALES TAX ERROR,SHIPPING and HANDLING, WRONG FREIGHT,A/R ERROR, CANCELLATION, CREDIT and REBILL, DUPLICATE BILLING, FOREIGN
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="SourceCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies source of the invoice (ex. from Contracts, Order Management, etc.).  An invoice can have a mix of lines from different sources, so the value on InvoiceHeader would be blank in that case.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="AdjustmentTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Used in conjunction with Invoice Type on invoice header.  Identifies whether the invoice line is regular, credit, rebill, adjustment, etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TransactionTypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of transaction.  Some values are: revenue line, utilization line, discount line, surcharge line, customer deposit applied, tax, etc
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PointOfSaleCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies whether customer picks up goods or goods are delivered to customer.  Taxation depends on this flag.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="OrderQuantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The quantity of item ordered on the sales or purchase order. This is different from the quantity being invoiced.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="Quantity" type="corecom:QuantityType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Quantity of the line item being invoiced
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="PayoffAmount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Amount Balance required to pay the account off.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="ServiceFinalChargeIndicator" type="corecom:IndicatorType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates if this is the final invoice line for this service being billed.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TaxCategoryCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Indicates whether the Invoice Line is taxable, non-taxable , exempt, non-exempt etc.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element ref="corecom:UnitPrice"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Price Per Quantity for the line item
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Note"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Note about the invoice line
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Status"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Status of the Invoice line like 'Open', 'Final','paid' etc.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:EffectiveTimePeriod"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Effective Time Period for which the invoice line has been generated.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ItemReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the item being invoiced
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ShipToPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Party to whom the line items on the invoice line are shipped or the services on the invoice line are provided. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ShipFromPartyReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Party that shipped the line item on the invoice line or provided the services on the invoice line. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:PurchaseOrderReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Purchase Order associated with the invoice line.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ContractReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Contract used to determine the prices and Terms and Conditions of the invoice line.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:SalesOrderReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Sales Order line being invoiced
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ShipmentReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the shipment associated with the invoice line
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:BillOfLadingReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Bill of Lading document associated with the invoice line
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ServiceRequestReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Service Request associated with for the invoice.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:RMAReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the RMA associated with the invoice line
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:ProjectReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the Project Accounting Project/ Task associated with the invoice line
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:InstalledProductReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to the service (service agreement) for which the invoice line has been generated.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:WorkOrderLineReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Reference to work order line for which the Invoice Line / billable charge was generated. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceLineAdjustment"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies the invoice lines that are being adjusted by this invoice line.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceLineAccountingDistribution"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+The accounting distribution of the InvoiceLine ExtendedAmount, could be of type AP/AR, Revenue, Revenue, etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceLineAttachment"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Binary, URI or other attachments that apply to the Invoice Line
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceLineTaxTotal"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Total Tax amount for various tax types . 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceLineChargeTotal"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Total Charge amount for various Charge types . 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element ref="InvoiceLineAllowanceTotal"  minOccurs="0" maxOccurs="unbounded" />
+                      <xsd:element ref="InvoiceLineAllowance"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about the discount or allowance that the Customer is to receive off of the invoice line Extended Amount. Examples are Early Payment, Coupons etc. Discount is treated as a type of allowance. Allowance Amounts are subtracted to determine the Total Amount
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="InvoiceLineTax"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Details about Tax applicable for the invoice line.I.e. Sales Tax, VAT, Excise Duty. 
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element ref="InvoiceLineCharge"  minOccurs="0" maxOccurs="unbounded" />
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLineAccountingDistribution" type="InvoiceLineAccountingDistributionType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+The accounting distribution of the InvoiceLine ExtendedAmount, could be of type AP/AR, Revenue, Revenue, etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineAccountingDistributionType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:AccountingDistribution"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+The accounting distribution of the TotalAmount in Charge,could be of type AP/AR, Revenue, etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineAccountingDistributionType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLineAdjustment" type="InvoiceLineAdjustmentType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the invoice lines that are being adjusted by this invoice line.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineAdjustmentType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Adjustment Line Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:AdjustedInvoiceLineReference"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identifies the invoice lines that are being adjusted by this invoice line.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineAdjustmentType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLineAllowance" type="InvoiceLineAllowanceType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Details about the discount or allowance that the Customer is to receive off of the invoice line Extended Amount. Examples are Early Payment, Coupons etc. Discount is treated as a type of allowance. Allowance Amounts are subtracted to determine the Total Amount
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineAllowanceType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                     <xsd:element ref="corecom:Allowance"  minOccurs="0" />
+                     <xsd:element ref="InvoiceAllowanceAccountingDistribution"  minOccurs="0" maxOccurs="unbounded" />
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineAllowanceType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+        <xsd:element name="InvoiceLineAllowanceTotal" type="InvoiceLineAllowanceTotalType" /> 
+            <xsd:complexType name="InvoiceLineAllowanceTotalType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                      <xsd:element name="Amount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total amount for a given type of allowance.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of allowance
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineAllowanceTotalType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLineAttachment" type="InvoiceLineAttachmentType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Binary, URI or other attachments that apply to the Invoice Line
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineAttachmentType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Line Attachment Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:Attachment"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Line Attachment details
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineAttachmentType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+        <xsd:element name="InvoiceLineCharge" type="InvoiceLineChargeType" /> 
+            <xsd:complexType name="InvoiceLineChargeType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                     <xsd:element ref="corecom:Charge"  minOccurs="0" />
+                      <xsd:element ref="InvoiceChargeAccountingDistribution"  minOccurs="0" maxOccurs="unbounded" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Contains details about charge and it's accounting distribution
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineChargeType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLineChargeTotal" type="InvoiceLineChargeTotalType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total Charge amount for various Charge types . 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineChargeTotalType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                      <xsd:element name="Amount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total amount for a given type of charge.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of Charge
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineChargeTotalType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLineTax" type="InvoiceLineTaxType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Details about Tax applicable for the invoice line.I.e. Sales Tax, VAT, Excise Duty. 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineTaxType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                     <xsd:element ref="corecom:Tax"  minOccurs="0" />
+                     <xsd:element ref="InvoiceTaxAccountingDistribution"  minOccurs="0" maxOccurs="unbounded" />
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineTaxType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceLineTaxTotal" type="InvoiceLineTaxTotalType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total Tax amount for various tax types . 
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceLineTaxTotalType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                      <xsd:element name="Amount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total amount for a given type of tax.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of tax
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceLineTaxTotalType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoicePayment" type="InvoicePaymentType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Details about all actual payments received for the invoice.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoicePaymentType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Invoice Payment Identification
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element ref="corecom:ReceivedPaymentReference"  minOccurs="0" />
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoicePaymentType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceStatusHistory" type="InvoiceStatusHistoryType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Capture the status history for the invoice.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceStatusHistoryType" >
+                 <xsd:sequence>
+                      <xsd:element ref="corecom:Identification"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+Identification for StatusHistory
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                      <xsd:element ref="corecom:StatusHistory"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+StatusHistory details
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceStatusHistoryType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+        <xsd:element name="InvoiceTaxAccountingDistribution" type="InvoiceTaxAccountingDistributionType" /> 
+            <xsd:complexType name="InvoiceTaxAccountingDistributionType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                      <xsd:element ref="corecom:AccountingDistribution"  minOccurs="0" >
+                           <xsd:annotation> 
+                               <xsd:documentation> 
+The accounting distribution of the TotalAmount in Tax,could be of type AP/AR, Revenue etc. Accounting Distribution is the assignment of an amount to one or more accounting entities such as GL Entities, Cost or Profit Centers, Projects etc. The AR or AP distribution on the line should only be populated if it's not defined at Invoice header.
+                               </xsd:documentation> 
+                           </xsd:annotation> 
+                      </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceTaxAccountingDistributionType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+                      <xsd:element name="InvoiceTaxTotal" type="InvoiceTaxTotalType" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total Tax amount for various tax types . This is the sum of all the line Tax Amounts.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+            <xsd:complexType name="InvoiceTaxTotalType" >
+                 <xsd:sequence>
+                     <xsd:element ref="corecom:Identification"  minOccurs="0" />
+                      <xsd:element name="Amount" type="corecom:AmountType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Total amount for a given type of tax.
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                      <xsd:element name="TypeCode" type="corecom:CodeType"  minOccurs="0" >
+                           <xsd:annotation> 
+                                <xsd:documentation> 
+Identifies the type of tax
+                                </xsd:documentation> 
+                           </xsd:annotation> 
+                     </xsd:element> 
+                     <xsd:element name="Custom" type="coreinvoicecust:CustomInvoiceTaxTotalType" minOccurs="0"/>
+                 </xsd:sequence>
+                 <xsd:attribute name="actionCode" type="corecom:ActionCodeType" use="optional"/>
+            </xsd:complexType>
+</xsd:schema>

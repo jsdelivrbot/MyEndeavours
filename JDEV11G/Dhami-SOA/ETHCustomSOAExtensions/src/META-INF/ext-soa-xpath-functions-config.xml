@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soa-xpath-functions version="11.1.1"
+ xmlns="http://xmlns.oracle.com/soa/config/xpath"
+ xmlns:ethsoa="http://customFunctions.emerson.com/eth3/SOA/dbresponse">
+  <function name="ethsoa:checkDBResponse">
+    <className>com.emerson.eth3.checkdb.EvaluateDBResponseC</className>
+    <return type="string"/>
+    <params>
+      <param name="responseCode" type="number" />
+      <param name="errorCodeNumber" type="string" />
+      <param name="rollBackFlag" type="number" />
+      
+    </params>
+    <desc><![CDATA[/**
+ * This Function is used to evaluate ETH DB Procedure response. 
+ * If the ResponseCode is 0(ZERO) then it will return 'SUCCESS'.
+ * If the ResponseCode is 99 OR (98 with ErrorCodeNumber != 999999) then it will return 'DB_FAILURE'
+ * If the ResponseCode is anything else, it will return 'FAILURE'
+ * @param responseCode - A Number
+ * @param errorCodeNumber - A String.
+ * @param rollBackFlag - A Number. Not used as of now, but mandatory to pass.
+ * @return responseFlag - A String 
+ * */]]></desc>    
+    <detail>
+      <![CDATA[/**
+ * This Function is used to evaluate ETH DB Procedure response. 
+ * If the ResponseCode is 0(ZERO) then it will return 'SUCCESS'.
+ * If the ResponseCode is 99 OR (98 with ErrorCodeNumber != 999999) then it will return 'DB_FAILURE'
+ * If the ResponseCode is anything else, it will return 'FAILURE'
+ * @param responseCode - A Number
+ * @param errorCodeNumber - A String.
+ * @param rollBackFlag - A Number. Not used as of now, but mandatory to pass.
+ * @return responseFlag - A String 
+ * */]]></detail>
+  </function>
+  
+</soa-xpath-functions>

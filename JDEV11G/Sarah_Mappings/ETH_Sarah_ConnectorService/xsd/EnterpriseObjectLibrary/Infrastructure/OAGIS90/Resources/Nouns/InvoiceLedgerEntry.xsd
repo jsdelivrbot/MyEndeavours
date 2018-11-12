@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\InvoiceLedgerEntry.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="InvoiceLedgerEntry" type="InvoiceLedgerEntryType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A InvoiceLedgerEntry represents a not yet approved for payment purchase ledger invoice or debit memo. A InvoiceLedgerEntry uses an InvoiceReference to reference the original suppliers invoice.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="InvoiceLedgerEntryHeader" type="InvoiceLedgerEntryHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation>Information that applies to the entire unapproved invoice document.
+
+The InvoiceReference in the Header is a reference to the external invoice that is being referred to in the document.
+
+The Voucher Reference is an internal voucher, possibly against the external invoice
+
+The Tax element contains any tax information such as the taxable amounts and the tax codes.  It is optional and used to summarize tax amounts across all the document lines. The principal intent of this data type is for use as a memo item</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="InvoiceLedgerEntryLine" type="InvoiceLedgerEntryLineType">
+                <xsd:annotation>
+                        <xsd:documentation>Represents lines on the internal invoice document. Invoice lines or credit memo lines are examples of PurchaseLedgerLines.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="InvoiceLedgerEntryType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A purchase ledger invoice or debit memo that has not yet  been approved for payment.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Deprecation of VOUCHER, ORIGREF:
+From OAGIS 7.2.1:
+ORIGREF is the link that ties back to a sub ledger transaction entry ID.  It is the identifier of an original transaction or document.  For example, it could be the receipt or the summarized inventory activity.  This is the singular field that refers to an audit record.  Together with the Sender information, the ORIGREF is part of the referencing system, which will enable drill back audit trail functionality.
+PN: The ORIGREF field represents the voucher or unapproved invoice identifier.
+VOUCHER is the internal identifier associated with the external supplier's invoice.
+REMITTANCE refers to a reference identifier to print on remittance advice, for example, supplier invoice number.
+
+In OAGIS 8:
+All of these can be accomplished with an InvoiceReference. REMITTANCE field in until the RemittanceAdvice BOD is part of OAGIS.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="InvoiceLedgerEntryHeader" minOccurs="0"/>
+                        <xsd:element ref="InvoiceLedgerEntryLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="InvoiceLedgerEntryHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="LedgerEntryHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="VoucherReference" minOccurs="0"/>
+                                        <xsd:element ref="RemittanceID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This refers to a reference identifier to print on remittance advice, for example, supplier invoice number</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PayeeParty" minOccurs="0"/>
+                                        <xsd:element ref="RemitToParty" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="InvoiceLedgerEntryLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the type that defines the structure of the InvoiceLedgerEntry Line.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="LedgerEntryLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

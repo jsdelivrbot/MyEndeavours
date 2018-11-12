@@ -1,0 +1,44 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="XSLTParameters"
+     targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/XSLTParameters/XSLTParameters"
+     xmlns:ns1="http://schemas.oracle.com/service/bpel/common"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/XSLTParameters/XSLTParameters"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="XSLTParameters">
+        <plnk:role name="XSLTParametersProvider">
+            <plnk:portType name="client:XSLTParameters"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.oracle.com/service/bpel/common"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/XSLTParameters/XSLTParameters"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://xmlns.oracle.com/Sarah_Mappings/XSLTParameters/XSLTParameters"
+                 schemaLocation="xsd/XSLTParameters.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.oracle.com/service/bpel/common"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/XSLTParameters/XSLTParameters"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <xsd:import namespace="http://schemas.oracle.com/service/bpel/common" schemaLocation="xsd/XSLTParam.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="XSLTParameter">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="XSLTParametersRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="XSLTParametersResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="XSLTParameters">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:XSLTParametersRequestMessage"/>
+            <wsdl:output message="client:XSLTParametersResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

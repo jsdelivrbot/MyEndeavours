@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Aug 23 14:12:57 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Issue93_BPEL"
+               targetNamespace="http://xmlns.oracle.com/Sarah_Mappings/Issue93_BPEL/Issue93_BPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Sarah_Mappings/Issue93_BPEL/Issue93_BPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Sarah_Mappings/Issue93_BPEL/Issue93_bpel_FL_IN"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="Issue93_bpel_FL_IN" partnerLinkType="ns1:Read_plt"
+                 myRole="Read_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Read_InputVariable" messageType="ns1:Read_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_Read_InputVariable"
+             partnerLink="Issue93_bpel_FL_IN" portType="ns1:Read_ptt"
+             operation="Read"/>
+    <assign name="Assign_Input">
+      <copy>
+        <from variable="Receive1_Read_InputVariable" part="opaque"
+              query="/ns2:opaqueElement"/>
+        <to variable="Receive1_Read_InputVariable" part="opaque"
+            query="/ns2:opaqueElement"/>
+      </copy>
+    </assign>
+  </sequence>
+</process>

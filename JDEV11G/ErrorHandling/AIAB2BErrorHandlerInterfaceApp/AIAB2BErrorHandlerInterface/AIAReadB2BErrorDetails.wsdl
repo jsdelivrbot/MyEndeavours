@@ -1,0 +1,31 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="AIAReadB2BErrorDetails"
+     targetNamespace="http://xmlns.oracle.com/AIAB2BIntegrationApplication/AIAReadB2BErrorDetails"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:inp1="http://xmlns.oracle.com/singleString"
+     xmlns:tns="http://xmlns.oracle.com/AIAB2BIntegrationApplication/AIAReadB2BErrorDetails"
+     xmlns:out1="http://xmlns.oracle.com/singleString"
+     xmlns:aiafault="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2"
+    >
+    <wsdl:types>
+     
+           
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/top/ReadOracleB2BErrorDetails"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/AIAEnrichB2BAIAFaultProcess/1.0">
+            <import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Core/Common/V2/Meta.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="request" element="aiafault:Fault"/>
+    </wsdl:message>
+    <wsdl:message name="replyMessage">
+        <wsdl:part name="reply" element="aiafault:Fault"/>
+    </wsdl:message>
+    <wsdl:portType name="readB2BErrorDetails_ptt">
+        <wsdl:operation name="readB2BErrorDetails">
+            <wsdl:input message="tns:requestMessage"/>
+            <wsdl:output message="tns:replyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

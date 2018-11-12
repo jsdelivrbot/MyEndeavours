@@ -1,0 +1,49 @@
+<wsdl:definitions
+     name="aq_dq_mdn"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_APP_18thJUNE/ETH_AQDEMO/aq_dq_mdn"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_APP_18thJUNE/ETH_AQDEMO/aq_dq_mdn"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/ETH_SOAINFRA"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:ph="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="Dequeue_plt" >
+    <plt:role name="Dequeue_role" >
+      <plt:portType name="tns:Dequeue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+    <!-- Define AQ Headers = Payload Headers -->
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/headers/payloadheaders/"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:obj1="http://xmlns.oracle.com/xdb/ETH_SOAINFRA" >
+      <import namespace="http://xmlns.oracle.com/xdb/ETH_SOAINFRA" schemaLocation="xsd/ETH_SOAINFRA_IP_MESSAGE_TYPE.xsd"/>
+      <complexType name="HeaderCType" >
+        <sequence>
+          <!-- payload header -->
+          <element name="PayloadHeader" type="obj1:IP_MESSAGE_TYPE" />
+        </sequence>
+      </complexType>
+      <element name="Header" type="ph:HeaderCType" />
+    </schema>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </wsdl:types>
+    <wsdl:message name="Dequeue_msg">
+        <wsdl:part name="opaque" element="opaque:opaqueElement"/>
+    </wsdl:message>
+    <wsdl:message name="Header_msg">
+        <wsdl:part name="Header" element="ph:Header"/>
+    </wsdl:message>
+    <wsdl:portType name="Dequeue_ptt">
+        <wsdl:operation name="Dequeue">
+            <wsdl:input message="tns:Dequeue_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

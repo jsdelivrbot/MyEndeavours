@@ -1,0 +1,103 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 24 15:34:07 GMT+05:30 2011
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="SOAPSender_BPELProcess"
+               targetNamespace="http://xmlns.oracle.com/Dhami_SOA/SOAPSender/SOAPSender_BPELProcess"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Dhami_SOA/SOAPSender/SOAPSender_BPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/Dhami_SOA/SOAPReceiver/SOAPReceiver_BPELProcess"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:aia="http://www.oracle.com/XSL/Transform/java/oracle.apps.aia.core.xpath.AIAFunctions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/Dhami_SOA/HeaderReceiver/HeaderReceiverBPELProcess">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="soapsender_bpelprocess_client" partnerLinkType="client:SOAPSender_BPELProcess" myRole="SOAPSender_BPELProcessProvider"/>
+    <partnerLink name="Call_SOAPService"
+                 partnerLinkType="ns1:SOAPReceiver_BPELProcess"
+                 partnerRole="SOAPReceiver_BPELProcessProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:SOAPSender_BPELProcessRequestMessage"/>
+    <variable name="InputVariable"
+              messageType="ns1:SOAPReceiver_BPELProcessRequestMessage"/>
+    <variable name="OutputVariable"
+              messageType="ns1:SOAPReceiver_BPELProcessResponseMessage"/>
+    <variable name="SOAPHeader"
+              messageType="ns1:SOAPReceiver_BPELProcessHeader"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in SOAPSender_BPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="soapsender_bpelprocess_client" portType="client:SOAPSender_BPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:input"/>
+        <to variable="InputVariable" part="payload"
+            query="/ns1:process/ns1:input"/>
+      </copy>
+      <copy>
+        <from expression="string('ryan')"/>
+        <to variable="SOAPHeader" part="header"
+            query="/ns1:header/ns1:username"/>
+      </copy>
+      <copy>
+        <from expression="string('Huneidi')"/>
+        <to variable="SOAPHeader" part="header"
+            query="/ns1:header/ns1:password"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_SOAPService"
+            inputVariable="InputVariable" outputVariable="OutputVariable"
+            partnerLink="Call_SOAPService"
+            portType="ns1:SOAPReceiver_BPELProcess" operation="process"
+            bpelx:invokeAsDetail="no" bpelx:inputHeaderVariable="SOAPHeader"/>
+  </sequence>
+</process>

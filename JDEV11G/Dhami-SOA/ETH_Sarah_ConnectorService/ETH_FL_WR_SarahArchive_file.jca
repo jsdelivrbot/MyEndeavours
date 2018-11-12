@@ -1,0 +1,13 @@
+<adapter-config name="ETH_FL_WR_SarahArchive" adapter="File Adapter" wsdlLocation="ETH_FL_WR_SarahArchive.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/FileAdapter"/>
+  <endpoint-interaction portType="WriteSarahArchive_ptt" operation="WriteSarahArchive">
+    <interaction-spec className="oracle.tip.adapter.file.outbound.FileInteractionSpec">
+      <property name="LogicalDirectory" value="SARAH_ARCHIVE"/>
+      <property name="Append" value="false"/>
+      <property name="FileNamingConvention" value="Sarah_%yyMMddHHmmssSS%.xml"/>
+      <property name="NumberMessages" value="1"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

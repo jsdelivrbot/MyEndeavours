@@ -1,0 +1,74 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Oct 14 18:59:20 GMT+05:30 2010
+  Author:  idhami
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="EmptyBPEL"
+               targetNamespace="http://xmlns.oracle.com/Dhami_SOA_jws/Project1/EmptyBPEL"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Dhami_SOA_jws/Project1/EmptyBPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://oracle.com/sca/soapservice/Dhami-SOA/Project1/Receive"
+         xmlns:ns2="http://TargetNamespace.com/ETH_GLB_OAP_Betsy"
+         xmlns:ns3="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="emptybpel_client" partnerLinkType="client:EmptyBPEL" myRole="EmptyBPELProvider"/>
+    <partnerLink myRole="execute_ptt" name="Receive"
+                 partnerLinkType="ns1:Receive"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:EmptyBPELRequestMessage"/>
+    <variable name="OAGIS_Variable" element="ns2:PROCESS_PO_007"
+              bpelx:sdoCapable="true"/>
+    <variable name="Variable_1" element="ns3:PurchaseOrderReference"/>
+  </variables>
+  <faultHandlers/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in EmptyBPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="emptybpel_client" portType="client:EmptyBPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Transform_1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('xsl/Transformation_1.xsl',bpws:getVariableData('OAGIS_Variable'))"/>
+        <to variable="Variable_1"/>
+      </copy>
+    </assign>
+  </sequence>
+</process>

@@ -1,0 +1,14 @@
+<adapter-config name="ReadOracleB2BError" adapter="AQ Adapter" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/aq/aiaB2BInfraAQCF" UIConnectionName="ap6002idmz(SH_SOAINFRA)" adapterRef=""/>
+  <endpoint-activation portType="Dequeue_ptt" operation="ProcessOracleB2BError">
+    <activation-spec className="oracle.tip.adapter.aq.inbound.AQDequeueActivationSpec">
+      <property name="QueueName" value="IP_IN_QUEUE"/>
+      <!--property name="DatabaseSchema" value="SH_SOAINFRA"/-->
+      <property name="ObjectFieldName" value="PAYLOAD"/>
+      <property name="PayloadHeaderRequired" value="true"/>
+      <property name="Consumer" value="b2berroruser"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Aug 08 22:58:29 GMT+05:30 2012
+  Author:  idhami
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TEST_BPEL_RDFILE"
+               targetNamespace="http://xmlns.oracle.com/SOAApp/FTPChecker/TEST_BPEL_RDFILE"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/SOAApp/FTPChecker/TEST_BPEL_RDFILE"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/SOAApp/FTPChecker/TEST_FL_RD"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="TEST_FL_RD" partnerLinkType="ns1:Read_plt"
+                 myRole="Read_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="gvarFileNAme" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" createInstance="yes"
+             variable="Receive1_Read_InputVariable" partnerLink="TEST_FL_RD"
+             portType="ns1:Read_ptt" operation="Read">
+      <bpelx:property name="jca.file.FileName" variable="gvarFileNAme"/>
+    </receive>
+    <assign name="Assign1">
+      <copy>
+        <from expression="ora:setCompositeInstanceTitle(bpws:getVariableData('gvarFileNAme'))"/>
+        <to variable="gvarFileNAme"/>
+      </copy>
+    </assign>
+  </sequence>
+</process>

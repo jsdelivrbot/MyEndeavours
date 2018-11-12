@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="PublishEvent"
+     targetNamespace="http://xmlns.oracle.com/EventProducer/EventProducer/PublishEvent"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:inp1="http://schema.emerson.com/ETH/ErrorData"
+     xmlns:tns="http://xmlns.oracle.com/EventProducer/EventProducer/PublishEvent"
+    >
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://schema.emerson.com/ETH/ErrorData" schemaLocation="xsd/ETH_ErrorData.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="ErrorData" element="inp1:ETH_ErrorData"/>
+    </wsdl:message>
+    <wsdl:portType name="execute_ptt">
+        <wsdl:operation name="execute">
+            <wsdl:input message="tns:requestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

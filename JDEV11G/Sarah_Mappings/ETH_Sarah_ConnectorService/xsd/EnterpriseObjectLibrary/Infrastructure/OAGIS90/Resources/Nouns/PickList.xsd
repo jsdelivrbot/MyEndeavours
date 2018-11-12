@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\PickList.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="PickList" type="PickListType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis">Picking List is a document that lists material to be retrieved ("picked") from various locations in a warehouse in order to fill a production order, sales order, or shipping order.  A picking list includes general identifying information (header information), as well as line item details.  Depending on the verb used, PickList may refer to header information only, or both header and detail information. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PickListHeader" type="PickListHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis">Information about the entire Picking List</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PickListLine" type="PickListLine">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis">Information about a line item on a Picking List.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PickListLineDetail" type="PickListLineDetail">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis">Detail information about particular line items</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="PickListType">
+                <xsd:sequence>
+                        <xsd:element ref="PickListHeader" minOccurs="0"/>
+                        <xsd:element ref="PickListLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="PickListHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="DemandReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BillOfLadingReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ShippingDockID" minOccurs="0"/>
+                                        <xsd:element ref="RouteID" minOccurs="0"/>
+                                        <xsd:element ref="WeightMeasure" minOccurs="0"/>
+                                        <xsd:element ref="VolumeMeasure" minOccurs="0"/>
+                                        <xsd:element ref="CarrierParty" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PickListLine">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:group ref="InventoryTransactionGroup"/>
+                                        <xsd:element ref="OrderQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ShippedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ShipUnitQuantity" minOccurs="0"/>
+                                        <xsd:element ref="CarrierParty" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PickListLineDetail" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PickListLineDetail">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ShippingTrackingID" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="LoadingLocation" minOccurs="0"/>
+                                        <xsd:element ref="ShipToLocation" minOccurs="0"/>
+                                        <xsd:element ref="ShippingMaterialID" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Description of the packaging</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ShipmentDateTime" minOccurs="0"/>
+                                        <xsd:element ref="LoadingDateTime" minOccurs="0"/>
+                                        <xsd:group ref="ShippingWeightandVolumeGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

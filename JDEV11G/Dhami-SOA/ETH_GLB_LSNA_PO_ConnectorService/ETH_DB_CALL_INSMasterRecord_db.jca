@@ -1,0 +1,13 @@
+<adapter-config name="ETH_DB_CALL_INSMasterRecord" adapter="Database Adapter" wsdlLocation="ETH_DB_CALL_INSMasterRecord.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/ETH/AppDB" UIConnectionName="ETH_3" adapterRef=""/>
+  <endpoint-interaction portType="ETH_DB_CALL_INSMasterRecord_ptt" operation="ETH_DB_CALL_INSMasterRecord">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ETH_DB3"/>
+      <property name="ProcedureName" value="ETH_INSERTMASTERRECORD_PD"/>
+      <property name="QueryTimeout" value="60"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>
