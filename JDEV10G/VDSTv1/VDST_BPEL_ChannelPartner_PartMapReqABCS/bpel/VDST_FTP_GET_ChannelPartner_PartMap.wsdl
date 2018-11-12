@@ -1,0 +1,60 @@
+<definitions
+     name="VDST_FTP_GET_ChannelPartner_PartMap"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/VDST_FTP_GET_ChannelPartner_PartMap/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/VDST_FTP_GET_ChannelPartner_PartMap/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://schema.emerson.com/VDST_FTP_GET_ChannelPartner_PartMap"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schema.emerson.com/VDST_FTP_GET_ChannelPartner_PartMap" schemaLocation="VDST_CPM.xsd" />
+      </schema>
+    </types>
+    <message name="CPM-Load_msg">
+        <part name="CPM-Load" element="imp1:CPM-Load"/>
+    </message>
+    <portType name="Get_ptt">
+        <operation name="Get">
+            <input message="tns:CPM-Load_msg"/>
+        </operation>
+    </portType>
+    <binding name="Get_binding" type="tns:Get_ptt">
+    <pc:inbound_binding  />
+        <operation name="Get">
+      <jca:operation
+          FileType="ascii"
+          PhysicalDirectory="$input_dir"
+          ActivationSpec="oracle.tip.adapter.ftp.inbound.FTPActivationSpec"
+          PhysicalArchiveDirectory="$archive_dir"
+          DeleteFile="true"
+          IncludeFiles="VDST_CPM_.*\.csv"
+          PollingFrequency="30"
+          MinimumAge="60"
+          FileModificationTime="FileSystem"
+          ModificationTimeFormat="4,18,yyyyMMddHHmmss"
+          OpaqueSchema="false"
+          UseRemoteArchive="true">
+          <!-- FileModificationTime="FileSystem"
+          ModificationTimeFormat="4,18,yyyyMMddHHmmss" -->
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="VDST_FTP_GET_ChannelPartner_PartMap">
+        <port name="Get_pt" binding="tns:Get_binding">
+      <jca:address location="$FTP_JNDI" UIincludeWildcard="VDST_CPM_*.csv" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Get_plt" >
+    <plt:role name="Get_role" >
+      <plt:portType name="tns:Get_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

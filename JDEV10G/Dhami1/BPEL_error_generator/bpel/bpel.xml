@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="BPEL_error_generator" src="BPEL_error_generator.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="Cust_fileReader">
+            <property name="wsdlLocation">Cust_fileReader.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="DB_INS_writeCust">
+            <property name="wsdlLocation">DB_INS_writeCust.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="Cust_fileReader">
+            <property name="portType">Read_ptt</property>
+            <property name="rejectedMessageHandlers">bpel://default:welcome1|CEH_BPEL_RejectedMsgHandler|handleRejection|payload</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

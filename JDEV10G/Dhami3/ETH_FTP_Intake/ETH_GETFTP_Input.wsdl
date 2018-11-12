@@ -1,0 +1,57 @@
+<definitions
+     name="ETH_GETFTP_Input"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_Input/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_Input/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterInboundHeader.wsdl"/>
+    <types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </types>
+    <message name="Get_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="Get_ptt">
+        <operation name="Get">
+            <input message="tns:Get_msg"/>
+        </operation>
+    </portType>
+    <binding name="Get_binding" type="tns:Get_ptt">
+    <pc:inbound_binding  />
+        <operation name="Get">
+      <jca:operation
+          FileType="ascii"
+          PhysicalDirectory="infile/"
+          ActivationSpec="oracle.tip.adapter.ftp.inbound.FTPActivationSpec"
+          DeleteFile="true"
+          IncludeFiles="ReadFTP123\.txt"
+          PollingFrequency="10"
+          MinimumAge="60"
+          FileModificationTime="FileSystem"
+          ModificationTimeFormat="4,18,yyyyMMddHHmmSS"
+          OpaqueSchema="true" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_GETFTP_Input">
+        <port name="Get_pt" binding="tns:Get_binding">
+      <jca:address location="eis/Ftp/ETH_ICE" UIincludeWildcard="ReadFTP123.txt" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Get_plt" >
+    <plt:role name="Get_role" >
+      <plt:portType name="tns:Get_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

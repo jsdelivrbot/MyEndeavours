@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<system name="ETHSystem_OutputServices" guid="6E22AEA1A5F911DEBFA54F68EB7C2675" qname="ETHSystem_OutputServices" status="ENABLED">
+   <versionInfo>
+      <ID>1265360873819</ID>
+      <lastModifiedTime>Fri Feb 05 09:07:53 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <description/>
+   <parameters>
+      <parameter name="Fax"/>
+      <parameter name="Mobile"/>
+      <parameter name="Host">soa-stg.emerson.com</parameter>
+      <parameter name="Phone"/>
+      <parameter name="Pager"/>
+      <parameter name="Email">inderpal.dhami@emerson.com</parameter>
+      <parameter name="Port">8800</parameter>
+   </parameters>
+   <clusterName>esb</clusterName>
+   <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleOJMS/XATCF">ESBTopics/Topics/ESB_JAVA_DEFERRED</deferredQueueName>
+</system>

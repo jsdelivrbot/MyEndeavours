@@ -1,0 +1,53 @@
+<definitions
+     name="readFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/readFile/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/readFile/"
+     xmlns:ns4="http://xmlns.emrsn.com/CommonProcessPO_007"
+     xmlns:ns1="http://xmlns.emrsn.com/CommonChangePO_006"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterInboundHeader.wsdl"/>
+    <types>
+        <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.emrsn.com/CommonProcessPO_007" schemaLocation="CommonProcess_PO_007.xsd"/>
+            <element name="opaqueElement" type="base64Binary"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.emrsn.com/CommonChangePO_006" schemaLocation="CommonChange_PO_006.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="Read_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="Read_ptt">
+        <operation name="Read">
+            <input message="tns:Read_msg"/>
+        </operation>
+    </portType>
+    <binding name="Read_binding" type="tns:Read_ptt">
+        <pc:inbound_binding/>
+        <operation name="Read">
+            <jca:operation PhysicalDirectory="D:\oracle\Files\bpelIn" ActivationSpec="oracle.tip.adapter.file.inbound.FileActivationSpec"
+                 DeleteFile="true" IncludeFiles="read.*\.txt" PollingFrequency="10" MinimumAge="0"
+                 OpaqueSchema="true"/>
+            <input>
+                <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="readFile">
+        <port name="Read_pt" binding="tns:Read_binding">
+            <jca:address location="eis/FileAdapter" UIincludeWildcard="read*.txt"/>
+        </port>
+    </service>
+    <plt:partnerLinkType name="Read_plt">
+        <plt:role name="Read_role">
+            <plt:portType name="tns:Read_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+</definitions>

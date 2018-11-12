@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\OnlineOrder.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Operational/OrderManagementComponents.xsd"/>
+        <xsd:element name="OnlineOrder" type="OnlineOrderType"/>
+        <xsd:element name="OnlineOrderHeader" type="OnlineOrderHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation>The Header information applies to the OnlineOrder as a whole, including the creator of the OnlineOrder, who it is intended for, effectivity of the OnlineOrder and so on.
+
+The status field on the OnlineOrder header is used in third party buying scenarios. Typically, in these scenarios, the OnlineOrder is created by a buyer on behalf of another entity or organization. Once the OnlineOrder is created by the buyer, the party for whocm the OnlineOrder is intended approves or rejects the OnlineOrder, and sets the status accordingly.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="OnlineOrderLine" type="OnlineOrderLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Line represents the specific line items in the shopping OnlineOrder</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="OnlineOrderType">
+                <xsd:sequence>
+                        <xsd:element ref="OnlineOrderHeader" minOccurs="0"/>
+                        <xsd:element ref="OnlineOrderLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="OnlineOrderHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="SessionID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The SessionId identifies the session in which the OnlineOrder was created. This enables a direct cross-reference for the Requisitioning System, or whatever the originating system was, to the originating document. This element is used as a session identifier by the processing application, and can be used to convey the contents of the shopping OnlineOrder back to the requesting application</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies the time period for which this OnlineOrder is effective</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CreatedByParty" minOccurs="0"/>
+                                        <xsd:element ref="CreatedForParty" minOccurs="0"/>
+                                        <xsd:element ref="SupplierParty" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="OnlineOrderLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OrderDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The OrderDateTime on the OnlineOrderLine the timestamp in which the order was placed</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Item" minOccurs="0"/>
+                                        <xsd:element ref="Facility" minOccurs="0"/>
+                                        <xsd:element ref="UnitPrice" minOccurs="0"/>
+                                        <xsd:element ref="SupplierParty" minOccurs="0"/>
+                                        <xsd:element ref="PriceBreak" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

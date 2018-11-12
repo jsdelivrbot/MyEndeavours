@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ENQJMS_BusinessErrors" guid="9CB49101356211DE9F5E09AFEEE33747" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_BusinessErrors" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885417084</ID>
+      <lastModifiedTime>Mon Jun 01 19:43:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_ENQJMS_BusinessErrors.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_BusinessErrors/">tns:Produce_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ENQJMS_BusinessErrors?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ENQJMS_BusinessErrors</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="9CB70200356211DE9F5E09AFEEE33747" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_BusinessErrors.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/SC_Error_Details" element="tns:CommonErrorHandlerCollection"/>
+      </operationInfo>
+   </operations>
+</service>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/BudgetLedger.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/LoadBudgetLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetBudgetLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowBudgetLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="GetBudgetLedger">
+                <part name="Message" element="oa:GetBudgetLedger"/>
+        </message>
+        <message name="ShowBudgetLedger">
+                <part name="Message" element="oa:ShowBudgetLedger"/>
+        </message>
+        <message name="LoadBudgetLedger">
+                <part name="Message" element="oa:LoadBudgetLedger"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestBudgetLedgerPortType">
+                <operation name="LoadBudgetLedger">
+                        <input message="oaws:LoadBudgetLedger"/>
+                </operation>
+                <operation name="GetBudgetLedger">
+                        <input message="oaws:GetBudgetLedger"/>
+                </operation>
+        </portType>
+        <portType name="ResponseBudgetLedgerPortType">
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="ShowBudgetLedger">
+                        <input message="oaws:ShowBudgetLedger"/>
+                </operation>
+        </portType>
+        <portType name="SyncBudgetLedgerPortType">
+                <operation name="LoadBudgetLedger">
+                        <input message="oaws:LoadBudgetLedger"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="GetBudgetLedger">
+                        <input message="oaws:GetBudgetLedger"/>
+                        <output message="oaws:ShowBudgetLedger"/>
+                </operation>
+        </portType>
+        <binding name="RequestBudgetLedgerBinding" type="oaws:RequestBudgetLedgerPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="LoadBudgetLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/BudgetLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetBudgetLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/BudgetLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseBudgetLedgerBinding" type="oaws:ResponseBudgetLedgerPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/BudgetLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowBudgetLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/BudgetLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncBudgetLedgerBinding" type="oaws:SyncBudgetLedgerPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="LoadBudgetLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/BudgetLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetBudgetLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/BudgetLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestBudgetLedgerService">
+                <port name="RequestBudgetLedgerBinding" binding="oaws:RequestBudgetLedgerBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestBudgetLedger"/>
+                </port>
+        </service>
+        <service name="ResponseBudgetLedgerService">
+                <port name="ResponseBudgetLedgerBinding" binding="oaws:ResponseBudgetLedgerBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseBudgetLedger"/>
+                </port>
+        </service>
+        <service name="SyncBudgetLedgerService">
+                <port name="SyncBudgetLedgerBinding" binding="oaws:SyncBudgetLedgerBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncBudgetLedger"/>
+                </port>
+        </service>
+</definitions>

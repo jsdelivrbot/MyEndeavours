@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="DeleteRecordBPEL" guid="A580E14162C111DDBFC7DF068A717A51" qname="TransformESB.DeleteRecordBPEL" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1217922120194</ID>
+      <lastModifiedTime>Tue Aug 05 13:12:00 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>http://GDC-18.gssamerica.co.in:8888/orabpel/default/Delete_MDMRecords_BPELProcess/Delete_MDMRecords_BPELProcess?wsdl</wsdlURL>
+      <portType xmlns:tns="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess">tns:Delete_MDMRecords_BPELProcess</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/TransformESB/DeleteRecordBPEL?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/TransformESB/DeleteRecordBPEL</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="A58CC82062C111DDBFC7DF068A717A51" qname="TransformESB.DeleteRecordBPEL.process" wsdlOperation="process" mepDisplayName="Request Response" mep="RequestResponse">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:DeleteRecordRequest"/>
+         <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://GDC-18.gssamerica.co.in:8888/orabpel/default/Delete_MDMRecords_BPELProcess/MDMService.xsd"/>
+      </operationInfo>
+   </operations>
+</service>

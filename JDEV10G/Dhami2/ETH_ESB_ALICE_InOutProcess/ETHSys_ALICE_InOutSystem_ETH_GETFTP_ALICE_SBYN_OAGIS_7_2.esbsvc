@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_ALICE_SBYN_OAGIS_7_2" guid="7C7460910A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1245907917987</ID>
+      <lastModifiedTime>Thu Jun 25 11:01:57 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+   </versionInfo>
+   <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+   <invocation>
+      <targetService guid="7C76D1900A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS"/>
+      <interface>
+         <wsdlURL>ETH_GETFTP_ALICE_SBYN_OAGIS_7_2.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2/">tns:Get_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="rejectedMessageHandlers" value="file://c:/"/>
+   </endpointProperties>
+</service>

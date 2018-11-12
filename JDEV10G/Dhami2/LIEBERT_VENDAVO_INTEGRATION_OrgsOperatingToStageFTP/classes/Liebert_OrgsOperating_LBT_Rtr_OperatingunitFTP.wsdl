@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="LBT_Rtr_OperatingunitFTP"
+     targetNamespace="http://oracle.com/esb/namespaces/Liebert_OrgsOperating"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating"
+     xmlns:inp1="http://www.openapplications.org/oagis/9"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.openapplications.org/oagis/9" schemaLocation="public_html/BODs/Standalone/SyncPartyMaster.xsd" />
+      </schema>
+    </types>
+    <message name="SyncPartyMaster_request">
+        <part name="SyncPartyMaster" element="inp1:SyncPartyMaster"/>
+    </message>
+    <portType name="execute_ppt">
+        <operation name="execute">
+            <input message="tns:SyncPartyMaster_request"/>
+        </operation>
+    </portType>
+</definitions>

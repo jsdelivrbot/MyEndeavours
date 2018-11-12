@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="CEHSys_EHPOC1" guid="00AA229012C911DE9F411B4F09FCBA8D" qname="CEHSys_EHPOC1" dirty="true">
+      <service name="CEH_MessageRouterRS" guid="2F29E30004CB11DE8F7CE9923B183B07" qname="CEHSys_EHPOC1.CEH_MessageRouterRS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED" dirty="true">
+         <description/>
+         <versionInfo>
+            <ID>1236350895526</ID>
+            <lastModifiedTime>Fri Mar 06 20:18:15 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_ErrorHandlingPOC1_CEH_ESB_MessageRouting</lastModifiedUser>
+         </versionInfo>
+         <parent guid="00AA229012C911DE9F411B4F09FCBA8D" qname="CEHSys_EHPOC1" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>RoutingService.wsdl</wsdlURL>
+            <portType xmlns:tns="http://esb.emerson.com/dataRouting">tns:RoutingPortType</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/CEHSys_EHPOC1/CEH_MessageRouterRS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://10.129.160.118:8888/event/CEHSys_EHPOC1/CEH_MessageRouterRS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="2F2C540004CB11DE8F7CE9923B183B07" qname="CEHSys_EHPOC1.CEH_MessageRouterRS.route" wsdlOperation="route" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" element="tns:envelope" xmlns:tns="http://schemas.emerson.com/common/envelope"/>
+               <routingRules>
+                  <routingRule guid="4000F3D004CB11DE8F7CE9923B183B07" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="22FBDD100A4B11DEBFADD700E03E6C34" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0.process" serviceGUID="1BE0B5F00A4B11DEBFADD700E03E6C34" serviceQName="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0" mepDisplayName="One Way" mep="OneWay"/>
+                     <filterExpression>{normalize-space(/emr:envelope/emr:header/emr:originalSource)='CustomerApp'};{ namespace emr=http://schemas.emerson.com/common/envelope }</filterExpression>
+                     <transformation>
+                        <xslFileURL>envelope_To_envelope.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="6F26FF0107E711DEBF96030817719483" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="5343419007E711DEBF71698EE00777E6" qname="BPELSystem.default.CEH_BPEL_ProcessProduct.CEH_BPEL_ProcessProduct_1_0.process" serviceGUID="4C017FA007E711DEBF71698EE00777E6" serviceQName="BPELSystem.default.CEH_BPEL_ProcessProduct.CEH_BPEL_ProcessProduct_1_0" mepDisplayName="One Way" mep="OneWay"/>
+                     <filterExpression>{normalize-space(/emr:envelope/emr:header/emr:originalSource)='ProductApp'};{ namespace emr=http://schemas.emerson.com/common/envelope }</filterExpression>
+                     <transformation>
+                        <xslFileURL>envelope_To_envelope.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+         <endpointProperties>
+            <property name="enableAccessBusinessEvent" value="true"/>
+         </endpointProperties>
+      </service>
+   </system>
+   <service name="CEH_BPEL_ProcessCustomer_1_0" guid="1BE0B5F00A4B11DEBFADD700E03E6C34" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED" dirty="true">
+      <description>BPEL Service for CEH_BPEL_ProcessCustomer</description>
+      <versionInfo>
+         <ID>1236342857595</ID>
+         <lastModifiedTime>Fri Mar 06 18:04:17 IST 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <parent guid="8AF5B67004C911DEBFA269BB1E2DA9EC" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer" type="serviceGroup"/>
+      <serviceDefinition>
+         <wsdlURL>http://INEDEC-MLAP-45.emrcorp.local/orabpel/default/CEH_BPEL_ProcessCustomer/1.0/CEH_BPEL_ProcessCustomer?wsdl</wsdlURL>
+         <portType xmlns:tns="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer">tns:CEH_BPEL_ProcessCustomer</portType>
+         <endpointDefinition>
+            <concreteWSDLURL>/esb/wsil/BPELSystem/default/CEH_BPEL_ProcessCustomer/CEH_BPEL_ProcessCustomer_1_0?wsdl</concreteWSDLURL>
+            <soapEndpointURI>http://localhost:8888/event/BPELSystem/default/CEH_BPEL_ProcessCustomer/CEH_BPEL_ProcessCustomer_1_0</soapEndpointURI>
+         </endpointDefinition>
+      </serviceDefinition>
+      <parameters>
+         <parameter name="port">8888</parameter>
+         <parameter name="processName">CEH_BPEL_ProcessCustomer</parameter>
+         <parameter name="host">INEDEC-MOH-03</parameter>
+         <parameter name="processVersion">1.0</parameter>
+         <parameter name="processDomain">default</parameter>
+      </parameters>
+      <operations>
+         <operationInfo guid="22FBDD100A4B11DEBFADD700E03E6C34" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0.process" wsdlOperation="process" mepDisplayName="One Way" mep="OneWay">
+            <request validate="false" element="tns:envelope" xmlns:tns="http://schemas.emerson.com/common/envelope"/>
+         </operationInfo>
+      </operations>
+   </service>
+   <service name="CEH_BPEL_ProcessProduct_1_0" guid="4C017FA007E711DEBF71698EE00777E6" qname="BPELSystem.default.CEH_BPEL_ProcessProduct.CEH_BPEL_ProcessProduct_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED" dirty="true">
+      <description>BPEL Service for CEH_BPEL_ProcessProduct</description>
+      <versionInfo>
+         <ID>1236089587896</ID>
+         <lastModifiedTime>Tue Mar 03 19:43:07 IST 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <parent guid="4BFA53B107E711DEBF71698EE00777E6" qname="BPELSystem.default.CEH_BPEL_ProcessProduct" type="serviceGroup"/>
+      <serviceDefinition>
+         <wsdlURL>http://INEDEC-MLAP-45.emrcorp.local/orabpel/default/CEH_BPEL_ProcessProduct/1.0/CEH_BPEL_ProcessProduct?wsdl</wsdlURL>
+         <portType xmlns:tns="http://bpel.oracle.com/CEH_BPEL_ProcessProduct">tns:CEH_BPEL_ProcessProduct</portType>
+         <endpointDefinition>
+            <concreteWSDLURL>/esb/wsil/BPELSystem/default/CEH_BPEL_ProcessProduct/CEH_BPEL_ProcessProduct_1_0?wsdl</concreteWSDLURL>
+            <soapEndpointURI>http://localhost:8888/event/BPELSystem/default/CEH_BPEL_ProcessProduct/CEH_BPEL_ProcessProduct_1_0</soapEndpointURI>
+         </endpointDefinition>
+      </serviceDefinition>
+      <parameters>
+         <parameter name="port">8888</parameter>
+         <parameter name="processName">CEH_BPEL_ProcessProduct</parameter>
+         <parameter name="host">INEDEC-MOH-03</parameter>
+         <parameter name="processVersion">1.0</parameter>
+         <parameter name="processDomain">default</parameter>
+      </parameters>
+      <operations>
+         <operationInfo guid="5343419007E711DEBF71698EE00777E6" qname="BPELSystem.default.CEH_BPEL_ProcessProduct.CEH_BPEL_ProcessProduct_1_0.process" wsdlOperation="process" mepDisplayName="One Way" mep="OneWay">
+            <request validate="false" element="tns:envelope" xmlns:tns="http://schemas.emerson.com/common/envelope"/>
+         </operationInfo>
+      </operations>
+   </service>
+</project_metadata>

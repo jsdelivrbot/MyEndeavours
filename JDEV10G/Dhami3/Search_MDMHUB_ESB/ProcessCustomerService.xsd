@@ -1,0 +1,34 @@
+<xs:schema xmlns="http://www.gssamerica.com/mdm/esbprocesscustomer" elementFormDefault="unqualified"
+     targetNamespace="http://www.gssamerica.com/mdm/esbprocesscustomer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import schemaLocation="ProcessCustomerPartyMaster.xsd" namespace="http://www.openapplications.org/oagis/9"/>
+    <xs:element name="ESBProcessCustomerRequest" type="ESBProcessCustomerRequestType"/>
+    <xs:complexType name="ESBRequestHeaderType">
+        <xs:sequence>
+            <xs:element name="srcID" type="xs:string"/>
+            <xs:element name="requestType" type="xs:string"/>
+            <xs:element minOccurs="0" name="configData" type="configurationDataType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ESBProcessCustomerRequestType">
+        <xs:sequence>
+            <xs:element name="header" type="ESBRequestHeaderType"/>
+            <xs:element name="body" type="ESBProcessCustomerRequestBodyType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ESBProcessCustomerRequestBodyType">
+        <xs:sequence>
+            <xs:element xmlns:q1="http://www.openapplications.org/oagis/9" ref="q1:ProcessCustomerPartyMaster"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="configurationDataType">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="element" type="configurationDataElementType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="configurationDataElementType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="value" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,48 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="VDST_JMSQ_DEQ_ChannelPartnerEBS_RS" guid="1A2B95B1667E11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_DEQ_ChannelPartnerEBS_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service VDST_JMSQ_DEQ_ChannelPartnerEBS</description>
+   <versionInfo>
+      <ID>1263818870839</ID>
+      <lastModifiedTime>Mon Jan 18 12:47:50 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VDSTv1_VDST_ESB_ChannelPartnerEBS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="E280CA90667D11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>VDST_JMSQ_DEQ_ChannelPartnerEBS.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQ_DEQ_ChannelPartnerEBS/">tns:Consume_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/VDSTSystem_EBSServices/VDSTSysGrp_ChannelPartner/VDST_JMSQ_DEQ_ChannelPartnerEBS_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:80/event/VDSTSystem_EBSServices/VDSTSysGrp_ChannelPartner/VDST_JMSQ_DEQ_ChannelPartnerEBS_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="1A3532A0667E11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_DEQ_ChannelPartnerEBS_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+         <routingRules>
+            <routingRule guid="2C98E170667F11DE8F34ADC545AA0A86" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="22F513A0667F11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_File_PUT_Test.Write" serviceGUID="22F058B0667F11DE8F34ADC545AA0A86" serviceQName="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_File_PUT_Test" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>Transform_AddExecutionUnit.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="33FB98E0667F11DE8F34ADC545AA0A86" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="BEDD2510667E11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_ENQ_ChannelPartnerProvABCS.Produce_Message" serviceGUID="BEDAB410667E11DE8F34ADC545AA0A86" serviceQName="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_ENQ_ChannelPartnerProvABCS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/imp1:envelope/imp1:header/imp1:EBOName) = string('http://schema.emerson.com/VDST_FTP_GET_ChannelPartnerList:CPL-Load')};{ namespace imp1=http://schemas.emerson.com/common/envelope }</filterExpression>
+               <transformation>
+                  <xslFileURL>Transform_AddExecutionUnit.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="AFCD1C6066F111DEBFF2DB4B8EF77A99" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="8AF5321066F111DEBFF2DB4B8EF77A99" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_ENQ_ChannelPartner_PartMap.Produce_Message" serviceGUID="8AF0772166F111DEBFF2DB4B8EF77A99" serviceQName="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_ENQ_ChannelPartner_PartMap" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/imp1:envelope/imp1:header/imp1:EBOName) = string('http://schema.emerson.com/VDST_FTP_GET_ChannelPartner_PartMap:CPM-Load')};{ namespace imp1=http://schemas.emerson.com/common/envelope }</filterExpression>
+               <transformation>
+                  <xslFileURL>Transform_AddExecution_PartMap.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

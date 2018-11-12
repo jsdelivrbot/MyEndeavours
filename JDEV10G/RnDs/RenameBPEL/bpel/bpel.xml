@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="RenameBPEL1" src="RenameBPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="Pick">
+            <property name="wsdlLocation">Pick.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="Pick">
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

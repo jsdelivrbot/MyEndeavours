@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="PollXMLFile_RS" guid="41EB190219F211DEAF48EB13DD37ED61" qname="DefaultSystem.PollXMLFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service PollXMLFile</description>
+   <versionInfo>
+      <ID>1238065906484</ID>
+      <lastModifiedTime>Thu Mar 26 16:41:46 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_Polling_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="8E8E403019F611DEAF48EB13DD37ED61" qname="DefaultSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>PollXMLFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/PollXMLFile/">tns:Read_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/DefaultSystem/PollXMLFile_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/DefaultSystem/PollXMLFile_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="41EFD3F019F211DEAF48EB13DD37ED61" qname="DefaultSystem.PollXMLFile_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.emerson.com/inder" element="tns:customer"/>
+         <routingRules>
+            <routingRule guid="83B2B28019F211DEAF48EB13DD37ED61" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="706B650119F211DEAF48EB13DD37ED61" qname="DefaultSystem.WriteXMLFile.Write" serviceGUID="706B650019F211DEAF48EB13DD37ED61" serviceQName="DefaultSystem.WriteXMLFile" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

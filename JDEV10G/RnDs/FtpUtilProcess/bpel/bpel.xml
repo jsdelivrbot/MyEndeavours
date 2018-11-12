@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="FtpUtilProcess" src="FtpUtilProcess.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">FtpUtilProcess.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="FtpDirGetterProcess">
+            <property name="wsdlLocation">FtpDirGetterProcess.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <configurations>
+         <property name="defaultInput" encryption="plaintext">
+            <![CDATA[        <ns1:FtpUtilProcessProcessRequest  xmlns:ns1="http://xmlns.oracle.com/FtpUtilProcess">
+            <ns1:ftp_jndi>eis/FTP/Liebert_Vendavo</ns1:ftp_jndi>
+            <ns1:ftp_dir>/infile</ns1:ftp_dir>
+            <ns1:ftp_operation>LS</ns1:ftp_operation>
+            <ns1:ftp_host></ns1:ftp_host>
+            <ns1:ftp_uid></ns1:ftp_uid>
+            <ns1:ftp_pwd></ns1:ftp_pwd>
+            <ns1:attrib1></ns1:attrib1>
+            <ns1:attrib2></ns1:attrib2>
+            <ns1:attrib3></ns1:attrib3>
+            <ns1:attrib4></ns1:attrib4>
+            <ns1:attrib5></ns1:attrib5>
+        </ns1:FtpUtilProcessProcessRequest>]]>
+         </property>
+      </configurations>
+   </BPELProcess>
+</BPELSuitcase>

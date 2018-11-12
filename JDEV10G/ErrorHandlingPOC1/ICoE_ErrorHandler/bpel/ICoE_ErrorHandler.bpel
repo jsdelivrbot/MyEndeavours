@@ -1,0 +1,300 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Oct 01 17:02:44 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ICoE_ErrorHandler"
+         targetNamespace="http://services.emerson.com/common/ICoE_ErrorHandler"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://services.emerson.com/common/ICoE_ErrorHandler"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/ICoE_DBINS_ErrorTable/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://schemas.emerson.com/common/envelope"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoEDBINSErrorTable"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:ICoE_ErrorHandler"
+                 myRole="ICoE_ErrorHandlerProvider"/>
+    <partnerLink name="ICoE_DBINS_ErrorTable"
+                 partnerRole="ICoE_DBINS_ErrorTable_role"
+                 partnerLinkType="ns1:ICoE_DBINS_ErrorTable_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="OnMessage_sumbitEBHError"
+              messageType="client:ICoE_ErrorHandlerRequestMessage_EBH"/>
+    <variable name="OnMessage_submitError"
+              messageType="client:ICoE_ErrorHandlerResponseMessage_Detail"/>
+    <variable name="G_Insert_ICoEDB_InputVariable"
+              messageType="ns1:ErrorTableCollection_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <pick name="Pick_Error" createInstance="yes">
+      <onMessage portType="client:ICoE_ErrorHandler" operation="sumbitEBHError"
+                 variable="OnMessage_sumbitEBHError" partnerLink="client">
+        <assign name="Assign_EBM_Error">
+          <copy>
+            <from expression="ora:generateGUID()"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:guuid"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:InteractionID"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:account"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:process/@ns3:type"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:processType"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:process/@ns3:processID"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:processId"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:environment"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:environment"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:process"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:processName"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:error[last()]/ns3:errorMessageCode"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorCode"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:error[last()]/ns3:errorException"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorSummary"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:error[last()]/ns3:severity"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorSeverity"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:error[last()]/ns3:errorTime"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorDatetime"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:error[last()]/ns3:errorMessage"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorMessage"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:ErrorDetails/ns3:error[last()]/ns3:errorStacktrace"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorStacktrace"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:EBMID"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageId"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:EBOName"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageType"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:Sender/ns3:ID"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageSourceId"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_sumbitEBHError" part="payload"
+                  query="/ns3:envelope/ns3:header/ns3:CreationDateTime"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageCreationDatetime"/>
+          </copy>
+        </assign>
+      </onMessage>
+      <onMessage portType="client:ICoE_ErrorHandler" operation="submitError"
+                 variable="OnMessage_submitError" partnerLink="client">
+        <assign name="Assign_ErrorDetail">
+          <copy>
+            <from expression="ora:generateGUID()"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:guuid"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/account"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:account"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/processType"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:processType"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/processID"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:processId"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/environment"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:environment"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/processName"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:processName"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/errorCode"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorCode"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/errorSummary"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorSummary"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/errorSeverity"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorSeverity"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/errorDateTime"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorDatetime"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/errorDetail"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:errorMessage"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/messageID"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageId"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/messageType"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageType"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/messageSourceID"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageSourceId"/>
+          </copy>
+          <copy>
+            <from variable="OnMessage_submitError" part="payload"
+                  query="/client:errorDetails/messageCreationDateTime"/>
+            <to variable="G_Insert_ICoEDB_InputVariable"
+                part="ErrorTableCollection"
+                query="/ns2:ErrorTableCollection/ns2:ErrorTable/ns2:messageCreationDatetime"/>
+          </copy>
+        </assign>
+      </onMessage>
+    </pick>
+    <invoke name="Invoke_ICoEDB_Error" partnerLink="ICoE_DBINS_ErrorTable"
+            portType="ns1:ICoE_DBINS_ErrorTable_ptt" operation="insert"
+            inputVariable="G_Insert_ICoEDB_InputVariable"/>
+  </sequence>
+</process>

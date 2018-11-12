@@ -1,0 +1,1377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--This Schema has been generated from a DTD. A target namespace has been added to the schema.-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://TargetNamespace.com/ETH_ENQAPP_ALICE_ACK_PO" xmlns="http://TargetNamespace.com/ETH_ENQAPP_ALICE_ACK_PO" nxsd:version="DTD" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd">
+   <xs:element name="BOMNAME" type="xs:string"/>
+   <xs:element name="LEDGER" type="xs:string"/>
+   <xs:element name="VERB">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="value" fixed="ACKNOWLEDGE" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="SOSLINENUM" type="xs:string"/>
+   <xs:element name="ITEMCATID" type="xs:string"/>
+   <xs:element name="DRAWING" type="xs:string"/>
+   <xs:element name="POSITION" type="xs:string"/>
+   <xs:element name="CLSSLMNTID" type="xs:string"/>
+   <xs:element name="RQSLINENUM" type="xs:string"/>
+   <xs:element name="SHIPNOTES" type="xs:string"/>
+   <xs:element name="USUPINVFG" type="xs:string"/>
+   <xs:element name="SHIPPERNUM" type="xs:string"/>
+   <xs:element name="TRACKFLG" type="xs:string"/>
+   <xs:element name="QTETYPE" type="xs:string"/>
+   <xs:element name="MCHDOCTYPE" type="xs:string"/>
+   <xs:element name="RECEIPTID" type="xs:string"/>
+   <xs:element name="OPSTATUS" type="xs:string"/>
+   <xs:element name="CTCHWCONV" type="xs:string"/>
+   <xs:element name="SALESORDERID" type="xs:string"/>
+   <xs:element name="POENTITY" type="xs:string"/>
+   <xs:element name="RELLOCID" type="xs:string"/>
+   <xs:element name="PARENTID" type="xs:string"/>
+   <xs:element name="QUALFNTYPE" type="xs:string"/>
+   <xs:element name="COUNTY" type="xs:string"/>
+   <xs:element name="QTEREVISON" type="xs:string"/>
+   <xs:element name="PRODOSTATS" type="xs:string"/>
+   <xs:element name="RESORCEUSE" type="xs:string"/>
+   <xs:element name="FEATUREID" type="xs:string"/>
+   <xs:element name="PRODSEQNUM" type="xs:string"/>
+   <xs:element name="PARENTLOT">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ECOPRIORITY" type="xs:string"/>
+   <xs:element name="PRODCTLINE" type="xs:string"/>
+   <xs:element name="UNIT" type="xs:string"/>
+   <xs:element name="RSBLINENUM" type="xs:string"/>
+   <xs:element name="REQLINENUM" type="xs:string"/>
+   <xs:element name="COMPREFDES" type="xs:string"/>
+   <xs:element name="SIGN" type="xs:string"/>
+   <xs:element name="ITEM" type="xs:string"/>
+   <xs:element name="CATALGNAME" type="xs:string"/>
+   <xs:element name="FAILTYPE" type="xs:string"/>
+   <xs:element name="MACHINEID" type="xs:string"/>
+   <xs:element name="SCHLINENUM" type="xs:string"/>
+   <xs:element name="REGION" type="xs:string"/>
+   <xs:element name="ONETIME" type="xs:string"/>
+   <xs:element name="MAINTCALID" type="xs:string"/>
+   <xs:element name="STEPNUM" type="xs:string"/>
+   <xs:element name="PRODSEQBEG" type="xs:string"/>
+   <xs:element name="ITEMDEFN" type="xs:string"/>
+   <xs:element name="HAZRDMATL" type="xs:string"/>
+   <xs:element name="ITEMSTATUS" type="xs:string"/>
+   <xs:element name="BUDGSTAT" type="xs:string"/>
+   <xs:element name="MAINTLOCID" type="xs:string"/>
+   <xs:element name="MACHSUDEP" type="xs:string"/>
+   <xs:element name="OPTIONID" type="xs:string"/>
+   <xs:element name="MINUTE" type="xs:string"/>
+   <xs:element name="SERIALNUM" type="xs:string"/>
+   <xs:element name="SHIPMATLID" type="xs:string"/>
+   <xs:element name="MACHSTATE" type="xs:string"/>
+   <xs:element name="WARRANTY" type="xs:string"/>
+   <xs:element name="CTCHWFLAG" type="xs:string"/>
+   <xs:element name="USERID" type="xs:string"/>
+   <xs:element name="ROUTINGVAR" type="xs:string"/>
+   <xs:element name="PAYMETHOD" type="xs:string"/>
+   <xs:element name="OPERATNID" type="xs:string"/>
+   <xs:element name="PARTIALSHP" type="xs:string"/>
+   <xs:element name="RFQLNSTAT" type="xs:string"/>
+   <xs:element name="FRMITMCLSS" type="xs:string"/>
+   <xs:element name="WAGEGROUP" type="xs:string"/>
+   <xs:element name="RSPSDLNUM" type="xs:string"/>
+   <xs:element name="MSGID" type="xs:string"/>
+   <xs:element name="ITMFTVAL" type="xs:string"/>
+   <xs:element name="SHPUNITTOT" type="xs:string"/>
+   <xs:element name="ECOTYPE" type="xs:string"/>
+   <xs:element name="DESCRIPTN" type="xs:string"/>
+   <xs:element name="BOMUSAGE" type="xs:string"/>
+   <xs:element name="USERAREA">
+      <xs:complexType mixed="true">
+         <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:any/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="MOPRIORITY" type="xs:string"/>
+   <xs:element name="PARTNRROLE" type="xs:string"/>
+   <xs:element name="MSDSID" type="xs:string"/>
+   <xs:element name="TELEPHONE">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="SHIPPERID" type="xs:string"/>
+   <xs:element name="DELIVERTO" type="xs:string"/>
+   <xs:element name="EXPIREFLAG" type="xs:string"/>
+   <xs:element name="PACKNGDESC" type="xs:string"/>
+   <xs:element name="FTDATATYPE" type="xs:string"/>
+   <xs:element name="RFQREVISON" type="xs:string"/>
+   <xs:element name="MACHCLASS" type="xs:string"/>
+   <xs:element name="MOSTATUS" type="xs:string"/>
+   <xs:element name="QUALIF" type="xs:string"/>
+   <xs:element name="NUMOFDEC" type="xs:string"/>
+   <xs:element name="GLENTITYD" type="xs:string"/>
+   <xs:element name="ROUTEID" type="xs:string"/>
+   <xs:element name="BUYERID" type="xs:string"/>
+   <xs:element name="XREFTYPEID" type="xs:string"/>
+   <xs:element name="POSTALCODE" type="xs:string"/>
+   <xs:element name="YEAR" type="xs:string"/>
+   <xs:element name="FRGHTTERMS" type="xs:string"/>
+   <xs:element name="PICLINENUM" type="xs:string"/>
+   <xs:element name="POSUBLINE">
+      <xs:complexType>
+         <xs:choice>
+            <xs:sequence>
+               <xs:element ref="ITEM"/>
+               <xs:element minOccurs="0" ref="ITEMX"/>
+               <xs:element minOccurs="0" ref="UPC"/>
+            </xs:sequence>
+            <xs:sequence>
+               <xs:element ref="ITEMX"/>
+               <xs:element minOccurs="0" ref="UPC"/>
+            </xs:sequence>
+            <xs:element ref="UPC"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:choice>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="INVENDISP" type="xs:string"/>
+   <xs:element name="GLENTITYS" type="xs:string"/>
+   <xs:element name="FIXEDASSET" type="xs:string"/>
+   <xs:element name="COMMODITY">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="SUPERVISOR" type="xs:string"/>
+   <xs:element name="APPROVERID" type="xs:string"/>
+   <xs:element name="SHPUNITSEQ" type="xs:string"/>
+   <xs:element name="RSLINENUM" type="xs:string"/>
+   <xs:element name="RFQID" type="xs:string"/>
+   <xs:element name="TERMFLAG" type="xs:string"/>
+   <xs:element name="OPERATTYPE" type="xs:string"/>
+   <xs:element name="BSR">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="VERB"/>
+            <xs:element ref="NOUN"/>
+            <xs:element ref="REVISION"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TRAKNGFLAG" type="xs:string"/>
+   <xs:element name="RFQTYPE" type="xs:string"/>
+   <xs:element name="OVERIDPRIC" type="xs:string"/>
+   <xs:element name="WORKORDER" type="xs:string"/>
+   <xs:element name="PRODORDER" type="xs:string"/>
+   <xs:element name="ACCTTYPE" type="xs:string"/>
+   <xs:element name="FLEXBKTID" type="xs:string"/>
+   <xs:element name="LINENUM" type="xs:string"/>
+   <xs:element name="MCHDOCID" type="xs:string"/>
+   <xs:element name="POLNSTATUS" type="xs:string"/>
+   <xs:element name="TXANALYSIS" type="xs:string"/>
+   <xs:element name="PSCLINENUM" type="xs:string"/>
+   <xs:element name="RELMACHID" type="xs:string"/>
+   <xs:element name="ACKNOWLEDGE_PO">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="POORDERHDR"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="POORDERLIN"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="KANBAN" type="xs:string"/>
+   <xs:element name="SOLNSTATUS" type="xs:string"/>
+   <xs:element name="TEMPRATURE">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="VALUE"/>
+            <xs:element ref="NUMOFDEC"/>
+            <xs:element ref="SIGN"/>
+         </xs:sequence>
+         <xs:attribute name="qualifier" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="ACTUAL"/>
+                  <xs:enumeration value="DELIVERY"/>
+                  <xs:enumeration value="LOADING"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="type" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="CELSIUS"/>
+                  <xs:enumeration value="FAHRENHEIT"/>
+                  <xs:enumeration value="KELVIN"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="OLDITMREV" type="xs:string"/>
+   <xs:element name="VALUECLASS" type="xs:string"/>
+   <xs:element name="DAY" type="xs:string"/>
+   <xs:element name="CONTACT">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="NAME"/>
+            <xs:element minOccurs="0" ref="CONTCTTYPE"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" ref="EMAIL"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="FAX"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="NAME"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="TELEPHONE"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="VOUCHER" type="xs:string"/>
+   <xs:element name="OVERTIME" type="xs:string"/>
+   <xs:element name="EMPLOYEEID" type="xs:string"/>
+   <xs:element name="DENSITYFAC" type="xs:string"/>
+   <xs:element name="SALESORDID" type="xs:string"/>
+   <xs:element name="ITEMVAR" type="xs:string"/>
+   <xs:element name="SHIPPRIOR" type="xs:string"/>
+   <xs:element name="CONFIRMATION" type="xs:string"/>
+   <xs:element name="STEPTYPE" type="xs:string"/>
+   <xs:element name="TAXCODE" type="xs:string"/>
+   <xs:element name="ENDITEMID" type="xs:string"/>
+   <xs:element name="QUALFNVAL" type="xs:string"/>
+   <xs:element name="SAFTYCLASS" type="xs:string"/>
+   <xs:element name="LABORID" type="xs:string"/>
+   <xs:element name="UOMVALUE" type="xs:string"/>
+   <xs:element name="PROXMONTH" type="xs:string"/>
+   <xs:element name="REPRTGFLAG" type="xs:string"/>
+   <xs:element name="INVLINENUM" type="xs:string"/>
+   <xs:element name="ORGID" type="xs:string"/>
+   <xs:element name="ROUTEVAR" type="xs:string"/>
+   <xs:element name="SPLITABLE" type="xs:string"/>
+   <xs:element name="TITLE" type="xs:string"/>
+   <xs:element name="ALLOWTYPE" type="xs:string"/>
+   <xs:element name="TOITMCLSS" type="xs:string"/>
+   <xs:element name="SOLINENUM" type="xs:string"/>
+   <xs:element name="FILENAME" type="xs:string"/>
+   <xs:element name="CURRTO" type="xs:string"/>
+   <xs:element name="SAFETYTYPE" type="xs:string"/>
+   <xs:element name="NOTES">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="COMPLEVEL" type="xs:string"/>
+   <xs:element name="RESORCTYP" type="xs:string"/>
+   <xs:element name="DOCUMENTID" type="xs:string"/>
+   <xs:element name="ROUTELEVEL">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="FRMSITELVL">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="RECEPTDISP" type="xs:string"/>
+   <xs:element name="PRODORDID" type="xs:string"/>
+   <xs:element name="CLASSLEVEL" type="xs:string"/>
+   <xs:element name="REASONCODE" type="xs:string"/>
+   <xs:element name="OTELIGIBLE" type="xs:string"/>
+   <xs:element name="QUALFNID" type="xs:string"/>
+   <xs:element name="RSPREVNUM" type="xs:string"/>
+   <xs:element name="INDLINENUM" type="xs:string"/>
+   <xs:element name="MACHID" type="xs:string"/>
+   <xs:element name="RECLINENUM" type="xs:string"/>
+   <xs:element name="FRGHTITEM" type="xs:string"/>
+   <xs:element name="RFQIDX" type="xs:string"/>
+   <xs:element name="TRNSFRTYPE" type="xs:string"/>
+   <xs:element name="PARTNRRATG" type="xs:string"/>
+   <xs:element name="BOMREVISON" type="xs:string"/>
+   <xs:element name="ACTTYPE" type="xs:string"/>
+   <xs:element name="SCHEDULEID" type="xs:string"/>
+   <xs:element name="REF">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="CONTRACTB" type="xs:string"/>
+   <xs:element name="DISCRPTYPE" type="xs:string"/>
+   <xs:element name="DOCTYPE" type="xs:string"/>
+   <xs:element name="MAINTORDID" type="xs:string"/>
+   <xs:element name="LINEFEED" type="xs:string"/>
+   <xs:element name="BOMTYPE" type="xs:string"/>
+   <xs:element name="CNTCTTYPE" type="xs:string"/>
+   <xs:element name="MATCHTYPE" type="xs:string"/>
+   <xs:element name="CONTRACTS" type="xs:string"/>
+   <xs:element name="EMPCATEGRY" type="xs:string"/>
+   <xs:element name="CHARGE">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="OPERAMT"/>
+            <xs:element minOccurs="0" ref="CHARGEID"/>
+            <xs:element minOccurs="0" ref="CHARGETYPE"/>
+            <xs:element minOccurs="0" ref="CHGLINENUM"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="DISTRIBUTN"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ROUTINGREV" type="xs:string"/>
+   <xs:element name="RFQLINENUM" type="xs:string"/>
+   <xs:element name="RELITEMID" type="xs:string"/>
+   <xs:element name="CLSSELMT">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="MOPARENTID" type="xs:string"/>
+   <xs:element name="REVISION">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="value" fixed="008" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="SUBLINENUM" type="xs:string"/>
+   <xs:element name="ITEMX" type="xs:string"/>
+   <xs:element name="OWNRSHPCDE" type="xs:string"/>
+   <xs:element name="SHPMTLDESC" type="xs:string"/>
+   <xs:element name="PERSONCODE" type="xs:string"/>
+   <xs:element name="APPROVE" type="xs:string"/>
+   <xs:element name="BOMSTATUS" type="xs:string"/>
+   <xs:element name="FAILUREID" type="xs:string"/>
+   <xs:element name="ITEMDESC" type="xs:string"/>
+   <xs:element name="ROUTINGID" type="xs:string"/>
+   <xs:element name="CHARGEID" type="xs:string"/>
+   <xs:element name="WAGETYPE" type="xs:string"/>
+   <xs:element name="DATETIME">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="YEAR"/>
+            <xs:element ref="MONTH"/>
+            <xs:element ref="DAY"/>
+            <xs:element ref="HOUR"/>
+            <xs:element ref="MINUTE"/>
+            <xs:element ref="SECOND"/>
+            <xs:element ref="SUBSECOND"/>
+            <xs:element ref="TIMEZONE"/>
+         </xs:sequence>
+         <xs:attribute name="qualifier" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="ACCOUNTING"/>
+                  <xs:enumeration value="ACTEND"/>
+                  <xs:enumeration value="ACTSTART"/>
+                  <xs:enumeration value="APPREQ"/>
+                  <xs:enumeration value="APPROVAL"/>
+                  <xs:enumeration value="AVAILABLE"/>
+                  <xs:enumeration value="BKTEND"/>
+                  <xs:enumeration value="BKTSTART"/>
+                  <xs:enumeration value="CANCEL"/>
+                  <xs:enumeration value="CHANGEDATE"/>
+                  <xs:enumeration value="COMPDATE"/>
+                  <xs:enumeration value="CONSUME"/>
+                  <xs:enumeration value="CREATION"/>
+                  <xs:enumeration value="CUMULATIVE"/>
+                  <xs:enumeration value="DELIVACT"/>
+                  <xs:enumeration value="DELIVSCHED"/>
+                  <xs:enumeration value="DISCNT"/>
+                  <xs:enumeration value="DOCUMENT"/>
+                  <xs:enumeration value="DUE"/>
+                  <xs:enumeration value="EARLSTEFF"/>
+                  <xs:enumeration value="EARLSTSHIP"/>
+                  <xs:enumeration value="EFFECTIVE"/>
+                  <xs:enumeration value="ENGCHG"/>
+                  <xs:enumeration value="EXECFINISH"/>
+                  <xs:enumeration value="EXECSTART"/>
+                  <xs:enumeration value="EXPIRATION"/>
+                  <xs:enumeration value="FAILDATE"/>
+                  <xs:enumeration value="FORECASTF"/>
+                  <xs:enumeration value="FORECASTS"/>
+                  <xs:enumeration value="FROM"/>
+                  <xs:enumeration value="GENERATION"/>
+                  <xs:enumeration value="IMPL"/>
+                  <xs:enumeration value="INVOICE"/>
+                  <xs:enumeration value="JOBDUE"/>
+                  <xs:enumeration value="LABORFINSH"/>
+                  <xs:enumeration value="LABORSTART"/>
+                  <xs:enumeration value="LASTUSED"/>
+                  <xs:enumeration value="LOADING"/>
+                  <xs:enumeration value="MATCHING"/>
+                  <xs:enumeration value="MSMENTDATE"/>
+                  <xs:enumeration value="NEEDDELV"/>
+                  <xs:enumeration value="OPFINISH"/>
+                  <xs:enumeration value="OPSTART"/>
+                  <xs:enumeration value="PAYEND"/>
+                  <xs:enumeration value="PLANEND"/>
+                  <xs:enumeration value="PLANSTART"/>
+                  <xs:enumeration value="PO"/>
+                  <xs:enumeration value="PROMDELV"/>
+                  <xs:enumeration value="PROMSHIP"/>
+                  <xs:enumeration value="PYMTTERM"/>
+                  <xs:enumeration value="RECEIVED"/>
+                  <xs:enumeration value="REPORTDATE"/>
+                  <xs:enumeration value="REPORTNGFN"/>
+                  <xs:enumeration value="REPORTNGST"/>
+                  <xs:enumeration value="REQUIRED"/>
+                  <xs:enumeration value="RESORCDWNF"/>
+                  <xs:enumeration value="RESORCDWNS"/>
+                  <xs:enumeration value="RSPDDATE"/>
+                  <xs:enumeration value="RSPDOCGEN"/>
+                  <xs:enumeration value="SCHEND"/>
+                  <xs:enumeration value="SCHSTART"/>
+                  <xs:enumeration value="SETUPFINSH"/>
+                  <xs:enumeration value="SETUPSTART"/>
+                  <xs:enumeration value="SHIP"/>
+                  <xs:enumeration value="SHIPSCHED"/>
+                  <xs:enumeration value="STATUSDATE"/>
+                  <xs:enumeration value="TEARDOWNF"/>
+                  <xs:enumeration value="TEARDOWNS"/>
+                  <xs:enumeration value="TO"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="type" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="T"/>
+                  <xs:enumeration value="F"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="index" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BOMALTID" type="xs:string"/>
+   <xs:element name="QTELINENUM" type="xs:string"/>
+   <xs:element name="DISPOSITN" type="xs:string"/>
+   <xs:element name="CATALOGRV" type="xs:string"/>
+   <xs:element name="PROJRESEL">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TAXEXEMPT" type="xs:string"/>
+   <xs:element name="OPTCLSSID" type="xs:string"/>
+   <xs:element name="PREFERENCE" type="xs:string"/>
+   <xs:element name="WORKCENTER" type="xs:string"/>
+   <xs:element name="PRICELSTID" type="xs:string"/>
+   <xs:element name="CLSELMLVL" type="xs:string"/>
+   <xs:element name="POLINENUM" type="xs:string"/>
+   <xs:element name="SAVESETUP" type="xs:string"/>
+   <xs:element name="PROPERTY">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="SUFFIX" type="xs:string"/>
+   <xs:element name="CONDSTATUS" type="xs:string"/>
+   <xs:element name="EXCPLINNUM" type="xs:string"/>
+   <xs:element name="PMID" type="xs:string"/>
+   <xs:element name="TOSITELVL">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="DUNSNUMBER" type="xs:string"/>
+   <xs:element name="LOTLEVEL">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="DISTCENTER" type="xs:string"/>
+   <xs:element name="RFQSTATUS" type="xs:string"/>
+   <xs:element name="TERMID" type="xs:string"/>
+   <xs:element name="SHIFT" type="xs:string"/>
+   <xs:element name="PARTNRID" type="xs:string"/>
+   <xs:element name="NEWITMREV" type="xs:string"/>
+   <xs:element name="DAYSNUM" type="xs:string"/>
+   <xs:element name="SYNCIND" type="xs:string"/>
+   <xs:element name="FTVALIND" type="xs:string"/>
+   <xs:element name="FUND" type="xs:string"/>
+   <xs:element name="PRODSEQEND" type="xs:string"/>
+   <xs:element name="TRACKINGID" type="xs:string"/>
+   <xs:element name="LINETYPE" type="xs:string"/>
+   <xs:element name="CONTAINRID" type="xs:string"/>
+   <xs:element name="OPRGRPNAME" type="xs:string"/>
+   <xs:element name="CITY" type="xs:string"/>
+   <xs:element name="ACKLINE">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="DATETIME"/>
+            <xs:element minOccurs="0" ref="DATETIME"/>
+            <xs:element minOccurs="0" ref="QUANTITY"/>
+            <xs:element ref="ACKCODE"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="NOTES"/>
+            <xs:element minOccurs="0" ref="SALESORDID"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="APPROVED" type="xs:string"/>
+   <xs:element name="SALESORG">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="NEWREVFLAG" type="xs:string"/>
+   <xs:element name="ACCTYEAR" type="xs:string"/>
+   <xs:element name="RESORCKIN" type="xs:string"/>
+   <xs:element name="BACKORDIND" type="xs:string"/>
+   <xs:element name="EMPSTATUS" type="xs:string"/>
+   <xs:element name="PRINT" type="xs:string"/>
+   <xs:element name="JPID" type="xs:string"/>
+   <xs:element name="QTELNSTAT" type="xs:string"/>
+   <xs:element name="CURRENCY" type="xs:string"/>
+   <xs:element name="CONSUMPTN" type="xs:string"/>
+   <xs:element name="RESORCLVL" type="xs:string"/>
+   <xs:element name="SUBSECOND" type="xs:string"/>
+   <xs:element name="MANDATORY" type="xs:string"/>
+   <xs:element name="BOMID" type="xs:string"/>
+   <xs:element name="POORDERLIN">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:sequence>
+               <xs:element ref="QUANTITY"/>
+               <xs:element minOccurs="0" ref="DATETIME"/>
+               <xs:element minOccurs="0" ref="OPERAMT"/>
+               <xs:element ref="POLINENUM"/>
+               <xs:element minOccurs="0" ref="DRAWING"/>
+               <xs:element minOccurs="0" ref="HAZRDMATL"/>
+               <xs:element minOccurs="0" ref="ITEMRV"/>
+               <xs:element minOccurs="0" ref="ITEMRVX"/>
+               <xs:element minOccurs="0" maxOccurs="unbounded" ref="NOTES"/>
+               <xs:element minOccurs="0" ref="PACKING"/>
+               <xs:element minOccurs="0" ref="POLNSTATUS"/>
+               <xs:element minOccurs="0" ref="TAXWHEXMPT"/>
+            </xs:sequence>
+            <xs:sequence>
+               <xs:element ref="DESCRIPTN"/>
+               <xs:element minOccurs="0" ref="ITEM"/>
+               <xs:element minOccurs="0" ref="ITEMX"/>
+               <xs:element minOccurs="0" ref="UPC"/>
+            </xs:sequence>
+            <xs:sequence>
+               <xs:element ref="ITEM"/>
+               <xs:element minOccurs="0" ref="ITEMX"/>
+               <xs:element minOccurs="0" ref="UPC"/>
+            </xs:sequence>
+            <xs:sequence>
+               <xs:element ref="ITEMX"/>
+               <xs:element minOccurs="0" ref="UPC"/>
+            </xs:sequence>
+            <xs:choice>
+               <xs:element ref="UPC"/>
+               <xs:element minOccurs="0" ref="USERAREA"/>
+               <xs:element minOccurs="0" maxOccurs="unbounded" ref="ACKLINE"/>
+               <xs:element minOccurs="0" maxOccurs="unbounded" ref="ATTCHREF"/>
+            </xs:choice>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="CHARGE"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="DISTRIBUTN"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="PARTNER"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="POTERM"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="POSUBLINE"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="POLINESCHD"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="INQUEUEID" type="xs:string"/>
+   <xs:element name="PRICETYPE" type="xs:string"/>
+   <xs:element name="EMPQUALIF" type="xs:string"/>
+   <xs:element name="CMPRSNID" type="xs:string"/>
+   <xs:element name="USERITEMDESCRIPTN" type="xs:string"/>
+   <xs:element name="FTVALQUAL" type="xs:string"/>
+   <xs:element name="DOCUMENTRV" type="xs:string"/>
+   <xs:element name="FIELDID" type="xs:string"/>
+   <xs:element name="QTEID" type="xs:string"/>
+   <xs:element name="ITEMCLASSID" type="xs:string"/>
+   <xs:element name="LOADPOINT" type="xs:string"/>
+   <xs:element name="EMAIL" type="xs:string"/>
+   <xs:element name="EXCPTNCODE" type="xs:string"/>
+   <xs:element name="COSTTYPE" type="xs:string"/>
+   <xs:element name="PRDLINENUM" type="xs:string"/>
+   <xs:element name="POORDERHDR">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="DATETIME"/>
+            <xs:element minOccurs="0" ref="OPERAMT"/>
+            <xs:element ref="POID"/>
+            <xs:element ref="POTYPE"/>
+            <xs:element minOccurs="0" ref="ACKREQUEST"/>
+            <xs:element minOccurs="0" ref="CONTRACTB"/>
+            <xs:element minOccurs="0" ref="CONTRACTS"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="NOTES"/>
+            <xs:element minOccurs="0" ref="OPRAMTAUTH"/>
+            <xs:element minOccurs="0" ref="PORELEASE"/>
+            <xs:element minOccurs="0" ref="TAXWHEXMPT"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+            <xs:element ref="ACKHEADER"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ATTCHREF"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="CHARGE"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="PARTNER"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="POTERM"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="PLANNERID" type="xs:string"/>
+   <xs:element name="EXPORTLIC" type="xs:string"/>
+   <xs:element name="WRKSCHDID" type="xs:string"/>
+   <xs:element name="CLASSFN">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="SOSTATUS" type="xs:string"/>
+   <xs:element name="SHPUNITSTS" type="xs:string"/>
+   <xs:element name="LANGUAGE" type="xs:string"/>
+   <xs:element name="DIVISION" type="xs:string"/>
+   <xs:element name="FAILCODE" type="xs:string"/>
+   <xs:element name="REQLNSTAT" type="xs:string"/>
+   <xs:element name="TOPARTY" type="xs:string"/>
+   <xs:element name="COMMENTS" type="xs:string"/>
+   <xs:element name="RSLINETYPE" type="xs:string"/>
+   <xs:element name="CLSSSCHMID" type="xs:string"/>
+   <xs:element name="ITEMTYPE" type="xs:string"/>
+   <xs:element name="ADDRESS">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ADDRLINE"/>
+            <xs:element minOccurs="0" ref="ADDRTYPE"/>
+            <xs:element minOccurs="0" ref="CITY"/>
+            <xs:element minOccurs="0" ref="COUNTRY"/>
+            <xs:element minOccurs="0" ref="COUNTY"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="FAX"/>
+            <xs:element minOccurs="0" ref="POSTALCODE"/>
+            <xs:element minOccurs="0" ref="REGION"/>
+            <xs:element minOccurs="0" ref="STATEPROVN"/>
+            <xs:element minOccurs="0" ref="TAXJRSDCTN"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="TELEPHONE"/>
+            <xs:element minOccurs="0" ref="URL"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="REQUESTER" type="xs:string"/>
+   <xs:element name="BUDGVER" type="xs:string"/>
+   <xs:element name="CONTCTTYPE" type="xs:string"/>
+   <xs:element name="BUDGTXN" type="xs:string"/>
+   <xs:element name="DATAAREA">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="ACKNOWLEDGE_PO"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="UPCPKGIND" type="xs:string"/>
+   <xs:element name="UPDTWIPFG" type="xs:string"/>
+   <xs:element name="NAME">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="OPERATNSEQ" type="xs:string"/>
+   <xs:element name="DISPOSITON" type="xs:string"/>
+   <xs:element name="EMPNAME" type="xs:string"/>
+   <xs:element name="ACCTPERIOD" type="xs:string"/>
+   <xs:element name="TIMEZONE" type="xs:string"/>
+   <xs:element name="RSPLINNUM" type="xs:string"/>
+   <xs:element name="INMRPPLAN" type="xs:string"/>
+   <xs:element name="GEOGRAPHY" type="xs:string"/>
+   <xs:element name="POTERM">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:sequence>
+               <xs:choice>
+                  <xs:sequence>
+                     <xs:element minOccurs="0" ref="DESCRIPTN"/>
+                     <xs:element minOccurs="0" ref="TERMID"/>
+                  </xs:sequence>
+                  <xs:sequence>
+                     <xs:element ref="DAYOFMONTH"/>
+                     <xs:element ref="PROXMONTH"/>
+                  </xs:sequence>
+               </xs:choice>
+               <xs:element ref="DAYSNUM"/>
+            </xs:sequence>
+            <xs:choice>
+               <xs:element ref="OPERAMT"/>
+               <xs:element ref="QUANTITY"/>
+            </xs:choice>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="USEUPITEM" type="xs:string"/>
+   <xs:element name="OUTQUEUEID" type="xs:string"/>
+   <xs:element name="COSTCENTER" type="xs:string"/>
+   <xs:element name="PROJTXTYPE" type="xs:string"/>
+   <xs:element name="TAXID" type="xs:string"/>
+   <xs:element name="AUTHID" type="xs:string"/>
+   <xs:element name="VALUE" type="xs:string"/>
+   <xs:element name="INSPECTRID" type="xs:string"/>
+   <xs:element name="JEID" type="xs:string"/>
+   <xs:element name="PUBLISHER" type="xs:string"/>
+   <xs:element name="HRORG">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="DISTRIBUTN">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="OPERAMT"/>
+            <xs:element minOccurs="0" ref="BUSNAREA"/>
+            <xs:element minOccurs="0" ref="COSTCENTER"/>
+            <xs:element minOccurs="0" ref="DEPARTMENT"/>
+            <xs:element minOccurs="0" ref="DIVISION"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ELEMENT"/>
+            <xs:element minOccurs="0" ref="FUND"/>
+            <xs:element minOccurs="0" ref="GEOGRAPHY"/>
+            <xs:element minOccurs="0" ref="GLENTITYS"/>
+            <xs:element minOccurs="0" ref="GLNOMACCT"/>
+            <xs:element minOccurs="0" ref="PROFITCTR"/>
+            <xs:element minOccurs="0" ref="PROJECT"/>
+            <xs:element minOccurs="0" ref="UNIT"/>
+            <xs:element minOccurs="0" ref="WAREHOUSE"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="FILETYPE" type="xs:string"/>
+   <xs:element name="CLASSFNID" type="xs:string"/>
+   <xs:element name="PSBLINENUM" type="xs:string"/>
+   <xs:element name="JOBCODE" type="xs:string"/>
+   <xs:element name="TAXJRSDCTN" type="xs:string"/>
+   <xs:element name="TOOLCLASS" type="xs:string"/>
+   <xs:element name="OPERAMT">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="VALUE"/>
+            <xs:element ref="NUMOFDEC"/>
+            <xs:element ref="SIGN"/>
+            <xs:element ref="CURRENCY"/>
+            <xs:element ref="UOMVALUE"/>
+            <xs:element ref="UOMNUMDEC"/>
+            <xs:element ref="UOM"/>
+         </xs:sequence>
+         <xs:attribute name="qualifier" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="COST"/>
+                  <xs:enumeration value="EXTENDED"/>
+                  <xs:enumeration value="FREIGHT"/>
+                  <xs:enumeration value="UNIT"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="type" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="T"/>
+                  <xs:enumeration value="F"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="OPTCLSNAME" type="xs:string"/>
+   <xs:element name="DEFLTVALUE" type="xs:string"/>
+   <xs:element name="PARTNER">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="NAME"/>
+            <xs:element minOccurs="0" ref="ONETIME"/>
+            <xs:element minOccurs="0" ref="PARTNRID"/>
+            <xs:element minOccurs="0" ref="PARTNRTYPE"/>
+            <xs:element minOccurs="0" ref="SYNCIND"/>
+            <xs:element minOccurs="0" ref="ACTIVE"/>
+            <xs:element minOccurs="0" ref="CURRENCY"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" ref="DUNSNUMBER"/>
+            <xs:element minOccurs="0" ref="GLENTITYS"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="NAME"/>
+            <xs:element minOccurs="0" ref="PARENTID"/>
+            <xs:element minOccurs="0" ref="PARTNRIDX"/>
+            <xs:element minOccurs="0" ref="PARTNRRATG"/>
+            <xs:element minOccurs="0" ref="PARTNRROLE"/>
+            <xs:element minOccurs="0" ref="PAYMETHOD"/>
+            <xs:element minOccurs="0" ref="TAXEXEMPT"/>
+            <xs:element minOccurs="0" ref="TAXID"/>
+            <xs:element minOccurs="0" ref="TERMID"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ADDRESS"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ATTCHREF"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="CONTACT"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="PRICELSTRV" type="xs:string"/>
+   <xs:element name="FIELDVALUE" type="xs:string"/>
+   <xs:element name="TRANSMETHD" type="xs:string"/>
+   <xs:element name="UNITTYPE" type="xs:string"/>
+   <xs:element name="FRMITMNM" type="xs:string"/>
+   <xs:element name="FAX">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="DOCKID" type="xs:string"/>
+   <xs:element name="INSLINENUM" type="xs:string"/>
+   <xs:element name="GLNOMACCT" type="xs:string"/>
+   <xs:element name="RESTRICTN" type="xs:string"/>
+   <xs:element name="COUNTRY" type="xs:string"/>
+   <xs:element name="LOGICALID" type="xs:string"/>
+   <xs:element name="ITEMCLASS" type="xs:string"/>
+   <xs:element name="FTGROUP" type="xs:string"/>
+   <xs:element name="REVISIONNUM" type="xs:string"/>
+   <xs:element name="ABSENCETYP" type="xs:string"/>
+   <xs:element name="SHIPPOINT" type="xs:string"/>
+   <xs:element name="ITEMRV" type="xs:string"/>
+   <xs:element name="MONTH" type="xs:string"/>
+   <xs:element name="RATETYPE" type="xs:string"/>
+   <xs:element name="IMPORTLIC" type="xs:string"/>
+   <xs:element name="CMPRSNTYPE" type="xs:string"/>
+   <xs:element name="REQUISTNID" type="xs:string"/>
+   <xs:element name="COUNTRYORG" type="xs:string"/>
+   <xs:element name="HOUR" type="xs:string"/>
+   <xs:element name="CONTNRTYPE" type="xs:string"/>
+   <xs:element name="DRCR" type="xs:string"/>
+   <xs:element name="BKTYPE" type="xs:string"/>
+   <xs:element name="FACTOR" type="xs:string"/>
+   <xs:element name="OPERATION" type="xs:string"/>
+   <xs:element name="LOTSERIAL">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="QUANTITY"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="LOTLEVEL"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="PARENTLOT"/>
+            <xs:element minOccurs="0" ref="PARENTSNUM"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="SERIALNUM"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TOITMNM" type="xs:string"/>
+   <xs:element name="EMPDEPT" type="xs:string"/>
+   <xs:element name="EXCLUSIVE" type="xs:string"/>
+   <xs:element name="ECOAPPSTAT" type="xs:string"/>
+   <xs:element name="UOM" type="xs:string"/>
+   <xs:element name="LOTSNFLAG" type="xs:string"/>
+   <xs:element name="PROJACTSTS" type="xs:string"/>
+   <xs:element name="ACKMODE" type="xs:string"/>
+   <xs:element name="BILLOLADNG" type="xs:string"/>
+   <xs:element name="UPC" type="xs:string"/>
+   <xs:element name="SAFETYID" type="xs:string"/>
+   <xs:element name="TOOLID" type="xs:string"/>
+   <xs:element name="ACKHEADER">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="SENDER"/>
+            <xs:element minOccurs="0" ref="DATETIME"/>
+            <xs:element minOccurs="0" ref="DATETIME"/>
+            <xs:element ref="ACKCODE"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="NOTES"/>
+            <xs:element minOccurs="0" ref="SALESORDID"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="STEPID" type="xs:string"/>
+   <xs:element name="CODEPAGE" type="xs:string"/>
+   <xs:element name="ACTIONCODE" type="xs:string"/>
+   <xs:element name="INSPECTDOC" type="xs:string"/>
+   <xs:element name="QSLINESTAT" type="xs:string"/>
+   <xs:element name="FREIGHTCLS" type="xs:string"/>
+   <xs:element name="BUSNAREA" type="xs:string"/>
+   <xs:element name="PROJSTATUS" type="xs:string"/>
+   <xs:element name="DOCUMNTREF">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="DOCTYPE"/>
+            <xs:element ref="DOCUMENTID"/>
+            <xs:element ref="PARTNRID"/>
+            <xs:element ref="PARTNRTYPE"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" ref="DOCUMENTRV"/>
+            <xs:element minOccurs="0" ref="LINENUM"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="NOTES"/>
+            <xs:element minOccurs="0" ref="SCHLINENUM"/>
+            <xs:element minOccurs="0" ref="SUBLINENUM"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="CARRSRVLVL" type="xs:string"/>
+   <xs:element name="OILINENUM" type="xs:string"/>
+   <xs:element name="DEFAULT" type="xs:string"/>
+   <xs:element name="SUBSFLAG" type="xs:string"/>
+   <xs:element name="PARTNRTYPE" type="xs:string"/>
+   <xs:element name="POSTATUS" type="xs:string"/>
+   <xs:element name="RECEIPTYPE" type="xs:string"/>
+   <xs:element name="URI" type="xs:string"/>
+   <xs:element name="CLSSSCHMRV" type="xs:string"/>
+   <xs:element name="URL" type="xs:string"/>
+   <xs:element name="RESOURCEID" type="xs:string"/>
+   <xs:element name="PARENTSNUM" type="xs:string"/>
+   <xs:element name="SALESPERSN" type="xs:string"/>
+   <xs:element name="ELEMENT">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="QTESTATUS" type="xs:string"/>
+   <xs:element name="NOUN">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="value" fixed="PO" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="OPTIONNAME" type="xs:string"/>
+   <xs:element name="USAGERESTN" type="xs:string"/>
+   <xs:element name="PACKING" type="xs:string"/>
+   <xs:element name="UOMNUMDEC" type="xs:string"/>
+   <xs:element name="REVITMSTAT" type="xs:string"/>
+   <xs:element name="CURRFROM" type="xs:string"/>
+   <xs:element name="FEATVAL" type="xs:string"/>
+   <xs:element name="ACKREQUEST" type="xs:string"/>
+   <xs:element name="OPRGRPTYPE" type="xs:string"/>
+   <xs:element name="DAYOFMONTH" type="xs:string"/>
+   <xs:element name="ECONAME" type="xs:string"/>
+   <xs:element name="PSDLINENUM" type="xs:string"/>
+   <xs:element name="SHIPSRVLVL" type="xs:string"/>
+   <xs:element name="TASK" type="xs:string"/>
+   <xs:element name="OPENITEM" type="xs:string"/>
+   <xs:element name="CRAFTID" type="xs:string"/>
+   <xs:element name="MSGTEXT" type="xs:string"/>
+   <xs:element name="PRIORITY" type="xs:string"/>
+   <xs:element name="RESORCGRP" type="xs:string"/>
+   <xs:element name="TAXLINE" type="xs:string"/>
+   <xs:element name="QSLINETYPE" type="xs:string"/>
+   <xs:element name="ACTIVE" type="xs:string"/>
+   <xs:element name="UOMGROUPID" type="xs:string"/>
+   <xs:element name="PRNTCLSELM" type="xs:string"/>
+   <xs:element name="FRMITMNMRV" type="xs:string"/>
+   <xs:element name="PROJECT" type="xs:string"/>
+   <xs:element name="POLINESCHD">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="DATETIME"/>
+            <xs:element ref="QUANTITY"/>
+            <xs:element minOccurs="0" ref="DESCRIPTN"/>
+            <xs:element minOccurs="0" ref="PSCLINENUM"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ORIGREF" type="xs:string"/>
+   <xs:element name="PRODOTYPE" type="xs:string"/>
+   <xs:element name="SCRAP" type="xs:string"/>
+   <xs:element name="COUNTRYDST" type="xs:string"/>
+   <xs:element name="POTYPE" type="xs:string"/>
+   <xs:element name="ATTCHREF">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:sequence>
+               <xs:element minOccurs="0" ref="DATETIME"/>
+               <xs:element minOccurs="0" ref="QUANTITY"/>
+               <xs:element minOccurs="0" ref="CMPRSNTYPE"/>
+               <xs:element minOccurs="0" ref="CMPRSNID"/>
+               <xs:element minOccurs="0" ref="DESCRIPTN"/>
+               <xs:element minOccurs="0" ref="FILETYPE"/>
+               <xs:element minOccurs="0" maxOccurs="unbounded" ref="NOTES"/>
+               <xs:element minOccurs="0" ref="TITLE"/>
+            </xs:sequence>
+            <xs:choice>
+               <xs:element ref="FILENAME"/>
+               <xs:element ref="URI"/>
+            </xs:choice>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="CHGLINENUM" type="xs:string"/>
+   <xs:element name="STATEPROVN" type="xs:string"/>
+   <xs:element name="RESORCUSE" type="xs:string"/>
+   <xs:element name="CONTNRSEAL" type="xs:string"/>
+   <xs:element name="STAGEPOINT" type="xs:string"/>
+   <xs:element name="REMITTANCE" type="xs:string"/>
+   <xs:element name="QUANTITY">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="VALUE"/>
+            <xs:element ref="NUMOFDEC"/>
+            <xs:element ref="SIGN"/>
+            <xs:element ref="UOM"/>
+         </xs:sequence>
+         <xs:attribute name="qualifier" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="ACCEPTED"/>
+                  <xs:enumeration value="ACTDUR"/>
+                  <xs:enumeration value="ACTHRS"/>
+                  <xs:enumeration value="ALLOCATED"/>
+                  <xs:enumeration value="ALLOWEDWT"/>
+                  <xs:enumeration value="AVAILABLE"/>
+                  <xs:enumeration value="AVGRUNSIZE"/>
+                  <xs:enumeration value="BACKORDERD"/>
+                  <xs:enumeration value="BATCHSIZE"/>
+                  <xs:enumeration value="BATCHTIME"/>
+                  <xs:enumeration value="BLOCKED"/>
+                  <xs:enumeration value="BREAKTIME"/>
+                  <xs:enumeration value="CAPPERCENT"/>
+                  <xs:enumeration value="CATCHWEGHT"/>
+                  <xs:enumeration value="COMMISSION"/>
+                  <xs:enumeration value="COMPLETED"/>
+                  <xs:enumeration value="CUMULATIVE"/>
+                  <xs:enumeration value="DELIVERED"/>
+                  <xs:enumeration value="DUE"/>
+                  <xs:enumeration value="DURATION"/>
+                  <xs:enumeration value="DUROVER"/>
+                  <xs:enumeration value="DURUNDER"/>
+                  <xs:enumeration value="EMPLOYEES"/>
+                  <xs:enumeration value="EMPREQD"/>
+                  <xs:enumeration value="ESTDUR"/>
+                  <xs:enumeration value="ESTHRS"/>
+                  <xs:enumeration value="ESTWEIGHT"/>
+                  <xs:enumeration value="FILENAME"/>
+                  <xs:enumeration value="FILESIZE"/>
+                  <xs:enumeration value="FIXEDTIME"/>
+                  <xs:enumeration value="HEIGHT"/>
+                  <xs:enumeration value="INSPECTED"/>
+                  <xs:enumeration value="INSPECTION"/>
+                  <xs:enumeration value="ITEM"/>
+                  <xs:enumeration value="LDTMOFFSET"/>
+                  <xs:enumeration value="LENGTH"/>
+                  <xs:enumeration value="LABOR"/>
+                  <xs:enumeration value="LOADINGWT"/>
+                  <xs:enumeration value="LOTSIZEMAX"/>
+                  <xs:enumeration value="LOTSIZEMIN"/>
+                  <xs:enumeration value="LOTSIZEMLT"/>
+                  <xs:enumeration value="LOWERLIMIT"/>
+                  <xs:enumeration value="MACHINEHRS"/>
+                  <xs:enumeration value="MAXIMUM"/>
+                  <xs:enumeration value="MAXPARLTM"/>
+                  <xs:enumeration value="MINIMUM"/>
+                  <xs:enumeration value="MOVETIME"/>
+                  <xs:enumeration value="MSMENT"/>
+                  <xs:enumeration value="MULTIPLIER"/>
+                  <xs:enumeration value="NETWEIGHT"/>
+                  <xs:enumeration value="OPEN"/>
+                  <xs:enumeration value="ORDERED"/>
+                  <xs:enumeration value="OTHERREJ"/>
+                  <xs:enumeration value="OVERSHIP"/>
+                  <xs:enumeration value="PACKING"/>
+                  <xs:enumeration value="PERCENT"/>
+                  <xs:enumeration value="PERCENTREQ"/>
+                  <xs:enumeration value="PERSHBNOPR"/>
+                  <xs:enumeration value="PERSHWIOPR"/>
+                  <xs:enumeration value="PLNDPRCT"/>
+                  <xs:enumeration value="PRCBRK"/>
+                  <xs:enumeration value="PRIOR"/>
+                  <xs:enumeration value="QUEUETIME"/>
+                  <xs:enumeration value="RATE"/>
+                  <xs:enumeration value="RECEIVED"/>
+                  <xs:enumeration value="REJECTED"/>
+                  <xs:enumeration value="REJFIXED"/>
+                  <xs:enumeration value="REJPERCENT"/>
+                  <xs:enumeration value="REMDUR"/>
+                  <xs:enumeration value="REMHRS"/>
+                  <xs:enumeration value="REQUIRED"/>
+                  <xs:enumeration value="RETURNED"/>
+                  <xs:enumeration value="REWORK"/>
+                  <xs:enumeration value="RUNTIME"/>
+                  <xs:enumeration value="SCRAP"/>
+                  <xs:enumeration value="SETUPTIME"/>
+                  <xs:enumeration value="SHELFLIFE"/>
+                  <xs:enumeration value="SHIPPED"/>
+                  <xs:enumeration value="SHIPUNIT"/>
+                  <xs:enumeration value="START"/>
+                  <xs:enumeration value="TEARDOWN"/>
+                  <xs:enumeration value="TOOLREQD"/>
+                  <xs:enumeration value="TOTWEIGHT"/>
+                  <xs:enumeration value="TRANSFRLOT"/>
+                  <xs:enumeration value="UNDERSHIP"/>
+                  <xs:enumeration value="UNIT"/>
+                  <xs:enumeration value="UPPERLIMIT"/>
+                  <xs:enumeration value="VOLUME"/>
+                  <xs:enumeration value="WAITTIME"/>
+                  <xs:enumeration value="WEIGHT"/>
+                  <xs:enumeration value="WIDTH"/>
+                  <xs:enumeration value="WIPMOVE"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="PROJACTVTY" type="xs:string"/>
+   <xs:element name="POID" type="xs:string"/>
+   <xs:element name="SEQNCENUM" type="xs:string"/>
+   <xs:element name="ITEMRVX" type="xs:string"/>
+   <xs:element name="PSSTATUS" type="xs:string"/>
+   <xs:element name="DEPARTMENT" type="xs:string"/>
+   <xs:element name="OPERATNAME" type="xs:string"/>
+   <xs:element name="SENDER">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="LOGICALID"/>
+            <xs:element ref="COMPONENT"/>
+            <xs:element ref="TASK"/>
+            <xs:element ref="REFERENCEID"/>
+            <xs:element ref="CONFIRMATION"/>
+            <xs:element ref="LANGUAGE"/>
+            <xs:element ref="CODEPAGE"/>
+            <xs:element ref="AUTHID"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TAXWHEXMPT" type="xs:string"/>
+   <xs:element name="RFQNAME" type="xs:string"/>
+   <xs:element name="CARRIER" type="xs:string"/>
+   <xs:element name="CNTROLAREA">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="BSR"/>
+            <xs:element ref="SENDER"/>
+            <xs:element ref="DATETIME"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="SCHDULETYP" type="xs:string"/>
+   <xs:element name="FAILCLASS" type="xs:string"/>
+   <xs:element name="AMOUNT">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="VALUE"/>
+            <xs:element ref="NUMOFDEC"/>
+            <xs:element ref="SIGN"/>
+            <xs:element ref="CURRENCY"/>
+            <xs:element ref="DRCR"/>
+         </xs:sequence>
+         <xs:attribute name="qualifier" use="required">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="ACTUAL"/>
+                  <xs:enumeration value="APPRVORD"/>
+                  <xs:enumeration value="AVAILABLE"/>
+                  <xs:enumeration value="BUDGET"/>
+                  <xs:enumeration value="COMMISSION"/>
+                  <xs:enumeration value="DECLAREVAL"/>
+                  <xs:enumeration value="DSCPRCNT"/>
+                  <xs:enumeration value="DSCVALUE"/>
+                  <xs:enumeration value="DISCNT"/>
+                  <xs:enumeration value="DOCUMENT"/>
+                  <xs:enumeration value="ESTENGIMP"/>
+                  <xs:enumeration value="ESTFREIGHT"/>
+                  <xs:enumeration value="ESTHRS"/>
+                  <xs:enumeration value="ESTIMATE"/>
+                  <xs:enumeration value="ESTMANIMP"/>
+                  <xs:enumeration value="ESTUCOST"/>
+                  <xs:enumeration value="EXTENDED"/>
+                  <xs:enumeration value="FREIGHT"/>
+                  <xs:enumeration value="ITEM"/>
+                  <xs:enumeration value="OPENITEM"/>
+                  <xs:enumeration value="ORDER"/>
+                  <xs:enumeration value="ORDLIMIT"/>
+                  <xs:enumeration value="OVERRIDE"/>
+                  <xs:enumeration value="PAYRATE"/>
+                  <xs:enumeration value="RATE"/>
+                  <xs:enumeration value="PRCBRK"/>
+                  <xs:enumeration value="TAX"/>
+                  <xs:enumeration value="TAXBASE"/>
+                  <xs:enumeration value="TOTAL"/>
+                  <xs:enumeration value="TOTLIMIT"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="type" use="optional">
+            <xs:simpleType>
+               <xs:restriction base="xs:NMTOKEN">
+                  <xs:enumeration value="T"/>
+                  <xs:enumeration value="F"/>
+                  <xs:enumeration value="TAX"/>
+                  <xs:enumeration value="OTHER"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="index" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ACKCODE" type="xs:string"/>
+   <xs:element name="PRINTCNTL" type="xs:string"/>
+   <xs:element name="ECOREVISON" type="xs:string"/>
+   <xs:element name="SITELEVEL">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="PARCNTNRID" type="xs:string"/>
+   <xs:element name="AUTHCODE" type="xs:string"/>
+   <xs:element name="PROFITCTR" type="xs:string"/>
+   <xs:element name="REFERENCEID" type="xs:string"/>
+   <xs:element name="QSLINENUM" type="xs:string"/>
+   <xs:element name="DSPSTNINV" type="xs:string"/>
+   <xs:element name="ADDRTYPE" type="xs:string"/>
+   <xs:element name="MCHLINENUM" type="xs:string"/>
+   <xs:element name="FROMPARTY" type="xs:string"/>
+   <xs:element name="ROUTETYPE" type="xs:string"/>
+   <xs:element name="MOTYPE" type="xs:string"/>
+   <xs:element name="HDRSTATUS" type="xs:string"/>
+   <xs:element name="DATETYPE" type="xs:string"/>
+   <xs:element name="WAREHOUSE" type="xs:string"/>
+   <xs:element name="RSPSCHEDID" type="xs:string"/>
+   <xs:element name="FRGHTCLS" type="xs:string"/>
+   <xs:element name="CHARGETYPE" type="xs:string"/>
+   <xs:element name="TRANSTERMS" type="xs:string"/>
+   <xs:element name="SECOND" type="xs:string"/>
+   <xs:element name="MSGTYPE" type="xs:string"/>
+   <xs:element name="UPCSCC14" type="xs:string"/>
+   <xs:element name="INCPLANFLG" type="xs:string"/>
+   <xs:element name="COMPONENT" type="xs:string"/>
+   <xs:element name="PRCESSCODE" type="xs:string"/>
+   <xs:element name="SPECIALHND" type="xs:string"/>
+   <xs:element name="ADDRLINE">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="index" use="required" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="CONTRACTID" type="xs:string"/>
+   <xs:element name="PRICECODE" type="xs:string"/>
+   <xs:element name="STATUSLVL" type="xs:string"/>
+   <xs:element name="DROPSHIP" type="xs:string"/>
+   <xs:element name="DOCUMENT">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="DOCUMENTID"/>
+            <xs:element minOccurs="0" ref="DOCUMENTRV"/>
+            <xs:element minOccurs="0" ref="DOCTYPE"/>
+            <xs:element minOccurs="0" ref="USERAREA"/>
+         </xs:sequence>
+         <xs:attribute name="returndata" use="optional" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TOITMNMRV" type="xs:string"/>
+   <xs:element name="INSPDOCREV" type="xs:string"/>
+   <xs:element name="FIXDQTYIND" type="xs:string"/>
+   <xs:element name="CONSLINENUM" type="xs:string"/>
+   <xs:element name="OPRAMTAUTH" type="xs:string"/>
+   <xs:element name="ITMIDFLG" type="xs:string"/>
+   <xs:element name="PORELEASE" type="xs:string"/>
+   <xs:element name="QTEIDX" type="xs:string"/>
+   <xs:element name="PARTNRIDX" type="xs:string"/>
+   <xs:element name="LOCK" type="xs:string"/>
+   <xs:element name="ACKNOWLEDGE_PO_008">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="CNTROLAREA"/>
+            <xs:element maxOccurs="unbounded" ref="DATAAREA"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

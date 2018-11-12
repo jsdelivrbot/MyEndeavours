@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\ItemMaster.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="ItemMaster" type="ItemMasterType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents any unique purchased part or manufactured product.  Item, as used here, refers to the basic information about an item, including its attributes, cost, and locations.  It does not include item quantities.  Compare to the noun BalanceInventory, which includes all quantities and other location-specific information.
+
+ItemMaster is used as the Item Master. 
+
+The ItemMaster provides details about an Item in many domains of an enterprise. Each domain or functional area are interested in different views of the Item. The ItemMaster provides information to the following partial list of functional areas: Manufacturing, Order Management along with the Catalog view, Logistics, Engineering along with the EngineeringDocument, CRM, and Financials.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemMasterHeader" type="ItemHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies everything know about an item. Information at the header level applies to all locations unless indicated differently at a given location.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemLocation" type="ItemLocationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Item information that is specific to a location. For example a plant or site may keep different information about an item than the corporate office.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemValue" type="ItemValueType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the cost or value of the item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ItemDetailsBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Lot" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Type" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ExecutionTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="FixedQuantityIndicator" minOccurs="0"/>
+                                        <xsd:group ref="LotSizeGroup"/>
+                                        <xsd:element ref="LeadTimeDuration" minOccurs="0"/>
+                                        <xsd:element ref="RequiredPercent" minOccurs="0"/>
+                                        <xsd:choice>
+                                                <xsd:annotation>
+                                                        <xsd:documentation>Idicates if the Item is reported theoretically (back-flushed) or if the ITEM is reported directly (actual)</xsd:documentation>
+                                                </xsd:annotation>
+                                                <xsd:element ref="BackFlushedIndicator" minOccurs="0"/>
+                                                <xsd:element ref="ActualIndicator" minOccurs="0"/>
+                                        </xsd:choice>
+                                        <xsd:element ref="TrackingIndicator" minOccurs="0"/>
+                                        <xsd:element ref="ScrapIndicator" minOccurs="0"/>
+                                        <xsd:element ref="ItemStatus" minOccurs="0"/>
+                                        <xsd:element ref="BaseUOMCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the default UOM that the business refers to the item in. This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+EXAMPLES: 
+Generic Quantity  (Each, Pair, Dozen, Gross, etc); 
+Weight (Ounce, Pound, Ton, Kilogram, etc); 
+Volume (Cup, Pint, Gallon, Liter, etc);
+Length (Inch, Foot, Yard, Meter, etc)</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="StorageUOMCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This describes the unit of measure that a product is stored in inventory.  This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+Examples are:
+
+- Generic Quantity  (Each, Pair, Dozen, Gross, etc)
+- Weight (Ounce, Pound, Ton, Kilogram, etc)
+- Volume (Cup, Pint, Gallon, Liter, etc)
+- Length (Inch, Foot, Yard, Meter, etc)
+- Time (Second, Minute, Hour, Day, Year, etc)</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This describes the unit of measure that a product is stored in inventory.  This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+Examples are:
+
+- Generic Quantity  (Each, Pair, Dozen, Gross, etc)
+- Weight (Ounce, Pound, Ton, Kilogram, etc)
+- Volume (Cup, Pint, Gallon, Liter, etc)
+- Length (Inch, Foot, Yard, Meter, etc)
+- Time (Second, Minute, Hour, Day, Year, etc)</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ShippingUOMCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This describes the unit of measure that a product is shipped.  This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+Examples are:
+
+- Generic Quantity  (Each, Pair, Dozen, Gross, etc)
+- Weight (Ounce, Pound, Ton, Kilogram, etc)
+- Volume (Cup, Pint, Gallon, Liter, etc)
+- Length (Inch, Foot, Yard, Meter, etc)
+- Time (Second, Minute, Hour, Day, Year, etc)</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="RoutingDisposition" minOccurs="0"/>
+                                        <xsd:element ref="SerialNumberSpecification" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the business rules used to specify what constitutes a serial number</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LotNumberSpecification" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the business rules used to specify what constitutes a lot</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LastModificationDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the timestamp of the last modification to the Item Master for this Item.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UnitPackaging" minOccurs="0"/>
+                                        <xsd:element ref="OwnerParty" minOccurs="0"/>
+                                        <xsd:element ref="UOMGroupID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies a set of related UOM's and their conversions from the Item's UOM</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a UOMGroup Identifier, that identifies a set of related UOM's and their conversions from the Item's UOM</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="AlternateUOMCode" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UOMCodeConversion" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ItemValue" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BOMReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DrawingAttachment" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ItemHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemDetailsBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="SupplierContractReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BuyerContractReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="FreightItemID" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This identifies the item number assigned to the type of goods for the purposes of freight classification and cost calculation</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="FreightClassification" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Qualifies goods for purposes of freight cost calculation. An example would the qualifications used by National Motor Freight Carriers.
+
+EXAMPLES	National Motor Freight Carriers (NMFC) Class Code 
+
+Based on an evaluation of density, stowability, ease of handling and liability, the commodities are grouped into one of 18 classes.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="SerialControlIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates if the item is a serialized item i.e. unique instances of the item are identified by unique serial numbers. Valid values are 0 for no, and 1 for yes</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LotControlIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates if the item is a lotted item. Valid values are 0 for no, and 1 for yes</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ExpirationControlCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the type of control used to determine whether or not an item has expired or is no longer considered good to sell or consume.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="GLAccount" minOccurs="0"/>
+                                        <xsd:element ref="DocumentDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifyies the timestamp that the Item Master record was created.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CatchWeightIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates that an ITEM requires special processing to determine the actual net or gross weight during certain inventory operations.  </xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates that an ITEM requires special processing to determine the actual net or gross weight during certain inventory operations.  </xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ShelfLifeDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This is the period of time in duration that the item is valid for use</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="AverageRunSizeQuantity" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This is the average quantity made during a manufacturing run using a specific Item or Bill of Material.  This is often used during MRP or other forecasting operations</xsd:documentation>
+                                                        <xsd:documentation>This is the average quantity made during a manufacturing run using a specific Item or Bill of Material.  This is often used during MRP or other forecasting operations</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ItemValueType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the cost or value of an item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="UnitValue" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the value per quantity of the item. Represents the value of the item to the owning organization.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="CostingMethodCode" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the methodology by which the value of an item is determined.
+
+Values are:
+ Standard
+ Moving Average
+ LIFO - For last in first out.
+ FIFO - For first in first out.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ValueClassification" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a grouping used to determine the General Ledger accounting effect. These are user defined values, with the exception of the values TOTAL, MATERIAL, LABOR, BURDEN, OVERHEAD, SUBCONTRACT</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="GLEntityID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the owning organzation of the item.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation>This is the time period the item value is valid for.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemLocationType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemDetailsBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Facility" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="AlternateUOMType">
+                <xsd:annotation>
+                        <xsd:documentation>The UOM here represents the alternate UOM. The the Mulitplier determines the conversion between the parent UOM and the UOM specified here in the allternate UOM.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="UOMMultiplier" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the multiple to make the conversion from the Inventory UOM to the the alternate UOM. </xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="UOMCode" minOccurs="0"/>
+                        <xsd:element ref="UnitPackaging" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemMasterType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents any unique purchased part or manufactured product.  Item, as used here, refers to the basic information about an item, including its attributes, cost, and locations.  It does not include item quantities.  Compare to the noun InventoryBalance, which includes all quantities and other location-specific information.
+
+Item is used as the Item Master.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ItemMasterHeader" minOccurs="0"/>
+                        <xsd:element ref="ItemLocation" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="CEH_BPEL_ReceiveData_1_0" guid="A25C33F112D111DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ReceiveData.CEH_BPEL_ReceiveData_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+   <description>BPEL Service for CEH_BPEL_ReceiveData</description>
+   <versionInfo>
+      <ID>1237280244957</ID>
+      <lastModifiedTime>Tue Mar 17 14:27:24 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <parent guid="A25C33F012D111DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ReceiveData" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>http://INEDEC-MLAP-45.emrcorp.local:80/orabpel/default/CEH_BPEL_ReceiveData/1.0/CEH_BPEL_ReceiveData?wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/CEH_BPEL_ReceiveData">tns:CEH_BPEL_ReceiveData</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/BPELSystem/default/CEH_BPEL_ReceiveData/CEH_BPEL_ReceiveData_1_0?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/BPELSystem/default/CEH_BPEL_ReceiveData/CEH_BPEL_ReceiveData_1_0</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <invocation>
+      <targetService guid="2F29E30004CB11DE8F7CE9923B183B07" qname="CEHSys_EHPOC1.CEH_MessageRouterRS"/>
+   </invocation>
+   <parameters>
+      <parameter name="port">80</parameter>
+      <parameter name="processName">CEH_BPEL_ReceiveData</parameter>
+      <parameter name="host">INEDEC-MLAP-45.emrcorp.local</parameter>
+      <parameter name="targetSvcOperations">2F29E30004CB11DE8F7CE9923B183B07:2F2C540004CB11DE8F7CE9923B183B07,2F2C540004CB11DE8F7CE9923B183B07&amp;</parameter>
+      <parameter name="processVersion">1.0</parameter>
+      <parameter name="processDomain">default</parameter>
+   </parameters>
+   <operations>
+      <operationInfo guid="A9688E0012D111DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ReceiveData.CEH_BPEL_ReceiveData_1_0.initiate" wsdlOperation="initiate" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+      </operationInfo>
+   </operations>
+</service>

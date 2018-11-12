@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ENQJMS_ArchiveTransaction" guid="99BB5FA0F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1244631346288</ID>
+      <lastModifiedTime>Wed Jun 10 10:55:46 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_ENQJMS_ArchiveTransaction.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ArchiveTransaction/">tns:Produce_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ArchiveTransaction?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ArchiveTransaction</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/SC_Archive" element="tns:RootElement"/>
+      </operationInfo>
+   </operations>
+</service>

@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="ETH_Transform_Oagis_AckPO_9_0"
+     targetNamespace="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_B2BInOut"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_B2BInOut"
+     xmlns:inp1="http://xmlns.emrsn.com/CustomAcknowledgePurchaseOrder"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomAcknowledgePurchaseOrder" schemaLocation="public_html/CustomAcknowledgePurchaseOrder.xsd" />
+      </schema>
+    </types>
+    <message name="CustomAcknowledgePO_request">
+        <part name="CustomAcknowledgePO" element="inp1:CustomAcknowledgePO"/>
+    </message>
+    <portType name="execute_ppt">
+        <operation name="execute">
+            <input message="tns:CustomAcknowledgePO_request"/>
+        </operation>
+    </portType>
+</definitions>

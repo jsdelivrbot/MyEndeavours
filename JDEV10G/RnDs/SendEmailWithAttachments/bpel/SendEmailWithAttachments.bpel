@@ -1,0 +1,186 @@
+<!--
+  ///////////////////////////////////////////////////////////////////////////////////////////// 
+  // Oracle JDeveloper BPEL Designer 
+  // 
+  // Created: Fri Apr 15 13:38:28 PDT 2005
+  // Author:  rarangas
+  // Purpose: Asynchronous BPEL Process
+  ///////////////////////////////////////////////////////////////////////////////////////////// 
+-->
+<process name="SendEmailWithAttachments"
+         targetNamespace="http://xmlns.oracle.com/SendEmailWithAttachments"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ns2="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.oracle.com/SendEmailWithAttachments"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- ================================================================= -->
+  <!-- PARTNERLINKS                                                      -->
+  <!-- List of services participating in this BPEL process               -->
+  <!-- ================================================================= -->
+  <partnerLinks>
+    <!-- 
+    The 'client' role represents the requester of this service. It is 
+    used for callback. The location and correlation information associated
+    with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:SendEmailWithAttachments"
+                 myRole="SendEmailWithAttachmentsProvider"
+                 partnerRole="SendEmailWithAttachmentsRequester"/>
+    <partnerLink name="NotificationService"
+                 partnerRole="NotificationServiceProvider"
+                 partnerLinkType="ns1:NotificationServiceLink"/>
+  </partnerLinks>
+  <!-- ================================================================= -->
+  <!-- VARIABLES                                                         -->
+  <!-- List of messages and XML documents used within this BPEL process  -->
+  <!-- ================================================================= -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:SendEmailWithAttachmentsRequestMessage"/>
+    <!-- Reference to the message that will be sent back to the 
+    requester during callback
+    -->
+    <variable name="outputVariable"
+              messageType="client:SendEmailWithAttachmentsResponseMessage"/>
+  </variables>
+  <!-- ================================================================= -->
+  <!-- ORCHESTRATION LOGIC                                               -->
+  <!-- Set of activities coordinating the flow of messages across the    -->
+  <!-- services integrated within this business process                  -->
+  <!-- ================================================================= -->
+  <sequence name="main">
+    <!-- Receive input from requestor. 
+    Note: This maps to operation defined in SendEmailWithAttachments.wsdl
+    -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:SendEmailWithAttachments" operation="initiate"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Asynchronous callback to the requester.
+     Note: the callback location and correlation id is transparently handled 
+     using WS-addressing.
+     -->
+    <scope name="NotificationService">
+      <variables>
+        <variable name="varNotificationReq"
+                  messageType="ns1:EmailNotificationRequest"/>
+        <variable name="varNotificationResponse"
+                  messageType="ns1:ArrayOfResponse"/>
+        <variable name="NotificationServiceFaultVariable"
+                  messageType="ns1:NotificationServiceErrorMessage"/>
+      </variables>
+      <faultHandlers>
+        <catch faultName="ns1:NotificationServiceFault"
+               faultVariable="NotificationServiceFaultVariable">
+          <empty/>
+        </catch>
+      </faultHandlers>
+      <sequence>
+        <assign name="Assign">
+          <copy>
+            <from expression='"Default"'/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:FromAccountName"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Bcc"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Cc"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:ReplyToAddress"/>
+          </copy>
+          <copy>
+            <from expression="bpws:getVariableData('inputVariable','payload','/client:SendEmailWithAttachmentsProcessRequest/client:subject')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Subject"/>
+          </copy>
+          <copy>
+            <from expression="ora:getUserProperty(bpws:getVariableData('inputVariable','payload','/client:SendEmailWithAttachmentsProcessRequest/client:to'), 'mail')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:To"/>
+          </copy>
+          <copy>
+            <from>
+              <Content xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                <MimeType xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">multipart/mixed</MimeType>
+                <ContentBody xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                  <MultiPart xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                    <BodyPart xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                      <MimeType xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <ContentBody xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <BodyPartName xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                    </BodyPart>
+                    <BodyPart xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                      <MimeType xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <ContentBody xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <BodyPartName xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                    </BodyPart>
+                  </MultiPart>
+                </ContentBody>
+              </Content>
+            </from>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Content"/>
+          </copy>
+          <copy>
+            <from expression="string('text/html')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Content/ns1:ContentBody/ns1:MultiPart/ns1:BodyPart[1]/ns1:MimeType"/>
+          </copy>
+          <copy>
+            <from expression="string('NotificationAttachment1.html')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Content/ns1:ContentBody/ns1:MultiPart/ns1:BodyPart[1]/ns1:BodyPartName"/>
+          </copy>
+          <copy>
+            <from expression="bpws:getVariableData('inputVariable','payload','/client:SendEmailWithAttachmentsProcessRequest/client:body')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Content/ns1:ContentBody/ns1:MultiPart/ns1:BodyPart[1]/ns1:ContentBody"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:SendEmailWithAttachmentsProcessRequest/client:attachmentMimeType"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Content/ns1:ContentBody/ns1:MultiPart/ns1:BodyPart[2]/ns1:MimeType"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:SendEmailWithAttachmentsProcessRequest/client:attachmentName"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Content/ns1:ContentBody/ns1:MultiPart/ns1:BodyPart[2]/ns1:BodyPartName"/>
+          </copy>
+          <copy>
+            <from expression="ora:readFile(bpws:getVariableData('inputVariable','payload','/client:SendEmailWithAttachmentsProcessRequest/client:attachmentURI'))"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns1:Content/ns1:ContentBody/ns1:MultiPart/ns1:BodyPart[2]/ns1:ContentBody"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeNotificationService"
+                partnerLink="NotificationService"
+                portType="ns1:NotificationService"
+                operation="sendEmailNotification"
+                inputVariable="varNotificationReq"
+                outputVariable="varNotificationResponse"/>
+      </sequence>
+    </scope>
+    <invoke name="callbackClient" partnerLink="client"
+            portType="client:SendEmailWithAttachmentsCallback"
+            operation="onResult" inputVariable="outputVariable"/>
+  </sequence>
+</process>

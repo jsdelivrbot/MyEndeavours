@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CEH_BPEL_ESBErrorTopicHandler" src="CEH_BPEL_ESBErrorTopicHandler.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="CEH_JMSTDEQ_ESBErrorTopic">
+            <property name="wsdlLocation">CEH_JMSTDEQ_ESBErrorTopic.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CEH_BPEL_CommonErrorHandler">
+            <property name="wsdlLocation">http://inedec-mlap-45.emrcorp.local/orabpel/default/CEH_BPEL_CommonErrorHandler/CEH_BPEL_CommonErrorHandler?wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="CEH_JMSTDEQ_ESBErrorTopic">
+            <property name="portType">ConsumeESBError_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

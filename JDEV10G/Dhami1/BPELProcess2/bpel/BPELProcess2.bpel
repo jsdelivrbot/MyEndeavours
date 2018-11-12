@@ -1,0 +1,84 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Feb 16 22:01:40 IST 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess2" targetNamespace="http://www.emerson.com/inder/bpel"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/rejectionHandler"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/File_WriteHandlerError/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/errorHandling"
+         xmlns:client="http://www.emerson.com/inder/bpel"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="File_WriteHandlerError" partnerRole="Write_role"
+                 partnerLinkType="ns3:Write_plt"/>
+    <partnerLink myRole="RejectionHandlerPortType_Role" name="RejectionMessage"
+                 partnerRole="RejectionHandlerPortType_Role"
+                 partnerLinkType="ns1:RejectionHandlerPortType_PL"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_1_handleRejection_InputVariable"
+              messageType="ns1:RejectionMessage"/>
+    <variable name="G_InputRequest" messageType="ns1:RejectionMessage"/>
+    <variable name="G_WriteHandlerError_Request"
+              messageType="ns3:RejectedMessage_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" operation="handleRejection"
+             partnerLink="RejectionMessage"
+             portType="ns1:RejectionHandlerPortType"
+             variable="Receive_1_handleRejection_InputVariable"
+             createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="Receive_1_handleRejection_InputVariable" part="message"
+              query="/ns2:RejectedMessage"/>
+        <to variable="G_InputRequest" part="message"
+            query="/ns2:RejectedMessage"/>
+      </copy>
+    </assign>
+    <assign name="Transform_1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Transformation_1.xsl',bpws:getVariableData('G_InputRequest','message'))"/>
+        <to variable="G_WriteHandlerError_Request" part="RejectedMessage"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_WriteHanderErrorService"
+            partnerLink="File_WriteHandlerError" portType="ns3:Write_ptt"
+            operation="Write" inputVariable="G_WriteHandlerError_Request"/>
+  </sequence>
+</process>

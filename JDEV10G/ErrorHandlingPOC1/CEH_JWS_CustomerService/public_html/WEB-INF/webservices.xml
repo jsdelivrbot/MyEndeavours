@@ -1,0 +1,21 @@
+<webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
+     version="1.1">
+    <webservice-description>
+        <webservice-description-name>CustomerService</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/CustomerService.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/CustomerService-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>CustomerPort</port-component-name>
+            <wsdl-port xmlns:wsa0="http://services.emerson.com/customer">wsa0:CustomerPort</wsdl-port>
+            <service-endpoint-interface>com.emerson.services.CustomerPortType</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>CustomerPort</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>CustomerServiceHandler</handler-name>
+                <handler-class>com.emerson.services.handler.CustomerServicehandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+</webservices>

@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_ELSHA_LiebertFlatFile" guid="838973900C9411DEBFB957152A29AC2D" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_GETFTP_ELSHA_LiebertFlatFile" status="DISABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1268819956565</ID>
+      <lastModifiedTime>Wed Mar 17 15:29:16 GMT+05:30 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="02B9F251D8E311DEBFF4E177418C329B" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="838973910C9411DEBFB957152A29AC2D" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS"/>
+      <interface>
+         <wsdlURL>ETH_GETFTP_ELSHA_LiebertFlatFile.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ELSHA_LiebertFlatFile/">tns:Get_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="ETH_LIEBERT_FTP_Folder_PO" value="infile/850/"/>
+      <property name="ETH_LIEBERT_Archive_Folder_PO" value="archive/850/"/>
+      <property name="ETH_LIEBERT_POLL_FREQ_PO" value="10"/>
+      <property name="ETH_LIEBERT_FileName_PO" value="Disable_LIE.*\.txt"/>
+      <property name="rejectedMessageHandlers" value="file:///ftpdata/Files/SC/RejectedMessages/LIEBERT"/>
+      <property name="clusterGroupId" value="ETHSysGrp_Liebert_Process_Poller1"/>
+   </endpointProperties>
+</service>

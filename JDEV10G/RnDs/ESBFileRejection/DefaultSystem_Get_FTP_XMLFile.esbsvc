@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Get_FTP_XMLFile" guid="29611521512D11DEAF3637EA93E8375C" qname="DefaultSystem.Get_FTP_XMLFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1244817794692</ID>
+      <lastModifiedTime>Fri Jun 12 20:13:14 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_ESBFileRejection</lastModifiedUser>
+   </versionInfo>
+   <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+   <invocation>
+      <targetService guid="29611522512D11DEAF3637EA93E8375C" qname="DefaultSystem.Get_FTP_XMLFile_RS"/>
+      <interface>
+         <wsdlURL>Get_FTP_XMLFile.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Get_FTP_XMLFile/">tns:Get_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="rejectedMessageHandlers" value="file://c:/"/>
+   </endpointProperties>
+</service>

@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_PUTFL_POAck_FixedWidth_FlatFile" guid="6F4BF540520411DF8F00EF1C230ABACC" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_FixedWidth_FlatFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1275301749244</ID>
+      <lastModifiedTime>Mon May 31 10:29:09 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+   </versionInfo>
+   <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_PUTFL_POAck_FixedWidth_FlatFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_POAck_FixedWidth_FlatFile/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_PUTFL_POAck_FixedWidth_FlatFile?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_PUTFL_POAck_FixedWidth_FlatFile</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="6F4E3F30520411DF8F00EF1C230ABACC" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_FixedWidth_FlatFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/POAckFlatFile" element="tns:Root-Element"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="FixedWidth_FF_Path" value="/ftpdata/elshap1/lbt/outfile/POAck"/>
+   </endpointProperties>
+</service>

@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="resultOutFileAdapter" guid="EBBADE60FBF311DD9F75B99054634EA7" qname="Process1.resultOutFileAdapter" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1240224271667</ID>
+      <lastModifiedTime>Mon Apr 20 16:14:31 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+   </versionInfo>
+   <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>resultOutFileAdapter.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/resultOutFileAdapter/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Process1/resultOutFileAdapter?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Process1/resultOutFileAdapter</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="EBBADE61FBF311DD9F75B99054634EA7" qname="Process1.resultOutFileAdapter.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.emerson.com/inderOut" element="tns:customerOut"/>
+      </operationInfo>
+   </operations>
+</service>

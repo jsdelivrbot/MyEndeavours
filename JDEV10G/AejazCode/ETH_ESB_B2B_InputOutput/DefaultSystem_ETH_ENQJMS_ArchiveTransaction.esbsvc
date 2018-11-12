@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ENQJMS_ArchiveTransaction" guid="7881CBE1096611DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1271412048134</ID>
+      <lastModifiedTime>Fri Apr 16 10:00:48 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_ENQJMS_ArchiveTransaction.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ArchiveTransaction/">tns:Produce_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ENQJMS_ArchiveTransaction?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ENQJMS_ArchiveTransaction</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="788415D0096611DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/SC_Archive" element="tns:RootElement"/>
+      </operationInfo>
+   </operations>
+</service>

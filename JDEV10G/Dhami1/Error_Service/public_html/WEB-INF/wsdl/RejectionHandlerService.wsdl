@@ -1,0 +1,36 @@
+<definitions
+     name="RejectionMessage"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/rejectionHandler"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/rejectionHandler"
+     xmlns:err="http://xmlns.oracle.com/pcbpel/errorHandling"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/errorHandling" schemaLocation="JCAErrorHandling.xsd"/>
+        </schema>
+    </types>
+    <message name="RejectionMessage">
+        <part name="message" element="err:RejectedMessage"/>
+    </message>
+    <portType name="RejectionHandlerPortType">
+        <operation name="handleError">
+            <input message="tns:RejectionMessage"/>
+        </operation>
+    </portType>
+    <binding name="RejectionHandlerBinding" type="tns:RejectionHandlerPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="handleError">
+            <soap:operation style="document" soapAction="handleError"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="RejectionHandlerService">
+        <port name="RejectionHandlerPort" binding="tns:RejectionHandlerBinding">
+            <soap:address location="http://10.129.160.118:8888/Error_Service/RejectionHandlerPort"/>
+        </port>
+    </service>
+</definitions>

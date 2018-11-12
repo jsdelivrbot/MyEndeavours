@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<system name="ETHSys_IntegrationServices" guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" status="ENABLED">
+   <versionInfo>
+      <ID>1243885308363</ID>
+      <lastModifiedTime>Mon Jun 01 19:41:48 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <description/>
+   <parameters>
+      <parameter name="Mobile"/>
+      <parameter name="Fax"/>
+      <parameter name="Host">localhost</parameter>
+      <parameter name="Pager"/>
+      <parameter name="Phone"/>
+      <parameter name="Email"/>
+      <parameter name="Port">8888</parameter>
+   </parameters>
+   <clusterName>esb</clusterName>
+   <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+</system>

@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="WriteFile" guid="FC3AAE40229111DE8F1BA9E5E980B820" qname="DefaultSystem.WriteFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1239097402024</ID>
+      <lastModifiedTime>Tue Apr 07 15:13:22 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_CSV_Validation_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="8E8E403019F611DEAF48EB13DD37ED61" qname="DefaultSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>WriteFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/WriteFile/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/DefaultSystem/WriteFile?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://inedec-mlap-45.emrcorp.local:80/event/DefaultSystem/WriteFile</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="FC3D1F40229111DE8F1BA9E5E980B820" qname="DefaultSystem.WriteFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schema.emerson.com/native/FetchCSV" element="tns:employees"/>
+      </operationInfo>
+   </operations>
+</service>

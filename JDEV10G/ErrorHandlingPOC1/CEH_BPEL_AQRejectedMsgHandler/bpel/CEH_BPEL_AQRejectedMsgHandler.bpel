@@ -1,0 +1,79 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Apr 16 16:10:54 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CEH_BPEL_AQRejectedMsgHandler"
+         targetNamespace="http://schema.emerson.com/CEH_BPEL_AQRejectedMsgHandler"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/file/PutFile/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:client="http://schema.emerson.com/CEH_BPEL_AQRejectedMsgHandler"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/aq/readRejectedMsg/"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/errorHandling"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Dequeue_role" name="readRejectedMsg"
+                 partnerLinkType="ns1:Dequeue_plt"/>
+    <partnerLink name="PutFile" partnerRole="Write_role"
+                 partnerLinkType="ns4:Write_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="AQ_Header" messageType="ns2:Header"/>
+    <variable name="Invoke_1_Write_InputVariable" messageType="ns4:Write_msg"/>
+    <variable name="Receive_1_Dequeue_InputVariable"
+              messageType="ns1:Dequeue_msg"/>
+    <variable name="AQ_Header_Variable" messageType="ns2:Header"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="readRejectedMsg"
+             portType="ns1:Dequeue_ptt" operation="Dequeue"
+             variable="Receive_1_Dequeue_InputVariable" createInstance="yes"
+             bpelx:headerVariable="AQ_Header"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="Receive_1_Dequeue_InputVariable" part="opaque"
+              query="/ns5:opaqueElement"/>
+        <to variable="Invoke_1_Write_InputVariable" part="opaque"
+            query="/ns5:opaqueElement"/>
+      </copy>
+      <copy>
+        <from variable="AQ_Header" part="Header" query="/ns2:Header"/>
+        <to variable="AQ_Header_Variable" part="Header" query="/ns2:Header"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="PutFile" portType="ns4:Write_ptt"
+            operation="Write" inputVariable="Invoke_1_Write_InputVariable"/>
+  </sequence>
+</process>

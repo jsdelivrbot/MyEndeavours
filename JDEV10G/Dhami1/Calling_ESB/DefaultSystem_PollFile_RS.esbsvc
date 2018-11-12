@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="PollFile_RS" guid="1063FCE22EFF11DEAF3BBFF482BF59EB" qname="Research1.PollFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service PollFile</description>
+   <versionInfo>
+      <ID>1245684198234</ID>
+      <lastModifiedTime>Mon Jun 22 20:53:18 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_Calling_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="EDB50C102F0911DEAF3BBFF482BF59EB" qname="Research1" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>PollFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/PollFile/">tns:Read_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Research1/PollFile_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Research1/PollFile_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="1063FCE32EFF11DEAF3BBFF482BF59EB" qname="Research1.PollFile_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+         <routingRules>
+            <routingRule guid="80EDB0215F4011DEAF607BF98AF94F0D" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="B6C505B05F3E11DEBFCEF37B15612FC0" qname="BPELSystem.default.Called_BPEL.Called_BPEL_1_0.process" serviceGUID="AF8D7CF15F3E11DEBFCEF37B15612FC0" serviceQName="BPELSystem.default.Called_BPEL.Called_BPEL_1_0" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>opaqueElement_To_Called_BPELProcessRequest_2.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

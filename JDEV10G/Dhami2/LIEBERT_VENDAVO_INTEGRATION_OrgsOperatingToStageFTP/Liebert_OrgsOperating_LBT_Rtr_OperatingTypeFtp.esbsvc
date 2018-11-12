@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_Rtr_OperatingTypeFtp" guid="3CC68240736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingTypeFtp" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1228925064990</ID>
+      <lastModifiedTime>Wed Dec 10 16:04:24 GMT+00:00 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_OperatingTypeFtp.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingTypeFtp?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingTypeFtp</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="3CCDAE30736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingTypeFtp.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:SyncPartyMaster"/>
+         <routingRules>
+            <routingRule guid="A281A950B6E711DDAF0CADEAACA7B5C4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="3CC2BBE0C13711DD9F77616F9FAE6CA3" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0.initiate" serviceGUID="35F2CE90C13711DD9F77616F9FAE6CA3" serviceQName="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>SyncPartyMaster_To_OperatingUnitRecord_3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

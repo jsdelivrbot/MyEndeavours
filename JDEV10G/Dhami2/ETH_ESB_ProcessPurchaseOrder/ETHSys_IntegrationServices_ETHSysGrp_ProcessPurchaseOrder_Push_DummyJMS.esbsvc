@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Push_DummyJMS" guid="D36205E056CB11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Push_DummyJMS" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1245869496530</ID>
+      <lastModifiedTime>Thu Jun 25 00:21:36 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>Push_DummyJMS.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Push_DummyJMS/">tns:Produce_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/Push_DummyJMS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/Push_DummyJMS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="D36931D056CB11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Push_DummyJMS.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/TransactionComplianceData" element="tns:TransactionComplianceData"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="cacheWSIFOperation" value="true"/>
+      <property name="cacheConnections" value="false"/>
+   </endpointProperties>
+</service>

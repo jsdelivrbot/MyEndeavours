@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="customerFileAdapter_RS" guid="778CBE01FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service customerFileAdapter</description>
+   <versionInfo>
+      <ID>1235133534977</ID>
+      <lastModifiedTime>Fri Feb 20 18:08:54 IST 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+   </versionInfo>
+   <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>customerFileAdapter.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/customerFileAdapter/">tns:Read_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Process1/customerFileAdapter_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Process1/customerFileAdapter_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="778CBE02FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.emerson.com/inder" element="tns:customer"/>
+         <routingRules>
+            <routingRule guid="F695F3B0FBF311DD9F75B99054634EA7" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="EBBADE61FBF311DD9F75B99054634EA7" qname="Process1.resultOutFileAdapter.Write" serviceGUID="EBBADE60FBF311DD9F75B99054634EA7" serviceQName="Process1.resultOutFileAdapter" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>customer_To_customerOut.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="7B5B2820FC1411DD9F75B99054634EA7" subscriptionType="ANY" executionType="Deferred" status="ENABLED">
+               <targetOperation guid="6DD0F862FC1411DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter2.insert" serviceGUID="6DC9CC70FC1411DD9F75B99054634EA7" serviceQName="Process1.resultOutDBAdapter2" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>customer_To_Customer1Collection.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="D2C1A9D0FC0B11DD9F75B99054634EA7" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="82604552FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.insert" serviceGUID="82591960FC0B11DD9F75B99054634EA7" serviceQName="Process1.resultOutDBAdapter" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>customer_To_CustomerCollection.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

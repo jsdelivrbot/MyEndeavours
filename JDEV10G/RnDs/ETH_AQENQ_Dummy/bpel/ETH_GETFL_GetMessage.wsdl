@@ -1,0 +1,54 @@
+<definitions
+     name="ETH_GETFL_GetMessage"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_GetMessage/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_GetMessage/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterInboundHeader.wsdl"/>
+    <types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </types>
+    <message name="ReadDummyAQ_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="ReadDummyAQ_ptt">
+        <operation name="ReadDummyAQ">
+            <input message="tns:ReadDummyAQ_msg"/>
+        </operation>
+    </portType>
+    <binding name="ReadDummyAQ_binding" type="tns:ReadDummyAQ_ptt">
+    <pc:inbound_binding  />
+        <operation name="ReadDummyAQ">
+      <jca:operation
+          LogicalDirectory="ETH_GetFL_DummyFile"
+          ActivationSpec="oracle.tip.adapter.file.inbound.FileActivationSpec"
+          DeleteFile="true"
+          IncludeFiles="FTH_Dummy.*\.txt"
+          PollingFrequency="60"
+          MinimumAge="0"
+          OpaqueSchema="true" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_GETFL_GetMessage">
+        <port name="ReadDummyAQ_pt" binding="tns:ReadDummyAQ_binding">
+      <jca:address location="eis/FileAdapter" UIincludeWildcard="FTH_Dummy*.txt" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="ReadDummyAQ_plt" >
+    <plt:role name="ReadDummyAQ_role" >
+      <plt:portType name="tns:ReadDummyAQ_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

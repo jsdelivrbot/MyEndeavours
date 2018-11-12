@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/ReceiveItem.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessReceiveItem.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeReceiveItem.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetReceiveItem.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowReceiveItem.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="ProcessReceiveItem">
+                <part name="Message" element="oa:ProcessReceiveItem"/>
+        </message>
+        <message name="AcknowledgeReceiveItem">
+                <part name="Message" element="oa:AcknowledgeReceiveItem"/>
+        </message>
+        <message name="GetReceiveItem">
+                <part name="Message" element="oa:GetReceiveItem"/>
+        </message>
+        <message name="ShowReceiveItem">
+                <part name="Message" element="oa:ShowReceiveItem"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestReceiveItemPortType">
+                <operation name="GetReceiveItem">
+                        <input message="oaws:GetReceiveItem"/>
+                </operation>
+                <operation name="ProcessReceiveItem">
+                        <input message="oaws:ProcessReceiveItem"/>
+                </operation>
+        </portType>
+        <portType name="ResponseReceiveItemPortType">
+                <operation name="AcknowledgeReceiveItem">
+                        <input message="oaws:AcknowledgeReceiveItem"/>
+                </operation>
+                <operation name="ShowReceiveItem">
+                        <input message="oaws:ShowReceiveItem"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncReceiveItemPortType">
+                <operation name="GetReceiveItem">
+                        <input message="oaws:GetReceiveItem"/>
+                        <output message="oaws:ShowReceiveItem"/>
+                </operation>
+                <operation name="ProcessReceiveItem">
+                        <input message="oaws:ProcessReceiveItem"/>
+                        <output message="oaws:AcknowledgeReceiveItem"/>
+                </operation>
+        </portType>
+        <binding name="RequestReceiveItemBinding" type="oaws:RequestReceiveItemPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessReceiveItem">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ReceiveItem.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetReceiveItem">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ReceiveItem.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseReceiveItemBinding" type="oaws:ResponseReceiveItemPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeReceiveItem">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ReceiveItem.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowReceiveItem">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ReceiveItem.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ReceiveItem.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncReceiveItemBinding" type="oaws:SyncReceiveItemPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetReceiveItem">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ReceiveItem.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ProcessReceiveItem">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ReceiveItem.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestReceiveItemService">
+                <port name="RequestReceiveItemBinding" binding="oaws:RequestReceiveItemBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestReceiveItem"/>
+                </port>
+        </service>
+        <service name="ResponseReceiveItemService">
+                <port name="ResponseReceiveItemBinding" binding="oaws:ResponseReceiveItemBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseReceiveItem"/>
+                </port>
+        </service>
+        <service name="SyncReceiveItemService">
+                <port name="SyncReceiveItemBinding" binding="oaws:SyncReceiveItemBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncReceiveItem"/>
+                </port>
+        </service>
+</definitions>

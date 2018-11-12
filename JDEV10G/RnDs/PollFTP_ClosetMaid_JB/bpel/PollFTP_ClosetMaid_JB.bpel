@@ -1,0 +1,84 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 19 21:44:34 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="PollFTP_ClosetMaid_JB"
+         targetNamespace="http://xmlns.emerson.com/PollFTP_ClosetMaid_JB"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns7="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:client="http://xmlns.emerson.com/PollFTP_ClosetMaid_JB"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/ClosetMaid_ReadFTP/"
+         xmlns:ns3="http://services.emerson.com"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Get_role" name="ClosetMaid_ReadFTP"
+                 partnerLinkType="ns1:Get_plt"/>
+    <partnerLink name="ReadFTP_JB" partnerRole="ReadFTP_JB_Provider"
+                 partnerLinkType="ns3:ReadFTP_JB"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_FTPFile_Get_InputVariable"
+              messageType="ns1:Get_msg"/>
+    <variable name="FTP_Header" messageType="ns2:InboundHeader_msg"/>
+    <variable name="Input_JavaRead" messageType="ns3:ReadFTP_RequestMessage"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <empty name="Empty_1"/>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_FTPFile" partnerLink="ClosetMaid_ReadFTP"
+             portType="ns1:Get_ptt" operation="Get"
+             variable="Receive_FTPFile_Get_InputVariable" createInstance="yes"
+             bpelx:headerVariable="FTP_Header"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="FTP_Header" part="inboundHeader"
+              query="/ns2:InboundFTPHeaderType/ns2:fileName"/>
+        <to variable="Input_JavaRead" part="filename"/>
+      </copy>
+      <copy>
+        <from expression="string('ClosetMaidFTP')"/>
+        <to variable="Input_JavaRead" part="host"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="ReadFTP_JB" portType="ns3:ReadFTP_JB"
+            operation="readFTP" inputVariable="Input_JavaRead"/>
+  </sequence>
+</process>

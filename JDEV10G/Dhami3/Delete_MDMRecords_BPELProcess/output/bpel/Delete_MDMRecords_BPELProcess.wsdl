@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="Delete_MDMRecords_BPELProcess"
+             targetNamespace="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess"
+            xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://www.gssamerica.com/mdm/services"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns3="http://schemas.oracle.com/service/bpel/common"
+     xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+     xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+     xmlns:client="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+         <import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+	<types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gssamerica.com/mdm/services"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess"
+             xmlns:ns2="http://schemas.oracle.com/bpel/extension" xmlns:ns3="http://schemas.oracle.com/service/bpel/common">
+            <import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="MDMService.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gssamerica.com/mdm/services"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+             xmlns:client="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess"
+             xmlns:ns3="http://schemas.oracle.com/service/bpel/common">
+            <xsd:import namespace="http://schemas.oracle.com/service/bpel/common" schemaLocation="ExternalParameters.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gssamerica.com/mdm/services"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:ns3="http://schemas.oracle.com/service/bpel/common"
+             xmlns:ns2="http://schemas.oracle.com/bpel/extension" xmlns:client="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess">
+            <xsd:import namespace="http://schemas.oracle.com/service/bpel/common" schemaLocation="ExternalParameters.xsd"/>
+        </xsd:schema>
+	</types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<message name="Delete_MDMRecords_BPELProcessRequestMessage">
+		<part name="payload" element="ns1:DeleteRecordRequest" />
+	</message>
+
+	<message name="Delete_MDMRecords_BPELProcessResponseMessage">
+		<part name="payload" element="ns1:ServiceReply" />
+	</message>
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- portType implemented by the Delete_MDMRecords_BPELProcess BPEL process -->
+	<portType name="Delete_MDMRecords_BPELProcess">
+		<operation name="process">
+			<input message="client:Delete_MDMRecords_BPELProcessRequestMessage"/>
+                        <output message="client:Delete_MDMRecords_BPELProcessResponseMessage"/>
+		</operation>
+	</portType>
+
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	the Delete_MDMRecords_BPELProcess partnerLinkType binds the provider and
+	requester portType into an asynchronous conversation.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<plnk:partnerLinkType name="Delete_MDMRecords_BPELProcess">
+		<plnk:role name="Delete_MDMRecords_BPELProcessProvider">
+			<plnk:portType name="client:Delete_MDMRecords_BPELProcess"/>
+		</plnk:role>
+        </plnk:partnerLinkType>
+</definitions>

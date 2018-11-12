@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Routin_GetCustomer" guid="848168F05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routin_GetCustomer" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1217331594306</ID>
+      <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>DefaultSystem_Routin_GetCustomer.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/DefaultSystem">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/TransformESB/Routin_GetCustomer?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/TransformESB/Routin_GetCustomer</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="848623E05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routin_GetCustomer.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbgetcustomer" element="tns:ESBGetCustomerRequest"/>
+         <routingRules>
+            <routingRule guid="FF802B305CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="E98381B05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteGetCustomer.Write" serviceGUID="E97EC6C05CA211DDBFBF7949E8E58CEB" serviceQName="TransformESB.WriteGetCustomer" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

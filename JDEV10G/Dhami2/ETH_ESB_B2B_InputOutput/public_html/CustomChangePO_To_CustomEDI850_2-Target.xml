@@ -1,0 +1,317 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ns10:CustomEDI850 xmlns:ns10="http://xmlns.emrsn.com/CustomProcessPurchaseOrder">
+   <ns12:Transaction-850 xmlns:ns12="urn:oracle:integration:b2b:DCC1FCD2811C47748DF43A39F735F4F0" XDataVersion="1.0" Standard="X12" GUID="{D4791971-A782-D811-B0F2-080020C8C860}" CreatedBy="ECXEngine_899" CreatedDate="2009-05-05T16:10:42+05:30">
+      <ns12:Segment-ST>
+         <ns12:Element-143>850</ns12:Element-143>
+         <ns12:Element-329/>
+      </ns12:Segment-ST>
+      <ns12:Segment-BEG>
+         <ns12:Element-353>04</ns12:Element-353>
+         <ns12:Element-92>BK</ns12:Element-92>
+         <ns12:Element-324>999POCGeneric3B</ns12:Element-324>
+         <ns12:Element-328/>
+         <ns12:Element-373>20081012</ns12:Element-373>
+         <ns12:Element-367>EMR123456ABC</ns12:Element-367>
+         <ns12:Element-587>AC</ns12:Element-587>
+         <ns12:Element-786>03</ns12:Element-786>
+      </ns12:Segment-BEG>
+      <ns12:Segment-CUR>
+         <ns12:Element-98>BY</ns12:Element-98>
+         <ns12:Element-100>USD</ns12:Element-100>
+      </ns12:Segment-CUR>
+      <ns12:Segment-REF>
+         <ns12:Element-128>S3</ns12:Element-128>
+         <ns12:Element-127>EMR850V5.0</ns12:Element-127>
+      </ns12:Segment-REF>
+      <ns12:Segment-REF>
+         <ns12:Element-128>PP</ns12:Element-128>
+         <ns12:Element-352>1</ns12:Element-352>
+      </ns12:Segment-REF>
+      <ns12:Segment-REF>
+         <ns12:Element-128>06</ns12:Element-128>
+         <ns12:Element-352>999</ns12:Element-352>
+      </ns12:Segment-REF>
+      <ns12:Segment-REF>
+         <ns12:Element-128>K8</ns12:Element-128>
+         <ns12:Element-352>PURCHASE ORDER DESCRIPTION TEXT</ns12:Element-352>
+      </ns12:Segment-REF>
+      <ns12:Segment-REF>
+         <ns12:Element-128>K9</ns12:Element-128>
+         <ns12:Element-352>1</ns12:Element-352>
+      </ns12:Segment-REF>
+      <ns12:Segment-FOB>
+         <ns12:Element-146>DF</ns12:Element-146>
+         <ns12:Element-309>ZZ</ns12:Element-309>
+         <ns12:Element-352>UCC FOB DEST COL</ns12:Element-352>
+      </ns12:Segment-FOB>
+      <ns12:Segment-ITD>
+         <ns12:Element-352>NET30</ns12:Element-352>
+      </ns12:Segment-ITD>
+      <ns12:Loop-N9>
+         <ns12:Segment-N9>
+            <ns12:Element-128>L1</ns12:Element-128>
+            <ns12:Element-127>PO Header Instructions to Supplier</ns12:Element-127>
+         </ns12:Segment-N9>
+         <ns12:Segment-MTX>
+            <ns12:Element-363>OTH</ns12:Element-363>
+            <ns12:Element-1551>HEADER INSTRUCTIONS TO SUPPLIER</ns12:Element-1551>
+            <ns12:Element-1551_1>HEADER INSTRUCTIONS TO SUPPLIER, CONTINUED IF NEEDED</ns12:Element-1551_1>
+         </ns12:Segment-MTX>
+      </ns12:Loop-N9>
+      <ns12:Loop-N1>
+         <ns12:Segment-N1>
+            <ns12:Element-98>VN</ns12:Element-98>
+            <ns12:Element-93>ABC SUPPLIER</ns12:Element-93>
+            <ns12:Element-66>93</ns12:Element-66>
+            <ns12:Element-67>999123456</ns12:Element-67>
+         </ns12:Segment-N1>
+         <ns12:Segment-N3>
+            <ns12:Element-166>SUPPLIER ADDRESS LINE 1 - THIS LINE LONGER THAN 55 CHA+</ns12:Element-166>
+            <ns12:Element-166_1>SUPPLIER ADDRESS LINE 2 - THIS LINE LONGER THAN 55 CHA+</ns12:Element-166_1>
+         </ns12:Segment-N3>
+         <ns12:Segment-N3>
+            <ns12:Element-166>SUPPLIER ADDRESS LINE 3 - THIS LINE LONGER THAN 55 CHA+</ns12:Element-166>
+            <ns12:Element-166>SUPPLIER ADDRESS LINE 4 - THIS LINE LONGER THAN 55 CHA+</ns12:Element-166>
+         </ns12:Segment-N3>
+         <ns12:Segment-N4>
+            <ns12:Element-19>SAINT LOUIS</ns12:Element-19>
+            <ns12:Element-116>63136</ns12:Element-116>
+            <ns12:Element-26>US</ns12:Element-26>
+            <ns12:Element-309>93</ns12:Element-309>
+            <ns12:Element-310>X999S</ns12:Element-310>
+            <ns12:Element-1715>MO</ns12:Element-1715>
+         </ns12:Segment-N4>
+         <ns12:Segment-PER>
+            <ns12:Element-366>SU</ns12:Element-366>
+            <ns12:Element-93>Supplier Contact Name</ns12:Element-93>
+            <ns12:Element-365>TE</ns12:Element-365>
+            <ns12:Element-364>314-555-2345</ns12:Element-364>
+            <ns12:Element-365_1>FX</ns12:Element-365_1>
+            <ns12:Element-364_1>314-555-1234</ns12:Element-364_1>
+            <ns12:Element-365_2>EM</ns12:Element-365_2>
+            <ns12:Element-364_2>contact.name@supplier.com</ns12:Element-364_2>
+         </ns12:Segment-PER>
+      </ns12:Loop-N1>
+      <ns12:Loop-N1>
+         <ns12:Segment-N1>
+            <ns12:Element-98>SO</ns12:Element-98>
+            <ns12:Element-93>EMERSON SOLD-TO DIVISION NAME</ns12:Element-93>
+         </ns12:Segment-N1>
+         <ns12:Segment-N3>
+            <ns12:Element-166>SOLD-TO ADDRESS LINE 1 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+            <ns12:Element-166_1>SOLD-TO ADDRESS LINE 2 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166_1>
+         </ns12:Segment-N3>
+         <ns12:Segment-N3>
+            <ns12:Element-166>SOLD-TO ADDRESS LINE 3 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+            <ns12:Element-166>SOLD-TO ADDRESS LINE 4 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+         </ns12:Segment-N3>
+         <ns12:Segment-N4>
+            <ns12:Element-19>SOMEWHERE</ns12:Element-19>
+            <ns12:Element-116>63376</ns12:Element-116>
+            <ns12:Element-26>US</ns12:Element-26>
+            <ns12:Element-309>93</ns12:Element-309>
+            <ns12:Element-310>X999SO</ns12:Element-310>
+            <ns12:Element-1715>MO</ns12:Element-1715>
+         </ns12:Segment-N4>
+      </ns12:Loop-N1>
+      <ns12:Loop-N1>
+         <ns12:Segment-N1>
+            <ns12:Element-98>BT</ns12:Element-98>
+            <ns12:Element-93>EMERSON BILL-TO DIVISION NAME</ns12:Element-93>
+         </ns12:Segment-N1>
+         <ns12:Segment-N3>
+            <ns12:Element-166>BILL-TO ADDRESS LINE 1 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+            <ns12:Element-166_1>BILL-TO ADDRESS LINE 2 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166_1>
+         </ns12:Segment-N3>
+         <ns12:Segment-N3>
+            <ns12:Element-166>BILL-TO ADDRESS LINE 3 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+            <ns12:Element-166>BILL-TO ADDRESS LINE 4 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+         </ns12:Segment-N3>
+         <ns12:Segment-N4>
+            <ns12:Element-19>SAINT CHARLES</ns12:Element-19>
+            <ns12:Element-116>63303</ns12:Element-116>
+            <ns12:Element-26>US</ns12:Element-26>
+            <ns12:Element-309>93</ns12:Element-309>
+            <ns12:Element-310>X999BT</ns12:Element-310>
+            <ns12:Element-1715>MO</ns12:Element-1715>
+         </ns12:Segment-N4>
+         <ns12:Segment-PER>
+            <ns12:Element-366>BD</ns12:Element-366>
+            <ns12:Element-93>Bill-To Contact Name</ns12:Element-93>
+            <ns12:Element-365>TE</ns12:Element-365>
+            <ns12:Element-364>314-555-6789</ns12:Element-364>
+            <ns12:Element-365_1>FX</ns12:Element-365_1>
+            <ns12:Element-364_1>314-555-5678</ns12:Element-364_1>
+            <ns12:Element-365_2>EM</ns12:Element-365_2>
+            <ns12:Element-364_2>contact.name@billto.com</ns12:Element-364_2>
+         </ns12:Segment-PER>
+      </ns12:Loop-N1>
+      <ns12:Loop-N1>
+         <ns12:Segment-N1>
+            <ns12:Element-98>CA</ns12:Element-98>
+            <ns12:Element-93>FED EX GROUND</ns12:Element-93>
+         </ns12:Segment-N1>
+      </ns12:Loop-N1>
+      <ns12:Loop-PO1>
+         <ns12:Segment-PO1>
+            <ns12:Element-350>1</ns12:Element-350>
+            <ns12:Element-380>10</ns12:Element-380>
+            <ns12:Element-355_1>EA</ns12:Element-355_1>
+            <ns12:Element-212>108</ns12:Element-212>
+            <ns12:Element-235_1>SW</ns12:Element-235_1>
+            <ns12:Element-234_1>EMR456789</ns12:Element-234_1>
+            <ns12:Element-235_2>VX</ns12:Element-235_2>
+            <ns12:Element-234_2>SUPP456789</ns12:Element-234_2>
+            <ns12:Element-235_3>BE</ns12:Element-235_3>
+            <ns12:Element-234_3>1.1</ns12:Element-234_3>
+         </ns12:Segment-PO1>
+         <ns12:Loop-PID>
+            <ns12:Segment-PID>
+               <ns12:Element-349>F</ns12:Element-349>
+               <ns12:Element-352>EMERSON ITEM DESCRIPTION TEXT EMERSON ITEM DESCRIPTION TEXTEMERSON ITEM DESCRIPT</ns12:Element-352>
+            </ns12:Segment-PID>
+         </ns12:Loop-PID>
+         <ns12:Loop-PID>
+            <ns12:Segment-PID>
+               <ns12:Element-349>F</ns12:Element-349>
+               <ns12:Element-352>ION TEXTEMERSON ITEM DESCRIPTION TEXTEMERSON ITEM DESCRIPTION TEXTEMERSON ITEM D</ns12:Element-352>
+            </ns12:Segment-PID>
+         </ns12:Loop-PID>
+         <ns12:Loop-PID>
+            <ns12:Segment-PID>
+               <ns12:Element-349>F</ns12:Element-349>
+               <ns12:Element-352>ESCRIPTION TEXTEMERSON ITEM DESCRIPTION TEXTEMERSON ITEM DESCRIPTION TEXTvvEMERS</ns12:Element-352>
+            </ns12:Segment-PID>
+         </ns12:Loop-PID>
+         <ns12:Loop-PID>
+            <ns12:Segment-PID>
+               <ns12:Element-349>F</ns12:Element-349>
+               <ns12:Element-352>ON ITEM DESCRIPTION TEXT</ns12:Element-352>
+            </ns12:Segment-PID>
+         </ns12:Loop-PID>
+         <ns12:Segment-TD4>
+            <ns12:Element-152>HAZ</ns12:Element-152>
+            <ns12:Element-352>Hazardous Class Description Text</ns12:Element-352>
+         </ns12:Segment-TD4>
+         <ns12:Loop-N1_2>
+            <ns12:Segment-N1>
+               <ns12:Element-98>ST</ns12:Element-98>
+               <ns12:Element-93>EMERSON SHIP-TO DIVISION NAME</ns12:Element-93>
+               <ns12:Element-66>93</ns12:Element-66>
+               <ns12:Element-67>999ST</ns12:Element-67>
+            </ns12:Segment-N1>
+            <ns12:Segment-N3>
+               <ns12:Element-166>SHIP-TO ADDRESS LINE 1 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+               <ns12:Element-166>SHIP-TO ADDRESS LINE 2 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+            </ns12:Segment-N3>
+            <ns12:Segment-N3>
+               <ns12:Element-166>SHIP-TO ADDRESS LINE 3 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166>
+               <ns12:Element-166_1>SHIP-TO ADDRESS LINE 4 - THIS LINE LONGER THAN 55 CHAR+</ns12:Element-166_1>
+            </ns12:Segment-N3>
+            <ns12:Segment-N4>
+               <ns12:Element-19>ANYWHERE</ns12:Element-19>
+               <ns12:Element-116>44813</ns12:Element-116>
+               <ns12:Element-26>US</ns12:Element-26>
+               <ns12:Element-309>93</ns12:Element-309>
+               <ns12:Element-310>X999ST</ns12:Element-310>
+               <ns12:Element-1715/>
+            </ns12:Segment-N4>
+            <ns12:Segment-PER>
+               <ns12:Element-366>BD</ns12:Element-366>
+               <ns12:Element-93>Ship-To Contact Name</ns12:Element-93>
+               <ns12:Element-365>TE</ns12:Element-365>
+               <ns12:Element-364>314-555-8901</ns12:Element-364>
+               <ns12:Element-365_1>FX</ns12:Element-365_1>
+               <ns12:Element-364_1>314-555-7890</ns12:Element-364_1>
+               <ns12:Element-365_2>EM</ns12:Element-365_2>
+               <ns12:Element-364_2>contact.name@shipto.com</ns12:Element-364_2>
+            </ns12:Segment-PER>
+            <ns12:Segment-PER>
+               <ns12:Element-366>RQ</ns12:Element-366>
+               <ns12:Element-93>Buyer Name 1C</ns12:Element-93>
+            </ns12:Segment-PER>
+            <ns12:Loop-SCH>
+               <ns12:Segment-SCH>
+                  <ns12:Element-380_2>10</ns12:Element-380_2>
+                  <ns12:Element-355>BFT</ns12:Element-355>
+                  <ns12:Element-374_5>112</ns12:Element-374_5>
+                  <ns12:Element-373>20081210</ns12:Element-373>
+                  <ns12:Element-374>010</ns12:Element-374>
+                  <ns12:Element-373_1>20081209</ns12:Element-373_1>
+                  <ns12:Element-350>1</ns12:Element-350>
+               </ns12:Segment-SCH>
+            </ns12:Loop-SCH>
+         </ns12:Loop-N1_2>
+      </ns12:Loop-PO1>
+      <ns12:Loop-CTT>
+         <ns12:Segment-CTT>
+            <ns12:Element-354>1</ns12:Element-354>
+         </ns12:Segment-CTT>
+      </ns12:Loop-CTT>
+      <ns12:Segment-SE>
+         <ns12:Element-96>#SegmentCount#</ns12:Element-96>
+         <ns12:Element-329/>
+      </ns12:Segment-SE>
+   </ns12:Transaction-850>
+   <Message_id>3294</Message_id>
+   <Message_direction>Out</Message_direction>
+   <Sender_Document_number>999POCGeneric3B</Sender_Document_number>
+   <Sender_Message_type>XML</Sender_Message_type>
+   <Sender_Message_standard>OAG</Sender_Message_standard>
+   <Sender_Transaction_type>ChangePO</Sender_Transaction_type>
+   <Sender_Transaction_subtype>POCO</Sender_Transaction_subtype>
+   <Sender_System_type>Oracle</Sender_System_type>
+   <Sender_Id>EMRDIV</Sender_Id>
+   <Sender_Site_Id/>
+   <Sender_Name>EMC</Sender_Name>
+   <Sender_Type/>
+   <Receiver_System_type/>
+   <Receiver_Id>999123456</Receiver_Id>
+   <Receiver_Site_id>X999S</Receiver_Site_id>
+   <Receiver_Name>ABC SUPPLIER</Receiver_Name>
+   <Receiver_type/>
+   <File_name/>
+   <Record_total/>
+   <Record_number/>
+   <Flow_id_1>7Ex75utgPQr6C+iac3k+bw==</Flow_id_1>
+   <Flow_id_2>7TPD-x0i-JgG6Sf62fwFIQ==</Flow_id_2>
+   <Flow_id_3/>
+   <Send_on_fail/>
+   <Division_name/>
+   <Division_format/>
+   <Trading_partner_1_name/>
+   <Trading_partner_1_format/>
+   <Trading_partner_1_date_from/>
+   <Trading_partner_1_date_to/>
+   <Trading_partner_2_name/>
+   <Trading_partner_2_format/>
+   <Trading_partner_2_date_from/>
+   <Trading_partner_2_date_to/>
+   <Trading_partner_3_name/>
+   <Trading_partner_3_format/>
+   <Trading_partner_3_date_from/>
+   <Trading_partner_3_date_to/>
+   <Logistics_1_name/>
+   <Logistics_1_format/>
+   <Logistics_1_date_from/>
+   <Logistics_1_date_to/>
+   <Logistics_2_name/>
+   <Logistics_2_format/>
+   <Logistics_2_date_from/>
+   <Logistics_2_date_to/>
+   <Logistics_3_name/>
+   <Logistics_3_format/>
+   <Logistics_3_date_from/>
+   <Logistics_3_date_to/>
+   <Compliance_result/>
+   <Attribute1>X999ST</Attribute1>
+   <Attribute2/>
+   <Attribute3/>
+   <Attribute4/>
+   <Attribute5/>
+   <Attribute6/>
+   <Attribute7/>
+   <Attribute8/>
+   <Attribute9/>
+   <Attribute10/>
+</ns10:CustomEDI850>

@@ -1,0 +1,127 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Mar 03 16:20:49 IST 2009
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CEH_BPEL_ProcessProduct"
+         targetNamespace="http://bpel.oracle.com/CEH_BPEL_ProcessProduct"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://bpel.oracle.com/CEH_BPEL_ProcessProduct"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://schemas.emerson.com/common/envelope"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns2="http://services.emerson.com/product"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:CEH_BPEL_ProcessProduct"
+                 myRole="CEH_BPEL_ProcessProductProvider"/>
+    <partnerLink name="ProductBusinessService"
+                 partnerRole="ProductPortType_Role"
+                 partnerLinkType="ns2:ProductPortType_PL"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:CEH_BPEL_ProcessProductRequestMessage"/>
+    <variable name="L_ProcessDetails" element="ns1:process"/>
+    <variable name="L_Header" element="ns1:header"/>
+    <variable name="L_Body" element="ns1:body"/>
+    <variable name="L_ProductRequest" messageType="ns2:RequestMessage"/>
+    <variable name="L_ProductResponse" messageType="ns2:ResponseMessage"/>
+    <variable name="Flt_DataFault" messageType="ns2:FaultMessage"/>
+  </variables>
+  <faultHandlers>
+    <catch faultName="ns2:DataFault" faultVariable="Flt_DataFault"/>
+    <catchAll>
+      <empty name="Empty_IfAnyFault"/>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in CEH_BPEL_ProcessProduct.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:CEH_BPEL_ProcessProduct" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_ProcessDetails">
+      <copy>
+        <from expression="ora:getProcessId()"/>
+        <to variable="L_ProcessDetails" query="/ns1:process"/>
+      </copy>
+      <copy>
+        <from expression="ora:getInstanceId()"/>
+        <to variable="L_ProcessDetails" query="/ns1:process/@ns1:processID"/>
+      </copy>
+    </assign>
+    <assign name="Assign_InvocationVariables">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/ns1:envelope/ns1:header"/>
+        <to variable="L_Header" query="/ns1:header"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/ns1:envelope/ns1:body/ns1:xmlPayload"/>
+        <to variable="L_Body" query="/ns1:body/ns1:xmlPayload"/>
+      </copy>
+      <bpelx:insertAfter>
+        <bpelx:from variable="L_ProcessDetails" query="/ns1:process"/>
+        <bpelx:to variable="L_Header"
+                  query="/ns1:header/ns1:routingInfo/ns1:process"/>
+      </bpelx:insertAfter>
+      <copy>
+        <from expression="string('CEH_JWS_CustomerService')"/>
+        <to variable="L_Header" query="/ns1:header/ns1:destination"/>
+      </copy>
+    </assign>
+    <assign name="Transform_EnvelopeBodyToProduct">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('envelopeBody_Product.xsl',bpws:getVariableData('L_Body'))"/>
+        <to variable="L_ProductRequest" part="requestPart"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_ProductBusinessService"
+            partnerLink="ProductBusinessService" portType="ns2:ProductPortType"
+            operation="processProduct" inputVariable="L_ProductRequest"
+            outputVariable="L_ProductResponse"/>
+  </sequence>
+</process>

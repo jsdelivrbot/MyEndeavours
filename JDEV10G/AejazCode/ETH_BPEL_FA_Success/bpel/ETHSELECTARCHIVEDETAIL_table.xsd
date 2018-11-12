@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSELECTARCHIVEDETAIL" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSELECTARCHIVEDETAIL" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="EthArchiveDetailTransactionCollection" type="EthArchiveDetailTransactionCollection"/>
+   <xs:element name="EthArchiveDetailTransaction" type="EthArchiveDetailTransaction"/>
+   <xs:complexType name="EthArchiveDetailTransactionCollection">
+      <xs:sequence>
+         <xs:element name="EthArchiveDetailTransaction" type="EthArchiveDetailTransaction" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="EthArchiveDetailTransaction">
+      <xs:sequence>
+         <xs:element name="seqNumber" type="xs:decimal"/>
+         <xs:element name="messageId">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="200"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="bussinessDocumentId" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="30"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="destinationAckTrackingId" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="100"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="payload" type="xs:string" minOccurs="0" nillable="true"/>
+         <xs:element name="destinationSystem" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="100"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_idInputParameters" type="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id"/>
+   <xs:complexType name="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id">
+      <xs:sequence>
+         <xs:element name="fa_tracking_id" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

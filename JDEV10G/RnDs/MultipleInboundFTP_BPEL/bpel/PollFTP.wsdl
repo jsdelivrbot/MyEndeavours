@@ -1,0 +1,57 @@
+<definitions
+     name="PollFTP"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/PollFTP/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/PollFTP/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterInboundHeader.wsdl"/>
+    <types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </types>
+    <message name="Get_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="Get_ptt">
+        <operation name="Get">
+            <input message="tns:Get_msg"/>
+        </operation>
+    </portType>
+    <binding name="Get_binding" type="tns:Get_ptt">
+    <pc:inbound_binding  />
+        <operation name="Get">
+      <jca:operation
+          FileType="ascii"
+          PhysicalDirectory="$InputDIR"
+          ActivationSpec="oracle.tip.adapter.ftp.inbound.FTPActivationSpec"
+          PhysicalArchiveDirectory="$archiveDIR"
+          DeleteFile="true"
+          IncludeFiles="dynamic.*\.txt"
+          PollingFrequency="60"
+          MinimumAge="0"
+          OpaqueSchema="true"
+          UseRemoteArchive="true">
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="PollFTP">
+        <port name="Get_pt" binding="tns:Get_binding">
+      <jca:address location="$ftpJNDI" UIincludeWildcard="dynamic*.txt" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Get_plt" >
+    <plt:role name="Get_role" >
+      <plt:portType name="tns:Get_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

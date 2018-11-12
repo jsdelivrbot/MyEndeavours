@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<system name="ETHSys_IntegrationServices" guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" status="ENABLED">
+   <versionInfo>
+      <ID>1244825629926</ID>
+      <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <description/>
+   <parameters>
+      <parameter name="Host">localhost</parameter>
+      <parameter name="Port">12001</parameter>
+   </parameters>
+   <clusterName>esb</clusterName>
+   <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+</system>

@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="DynPL_JNDI" src="DynPL_JNDI.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ReadGifFile">
+            <property name="wsdlLocation">ReadGifFile.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="FtpPutFileBLOBPayload">
+            <property name="wsdlLocation">FtpPutFileBLOBPayload.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <configurations>
+         <property name="sensorActionLocation">sensorAction.xml</property>
+      </configurations>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ReadGifFile">
+            <property name="inputDirectory" type="LogicalDirectory">D:\oracle\suite\bpel/samples/tutorials/140.AdapterFramework/DynamicPartnerlinks/DynPL_JNDI/inputDir</property>
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

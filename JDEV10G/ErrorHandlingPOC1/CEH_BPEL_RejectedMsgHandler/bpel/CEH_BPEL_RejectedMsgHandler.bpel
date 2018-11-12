@@ -1,0 +1,102 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Mar 03 20:20:15 IST 2009
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CEH_BPEL_RejectedMsgHandler"
+         targetNamespace="http://bpel.oracle.com/CEH_BPEL_RejectedMsgHandler"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:client="http://bpel.oracle.com/CEH_BPEL_RejectedMsgHandler"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://bpel.oracle.com/CEH_BPEL_CommonErrorHandler"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/errorHandling"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="RejectedMessages"
+                 partnerLinkType="client:CEH_BPEL_RejectedMsgHandler"
+                 myRole="CEH_BPEL_RejectedMsgHandlerProvider"/>
+    <partnerLink name="CEH_BPEL_CommonErrorHandler"
+                 partnerRole="CEH_BPEL_CommonErrorHandlerProvider"
+                 partnerLinkType="ns1:CEH_BPEL_CommonErrorHandler"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="G_IN_RejectedMessage"
+              messageType="client:CEH_BPEL_RejectedMsgHandlerRequestMessage"/>
+    <variable name="Invoke_CommonErrorHandler_Request"
+              messageType="ns1:CEH_BPEL_CommonErrorHandlerRequestMessage"/>
+    <variable name="Flt_AnyFault" type="xsd:string"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence_1">
+        <assign name="Assign_IfAnyFault">
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="Flt_AnyFault"/>
+          </copy>
+        </assign>
+        <empty name="Empty_IfAnyFault"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in CEH_BPEL_RejectedMsgHandler.wsdl) -->
+    <receive name="receiveInput" partnerLink="RejectedMessages"
+             portType="client:CEH_BPEL_RejectedMsgHandler"
+             operation="handleRejection" variable="G_IN_RejectedMessage"
+             createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Trnfm_RejectedMsg_ErrorMsg">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Trnfm_RejectedMsg_ErrorMsg.xsl',bpws:getVariableData('G_IN_RejectedMessage','payload'))"/>
+        <to variable="Invoke_CommonErrorHandler_Request" part="payload"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_CommonErrorHandler"
+            partnerLink="CEH_BPEL_CommonErrorHandler"
+            portType="ns1:CEH_BPEL_CommonErrorHandler" operation="handleError"
+            inputVariable="Invoke_CommonErrorHandler_Request"/>
+  </sequence>
+</process>

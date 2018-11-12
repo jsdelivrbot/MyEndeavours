@@ -1,0 +1,59 @@
+<definitions
+     name="ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://xmlns.emrsn.com/CustomChange_PO_006"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomChange_PO_006" schemaLocation="public_html/CustomChange_PO_006.xsd" />
+      </schema>
+    </types>
+    <message name="CustomChange_PO_006_msg">
+        <part name="CustomChange_PO_006" element="imp1:CustomChange_PO_006"/>
+    </message>
+    <portType name="Produce_Message_ptt">
+        <operation name="Produce_Message">
+            <input message="tns:CustomChange_PO_006_msg"/>
+        </operation>
+    </portType>
+    <binding name="Produce_Message_binding" type="tns:Produce_Message_ptt">
+    <jca:binding  />
+        <operation name="Produce_Message">
+      <jca:operation
+          DestinationName="jms/ETH_ChangePO_OAGIS_7_2"
+          DeliveryMode="Persistent"
+          TimeToLive="0"
+          PayloadType="TextMessage"
+          InteractionSpec="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2">
+        <port name="Produce_Message_pt" binding="tns:Produce_Message_binding">
+      <jca:address location="eis/Jms/ETHTopicConnection" UIConnectionName="AS_Elshat1"
+          ManagedConnectionFactory="oracle.tip.adapter.jms.JmsManagedConnectionFactory"
+          mcf.ConnectionFactoryLocation="jms/TopicConnectionFactory"
+          mcf.IsTopic="true"
+          mcf.IsTransacted="false"
+          mcf.FactoryProperties=""
+          mcf.Username="oc4jadmin"
+          mcf.Password="0C03B4033C9E1CE7BEE999834D0F025B9A31B0C43B52175A"
+          UIJmsProvider="OC4JJMS" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Produce_Message_plt" >
+    <plt:role name="Produce_Message_role" >
+      <plt:portType name="tns:Produce_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

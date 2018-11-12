@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_ELSHA_LiebertFlatFile_RS" guid="838973910C9411DEBFB957152A29AC2D" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ETH_GETFTP_ELSHA_LiebertFlatFile</description>
+   <versionInfo>
+      <ID>1266567335710</ID>
+      <lastModifiedTime>Fri Feb 19 08:15:35 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_WorkingESB_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="02B9F251D8E311DEBFF4E177418C329B" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_GETFTP_ELSHA_LiebertFlatFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ELSHA_LiebertFlatFile/">tns:Get_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_InputServices/ETHSysGrp_Liebert_Process/ETH_GETFTP_ELSHA_LiebertFlatFile_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_InputServices/ETHSysGrp_Liebert_Process/ETH_GETFTP_ELSHA_LiebertFlatFile_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="838BE4900C9411DEBFB957152A29AC2D" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/LiebertPurchaseOrder" element="tns:Root-Element"/>
+         <routingRules>
+            <routingRule guid="10F4AF800CA211DEBFB957152A29AC2D" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="E8D0CE800CA111DEBFB957152A29AC2D" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_ENQJMS_PO_LiebertFlatFile.Produce_Message" serviceGUID="E8CE84900CA111DEBFB957152A29AC2D" serviceQName="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_ENQJMS_PO_LiebertFlatFile" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>Root_Element_To_CustomLiebertPO_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

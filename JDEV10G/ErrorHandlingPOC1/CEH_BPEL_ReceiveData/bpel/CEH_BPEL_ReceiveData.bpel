@@ -1,0 +1,187 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Feb 27 11:33:04 IST 2009
+  Author:  idhami
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CEH_BPEL_ReceiveData"
+         targetNamespace="http://xmlns.oracle.com/CEH_BPEL_ReceiveData"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://schemas.emerson.com/common/errorMessage"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://xmlns.oracle.com/CEH_BPEL_ReceiveData"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://schemas.emerson.com/common/envelope"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://bpel.oracle.com/CEH_BPEL_CommonErrorHandler"
+         xmlns:ns2="http://esb.emerson.com/dataRouting"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="client" partnerLinkType="client:CEH_BPEL_ReceiveData"
+                     myRole="CEH_BPEL_ReceiveDataProvider"/>
+        <partnerLink name="RoutingESBService"
+                     partnerRole="RoutingPortTypeProvider"
+                     partnerLinkType="ns2:RoutingPortTypeLT"/>
+        <partnerLink name="PtESB_RoutingService"
+                     partnerRole="RoutingPortTypeProvider"
+                     partnerLinkType="ns2:RoutingPortTypeLT"/>
+        <partnerLink name="CEH_BPEL_CommonErrorHandler"
+                     partnerRole="CEH_BPEL_CommonErrorHandlerProvider"
+                     partnerLinkType="ns3:CEH_BPEL_CommonErrorHandler"/>
+    </partnerLinks>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="G_IN_inputVariable"
+                  messageType="client:CEH_BPEL_ReceiveDataRequestMessage"/>
+        <variable name="L_RoutingESB_Request" messageType="ns2:RequestMessage"/>
+        <variable name="L_ProcessDetails" element="ns1:process"/>
+        <variable name="L_CommonErrorHandler_Request"
+                  messageType="ns3:CEH_BPEL_CommonErrorHandlerRequestMessage"/>
+        <variable name="LogMessage"
+                  messageType="client:CEH_BPEL_ReceiveDataRequestMessage"/>
+    </variables>
+    <faultHandlers>
+        <catchAll>
+            <sequence name="Sequence_1">
+                <assign name="Assign_AnyErrorMsg">
+                    <copy>
+                        <from expression="ora:getFaultAsString()"/>
+                        <to variable="L_CommonErrorHandler_Request"
+                            part="payload"
+                            query="/ns4:errorMessage/ns4:errorMessageDetails/ns4:errorReason"/>
+                    </copy>
+                    <copy>
+                        <from variable="G_IN_inputVariable" part="payload"
+                              query="/ns1:envelope/ns1:header"/>
+                        <to variable="L_CommonErrorHandler_Request"
+                            part="payload"
+                            query="/ns4:errorMessage/ns4:errorMessageHeader"/>
+                    </copy>
+                    <copy>
+                        <from variable="G_IN_inputVariable" part="payload"
+                              query="/ns1:envelope/ns1:body/ns1:xmlPayload"/>
+                        <to variable="L_CommonErrorHandler_Request"
+                            part="payload"
+                            query="/ns4:errorMessage/ns4:errorMessagePayload"/>
+                    </copy>
+                    <copy>
+                        <from variable="G_IN_inputVariable" part="payload"
+                              query="/ns1:envelope/ns1:header/ns1:flowID"/>
+                        <to variable="L_CommonErrorHandler_Request"
+                            part="payload"
+                            query="/ns4:errorMessage/ns4:errorMessageDetails/ns4:flowID"/>
+                    </copy>
+                    <copy>
+                        <from variable="G_IN_inputVariable" part="payload"
+                              query="/ns1:envelope/ns1:header/ns1:originalSource"/>
+                        <to variable="L_CommonErrorHandler_Request"
+                            part="payload"
+                            query="/ns4:errorMessage/ns4:errorMessageDetails/ns4:source"/>
+                    </copy>
+                    <copy>
+                        <from variable="G_IN_inputVariable" part="payload"
+                              query="/ns1:envelope/ns1:header/ns1:destination"/>
+                        <to variable="L_CommonErrorHandler_Request"
+                            part="payload"
+                            query="/ns4:errorMessage/ns4:errorMessageDetails/ns4:destination"/>
+                    </copy>
+                </assign>
+                <invoke name="Invoke_CEHBPEL"
+                        partnerLink="CEH_BPEL_CommonErrorHandler"
+                        portType="ns3:CEH_BPEL_CommonErrorHandler"
+                        operation="handleError"
+                        inputVariable="L_CommonErrorHandler_Request"/>
+            </sequence>
+        </catchAll>
+    </faultHandlers>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in CEH_BPEL_ReceiveData.wsdl) -->
+        <receive name="Receive_CommonEnvelope" partnerLink="client"
+                 portType="client:CEH_BPEL_ReceiveData" operation="initiate"
+                 variable="G_IN_inputVariable" createInstance="yes"/>
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <assign name="Assign_ProcessDetails">
+            <copy>
+                <from expression="ora:getInstanceId()"/>
+                <to variable="L_ProcessDetails"
+                    query="/ns1:process/@ns1:processID"/>
+            </copy>
+            <copy>
+                <from expression="ora:getProcessId()"/>
+                <to variable="L_ProcessDetails" query="/ns1:process"/>
+            </copy>
+            <copy>
+                <from variable="G_IN_inputVariable" part="payload"
+                      query="/ns1:envelope"/>
+                <to variable="LogMessage" part="payload" query="/ns1:envelope"/>
+            </copy>
+        </assign>
+        <assign name="Assign_RoutingInfo">
+            <bpelx:insertAfter>
+                <bpelx:from variable="L_ProcessDetails" query="/ns1:process"/>
+                <bpelx:to variable="G_IN_inputVariable" part="payload"
+                          query="/ns1:envelope/ns1:header/ns1:routingInfo/ns1:process"/>
+            </bpelx:insertAfter>
+            <copy>
+                <from expression="string('CEH_ESB_MessageRouting')"/>
+                <to variable="G_IN_inputVariable" part="payload"
+                    query="/ns1:envelope/ns1:header/ns1:destination"/>
+            </copy>
+        </assign>
+        <empty name="Empty_Logging"/>
+        <assign name="Assign_InvocationVariable">
+            <copy>
+                <from variable="G_IN_inputVariable" part="payload"
+                      query="/ns1:envelope"/>
+                <to variable="L_RoutingESB_Request" part="requestPart"
+                    query="/ns1:envelope"/>
+            </copy>
+            <copy>
+                <from variable="L_RoutingESB_Request" part="requestPart"
+                      query="/ns1:envelope"/>
+                <to variable="LogMessage" part="payload" query="/ns1:envelope"/>
+            </copy>
+        </assign>
+        <invoke name="Invoke_RoutingESB" partnerLink="RoutingESBService"
+                portType="ns2:RoutingPortType" operation="route"
+                inputVariable="L_RoutingESB_Request"/>
+    </sequence>
+</process>

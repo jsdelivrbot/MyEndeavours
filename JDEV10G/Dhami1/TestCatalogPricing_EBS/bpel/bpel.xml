@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="TestCatalogPricing_EBS" src="TestCatalogPricing_EBS.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="Poll_CatalogPricing">
+            <property name="wsdlLocation">Poll_CatalogPricing.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="Push_CNP_ESB">
+            <property name="wsdlLocation">Push_CNP_ESB.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="Poll_CatalogPricing">
+            <property name="portType">Read_ptt</property>
+            <!--<property name="rejectedMessageHandlers">bpel://default:welcome1|CEH_BPEL_RejectedMsgHandler|handleRejection|payload</property>-->
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

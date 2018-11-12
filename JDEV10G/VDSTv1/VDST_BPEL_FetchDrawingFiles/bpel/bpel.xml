@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="VDST_BPEL_FetchDrawingFiles" src="VDST_BPEL_FetchDrawingFiles.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="VDST_FTPGET_DrawingFilename">
+            <property name="wsdlLocation">VDST_FTPGET_DrawingFilename.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="VDST_FTPGET_DrawingFilename">
+            <property name="portType">Get_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

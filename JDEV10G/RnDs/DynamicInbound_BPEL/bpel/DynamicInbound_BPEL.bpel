@@ -1,0 +1,77 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Apr 14 11:39:50 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="DynamicInbound_BPEL"
+         targetNamespace="http://schema.emerson.com/DynamicInbound_BPEL"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/aq/Test1AQ/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/xdb/AQ"
+         xmlns:client="http://schema.emerson.com/DynamicInbound_BPEL"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/PollFile/"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/PutFile/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="PollFile"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="PutFile" partnerRole="Write_role"
+                 partnerLinkType="ns2:Write_plt"/>
+    <partnerLink name="Test1AQ" partnerRole="Enqueue_role"
+                 partnerLinkType="ns4:Enqueue_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_1_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="Invoke_1_Write_InputVariable" messageType="ns2:Write_msg"/>
+    <variable name="Invoke_2_Enqueue_InputVariable"
+              messageType="ns4:MESSAGE_TYP_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="PollFile" portType="ns1:Read_ptt"
+             operation="Read" variable="Receive_1_Read_InputVariable"
+             createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="Receive_1_Read_InputVariable" part="opaque"
+              query="/ns3:opaqueElement"/>
+        <to variable="Invoke_1_Write_InputVariable" part="opaque"
+            query="/ns3:opaqueElement"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="PutFile" portType="ns2:Write_ptt"
+            operation="Write" inputVariable="Invoke_1_Write_InputVariable"/>
+    <invoke name="Invoke_2" partnerLink="Test1AQ" portType="ns4:Enqueue_ptt"
+            operation="Enqueue" inputVariable="Invoke_2_Enqueue_InputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,32 @@
+<definitions
+     name="ICoE_FaultGenerator"
+     targetNamespace="http://services.emerson.com/ICoE_FaultGenerator"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://schemas.oracle.com/bpel/extension"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://services.emerson.com/ICoE_FaultGenerator"
+    >
+    <import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://services.emerson.com/ICoE_FaultGenerator" schemaLocation="ICoE_FaultGenerator.xsd"/>
+        </schema>
+    </types>
+    <message name="ICoE_FaultGeneratorRequestMessage">
+        <part name="payload" element="client:ICoE_FaultGeneratorProcessRequest"/>
+    </message>
+    <message name="ICoE_FaultGeneratorResponseMessage">
+        <part name="payload" element="client:ICoE_FaultGeneratorProcessResponse"/>
+    </message>
+    <portType name="ICoE_FaultGenerator">
+        <operation name="process">
+            <input message="client:ICoE_FaultGeneratorRequestMessage"/>
+            <output message="client:ICoE_FaultGeneratorResponseMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="ICoE_FaultGenerator">
+        <plnk:role name="ICoE_FaultGeneratorProvider">
+            <plnk:portType name="client:ICoE_FaultGenerator"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

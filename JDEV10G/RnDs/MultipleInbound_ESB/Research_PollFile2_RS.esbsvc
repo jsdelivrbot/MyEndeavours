@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="PollFile2_RS" guid="30AF7E9128DB11DE9F6E25369D68C9F5" qname="Research.PollFile2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service PollFile2</description>
+   <versionInfo>
+      <ID>1239707775017</ID>
+      <lastModifiedTime>Tue Apr 14 16:46:15 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_MultipleInbound_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="26E1DE7128D711DE9F6E25369D68C9F5" qname="Research" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>PollFile2.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/PollFile2/">tns:Read_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Research/PollFile2_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Research/PollFile2_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="30AF7E9228DB11DE9F6E25369D68C9F5" qname="Research.PollFile2_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+         <routingRules>
+            <routingRule guid="3A33DD8028DB11DE9F6E25369D68C9F5" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="B4D08E2128D711DE9F6E25369D68C9F5" qname="Research.PutFile.Write" serviceGUID="B4D08E2028D711DE9F6E25369D68C9F5" serviceQName="Research.PutFile" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

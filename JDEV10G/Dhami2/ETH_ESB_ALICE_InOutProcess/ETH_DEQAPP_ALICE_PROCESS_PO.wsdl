@@ -1,0 +1,84 @@
+<definitions
+     name="ETH_DEQDB_ALICE_PROCESSPO"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_DEQDB_ALICE_PROCESSPO/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_DEQDB_ALICE_PROCESSPO/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://xmlns.emrsn.com/CommonProcessPO_007"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/SYSTEM"
+    >
+    <types>
+    <!-- Define AQ Headers = Payload Headers + Static Queue Headers -->
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_DEQDB_ALICE_PROCESSPO/"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_DEQDB_ALICE_PROCESSPO/"
+            xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"
+            xmlns:obj1="http://xmlns.oracle.com/xdb/SYSTEM" >
+      <import namespace="http://xmlns.oracle.com/xdb/SYSTEM" schemaLocation="SYSTEM_ECXMSG.xsd"/>
+      <import namespace="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/" schemaLocation="aqAdapterInboundHeader.xsd"/>
+      <complexType name="HeaderCType" >
+        <sequence>
+          <!-- static header -->
+          <element name="QueueHeader" type="hdr:HeaderType" />
+          <!-- payload header -->
+          <element name="PayloadHeader" type="obj1:ECXMSG" />
+        </sequence>
+      </complexType>
+      <element name="Header" type="tns:HeaderCType" />
+    </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CommonProcessPO_007" schemaLocation="public_html/CommonProcess_PO_007.xsd" />
+      </schema>
+    </types>
+    <message name="PROCESS_PO_007_msg">
+        <part name="PROCESS_PO_007" element="imp1:PROCESS_PO_007"/>
+    </message>
+    <message name="Header_msg">
+        <part name="Header" element="tns:Header"/>
+    </message>
+    <portType name="Dequeue_ptt">
+        <operation name="Dequeue">
+            <input message="tns:PROCESS_PO_007_msg"/>
+        </operation>
+    </portType>
+    <binding name="Dequeue_binding" type="tns:Dequeue_ptt">
+    <pc:inbound_binding  />
+        <operation name="Dequeue">
+      <jca:operation
+          ActivationSpec="oracle.tip.adapter.apps.AppsXMLGatewayDequeueActivationSpec"
+          PayloadHeaderRequired="true"
+          QueueName="ECX_OUTBOUND"
+          DatabaseSchema="APPS"
+          ObjectFieldName="PAYLOAD"
+          Correlation="PO_BPEL"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="tns:Header_msg" part="Header"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_DEQDB_ALICE_PROCESSPO">
+        <port name="Dequeue_pt" binding="tns:Dequeue_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/AppsAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/Apps/ALICE is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/Apps/Alice" UIConnectionName="ALICE" UIOracleAppType="XMLGATEWAY"
+          ManagedConnectionFactory="oracle.tip.adapter.apps.AppsManagedConnectionFactory"
+          mcf.ConnectionString="jdbc:oracle:thin:@essdbdu31.emrsn.com:20901:aliced2"
+          mcf.UserName="apps"
+          mcf.Password="53CB0F044A0D3DD2C063679F18F89870" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Dequeue_plt" >
+    <plt:role name="Dequeue_role" >
+      <plt:portType name="tns:Dequeue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

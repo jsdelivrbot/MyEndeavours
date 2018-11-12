@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<actions targetNamespace="http://xmlns.oracle.com/CEH_BPEL_ReceiveData" xmlns="http://xmlns.oracle.com/bpel/sensor" xmlns:tns="http://xmlns.oracle.com/CEH_BPEL_ReceiveData" xmlns:pc="http://xmlns.oracle.com/bpel/sensor">
+   <action name="LogSensorJMSTopicAction" publishName="" publishType="JMSTopic" enabled="true" publishTarget="jms/common/Log_Topic">
+      <property name="JMSConnectionFactory">jms/TopicConnectionFactory</property>
+      <sensorName>LogSensor</sensorName>
+   </action>
+   <action name="LogSensorDBAction" publishName="" publishType="BpelReportsSchema" enabled="true">
+      <sensorName>LogSensor</sensorName>
+   </action>
+   <action name="LogSensorCustomAction" publishName="" publishType="Custom" enabled="true" filter="" publishTarget="com.emerson.bpel.sensor.action.MySensorAction">
+      <sensorName>LogSensor</sensorName>
+   </action>
+</actions>

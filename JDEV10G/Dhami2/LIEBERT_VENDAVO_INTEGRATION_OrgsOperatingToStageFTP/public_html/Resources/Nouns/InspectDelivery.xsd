@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\InspectDelivery.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="InspectDelivery" type="InspectDeliveryType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Reports the InspectDelivery of items identifies in the source document.
+
+Typically, the source document is a Purchase Order. However, in some cases, the goods inspected may already be in inventory in a queue awaiting InspectDelivery. In this case the visibility to the PO may no longer be available, in which case the DeliveryReceipt reference must be used. 
+
+This may also require an Inventory event to occur to ensure the status of the goods is updated in Inventory to reflect whether the goods are available for Inventory use after InspectDelivery.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RejectionDetails" type="RejectionDetailsType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This describes the reasons for rejecting or accepting the corresponding quantity</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="InspectDeliveryType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="RejectedQuantity" minOccurs="0"/>
+                                        <xsd:element name="AcceptedQuantity" type="QuantityType" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies the total quantity acceptedagainst this InspectDelivery line</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="InspectedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="TotalQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                                        <xsd:element ref="PurchasingParty" minOccurs="0"/>
+                                        <xsd:element ref="SupplierParty" minOccurs="0"/>
+                                        <xsd:element ref="InspectorContact" minOccurs="0"/>
+                                        <xsd:element ref="InspectDeliveryReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PurchaseOrderReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DeliveryReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RejectionDetails" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RejectionDetailsType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="InventoryItemIDs" minOccurs="0"/>
+                                        <xsd:element ref="RejectedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="AcceptedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="InspectedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="TotalQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

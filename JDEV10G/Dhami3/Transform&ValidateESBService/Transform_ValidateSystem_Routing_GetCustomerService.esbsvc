@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Routing_GetCustomerService" guid="26139A2036F111DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.Routing_GetCustomerService" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1214809452748</ID>
+      <lastModifiedTime>Mon Jun 30 12:34:12 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDMApplication_Transform&amp;ValidateESBService</lastModifiedUser>
+   </versionInfo>
+   <parent guid="662E8A8036F011DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>esb:///ESB_Projects/MDMApplication_Transform&amp;ValidateESBService/Transform_ValidateSystem_Routing_GetCustomerService.wsdl</wsdlURL>
+      <portType xmlns:tns="http://www.gssamerica.com/mdm/Transform_ValidateSystem">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Transform&amp;ValidateSystem/Routing_GetCustomerService?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Transform&amp;ValidateSystem/Routing_GetCustomerService</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="2615E41036F111DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.Routing_GetCustomerService.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbgetcustomer" element="tns:ESBGetCustomerRequest"/>
+         <routingRules>
+            <routingRule guid="937E0CC036F211DDBF87E36E13A58817" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="1587CDB036F211DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.WriteGetCustFile.Write" serviceGUID="15855CB036F211DDBF87E36E13A58817" serviceQName="Transform&amp;ValidateSystem.WriteGetCustFile" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

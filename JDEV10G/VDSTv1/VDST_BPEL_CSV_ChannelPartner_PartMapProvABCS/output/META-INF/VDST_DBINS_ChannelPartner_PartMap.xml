@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.4.0) (Build 080602)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>VDST_DBINS_ChannelPartner_PartMap</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>VDSTDBINSChannelPartnerPartMap.VdstChnlpartnerPartNumber</opm:class>
+         <opm:alias>VdstChnlpartnerPartNumber</opm:alias>
+         <opm:primary-key>
+            <opm:field table="VDST_CHNLPARTNER_PART_NUMBER" name="PART_NUMBER" xsi:type="opm:column"/>
+            <opm:field table="VDST_CHNLPARTNER_PART_NUMBER" name="CHANNEL_PARTNER_ID" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="findAllVdstChnlpartnerPartNumber" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>VDSTDBINSChannelPartnerPartMap.VdstChnlpartnerPartNumber</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>partNumber</opm:attribute-name>
+               <opm:field table="VDST_CHNLPARTNER_PART_NUMBER" name="PART_NUMBER" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>channelPartnerId</opm:attribute-name>
+               <opm:field table="VDST_CHNLPARTNER_PART_NUMBER" name="CHANNEL_PARTNER_ID" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>channelPartnerPartNumber</opm:attribute-name>
+               <opm:field table="VDST_CHNLPARTNER_PART_NUMBER" name="CHANNEL_PARTNER_PART_NUMBER" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>generatedTimestamp</opm:attribute-name>
+               <opm:field table="VDST_CHNLPARTNER_PART_NUMBER" name="GENERATED_TIMESTAMP" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="VDST_CHNLPARTNER_PART_NUMBER"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+   <toplink:login xsi:type="toplink:database-login">
+      <toplink:platform-class>oracle.toplink.platform.database.oracle.Oracle10Platform</toplink:platform-class>
+      <toplink:user-name>CMC_VDST_IMPORT</toplink:user-name>
+      <toplink:password>6672B62098892995C8B651EFDF798A59</toplink:password>
+      <toplink:driver-class>oracle.jdbc.OracleDriver</toplink:driver-class>
+      <toplink:connection-url>jdbc:oracle:thin:@elshasdb.emrsn.com:20005:elshas5</toplink:connection-url>
+   </toplink:login>
+</toplink:object-persistence>

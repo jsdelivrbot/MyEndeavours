@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/JournalEntry.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/PostJournalEntry.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeJournalEntry.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetJournalEntry.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowJournalEntry.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="PostJournalEntry">
+                <part name="Message" element="oa:PostJournalEntry"/>
+        </message>
+        <message name="AcknowledgeJournalEntry">
+                <part name="Message" element="oa:AcknowledgeJournalEntry"/>
+        </message>
+        <message name="GetJournalEntry">
+                <part name="Message" element="oa:GetJournalEntry"/>
+        </message>
+        <message name="ShowJournalEntry">
+                <part name="Message" element="oa:ShowJournalEntry"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestJournalEntryPortType">
+                <operation name="PostJournalEntry">
+                        <input message="oaws:PostJournalEntry"/>
+                </operation>
+                <operation name="GetJournalEntry">
+                        <input message="oaws:GetJournalEntry"/>
+                </operation>
+        </portType>
+        <portType name="ResponseJournalEntryPortType">
+                <operation name="ShowJournalEntry">
+                        <input message="oaws:ShowJournalEntry"/>
+                </operation>
+                <operation name="AcknowledgeJournalEntry">
+                        <input message="oaws:AcknowledgeJournalEntry"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncJournalEntryPortType">
+                <operation name="PostJournalEntry">
+                        <input message="oaws:PostJournalEntry"/>
+                        <output message="oaws:AcknowledgeJournalEntry"/>
+                </operation>
+                <operation name="GetJournalEntry">
+                        <input message="oaws:GetJournalEntry"/>
+                        <output message="oaws:ShowJournalEntry"/>
+                </operation>
+        </portType>
+        <binding name="RequestJournalEntryBinding" type="oaws:RequestJournalEntryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="PostJournalEntry">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/JournalEntry.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetJournalEntry">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/JournalEntry.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseJournalEntryBinding" type="oaws:ResponseJournalEntryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowJournalEntry">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/JournalEntry.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="AcknowledgeJournalEntry">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/JournalEntry.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/JournalEntry.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncJournalEntryBinding" type="oaws:SyncJournalEntryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="PostJournalEntry">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/JournalEntry.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetJournalEntry">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/JournalEntry.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestJournalEntryService">
+                <port name="RequestJournalEntryBinding" binding="oaws:RequestJournalEntryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestJournalEntry"/>
+                </port>
+        </service>
+        <service name="ResponseJournalEntryService">
+                <port name="ResponseJournalEntryBinding" binding="oaws:ResponseJournalEntryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseJournalEntry"/>
+                </port>
+        </service>
+        <service name="SyncJournalEntryService">
+                <port name="SyncJournalEntryBinding" binding="oaws:SyncJournalEntryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncJournalEntry"/>
+                </port>
+        </service>
+</definitions>

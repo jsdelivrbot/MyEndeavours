@@ -1,0 +1,50 @@
+<definitions
+     name="TestPutTransComplianceFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/TestPutTransComplianceFile/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/TestPutTransComplianceFile/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://xmlns.emrsn.com/TransactionComplianceData"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/TransactionComplianceData" schemaLocation="public_html/TransactionComplianceData.xsd" />
+      </schema>
+    </types>
+    <message name="TransactionComplianceData_msg">
+        <part name="TransactionComplianceData" element="imp1:TransactionComplianceData"/>
+    </message>
+    <portType name="Write_ptt">
+        <operation name="Write">
+            <input message="tns:TransactionComplianceData_msg"/>
+        </operation>
+    </portType>
+    <binding name="Write_binding" type="tns:Write_ptt">
+    <jca:binding  />
+        <operation name="Write">
+      <jca:operation
+          PhysicalDirectory="C:\JMS Issue\"
+          InteractionSpec="oracle.tip.adapter.file.outbound.FileInteractionSpec"
+          FileNamingConvention="inder_test_%yyMMddHHmmss%"
+          NumberMessages="1"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="TestPutTransComplianceFile">
+        <port name="Write_pt" binding="tns:Write_binding">
+      <jca:address location="eis/FileAdapter" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Write_plt" >
+    <plt:role name="Write_role" >
+      <plt:portType name="tns:Write_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

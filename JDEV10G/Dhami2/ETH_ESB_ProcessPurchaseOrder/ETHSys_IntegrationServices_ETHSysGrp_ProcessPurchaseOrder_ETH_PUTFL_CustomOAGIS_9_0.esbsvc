@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_PUTFL_CustomOAGIS_9_0" guid="7F2F5990F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1245869496530</ID>
+      <lastModifiedTime>Thu Jun 25 00:21:36 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_PUTFL_CustomOAGIS_9_0.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_CustomOAGIS_9_0/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_9_0?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_9_0</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="CustomOAGIS_9_0" value="C:\JMS Issue\OG90"/>
+   </endpointProperties>
+</service>

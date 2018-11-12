@@ -1,0 +1,69 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Mar 31 19:06:28 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ReadBigFile_BPEL"
+         targetNamespace="http://xmlns.oracle.com/ReadBigFile_BPEL"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/readBIGFile/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/writeBigFile/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.oracle.com/ReadBigFile_BPEL"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="readBIGFile"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="writeBigFile" partnerRole="Write_role"
+                 partnerLinkType="ns2:Write_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="Invoke_Write_BigFile" messageType="ns2:Write_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="readBIGFile" portType="ns1:Read_ptt"
+             operation="Read" variable="Receive_Read_InputVariable"
+             createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="Receive_Read_InputVariable" part="opaque"
+              query="/ns3:opaqueElement"/>
+        <to variable="Invoke_Write_BigFile" part="opaque"
+            query="/ns3:opaqueElement"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="writeBigFile" portType="ns2:Write_ptt"
+            operation="Write" inputVariable="Invoke_Write_BigFile"/>
+  </sequence>
+</process>

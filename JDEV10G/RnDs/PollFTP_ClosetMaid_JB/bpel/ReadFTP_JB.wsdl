@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<definitions name="ReadFTP_JB"
+        targetNamespace="http://services.emerson.com"
+        xmlns:tns="http://services.emerson.com"
+        xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+        xmlns:format="http://schemas.xmlsoap.org/wsdl/formatbinding/"
+        xmlns:java="http://schemas.xmlsoap.org/wsdl/java/"        
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        >
+                      
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     TYPE DEFINITION - List of services participating in this BPEL process 
+     The default output of the BPELZ wizard uses Strings as input and 
+     output to the BPEL Process. But you can define or import any XML 
+     Schema type and us them as part of the message types.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <types>  
+        <schema attributeFormDefault="qualified" 
+                elementFormDefault="qualified" 
+                targetNamespace="http://services.emerson.com" 
+                xmlns="http://www.w3.org/2001/XMLSchema"/>
+    </types>
+    
+  <message name="ReadFTP_RequestMessage">
+    <part name="host" type="xsd:string"/>      
+    <part name="filename" type="xsd:string"/>
+  </message>
+  
+
+  <portType name="ReadFTP_JB">
+    <operation name="readFTP">
+      <input message="tns:ReadFTP_RequestMessage"/>
+    </operation>   
+  </portType>
+
+  <binding name="JavaBinding" type="tns:ReadFTP_JB">
+    <java:binding/>
+    <format:typeMapping encoding="Java" style="Java">
+      <format:typeMap typeName="xsd:string" formatType="java.lang.String" />
+    </format:typeMapping>
+    <operation name="readFTP">
+      <java:operation methodName="readFTP"/>
+      <input/>
+      <output/>
+    </operation>     
+  </binding>
+
+  <service name="ReadFTP_JB">
+    <port name="JavaPort" binding="tns:JavaBinding">
+      <java:address className="com.emerson.bpel.ftp.ReadFTP_JB"/>
+    </port>
+  </service>
+  
+  <plnk:partnerLinkType name="ReadFTP_JB">
+    <plnk:role name="ReadFTP_JB_Provider">
+      <plnk:portType name="tns:ReadFTP_JB"/>
+    </plnk:role>
+  </plnk:partnerLinkType>  
+
+</definitions>

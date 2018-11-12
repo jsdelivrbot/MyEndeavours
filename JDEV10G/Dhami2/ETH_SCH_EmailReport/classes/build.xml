@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<project name="BPE_Schduler" default="deploy" basedir="." xmlns:oracle="antlib:oracle">
+  <property environment="env"/>
+    <!-- Set bpel.home using env variable BPEL_HOME, if set by developer prompt -->
+    <condition property="bpel.home" value="elshap1/elshap1/aelshap1/elshap1_Ofm/bpel">
+      <available file="elshap1/elshap1/aelshap1/elshap1_Ofm/bpel/utilities/ant-orabpel.xml"/>
+    </condition>
+    <!-- Set bpel.home using ant property oracle.home, if set by JDev -->
+    <fail unless="bpel.home">
+     Run under developer propmt(devprompt.bat[sh]), which defines env BPEL_HOME.
+    </fail>
+
+    <!-- import custom ant task(deployUI) -->
+ <import file="${bpel.home}/utilities/ant-orabpel.xml"/>
+    
+
+
+    <property name="out" value="classes"/>
+	
+    <target name="clean" >
+	<delete>
+		<fileset dir="${basedir}/classes" includes="**/*"/>
+		<fileset dir="${basedir}/deploy" includes="**/*"/>
+  	</delete>
+
+    </target>
+    <target name="compile" depends="clean">
+        <mkdir dir="${out}"/>
+        <javac classpath="${classpath};${bpel.home}/lib/j2ee_1.3.01.jar;${bpel.home}/lib/quartz-all-1.6.0.jar;${bpel.home}/lib/orabpel.jar;${bpel.home}/lib/orabpel-common.jar;elshap1/elshap1/aelshap1/elshap1_Ofm/j2ee/home/lib/oc4j-internal.jar;/elshap1/elshap1/aelshap1/elshap1_Ofm/j2ee/home/lib/ejb.jar;/elshap1/elshap1/aelshap1/elshap1_Ofm/opmn/lib/optic.jar;/elshap1/elshap1/aelshap1/elshap1_Ofm/diagnostics/lib/ojdl.jar"
+               srcdir="${basedir}/src/"
+               destdir="${out}"/>
+    </target>
+
+ <target name="build_ear">
+	 <copy todir="${basedir}/classes">
+		<fileset dir="${basedir}/public_html" includes="*.properties"/>
+         </copy>
+	 <war destfile="${basedir}/deploy/Transactionreport.war" webxml="${basedir}/public_html/WEB-INF/web.xml">
+		<classes dir="${basedir}/classes" includes="**/*"/>
+ 	 </war>
+
+	 <ear destfile="${basedir}/deploy/Transactionreport.ear" appxml="${basedir}/application.xml">
+		 <metainf dir="${basedir}/META-INF" includes="*.xml"/>
+		 <fileset dir="${basedir}/deploy" includes="Transactionreport.war"/>
+        </ear>
+    </target>
+    <target name="deploy" depends="compile,build_ear">
+            <oracle:deploy deployeruri="deployer:oc4j:opmn:10.238.4.140:12201/elshap1_Ofm_soa" userid="oc4jadmin"
+                   password="welc0me"
+		   file="${basedir}/deploy/Transactionreport.ear"
+		   deploymentname="Transactionreport"
+                   bindallwebapps="default-web-site"/>
+
+    </target>       
+
+     
+</project>
+

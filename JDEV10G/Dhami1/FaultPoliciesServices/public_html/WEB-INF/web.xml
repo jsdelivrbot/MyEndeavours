@@ -1,0 +1,37 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+     version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee">
+    <servlet>
+        <description>Web Service HelloPoliciesPort</description>
+        <display-name>Web Service HelloPoliciesPort</display-name>
+        <servlet-name>HelloPoliciesPort</servlet-name>
+        <servlet-class>com.emerson.inder.fault.services.HelloPoliciesPortTypeImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description>Web Service HelloPoliciesPort2</description>
+        <display-name>Web Service HelloPoliciesPort2</display-name>
+        <servlet-name>HelloPoliciesPort2</servlet-name>
+        <servlet-class>com.emerson.inder.fault.services2.HelloPoliciesPortTypeImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <description>Empty web.xml file for Web Application</description>
+    <servlet-mapping>
+        <servlet-name>HelloPoliciesPort</servlet-name>
+        <url-pattern>HelloPoliciesPort</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HelloPoliciesPort2</servlet-name>
+        <url-pattern>HelloPoliciesPort2</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>35</session-timeout>
+    </session-config>
+    <mime-mapping>
+        <extension>html</extension>
+        <mime-type>text/html</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>txt</extension>
+        <mime-type>text/plain</mime-type>
+    </mime-mapping>
+</web-app>

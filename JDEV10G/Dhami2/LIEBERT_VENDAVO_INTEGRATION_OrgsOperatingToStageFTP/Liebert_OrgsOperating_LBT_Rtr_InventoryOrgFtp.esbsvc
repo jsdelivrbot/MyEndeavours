@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_Rtr_InventoryOrgFtp" guid="7E6712E073FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrgFtp" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1228925064990</ID>
+      <lastModifiedTime>Wed Dec 10 16:04:24 GMT+00:00 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_InventoryOrgFtp.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_InventoryOrgFtp?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_InventoryOrgFtp</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="7E6BCDD073FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrgFtp.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:SyncPartyMaster"/>
+         <routingRules>
+            <routingRule guid="582CEE9173FE11DDBF2F21FF8FD76B3E" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="99C9BF507F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg.merge" serviceGUID="99C775617F0611DDBFCE87F389794F29" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>SyncPartyMaster_To_EmrInventoryOrgCollection.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

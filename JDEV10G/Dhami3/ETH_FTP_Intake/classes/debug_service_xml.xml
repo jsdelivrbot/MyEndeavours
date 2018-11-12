@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="ETHSystem_TestRnDServices" guid="2791D960059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices" dirty="true">
+      <serviceGroup name="ETHSysGrp_FTPInput" guid="3BF23800059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput" dirty="true">
+         <parent guid="2791D960059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices" type="system"/>
+         <service name="ETH_GETFTP_Input" guid="E5900090059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_GETFTP_Input" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false" dirty="true" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_Input/">
+            <parent guid="3BF23800059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput" type="serviceGroup"/>
+            <invocation>
+               <interface>
+                  <wsdlURL>ETH_GETFTP_Input.wsdl</wsdlURL>
+                  <portType>tns:Get_ptt</portType>
+               </interface>
+               <targetService guid="E5900091059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_GETFTP_Input_RS"/>
+            </invocation>
+            <operations>
+               <operationInfo wsdlOperation="Get" guid="E5A0A260059511DFBFD12D54526E389A" mep="OneWay"/>
+            </operations>
+         </service>
+         <service name="ETH_GETFTP_Input_RS" guid="E5900091059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_GETFTP_Input_RS" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" dirty="true" soapEndpointStatus="ENABLED" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_Input/">
+            <description>This is the Routing Service for Adapter Service ETH_GETFTP_Input</description>
+            <parent guid="3BF23800059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_GETFTP_Input.wsdl</wsdlURL>
+               <portType>tns:Get_ptt</portType>
+            </serviceDefinition>
+            <operations>
+               <operationInfo wsdlOperation="Get" guid="E594BB80059511DFBFD12D54526E389A" mep="OneWay">
+                  <routingRules>
+                     <routingRule guid="3D5C0BC0059611DFBFD12D54526E389A" subscriptionType="ANY" executionType="Immediate">
+                        <targetOperation guid="32E90710059611DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_PUTFTP_Feed1.Put" serviceGUID="32E44C20059611DFBFD12D54526E389A" serviceQName="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_PUTFTP_Feed1" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_PUTFTP_Feed1" guid="32E44C20059611DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_PUTFTP_Feed1" serviceType="OutboundAdapterService" serviceSubType="FTP" typeDescription="Outbound FTP Adapter Service" isWSDLEditable="false" dirty="true" soapEndpointStatus="ENABLED" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_Feed1/">
+            <parent guid="3BF23800059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_PUTFTP_Feed1.wsdl</wsdlURL>
+               <portType>tns:Put_ptt</portType>
+            </serviceDefinition>
+            <operations>
+               <operationInfo wsdlOperation="Put" guid="32E90710059611DFBFD12D54526E389A" mep="OneWay">
+                  <request/>
+               </operationInfo>
+            </operations>
+         </service>
+      </serviceGroup>
+   </system>
+</project_metadata>

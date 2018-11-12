@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CEH_BPEL_CommonErrorHandler"
+                src="CEH_BPEL_CommonErrorHandler.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">CEH_BPEL_CommonErrorHandler.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ErrorFileAdapter">
+            <property name="wsdlLocation">ErrorFileAdapter.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <configurations>
+         <property name="inMemoryOptimization">true</property>
+         <property name="completionPersistPolicy">faulted</property>
+         <property name="completionPersistLevel">All</property>
+      </configurations>
+   </BPELProcess>
+</BPELSuitcase>

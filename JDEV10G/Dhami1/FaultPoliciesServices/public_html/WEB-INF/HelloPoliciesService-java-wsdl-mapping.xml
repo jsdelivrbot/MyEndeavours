@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java-wsdl-mapping xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+  http://www.ibm.com/webservices/xsd/j2ee_jaxrpc_mapping_1_1.xsd"
+  version="1.1">
+
+    <package-mapping>
+        <package-type>com.emerson.inder.fault.services</package-type>
+        <namespaceURI>http://hello.emerson.com</namespaceURI>
+    </package-mapping>
+    <service-interface-mapping>
+        <service-interface>com.emerson.inder.fault.services.HelloPoliciesService</service-interface>
+        <wsdl-service-name xmlns:serviceNS="http://hello.emerson.com">serviceNS:HelloPoliciesService</wsdl-service-name>
+        <port-mapping>
+            <port-name>HelloPoliciesPort</port-name>
+            <java-port-name>HelloPoliciesPort</java-port-name>
+        </port-mapping>
+    </service-interface-mapping>
+    <service-endpoint-interface-mapping>
+        <service-endpoint-interface>com.emerson.inder.fault.services.HelloPoliciesPortType</service-endpoint-interface>
+        <wsdl-port-type xmlns:portTypeNS="http://hello.emerson.com">portTypeNS:HelloPoliciesPortType</wsdl-port-type>
+        <wsdl-binding xmlns:bindingNS="http://hello.emerson.com">bindingNS:HeloPoliciesBinding</wsdl-binding>
+        <service-endpoint-method-mapping>
+            <java-method-name>process</java-method-name>
+            <wsdl-operation>process</wsdl-operation>
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://hello.emerson.com">wsdlMsgNS:HelloPoliciesRequestMessage</wsdl-message>
+                    <wsdl-message-part-name>requestPart</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>java.lang.String</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://hello.emerson.com">wsdlMsgNS:HelloPoliciesResponseMessage</wsdl-message>
+                <wsdl-message-part-name>responsePart</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+    </service-endpoint-interface-mapping>
+</java-wsdl-mapping>
+

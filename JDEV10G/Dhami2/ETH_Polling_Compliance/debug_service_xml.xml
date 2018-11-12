@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="Test" guid="7891826056CD11DE8F4F5D66B4000912" qname="Test" dirty="true">
+      <serviceGroup name="ComplianceFetch" guid="821D827056CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch" dirty="true">
+         <parent guid="7891826056CD11DE8F4F5D66B4000912" qname="Test" type="system"/>
+         <service name="Fetch_Compliance" guid="B615A5D056CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch.Fetch_Compliance" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Fetch_Compliance/" dirty="true">
+            <parent guid="821D827056CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch" type="serviceGroup"/>
+            <invocation>
+               <interface>
+                  <wsdlURL>Fetch_Compliance.wsdl</wsdlURL>
+                  <portType>tns:Consume_Message_ptt</portType>
+               </interface>
+               <targetService guid="B615A5D156CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch.Fetch_Compliance_RS"/>
+            </invocation>
+            <operations>
+               <operationInfo wsdlOperation="Consume_Message" guid="B61816D156CD11DE8F4F5D66B4000912" mep="OneWay"/>
+            </operations>
+         </service>
+         <service name="Fetch_Compliance_RS" guid="B615A5D156CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch.Fetch_Compliance_RS" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" dirty="true" soapEndpointStatus="ENABLED" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Fetch_Compliance/">
+            <description>This is the Routing Service for Adapter Service Fetch_Compliance</description>
+            <parent guid="821D827056CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>Fetch_Compliance.wsdl</wsdlURL>
+               <portType>tns:Consume_Message_ptt</portType>
+            </serviceDefinition>
+            <operations>
+               <operationInfo wsdlOperation="Consume_Message" guid="B61816D056CD11DE8F4F5D66B4000912" mep="OneWay">
+                  <routingRules>
+                     <routingRule guid="D54DBE6056CD11DE8F4F5D66B4000912" subscriptionType="ANY" executionType="Immediate">
+                        <targetOperation guid="CEEC716156CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch.Put_File.Write" serviceGUID="CEEC716056CD11DE8F4F5D66B4000912" serviceQName="Test.ComplianceFetch.Put_File" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="Put_File" guid="CEEC716056CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch.Put_File" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Put_File/" dirty="true" soapEndpointStatus="ENABLED">
+            <parent guid="821D827056CD11DE8F4F5D66B4000912" qname="Test.ComplianceFetch" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>Put_File.wsdl</wsdlURL>
+               <portType>tns:Write_ptt</portType>
+            </serviceDefinition>
+            <operations>
+               <operationInfo wsdlOperation="Write" guid="CEEC716156CD11DE8F4F5D66B4000912" mep="OneWay"/>
+            </operations>
+         </service>
+      </serviceGroup>
+   </system>
+</project_metadata>

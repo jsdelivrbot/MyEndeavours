@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/Quote.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CancelQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ChangeQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetListQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ListQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/RespondQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/UpdateQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyQuote.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="AcknowledgeQuote">
+                <part name="Message" element="oa:AcknowledgeQuote"/>
+        </message>
+        <message name="CancelQuote">
+                <part name="Message" element="oa:CancelQuote"/>
+        </message>
+        <message name="ChangeQuote">
+                <part name="Message" element="oa:ChangeQuote"/>
+        </message>
+        <message name="GetQuote">
+                <part name="Message" element="oa:GetQuote"/>
+        </message>
+        <message name="ShowQuote">
+                <part name="Message" element="oa:ShowQuote"/>
+        </message>
+        <message name="GetListQuote">
+                <part name="Message" element="oa:GetListQuote"/>
+        </message>
+        <message name="ListQuote">
+                <part name="Message" element="oa:ListQuote"/>
+        </message>
+        <message name="ProcessQuote">
+                <part name="Message" element="oa:ProcessQuote"/>
+        </message>
+        <message name="RespondQuote">
+                <part name="Message" element="oa:RespondQuote"/>
+        </message>
+        <message name="UpdateQuote">
+                <part name="Message" element="oa:UpdateQuote"/>
+        </message>
+        <message name="SyncQuote">
+                <part name="Message" element="oa:SyncQuote"/>
+        </message>
+        <message name="NotifyQuote">
+                <part name="Message" element="oa:NotifyQuote"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <message name="NewMessage"/>
+        <message name="NewMessage2"/>
+        <message name="NewMessage3"/>
+        <portType name="RequestQuotePortType">
+                <operation name="ProcessQuote">
+                        <input message="oaws:ProcessQuote"/>
+                </operation>
+                <operation name="ChangeQuote">
+                        <input message="oaws:ChangeQuote"/>
+                </operation>
+                <operation name="CancelQuote">
+                        <input message="oaws:CancelQuote"/>
+                </operation>
+                <operation name="GetQuote">
+                        <input message="oaws:GetQuote"/>
+                </operation>
+                <operation name="GetListQuote">
+                        <input message="oaws:GetListQuote"/>
+                </operation>
+                <operation name="UpdateQuote">
+                        <input message="oaws:UpdateQuote"/>
+                </operation>
+                <operation name="SyncQuote">
+                        <input message="oaws:SyncQuote"/>
+                </operation>
+                <operation name="NotifyQuote">
+                        <input message="oaws:NotifyQuote"/>
+                </operation>
+        </portType>
+        <portType name="ResponseQuotePortType">
+                <operation name="AcknowledgeQuote">
+                        <input message="oaws:AcknowledgeQuote"/>
+                </operation>
+                <operation name="RespondQuote">
+                        <input message="oaws:RespondQuote"/>
+                </operation>
+                <operation name="ShowQuote">
+                        <input message="oaws:ShowQuote"/>
+                </operation>
+                <operation name="ListQuote">
+                        <input message="oaws:ListQuote"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncQuotePortType">
+                <operation name="ProcessQuote">
+                        <input message="oaws:ProcessQuote"/>
+                        <output message="oaws:AcknowledgeQuote"/>
+                </operation>
+                <operation name="ChangeQuote">
+                        <input message="oaws:ChangeQuote"/>
+                        <output message="oaws:RespondQuote"/>
+                </operation>
+                <operation name="CancelQuote">
+                        <input message="oaws:CancelQuote"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="GetQuote">
+                        <input message="oaws:GetQuote"/>
+                        <output message="oaws:ShowQuote"/>
+                </operation>
+                <operation name="GetListQuote">
+                        <input message="oaws:GetListQuote"/>
+                        <output message="oaws:ListQuote"/>
+                </operation>
+                <operation name="UpdateQuote">
+                        <input message="oaws:UpdateQuote"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="SyncQuote">
+                        <input message="oaws:SyncQuote"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyQuote">
+                        <input message="oaws:NotifyQuote"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestQuoteBinding" type="oaws:RequestQuotePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ChangeQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="CancelQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetListQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="UpdateQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseQuoteBinding" type="oaws:ResponseQuotePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="RespondQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ListQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncQuoteBinding" type="oaws:SyncQuotePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ChangeQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CancelQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetListQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="UpdateQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyQuote">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Quote.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestQuoteService">
+                <port name="RequestQuoteBinding" binding="oaws:RequestQuoteBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestQuote"/>
+                </port>
+        </service>
+        <service name="ResponseQuoteService">
+                <port name="ResponseQuoteBinding" binding="oaws:ResponseQuoteBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseQuote"/>
+                </port>
+        </service>
+        <service name="SyncQuoteService">
+                <port name="SyncQuoteBinding" binding="oaws:SyncQuoteBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncQuote"/>
+                </port>
+        </service>
+</definitions>

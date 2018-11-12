@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Write_PUTFL_EDI_PO_5020" guid="6E9B9661124411DEAF575582B6334BBE" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_EDI_PO_5020" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885417084</ID>
+      <lastModifiedTime>Mon Jun 01 19:43:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>Write_PUTFL_EDI_PO_5020.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Write_PUTFL_EDI_PO_5020/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/Write_PUTFL_EDI_PO_5020?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/Write_PUTFL_EDI_PO_5020</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="6EF63980124411DEAF575582B6334BBE" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_EDI_PO_5020.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="urn:oracle:integration:b2b:DCC1FCD2811C47748DF43A39F735F4F0" element="tns:Transaction-850"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="ProcessPO_EDI_5020" value="/elshap1/elshap1/aelshap1/workingfolder/SC/NewFlatFile"/>
+   </endpointProperties>
+</service>

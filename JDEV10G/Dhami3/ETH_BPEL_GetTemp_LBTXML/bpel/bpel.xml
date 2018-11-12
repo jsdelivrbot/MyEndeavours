@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ETH_BPEL_GetTemp_LBTXML" src="ETH_BPEL_GetTemp_LBTXML.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ETH_GETFL_TempXML">
+            <property name="wsdlLocation">ETH_GETFL_TempXML.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ETH_PUSHJMS_LBTXML">
+            <property name="wsdlLocation">ETH_PUSHJMS_LBTXML.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ETH_GETFL_TempXML">
+            <property name="Archive_Folder" type="LogicalArchiveDirectory"></property>
+            <property name="portType">Read_TempXML_ptt</property>
+            <property name="Infile_Folder" type="LogicalDirectory"></property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

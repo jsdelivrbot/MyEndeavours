@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="CreateRecordsBPEL" guid="C5695E905CA111DDBFBF7949E8E58CEB" qname="TransformESB.CreateRecordsBPEL" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1217331594306</ID>
+      <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>http://GDC-18.gssamerica.co.in:8888/orabpel/default/Create_MDMRecords_BPELProcess/Create_MDMRecords_BPELProcess?wsdl</wsdlURL>
+      <portType xmlns:tns="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess">tns:Create_MDMRecords_BPELProcess</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/TransformESB/CreateRecordsBPEL?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/TransformESB/CreateRecordsBPEL</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="C572FB805CA111DDBFBF7949E8E58CEB" qname="TransformESB.CreateRecordsBPEL.process" wsdlOperation="process" mepDisplayName="Request Response" mep="RequestResponse">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:CreateRecordsRequest"/>
+         <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://GDC-18.gssamerica.co.in:8888/orabpel/default/Create_MDMRecords_BPELProcess/MDMService.xsd"/>
+      </operationInfo>
+   </operations>
+</service>

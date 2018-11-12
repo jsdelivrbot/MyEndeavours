@@ -1,0 +1,87 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Apr 19 17:27:52 GMT+05:30 2011
+  Author:  RSingla1
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="purchase_order"
+         targetNamespace="http://xmlns.oracle.com/purchase_order"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/purchase_order_xsd"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/write/"
+         xmlns:client="http://xmlns.oracle.com/purchase_order"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:purchase_order"
+                 myRole="purchase_orderProvider"/>
+    <partnerLink name="write" partnerRole="Write_role"
+                 partnerLinkType="ns2:Write_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:purchase_orderRequestMessage"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable"
+              messageType="client:purchase_orderResponseMessage"/>
+    <variable name="Invoke_1_Write_InputVariable" messageType="ns2:PO_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in purchase_order.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:purchase_order" operation="Purchase"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_1">
+      <copy>
+        <from variable="inputVariable" part="po" query="/ns1:PO/ns1:POID"/>
+        <to variable="Invoke_1_Write_InputVariable" part="PO"
+            query="/ns1:PO/ns1:POID"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="po"
+              query="/ns1:PO/ns1:item/ns1:item_name"/>
+        <to variable="outputVariable" part="Result"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="write" portType="ns2:Write_ptt"
+            operation="Write" inputVariable="Invoke_1_Write_InputVariable"/>
+    <reply name="replyOutput" partnerLink="client"
+           portType="client:purchase_order" operation="Purchase"
+           variable="outputVariable"/>
+  </sequence>
+</process>

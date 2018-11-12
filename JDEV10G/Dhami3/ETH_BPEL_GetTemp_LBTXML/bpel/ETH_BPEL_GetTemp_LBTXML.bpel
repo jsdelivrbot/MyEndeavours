@@ -1,0 +1,74 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed May 12 20:33:31 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_GetTemp_LBTXML"
+         targetNamespace="http://xmlns.oracle.com/ETH_BPEL_GetTemp_LBTXML"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_TempXML/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_PUSHJMS_LBTXML/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.oracle.com/ETH_BPEL_GetTemp_LBTXML"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_TempXML_role" name="ETH_GETFL_TempXML"
+                 partnerLinkType="ns1:Read_TempXML_plt"/>
+    <partnerLink name="ETH_PUSHJMS_LBTXML" partnerRole="Produce_LBTXML_role"
+                 partnerLinkType="ns2:Produce_LBTXML_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_IN_Input_Read_TempXML_InputVariable"
+              messageType="ns1:Root-Element_msg"/>
+    <variable name="G_Out_1_Produce_LBTXML_InputVariable"
+              messageType="ns2:CustomLiebertPO_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_Input" partnerLink="ETH_GETFL_TempXML"
+             portType="ns1:Read_TempXML_ptt" operation="Read_TempXML"
+             variable="G_IN_Input_Read_TempXML_InputVariable"
+             createInstance="yes"/>
+    <assign name="Transform_1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Transformation_LBTXML.xsl',bpws:getVariableData('G_IN_Input_Read_TempXML_InputVariable','Root-Element'))"/>
+        <to variable="G_Out_1_Produce_LBTXML_InputVariable"
+            part="CustomLiebertPO"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="ETH_PUSHJMS_LBTXML"
+            portType="ns2:Produce_LBTXML_ptt" operation="Produce_LBTXML"
+            inputVariable="G_Out_1_Produce_LBTXML_InputVariable"/>
+  </sequence>
+</process>

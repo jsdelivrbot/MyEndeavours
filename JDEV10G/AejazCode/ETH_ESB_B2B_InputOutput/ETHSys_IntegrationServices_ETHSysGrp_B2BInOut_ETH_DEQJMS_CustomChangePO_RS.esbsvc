@@ -1,0 +1,140 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_DEQJMS_CustomChangePO_RS" guid="0FD97631095A11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_DEQJMS_CustomChangePO_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ETH_DEQJMS_CustomChangePO</description>
+   <versionInfo>
+      <ID>1271413700324</ID>
+      <lastModifiedTime>Fri Apr 16 10:28:20 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_DEQJMS_CustomChangePO.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_CustomChangePO/">tns:Consume_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_DEQJMS_CustomChangePO_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_DEQJMS_CustomChangePO_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="0FE55D10095A11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_DEQJMS_CustomChangePO_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomChangePurchaseOrder" element="tns:CustomChangePO"/>
+         <routingRules>
+            <routingRule guid="5C9E2290356511DE9F5E09AFEEE33747" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="788415D0096611DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="7881CBE1096611DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{(/imp1:CustomChangePO/Trading_partner_1_format = 'DoNotSend' and /imp1:CustomChangePO/Attribute5 ='TP1') or (/imp1:CustomChangePO/Trading_partner_2_format = 'DoNotSend' and /imp1:CustomChangePO/Attribute5 ='TP2') or (/imp1:CustomChangePO/Trading_partner_3_format = 'DoNotSend' and /imp1:CustomChangePO/Attribute5 ='TP3') or (/imp1:CustomChangePO/Logistics_1_format = 'DoNotSend' and /imp1:CustomChangePO/Attribute5 ='TP4') or (/imp1:CustomChangePO/Logistics_2_format = 'DoNotSend' and /imp1:CustomChangePO/Attribute5 ='TP5')};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>DoNotSend_Archival_ChangePO_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="E53EB6E0095B11DEBF89EFB363EA0848" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C24FB0D0095B11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS.execute" serviceGUID="C2463AF0095B11DEBF89EFB363EA0848" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_1_format = 'OAGIS_9_0'  and /imp1:CustomChangePO/Attribute5 ='TP1'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomChangePO_Mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="761DAD71298111DE8F38371743926143" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C24FB0D0095B11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS.execute" serviceGUID="C2463AF0095B11DEBF89EFB363EA0848" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_2_format = 'OAGIS_9_0'  and /imp1:CustomChangePO/Attribute5 ='TP2'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomChangePO_Mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="F34A9460380411DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C24FB0D0095B11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS.execute" serviceGUID="C2463AF0095B11DEBF89EFB363EA0848" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_3_format = 'OAGIS_9_0'  and /imp1:CustomChangePO/Attribute5 ='TP3'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomChangePO_Mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="36DE3B50380511DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C24FB0D0095B11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS.execute" serviceGUID="C2463AF0095B11DEBF89EFB363EA0848" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Logistics_1_format = 'OAGIS_9_0'  and /imp1:CustomChangePO/Attribute5 ='TP4'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomChangePO_Mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="6B488170380511DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C24FB0D0095B11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS.execute" serviceGUID="C2463AF0095B11DEBF89EFB363EA0848" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomOagis_removeNamesapce_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Logistics_2_format = 'OAGIS_9_0'  and /imp1:CustomChangePO/Attribute5 ='TP5'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomChangePO_Mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="AB9C7D00AF6911DEBF908F1B630F4EF1" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="22EE19F0AF6911DEBF908F1B630F4EF1" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS.execute" serviceGUID="2295E7D1AF6911DEBF908F1B630F4EF1" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_1_format ='EDI_5020_V5_0' and /imp1:CustomChangePO/Attribute5 ='TP1'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI850_V8.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="21C709A0AF6A11DEBF908F1B630F4EF1" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="22EE19F0AF6911DEBF908F1B630F4EF1" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS.execute" serviceGUID="2295E7D1AF6911DEBF908F1B630F4EF1" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_2_format ='EDI_5020_V5_0' and /imp1:CustomChangePO/Attribute5 ='TP2'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI850_V8.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="CE4D2B40380511DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="22EE19F0AF6911DEBF908F1B630F4EF1" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS.execute" serviceGUID="2295E7D1AF6911DEBF908F1B630F4EF1" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_3_format ='EDI_5020_V5_0' and /imp1:CustomChangePO/Attribute5 ='TP3'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI850_V8.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="2F3BC650380611DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="22EE19F0AF6911DEBF908F1B630F4EF1" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS.execute" serviceGUID="2295E7D1AF6911DEBF908F1B630F4EF1" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Logistics_1_format ='EDI_5020_V5_0' and /imp1:CustomChangePO/Attribute5 ='TP4'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI850_V8.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="664B14C0380611DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="22EE19F0AF6911DEBF908F1B630F4EF1" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS.execute" serviceGUID="2295E7D1AF6911DEBF908F1B630F4EF1" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_850_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Logistics_2_format ='EDI_5020_V5_0' and /imp1:CustomChangePO/Attribute5 ='TP5'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI850_V8.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="F67F8F90096711DE9F1EA78AC56F7274" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="16C75670A8F511DE8F4E8545DFEB6079" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="165E5B71A8F511DE8F4E8545DFEB6079" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_1_format ='EDI_5020_V1_0' and /imp1:CustomChangePO/Attribute5 ='TP1'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI860_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="86E86230298111DE8F38371743926143" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="16C75670A8F511DE8F4E8545DFEB6079" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="165E5B71A8F511DE8F4E8545DFEB6079" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_2_format ='EDI_5020_V1_0' and /imp1:CustomChangePO/Attribute5 ='TP2'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI860_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="C40A41D0380611DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="16C75670A8F511DE8F4E8545DFEB6079" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="165E5B71A8F511DE8F4E8545DFEB6079" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Trading_partner_3_format ='EDI_5020_V1_0' and /imp1:CustomChangePO/Attribute5 ='TP3'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI860_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="FDF7F810380611DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="16C75670A8F511DE8F4E8545DFEB6079" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="165E5B71A8F511DE8F4E8545DFEB6079" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Logistics_1_format ='EDI_5020_V1_0' and /imp1:CustomChangePO/Attribute5 ='TP4'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI860_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="2E86FFD0380711DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="16C75670A8F511DE8F4E8545DFEB6079" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="165E5B71A8F511DE8F4E8545DFEB6079" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomChangePO/Logistics_2_format ='EDI_5020_V1_0' and /imp1:CustomChangePO/Attribute5 ='TP5'};{ namespace imp1=http://xmlns.emrsn.com/CustomChangePurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomChangePO_To_CustomEDI860_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="customerFileAdapter" guid="778CBE00FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1240224271667</ID>
+      <lastModifiedTime>Mon Apr 20 16:14:31 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+   </versionInfo>
+   <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+   <invocation>
+      <targetService guid="778CBE01FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter_RS"/>
+      <interface>
+         <wsdlURL>customerFileAdapter.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/customerFileAdapter/">tns:Read_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="rejectedMessageHandlers" value="queue://jdbc:oracle:thin:@inedec-mlap-45:1521:XE|aq/aq123|REJECTION_QUEUE"/>
+      <property name="InDIR" value="D:\oracle\Files\In"/>
+      <property name="archiveDIR" value="D:\oracle\Files\archive"/>
+   </endpointProperties>
+</service>

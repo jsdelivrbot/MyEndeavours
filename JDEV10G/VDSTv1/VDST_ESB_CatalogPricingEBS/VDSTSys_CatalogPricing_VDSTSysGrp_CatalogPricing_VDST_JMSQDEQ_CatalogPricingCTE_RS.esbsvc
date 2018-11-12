@@ -1,0 +1,41 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="VDST_JMSQDEQ_CatalogPricingCTE_RS" guid="E786C6B264A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service VDST_JMSQDEQ_CatalogPricingCTE</description>
+   <versionInfo>
+      <ID>1263818791638</ID>
+      <lastModifiedTime>Mon Jan 18 12:46:31 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>VDST_JMSQDEQ_CatalogPricingCTE.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CatalogPricingCTE/">tns:Consume_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/VDSTSystem_EBSServices/VDSTSysGrp_CatalogPricing/VDST_JMSQDEQ_CatalogPricingCTE_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:80/event/VDSTSystem_EBSServices/VDSTSysGrp_CatalogPricing/VDST_JMSQDEQ_CatalogPricingCTE_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="E78937B064A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+         <routingRules>
+            <routingRule guid="B6D4F360661111DEBF7F17F5CA68AC99" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="B0598EB0661111DEBF7F17F5CA68AC99" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_FILEPUT_DebugFile.Write" serviceGUID="B05744C1661111DEBF7F17F5CA68AC99" serviceQName="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_FILEPUT_DebugFile" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>Transform_AddExecutionUnit.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="0EBC9E3064A411DE8F10F7FBB1F6B216" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="9EEEB7F064D511DEBFF58D37AC75300C" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQENQ_CSV_CatalaogPricing.Produce_Message" serviceGUID="9EE9FD0164D511DEBFF58D37AC75300C" serviceQName="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQENQ_CSV_CatalaogPricing" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/ns5:envelope/ns5:header/ns5:EBOName) = string('http://schema.emerson.com/VDST_FTP_GET_CatalogPricing:CP-Load')};{ namespace ns5=http://schemas.emerson.com/common/envelope }</filterExpression>
+               <transformation>
+                  <xslFileURL>Transform_AddExecutionUnit.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

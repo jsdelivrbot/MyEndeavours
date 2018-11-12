@@ -1,0 +1,2449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\BODs\Standalone\SyncItemMaster.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" xmlns:udt="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:qdt="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" xmlns:ccts="urn:un:unece:uncefact:documentation:1.1" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" schemaLocation="../../Resources/Components/CoreComponents/UnqualifiedDataTypes.xsd"/>
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" schemaLocation="../../Resources/Components/CoreComponents/QualifiedDataTypes.xsd"/>
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/codelists" schemaLocation="../../Resources/Components/Common/CodeLists.xsd"/>
+        <xsd:attributeGroup name="CodeListAttributeGroup">
+                <xsd:attribute name="listID" type="xsd:normalizedString" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC2</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code List. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The identification of a list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass>Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Identification</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listAgencyID" type="xsd:normalizedString" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC3</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code List. Agency. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition>An agency that maintains one or more lists of codes.</ccts:Definition>
+                                        <ccts:ObjectClass>Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Agency</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                        <ccts:UsageRule>Defaults to the UN/EDIFACT data element 3055 code list.</ccts:UsageRule>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listAgencyName" type="xsd:string" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC4</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code List. Agency Name. Text</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The name of the agency that maintains the list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass>Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Agency Name</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Text</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listName" type="xsd:string" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC5</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code List. Name. Text</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The name of a list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass>Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Name</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Text</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listVersionID" type="xsd:normalizedString" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC6</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code List. Version. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The version of the list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass>Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Version</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="name" type="xsd:string" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC7</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code. Name. Text</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The textual equivalent of the code content component.</ccts:Definition>
+                                        <ccts:ObjectClass>Code</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Name</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Text</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="languageID" type="xsd:language" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC8</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Language. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The identifier of the language used in the code name.</ccts:Definition>
+                                        <ccts:ObjectClass>Language</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Identification</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listURI" type="xsd:anyURI" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC9</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code List. Uniform Resource. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The Uniform Resource Identifier that identifies where the code list is located.</ccts:Definition>
+                                        <ccts:ObjectClass>Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Uniform Resource Identifier</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listSchemeURI" type="xsd:anyURI" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID>UNDT000007-SC10</ccts:UniqueID>
+                                        <ccts:CategoryCode>SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName>Code List Scheme. Uniform Resource. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition>The Uniform Resource Identifier that identifies where the code list scheme is located.</ccts:Definition>
+                                        <ccts:ObjectClass>Code List Scheme</ccts:ObjectClass>
+                                        <ccts:PropertyTermName>Uniform Resource Identifier</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName>Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType>string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+        </xsd:attributeGroup>
+        <xsd:complexType name="SyncItemMasterDataAreaType">
+                <xsd:sequence>
+                        <xsd:element ref="Sync"/>
+                        <xsd:element ref="ItemMaster" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SyncItemMasterType">
+                <xsd:complexContent>
+                        <xsd:extension base="BusinessObjectDocumentType">
+                                <xsd:sequence>
+                                        <xsd:element name="DataArea" type="SyncItemMasterDataAreaType">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is where the information that the BOD message carries is provided, in this case SyncItemMaster. The information consists of a Verb and one or more Nouns. The verb (Sync) indicates the action to be performed on the Noun (ItemMaster).</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="BusinessObjectDocumentType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the schema based inheritance for all BODs. The logical model would also include the DataArea.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ApplicationArea"/>
+                </xsd:sequence>
+                <xsd:attribute name="releaseID" type="NormalizedStringType" use="required">
+                        <xsd:annotation>
+                                <xsd:documentation>OAGIS Release this BOD Instances belongs or the OAGIS release that the derivative work is based on.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="versionID" type="NormalizedStringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the version of the given BOD defintion.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="systemEnvironmentCode" type="SystemEnvironmentCodeContentType" use="optional" default="Production">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether this BOD is being sent in a "Test" or a "Production" mode. If the BOD is being sent in a test mode, it's information should not affect the business operation. However, if the BOD is sent in "Production" mode it is assumed that all test has been complete and the contents of the BOD are to affect the operation of the receiving business application(s).</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="languageCode" type="LanguageCodeType" use="optional" default="en-US">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the language that the contents of the BOD is in unless otherwise stated.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+        </xsd:complexType>
+        <xsd:complexType name="SyncType">
+                <xsd:complexContent>
+                        <xsd:extension base="ActionVerbType"/>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ItemMasterType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents any unique purchased part or manufactured product.  Item, as used here, refers to the basic information about an item, including its attributes, cost, and locations.  It does not include item quantities.  Compare to the noun InventoryBalance, which includes all quantities and other location-specific information.
+
+Item is used as the Item Master.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ItemMasterHeader" minOccurs="0"/>
+                        <xsd:element ref="ItemLocation" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ActionVerbType">
+                <xsd:complexContent>
+                        <xsd:extension base="VerbType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ActionCriteria" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ApplicationAreaType">
+                <xsd:sequence>
+                        <xsd:element ref="Sender" minOccurs="0"/>
+                        <xsd:element ref="CreationDateTime"/>
+                        <xsd:element ref="Signature" minOccurs="0"/>
+                        <xsd:element ref="BODID" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="VerbType" abstract="true"/>
+        <xsd:complexType name="ItemHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemDetailsBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="SupplierContractReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BuyerContractReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="FreightItemID" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This identifies the item number assigned to the type of goods for the purposes of freight classification and cost calculation</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="FreightClassification" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Qualifies goods for purposes of freight cost calculation. An example would the qualifications used by National Motor Freight Carriers.
+
+EXAMPLES	National Motor Freight Carriers (NMFC) Class Code 
+
+Based on an evaluation of density, stowability, ease of handling and liability, the commodities are grouped into one of 18 classes.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="SerialControlIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates if the item is a serialized item i.e. unique instances of the item are identified by unique serial numbers. Valid values are 0 for no, and 1 for yes</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LotControlIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates if the item is a lotted item. Valid values are 0 for no, and 1 for yes</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ExpirationControlCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the type of control used to determine whether or not an item has expired or is no longer considered good to sell or consume.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="GLAccount" minOccurs="0"/>
+                                        <xsd:element ref="DocumentDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifyies the timestamp that the Item Master record was created.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CatchWeightIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates that an ITEM requires special processing to determine the actual net or gross weight during certain inventory operations.  </xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates that an ITEM requires special processing to determine the actual net or gross weight during certain inventory operations.  </xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ShelfLifeDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This is the period of time in duration that the item is valid for use</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="AverageRunSizeQuantity" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This is the average quantity made during a manufacturing run using a specific Item or Bill of Material.  This is often used during MRP or other forecasting operations</xsd:documentation>
+                                                        <xsd:documentation>This is the average quantity made during a manufacturing run using a specific Item or Bill of Material.  This is often used during MRP or other forecasting operations</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ItemLocationType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemDetailsBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Facility" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ActionCriteriaType">
+                <xsd:sequence>
+                        <xsd:element ref="ActionExpression" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ChangeStatus" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemDetailsBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Lot" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Type" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ExecutionTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="FixedQuantityIndicator" minOccurs="0"/>
+                                        <xsd:group ref="LotSizeGroup"/>
+                                        <xsd:element ref="LeadTimeDuration" minOccurs="0"/>
+                                        <xsd:element ref="RequiredPercent" minOccurs="0"/>
+                                        <xsd:choice>
+                                                <xsd:annotation>
+                                                        <xsd:documentation>Idicates if the Item is reported theoretically (back-flushed) or if the ITEM is reported directly (actual)</xsd:documentation>
+                                                </xsd:annotation>
+                                                <xsd:element ref="BackFlushedIndicator" minOccurs="0"/>
+                                                <xsd:element ref="ActualIndicator" minOccurs="0"/>
+                                        </xsd:choice>
+                                        <xsd:element ref="TrackingIndicator" minOccurs="0"/>
+                                        <xsd:element ref="ScrapIndicator" minOccurs="0"/>
+                                        <xsd:element ref="ItemStatus" minOccurs="0"/>
+                                        <xsd:element ref="BaseUOMCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the default UOM that the business refers to the item in. This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+EXAMPLES: 
+Generic Quantity  (Each, Pair, Dozen, Gross, etc); 
+Weight (Ounce, Pound, Ton, Kilogram, etc); 
+Volume (Cup, Pint, Gallon, Liter, etc);
+Length (Inch, Foot, Yard, Meter, etc)</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="StorageUOMCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This describes the unit of measure that a product is stored in inventory.  This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+Examples are:
+
+- Generic Quantity  (Each, Pair, Dozen, Gross, etc)
+- Weight (Ounce, Pound, Ton, Kilogram, etc)
+- Volume (Cup, Pint, Gallon, Liter, etc)
+- Length (Inch, Foot, Yard, Meter, etc)
+- Time (Second, Minute, Hour, Day, Year, etc)</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This describes the unit of measure that a product is stored in inventory.  This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+Examples are:
+
+- Generic Quantity  (Each, Pair, Dozen, Gross, etc)
+- Weight (Ounce, Pound, Ton, Kilogram, etc)
+- Volume (Cup, Pint, Gallon, Liter, etc)
+- Length (Inch, Foot, Yard, Meter, etc)
+- Time (Second, Minute, Hour, Day, Year, etc)</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ShippingUOMCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This describes the unit of measure that a product is shipped.  This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+Examples are:
+
+- Generic Quantity  (Each, Pair, Dozen, Gross, etc)
+- Weight (Ounce, Pound, Ton, Kilogram, etc)
+- Volume (Cup, Pint, Gallon, Liter, etc)
+- Length (Inch, Foot, Yard, Meter, etc)
+- Time (Second, Minute, Hour, Day, Year, etc)</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="RoutingDisposition" minOccurs="0"/>
+                                        <xsd:element ref="SerialNumberSpecification" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the business rules used to specify what constitutes a serial number</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LotNumberSpecification" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the business rules used to specify what constitutes a lot</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LastModificationDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the timestamp of the last modification to the Item Master for this Item.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UnitPackaging" minOccurs="0"/>
+                                        <xsd:element ref="OwnerParty" minOccurs="0"/>
+                                        <xsd:element ref="UOMGroupID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies a set of related UOM's and their conversions from the Item's UOM</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a UOMGroup Identifier, that identifies a set of related UOM's and their conversions from the Item's UOM</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="AlternateUOMCode" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UOMCodeConversion" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ItemValue" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BOMReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DrawingAttachment" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SenderType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the sender of the given BOD instance</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="LogicalID" minOccurs="0"/>
+                        <xsd:element ref="ComponentID" minOccurs="0"/>
+                        <xsd:element ref="TaskID" minOccurs="0"/>
+                        <xsd:element ref="ReferenceID" minOccurs="0"/>
+                        <xsd:element ref="ConfirmationCode" minOccurs="0"/>
+                        <xsd:element ref="AuthorizationID" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SignatureType">
+                <xsd:annotation>
+                        <xsd:documentation>Allows any digital Signatures to be added to the Instance of the BOD Instance in order to sign for any portion of the BOD content.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:any namespace="##any" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="qualifyingAgencyId" type="NormalizedStringType" use="optional"/>
+        </xsd:complexType>
+        <xsd:complexType name="IdentifierType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:IdentifierType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="UserAreaType" block="restriction">
+                <xsd:sequence>
+                        <xsd:any namespace="##any" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemBaseType" abstract="true">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the basis for Items.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:group ref="ItemIDsGroup"/>
+                        <xsd:element ref="ServiceIndicator" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="Classification" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Specification" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="HazardousMaterial" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Packaging" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="OrderReferenceType">
+                <xsd:complexContent>
+                        <xsd:extension base="DocumentReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ReleaseNumber" minOccurs="0"/>
+                                        <xsd:element ref="LineNumber" minOccurs="0"/>
+                                        <xsd:element ref="ScheduleLineNumber" minOccurs="0"/>
+                                        <xsd:element ref="SubLineNumber" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SemanticClassificationType">
+                <xsd:complexContent>
+                        <xsd:extension base="ClassificationBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="CodeType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:CodeType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="GLAccountType">
+                <xsd:sequence>
+                        <xsd:element ref="GLNominalAccount" minOccurs="0"/>
+                        <xsd:element ref="GLElement" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="QuantityType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:QuantityType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="FacilityType">
+                <xsd:complexContent>
+                        <xsd:extension base="FacilityBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ActionExpressionType">
+                <xsd:annotation>
+                        <xsd:documentation>ReturnCriteria identifies the content that is to be returned, given query success. In essence, the expression here has the effect of filtering the part(s) of the found element(s) that are to be returned.
+
+ReturnCriteria plays no role in the query itself. That is handled as a match against the request BOD's noun exemplar. 
+
+ReturnCriteria allows the sender of the BOD to indicate which information (down to the field level) is requested to be returned, given that the query has been successful in matching the exemplar to existing nouns. 
+
+That is, in a GetListPurchaseOrder, if one or more PurchaseOrders with a TotalPrice = $1M were found, ReturnCriteria tells the BOD recipient which parts of the PurchaseOrder should be populated with content when the response (ShowPurchaseOrder) is formulated.
+
+The expressionLanguage indicates the expression language being used. In order for the ReturnCriteria expression to be evaluable by the BOD recipient, the recipient must be capable of processing and interpreting the specified expression language. XPath is the default, due to its ubiquity among XML processing technologies. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="TokenType">
+                                <xsd:attribute name="actionCode" type="ActionCodeContentType" use="required"/>
+                                <xsd:attribute name="expressionLanguage" type="TokenType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="ChangeStatusType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusBasisType">
+                                <xsd:sequence>
+                                        <xsd:element ref="StateChange" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="LotType">
+                <xsd:sequence>
+                        <xsd:element ref="LotIDs" minOccurs="0"/>
+                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="Quantity" minOccurs="0"/>
+                        <xsd:element ref="SerialNumber" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="RFID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="sequence" type="PositiveIntegerNumericType"/>
+        </xsd:complexType>
+        <xsd:complexType name="TimePeriodType">
+                <xsd:annotation>
+                        <xsd:documentation>Provides the structure to indicate a Date/Time period where the Time is provided with in the Start and Duration or EndDateTime.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="TimePeriodABIEType"/>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="StatusType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusABIEType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="UOMCodeType">
+                <xsd:simpleContent>
+                        <xsd:extension base="UnitCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="DescriptionType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>Description_ Text. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText/>
+                                <ccts:RepresentationTermName>Text</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>Description</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:TextType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="PackagingType">
+                <xsd:complexContent>
+                        <xsd:extension base="PackagingBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SemanticPartyType">
+                <xsd:complexContent>
+                        <xsd:extension base="PartyBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="UOMCodeConversionType">
+                <xsd:annotation>
+                        <xsd:documentation>The UOM here represents the alternate UOM. The the Mulitplier determines the conversion between the parent UOM and the UOM specified here in the allternate UOM.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="FromUOMPackage" minOccurs="0"/>
+                        <xsd:element ref="RateNumeric" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the multiple to make the conversion from the Inventory UOM to the the alternate UOM. </xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ToUOMPackage" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The UOM here represents the alternate UOM. The the Mulitplier determines the conversion between the parent UOM and the UOM specified here in the allternate UOM.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemValueType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the cost or value of an item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="UnitValue" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the value per quantity of the item. Represents the value of the item to the owning organization.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="CostingMethodCode" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the methodology by which the value of an item is determined.
+
+Values are:
+ Standard
+ Moving Average
+ LIFO - For last in first out.
+ FIFO - For first in first out.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ValueClassification" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a grouping used to determine the General Ledger accounting effect. These are user defined values, with the exception of the values TOTAL, MATERIAL, LABOR, BURDEN, OVERHEAD, SUBCONTRACT</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="GLEntityID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the owning organzation of the item.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation>This is the time period the item value is valid for.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="BOMReferenceType">
+                <xsd:complexContent>
+                        <xsd:extension base="BOMReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SemanticAttachmentType">
+                <xsd:complexContent>
+                        <xsd:extension base="AttachmentBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="DocumentReferenceBaseType" abstract="true">
+                <xsd:sequence>
+                        <xsd:group ref="DocumentIDsGroup"/>
+                        <xsd:element ref="DocumentDateTime" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="StatusCode" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ClassificationBaseType" abstract="true">
+                <xsd:sequence>
+                        <xsd:element name="Codes" type="SequencedCodesType" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation>The ClassificationCodes that identify a single or hierarchical association of classifications. For example, Pump, Centrifugal would be represented by two Codes, the first one as Pump, the second as Centrifugal.
+
+The Sequence attribute of the Code identifies the hierarchical position of the identifier in the case of multi-level codes.
+
+The name attribute identifies the name of the corresponding classification level. Possible examples are ROOT, BRANCH, LEAF</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="FacilityBaseType">
+                <xsd:sequence>
+                        <xsd:element name="IDs" type="SequencedIDsType" minOccurs="0"/>
+                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="Address" minOccurs="0"/>
+                        <xsd:element ref="Coordinate" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ConfirmationResponseCodeType">
+                <xsd:simpleContent>
+                        <xsd:extension base="ResponseCodeType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="StatusBasisType">
+                <xsd:sequence>
+                        <xsd:element ref="Code" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0"/>
+                        <xsd:element ref="EffectiveDateTime" minOccurs="0"/>
+                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                        <xsd:element ref="Reason" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ClassificationType">
+                <xsd:complexContent>
+                        <xsd:extension base="ClassificationBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:attribute name="type" type="NormalizedStringType"/>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SpecificationType">
+                <xsd:sequence>
+                        <xsd:element ref="Property" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="NormalizedStringType" use="optional"/>
+        </xsd:complexType>
+        <xsd:complexType name="HazardousMaterialType">
+                <xsd:complexContent>
+                        <xsd:extension base="HazardousMaterialABIEType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="TimePeriodABIEType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">TimePeriodABIEType is logically derived from UN/CEFACT TBG17 ABIE PeriodType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="StartDateTime"/>
+                        <xsd:choice>
+                                <xsd:element ref="Duration" minOccurs="0"/>
+                                <xsd:element ref="EndDateTime" minOccurs="0"/>
+                        </xsd:choice>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="StatusABIEType">
+                <xsd:annotation>
+                        <xsd:documentation>StatusABIEType is logically derived from UN/CEFACT TBG17 ABIE StatusType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="StatusBasisType">
+                                <xsd:sequence>
+                                        <xsd:element ref="TimePeriod" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PackagingBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="MaterialBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Type" minOccurs="0"/>
+                                        <xsd:element ref="Dimensions" minOccurs="0"/>
+                                        <xsd:element ref="UPCPackagingLevelCode" minOccurs="0"/>
+                                        <xsd:element ref="PerPackageQuantity" minOccurs="0"/>
+                                        <xsd:element ref="CapacityPerPackageQuantity" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PartyBaseType" abstract="true">
+                <xsd:sequence>
+                        <xsd:element ref="PartyIDs" minOccurs="0"/>
+                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Location" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="category" type="PartyCategoryCodeContentType"/>
+        </xsd:complexType>
+        <xsd:complexType name="BOMReferenceBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="DocumentReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="Item" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="AttachmentBaseType">
+                <xsd:sequence>
+                        <xsd:choice>
+                                <xsd:element ref="EmbeddedData" minOccurs="0"/>
+                                <xsd:element ref="URI" minOccurs="0"/>
+                                <xsd:element ref="FileName" minOccurs="0"/>
+                                <xsd:element ref="ISBN" minOccurs="0"/>
+                        </xsd:choice>
+                        <xsd:element ref="DocumentDateTime" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="FileType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="FileSizeQuantity" minOccurs="0"/>
+                        <xsd:element ref="Title" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="inline" type="IndicatorType" default="false"/>
+        </xsd:complexType>
+        <xsd:complexType name="DocumentReferenceType">
+                <xsd:complexContent>
+                        <xsd:extension base="DocumentReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:attribute name="type" type="TokenType" use="required"/>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="OpenAttachmentType">
+                <xsd:complexContent>
+                        <xsd:extension base="SemanticAttachmentType">
+                                <xsd:attribute name="type" type="NormalizedStringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SequencedCodesType">
+                <xsd:sequence>
+                        <xsd:element name="Code" type="SequencedCodeType" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="GLElementType">
+                <xsd:sequence>
+                        <xsd:element ref="Element" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SequencedIDsType">
+                <xsd:annotation>
+                        <xsd:documentation>Contains the sequenced identifier for the associated component or noun.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:group ref="SequencedIDsGroup"/>
+        </xsd:complexType>
+        <xsd:complexType name="ResponseCodeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>Response_ Code. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText/>
+                                <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>Response</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="ResponseCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="StateChangeType">
+                <xsd:sequence>
+                        <xsd:element ref="FromStateCode" minOccurs="0"/>
+                        <xsd:element ref="ToStateCode" minOccurs="0"/>
+                        <xsd:element ref="ChangeDateTime" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemIDType">
+                <xsd:complexContent>
+                        <xsd:extension base="DocumentIDType"/>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="NoteType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A free form note. The lang attribute identifies the language that the note is in. The author identifies the author of the note. The enrtyDate indicates the date the note was entered or last modified.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="DescriptionType">
+                                <xsd:attribute name="author" type="StringType" use="optional"/>
+                                <xsd:attribute name="entryDateTime" type="DateTimeType" use="optional"/>
+                                <xsd:attribute name="status" type="StringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="HazardousMaterialABIEType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">HazardousMaterialABIEType is logically derived from UN/CEFACT TBG17 ABIE 
+HazardousMaterialType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="MFAGID" minOccurs="0"/>
+                        <xsd:element ref="TechnicalName" minOccurs="0"/>
+                        <xsd:element ref="PlacardEndorsement" minOccurs="0"/>
+                        <xsd:element ref="PlacardNotation" minOccurs="0"/>
+                        <xsd:element ref="MarinePollutionLevelCode" minOccurs="0"/>
+                        <xsd:element ref="ToxicityZoneCode" minOccurs="0"/>
+                        <xsd:element ref="Temperature" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="FlashpointTemperature" minOccurs="0"/>
+                        <xsd:element ref="PrimaryEntryRoute" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="EmergencyContact" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MaterialBaseType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="UOMPackageType">
+                <xsd:annotation>
+                        <xsd:documentation>Associates a unit of measure with a packaging unit.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="UOMCode" minOccurs="0"/>
+                        <xsd:element ref="UnitPackaging" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="PriceABIEType">
+                <xsd:annotation>
+                        <xsd:documentation>PriceABIEType is logically derived from UN/CEFACT TBG17 ABIE PriceType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="AmountPerQuantityType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Code" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="TimePeriod" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SequencedCodeType">
+                <xsd:simpleContent>
+                        <xsd:extension base="CodeType">
+                                <xsd:attribute name="sequence" type="PositiveIntegerNumericType" use="required"/>
+                                <xsd:attribute name="sequenceName" type="NormalizedStringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="NameType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:NameType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="AddressType">
+                <xsd:complexContent>
+                        <xsd:extension base="AddressBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="CoordinateType">
+                <xsd:complexContent>
+                        <xsd:extension base="CoordinateBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="TextType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:TextType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="DocumentIDType">
+                <xsd:annotation>
+                        <xsd:documentation>This is the ID assigned to the document by the creator of the document.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID"/>
+                        <xsd:element ref="RevisionID" minOccurs="0"/>
+                        <xsd:element ref="VariationID" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="agencyRole"/>
+        </xsd:complexType>
+        <xsd:complexType name="PropertyType">
+                <xsd:sequence>
+                        <xsd:element ref="NameValue" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="sequence" type="PositiveIntegerNumericType" use="optional"/>
+        </xsd:complexType>
+        <xsd:complexType name="DimensionType">
+                <xsd:complexContent>
+                        <xsd:extension base="DimensionABIEType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PartyIDsType">
+                <xsd:group ref="PartyIDsGroup"/>
+        </xsd:complexType>
+        <xsd:complexType name="LocationType">
+                <xsd:complexContent>
+                        <xsd:extension base="LocationABIEType">
+                                <xsd:sequence>
+                                        <xsd:group ref="FreeFormTextGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ContactType">
+                <xsd:complexContent>
+                        <xsd:extension base="SemanticContactType">
+                                <xsd:attribute name="type" type="NormalizedStringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="AmountPerQuantityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the cost or price of something represented as a value per a number of units. The price of eggs for example would be 1.29 per 1 dozen.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="Amount"/>
+                        <xsd:element ref="PerQuantity"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="RFID" minOccurs="0"/>
+                                        <xsd:element ref="SerialNumber" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="BinaryObjectType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:BinaryObjectType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="SequencedTextType">
+                <xsd:simpleContent>
+                        <xsd:extension base="TextType">
+                                <xsd:attribute name="sequence" type="PositiveIntegerNumericType" use="required"/>
+                                <xsd:attribute name="sequenceName" type="NormalizedStringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="SequencedIDType">
+                <xsd:simpleContent>
+                        <xsd:extension base="IdentifierType">
+                                <xsd:attribute name="sequence" type="PositiveIntegerNumericType"/>
+                                <xsd:attribute name="sequenceName" type="NormalizedStringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="AddressBaseType" abstract="true">
+                <xsd:annotation>
+                        <xsd:documentation>Address BaseType provides the information about the address or semantic address of an associated entity.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="FormatCode" minOccurs="0"/>
+                        <xsd:element ref="AttentionOfName" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="CareOfName" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:choice>
+                                <xsd:element ref="AddressLine" minOccurs="0" maxOccurs="unbounded"/>
+                                <xsd:sequence>
+                                        <xsd:element ref="LineOne" minOccurs="0"/>
+                                        <xsd:element ref="LineTwo" minOccurs="0"/>
+                                        <xsd:element ref="LineThree" minOccurs="0"/>
+                                        <xsd:element ref="LineFour" minOccurs="0"/>
+                                        <xsd:element ref="LineFive" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:sequence>
+                                        <xsd:element ref="BuildingNumber" minOccurs="0"/>
+                                        <xsd:element ref="BuildingName" minOccurs="0"/>
+                                        <xsd:element ref="StreetName" minOccurs="0"/>
+                                        <xsd:element ref="Unit" minOccurs="0"/>
+                                        <xsd:element ref="Floor" minOccurs="0"/>
+                                        <xsd:element ref="PostOfficeBox" minOccurs="0"/>
+                                        <xsd:element ref="DeliveryPointCode" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:choice>
+                        <xsd:element ref="CitySubDivisionName" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="CityName" minOccurs="0"/>
+                        <xsd:element ref="CountrySubDivisionCode" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="CountryCode" minOccurs="0"/>
+                        <xsd:element ref="PostalCode" minOccurs="0"/>
+                        <xsd:element ref="Status" minOccurs="0"/>
+                        <xsd:element ref="Preference" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="languageCode" type="LanguageCodeType" use="optional"/>
+        </xsd:complexType>
+        <xsd:complexType name="CoordinateBaseType">
+                <xsd:annotation>
+                        <xsd:documentation>The OAGIS CoordinateType allows the use of another coordinate system for the use within a warehousing and inventory environment and the geographic coordinat system.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:choice>
+                        <xsd:sequence>
+                                <xsd:element ref="Latitude" minOccurs="0"/>
+                                <xsd:element ref="Longitude" minOccurs="0"/>
+                                <xsd:element ref="AltitudeMeasure" minOccurs="0"/>
+                        </xsd:sequence>
+                        <xsd:sequence>
+                                <xsd:element ref="SystemID" minOccurs="0"/>
+                                <xsd:element ref="CoordinateReference" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                </xsd:choice>
+        </xsd:complexType>
+        <xsd:complexType name="StateCodeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>State_ Code. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText/>
+                                <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>State</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="StateCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="TemperatureMeasureType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>Temperature_ Measure. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText/>
+                                <ccts:RepresentationTermName>Measure</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>Temperature</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:MeasureType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="DimensionABIEType">
+                <xsd:annotation>
+                        <xsd:documentation>DimensionABIEType is logically derived from UN/CEFACT TBG17 ABIE DimensionType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="WidthMeasure" minOccurs="0"/>
+                        <xsd:element ref="LengthMeasure" minOccurs="0"/>
+                        <xsd:element ref="HeightMeasure" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="NormalizedStringType"/>
+        </xsd:complexType>
+        <xsd:complexType name="LocationABIEType">
+                <xsd:annotation>
+                        <xsd:documentation>LocationABIEType is logically derived from UN/CEFACT TBG17 ABIE LocationType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Directions" minOccurs="0"/>
+                        <xsd:element ref="Coordinate" minOccurs="0"/>
+                        <xsd:element ref="Address" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="NormalizedStringType"/>
+        </xsd:complexType>
+        <xsd:complexType name="SemanticContactType">
+                <xsd:complexContent>
+                        <xsd:extension base="ContactABIEType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:attribute name="languageCode" type="LanguageCodeContentType"/>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="NameValuePairType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the tag and information of the new information to be passed.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="StringType">
+                                <xsd:attribute name="name" type="NormalizedStringType" use="required">
+                                        <xsd:annotation>
+                                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the name of the tag for the information being passed.</xsd:documentation>
+                                        </xsd:annotation>
+                                </xsd:attribute>
+                                <xsd:attribute name="type" type="NormalizedStringType" use="optional">
+                                        <xsd:annotation>
+                                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the type of the information being passed in the NameValue.</xsd:documentation>
+                                        </xsd:annotation>
+                                </xsd:attribute>
+                                <xsd:attribute name="unitCode" type="UnitCodeContentType" use="optional"/>
+                                <xsd:attribute name="unitCodeListVersionID" type="NormalizedStringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="ContactABIEType" abstract="true">
+                <xsd:annotation>
+                        <xsd:documentation>ContactABIEType is logically derived from UN/CEFACT TBG17 ABIE ContactType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Name" minOccurs="0"/>
+                        <xsd:element ref="JobTitle" minOccurs="0"/>
+                        <xsd:element ref="Responsibility" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="DepartmentName" minOccurs="0"/>
+                        <xsd:element ref="Communication" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Preference" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="AmountType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:AmountType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="DeliveryPointCodeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>Delivery Point_ Code. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText>A character string (letters, figures, or symbols) that for brevity and/or languange 
+independence may be used to represent or replace a definitive value or text of an attribute together with relevant 
+supplementary information.</ccts:DefinitionText>
+                                <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>Delivery Point</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="DeliveryPointCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="CountrySubDivisionCodeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>Country Subdivision_ Code. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText>A character string (letters, figures, or symbols) that for brevity and/or languange 
+independence may be used to represent or replace a definitive value or text of an attribute together with relevant 
+supplementary information.</ccts:DefinitionText>
+                                <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>Country Subdivision</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="CountrySubdivisionCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="CountryCodeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>Country_ Code. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText/>
+                                <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>Country</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="CountryCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="PreferenceType">
+                <xsd:complexContent>
+                        <xsd:extension base="PreferenceABIEType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PositionType">
+                <xsd:sequence>
+                        <xsd:element ref="DegreeMeasure" minOccurs="0"/>
+                        <xsd:element ref="MinuteMeasure" minOccurs="0"/>
+                        <xsd:element ref="SecondMeasure" minOccurs="0"/>
+                        <xsd:element ref="DirectionCode" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MeasureType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:MeasureType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="PreferenceABIEType">
+                <xsd:annotation>
+                        <xsd:documentation>PreferenceABIEType is logically derived from UN/CEFACT TBG17 ABIE PreferenceType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="Sequence" minOccurs="0"/>
+                        <xsd:element ref="Indicator" minOccurs="0"/>
+                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="CommunicationType">
+                <xsd:complexContent>
+                        <xsd:extension base="CommunicationABIEType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="CommunicationABIEType">
+                <xsd:annotation>
+                        <xsd:documentation>CommunicationABIEType is logically derived from UN/CEFACT TBG17 ABIE CommunicationType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ChannelCode" minOccurs="0"/>
+                        <xsd:element ref="UseCode" minOccurs="0"/>
+                        <xsd:choice>
+                                <xsd:sequence>
+                                        <xsd:element ref="CountryDialing" minOccurs="0"/>
+                                        <xsd:element ref="AreaDialing" minOccurs="0"/>
+                                        <xsd:element ref="DialNumber" minOccurs="0"/>
+                                        <xsd:element ref="Extension" minOccurs="0"/>
+                                        <xsd:element ref="Access" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:element ref="Address" minOccurs="0"/>
+                                <xsd:sequence>
+                                        <xsd:element ref="URI" minOccurs="0"/>
+                                        <xsd:element ref="HTMLPreferredIndicator" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:element ref="Text" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:choice>
+                        <xsd:element ref="Preference" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="sequence" type="PositiveIntegerNumericType"/>
+                <xsd:attribute name="preferredIndicator" type="IndicatorType"/>
+        </xsd:complexType>
+        <xsd:element name="SyncItemMaster" type="SyncItemMasterType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The purpose of the SyncItemMaster is to supply Item information for goods or services to another business application module.  This BOD may also be initiated by the sending system upon some event occurring.
+
+This BOD is not for synchronizing ITEM quantities at each inventory location.   The SyncInventoryBalance Business Object Document is used for this purpose.
+
+There are many possible business applications in several environments that may use this capability. For example, a MRP, Inventory, or Manufacturing business application could use this to communicate item information. 
+
+This BOD can be used to synchronize items used in finished goods, raw materials, work-in-process or components in a bill of materials.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Sync" type="SyncType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9.0">The Sync verb is used when the owner of the data is passing or publishing that information or change in information to other software components.  This is to be used when the receiver of the SyncBOD does not own the data.  This verb is commonly used when mass changes are necessary or when a publish and subscribe mechanism is used in the integration architecture.The purposes of this verb include application integrity and ease of data entry for the business user by enabling a single point of input.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemMaster" type="ItemMasterType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents any unique purchased part or manufactured product.  Item, as used here, refers to the basic information about an item, including its attributes, cost, and locations.  It does not include item quantities.  Compare to the noun BalanceInventory, which includes all quantities and other location-specific information.
+
+ItemMaster is used as the Item Master. 
+
+The ItemMaster provides details about an Item in many domains of an enterprise. Each domain or functional area are interested in different views of the Item. The ItemMaster provides information to the following partial list of functional areas: Manufacturing, Order Management along with the Catalog view, Logistics, Engineering along with the EngineeringDocument, CRM, and Financials.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ApplicationArea" type="ApplicationAreaType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides the information that an application may need to know in order to communicate in an integration of two or more business applications. The ApplicationArea is used at the applications layer of communication. While the integration frameworks web services and middleware provide the communication layer that OAGIS operates on top of.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides the information that an application may need to know in order to communicate in an integration of two or more business applications. The ApplicationArea is used at the applications layer of communication. While the integration frameworks web services and middleware provide the communication layer that OAGIS operates on top of.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemMasterHeader" type="ItemHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies everything know about an item. Information at the header level applies to all locations unless indicated differently at a given location.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemLocation" type="ItemLocationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Item information that is specific to a location. For example a plant or site may keep different information about an item than the corporate office.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ActionCriteria" type="ActionCriteriaType"/>
+        <xsd:element name="Sender" type="SenderType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies characteristics and control identifiers that relate to the application that created the Business Object Document.  The sender area can indicate the logical location of the application and/or database server, the application, and the task that was processing to create the BOD.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CreationDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">is the date time stamp that the given instance of the Business Object Document was created.  This date must not be modified during the life of the Business Object Document.
+</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Signature" type="SignatureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">If the BOD is to be signed the signature element is included, otherwise it is not.
+Signature supports any digital signature that maybe used by an implementation of OAGIS. The qualifyingAgency identifies the agency that provided the format for the signature.
+
+This element supports any digital signature specification that is available today and in the future. This is accomplished by not actually defining the content but by allowing the implementation to specify the digital signature to be used via an external XML Schema namespace declaration. The Signature element is defined to have any content from any other namespace. 
+
+This allows the user to carry a digital signature in the xml instance of a BOD. The choice of which digital signature to use is left up to the user and their integration needs.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BODID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The BODId provides a place to carry a Globally Unique Identifier (GUID) that will make each Business Object Document instance uniquely identifiable.
+
+This is a critical success factor to enable software developers to use the Globally Unique Identifier (GUID) to build the following services or capabilities:
+1. Legally binding transactions,
+2. Transaction logging,
+3. Exception handling,
+4. Re-sending,
+5. Reporting,
+6. Confirmations,
+7. Security.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UserArea" type="UserAreaType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Allows the user of OAGIS to extend the specification in order to provide additional information that is not captured in OAGIS.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is done by defining the additional information in XML Schema and referencing the new schema in the xml instance document throught the use of namespaces. Once this is done the additional information defined there can be carried in the BOD XML instance document.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Open Applications Group will make best efforts to quickly consider all proposed submissions.The USERAREA is always the last element in all components, except where the component has been extended inline.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SupplierContractReference" type="OrderReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the reference to the supplier contract.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BuyerContractReference" type="OrderReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the reference to the buyer contract.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FreightItemID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the item number assigned to the type of goods for the purposes of freight classification and cost calculation.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FreightClassification" type="SemanticClassificationType">
+                <xsd:annotation>
+                        <xsd:documentation>Qualifies goods for purposes of freight cost calculation. An example would the qualifications used by National Motor Freight Carriers. The classification is used in order calculate the freight cost. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SerialControlIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates if the item is a serialized item i.e. unique instances of the item are identified by unique serial numbers. Valid values are 0 for no, and 1 for yes</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LotControlIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates if the item is a lotted item. Valid values are 0 for no, and 1 for yes</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ExpirationControlCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates the type of control used to determine whether or not an item has expired or is no longer considered good to sell or consume.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="GLAccount" type="GLAccountType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the GLAccount for the associated document and component.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DocumentDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation>The date that document was created within the system of record.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CatchWeightIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates that an ITEM requires special processing to determine the actual net or gross weight during certain inventory operations.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShelfLifeDuration" type="DurationMeasureType">
+                <xsd:annotation>
+                        <xsd:documentation>This is the period of time in duration that the item is valid for use</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AverageRunSizeQuantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation>This is the average quantity made during a manufacturing run using a specific Item or Bill of Material.  This is often used during MRP or other forecasting operations</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Facility" type="FacilityType">
+                <xsd:annotation>
+                        <xsd:documentation>A Facility identifies a location within an entity. The facility may have sub-locators identified using a sequenced identification notation e.g. Warehouse A100 Sub-Location 11, Row R10 would be represented as an array of three Facility elements with values as A100, 11, R10, name attribute as Warehouse, Sub-Location and Row and sequence attribute as 1,2 and 3 respectively.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ActionExpression" type="ActionExpressionType"/>
+        <xsd:element name="ChangeStatus" type="ChangeStatusType"/>
+        <xsd:element name="Lot" type="LotType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Lot that a given Item Instance belongs to.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Type" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis">Indicates the type of the object in which assoicated.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EffectiveTimePeriod" type="TimePeriodType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates the time period in which the associated component is effective.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ExecutionTimePeriod" type="TimePeriodType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the time in which the associated entity is actually in process.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FixedQuantityIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether the ItemQuantity is a fixed size and does not scale along with the quantity of the BOM or Routing being produced</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LeadTimeDuration" type="DurationMeasureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the duration of time that is required to add to a manufacturing process to forecast availability of this Item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RequiredPercent" type="PercentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the percentage of the total quantity on the Bill of Material that is required to be available before the manufacturing process can begin</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BackFlushedIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates whether the associated quatities are backflushed or not.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ActualIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates if the associated quatities are reported as they happen.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="TrackingIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether the related object is to be tracked</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ScrapIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the status of an item as a scrapped item</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemStatus" type="StatusType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether an item is active, inactive, or in other various states.  Examples of values for this field include:	Active, Inactive, Hold, Deleted, Obsolete</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BaseUOMCode" type="UOMCodeType">
+                <xsd:annotation>
+                        <xsd:documentation>This is the base unit of measure of the associated item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="StorageUOMCode" type="UOMCodeType">
+                <xsd:annotation>
+                        <xsd:documentation>This is the storage unit of measure of the item. This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShippingUOMCode" type="UOMCodeType">
+                <xsd:annotation>
+                        <xsd:documentation>This describes the unit of measure that a product is shipped.  This is sometimes different from the unit of measure that is used to count a product as it is consumed, sold or accounted for.
+
+Examples are:
+
+- Generic Quantity  (Each, Pair, Dozen, Gross, etc)
+- Weight (Ounce, Pound, Ton, Kilogram, etc)
+- Volume (Cup, Pint, Gallon, Liter, etc)
+- Length (Inch, Foot, Yard, Meter, etc)
+- Time (Second, Minute, Hour, Day, Year, etc)</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RoutingDisposition" type="StatusType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This determines the receipt routing of an item or part.
+
+Examples of values include:
+Customer consignment, Inspection, Vendor consignment, Blocked
+Bonded, User defined
+
+Possible synonyms are 
+Receipt Routing, Material Status, Material Condition Code</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SerialNumberSpecification" type="DescriptionType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates the business rules used to specify what constitutes a serial number</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LotNumberSpecification" type="DescriptionType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates the business rules used to specify what constitutes a lot</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LastModificationDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation>The datetime on which the object was last modified</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UnitPackaging" type="PackagingType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the packaging that the company generally references the Item in.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="OwnerParty" type="SemanticPartyType">
+                <xsd:annotation>
+                        <xsd:documentation>This is used to identify who or which organization owns the item or part. The content of this field is user defined based on a specific Customer or Supplier.
+
+Synonyms are Vendor Consignment ID, Supplier Consignment ID</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UOMGroupID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>This identifies a set of related UOM's and their conversions from the Item's UOM</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AlternateUOMCode" type="UOMCodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies alternate unit of measures for an item that may be used.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UOMCodeConversion" type="UOMCodeConversionType"/>
+        <xsd:element name="ItemValue" type="ItemValueType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the cost or value of the item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BOMReference" type="BOMReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a reference to a Bill-Of-Material Document.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DrawingAttachment" type="SemanticAttachmentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Drawing Attachment allows drawings to be attached to a Noun or Component.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LogicalID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides the logical location of the server and applications from which the Business Object Document originated. It can be used to establish a logical to physical mapping, however its use is optional.
+
+Each system or combination of systems should maintain an external central reference table containing the logical names or logical addresses of the application systems in the integration configuration.  This enables the logical names to be mapped to the physical network addresses of the resources needed on the network.  
+
+Note:  The technical implementation of this Domain Naming Service is not dictated by this specification. 
+
+This logical to physical mapping may be done at execution time by the application itself or by a middleware transport mechanism, depending on the integration architecture used.
+
+This provides for a simple but effective directory access capability while maintaining application independence from the physical location of those resources on the network</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ComponentID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides a finer level of control than Logical Identifier and represents the business application that issued the Business Object Document.  Its use is optional.
+
+The Open Applications Group has not constructed the list of valid Component names.  A suggestion for naming is to use the application component names used in the scenario diagrams in section two of OAGIS. Example Components may be Inventory, or Payroll.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="TaskID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the business event that initiated the need for the Business Object Document to be created. Its use is optional. Although the Task may differ depending on the specific implementation, it is important to enable drill back capability. Example Tasks may be Receipt or Adjustment.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReferenceID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Enables the sending application to indicate the instance identifier of the event or task that caused the BOD to be created. This allows drill back from the BOD message into the sending application. The may be required in environments where an audit trail must be maintained for all transactions.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ConfirmationCode" type="ConfirmationResponseCodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis">Is an option controlled by the Sender business application.  It is a request to the receiving application to send back a confirmation BOD to the sender. The confirmation Business Object Document may indicate the successful processing of the original Business Object Document or return error conditions if the original Business Object Document was unsuccessful.
+
+The confirmation request has the following valid values:
+
+Never - No confirmation Business Object Document requested
+
+OnError - OnError send back a confirmation Business Object Document only if an error has occurred
+
+Always - Always send a confirmation Business Object Document regardless</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AuthorizationID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifyies the authorization level of the user or application that is sending the Business Object Document Message. This authorization level being recognized be the receiving system indicates what can be done on the receiving system(s).</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ServiceIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies if the Item is a Service</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Classification" type="ClassificationType">
+                <xsd:annotation>
+                        <xsd:documentation>This identifies the classification of an entity. An entity may be classified into mulitple groups for different reasons. Examples of Classification include Commodity Codes, Freight Classifications, Product Line classifications and so on. Suggested Values are COMMODITY, FREIGHT, PRODUCTLINE</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Specification" type="SpecificationType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the specification of an entity.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="HazardousMaterial" type="HazardousMaterialType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides the Hazardous Material Code and description.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Packaging" type="PackagingType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Packaging information for a given item.
+
+Note: The UPC here is the UPC of the packaging for a given item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MaximumLotSizeQuantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the maximum number of items that can be put into a lot for this Item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MinimumLotSizeQuantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the minimum number of items that can be put into a lot for this Item,</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LotSizeMultipler" type="NumericType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is used with the MinimumLotSize and MaximumLotSize.  It contains the multiplier between the minimum and maximum manufactured lot quantities.  For example, if the maximum lot quantity is 10,000 and the minimum lot quantity is 1000, the lot size multiplier could be 1000.  This means the Item may be manufactured in lot sizes starting at 1000 and going up to 10,000 by 1000 increments.For example, 1000, 2000, 3000, etc.  A lot of 4500, would not be allowed under these constraints.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DocumentReference" type="DocumentReferenceType"/>
+        <xsd:element name="Attachment" type="OpenAttachmentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Attachment represents binary data files that may be included within a BOD. These files replace the paper specifications and drawings attached to a BOD definition to clearly communicate design requirements. This Data Type is optional. Attachment usage is further defined by its position.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReleaseNumber" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the Release Number in the case of Blanket POs</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LineNumber" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the Line Number of the given Line Coponent within the document. LineNumbers are assigned by the sending system.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ScheduleLineNumber" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the ScheduleLineNumber of a particular item of interest for the given DocumentReference. The Line Number is of the primary DocumentId of the sender indicated  by the DocumentId under DocumentIds.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SubLineNumber" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the SublineNumber of a particular item of interest for the given DocumentReference. The Line Number is of the primary DocumentId of the sender indicated  by the DocumentId under DocumentIds.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="GLNominalAccount" type="NormalizedStringType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the primary account classification within a chart of accounts. For example reveune, Fixed Asset, Land, Buildings, etc.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="GLElement" type="GLElementType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Accounting code elements</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="StateChange" type="StateChangeType"/>
+        <xsd:element name="ItemID" type="ItemIDType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the primary item Identifier associated with the given item within the scope of the given integration as provided by the Party or entity that has created this document instance.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CustomerItemID" type="ItemIDType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the identifier provided by the customer for the item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ManufacturerItemID" type="ItemIDType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the identifier provided by Manufacturer for the Item. One example may be the model number.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SupplierItemID" type="ItemIDType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the identifier provided by the supplier for the item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UPCID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Allows an instance of an item to have a UPC identifier associated.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EPCID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Allows an instance of an item to communicate the ElectronicProductCodeID that it was assigned. The ElectronicProductCodeID is one of the major RadioFrequency Identifiers used.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Description" type="DescriptionType"/>
+        <xsd:element name="Note" type="NoteType"/>
+        <xsd:element name="LotIDs" type="SequencedIDsType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the Lot Identifiers of all of the lots that are contained in the associated set of items.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Quantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the quantity of the associated service or item that is addresses by the component in which the quantity is associated.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SerialNumber" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Unique serial number assigned to the given item instance by the manufacturer.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RFID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Allows an instance of an item to carry any radio frequency identifier (RFID) that maybe used by a supply chain.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FromUOMPackage" type="UOMPackageType">
+                <xsd:annotation>
+                        <xsd:documentation>Provides the unit of measure and packaging details that is being converted from.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RateNumeric" type="NumericType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the multiplier to convert the source units to the target units. (e.g.) The conversion of one currency to another currency monitary amount in the from currency is multiplied by the CalculationRateNumeric to calcultate the monitary amount in the to currency. Another example maybe the conversion between units of measure.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ToUOMPackage" type="UOMPackageType">
+                <xsd:annotation>
+                        <xsd:documentation>Provides the unit of measure and packaging details that is being converted to (the target uni of measure and packaging)..</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UnitValue" type="PriceABIEType"/>
+        <xsd:element name="CostingMethodCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the methodology by which the value of an item is determined.
+
+Values are:
+ Standard
+ Moving Average
+ LIFO - For last in first out.
+ FIFO - For first in first out.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ValueClassification" type="ClassificationType">
+                <xsd:annotation>
+                        <xsd:documentation> Is a grouping used to determine the General Ledger accounting effect. These are user defined values, with the exception of the values TOTAL, MATERIAL, LABOR, BURDEN, OVERHEAD, SUBCONTRACT.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="GLEntityID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>A G/L entity is the smallest organizational unit for which individual financial statements must be drawn up according to relevant commercial law.
+
+It is normally the primary balancing segment of the GL Account structure.  Typically, this is the owning entity for the transaction. 
+
+Synonyms are Business Unit, Fund, G/L Company, Joint Venture, Non-Profit Association Name</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="StatusCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the Code to indicate the status for the Noun or Component in which the Status Component occurs.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Name" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the Name of the object in which associated.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Address" type="AddressType"/>
+        <xsd:element name="Coordinate" type="CoordinateType"/>
+        <xsd:element name="Code" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Element for the communication of all codes.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EffectiveDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation>This is the DateTime the associated object is made effective</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReasonCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the reason for an activity</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Reason" type="TextType"/>
+        <xsd:element name="Property" type="PropertyType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents the Properties or Features of the associated entity</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="StartDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation>Start timestamp indicating the starting point of the event.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Duration" type="DurationMeasureType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates the duration of time as represented by ISO 8601. Where the value space is a six dimensional space where the coordinates designate the Gregorian year, month, day, hour, minute, and second. The number of seconds can include decimal digits to arbitary pecision.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EndDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the ending timestamp of the event.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="TimePeriod" type="TimePeriodType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">An explicit period of time for the bucket.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Dimensions" type="DimensionType">
+                <xsd:annotation>
+                        <xsd:documentation>Provides the dimensions of the associated component.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UPCPackagingLevelCode" type="CodeType"/>
+        <xsd:element name="PerPackageQuantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the number of instances of the item in the unit of measure contained with in the package.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CapacityPerPackageQuantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the maximum number of instances of an item in the unit of measure that maybe contained within the package.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PartyIDs" type="PartyIDsType">
+                <xsd:annotation>
+                        <xsd:documentation>Contains the set of possible identifiers for an associated Party.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Location" type="LocationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The location of a thing, as captured by an address (or addresses), GPS Coordinates, and/or in relation to other locations.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Contact" type="ContactType">
+                <xsd:annotation>
+                        <xsd:documentation>Contacts are the point of communication with the given party. In the case of an organization it may be the requestioner, the buyer, customer service, etc. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Item" type="ItemType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the Item associated with the Line or Detail of a transaction. The item provides the details of the generic Item component information. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EmbeddedData" type="BinaryObjectType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Allows the data to be embedded directly into the BOD instance.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="URI" type="URIType"/>
+        <xsd:element name="FileName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the name of the File being referenced.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ISBN" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Allows a reference to an ISBN.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FileType" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the type of the file type of the attachment.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FileSizeQuantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Specifies how big the file is.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Title" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the title of the person. For example Dr..</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DocumentID" type="DocumentIDType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the primary document id for the document associated.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AlternateDocumentID" type="DocumentIDType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the alternate document id for the associated document.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Element" type="SequencedTextType"/>
+        <xsd:element name="FromStateCode" type="StateCodeType"/>
+        <xsd:element name="ToStateCode" type="StateCodeType"/>
+        <xsd:element name="ChangeDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates when the status change occured.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the Identifiers of the given instance of an entity within the scope of the integration. The providedBy attribute identifies the party that provided or knows this party by the given identifier.
+</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MFAGID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Used to identify a Medical First Aid Guide (MFAG) for hazardous substance.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="TechnicalName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the Technical name of the associated entity.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PlacardEndorsement" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The placard endorsement that is to be shown on shipping papers for hazardous materials. Can also be used for the number of the orange placard (lower part) require on transport. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PlacardNotation" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The placard notation that is to be shown on shipping papers for hazardous materials. Can also be used for the number of the orange placard (upper part) require on transport. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MarinePollutionLevelCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Specifies the level of marine pollution for this hazardous substance.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ToxicityZoneCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>A code identifying the Inhalation Toxicity Hazard Zone for the hazardous substance, this is generally identfied by a government agency in the United States this is provided by the US Department of Transportation.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Temperature" type="TemperatureMeasureType">
+                <xsd:annotation>
+                        <xsd:documentation>Temperature of the associated entity.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FlashpointTemperature" type="TemperatureMeasureType">
+                <xsd:annotation>
+                        <xsd:documentation>FlashpointTemperature is related to hazadous substances or goods, indicates the temperature at which the associated substance of goods become flammable, explossive or toxic..</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PrimaryEntryRoute" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The primary entry route by which the Hazardous Material gains access to the human body.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EmergencyContact" type="ContactType"/>
+        <xsd:element name="UOMCode" type="UOMCodeType">
+                <xsd:annotation>
+                        <xsd:documentation>This identifies the UOM of any object</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RevisionID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the revision of the semantically named document. The combination of the ID and its revision uniquely identifies the associated entity.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="VariationID" type="IdentifierType"/>
+        <xsd:element name="NameValue" type="NameValuePairType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the tag and information of the new information to be passed.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Amount" type="AmountType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The monetary value of the object in which the amount is associated</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PerQuantity" type="QuantityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the PerQuantity side of this Amount. Typically, this value is 1 with a uom of each, meaning that, e.g., a UnitPrice with the Amount 1.29 would be the price per each or simply $1.29 each. For pricing wire, the UnitPrice Amount might be $7.00 with a  PerQuantity of 100 and a uom of LinearFeet, meaning the unit price would be $7 per 100 linear feet.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FormatCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Format Code indicates the format of the address. Examples are US Military, US Formatted Address, European Formatted Address etc. There is no intent to decode the address formats - these are informational only. No list of valid values exists or is proposed here.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AttentionOfName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation>The name of the person or organization that the associated entity is intended.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CareOfName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation>The name that the associated entity is sent by.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AddressLine" type="SequencedTextType"/>
+        <xsd:element name="LineOne" type="TextType"/>
+        <xsd:element name="LineTwo" type="TextType"/>
+        <xsd:element name="LineThree" type="TextType"/>
+        <xsd:element name="LineFour" type="TextType"/>
+        <xsd:element name="LineFive" type="TextType"/>
+        <xsd:element name="BuildingNumber" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The Number of the building or house on the street that identifies where to deliver mail.  For example, Building 300 on Standards Parkway</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BuildingName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation>The building or house name on the street that identifies where to deliver mail</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="StreetName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation>The Street Name where the building/ house is located</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Unit" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the apartment number or office suite.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Floor" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The floor where the housename is located</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PostOfficeBox" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies a Post Office Box number</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DeliveryPointCode" type="DeliveryPointCodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the Dock or the Mail Stop or Lane or any other specific Delivery Point. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CitySubDivisionName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation>Qualifies the further division of the City, example a city may have many districts or Boroughs. The type attribute identifies the type of this entity e.g. City, Borough etc, and there is a pre-defined list of types supported, with the ability to add new ones as necessary</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CityName" type="NameType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the town or the city</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CountrySubDivisionCode" type="CountrySubDivisionCodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Qualifies the further division of the Country. These may be Districts, Regions, States, Provinces etc. A possible list of values is as specified in ISO 3166-2. The type attribute identifies the type of this e.g. District, Region etc, and there is a pre-defined list of types supported, with the ability to add new ones as necessary</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CountryCode" type="CountryCodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Country in which the Address is in. A possible list of values is as specified in ISO 3166-2.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PostalCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Postal Code of the Address.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Status" type="StatusType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the status of the associated object by providing the Status Code along with a description and when the status is effective.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Preference" type="PreferenceType"/>
+        <xsd:element name="Latitude" type="PositionType"/>
+        <xsd:element name="Longitude" type="PositionType"/>
+        <xsd:element name="AltitudeMeasure" type="MeasureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the value and unit of measure in the z-axis in a thrre dimensional system.
+
+Examples of this maybe the Altitude in the case of a map of the world, or the height or shelf in a rack system in the case of a manufacturing or warehouse facility.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SystemID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the system in which the userid applies.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CoordinateReference" type="SequencedIDsType"/>
+        <xsd:element name="WidthMeasure" type="MeasureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the width of an object</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LengthMeasure" type="MeasureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the length of an object</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="HeightMeasure" type="MeasureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the Height of an object</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="TaxID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifier for a business or individual provided by the government. This maybe a FIIN, Social Security Number, or Drivers License Number to name a few.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DUNSID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifier for business provided by Dun and Bradstreet.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CAGEID" type="IdentifierType"/>
+        <xsd:element name="DODAACID" type="IdentifierType"/>
+        <xsd:element name="BICID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation>The Bank Identifier Code is a unique address which, in telecommunication messages, identifies precisely the financial institutions involved in financial transactions.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Directions" type="TextType"/>
+        <xsd:element name="JobTitle" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the position or designation of the pesron with whom associated within the given organization. Examples are Director, Software Engineer, Purchasing Manager etc</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Responsibility" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>A text description of the responsibility of the associated entity.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DepartmentName" type="NameType"/>
+        <xsd:element name="Communication" type="CommunicationType"/>
+        <xsd:element name="DegreeMeasure" type="MeasureType"/>
+        <xsd:element name="MinuteMeasure" type="MeasureType"/>
+        <xsd:element name="SecondMeasure" type="MeasureType"/>
+        <xsd:element name="DirectionCode" type="CodeType"/>
+        <xsd:element name="Sequence" type="PositiveIntegerNumericType">
+                <xsd:annotation>
+                        <xsd:documentation>A value expressing the value of a Sequence.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Indicator" type="IndicatorType"/>
+        <xsd:element name="ChannelCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Identifies the channel in which the associated entity comes.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UseCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation>Code identifying the usage of the contact point e.g. business, private, etc.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CountryDialing" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The country dialing code for a communication number.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AreaDialing" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The area dialing code for a communication number.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DialNumber" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The commication number, not including country dialing or area dialing codes.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Extension" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The extension of the assoicated communication number.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Access" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation>The text that permits access to the electronic network of the associated communication number such as telephone network, for example 9, *70.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="HTMLPreferredIndicator" type="IndicatorType">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates that the associated entity preferrs HTML format.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Text" type="TextType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a message to the reader about the object associated.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:group name="LotSizeGroup">
+                <xsd:sequence>
+                        <xsd:element ref="MaximumLotSizeQuantity" minOccurs="0"/>
+                        <xsd:element ref="MinimumLotSizeQuantity" minOccurs="0"/>
+                        <xsd:element ref="LotSizeMultipler" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="ReferencesGroup">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Common References to DocumentReferences and Attachements</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="DocumentReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="ItemIDsGroup">
+                <xsd:annotation>
+                        <xsd:documentation>Contains the Item IDs for an associated item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ItemID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="CustomerItemID" minOccurs="0"/>
+                        <xsd:element ref="ManufacturerItemID" minOccurs="0"/>
+                        <xsd:element ref="SupplierItemID" minOccurs="0"/>
+                        <xsd:element ref="UPCID" minOccurs="0"/>
+                        <xsd:element ref="EPCID" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="FreeFormTextGroup">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Common Free Form Text elements that occur together.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="DocumentIDsGroup">
+                <xsd:annotation>
+                        <xsd:documentation>Provides the Identifier(s) of the document being communicated.
+
+Uniquily identifies a Document within an organization. Typically there is only an ID for a document within one system. However, with the use of different business applications there maybe different ids assigned to the same document within an organization from the different systems and in the case of B2B transactions different businesses may have different Identifiers for the same document. 
+
+This construct is designed to allow for these different identifications.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="DocumentID" minOccurs="0"/>
+                        <xsd:element ref="AlternateDocumentID" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="SequencedIDsGroup">
+                <xsd:annotation>
+                        <xsd:documentation>Indicates the ID of the associated component or noun. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element name="ID" type="SequencedIDType" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="PartyIDsGroup">
+                <xsd:annotation>
+                        <xsd:documentation>Contain the ids for a given party. These ids may be assigned by multiple organizations.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="TaxID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="DUNSID" minOccurs="0"/>
+                        <xsd:element ref="CAGEID" minOccurs="0"/>
+                        <xsd:element ref="DODAACID" minOccurs="0"/>
+                        <xsd:element ref="BICID" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:simpleType name="NormalizedStringType">
+                <xsd:restriction base="qdt:NormalizedStringType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="SystemEnvironmentCodeContentType">
+                <xsd:restriction base="oacl:SystemEnvironmentCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="LanguageCodeType">
+                <xsd:restriction base="qdt:LanguageCodeType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID>QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode>QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName>Month_ Date. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID>1.0</ccts:VersionID>
+                                <ccts:DefinitionText>A particular point in the progression of time together with the relevant supplementary information.  Provides the XML Schema simpleType that allows either just the Date or the Date and Time to be provided in the elements that are based on this type and/or types that use this as their base.</ccts:DefinitionText>
+                                <ccts:RepresentationTermName>Date</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm>Month</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:union memberTypes="udt:DateType udt:TimeType udt:DateTimeType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="IndicatorType">
+                <xsd:restriction base="udt:IndicatorType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="DurationMeasureType">
+                <xsd:restriction base="qdt:DurationMeasureType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="PercentType">
+                <xsd:restriction base="udt:PercentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="TokenType">
+                <xsd:restriction base="qdt:TokenType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="ActionCodeContentType">
+                <xsd:restriction base="oacl:ActionCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="PositiveIntegerNumericType">
+                <xsd:restriction base="qdt:PositiveIntegerNumericType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="NumericType">
+                <xsd:restriction base="udt:NumericType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="UnitCodeContentType">
+                <xsd:restriction base="oacl:UnitCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="PartyCategoryCodeContentType">
+                <xsd:restriction base="oacl:PartyCategoryCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="ResponseCodeContentType">
+                <xsd:restriction base="oacl:ResponseCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="StringType">
+                <xsd:restriction base="qdt:StringType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="URIType">
+                <xsd:restriction base="qdt:URIType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="StateCodeContentType">
+                <xsd:restriction base="oacl:StateCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="LanguageCodeContentType">
+                <xsd:restriction base="oacl:LanguageCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="DeliveryPointCodeContentType">
+                <xsd:restriction base="oacl:DeliveryPointCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="CountrySubdivisionCodeContentType">
+                <xsd:restriction base="oacl:CountrySubdivisionCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="CountryCodeContentType">
+                <xsd:restriction base="oacl:CountryCodeContentType"/>
+        </xsd:simpleType>
+</xsd:schema>

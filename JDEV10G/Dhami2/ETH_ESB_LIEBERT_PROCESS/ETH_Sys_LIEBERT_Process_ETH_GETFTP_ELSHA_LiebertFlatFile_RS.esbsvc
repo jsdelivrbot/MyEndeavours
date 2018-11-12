@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_ELSHA_LiebertFlatFile_RS" guid="838973910C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ETH_GETFTP_ELSHA_LiebertFlatFile</description>
+   <versionInfo>
+      <ID>1243885777999</ID>
+      <lastModifiedTime>Mon Jun 01 19:49:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_GETFTP_ELSHA_LiebertFlatFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ELSHA_LiebertFlatFile/">tns:Get_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETH_Sys_LIEBERT_Process/ETH_GETFTP_ELSHA_LiebertFlatFile_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:12001/event/ETH_Sys_LIEBERT_Process/ETH_GETFTP_ELSHA_LiebertFlatFile_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="838BE4900C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/LiebertPurchaseOrder" element="tns:Root-Element"/>
+         <routingRules>
+            <routingRule guid="10F4AF800CA211DEBFB957152A29AC2D" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="E8D0CE800CA111DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_ENQJMS_PO_LiebertFlatFile.Produce_Message" serviceGUID="E8CE84900CA111DEBFB957152A29AC2D" serviceQName="ETH_Sys_LIEBERT_Process.ETH_ENQJMS_PO_LiebertFlatFile" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>Root_Element_To_CustomLiebertPO.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

@@ -1,0 +1,16 @@
+<definitions
+    
+     targetNamespace="http://services.emerson.com/product"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://services.emerson.com/product"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <import namespace="http://services.emerson.com/product" location="http://inedec-mlap-45.emrcorp.local:80/ProductService/ProductPort?wsdl"/>
+    <plnk:partnerLinkType name="ProductPortType_PL">
+        <plnk:role name="ProductPortType_Role">
+            <plnk:portType name="tns:ProductPortType"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

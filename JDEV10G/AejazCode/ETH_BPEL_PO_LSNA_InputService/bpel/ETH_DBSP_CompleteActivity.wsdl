@@ -1,0 +1,56 @@
+<definitions
+     name="ETH_DBSP_CompleteActivity"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSP_CompleteActivity/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSP_CompleteActivity/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/APPS/WF_ENGINE/COMPLETEACTIVITY/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+    <types>
+     <schema xmlns="http://www.w3.org/2001/XMLSchema">
+       <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/APPS/WF_ENGINE/COMPLETEACTIVITY/"
+               schemaLocation="APPS_WF_ENGINE_COMPLETEACTIVITY.xsd" />
+     </schema>
+    </types>
+    <message name="args_in_msg">
+        <part name="InputParameters" element="db:InputParameters"/>
+    </message>
+    <portType name="ETH_DBSP_CompleteActivity_ptt">
+        <operation name="ETH_DBSP_CompleteActivity">
+            <input message="tns:args_in_msg"/>
+        </operation>
+    </portType>
+    <binding name="ETH_DBSP_CompleteActivity_binding" type="tns:ETH_DBSP_CompleteActivity_ptt">
+    <jca:binding  />
+        <operation name="ETH_DBSP_CompleteActivity">
+      <jca:operation
+          SchemaName="APPS"
+          PackageName="WF_ENGINE"
+          ProcedureName="COMPLETEACTIVITY"
+          InteractionSpec="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_DBSP_CompleteActivity">
+        <port name="ETH_DBSP_CompleteActivity_pt" binding="tns:ETH_DBSP_CompleteActivity_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/DB/ETH_LSNA is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/DB/ETH_LSNA" UIConnectionName="SARAH_S0" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="ETH_DBSP_CompleteActivity_plt" >
+    <plt:role name="ETH_DBSP_CompleteActivity_role" >
+      <plt:portType name="tns:ETH_DBSP_CompleteActivity_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

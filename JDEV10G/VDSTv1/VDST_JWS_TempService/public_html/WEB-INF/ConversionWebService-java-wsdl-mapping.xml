@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java-wsdl-mapping xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+  http://www.ibm.com/webservices/xsd/j2ee_jaxrpc_mapping_1_1.xsd"
+  version="1.1">
+
+    <package-mapping>
+        <package-type>com.emerson.service.vdst</package-type>
+        <namespaceURI>http://service.emerson.com/vdst/tool/ConversionWebService.wsdl</namespaceURI>
+    </package-mapping>
+    <package-mapping>
+        <package-type>com.emerson.servicetypes.vdst.com.emerson.service.vdst.tool.common</package-type>
+        <namespaceURI>http://service.emerson.com/vdst/tool/common</namespaceURI>
+    </package-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.servicetypes.vdst.com.emerson.service.vdst.tool.common.SOAPException</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/common">typeNS:SOAPException</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>message</java-variable-name>
+            <xml-element-name>message</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.service.vdst.ImportCADModelRequestType</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">typeNS:ImportCADModelRequestType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>sessionID</java-variable-name>
+            <xml-element-name>SessionID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>filenames</java-variable-name>
+            <xml-element-name>Filenames</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.service.vdst.ImportOtherModelRequestType</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">typeNS:ImportOtherModelRequestType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>sessionID</java-variable-name>
+            <xml-element-name>SessionID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>filename</java-variable-name>
+            <xml-element-name>Filename</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>productID</java-variable-name>
+            <xml-element-name>ProductID</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.service.vdst.UpdateProductContentRequestType</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">typeNS:UpdateProductContentRequestType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>sessionID</java-variable-name>
+            <xml-element-name>SessionID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>productID</java-variable-name>
+            <xml-element-name>ProductID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>content</java-variable-name>
+            <xml-element-name>Content</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>contentType</java-variable-name>
+            <xml-element-name>ContentType</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.servicetypes.vdst.com.emerson.service.vdst.tool.common.FaultDetailType</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/common">typeNS:FaultDetailType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>code</java-variable-name>
+            <xml-element-name>Code</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>message</java-variable-name>
+            <xml-element-name>Message</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.service.vdst.RetesselateModelRequestType</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">typeNS:RetesselateModelRequestType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>sessionID</java-variable-name>
+            <xml-element-name>SessionID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>productID</java-variable-name>
+            <xml-element-name>ProductID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>tesselationFactor</java-variable-name>
+            <xml-element-name>TesselationFactor</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.servicetypes.vdst.com.emerson.service.vdst.tool.common.VoidType</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/common">typeNS:VoidType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.service.vdst.ImportERPDataRequestType</java-type>
+        <root-type-qname xmlns:typeNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">typeNS:ImportERPDataRequestType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>sessionID</java-variable-name>
+            <xml-element-name>SessionID</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>java.lang.String[]</java-type>
+        <anonymous-type-qname>{http://service.emerson.com/vdst/tool/ConversionWebService.wsdl}ImportCADModelRequestType&gt;Filenames[1,unbounded]</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+    </java-xml-type-mapping>
+    <exception-mapping>
+        <exception-type>com.emerson.servicetypes.vdst.com.emerson.service.vdst.tool.common.SOAPException</exception-type>
+        <wsdl-message xmlns:exMsg="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">exMsg:SOAPException</wsdl-message>
+        <constructor-parameter-order>
+             <element-name>message</element-name>
+        </constructor-parameter-order>
+    </exception-mapping>
+
+    <exception-mapping>
+        <exception-type>com.emerson.servicetypes.vdst.com.emerson.service.vdst.tool.common.FaultDetailType</exception-type>
+        <wsdl-message xmlns:exMsg="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">exMsg:FaultDetailType</wsdl-message>
+        <constructor-parameter-order>
+             <element-name>Code</element-name>
+             <element-name>Message</element-name>
+        </constructor-parameter-order>
+    </exception-mapping>
+
+    <service-interface-mapping>
+        <service-interface>com.emerson.service.vdst.ConversionWebService</service-interface>
+        <wsdl-service-name xmlns:serviceNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">serviceNS:ConversionWebService</wsdl-service-name>
+        <port-mapping>
+            <port-name>ConversionWebServicePort</port-name>
+            <java-port-name>ConversionWebServicePort</java-port-name>
+        </port-mapping>
+    </service-interface-mapping>
+    <service-endpoint-interface-mapping>
+        <service-endpoint-interface>com.emerson.service.vdst.ConversionWebServicePortType</service-endpoint-interface>
+        <wsdl-port-type xmlns:portTypeNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">portTypeNS:ConversionWebServicePortType</wsdl-port-type>
+        <wsdl-binding xmlns:bindingNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">bindingNS:ConversionWebServicePortBinding</wsdl-binding>
+        <service-endpoint-method-mapping>
+            <java-method-name>importCADModel</java-method-name>
+            <wsdl-operation>importCADModel</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:ImportCADModel</wsdl-message>
+                    <wsdl-message-part-name>SessionID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:ImportCADModel</wsdl-message>
+                    <wsdl-message-part-name>Filenames</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>importOtherModel</java-method-name>
+            <wsdl-operation>importOtherModel</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:ImportOtherModel</wsdl-message>
+                    <wsdl-message-part-name>SessionID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:ImportOtherModel</wsdl-message>
+                    <wsdl-message-part-name>Filename</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:ImportOtherModel</wsdl-message>
+                    <wsdl-message-part-name>ProductID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>retesselateModel</java-method-name>
+            <wsdl-operation>retesselateModel</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:RetesselateModel</wsdl-message>
+                    <wsdl-message-part-name>SessionID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:RetesselateModel</wsdl-message>
+                    <wsdl-message-part-name>ProductID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>float</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:RetesselateModel</wsdl-message>
+                    <wsdl-message-part-name>TesselationFactor</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>importERPData</java-method-name>
+            <wsdl-operation>importERPData</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:ImportERPData</wsdl-message>
+                    <wsdl-message-part-name>SessionID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>updateProductContent</java-method-name>
+            <wsdl-operation>updateProductContent</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:UpdateProductContent</wsdl-message>
+                    <wsdl-message-part-name>SessionID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:UpdateProductContent</wsdl-message>
+                    <wsdl-message-part-name>ProductID</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>byte[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:UpdateProductContent</wsdl-message>
+                    <wsdl-message-part-name>Content</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>com.emerson.service.vdst.ContentType</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">wsdlMsgNS:UpdateProductContent</wsdl-message>
+                    <wsdl-message-part-name>ContentType</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+        </service-endpoint-method-mapping>
+    </service-endpoint-interface-mapping>
+</java-wsdl-mapping>
+

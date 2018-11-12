@@ -1,0 +1,64 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jul 19 17:00:59 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_XMLGTW_DQ"
+         targetNamespace="http://xmlns.oracle.com/ETH_BPEL_XMLGTW_DQ"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_XMLGTWAQ_DQ/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.oracle.com/ETH_BPEL_XMLGTW_DQ"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="DequeueXMLGTW_role" name="ETH_XMLGTWAQ_DQ"
+                 partnerLinkType="ns1:DequeueXMLGTW_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="G_IN_XMLGTW_DQ" messageType="ns1:DequeueXMLGTW_msg"/>
+    <variable name="G_IN_MSGHeader" messageType="ns1:Header_msg"/>
+    <variable name="G_MsgHeader" messageType="ns1:Header_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_XMLGTW" partnerLink="ETH_XMLGTWAQ_DQ"
+             portType="ns1:DequeueXMLGTW_ptt" operation="DequeueXMLGTW"
+             variable="G_IN_XMLGTW_DQ" createInstance="yes"
+             bpelx:headerVariable="G_IN_MSGHeader"/>
+    <assign name="Assign_Header">
+      <copy>
+        <from variable="G_IN_MSGHeader" part="Header" query="/ns1:Header"/>
+        <to variable="G_MsgHeader" part="Header" query="/ns1:Header"/>
+      </copy>
+    </assign>
+  </sequence>
+</process>

@@ -1,0 +1,21 @@
+<schema targetNamespace="http://xmlns.oracle.com/xdb/AQ" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:AQ="http://xmlns.oracle.com/xdb/AQ" elementFormDefault="unqualified" attributeFormDefault="qualified">
+   <complexType name="MESSAGE_TYP">
+      <sequence>
+         <element name="SUBJECT" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="30"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="TEXT" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="80"/>
+               </restriction>
+            </simpleType>
+         </element>
+      </sequence>
+   </complexType>
+   <element name="MESSAGE_TYP" type="AQ:MESSAGE_TYP" />
+</schema>

@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="resultOutDBAdapter" guid="82591960FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1234872990996</ID>
+      <lastModifiedTime>Tue Feb 17 17:46:30 IST 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+   </versionInfo>
+   <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>resultOutDBAdapter.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/resultOutDBAdapter/">tns:resultOutDBAdapter_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Process1/resultOutDBAdapter?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Process1/resultOutDBAdapter</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="82604550FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.merge" wsdlOperation="merge" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+      </operationInfo>
+      <operationInfo guid="82604551FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.write" wsdlOperation="write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+      </operationInfo>
+      <operationInfo guid="82604552FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.insert" wsdlOperation="insert" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+      </operationInfo>
+      <operationInfo guid="82604553FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.update" wsdlOperation="update" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+      </operationInfo>
+   </operations>
+</service>

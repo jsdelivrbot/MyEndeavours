@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/InventoryConsumption.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" xmlns:ns="http://www.openapplications.org/oagis/9/IANAMIMEMediaTypes:2003" xmlns:ns1="http://www.openapplications.org/oagis/9/currencycode/54217:2001" xmlns:ns2="http://www.openapplications.org/oagis/9/languagecode/5639:1988" xmlns:ns3="http://www.openapplications.org/oagis/9/unitcode/66411:2001" xmlns:ns4="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:ns5="http://www.openapplications.org/oagis/9/codelists" xmlns:ns6="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" xmlns:ns7="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/GetInventoryConsumption.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowInventoryConsumption.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessInventoryConsumption.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeInventoryConsumption.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncInventoryConsumption.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyInventoryConsumption.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="GetInventoryConsumption">
+                <part name="Message" element="oa:GetInventoryConsumption"/>
+        </message>
+        <message name="ShowInventoryConsumption">
+                <part name="Message" element="oa:ShowInventoryConsumption"/>
+        </message>
+        <message name="ProcessInventoryConsumption">
+                <part name="Message" element="oa:ProcessInventoryConsumption"/>
+        </message>
+        <message name="AcknowledgeInventoryConsumption">
+                <part name="Message" element="oa:AcknowledgeInventoryConsumption"/>
+        </message>
+        <message name="SyncInventoryConsumption">
+                <part name="Message" element="oa:SyncInventoryConsumption"/>
+        </message>
+        <message name="NotifyInventoryConsumption">
+                <part name="Message" element="oa:NotifyInventoryConsumption"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <portType name="RequestInventoryConsumptionPortType">
+                <operation name="GetInventoryConsumption">
+                        <input message="oaws:GetInventoryConsumption"/>
+                </operation>
+                <operation name="ProcessInventoryConsumption">
+                        <input message="oaws:ProcessInventoryConsumption"/>
+                </operation>
+                <operation name="SyncInventoryConsumption">
+                        <input message="oaws:SyncInventoryConsumption"/>
+                </operation>
+                <operation name="NotifyInventoryConsumption">
+                        <input message="oaws:NotifyInventoryConsumption"/>
+                </operation>
+        </portType>
+        <portType name="ResponseInventoryConsumptionPortType">
+                <operation name="ShowInventoryConsumption">
+                        <input message="oaws:ShowInventoryConsumption"/>
+                </operation>
+                <operation name="AcknowledgeInventoryConsumption">
+                        <input message="oaws:AcknowledgeInventoryConsumption"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncInventoryConsumptionPortType">
+                <operation name="GetInventoryConsumption">
+                        <input message="oaws:GetInventoryConsumption"/>
+                        <output message="oaws:ShowInventoryConsumption"/>
+                </operation>
+                <operation name="ProcessInventoryConsumption">
+                        <input message="oaws:ProcessInventoryConsumption"/>
+                        <output message="oaws:AcknowledgeInventoryConsumption"/>
+                </operation>
+                <operation name="SyncInventoryConsumption">
+                        <input message="oaws:SyncInventoryConsumption"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyInventoryConsumption">
+                        <input message="oaws:NotifyInventoryConsumption"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestInventoryConsumptionBinding" type="oaws:RequestInventoryConsumptionPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ProcessInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseInventoryConsumptionBinding" type="oaws:ResponseInventoryConsumptionPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="AcknowledgeInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncInventoryConsumptionBinding" type="oaws:SyncInventoryConsumptionPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ProcessInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyInventoryConsumption">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9/ws/wsdl/InventoryConsumption.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestInventoryConsumptionService">
+                <port name="RequestInventoryConsumptionBinding" binding="oaws:RequestInventoryConsumptionBinding">
+                        <soap:address location="http://openapplications.org/9/ws/RequestInventoryConsumption"/>
+                </port>
+        </service>
+        <service name="ResponseInventoryConsumptionService">
+                <port name="ResponseInventoryConsumptionBinding" binding="oaws:ResponseInventoryConsumptionBinding">
+                        <soap:address location="http://openapplications.org/9/ws/ResponseInventoryConsumption"/>
+                </port>
+        </service>
+        <service name="SyncInventoryConsumptionService">
+                <port name="SyncInventoryConsumptionBinding" binding="oaws:SyncInventoryConsumptionBinding">
+                        <soap:address location="http://openapplications.org/9/ws/SyncInventoryConsumption"/>
+                </port>
+        </service>
+</definitions>

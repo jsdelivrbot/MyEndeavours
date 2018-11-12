@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\ReceiveDelivery.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/LogisticsComponents.xsd"/>
+        <xsd:element name="ReceiveDelivery" type="ReceiveDeliveryType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents a transaction for the receiving of goods or services.  It may be used to indicate receipt of goods in conjunction with a purchase order system.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Delivery document contains CHARGE and DISTRIBUTN elements at various levels to support the assessment of receiving service or compliance penalty charges.  Several large retailers that demand receiving efficiency commonly assess penalty charges for supplier deliveries that are not compliant with the retailer's policies.  Charges may be incurred for deliveries, ship units or items that contain discrepancies from what was ordered or electronically manifested, for improper labeling of items and ship units and the incorrect packing or loading of ship units.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReceiveDeliveryHeader" type="ReceiveDeliveryHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides general information about the ReceiveDelivery receipt document that is used to receive a specific quantity of material goods from a supplier.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReceiveDeliveryItem" type="ReceiveDeliveryItemType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides general information about the item inventory being delivered, including the requested and actual quantities.  This information usually directly references a line item or Delivery schedule line on a sales order, purchase order or other inventory transfer document.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReceiptDiscrepancy" type="ReceiveDeliveryDiscrepancyType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides receiving discrepancy information for the ReceiveDelivery header as a whole, for a particular ReceiptLine, for the receipt of a shipping unit as a whole  ReceiptLine, or to a particular item within the shipping unit (ReceiptUnit).</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReceiveDeliveryUnit" type="ReceiveDeliveryUnitType"/>
+        <xsd:element name="ReceiveDeliveryUnitItem" type="ReceiveDeliveryUnitItemType"/>
+        <xsd:complexType name="ReceiveDeliveryType">
+                <xsd:annotation>
+                        <xsd:documentation>ReceiveDelivery typically report on the ReceiveDeliveryItems.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ReceiveDeliveryHeader" minOccurs="0"/>
+                        <xsd:element ref="ReceiveDeliveryItem" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ReceiveDeliveryUnit" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ReceiveDeliveryHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides general information about the ReceiveDelivery document that is used to receive a specific quantity of material goods
+
+The EffectiveDateTime is the date/time the received material is posted to other business systems as being available for use.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="ShipmentHeaderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ReceivingServiceChargeAmount" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ReceivedDateTime" minOccurs="0"/>
+                                        <xsd:element ref="BillOfLadingID" minOccurs="0"/>
+                                        <xsd:element ref="Container" minOccurs="0"/>
+                                        <xsd:element ref="TrackingID" minOccurs="0"/>
+                                        <xsd:element ref="DeliverToParty" minOccurs="0"/>
+                                        <xsd:element ref="ReceivingLocation" minOccurs="0"/>
+                                        <xsd:element ref="ASNReference" minOccurs="0"/>
+                                        <xsd:element ref="ReceiptDiscrepancy" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ReceiveDeliveryItemType">
+                <xsd:annotation>
+                        <xsd:documentation>ReceiptLine represents the goods line item detail of the receipt document. THis can be used by itself for traditional receiving against Purchase Orders or other line-item oriented buisness documents, or in conjunction with the ReceiptUnit element to summarize ship unit item detail at line level</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="ShipItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Status" minOccurs="0"/>
+                                        <xsd:element ref="ReceivingServiceChargeAmount" minOccurs="0"/>
+                                        <xsd:element ref="PackingSlipQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReceivedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReturnedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReceiptRoutingCode" minOccurs="0"/>
+                                        <xsd:group ref="CatchWeightGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ReceiveDeliveryDiscrepancyType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies discrepancy information for the receipt.
+
+The Type identifies the discrepancy type. 
+
+The ReasonCode Identifies the reason for the discrepancy.
+
+If the discrepancy applies to specific quantities of the item, then the quantity can be specified. If no quantity is specified, the discrepancy applies to the inventory occurence as a whole</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="Type" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is an exception classification that codifies the general problem encountered during a business process, such as receiving goods</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ReasonCode" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the reason for the discrepancy.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ItemQuantity" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">If the discrepancy applies to specific quantities of the item, then the quantity can be specified. If no quantity is specified, the discrepancy applies to the inventory occurence as a whole</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ReceiveDeliveryUnitType">
+                <xsd:annotation>
+                        <xsd:documentation>Provides information that identifies and describes a particular shipping unit being received.  This information usually directly references a DeliveryUnit on an OAGIS Delivery message or other shipping   document.  May also be used to provide context to adequately detail inventory discrepancies or compliance charges for a particular shipping unit</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="ShipUnitBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Container" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ReceiveDeliveryUnitItem" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ReceiveDeliveryUnitItemType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides information about a specific quantity of goods inventory contained within a shipping unit. RECEIPTITM is used to provide a detailed breakdown of RECEIPTLN inventory for inventory discrepancies or compliance charges for a particular shipping unit</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="ShipItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Status" minOccurs="0"/>
+                                        <xsd:element ref="PackingSlipQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReceivedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReturnedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReceiptRoutingCode" minOccurs="0"/>
+                                        <xsd:group ref="CatchWeightGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

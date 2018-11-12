@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="BPELProcess2" src="BPELProcess2.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="File_WriteHandlerError">
+            <property name="wsdlLocation">File_WriteHandlerError.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="RejectionMessage">
+            <property name="wsdlLocation">RejectionMessageRef.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

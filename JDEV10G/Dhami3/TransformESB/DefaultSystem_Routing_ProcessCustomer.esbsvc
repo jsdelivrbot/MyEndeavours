@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Routing_ProcessCustomer" guid="572885F05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routing_ProcessCustomer" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1217922120194</ID>
+      <lastModifiedTime>Tue Aug 05 13:12:00 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>DefaultSystem_Routing_ProcessCustomer.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/DefaultSystem">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/TransformESB/Routing_ProcessCustomer?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/TransformESB/Routing_ProcessCustomer</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="57346CD05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routing_ProcessCustomer.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbprocesscustomer" element="tns:ESBProcessCustomerRequest"/>
+         <routingRules>
+            <routingRule guid="63E9D8B05CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="4565A6D05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteToFile.Write" serviceGUID="45635CE05CA211DDBFBF7949E8E58CEB" serviceQName="TransformESB.WriteToFile" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='DeleteCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+               <transformation>
+                  <xslFileURL>ESBProcessCustomerRequest_To_DeleteRecordRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="75D36AF05CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C572FB805CA111DDBFBF7949E8E58CEB" qname="TransformESB.CreateRecordsBPEL.process" serviceGUID="C5695E905CA111DDBFBF7949E8E58CEB" serviceQName="TransformESB.CreateRecordsBPEL" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='CreateCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+               <transformation>
+                  <xslFileURL>ESBProcessCustomerRequest_To_CreateRecordsRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="94ED26105CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="D91FE8A05CA111DDBFBF7949E8E58CEB" qname="TransformESB.UpdateRecordsBPEL.process" serviceGUID="D91672C05CA111DDBFBF7949E8E58CEB" serviceQName="TransformESB.UpdateRecordsBPEL" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='UpdateCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+               <transformation>
+                  <xslFileURL>ESBProcessCustomerRequest_To_UpdateRecordRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="CAA95C9062C111DDBFC7DF068A717A51" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="A58CC82062C111DDBFC7DF068A717A51" qname="TransformESB.DeleteRecordBPEL.process" serviceGUID="A580E14162C111DDBFC7DF068A717A51" serviceQName="TransformESB.DeleteRecordBPEL" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='DeleteCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+               <transformation>
+                  <xslFileURL>ESBProcessCustomerRequest_To_DeleteRecordRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

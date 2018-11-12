@@ -1,0 +1,66 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Oct 09 17:30:03 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_FetchDrawingFiles"
+         targetNamespace="http://xmlns.oracle.com/VDST_BPEL_FetchDrawingFiles"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/VDST_FTPGET_DrawingFilename/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.oracle.com/VDST_BPEL_FetchDrawingFiles"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Get_role" name="VDST_FTPGET_DrawingFilename"
+                 partnerLinkType="ns1:Get_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_IN_FTPFile" messageType="ns1:Get_msg"/>
+    <variable name="G_IN_FTPFileName" messageType="ns3:InboundHeader_msg"/>
+    <variable name="G_IN_FileName" type="xsd:string"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_FTPFileDetails"
+             partnerLink="VDST_FTPGET_DrawingFilename" portType="ns1:Get_ptt"
+             operation="Get" variable="G_IN_FTPFile" createInstance="yes"
+             bpelx:headerVariable="G_IN_FTPFileName"/>
+    <assign name="Assign_FileName">
+      <copy>
+        <from variable="G_IN_FTPFileName" part="inboundHeader"
+              query="/ns3:InboundFTPHeaderType/ns3:fileName"/>
+        <to variable="G_IN_FileName"/>
+      </copy>
+    </assign>
+  </sequence>
+</process>

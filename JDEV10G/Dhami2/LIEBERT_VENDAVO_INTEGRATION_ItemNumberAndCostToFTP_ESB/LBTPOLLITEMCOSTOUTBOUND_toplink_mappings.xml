@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.4.0) (Build 080602)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>LBT_POLL_ITEM_COST_OUTBOUND</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>LBTPOLLITEMCOSTOUTBOUND.ItemCostOutbound</opm:class>
+         <opm:alias>ItemCostOutbound</opm:alias>
+         <opm:primary-key>
+            <opm:field table="ITEM_COST_OUTBOUND" name="ITEM_NBR" xsi:type="opm:column"/>
+            <opm:field table="ITEM_COST_OUTBOUND" name="OPERATING_UNIT_CODE" xsi:type="opm:column"/>
+            <opm:field table="ITEM_COST_OUTBOUND" name="COST_TYPE" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="LBT_POLL_ITEM_COST_OUTBOUND" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+				   <toplink:call xsi:type="toplink:sql-call">
+                     <toplink:sql>SELECT c.ITEM_NBR, c.OPERATING_UNIT_CODE, c.COST_TYPE,c.UNIT_COST,c.MATERIAL_COST_ELEMENT,  c.CURRENCY_CODE, 
+                                 c.CREATION_DATE ,c.EFFECTIVE_START_DATE,c.EFFECTIVE_END_DATE,c.PROCESS_FLAG
+                                  FROM  ITEM_COST_OUTBOUND c, app_vendavo_prod.ITEM_NUMBER_OUTBOUND i
+                                  WHERE c. PROCESS_FLAG = 'N'
+                                    AND c.ITEM_NBR = i.ITEM_NBR
+                      AND i.PROCESS_FLAG = 'Y'
+					  </toplink:sql>
+                  </toplink:call>
+                  <toplink:reference-class>LBTPOLLITEMCOSTOUTBOUND.ItemCostOutbound</toplink:reference-class>
+                   <toplink:refresh>true</toplink:refresh>		  
+		   <toplink:remote-refresh>true</toplink:remote-refresh>		  
+		   <toplink:cache-usage>primary-key</toplink:cache-usage>		  
+		   <toplink:lock-mode>lock-no-wait</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+               <opm:query name="findAllItemCostOutbound" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>LBTPOLLITEMCOSTOUTBOUND.ItemCostOutbound</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                    <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+			 <toplink:delete-query xsi:type="toplink:delete-object-query">
+               <toplink:call xsi:type="toplink:sql-call">
+                  <toplink:sql>update app_vendavo_prod.ITEM_COST_OUTBOUND  set PROCESS_FLAG ='Y' 
+                    where ITEM_NBR=#ITEM_NBR
+				  </toplink:sql>
+               </toplink:call>
+            </toplink:delete-query>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemNbr</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="ITEM_NBR" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>operatingUnitCode</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="OPERATING_UNIT_CODE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>costType</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="COST_TYPE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>unitCost</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="UNIT_COST" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>materialCostElement</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="MATERIAL_COST_ELEMENT" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>currencyCode</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="CURRENCY_CODE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>creationDate</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="CREATION_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>effectiveStartDate</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="EFFECTIVE_START_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>effectiveEndDate</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="EFFECTIVE_END_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>processFlag</opm:attribute-name>
+               <opm:field table="ITEM_COST_OUTBOUND" name="PROCESS_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="ITEM_COST_OUTBOUND"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+</toplink:object-persistence>

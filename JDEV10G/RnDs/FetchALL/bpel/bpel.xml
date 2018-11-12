@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="FetchALL" src="FetchALL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="fetchAll">
+            <property name="wsdlLocation">fetchAll.wsdl</property>
+            <property name="retryMaxCount">4</property>
+            <property name="retryInterval">2</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="fetchAll">
+            <property name="portType">Get_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

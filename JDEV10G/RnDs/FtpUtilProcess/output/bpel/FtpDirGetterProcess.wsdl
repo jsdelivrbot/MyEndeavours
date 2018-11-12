@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="FtpDirGetterProcess"
+             targetNamespace="http://services.emerson.com"
+             xmlns:tns="http://services.emerson.com"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:format="http://schemas.xmlsoap.org/wsdl/formatbinding/"
+             xmlns:java="http://schemas.xmlsoap.org/wsdl/java/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <types>
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://services.emerson.com"
+            xmlns="http://www.w3.org/2001/XMLSchema"/>
+  </types>
+  <message name="FtpDirGetterProcessRequestMessage">
+    <part name="jndi" type="xsd:string"/>
+    <part name="dir" type="xsd:string"/>
+    <part name="mode" type="xsd:string"/>
+    <part name="host" type="xsd:string"/>
+    <part name="uid" type="xsd:string"/>
+    <part name="pwd" type="xsd:string"/>
+  </message>
+  <message name="FtpModifyGetterProcessRequestMessage">
+    <part name="jndi" type="xsd:string"/>
+    <part name="dir" type="xsd:string"/>
+    <part name="mode" type="xsd:string"/>
+  </message>
+  <message name="FtpDirGetterProcessResponseMessage">
+    <part name="dirListing" type="xsd:string"/>
+  </message>
+  <portType name="FtpDirGetterProcess">
+    <operation name="getDirectoryListing">
+      <input message="tns:FtpDirGetterProcessRequestMessage"/>
+      <output message="tns:FtpDirGetterProcessResponseMessage"/>
+    </operation>
+    <operation name="getModifiedListing">
+      <input message="tns:FtpModifyGetterProcessRequestMessage"/>
+      <output message="tns:FtpDirGetterProcessResponseMessage"/>
+    </operation>
+  </portType>
+  <binding name="JavaBinding" type="tns:FtpDirGetterProcess">
+    <java:binding/>
+    <format:typeMapping encoding="Java" style="Java">
+      <format:typeMap typeName="xsd:string" formatType="java.lang.String"/>
+    </format:typeMapping>
+    <operation name="getDirectoryListing">
+      <java:operation methodName="getDirectoryListing"/>
+      <input/>
+      <output/>
+    </operation>
+    <operation name="getModifiedListing">
+      <java:operation methodName="getModifiedListing"/>
+      <input/>
+      <output/>
+    </operation>
+  </binding>
+  <service name="FtpDirGetterProcess">
+    <port name="JavaPort" binding="tns:JavaBinding">
+      <java:address className="com.emerson.services.FtpDirGetterProcess"/>
+    </port>
+  </service>
+  <plnk:partnerLinkType name="FtpDirGetterProcess">
+    <plnk:role name="FtpDirGetterProcess_Provider">
+      <plnk:portType name="tns:FtpDirGetterProcess"/>
+    </plnk:role>
+  </plnk:partnerLinkType>
+</definitions>
+

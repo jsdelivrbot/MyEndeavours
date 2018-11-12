@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="PollFTP_ClosetMaid-JB" src="PollFTP_ClosetMaid-JB.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="Poll_ClosetMaid_FTP">
+            <property name="wsdlLocation">Poll_ClosetMaid_FTP.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="Poll_ClosetMaid_FTP">
+            <property name="InFTPDIR" type="LogicalDirectory">VSP</property>
+            <property name="portType">Get_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

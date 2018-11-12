@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="MyProcess"
+        targetNamespace="http://services.training.com"
+        xmlns:tns="http://services.training.com"
+        xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+        xmlns:format="http://schemas.xmlsoap.org/wsdl/formatbinding/"
+        xmlns:java="http://schemas.xmlsoap.org/wsdl/java/"        
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        >
+        
+        
+    <types>  
+        <schema attributeFormDefault="qualified" 
+                elementFormDefault="qualified" 
+                targetNamespace="http://services.training.com" 
+                xmlns="http://www.w3.org/2001/XMLSchema"/>
+    </types>
+    
+  <message name="MyProcessRequestMessage">
+    <part name="title" type="xsd:string"/>      
+    <part name="name" type="xsd:string"/>  
+  </message>
+  <message name="MyProcessResponseMessage">
+    <part name="greeting" type="xsd:string"/>
+  </message>
+
+    <portType name="MyProcess">
+    <operation name="hello">
+      <input message="tns:MyProcessRequestMessage"/>
+      <output message="tns:MyProcessResponseMessage"/>
+    </operation>   
+  </portType>
+  
+  <binding name="JavaBinding" type="tns:MyProcess">
+    <java:binding/>
+    <format:typeMapping encoding="Java" style="Java">
+      <format:typeMap typeName="xsd:string" formatType="java.lang.String" />
+    </format:typeMapping>
+    <operation name="hello">
+      <java:operation methodName="hello"/>
+      <input/>
+      <output/>
+    </operation>     
+  </binding>      
+
+
+  <service name="MyProcess">
+    <port name="JavaPort" binding="tns:JavaBinding">
+      <java:address className="com.training.services.HelloProgram"/>
+    </port>
+  </service>
+
+
+  <plnk:partnerLinkType name="MyProcess">
+    <plnk:role name="MyProcess_Provider">
+      <plnk:portType name="tns:MyProcess"/>
+    </plnk:role>
+  </plnk:partnerLinkType>
+
+</definitions>

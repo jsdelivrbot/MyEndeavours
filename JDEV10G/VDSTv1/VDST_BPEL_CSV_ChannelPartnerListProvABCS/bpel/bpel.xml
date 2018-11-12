@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="VDST_BPEL_CSV_ChannelPartnerListProvABCS" src="VDST_BPEL_CSV_ChannelPartnerListProvABCS.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="VDST_JMSQ_DEQ_ChannelPartnerList_CSV">
+            <property name="wsdlLocation">VDST_JMSQ_DEQ_ChannelPartnerList_CSV.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ConversionWebService">
+            <property name="wsdlLocation">ConversionWebService.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="VDST_DBINS_ChannelPartnerList_Staging">
+            <property name="wsdlLocation">VDST_DBINS_ChannelPartnerList_Staging.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CSF_ICoE_ErrorHandler">
+            <property name="wsdlLocation">http://soa-stg.emerson.com:8800/orabpel/default/CSF_ICoE_ErrorHandler/CSF_ICoE_ErrorHandler?wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="VDST_JMSQ_DEQ_ChannelPartnerList_CSV">
+            <property name="destinationJNDI">jms/vdst_q/cp/CPL_ProvABCS_CSV</property>
+            <property name="factoryJNDI">eis/VDST/QueueConnectionFactory</property>
+            <property name="portType">Consume_Message_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

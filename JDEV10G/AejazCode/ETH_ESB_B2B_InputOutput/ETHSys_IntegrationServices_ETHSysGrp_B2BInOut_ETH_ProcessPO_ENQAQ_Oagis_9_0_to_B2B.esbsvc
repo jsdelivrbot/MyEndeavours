@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B" guid="97736390097C11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="AQ" typeDescription="oracle.tip.esb.console.servicetype.outboundaqadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1271412048134</ID>
+      <lastModifiedTime>Fri Apr 16 10:00:48 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B/">tns:Enqueue_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="977D0080097C11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B.Enqueue" wsdlOperation="Enqueue" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:ProcessPurchaseOrder"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="cacheConnections" value="false"/>
+   </endpointProperties>
+</service>

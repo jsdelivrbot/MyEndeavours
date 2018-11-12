@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ETH_BPEL_XMLGTW_TEST" src="ETH_BPEL_XMLGTW_TEST.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ETH_GETFL_RAW">
+            <property name="wsdlLocation">ETH_GETFL_RAW.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ETH_JMSENQ_CHANGE">
+            <property name="wsdlLocation">ETH_JMSENQ_CHANGE.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ETH_JMSENQ_PROCESS">
+            <property name="wsdlLocation">ETH_JMSENQ_PROCESS.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ETH_GETFL_RAW">
+            <property name="INPUT_FOLDER" type="LogicalDirectory">/ftpdata/elshas1/lsna/infile/850</property>
+            <property name="ARCHIVE_FOLDER" type="LogicalArchiveDirectory">/ftpdata/elshas1/lsna/archive/850</property>
+            <property name="portType">Read_RAW_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

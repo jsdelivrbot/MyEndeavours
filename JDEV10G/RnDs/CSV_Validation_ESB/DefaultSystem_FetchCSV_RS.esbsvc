@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="FetchCSV_RS" guid="530456E0228D11DE8F1BA9E5E980B820" qname="DefaultSystem.FetchCSV_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service FetchCSV</description>
+   <versionInfo>
+      <ID>1239097402024</ID>
+      <lastModifiedTime>Tue Apr 07 15:13:22 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_CSV_Validation_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="8E8E403019F611DEAF48EB13DD37ED61" qname="DefaultSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>FetchCSV.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/FetchCSV/">tns:Read_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/DefaultSystem/FetchCSV_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://inedec-mlap-45.emrcorp.local:80/event/DefaultSystem/FetchCSV_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="530456E1228D11DE8F1BA9E5E980B820" qname="DefaultSystem.FetchCSV_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+         <request validate="true" xmlns:tns="http://schema.emerson.com/native/FetchCSV" element="tns:employees"/>
+         <routingRules>
+            <routingRule guid="B5E01391229B11DEBFEC91957C4BEA29" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="FC3D1F40229111DE8F1BA9E5E980B820" qname="DefaultSystem.WriteFile.Write" serviceGUID="FC3AAE40229111DE8F1BA9E5E980B820" serviceQName="DefaultSystem.WriteFile" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

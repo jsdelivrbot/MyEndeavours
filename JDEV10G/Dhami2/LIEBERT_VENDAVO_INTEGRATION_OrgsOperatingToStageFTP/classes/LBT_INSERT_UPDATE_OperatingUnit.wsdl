@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="LBT_INSERT/UPDATE_OperatingUnit"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_INSERT_UPDATE_OperatingUnit/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_INSERT_UPDATE_OperatingUnit/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTUPDATEOperatingUnit"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTUPDATEOperatingUnit"
+                schemaLocation="LBTINSERTUPDATEOperatingUnit_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EmrOperatingUnit1Collection_msg">
+        <part name="EmrOperatingUnit1Collection" element="top:EmrOperatingUnit1Collection"/>
+    </message>
+
+
+    <portType name="LBT_INSERT/UPDATE_OperatingUnit_ptt">
+        <operation name="merge">
+            <input message="tns:EmrOperatingUnit1Collection_msg"/>
+        </operation>
+        <operation name="write">
+            <input message="tns:EmrOperatingUnit1Collection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="LBT_INSERT/UPDATE_OperatingUnit_binding" type="tns:LBT_INSERT/UPDATE_OperatingUnit_ptt">
+        <jca:binding />
+        <operation name="merge">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="LBTINSERTUPDATEOperatingUnit.EmrOperatingUnit1"
+                DmlType="merge"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="LBTINSERTUPDATEOperatingUnit_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="write">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="LBTINSERTUPDATEOperatingUnit.EmrOperatingUnit1"
+                DmlType="write"
+                MappingsMetaDataURL="LBTINSERTUPDATEOperatingUnit_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/ENPDW is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="LBT_INSERT/UPDATE_OperatingUnit">
+        <port name="LBT_INSERT/UPDATE_OperatingUnit_pt" binding="tns:LBT_INSERT/UPDATE_OperatingUnit_binding">
+            <jca:address location="eis/DB/ENPDW"
+                UIConnectionName="ENPDW"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.Oracle10Platform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//126.3.10.166:1521/enpdw"
+                mcf.UserName="app_vendavo"
+                mcf.Password="B58D554E01A4451DCF9564B4EF3228B23CD1AC32AC1D5BD6"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="LBT_INSERT/UPDATE_OperatingUnit_plt" >
+        <plt:role name="LBT_INSERT/UPDATE_OperatingUnit_role" >
+            <plt:portType name="tns:LBT_INSERT/UPDATE_OperatingUnit_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

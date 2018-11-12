@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_PUSHAQ_LBTXML" guid="F37200C05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_PUSHAQ_LBTXML" status="DISABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1274146355627</ID>
+      <lastModifiedTime>Tue May 18 01:32:35 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <parent guid="5FF0ECD05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_PUSHAQ_LBTXML.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_PUSHAQ_LBTXML/">tns:Produce_LBTXML_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETH_Temp/ETH_PUSHAQ_LBTXML?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa.emerson.com:8800/event/ETH_Temp/ETH_PUSHAQ_LBTXML</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="F3744AB05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_PUSHAQ_LBTXML.Produce_LBTXML" wsdlOperation="Produce_LBTXML" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" element="tns:CustomLiebertPO"/>
+      </operationInfo>
+   </operations>
+</service>

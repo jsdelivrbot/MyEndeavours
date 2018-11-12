@@ -1,0 +1,39 @@
+<schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/pcbpel/errorHandling"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/errorHandling" xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="FatalErrorMessage" type="tns:FatalErrorMessageType"/>
+    <complexType name="FatalErrorMessageType">
+        <sequence>
+            <element name="Originator" type="string"/>
+            <element name="Reason" type="string"/>
+            <element name="Exception" type="string"/>
+            <element name="StackTrace" type="string"/>
+        </sequence>
+    </complexType>
+    <element name="RejectedMessage" type="tns:RejectedMessageType"/>
+    <complexType name="RejectedMessageType">
+        <sequence>
+            <element name="MessageHeader" type="base64Binary"/>
+            <element name="MessagePayload" type="base64Binary"/>
+            <element name="RejectionReason" type="string"/>
+            <element name="AdditionalProperties" type="tns:AdditionalPropsType"/>
+        </sequence>
+        <attribute name="RejectionId" type="string"/>
+        <attribute name="BatchId" type="string"/>
+        <attribute name="BatchInfo" type="string"/>
+        <attribute name="PrimaryKey" type="string"/>
+        <attribute name="MessageOriginReference" type="string"/>
+    </complexType>
+    <complexType name="AdditionalPropsType">
+        <sequence>
+            <element name="RejectionProp" type="tns:RejectionPropType" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="RejectionPropType">
+        <simpleContent>
+            <extension base="string">
+                <attribute name="name" type="ID" use="required"/>
+                <attribute name="value" type="string" use="required"/>
+            </extension>
+        </simpleContent>
+    </complexType>
+</schema>

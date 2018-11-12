@@ -1,0 +1,50 @@
+<definitions
+     name="VDST_FILEPUT_DebugFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/VDST_FILEPUT_DebugFile/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/VDST_FILEPUT_DebugFile/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://schemas.emerson.com/common/envelope"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="EMR_CTE.xsd" />
+      </schema>
+    </types>
+    <message name="envelope_msg">
+        <part name="envelope" element="imp1:envelope"/>
+    </message>
+    <portType name="Write_ptt">
+        <operation name="Write">
+            <input message="tns:envelope_msg"/>
+        </operation>
+    </portType>
+    <binding name="Write_binding" type="tns:Write_ptt">
+    <jca:binding  />
+        <operation name="Write">
+      <jca:operation
+          PhysicalDirectory="D:\oracle\Files\Out"
+          InteractionSpec="oracle.tip.adapter.file.outbound.FileInteractionSpec"
+          FileNamingConvention="VDST_ESB_CatalogPricingEBS%SEQ%"
+          NumberMessages="1"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="VDST_FILEPUT_DebugFile">
+        <port name="Write_pt" binding="tns:Write_binding">
+      <jca:address location="eis/FileAdapter" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Write_plt" >
+    <plt:role name="Write_role" >
+      <plt:portType name="tns:Write_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

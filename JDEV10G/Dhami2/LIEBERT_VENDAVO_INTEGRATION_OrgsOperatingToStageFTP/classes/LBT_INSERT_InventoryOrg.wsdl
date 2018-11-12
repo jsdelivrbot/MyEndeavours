@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="LBT_INSERT_InventoryOrg"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_INSERT_InventoryOrg/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_INSERT_InventoryOrg/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTInventoryOrg"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTInventoryOrg"
+                schemaLocation="LBTINSERTInventoryOrg_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EmrInventoryOrgCollection_msg">
+        <part name="EmrInventoryOrgCollection" element="top:EmrInventoryOrgCollection"/>
+    </message>
+
+
+    <portType name="LBT_INSERT_InventoryOrg_ptt">
+        <operation name="insert">
+            <input message="tns:EmrInventoryOrgCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="LBT_INSERT_InventoryOrg_binding" type="tns:LBT_INSERT_InventoryOrg_ptt">
+        <jca:binding />
+        <operation name="insert">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="LBTINSERTInventoryOrg.EmrInventoryOrg"
+                DmlType="insert"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="LBTINSERTInventoryOrg_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/ENPDW is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="LBT_INSERT_InventoryOrg">
+        <port name="LBT_INSERT_InventoryOrg_pt" binding="tns:LBT_INSERT_InventoryOrg_binding">
+            <jca:address location="eis/DB/ENPDW"
+                UIConnectionName="ENPDW"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.Oracle10Platform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//126.3.10.166:1521/enpdw"
+                mcf.UserName="app_vendavo"
+                mcf.Password="B58D554E01A4451DCF9564B4EF3228B23CD1AC32AC1D5BD6"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="LBT_INSERT_InventoryOrg_plt" >
+        <plt:role name="LBT_INSERT_InventoryOrg_role" >
+            <plt:portType name="tns:LBT_INSERT_InventoryOrg_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

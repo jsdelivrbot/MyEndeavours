@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="LBT_Poll_CONTROLtable"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_Poll_CONTROLtable/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_Poll_CONTROLtable/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable"
+                schemaLocation="LBTPollCONTROLtable_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EmrFusionChangeControlCollection_msg">
+        <part name="EmrFusionChangeControlCollection" element="top:EmrFusionChangeControlCollection"/>
+    </message>
+
+    <portType name="LBT_Poll_CONTROLtable_ptt">
+        <operation name="receive">
+            <input message="tns:EmrFusionChangeControlCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="LBT_Poll_CONTROLtable_binding" type="tns:LBT_Poll_CONTROLtable_ptt">
+        <pc:inbound_binding/>
+        <operation name="receive">
+            <jca:operation
+                ActivationSpec="oracle.tip.adapter.db.DBActivationSpec"
+
+                DescriptorName="LBTPollCONTROLtable.EmrFusionChangeControl"
+                QueryName="LBT_Poll_CONTROLtable"
+                PollingStrategyName="LogicalDeletePollingStrategy"
+                MarkReadFieldName="PROCESSED_FLAG"
+                MarkReadValue="Y"
+                SequencingFieldName="TABLE_NAME"
+                MaxRaiseSize="10000"
+                MaxTransactionSize="100"
+                PollingInterval="600"
+                NumberOfThreads="1"
+                UseBatchDestroy="false"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="LBTPollCONTROLtable_toplink_mappings.xml" />
+        <input/>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if jdbc/DB/Liebert_Hub is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="LBT_Poll_CONTROLtable">
+        <port name="LBT_Poll_CONTROLtable_pt" binding="tns:LBT_Poll_CONTROLtable_binding">
+            <jca:address location="jdbc/DB/Liebert_Hub"
+                UIConnectionName="itemHub"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.Oracle9Platform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//enpushntora01.na.enpad.org:1521/enps"
+                mcf.UserName="fusion"
+                mcf.Password="631F097942148D7DF48C54F2DE1BBC2B"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="LBT_Poll_CONTROLtable_plt" >
+        <plt:role name="LBT_Poll_CONTROLtable_role" >
+            <plt:portType name="tns:LBT_Poll_CONTROLtable_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

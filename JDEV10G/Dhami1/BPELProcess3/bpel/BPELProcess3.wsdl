@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="BPELProcess3"
+             targetNamespace="http://xmlns.oracle.com/BPELProcess3"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/BPELProcess3"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:rej="http://xmlns.oracle.com/pcbpel/rejectionHandler">
+             
+     <import namespace="http://xmlns.oracle.com/pcbpel/rejectionHandler" location="http://localhost:8888/orabpel/xmllib/jca/RejectionMessage.wsdl"/>
+
+	
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="BPELProcess3">
+		<plnk:role name="BPELProcess3Provider">
+			<plnk:portType name="rej:RejectionHandlerPortType"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</definitions>

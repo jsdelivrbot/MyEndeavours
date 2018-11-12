@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.gssamerica.com/mdm/errorhandler" elementFormDefault="unqualified" targetNamespace="http://www.gssamerica.com/mdm/errorhandler" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:complexType name="ErrorHandlerRequestType">
+      <xs:sequence>
+		<xs:element name="TransactionID" type="xs:string" />
+        <xs:element minOccurs="0" name="ProcessID" type="xs:string" />
+        <xs:element name="ProcessName" type="xs:string" />
+		<xs:element name="Source" type="xs:string" />
+        <xs:element name="ErrorID" type="xs:string" />
+        <xs:element name="Environment" type="xs:string" />
+		<xs:element name="Type" type="xs:string" />
+        <xs:element name="Action" type="xs:string" />
+        <xs:element name="ErrorMessage" type="xs:string" />
+        <xs:element name="ErrorMessageCode" type="xs:string" />
+        <xs:element minOccurs="0" name="StackTrace" type="xs:string" />
+        <xs:element minOccurs="0" name="Destination" type="xs:string" />
+        <xs:element minOccurs="0" name="ExchangeFormat" type="xs:string" />
+        <xs:element minOccurs="0" name="BusinessKey" type="xs:string" />
+        <xs:element minOccurs="0" name="RemediationQueue" type="xs:string" />
+        <xs:element minOccurs="0" name="InputData" type="xs:string" />
+		<xs:element minOccurs="0" name="Data" type="xs:anyType" />
+        <xs:element minOccurs="0" name="GroupID" type="xs:string" />
+        <xs:element name="createdDateTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  <xs:element name="ErrorHandlerRequests">
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element name="ErrorHandlerRequest" type="ErrorHandlerRequestType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

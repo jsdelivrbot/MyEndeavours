@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/SalesOrder.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CancelSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ChangeSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetListSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ListSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/RespondSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/UpdateSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncSalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifySalesOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="AcknowledgeSalesOrder">
+                <part name="Message" element="oa:AcknowledgeSalesOrder"/>
+        </message>
+        <message name="CancelSalesOrder">
+                <part name="Message" element="oa:CancelSalesOrder"/>
+        </message>
+        <message name="ChangeSalesOrder">
+                <part name="Message" element="oa:ChangeSalesOrder"/>
+        </message>
+        <message name="GetSalesOrder">
+                <part name="Message" element="oa:GetSalesOrder"/>
+        </message>
+        <message name="ShowSalesOrder">
+                <part name="Message" element="oa:ShowSalesOrder"/>
+        </message>
+        <message name="GetListSalesOrder">
+                <part name="Message" element="oa:GetListSalesOrder"/>
+        </message>
+        <message name="ListSalesOrder">
+                <part name="Message" element="oa:ListSalesOrder"/>
+        </message>
+        <message name="ProcessSalesOrder">
+                <part name="Message" element="oa:ProcessSalesOrder"/>
+        </message>
+        <message name="RespondSalesOrder">
+                <part name="Message" element="oa:RespondSalesOrder"/>
+        </message>
+        <message name="UpdateSalesOrder">
+                <part name="Message" element="oa:UpdateSalesOrder"/>
+        </message>
+        <message name="SyncSalesOrder">
+                <part name="Message" element="oa:SyncSalesOrder"/>
+        </message>
+        <message name="NotifySalesOrder">
+                <part name="Message" element="oa:NotifySalesOrder"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <message name="NewMessage"/>
+        <message name="NewMessage2"/>
+        <message name="NewMessage3"/>
+        <portType name="RequestSalesOrderPortType">
+                <operation name="ProcessSalesOrder">
+                        <input message="oaws:ProcessSalesOrder"/>
+                </operation>
+                <operation name="ChangeSalesOrder">
+                        <input message="oaws:ChangeSalesOrder"/>
+                </operation>
+                <operation name="CancelSalesOrder">
+                        <input message="oaws:CancelSalesOrder"/>
+                </operation>
+                <operation name="GetSalesOrder">
+                        <input message="oaws:GetSalesOrder"/>
+                </operation>
+                <operation name="GetListSalesOrder">
+                        <input message="oaws:GetListSalesOrder"/>
+                </operation>
+                <operation name="UpdateSalesOrder">
+                        <input message="oaws:UpdateSalesOrder"/>
+                </operation>
+                <operation name="SyncSalesOrder">
+                        <input message="oaws:SyncSalesOrder"/>
+                </operation>
+                <operation name="NotifySalesOrder">
+                        <input message="oaws:NotifySalesOrder"/>
+                </operation>
+        </portType>
+        <portType name="ResponseSalesOrderPortType">
+                <operation name="AcknowledgeSalesOrder">
+                        <input message="oaws:AcknowledgeSalesOrder"/>
+                </operation>
+                <operation name="RespondSalesOrder">
+                        <input message="oaws:RespondSalesOrder"/>
+                </operation>
+                <operation name="ShowSalesOrder">
+                        <input message="oaws:ShowSalesOrder"/>
+                </operation>
+                <operation name="ListSalesOrder">
+                        <input message="oaws:ListSalesOrder"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncSalesOrderPortType">
+                <operation name="ProcessSalesOrder">
+                        <input message="oaws:ProcessSalesOrder"/>
+                        <output message="oaws:AcknowledgeSalesOrder"/>
+                </operation>
+                <operation name="ChangeSalesOrder">
+                        <input message="oaws:ChangeSalesOrder"/>
+                        <output message="oaws:RespondSalesOrder"/>
+                </operation>
+                <operation name="CancelSalesOrder">
+                        <input message="oaws:CancelSalesOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="GetSalesOrder">
+                        <input message="oaws:GetSalesOrder"/>
+                        <output message="oaws:ShowSalesOrder"/>
+                </operation>
+                <operation name="GetListSalesOrder">
+                        <input message="oaws:GetListSalesOrder"/>
+                        <output message="oaws:ListSalesOrder"/>
+                </operation>
+                <operation name="UpdateSalesOrder">
+                        <input message="oaws:UpdateSalesOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="SyncSalesOrder">
+                        <input message="oaws:SyncSalesOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifySalesOrder">
+                        <input message="oaws:NotifySalesOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestSalesOrderBinding" type="oaws:RequestSalesOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ChangeSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="CancelSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetListSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="UpdateSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifySalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseSalesOrderBinding" type="oaws:ResponseSalesOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="RespondSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ListSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncSalesOrderBinding" type="oaws:SyncSalesOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ChangeSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CancelSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetListSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="UpdateSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncSalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifySalesOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SalesOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestSalesOrderService">
+                <port name="RequestSalesOrderBinding" binding="oaws:RequestSalesOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestSalesOrder"/>
+                </port>
+        </service>
+        <service name="ResponseSalesOrderService">
+                <port name="ResponseSalesOrderBinding" binding="oaws:ResponseSalesOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseSalesOrder"/>
+                </port>
+        </service>
+        <service name="SyncSalesOrderService">
+                <port name="SyncSalesOrderBinding" binding="oaws:SyncSalesOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncSalesOrder"/>
+                </port>
+        </service>
+</definitions>

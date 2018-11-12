@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="ETH_DBSEL_ItemKey"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHDBSELItemKey"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHDBSELItemKey"
+                schemaLocation="ETHDBSELItemKey_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EcxDoclogsCollection_msg">
+        <part name="EcxDoclogsCollection" element="top:EcxDoclogsCollection"/>
+    </message>
+
+    <message name="ETH_DBSEL_ItemKeySelect_DocNumber_inparameters">
+        <part name="ETH_DBSEL_ItemKeySelect_DocNumber_inparameters" element="top:ETH_DBSEL_ItemKeySelect_DocNumberInputParameters"/>
+    </message>
+    <message name="EcxDoclogs_msg">
+        <part name="EcxDoclogs" element="top:EcxDoclogs"/>
+    </message>
+
+    <portType name="ETH_DBSEL_ItemKey_ptt">
+        <operation name="ETH_DBSEL_ItemKeySelect_DocNumber">
+            <input message="tns:ETH_DBSEL_ItemKeySelect_DocNumber_inparameters"/>
+            <output message="tns:EcxDoclogsCollection_msg"/>
+        </operation>
+        <operation name="queryByExample">
+            <input message="tns:EcxDoclogs_msg"/>
+            <output message="tns:EcxDoclogsCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="ETH_DBSEL_ItemKey_binding" type="tns:ETH_DBSEL_ItemKey_ptt">
+        <jca:binding />
+        <operation name="ETH_DBSEL_ItemKeySelect_DocNumber">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="ETHDBSELItemKey.EcxDoclogs"
+                QueryName="ETH_DBSEL_ItemKeySelect"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="ETHDBSELItemKey_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="queryByExample">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="ETHDBSELItemKey.EcxDoclogs"
+                IsQueryByExample="true"
+                MappingsMetaDataURL="ETHDBSELItemKey_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/ETH_LSNA is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="ETH_DBSEL_ItemKey">
+        <port name="ETH_DBSEL_ItemKey_pt" binding="tns:ETH_DBSEL_ItemKey_binding">
+            <jca:address location="eis/DB/ETH_LSNA" UIConnectionName="SARAH_S0"/>
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="ETH_DBSEL_ItemKey_plt" >
+        <plt:role name="ETH_DBSEL_ItemKey_role" >
+            <plt:portType name="tns:ETH_DBSEL_ItemKey_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

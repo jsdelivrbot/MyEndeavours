@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/purchase_order_xsd" targetNamespace="http://xmlns.oracle.com/purchase_order_xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Defination of simple type -->
+	<xs:simpleType name="simple_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z]{1,}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="simple_type1">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:pattern value="[0-9]{1,}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Defination of simple elements -->
+	<xs:element name="POID" type="xs:positiveInteger"/>
+	<xs:element name="item_id" type="simple_type1"/>
+	<xs:element name="item_name" type="simple_type"/>
+	<xs:element name="quantity" type="simple_type1"/>
+	<xs:element name="unit_amount" type="simple_type1"/>
+	<xs:element name="city" type="simple_type"/>
+	<xs:element name="state" type="simple_type"/>
+	<xs:element name="country" type="simple_type"/>
+	<xs:element name="house_no" type="simple_type1"/>
+	<xs:element name="street" type="simple_type"/>
+	<xs:element name="colony" type="simple_type"/>
+	<xs:element name="Date_Time" type="xs:date"/>
+        <xs:element name="response" type="xs:string"/>
+        <xs:element name="total_amount" type="simple_type1"/>
+	<xs:element name="ph_number">
+		<xs:simpleType>
+			<xs:restriction base="xs:positiveInteger">
+				<xs:pattern value="[0-9]{10}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="contact_email">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[^@\s]+@[^\.\s]+\..+"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="pincode">
+		<xs:simpleType>
+			<xs:restriction base="xs:positiveInteger">
+				<xs:pattern value="[0-9]{6}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--Defination of complex elements-->
+	<xs:element name="item">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="item_id"/>
+				<xs:element ref="item_name"/>
+				<xs:element ref="unit_amount"/>
+				<xs:element ref="quantity"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="contact_name">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="first_name" type="simple_type" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="middle_name" type="simple_type" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="last_name" type="simple_type" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--Defination of complex type-->
+        <xs:element name="supplier_address">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="contact_name"/>
+			<xs:element ref="ph_number"/>
+			<xs:element ref="contact_email"/>
+			<xs:element ref="city"/>
+			<xs:element ref="state"/>
+			<xs:element ref="country"/>
+			<xs:element ref="pincode"/>
+			<xs:element ref="house_no"/>
+			<xs:element ref="street"/>
+			<xs:element ref="colony"/>
+		</xs:sequence>
+	</xs:complexType>
+        </xs:element>
+        <xs:element name="buyer_address">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="contact_name"/>
+			<xs:element ref="ph_number"/>
+			<xs:element ref="contact_email"/>
+			<xs:element ref="city"/>
+			<xs:element ref="state"/>
+			<xs:element ref="country"/>
+			<xs:element ref="pincode"/>
+			<xs:element ref="house_no"/>
+			<xs:element ref="street"/>
+			<xs:element ref="colony"/>
+		</xs:sequence>
+	</xs:complexType>
+        </xs:element>
+	<!--Defination of structure-->
+	<xs:element name="PO">
+		<xs:complexType>
+			<xs:sequence>
+                                <xs:element ref="Date_Time"/>
+				<xs:element ref="POID"/>
+				<xs:element ref="item" maxOccurs="unbounded"/>
+				<xs:element ref="supplier_address"/>
+				<xs:element ref="buyer_address"/>
+				<xs:element ref="total_amount"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

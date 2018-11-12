@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.4.0) (Build 080602)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>DB_Upd_ITEM_NUM_OUTBOUND</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>DBUpdITEMNUMOUTBOUND.ItemNumberOutbound</opm:class>
+         <opm:alias>ItemNumberOutbound</opm:alias>
+         <opm:primary-key>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="CENTER_OF_EXPERTISE_ID" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="ISSUE_UOM_NAME" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="ITEM_DESCRIPTION" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="ITEM_NBR" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="ITEM_STATUS" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="LOCAL_FLAG" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="MODELLINE_CODE" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="PROCESS_FLAG" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="PRODUCTLINE_CODE" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="PRODUCT_SEGMENT_ID" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="SERVICE_FLAG" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="SUBMODELLINE_CODE" xsi:type="opm:column"/>
+            <opm:field table="ITEM_NUMBER_OUTBOUND" name="TARGET_STATE" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="findAllItemNumberOutbound" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>DBUpdITEMNUMOUTBOUND.ItemNumberOutbound</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemNbr</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="ITEM_NBR" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemDescription</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="ITEM_DESCRIPTION" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>centerOfExpertiseId</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="CENTER_OF_EXPERTISE_ID" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>productSegmentId</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="PRODUCT_SEGMENT_ID" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>productlineCode</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="PRODUCTLINE_CODE" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>modellineCode</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="MODELLINE_CODE" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>submodellineCode</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="SUBMODELLINE_CODE" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>issueUomName</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="ISSUE_UOM_NAME" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemStatus</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="ITEM_STATUS" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>targetState</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="TARGET_STATE" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>localFlag</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="LOCAL_FLAG" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>serviceFlag</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="SERVICE_FLAG" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>processFlag</opm:attribute-name>
+               <opm:field table="ITEM_NUMBER_OUTBOUND" name="PROCESS_FLAG" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="ITEM_NUMBER_OUTBOUND"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+   <toplink:login xsi:type="toplink:database-login">
+      <toplink:platform-class>oracle.toplink.platform.database.oracle.Oracle10Platform</toplink:platform-class>
+      <toplink:user-name>APP_VENDAVO</toplink:user-name>
+      <toplink:password>D9D88D6291908983FAF6582AD3CE81A7</toplink:password>
+      <toplink:driver-class>oracle.jdbc.OracleDriver</toplink:driver-class>
+      <toplink:connection-url>jdbc:oracle:thin:@enpushntora02.na.enpad.org:1521:enpdw</toplink:connection-url>
+   </toplink:login>
+</toplink:object-persistence>

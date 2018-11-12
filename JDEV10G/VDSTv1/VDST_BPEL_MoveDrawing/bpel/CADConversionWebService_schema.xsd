@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl" xmlns:ns1="http://service.emerson.com/vdst/tool/common" xmlns:tns="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://service.emerson.com/vdst/tool/common" schemaLocation="CommonWebService_schema.xsd"/>
+
+  <xs:element name="ImportCADModel" type="tns:ImportCADModelRequestType"/>
+
+  <xs:element name="importCADModel" nillable="true" type="tns:ImportCADModelRequestType"/>
+
+  <xs:element name="ImportCADModelResponse" type="ns1:VoidType"/>
+
+  <xs:element name="GetCADProcessingStatus" type="tns:GetCADProcessingStatusRequestType"/>
+
+  <xs:element name="getCADProcessingStatus" nillable="true" type="tns:GetCADProcessingStatusRequestType"/>
+
+  <xs:element name="GetCADProcessingStatusResponse" type="ns1:VoidType"/>
+
+  <xs:element name="RetesselateModel" type="tns:RetesselateModelRequestType"/>
+
+  <xs:element name="retesselateModel" nillable="true" type="tns:RetesselateModelRequestType"/>
+
+  <xs:element name="RetesselateModelResponse" type="ns1:VoidType"/>
+
+  <xs:complexType name="RetesselateModelRequestType">
+    <xs:sequence>
+      <xs:element name="SessionID" type="xs:string"/>
+      <xs:element name="DivisionID" type="xs:string"/>
+      <xs:element name="ProductID" type="ns1:UUIDType"/>
+      <xs:element name="TesselationFactor" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ImportCADModelRequestType">
+    <xs:sequence>
+      <xs:element name="SessionID" type="xs:string"/>
+      <xs:element name="DivisionID" type="xs:string"/>
+      <xs:element name="TesselationFactor" type="xs:string" minOccurs="0"/>
+      <xs:element name="Imports" type="tns:ImportType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetCADProcessingStatusRequestType">
+    <xs:sequence>
+      <xs:element name="SessionID" type="xs:string"/>
+      <xs:element name="DivisionID" type="xs:string"/>
+      <xs:element name="DrawingName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ImportType">
+    <xs:sequence>
+      <xs:element name="Import" type="tns:FilenameType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FilenameType">
+    <xs:sequence>
+      <xs:element name="Filename" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+

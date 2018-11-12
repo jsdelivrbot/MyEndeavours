@@ -1,0 +1,57 @@
+<definitions
+     name="ETH_ENQJMS_ChangePO"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ChangePO/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ChangePO/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://xmlns.emrsn.com/CustomChange_PO_006"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomChange_PO_006" schemaLocation="public_html/CustomChange_PO_006.xsd" />
+      </schema>
+    </types>
+    <message name="CustomChange_PO_006_msg">
+        <part name="CustomChange_PO_006" element="imp1:CustomChange_PO_006"/>
+    </message>
+    <portType name="Produce_Message_ptt">
+        <operation name="Produce_Message">
+            <input message="tns:CustomChange_PO_006_msg"/>
+        </operation>
+    </portType>
+    <binding name="Produce_Message_binding" type="tns:Produce_Message_ptt">
+    <jca:binding  />
+        <operation name="Produce_Message">
+      <jca:operation
+          DestinationName="java:comp/resource/esbRP/Topics/ORAESB.ETH_CHANGEPO_OAGIS72"
+          DeliveryMode="Persistent"
+          TimeToLive="0"
+          PayloadType="TextMessage"
+          InteractionSpec="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_ENQJMS_ChangePO">
+        <port name="Produce_Message_pt" binding="tns:Produce_Message_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/JMSAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/Jms/AQ/Topic/ETH is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/Jms/AQ/Topic/ETH" UIConnectionName="elshad1_SOA_DB" UIJmsProvider="OJMS" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Produce_Message_plt" >
+    <plt:role name="Produce_Message_role" >
+      <plt:portType name="tns:Produce_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

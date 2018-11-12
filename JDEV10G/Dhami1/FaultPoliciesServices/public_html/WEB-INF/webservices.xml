@@ -1,0 +1,30 @@
+<webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
+     version="1.1">
+    <webservice-description>
+        <webservice-description-name>HelloPoliciesService</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/HelloPoliciesService.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/HelloPoliciesService-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>HelloPoliciesPort</port-component-name>
+            <wsdl-port xmlns:wsa0="http://hello.emerson.com">wsa0:HelloPoliciesPort</wsdl-port>
+            <service-endpoint-interface>com.emerson.inder.fault.services.HelloPoliciesPortType</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>HelloPoliciesPort</servlet-link>
+            </service-impl-bean>
+        </port-component>
+    </webservice-description>
+    <webservice-description>
+        <webservice-description-name>HelloPoliciesService2</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/HelloPoliciesService2.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/HelloPoliciesService2-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>HelloPoliciesPort2</port-component-name>
+            <wsdl-port xmlns:wsa0="http://hello.emerson.com">wsa0:HelloPoliciesPort2</wsdl-port>
+            <service-endpoint-interface>com.emerson.inder.fault.services2.HelloPoliciesPortType</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>HelloPoliciesPort2</servlet-link>
+            </service-impl-bean>
+        </port-component>
+    </webservice-description>
+</webservices>

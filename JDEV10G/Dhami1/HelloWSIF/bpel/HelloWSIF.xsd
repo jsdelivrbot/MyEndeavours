@@ -1,0 +1,20 @@
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/HelloWSIF"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="HelloWSIFProcessRequest">
+		<complexType>
+			<sequence>
+				<element name="title" type="string"/>
+                                <element name="name" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="HelloWSIFProcessResponse">
+		<complexType>
+			<sequence>
+				<element name="result" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

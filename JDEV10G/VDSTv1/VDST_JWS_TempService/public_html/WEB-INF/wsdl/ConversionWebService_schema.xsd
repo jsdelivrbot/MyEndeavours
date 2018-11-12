@@ -1,0 +1,60 @@
+<xs:schema version="1.0" targetNamespace="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl"
+     xmlns:ns1="http://service.emerson.com/vdst/tool/common" xmlns:tns="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://service.emerson.com/vdst/tool/common" schemaLocation="CommonWebService_schema.xsd"/>
+    <xs:element name="ImportCADModel" type="tns:ImportCADModelRequestType"/>
+    <xs:element name="importCADModel" nillable="true" type="tns:ImportCADModelRequestType"/>
+    <xs:element name="ImportCADModelResponse" type="ns1:VoidType"/>
+    <xs:element name="ImportERPData" type="tns:ImportERPDataRequestType"/>
+    <xs:element name="importERPData" nillable="true" type="tns:ImportERPDataRequestType"/>
+    <xs:element name="ImportERPDataResponse" type="ns1:VoidType"/>
+    <xs:element name="ImportOtherModel" type="tns:ImportOtherModelRequestType"/>
+    <xs:element name="importOtherModel" nillable="true" type="tns:ImportOtherModelRequestType"/>
+    <xs:element name="ImportOtherModelResponse" type="ns1:VoidType"/>
+    <xs:element name="RetesselateModel" type="tns:RetesselateModelRequestType"/>
+    <xs:element name="retesselateModel" nillable="true" type="tns:RetesselateModelRequestType"/>
+    <xs:element name="RetesselateModelResponse" type="ns1:VoidType"/>
+    <xs:element name="UpdateProductContent" type="tns:UpdateProductContentRequestType"/>
+    <xs:element name="updateProductContent" nillable="true" type="tns:UpdateProductContentRequestType"/>
+    <xs:element name="UpdateProductContentResponse" type="ns1:VoidType"/>
+    <xs:complexType name="RetesselateModelRequestType">
+        <xs:sequence>
+            <xs:element name="SessionID" type="xs:string"/>
+            <xs:element name="ProductID" type="ns1:UUIDType"/>
+            <xs:element name="TesselationFactor" type="xs:float"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ImportOtherModelRequestType">
+        <xs:sequence>
+            <xs:element name="SessionID" type="xs:string"/>
+            <xs:element name="Filename" type="xs:string"/>
+            <xs:element name="ProductID" type="ns1:UUIDType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="UpdateProductContentRequestType">
+        <xs:sequence>
+            <xs:element name="SessionID" type="xs:string"/>
+            <xs:element name="ProductID" type="ns1:UUIDType"/>
+            <xs:element name="Content" type="xs:base64Binary"/>
+            <xs:element name="ContentType" type="tns:ContentType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ImportERPDataRequestType">
+        <xs:sequence>
+            <xs:element name="SessionID" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ImportCADModelRequestType">
+        <xs:sequence>
+            <xs:element name="SessionID" type="xs:string"/>
+            <xs:element name="Filenames" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="ContentType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ThumbnailImage"/>
+            <xs:enumeration value="ZoneImage"/>
+            <xs:enumeration value="ZoneImageMap"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

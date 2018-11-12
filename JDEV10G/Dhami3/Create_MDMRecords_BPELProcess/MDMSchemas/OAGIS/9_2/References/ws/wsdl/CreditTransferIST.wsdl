@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/CreditTransferIST.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessCreditTransferIST.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeCreditTransferIST.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetCreditTransferIST.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowCreditTransferIST.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="ProcessCreditTransferIST">
+                <part name="Message" element="oa:ProcessCreditTransferIST"/>
+        </message>
+        <message name="AcknowledgeCreditTransferIST">
+                <part name="Message" element="oa:AcknowledgeCreditTransferIST"/>
+        </message>
+        <message name="GetCreditTransferIST">
+                <part name="Message" element="oa:GetCreditTransferIST"/>
+        </message>
+        <message name="ShowCreditTransferIST">
+                <part name="Message" element="oa:ShowCreditTransferIST"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestCreditTransferISTPortType">
+                <operation name="GetCreditTransferIST">
+                        <input message="oaws:GetCreditTransferIST"/>
+                </operation>
+                <operation name="ProcessCreditTransferIST">
+                        <input message="oaws:ProcessCreditTransferIST"/>
+                </operation>
+        </portType>
+        <portType name="ResponseCreditTransferISTPortType">
+                <operation name="AcknowledgeCreditTransferIST">
+                        <input message="oaws:AcknowledgeCreditTransferIST"/>
+                </operation>
+                <operation name="ShowCreditTransferIST">
+                        <input message="oaws:ShowCreditTransferIST"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncCreditTransferISTPortType">
+                <operation name="GetCreditTransferIST">
+                        <input message="oaws:GetCreditTransferIST"/>
+                        <output message="oaws:ShowCreditTransferIST"/>
+                </operation>
+                <operation name="ProcessCreditTransferIST">
+                        <input message="oaws:ProcessCreditTransferIST"/>
+                        <output message="oaws:AcknowledgeCreditTransferIST"/>
+                </operation>
+        </portType>
+        <binding name="RequestCreditTransferISTBinding" type="oaws:RequestCreditTransferISTPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessCreditTransferIST">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CreditTransferIST.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetCreditTransferIST">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CreditTransferIST.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseCreditTransferISTBinding" type="oaws:ResponseCreditTransferISTPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeCreditTransferIST">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CreditTransferIST.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowCreditTransferIST">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CreditTransferIST.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CreditTransferIST.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncCreditTransferISTBinding" type="oaws:SyncCreditTransferISTPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetCreditTransferIST">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CreditTransferIST.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ProcessCreditTransferIST">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CreditTransferIST.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestCreditTransferISTService">
+                <port name="RequestCreditTransferISTBinding" binding="oaws:RequestCreditTransferISTBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestCreditTransferIST"/>
+                </port>
+        </service>
+        <service name="ResponseCreditTransferISTService">
+                <port name="ResponseCreditTransferISTBinding" binding="oaws:ResponseCreditTransferISTBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseCreditTransferIST"/>
+                </port>
+        </service>
+        <service name="SyncCreditTransferISTService">
+                <port name="SyncCreditTransferISTBinding" binding="oaws:SyncCreditTransferISTBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncCreditTransferIST"/>
+                </port>
+        </service>
+</definitions>

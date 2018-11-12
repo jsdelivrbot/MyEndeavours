@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java-wsdl-mapping xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+  http://www.ibm.com/webservices/xsd/j2ee_jaxrpc_mapping_1_1.xsd"
+  version="1.1">
+
+    <package-mapping>
+        <package-type>com.emerson.services.product</package-type>
+        <namespaceURI>http://services.emerson.com/product</namespaceURI>
+    </package-mapping>
+    <package-mapping>
+        <package-type>com.emerson.schemas.common.envelope</package-type>
+        <namespaceURI>http://schemas.emerson.com/common/envelope</namespaceURI>
+    </package-mapping>
+    <package-mapping>
+        <package-type>com.emerson.schemas.product</package-type>
+        <namespaceURI>http://schemas.emerson.com/product</namespaceURI>
+    </package-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.SystemType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/common/envelope">typeNS:processType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>systemID</java-variable-name>
+            <xml-attribute-name>processID</xml-attribute-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>location</java-variable-name>
+            <xml-attribute-name>location</xml-attribute-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.HeaderType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/common/envelope">typeNS:headerType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>flowID</java-variable-name>
+            <xml-element-name>flowID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>transactionID</java-variable-name>
+            <xml-element-name>transactionID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>originalSource</java-variable-name>
+            <xml-element-name>originalSource</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>routingInfo</java-variable-name>
+            <xml-element-name>routingInfo</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>destination</java-variable-name>
+            <xml-element-name>destination</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>userID</java-variable-name>
+            <xml-element-name>userID</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>headerProperties</java-variable-name>
+            <xml-element-name>headerProperties</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.FaultType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/common/envelope">typeNS:faultType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>faultSeverity</java-variable-name>
+            <xml-element-name>faultSeverity</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>faultCode</java-variable-name>
+            <xml-element-name>faultCode</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>faultMessage</java-variable-name>
+            <xml-element-name>faultMessage</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>faultSummary</java-variable-name>
+            <xml-element-name>faultSummary</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.HeaderPropertiesType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/common/envelope">typeNS:headerPropertiesType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>headerProperty</java-variable-name>
+            <xml-element-name>headerProperty</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.PropertyType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/common/envelope">typeNS:propertyType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>name</java-variable-name>
+            <xml-element-name>name</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>value</java-variable-name>
+            <xml-element-name>value</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.product.ProductType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/product">typeNS:productType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>productName</java-variable-name>
+            <xml-element-name>productName</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>productDescription</java-variable-name>
+            <xml-element-name>productDescription</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>productCatagory</java-variable-name>
+            <xml-element-name>productCatagory</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.BodyType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/common/envelope">typeNS:bodyType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>xmlPayload</java-variable-name>
+            <xml-element-name>xmlPayload</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.RoutingInfoType</java-type>
+        <root-type-qname xmlns:typeNS="http://schemas.emerson.com/common/envelope">typeNS:routingInfoType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>system</java-variable-name>
+            <xml-element-name>process</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.SystemType[]</java-type>
+        <anonymous-type-qname>{http://schemas.emerson.com/common/envelope}routingInfoType&gt;process[0,unbounded]</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.schemas.common.envelope.PropertyType[]</java-type>
+        <anonymous-type-qname>{http://schemas.emerson.com/common/envelope}headerPropertiesType&gt;headerProperty[0,unbounded]</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+    </java-xml-type-mapping>
+    <exception-mapping>
+        <exception-type>com.emerson.schemas.common.envelope.FaultType</exception-type>
+        <wsdl-message xmlns:exMsg="http://services.emerson.com/product">exMsg:FaultMessage</wsdl-message>
+        <constructor-parameter-order>
+             <element-name>faultSeverity</element-name>
+             <element-name>faultCode</element-name>
+             <element-name>faultMessage</element-name>
+             <element-name>faultSummary</element-name>
+        </constructor-parameter-order>
+    </exception-mapping>
+
+    <service-interface-mapping>
+        <service-interface>com.emerson.services.product.ProductService</service-interface>
+        <wsdl-service-name xmlns:serviceNS="http://services.emerson.com/product">serviceNS:ProductService</wsdl-service-name>
+        <port-mapping>
+            <port-name>ProductPort</port-name>
+            <java-port-name>ProductPort</java-port-name>
+        </port-mapping>
+    </service-interface-mapping>
+    <service-endpoint-interface-mapping>
+        <service-endpoint-interface>com.emerson.services.product.ProductPortType</service-endpoint-interface>
+        <wsdl-port-type xmlns:portTypeNS="http://services.emerson.com/product">portTypeNS:ProductPortType</wsdl-port-type>
+        <wsdl-binding xmlns:bindingNS="http://services.emerson.com/product">bindingNS:ProductBinding</wsdl-binding>
+        <service-endpoint-method-mapping>
+            <java-method-name>processProduct</java-method-name>
+            <wsdl-operation>processProduct</wsdl-operation>
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>com.emerson.schemas.product.ProductType</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://services.emerson.com/product">wsdlMsgNS:RequestMessage</wsdl-message>
+                    <wsdl-message-part-name>requestPart</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>com.emerson.schemas.common.envelope.HeaderType</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://services.emerson.com/product">wsdlMsgNS:HeaderMessage</wsdl-message>
+                    <wsdl-message-part-name>headerPart</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                    <soap-header />
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>java.lang.String</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://services.emerson.com/product">wsdlMsgNS:ResponseMessage</wsdl-message>
+                <wsdl-message-part-name>responsePart</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+    </service-endpoint-interface-mapping>
+</java-wsdl-mapping>
+

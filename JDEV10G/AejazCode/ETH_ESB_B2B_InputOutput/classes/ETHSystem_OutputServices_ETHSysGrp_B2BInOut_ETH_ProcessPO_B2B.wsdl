@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="ETH_ProcessPO_B2B"
+     targetNamespace="http://oracle.com/esb/namespaces/ETHSystem_OutputServices_ETHSysGrp_B2BInOut"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/esb/namespaces/ETHSystem_OutputServices_ETHSysGrp_B2BInOut"
+     xmlns:inp1="http://www.openapplications.org/oagis/9"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.openapplications.org/oagis/9" schemaLocation="public_html/BODs/Standalone/ProcessPurchaseOrder.xsd" />
+      </schema>
+    </types>
+    <message name="ProcessPurchaseOrder_request">
+        <part name="ProcessPurchaseOrder" element="inp1:ProcessPurchaseOrder"/>
+    </message>
+    <portType name="execute_ppt">
+        <operation name="execute">
+            <input message="tns:ProcessPurchaseOrder_request"/>
+        </operation>
+    </portType>
+</definitions>

@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Search_MDMHUB_Routing" guid="A85C201080A211DDBFD8950892A6F037" qname="Search_MDMHUB.Search_MDMHUB_Routing" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1221232014142</ID>
+      <lastModifiedTime>Fri Sep 12 20:36:54 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDM_Search_MDMHUB_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="138C69E1809311DDBFD8950892A6F037" qname="Search_MDMHUB" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>Search_MDMHUB.wsdl</wsdlURL>
+      <portType xmlns:tns="http://www.gssamerica.com/mdm/services/Search_MDMHUB/">tns:Search_MDMHUB</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Search_MDMHUB/Search_MDMHUB_Routing?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Search_MDMHUB/Search_MDMHUB_Routing</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="A8682E0080A211DDBFD8950892A6F037" qname="Search_MDMHUB.Search_MDMHUB_Routing.searchByRecordId" wsdlOperation="searchByRecordId" mepDisplayName="Request Response" mep="RequestResponse">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbprocesscustomer" element="tns:ESBProcessCustomerRequest"/>
+         <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/createesbresponse" element="tns:ESBResponse" schemaLocation="esb:///ESB_Projects/MDM_Search_MDMHUB_ESB/ESBResponse.xsd"/>
+         <routingRules>
+            <routingRule guid="9F9BD6A080B111DDBFD8950892A6F037" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="6316AA7180A211DDBFD8950892A6F037" qname="Search_MDMHUB.MDMScearchRecords.searchRecord" serviceGUID="6314397080A211DDBFD8950892A6F037" serviceQName="Search_MDMHUB.MDMScearchRecords" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{normalize-space('/cust:ESBProcessCustomerRequest/header/requestType')='searchHUB'};{ namespace cust=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+               <transformation>
+                  <xslFileURL>SearchHub_Request_Transformation.xsl</xslFileURL>
+               </transformation>
+               <replyHandler>
+                  <transformation attachRequestPayload="false">
+                     <xslFileURL>SearchHub_Response_Transformation.xsl</xslFileURL>
+                  </transformation>
+               </replyHandler>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

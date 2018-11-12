@@ -1,0 +1,84 @@
+<definitions
+     name="ETH_AcknowledgePo_DEQAQ_Oagis_9_0_from_B2B"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_AcknowledgePo_DEQAQ_Oagis_9_0_from_B2B/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_AcknowledgePo_DEQAQ_Oagis_9_0_from_B2B/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://www.openapplications.org/oagis/9"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/B2B"
+    >
+    <types>
+    <!-- Define AQ Headers = Payload Headers + Static Queue Headers -->
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_AcknowledgePo_DEQAQ_Oagis_9_0_from_B2B/"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_AcknowledgePo_DEQAQ_Oagis_9_0_from_B2B/"
+            xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"
+            xmlns:obj1="http://xmlns.oracle.com/xdb/B2B" >
+      <import namespace="http://xmlns.oracle.com/xdb/B2B" schemaLocation="B2B_IP_MESSAGE_TYPE.xsd"/>
+      <import namespace="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/" schemaLocation="aqAdapterInboundHeader.xsd"/>
+      <complexType name="HeaderCType" >
+        <sequence>
+          <!-- static header -->
+          <element name="QueueHeader" type="hdr:HeaderType" />
+          <!-- payload header -->
+          <element name="PayloadHeader" type="obj1:IP_MESSAGE_TYPE" />
+        </sequence>
+      </complexType>
+      <element name="Header" type="tns:HeaderCType" />
+    </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.openapplications.org/oagis/9" schemaLocation="public_html/BODs/Standalone/AcknowledgePurchaseOrder.xsd" />
+      </schema>
+    </types>
+    <message name="AcknowledgePurchaseOrder_msg">
+        <part name="AcknowledgePurchaseOrder" element="imp1:AcknowledgePurchaseOrder"/>
+    </message>
+    <message name="Header_msg">
+        <part name="Header" element="tns:Header"/>
+    </message>
+    <portType name="Dequeue_ptt">
+        <operation name="Dequeue">
+            <input message="tns:AcknowledgePurchaseOrder_msg"/>
+        </operation>
+    </portType>
+    <binding name="Dequeue_binding" type="tns:Dequeue_ptt">
+    <pc:inbound_binding  />
+        <operation name="Dequeue">
+      <jca:operation
+          ActivationSpec="oracle.tip.adapter.aq.inbound.AQDequeueActivationSpec"
+          QueueName="IP_IN_QUEUE"
+          DatabaseSchema="B2B"
+          ObjectFieldName="PAYLOAD"
+          PayloadHeaderRequired="true"
+          Consumer="OAG_9_0_AcknowledgePo"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="tns:Header_msg" part="Header"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_AcknowledgePo_DEQAQ_Oagis_9_0_from_B2B">
+        <port name="Dequeue_pt" binding="tns:Dequeue_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/AqAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/AQ/db_Elshat4_B2B is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/AQ/db_Elshat4_B2B" UIConnectionName="db_Elshat4_B2B"
+          ManagedConnectionFactory="oracle.tip.adapter.aq.AQManagedConnectionFactory"
+          mcf.ConnectionString="jdbc:oracle:thin:@elshat1db.emrsn.com:20004:elshat4"
+          mcf.UserName="b2b"
+          mcf.Password="6672B6209889299522E4386C0667FD08" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Dequeue_plt" >
+    <plt:role name="Dequeue_role" >
+      <plt:portType name="tns:Dequeue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

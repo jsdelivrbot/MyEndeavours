@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="Called_BPEL" src="Called_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">Called_BPEL.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PutFile">
+            <property name="wsdlLocation">PutFile.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

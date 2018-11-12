@@ -1,0 +1,29 @@
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/FtpUtilProcess"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="FtpUtilProcessProcessRequest">
+		<complexType>
+			<sequence>
+				<element name="ftp_jndi" type="string"/>
+                                <element name="ftp_dir" type="string"/>
+                                <element name="ftp_operation" type="string"/><!--For dirlisting, pass LS-->
+                                <element name="ftp_host" type="string"/><!--Used if JNDI access fails-->
+                                <element name="ftp_uid" type="string"/><!--Used if JNDI access fails-->
+                                <element name="ftp_pwd" type="string"/><!--Used if JNDI access fails-->
+                                <element name="attrib1" type="string"/><!--Future use-->
+                                <element name="attrib2" type="string"/><!--Future use-->
+                                <element name="attrib3" type="string"/><!--Future use-->
+                                <element name="attrib4" type="string"/><!--Future use-->
+                                <element name="attrib5" type="string"/><!--Future use-->
+			</sequence>
+		</complexType>
+	</element>
+	<element name="FtpUtilProcessProcessResponse">
+		<complexType>
+			<sequence>
+				<element name="result" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="WriteGetCustFile" guid="15855CB036F211DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.WriteGetCustFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1214809452748</ID>
+      <lastModifiedTime>Mon Jun 30 12:34:12 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDMApplication_Transform&amp;ValidateESBService</lastModifiedUser>
+   </versionInfo>
+   <parent guid="662E8A8036F011DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>esb:///ESB_Projects/MDMApplication_Transform&amp;ValidateESBService/WriteGetCustFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/WriteGetCustFile/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Transform&amp;ValidateSystem/WriteGetCustFile?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Transform&amp;ValidateSystem/WriteGetCustFile</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="1587CDB036F211DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.WriteGetCustFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbgetcustomer" element="tns:ESBGetCustomerRequest"/>
+      </operationInfo>
+   </operations>
+</service>

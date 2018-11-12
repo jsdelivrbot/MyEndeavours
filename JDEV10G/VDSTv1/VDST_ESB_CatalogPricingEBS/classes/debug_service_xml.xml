@@ -1,0 +1,160 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1139232135202</ID>
+         <lastModifiedTime>Thu Jun 29 21:00:55 GMT+05:30 2006</lastModifiedTime>
+         <lastModifiedUser>JDev</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="BPELSystem" guid="AC400E815B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1245243990068</ID>
+         <lastModifiedTime>Wed Jun 17 18:36:30 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="default" guid="AC400E825B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default" status="ENABLED">
+         <versionInfo>
+            <ID>1245243990068</ID>
+            <lastModifiedTime>Wed Jun 17 18:36:30 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="AC400E815B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem" type="system"/>
+         <serviceGroup name="Called_BPEL" guid="AC49AB705B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default.Called_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1245243990068</ID>
+               <lastModifiedTime>Wed Jun 17 18:36:30 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="AC400E825B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="VDST_BPEL_CatalogPricingProvABCS" guid="E9881DA1633211DEBFD7ED4F3F27A39F" qname="BPELSystem.default.VDST_BPEL_CatalogPricingProvABCS" status="ENABLED">
+            <versionInfo>
+               <ID>1246118118865</ID>
+               <lastModifiedTime>Sat Jun 27 21:25:18 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="AC400E825B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="VDST_BPEL_CatalogPricingReqABCS" guid="F8D00620633611DEBFD7ED4F3F27A39F" qname="BPELSystem.default.VDST_BPEL_CatalogPricingReqABCS" status="ENABLED">
+            <versionInfo>
+               <ID>1246119862396</ID>
+               <lastModifiedTime>Sat Jun 27 21:54:22 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="AC400E825B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="VDST_BPEL_CSV_CatalogPricingProvABCS" guid="06FE6F81658411DEBFFD4BED569D28AF" qname="BPELSystem.default.VDST_BPEL_CSV_CatalogPricingProvABCS" status="ENABLED">
+            <versionInfo>
+               <ID>1246372859575</ID>
+               <lastModifiedTime>Tue Jun 30 20:10:59 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="AC400E825B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+   </system>
+   <system name="VDSTSystem_EBSServices" guid="D5235020667D11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices" status="ENABLED">
+      <versionInfo>
+         <ID>1246010001819</ID>
+         <lastModifiedTime>Fri Jun 26 15:23:21 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="VDSTSysGrp_CatalogPricing" guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" status="ENABLED">
+         <versionInfo>
+            <ID>1246386626707</ID>
+            <lastModifiedTime>Wed Jul 01 00:00:26 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+         </versionInfo>
+         <parent guid="D5235020667D11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices" type="system"/>
+         <service name="VDST_FILEPUT_DebugFile" guid="B05744C1661111DEBF7F17F5CA68AC99" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_FILEPUT_DebugFile" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/VDST_FILEPUT_DebugFile/" dirty="true" soapEndpointStatus="ENABLED">
+            <parent guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>VDST_FILEPUT_DebugFile.wsdl</wsdlURL>
+               <portType>tns:Write_ptt</portType>
+            </serviceDefinition>
+            <operations>
+               <operationInfo wsdlOperation="Write" guid="B0598EB0661111DEBF7F17F5CA68AC99" mep="OneWay"/>
+            </operations>
+         </service>
+         <service name="VDST_JMSQDEQ_CatalogPricingCTE" guid="E786C6B164A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+            <versionInfo>
+               <ID>1246386626707</ID>
+               <lastModifiedTime>Wed Jul 01 00:00:26 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+            </versionInfo>
+            <parent guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="E786C6B264A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE_RS"/>
+               <interface>
+                  <wsdlURL>VDST_JMSQDEQ_CatalogPricingCTE.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CatalogPricingCTE/">tns:Consume_Message_ptt</portType>
+               </interface>
+            </invocation>
+            <endpointProperties>
+               <property name="factoryJNDI" value="eis/VDST/QueueConnectionFactory"/>
+               <property name="destinationJNDI" value="jms/vdst_q/cnp/EBS"/>
+            </endpointProperties>
+         </service>
+         <service name="VDST_JMSQDEQ_CatalogPricingCTE_RS" guid="E786C6B264A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <description>This is the Routing Service for Adapter Service VDST_JMSQDEQ_CatalogPricingCTE</description>
+            <versionInfo>
+               <ID>1246386626707</ID>
+               <lastModifiedTime>Wed Jul 01 00:00:26 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+            </versionInfo>
+            <parent guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>VDST_JMSQDEQ_CatalogPricingCTE.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CatalogPricingCTE/">tns:Consume_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/VDSTSys_CatalogPricing/VDSTSysGrp_CatalogPricing/VDST_JMSQDEQ_CatalogPricingCTE_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:8888/event/VDSTSys_CatalogPricing/VDSTSysGrp_CatalogPricing/VDST_JMSQDEQ_CatalogPricingCTE_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="E78937B064A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+                  <routingRules>
+                     <routingRule guid="0EBC9E3064A411DE8F10F7FBB1F6B216" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="9EEEB7F064D511DEBFF58D37AC75300C" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQENQ_CSV_CatalaogPricing.Produce_Message" serviceGUID="9EE9FD0164D511DEBFF58D37AC75300C" serviceQName="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQENQ_CSV_CatalaogPricing" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{normalize-space(/ns5:envelope/ns5:header/ns5:EBOName) = string('http://schema.emerson.com/VDST_FTP_GET_CatalogPricing:CP-Load')};{ namespace ns5=http://schemas.emerson.com/common/envelope }</filterExpression>
+                        <transformation>
+                           <xslFileURL>Transform_AddExecutionUnit.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="VDST_JMSQENQ_CSV_CatalaogPricing" guid="9EE9FD0164D511DEBFF58D37AC75300C" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQENQ_CSV_CatalaogPricing" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1246386626707</ID>
+               <lastModifiedTime>Wed Jul 01 00:00:26 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+            </versionInfo>
+            <parent guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>VDST_JMSQENQ_CSV_CatalaogPricing.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQENQ_CSV_CatalaogPricing/">tns:Produce_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/VDSTSys_CatalogPricing/VDSTSysGrp_CatalogPricing/VDST_JMSQENQ_CSV_CatalaogPricing?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:8888/event/VDSTSys_CatalogPricing/VDSTSysGrp_CatalogPricing/VDST_JMSQENQ_CSV_CatalaogPricing</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="9EEEB7F064D511DEBFF58D37AC75300C" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQENQ_CSV_CatalaogPricing.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="factoryJNDI" value="eis/VDST/QueueConnectionFactory"/>
+               <property name="destinationJNDI" value="jms/vdst_q/cnp/CP_ProvABCS_CSV"/>
+            </endpointProperties>
+         </service>
+      </serviceGroup>
+   </system>
+</metadata>

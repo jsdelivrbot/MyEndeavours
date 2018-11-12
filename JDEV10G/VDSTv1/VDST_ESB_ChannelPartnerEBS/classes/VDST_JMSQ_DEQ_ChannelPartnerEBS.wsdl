@@ -1,0 +1,52 @@
+<definitions
+     name="VDST_JMSQ_DEQ_ChannelPartnerEBS"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQ_DEQ_ChannelPartnerEBS/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQ_DEQ_ChannelPartnerEBS/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://schemas.emerson.com/common/envelope"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="EMR_CTE.xsd" />
+      </schema>
+    </types>
+    <message name="envelope_msg">
+        <part name="envelope" element="imp1:envelope"/>
+    </message>
+    <portType name="Consume_Message_ptt">
+        <operation name="Consume_Message">
+            <input message="tns:envelope_msg"/>
+        </operation>
+    </portType>
+    <binding name="Consume_Message_binding" type="tns:Consume_Message_ptt">
+    <pc:inbound_binding  />
+        <operation name="Consume_Message">
+      <jca:operation
+          DestinationName="$destinationJNDI"
+          UseMessageListener="false"
+          PayloadType="TextMessage"
+          ActivationSpec="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="VDST_JMSQ_DEQ_ChannelPartnerEBS">
+        <port name="Consume_Message_pt" binding="tns:Consume_Message_binding">
+      <jca:address location="$factoryJNDI" UIConnectionName="Local"
+          UIJmsProvider="OC4JJMS" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Consume_Message_plt" >
+    <plt:role name="Consume_Message_role" >
+      <plt:portType name="tns:Consume_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

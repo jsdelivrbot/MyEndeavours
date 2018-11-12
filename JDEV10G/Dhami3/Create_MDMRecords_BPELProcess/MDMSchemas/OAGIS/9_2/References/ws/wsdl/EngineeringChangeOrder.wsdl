@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/EngineeringChangeOrder.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CancelEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ChangeEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/RespondEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/UpdateEngineeringChangeOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="AcknowledgeEngineeringChangeOrder">
+                <part name="Message" element="oa:AcknowledgeEngineeringChangeOrder"/>
+        </message>
+        <message name="CancelEngineeringChangeOrder">
+                <part name="Message" element="oa:CancelEngineeringChangeOrder"/>
+        </message>
+        <message name="ChangeEngineeringChangeOrder">
+                <part name="Message" element="oa:ChangeEngineeringChangeOrder"/>
+        </message>
+        <message name="GetEngineeringChangeOrder">
+                <part name="Message" element="oa:GetEngineeringChangeOrder"/>
+        </message>
+        <message name="ProcessEngineeringChangeOrder">
+                <part name="Message" element="oa:ProcessEngineeringChangeOrder"/>
+        </message>
+        <message name="RespondEngineeringChangeOrder">
+                <part name="Message" element="oa:RespondEngineeringChangeOrder"/>
+        </message>
+        <message name="ShowEngineeringChangeOrder">
+                <part name="Message" element="oa:ShowEngineeringChangeOrder"/>
+        </message>
+        <message name="SyncEngineeringChangeOrder">
+                <part name="Message" element="oa:SyncEngineeringChangeOrder"/>
+        </message>
+        <message name="NotifyEngineeringChangeOrder">
+                <part name="Message" element="oa:NotifyEngineeringChangeOrder"/>
+        </message>
+        <message name="UpdateEngineeringChangeOrder">
+                <part name="Message" element="oa:UpdateEngineeringChangeOrder"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestEngineeringChangeOrderPortType">
+                <operation name="CancelEngineeringChangeOrder">
+                        <input message="oaws:CancelEngineeringChangeOrder"/>
+                </operation>
+                <operation name="ChangeEngineeringChangeOrder">
+                        <input message="oaws:ChangeEngineeringChangeOrder"/>
+                </operation>
+                <operation name="ProcessEngineeringChangeOrder">
+                        <input message="oaws:ProcessEngineeringChangeOrder"/>
+                </operation>
+                <operation name="GetEngineeringChangeOrder">
+                        <input message="oaws:GetEngineeringChangeOrder"/>
+                </operation>
+                <operation name="SyncEngineeringChangeOrder">
+                        <input message="oaws:SyncEngineeringChangeOrder"/>
+                </operation>
+                <operation name="UpdateEngineeringChangeOrder">
+                        <input message="oaws:UpdateEngineeringChangeOrder"/>
+                </operation>
+                <operation name="NotifyEngineeringChangeOrder">
+                        <input message="oaws:NotifyEngineeringChangeOrder"/>
+                </operation>
+        </portType>
+        <portType name="ResponseEngineeringChangeOrderPortType">
+                <operation name="AcknowledgeEngineeringChangeOrder">
+                        <input message="oaws:AcknowledgeEngineeringChangeOrder"/>
+                </operation>
+                <operation name="RespondEngineeringChangeOrder">
+                        <input message="oaws:RespondEngineeringChangeOrder"/>
+                </operation>
+                <operation name="ShowEngineeringChangeOrder">
+                        <input message="oaws:ShowEngineeringChangeOrder"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncEngineeringChangeOrderPortType">
+                <operation name="ProcessEngineeringChangeOrder">
+                        <input message="oaws:ProcessEngineeringChangeOrder"/>
+                        <output message="oaws:AcknowledgeEngineeringChangeOrder"/>
+                </operation>
+                <operation name="ChangeEngineeringChangeOrder">
+                        <input message="oaws:ChangeEngineeringChangeOrder"/>
+                        <output message="oaws:RespondEngineeringChangeOrder"/>
+                </operation>
+                <operation name="CancelEngineeringChangeOrder">
+                        <input message="oaws:CancelEngineeringChangeOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="GetEngineeringChangeOrder">
+                        <input message="oaws:GetEngineeringChangeOrder"/>
+                        <output message="oaws:ShowEngineeringChangeOrder"/>
+                </operation>
+                <operation name="SyncEngineeringChangeOrder">
+                        <input message="oaws:SyncEngineeringChangeOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="UpdateEngineeringChangeOrder">
+                        <input message="oaws:UpdateEngineeringChangeOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyEngineeringChangeOrder">
+                        <input message="oaws:NotifyEngineeringChangeOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestEngineeringChangeOrderBinding" type="oaws:RequestEngineeringChangeOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="CancelEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ChangeEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ProcessEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="UpdateEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseEngineeringChangeOrderBinding" type="oaws:ResponseEngineeringChangeOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="RespondEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncEngineeringChangeOrderBinding" type="oaws:SyncEngineeringChangeOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ChangeEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CancelEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="UpdateEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyEngineeringChangeOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/EngineeringChangeOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestEngineeringChangeOrderService">
+                <port name="RequestEngineeringChangeOrderBinding" binding="oaws:RequestEngineeringChangeOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestEngineeringChangeOrder"/>
+                </port>
+        </service>
+        <service name="ResponseEngineeringChangeOrderService">
+                <port name="ResponseEngineeringChangeOrderBinding" binding="oaws:ResponseEngineeringChangeOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseEngineeringChangeOrder"/>
+                </port>
+        </service>
+        <service name="SyncEngineeringChangeOrderService">
+                <port name="SyncEngineeringChangeOrderBinding" binding="oaws:SyncEngineeringChangeOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncEngineeringChangeOrder"/>
+                </port>
+        </service>
+</definitions>

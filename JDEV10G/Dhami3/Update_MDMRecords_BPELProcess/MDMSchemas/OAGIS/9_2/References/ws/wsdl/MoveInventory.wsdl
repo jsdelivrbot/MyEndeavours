@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/MoveInventory.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessMoveInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeMoveInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetMoveInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowMoveInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/IssueMoveInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ReceiveMoveInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                        <xs:include schemaLocation="../../../Resources/Nouns/BOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="ProcessMoveInventory">
+                <part name="Message" element="oa:ProcessMoveInventory"/>
+        </message>
+        <message name="AcknowledgeMoveInventory">
+                <part name="Message" element="oa:AcknowledgeMoveInventory"/>
+        </message>
+        <message name="GetMoveInventory">
+                <part name="Message" element="oa:GetMoveInventory"/>
+        </message>
+        <message name="ShowMoveInventory">
+                <part name="Message" element="oa:ShowMoveInventory"/>
+        </message>
+        <message name="IssueMoveInventory">
+                <part name="Message" element="oa:IssueMoveInventory"/>
+        </message>
+        <message name="ReceiveMoveInventory">
+                <part name="Message" element="oa:ReceiveMoveInventory"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestMoveInventoryPortType">
+                <operation name="ProcessMoveInventory">
+                        <input message="oaws:ProcessMoveInventory"/>
+                </operation>
+                <operation name="GetMoveInventory">
+                        <input message="oaws:GetMoveInventory"/>
+                </operation>
+                <operation name="IssueMoveInventory">
+                        <input message="oaws:IssueMoveInventory"/>
+                </operation>
+        </portType>
+        <binding name="RequestMoveInventoryBinding" type="oaws:RequestMoveInventoryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="IssueMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <service name="RequestMoveInventoryService">
+                <port name="RequestMoveInventoryBinding" binding="oaws:RequestMoveInventoryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestMoveInventory"/>
+                </port>
+        </service>
+        <portType name="ResponseMoveInventoryPortType">
+                <operation name="ShowMoveInventory">
+                        <input message="oaws:ShowMoveInventory"/>
+                </operation>
+                <operation name="ReceiveMoveInventory">
+                        <input message="oaws:ReceiveMoveInventory"/>
+                </operation>
+                <operation name="AcknowledgeMoveInventory">
+                        <input message="oaws:AcknowledgeMoveInventory"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="ResponseMoveInventoryBinding" type="oaws:ResponseMoveInventoryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ReceiveMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="AcknowledgeMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <service name="ResponseMoveInventoryService">
+                <port name="ResponseMoveInventoryBinding" binding="oaws:ResponseMoveInventoryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseMoveInventory"/>
+                </port>
+        </service>
+        <portType name="SyncMoveInventoryPortType">
+                <operation name="ProcessMoveInventory">
+                        <input message="oaws:ProcessMoveInventory"/>
+                        <output message="oaws:AcknowledgeMoveInventory"/>
+                </operation>
+                <operation name="GetMoveInventory">
+                        <input message="oaws:GetMoveInventory"/>
+                        <output message="oaws:ShowMoveInventory"/>
+                </operation>
+                <operation name="IssueMoveInventory">
+                        <input message="oaws:IssueMoveInventory"/>
+                        <output message="oaws:ReceiveMoveInventory"/>
+                </operation>
+        </portType>
+        <binding name="SyncMoveInventoryBinding" type="oaws:SyncMoveInventoryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="IssueMoveInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MoveInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="SyncMoveInventoryService">
+                <port name="SyncMoveInventoryBinding" binding="oaws:SyncMoveInventoryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncMoveInventory"/>
+                </port>
+        </service>
+</definitions>

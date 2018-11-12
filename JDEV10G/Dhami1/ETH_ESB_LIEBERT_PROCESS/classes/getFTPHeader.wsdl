@@ -1,0 +1,54 @@
+<definitions
+     name="getFTPHeader"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/getFTPHeader/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/getFTPHeader/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://xmlns.emrsn.com/LiebertPurchaseOrder"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/LiebertPurchaseOrder" schemaLocation="public_html/LiebertFlatFileInput.xsd" />
+      </schema>
+    </types>
+    <message name="Root-Element_msg">
+        <part name="Root-Element" element="imp1:Root-Element"/>
+    </message>
+    <portType name="Get_ptt">
+        <operation name="Get">
+            <input message="tns:Root-Element_msg"/>
+        </operation>
+    </portType>
+    <binding name="Get_binding" type="tns:Get_ptt">
+    <pc:inbound_binding  />
+        <operation name="Get">
+      <jca:operation
+          FileType="ascii"
+          LogicalDirectory="getFTPFolder"
+          ActivationSpec="oracle.tip.adapter.ftp.inbound.FTPActivationSpec"
+          DeleteFile="true"
+          IncludeFiles="read.*\.txt"
+          PollingFrequency="10"
+          MinimumAge="0"
+          OpaqueSchema="false">
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="getFTPHeader">
+        <port name="Get_pt" binding="tns:Get_binding">
+      <jca:address location="eis/Ftp/ETHFtpAdapter" UIincludeWildcard="read*.txt" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Get_plt" >
+    <plt:role name="Get_role" >
+      <plt:portType name="tns:Get_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

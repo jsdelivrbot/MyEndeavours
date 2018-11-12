@@ -1,0 +1,52 @@
+<definitions
+     name="ETH_ENQJMS_PO_LiebertFlatFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_PO_LiebertFlatFile/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_PO_LiebertFlatFile/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" schemaLocation="public_html/CustomLiebertFlatFileInput.xsd" />
+      </schema>
+    </types>
+    <message name="CustomLiebertPO_msg">
+        <part name="CustomLiebertPO" element="imp1:CustomLiebertPO"/>
+    </message>
+    <portType name="Produce_Message_ptt">
+        <operation name="Produce_Message">
+            <input message="tns:CustomLiebertPO_msg"/>
+        </operation>
+    </portType>
+    <binding name="Produce_Message_binding" type="tns:Produce_Message_ptt">
+    <jca:binding  />
+        <operation name="Produce_Message">
+      <jca:operation
+          DestinationName="java:comp/resource/esbRP/Topics/ETH_PO_LBT_FLATFILE"
+          DeliveryMode="Persistent"
+          TimeToLive="0"
+          Priority="9"
+          PayloadType="TextMessage"
+          InteractionSpec="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_ENQJMS_PO_LiebertFlatFile">
+        <port name="Produce_Message_pt" binding="tns:Produce_Message_binding">
+      <jca:address location="eis/Jms/AQ/Topic/ETH" UIConnectionName="as_Elshat1_Ofm"/>
+        </port>
+    </service>
+  <plt:partnerLinkType name="Produce_Message_plt" >
+    <plt:role name="Produce_Message_role" >
+      <plt:portType name="tns:Produce_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

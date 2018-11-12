@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/ShipmentSchedule.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/GetShipmentSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowShipmentSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncShipmentSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyShipmentSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="GetShipmentSchedule">
+                <part name="Message" element="oa:GetShipmentSchedule"/>
+        </message>
+        <message name="ShowShipmentSchedule">
+                <part name="Message" element="oa:ShowShipmentSchedule"/>
+        </message>
+        <message name="SyncShipmentSchedule">
+                <part name="Message" element="oa:SyncShipmentSchedule"/>
+        </message>
+        <message name="NotifyShipmentSchedule">
+                <part name="Message" element="oa:NotifyShipmentSchedule"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestShipmentSchedulePortType">
+                <operation name="GetShipmentSchedule">
+                        <input message="oaws:GetShipmentSchedule"/>
+                </operation>
+                <operation name="SyncShipmentSchedule">
+                        <input message="oaws:SyncShipmentSchedule"/>
+                </operation>
+                <operation name="NotifyShipmentSchedule">
+                        <input message="oaws:NotifyShipmentSchedule"/>
+                </operation>
+        </portType>
+        <portType name="ResponseShipmentSchedulePortType">
+                <operation name="ShowShipmentSchedule">
+                        <input message="oaws:ShowShipmentSchedule"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncShipmentSchedulePortType">
+                <operation name="GetShipmentSchedule">
+                        <input message="oaws:GetShipmentSchedule"/>
+                        <output message="oaws:ShowShipmentSchedule"/>
+                </operation>
+                <operation name="SyncShipmentSchedule">
+                        <input message="oaws:SyncShipmentSchedule"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyShipmentSchedule">
+                        <input message="oaws:NotifyShipmentSchedule"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestShipmentScheduleBinding" type="oaws:RequestShipmentSchedulePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetShipmentSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncShipmentSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyShipmentSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseShipmentScheduleBinding" type="oaws:ResponseShipmentSchedulePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowShipmentSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncShipmentScheduleBinding" type="oaws:SyncShipmentSchedulePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetShipmentSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncShipmentSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyShipmentSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ShipmentSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestShipmentScheduleService">
+                <port name="RequestShipmentScheduleBinding" binding="oaws:RequestShipmentScheduleBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestShipmentSchedule"/>
+                </port>
+        </service>
+        <service name="ResponseShipmentScheduleService">
+                <port name="ResponseShipmentScheduleBinding" binding="oaws:ResponseShipmentScheduleBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseShipmentSchedule"/>
+                </port>
+        </service>
+        <service name="SyncShipmentScheduleService">
+                <port name="SyncShipmentScheduleBinding" binding="oaws:SyncShipmentScheduleBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncShipmentSchedule"/>
+                </port>
+        </service>
+</definitions>

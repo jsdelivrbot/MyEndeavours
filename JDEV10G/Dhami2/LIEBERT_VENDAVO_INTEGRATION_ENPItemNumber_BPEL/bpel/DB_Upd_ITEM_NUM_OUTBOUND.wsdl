@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="DB_Upd_ITEM_NUM_OUTBOUND"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/DB_Upd_ITEM_NUM_OUTBOUND/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/DB_Upd_ITEM_NUM_OUTBOUND/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBUpdITEMNUMOUTBOUND"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBUpdITEMNUMOUTBOUND"
+                schemaLocation="DBUpdITEMNUMOUTBOUND_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="ItemNumberOutboundCollection_msg">
+        <part name="ItemNumberOutboundCollection" element="top:ItemNumberOutboundCollection"/>
+    </message>
+
+
+    <portType name="DB_Upd_ITEM_NUM_OUTBOUND_ptt">
+        <operation name="update">
+            <input message="tns:ItemNumberOutboundCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="DB_Upd_ITEM_NUM_OUTBOUND_binding" type="tns:DB_Upd_ITEM_NUM_OUTBOUND_ptt">
+        <jca:binding />
+        <operation name="update">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="DBUpdITEMNUMOUTBOUND.ItemNumberOutbound"
+                DmlType="update"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="DBUpdITEMNUMOUTBOUND_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if jdbc/DB/Liebert_VendavoStage is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="DB_Upd_ITEM_NUM_OUTBOUND">
+        <port name="DB_Upd_ITEM_NUM_OUTBOUND_pt" binding="tns:DB_Upd_ITEM_NUM_OUTBOUND_binding">
+            <jca:address location="jdbc/DB/Liebert_VendavoStage"
+                UIConnectionName="enpdw_prod"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="DB_Upd_ITEM_NUM_OUTBOUND_plt" >
+        <plt:role name="DB_Upd_ITEM_NUM_OUTBOUND_role" >
+            <plt:portType name="tns:DB_Upd_ITEM_NUM_OUTBOUND_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

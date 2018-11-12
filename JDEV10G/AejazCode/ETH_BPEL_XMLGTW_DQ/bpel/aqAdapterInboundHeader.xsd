@@ -1,0 +1,19 @@
+        <schema attributeFormDefault="qualified" elementFormDefault="qualified" 
+                targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"
+                xmlns="http://www.w3.org/2001/XMLSchema" 
+                xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/">
+
+	    <complexType name="HeaderType">
+		<all>
+		    <element name="MessageId" type="string" minOccurs="1" maxOccurs="1"/>
+		    <element name="Priority" type="integer" minOccurs="0" maxOccurs="1"/>
+		    <element name="Correlation" type="string" minOccurs="0" maxOccurs="1"/>
+		    <element name="Attempts" type="integer" minOccurs="0" maxOccurs="1"/>
+		    <element name="EnqueueTime" type="string" minOccurs="0" maxOccurs="1"/>
+		    <element name="OrigMessageId" type="string" minOccurs="0" maxOccurs="1"/>
+		</all>
+	    </complexType>
+
+	    <element name="Header" type="tns:HeaderType"/>
+
+	</schema>

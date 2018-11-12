@@ -1,0 +1,45 @@
+<definitions
+     name="ReplicateDataService"
+     targetNamespace="http://www.gssamerica.com/mdm/services/ReplicateDataService/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://www.gssamerica.com/mdm/services/ReplicateDataService/"
+     xmlns:mdm="http://www.gssamerica.com/mdm/services"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.gssamerica.com/mdm/services/ReplicateDataService/">
+            <xsd:import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="MDMService.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="ReplicateDataRequest">
+        <part name="ReplicateDataRequest" element="mdm:ReplicateDataRequest"/>
+    </message>
+    <message name="ReplicateDataResponse">
+        <part name="ReplicateDataResponse" element="mdm:ServiceReply"/>
+    </message>
+    <portType name="ReplicateData">
+        <operation name="replicateData">
+            <input message="tns:ReplicateDataRequest"/>
+            <output message="tns:ReplicateDataResponse"/>
+        </operation>
+    </portType>
+    <binding name="ReplicateDataSOAP" type="tns:ReplicateData">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="replicateData">
+            <soap:operation soapAction="http://www.gssamerica.com/mdm/services/ReplicateDataService/replicateData"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="ReplicateDataService">
+        <port name="ReplicateDataSOAP" binding="tns:ReplicateDataSOAP">
+            <soap:address location="http://10.0.2.20:8888/MDM-MDM_Services-context-root/ReplicateDataSOAP"/>
+        </port>
+    </service>
+</definitions>

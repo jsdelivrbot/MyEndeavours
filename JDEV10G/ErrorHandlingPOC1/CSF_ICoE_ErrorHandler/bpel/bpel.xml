@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CSF_ICoE_ErrorHandler" src="CSF_ICoE_ErrorHandler.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">CSF_ICoE_ErrorHandler.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CSF_DBINS_ICoE_ErrorTable">
+            <property name="wsdlLocation">CSF_DBINS_ICoE_ErrorTable.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="NotificationService">
+            <property name="wsdlLocation">NotificationService.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

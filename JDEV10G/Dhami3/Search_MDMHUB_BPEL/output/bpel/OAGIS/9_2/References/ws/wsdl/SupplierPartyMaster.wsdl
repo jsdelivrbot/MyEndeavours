@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/SupplierPartyMaster.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/GetSupplierPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowSupplierPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncSupplierPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifySupplierPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="GetSupplierPartyMaster">
+                <part name="Message" element="oa:GetSupplierPartyMaster"/>
+        </message>
+        <message name="ShowSupplierPartyMaster">
+                <part name="Message" element="oa:ShowSupplierPartyMaster"/>
+        </message>
+        <message name="SyncSupplierPartyMaster">
+                <part name="Message" element="oa:SyncSupplierPartyMaster"/>
+        </message>
+        <message name="NotifySupplierPartyMaster">
+                <part name="Message" element="oa:NotifySupplierPartyMaster"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestSupplierPartyMasterPortType">
+                <operation name="GetSupplierPartyMaster">
+                        <input message="oaws:GetSupplierPartyMaster"/>
+                </operation>
+                <operation name="SyncSupplierPartyMaster">
+                        <input message="oaws:SyncSupplierPartyMaster"/>
+                </operation>
+                <operation name="NotifySupplierPartyMaster">
+                        <input message="oaws:NotifySupplierPartyMaster"/>
+                </operation>
+        </portType>
+        <portType name="ResponseSupplierPartyMasterPortType">
+                <operation name="ShowSupplierPartyMaster">
+                        <input message="oaws:ShowSupplierPartyMaster"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncSupplierPartyMasterPortType">
+                <operation name="GetSupplierPartyMaster">
+                        <input message="oaws:GetSupplierPartyMaster"/>
+                        <output message="oaws:ShowSupplierPartyMaster"/>
+                </operation>
+                <operation name="SyncSupplierPartyMaster">
+                        <input message="oaws:SyncSupplierPartyMaster"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifySupplierPartyMaster">
+                        <input message="oaws:NotifySupplierPartyMaster"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestSupplierPartyMasterBinding" type="oaws:RequestSupplierPartyMasterPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetSupplierPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncSupplierPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifySupplierPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseSupplierPartyMasterBinding" type="oaws:ResponseSupplierPartyMasterPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowSupplierPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncSupplierPartyMasterBinding" type="oaws:SyncSupplierPartyMasterPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetSupplierPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncSupplierPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifySupplierPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/SupplierPartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestSupplierPartyMasterService">
+                <port name="RequestSupplierPartyMasterBinding" binding="oaws:RequestSupplierPartyMasterBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestSupplierPartyMaster"/>
+                </port>
+        </service>
+        <service name="ResponseSupplierPartyMasterService">
+                <port name="ResponseSupplierPartyMasterBinding" binding="oaws:ResponseSupplierPartyMasterBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseSupplierPartyMaster"/>
+                </port>
+        </service>
+        <service name="SyncSupplierPartyMasterService">
+                <port name="SyncSupplierPartyMasterBinding" binding="oaws:SyncSupplierPartyMasterBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncSupplierPartyMaster"/>
+                </port>
+        </service>
+</definitions>

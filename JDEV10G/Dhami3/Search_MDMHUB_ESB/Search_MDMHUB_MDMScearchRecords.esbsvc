@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="MDMScearchRecords" guid="6314397080A211DDBFD8950892A6F037" qname="Search_MDMHUB.MDMScearchRecords" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1221208623553</ID>
+      <lastModifiedTime>Fri Sep 12 14:07:03 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDM_Search_MDMHUB_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="138C69E1809311DDBFD8950892A6F037" qname="Search_MDMHUB" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>http://gdc-18:8888/MDM_Services/MDMSearchRecordSOAP?wsdl</wsdlURL>
+      <portType xmlns:tns="http://www.gssamerica.com/mdm/services/MDMSearchRecord/">tns:MDMSearchRecord</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Search_MDMHUB/MDMScearchRecords?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Search_MDMHUB/MDMScearchRecords</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="6316AA7080A211DDBFD8950892A6F037" qname="Search_MDMHUB.MDMScearchRecords.lookupRecord" wsdlOperation="lookupRecord" mepDisplayName="Request Response" mep="RequestResponse">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:LookupSearchRequest"/>
+         <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://gdc-18:8888/MDM_Services/MDMService.xsd"/>
+      </operationInfo>
+      <operationInfo guid="6316AA7180A211DDBFD8950892A6F037" qname="Search_MDMHUB.MDMScearchRecords.searchRecord" wsdlOperation="searchRecord" mepDisplayName="Request Response" mep="RequestResponse">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:SearchRecordRequest"/>
+         <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://gdc-18:8888/MDM_Services/MDMService.xsd"/>
+      </operationInfo>
+   </operations>
+</service>

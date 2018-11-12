@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<definitions targetNamespace="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl" name="CADConversionWebService" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://service.emerson.com/vdst/tool/common" schemaLocation="CommonWebService_schema.xsd"/>
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import namespace="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl" schemaLocation="CADConversionWebService_schema.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="ImportCADModel">
+    <part name="parameters" element="tns:importCADModel"/>
+  </message>
+  <message name="ImportCADModelResponse">
+    <part name="parameters" element="tns:ImportCADModelResponse"/>
+  </message>
+  <message name="GetCADProcessingStatus">
+    <part name="parameters" element="tns:getCADProcessingStatus"/>
+  </message>
+  <message name="GetCADProcessingStatusResponse">
+    <part name="parameters" element="tns:GetCADProcessingStatusResponse"/>
+  </message>  
+  <message name="FaultDetailType">
+    <part name="fault" element="ns1:FaultDetail" xmlns:ns1="http://service.emerson.com/vdst/tool/common"/>
+  </message>
+  <message name="SOAPException">
+    <part name="fault" element="ns1:SOAPException"  xmlns:ns1="http://service.emerson.com/vdst/tool/common"/>
+  </message>
+  <message name="RetesselateModel">
+    <part name="parameters" element="tns:retesselateModel"/>
+  </message>
+  <message name="RetesselateModelResponse">
+    <part name="parameters" element="tns:RetesselateModelResponse"/>
+  </message>
+  <portType name="CADConversionWebServicePortType">
+    <operation name="importCADModel">
+      <input message="tns:ImportCADModel"/>
+      <output message="tns:ImportCADModelResponse"/>
+      <fault message="tns:FaultDetailType" name="FaultDetailType"/>
+      <fault message="tns:SOAPException" name="SOAPException"/>
+    </operation>
+    <operation name="getCADProcessingStatus">
+      <input message="tns:GetCADProcessingStatus"/>
+      <output message="tns:GetCADProcessingStatusResponse"/>
+      <fault message="tns:FaultDetailType" name="FaultDetailType"/>
+      <fault message="tns:SOAPException" name="SOAPException"/>
+    </operation>
+    <operation name="retesselateModel">
+      <input message="tns:RetesselateModel"/>
+      <output message="tns:RetesselateModelResponse"/>
+      <fault message="tns:FaultDetailType" name="FaultDetailType"/>
+      <fault message="tns:SOAPException" name="SOAPException"/>
+    </operation>
+  </portType>
+  <binding name="CADConversionWebServicePortBinding" type="tns:CADConversionWebServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="importCADModel">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="FaultDetailType">
+        <soap:fault name="FaultDetailType" use="literal"/>
+      </fault>
+      <fault name="SOAPException">
+        <soap:fault name="SOAPException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getCADProcessingStatus">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="FaultDetailType">
+        <soap:fault name="FaultDetailType" use="literal"/>
+      </fault>
+      <fault name="SOAPException">
+        <soap:fault name="SOAPException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="retesselateModel">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="FaultDetailType">
+        <soap:fault name="FaultDetailType" use="literal"/>
+      </fault>
+      <fault name="SOAPException">
+        <soap:fault name="SOAPException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="CADConversionWebService">
+    <port name="CADConversionWebServicePort" binding="tns:CADConversionWebServicePortBinding">
+      <soap:address location="http://10.236.94.105:8080/ClosetMaid/Server/vdst/import/cad"/>
+    </port>
+  </service>
+</definitions>
+

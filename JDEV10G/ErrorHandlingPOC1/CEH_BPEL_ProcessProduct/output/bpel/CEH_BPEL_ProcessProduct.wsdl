@@ -1,0 +1,28 @@
+<definitions
+     name="CEH_BPEL_ProcessProduct"
+     targetNamespace="http://bpel.oracle.com/CEH_BPEL_ProcessProduct"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://schemas.emerson.com/common/envelope"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://bpel.oracle.com/CEH_BPEL_ProcessProduct"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.emerson.com/common/envelope"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://bpel.oracle.com/CEH_BPEL_ProcessProduct">
+            <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="CommonEnvelope.xsd"/>
+        </schema>
+    </types>
+    <message name="CEH_BPEL_ProcessProductRequestMessage">
+        <part name="payload" element="ns1:envelope"/>
+    </message>
+    <portType name="CEH_BPEL_ProcessProduct">
+        <operation name="process">
+            <input message="client:CEH_BPEL_ProcessProductRequestMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="CEH_BPEL_ProcessProduct">
+        <plnk:role name="CEH_BPEL_ProcessProductProvider">
+            <plnk:portType name="client:CEH_BPEL_ProcessProduct"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

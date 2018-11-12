@@ -1,0 +1,138 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Oct 21 16:09:30 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_ImportCAD"
+         targetNamespace="http://service.emerson.com/VDST_BPEL_ImportCAD"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://services.emerson.com"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl"
+         xmlns:client="http://service.emerson.com/VDST_BPEL_ImportCAD"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/VDST_FTP_GET_CADFile/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Get_role" name="VDST_FTP_GET_CADFile"
+                 partnerLinkType="ns1:Get_plt"/>
+    <partnerLink name="FTPService" partnerRole="FTPService_JB_Provider"
+                 partnerLinkType="ns4:FTPService_JB"/>
+    <partnerLink name="CADConversionWebService"
+                 partnerRole="CADConversionWebServicePortType_Role"
+                 partnerLinkType="ns5:CADConversionWebServicePortType_PL"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_IN_CADFile_Data" messageType="ns1:Get_msg"/>
+    <variable name="G_IN_CADFile_FTPAdapter_Info"
+              messageType="ns3:InboundHeader_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_CADFile_Info" partnerLink="VDST_FTP_GET_CADFile"
+             portType="ns1:Get_ptt" operation="Get" variable="G_IN_CADFile_Data"
+             createInstance="yes"
+             bpelx:headerVariable="G_IN_CADFile_FTPAdapter_Info"/>
+    <scope name="Scope_MoveCADFile">
+      <variables>
+        <variable name="L_IN_MoveCADFile_Request"
+                  messageType="ns4:MoveFile_RequestMessage"/>
+        <variable name="L_OUT_MoveCADFile_Response"
+                  messageType="ns4:MoveFile_ResponseMessage"/>
+      </variables>
+      <sequence name="Sequence_1">
+        <assign name="Assign_CADFile_Info">
+          <copy>
+            <from expression="concat(string('/CMC/DR/Infile/'),bpws:getVariableData('G_IN_CADFile_FTPAdapter_Info','inboundHeader','/ns3:InboundFTPHeaderType/ns3:fileName'))"/>
+            <to variable="L_IN_MoveCADFile_Request"
+                part="sourcePathwithFileName"/>
+          </copy>
+          <copy>
+            <from expression="string('eis/FTP/VDST_ClosetMaidFTP')"/>
+            <to variable="L_IN_MoveCADFile_Request" part="ftpRACFJndi"/>
+          </copy>
+          <copy>
+            <from expression="concat(string('/CMC/DR/Archive/'),bpws:getVariableData('G_IN_CADFile_FTPAdapter_Info','inboundHeader','/ns3:InboundFTPHeaderType/ns3:fileName'))"/>
+            <to variable="L_IN_MoveCADFile_Request"
+                part="destPathWithFileName"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_moveCADFile" partnerLink="FTPService"
+                portType="ns4:FTPService_JB" operation="moveFile"
+                inputVariable="L_IN_MoveCADFile_Request"
+                outputVariable="L_OUT_MoveCADFile_Response"/>
+      </sequence>
+    </scope>
+    <scope name="Call_ImportCAD">
+      <variables>
+        <variable name="L_IN_ImportCAD_Response"
+                  messageType="ns5:ImportCADModelResponse"/>
+        <variable name="L_IN_ImportCAD_Request"
+                  messageType="ns5:ImportCADModel"/>
+      </variables>
+      <sequence name="Sequence_2">
+        <assign name="Assign_ImportCAD">
+          <copy>
+            <from expression="string('SessionID')"/>
+            <to variable="L_IN_ImportCAD_Request" part="parameters"
+                query="/ns5:importCADModel/SessionID"/>
+          </copy>
+          <copy>
+            <from expression="string('CMC')"/>
+            <to variable="L_IN_ImportCAD_Request" part="parameters"
+                query="/ns5:importCADModel/DivisionID"/>
+          </copy>
+          <copy>
+            <from expression="string('0.75')"/>
+            <to variable="L_IN_ImportCAD_Request" part="parameters"
+                query="/ns5:importCADModel/TesselationFactor"/>
+          </copy>
+          <copy>
+            <from variable="G_IN_CADFile_FTPAdapter_Info" part="inboundHeader"
+                  query="/ns3:InboundFTPHeaderType/ns3:fileName"/>
+            <to variable="L_IN_ImportCAD_Request" part="parameters"
+                query="/ns5:importCADModel/Imports/Import/Filename"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_ImportCAD" partnerLink="CADConversionWebService"
+                portType="ns5:CADConversionWebServicePortType"
+                operation="importCADModel"
+                inputVariable="L_IN_ImportCAD_Request"
+                outputVariable="L_IN_ImportCAD_Response"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

@@ -1,0 +1,76 @@
+<schema attributeFormDefault="qualified" elementFormDefault="qualified"
+        targetNamespace="http://xmlns.emrsn.com/CustomProcessPurchaseOrder"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:cus9="http://www.openapplications.org/oagis/9">
+ <import namespace="http://www.openapplications.org/oagis/9"
+         schemaLocation="BODs/Standalone/ProcessPurchaseOrder.xsd"/>
+ <element name="CustomProcessPO">
+  <complexType>
+   <sequence>
+    <element name="ProcessPO" type="cus9:ProcessPurchaseOrderType"/>
+    <element name="Message_id" type="string"/>
+    <element name="Message_direction" type="string"/>
+    <element name="Sender_Document_number" type="string"/>
+    <element name="Sender_Message_type" type="string"/>    
+    <element name="Sender_Message_standard" type="string"/>    
+    <element name="Sender_Transaction_type" type="string"/>
+    <element name="Sender_Transaction_subtype" type="string"/>
+    <element name="Sender_System_type" type="string"/>
+    <element name="Sender_Id" type="string"/>
+    <element name="Sender_Site_Id" type="string"/>
+    <element name="Sender_Name" type="string"/>
+    <element name="Sender_Type" type="string"/>
+    <element name="Receiver_System_type" type="string"/>
+    <element name="Receiver_Id" type="string"/>
+    <element name="Receiver_Site_id" type="string"/>
+    <element name="Receiver_Name" type="string"/>
+    <element name="Receiver_type" type="string"/> 
+    <element name="File_name" type="string"/>
+    <element name="Record_total" type="string"/>
+    <element name="Record_number" type="string"/>
+    <element name="Flow_id_1" type="string"/>
+    <element name="Flow_id_2" type="string"/>
+    <element name="Flow_id_3" type="string"/>
+    
+    <element name="Send_on_fail" type="string"/>
+    <element name="Division_name" type="string"/>
+    <element name="Division_format" type="string"/>
+    <element name="Trading_partner_1_name" type="string"/>
+    <element name="Trading_partner_1_format" type="string"/>
+    <element name="Trading_partner_1_date_from" type="string"/>
+    <element name="Trading_partner_1_date_to" type="string"/>
+    <element name="Trading_partner_2_name" type="string"/>
+    <element name="Trading_partner_2_format" type="string"/>
+    <element name="Trading_partner_2_date_from" type="string"/>
+    <element name="Trading_partner_2_date_to" type="string"/>
+    <element name="Trading_partner_3_name" type="string"/>
+    <element name="Trading_partner_3_format" type="string"/>
+    <element name="Trading_partner_3_date_from" type="string"/>
+    <element name="Trading_partner_3_date_to" type="string"/>
+    <element name="Logistics_1_name" type="string"/>
+    <element name="Logistics_1_format" type="string"/>
+    <element name="Logistics_1_date_from" type="string"/>
+    <element name="Logistics_1_date_to" type="string"/>
+    <element name="Logistics_2_name" type="string"/>
+    <element name="Logistics_2_format" type="string"/>
+    <element name="Logistics_2_date_from" type="string"/>
+    <element name="Logistics_2_date_to" type="string"/>
+    <element name="Logistics_3_name" type="string"/>
+    <element name="Logistics_3_format" type="string"/>
+    <element name="Logistics_3_date_from" type="string"/>
+    <element name="Logistics_3_date_to" type="string"/>
+    <element name="Compliance_result" type="string"/>
+    <element name="Attribute1" type="string"/>
+    <element name="Attribute2" type="string"/>
+    <element name="Attribute3" type="string"/>
+    <element name="Attribute4" type="string"/>
+    <element name="Attribute5" type="string"/>
+    <element name="Attribute6" type="string"/>
+    <element name="Attribute7" type="string"/>
+    <element name="Attribute8" type="string"/>
+    <element name="Attribute9" type="string"/>
+    <element name="Attribute10" type="string"/>
+   </sequence>
+  </complexType>
+ </element>
+</schema>

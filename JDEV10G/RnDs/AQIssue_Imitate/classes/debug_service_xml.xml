@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="Test" guid="AFD1E50156A311DEBFBFF543CBD6D3C1" qname="Test" dirty="true">
+      <serviceGroup name="AQIssue" guid="B8A2F98056A311DEBFBFF543CBD6D3C1" qname="Test.AQIssue" dirty="true">
+         <parent guid="AFD1E50156A311DEBFBFF543CBD6D3C1" qname="Test" type="system"/>
+         <service name="B2B_AQ_Push" guid="3BF0EEB056AD11DEBFBFF543CBD6D3C1" qname="Test.AQIssue.B2B_AQ_Push" serviceType="OutboundAdapterService" serviceSubType="AQ" typeDescription="Outbound AQ Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/B2B_AQ_Push/" dirty="true" soapEndpointStatus="ENABLED">
+            <parent guid="B8A2F98056A311DEBFBFF543CBD6D3C1" qname="Test.AQIssue" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>B2B_AQ_Push.wsdl</wsdlURL>
+               <portType>tns:Enqueue_ptt</portType>
+            </serviceDefinition>
+            <operations>
+               <operationInfo wsdlOperation="Enqueue" guid="3BF35FB056AD11DEBFBFF543CBD6D3C1" mep="OneWay"/>
+            </operations>
+         </service>
+         <service name="PollTxtFile" guid="5131514056A611DEBFBFF543CBD6D3C1" qname="Test.AQIssue.PollTxtFile" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/PollTxtFile/" dirty="true">
+            <parent guid="B8A2F98056A311DEBFBFF543CBD6D3C1" qname="Test.AQIssue" type="serviceGroup"/>
+            <invocation>
+               <interface>
+                  <wsdlURL>PollTxtFile.wsdl</wsdlURL>
+                  <portType>tns:Get_ptt</portType>
+               </interface>
+               <targetService guid="5131514156A611DEBFBFF543CBD6D3C1" qname="Test.AQIssue.PollTxtFile_RS"/>
+            </invocation>
+            <operations>
+               <operationInfo wsdlOperation="Get" guid="5144641056A611DEBFBFF543CBD6D3C1" mep="OneWay"/>
+            </operations>
+         </service>
+         <service name="PollTxtFile_RS" guid="5131514156A611DEBFBFF543CBD6D3C1" qname="Test.AQIssue.PollTxtFile_RS" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/PollTxtFile/" dirty="true" soapEndpointStatus="ENABLED">
+            <description>This is the Routing Service for Adapter Service PollTxtFile</description>
+            <parent guid="B8A2F98056A311DEBFBFF543CBD6D3C1" qname="Test.AQIssue" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>PollTxtFile.wsdl</wsdlURL>
+               <portType>tns:Get_ptt</portType>
+            </serviceDefinition>
+            <operations>
+               <operationInfo wsdlOperation="Get" guid="51339B3056A611DEBFBFF543CBD6D3C1" mep="OneWay"/>
+            </operations>
+         </service>
+      </serviceGroup>
+   </system>
+</project_metadata>

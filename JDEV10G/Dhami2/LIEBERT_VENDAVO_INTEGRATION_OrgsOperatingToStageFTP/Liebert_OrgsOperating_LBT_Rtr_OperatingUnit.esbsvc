@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_Rtr_OperatingUnit" guid="F0F3DF90735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1228925064990</ID>
+      <lastModifiedTime>Wed Dec 10 16:04:24 GMT+00:00 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_OperatingUnit.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingUnit?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingUnit</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="F0F3DF91735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit" element="tns:EmrOperatingUnitCollection"/>
+         <routingRules>
+            <routingRule guid="6B0C9650735E11DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="5C8541E0735E11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingunitFTP.execute" serviceGUID="5C7E15F0735E11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingunitFTP" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>EmrOperatingUnitCollection_To_SyncPartyMaster.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

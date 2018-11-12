@@ -1,0 +1,401 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Feb 27 17:05:02 IST 2009
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CEH_BPEL_ProcessCustomer"
+         targetNamespace="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://bpel.oracle.com/CEH_BPEL_CommonErrorHandler"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://schemas.emerson.com/common/errorMessage"
+         xmlns:client="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://schemas.emerson.com/common/envelope"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://services.emerson.com/customer"
+         xmlns:ns2="http://schemas.emerson.com/customer"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:CEH_BPEL_ProcessCustomer"
+                 myRole="CEH_BPEL_ProcessCustomerProvider"/>
+    <partnerLink name="CustomerBusinessService"
+                 partnerRole="CustomerPortType_Role"
+                 partnerLinkType="ns3:CustomerPortType_PL"/>
+    <partnerLink name="CEH_BPEL_CommonErrorHandler"
+                 partnerRole="CEH_BPEL_CommonErrorHandlerProvider"
+                 partnerLinkType="ns4:CEH_BPEL_CommonErrorHandler"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="G_IN_inputVariable"
+              messageType="client:CEH_BPEL_ProcessCustomerRequestMessage"/>
+    <variable name="G_HeaderElement" element="ns1:header"/>
+    <variable name="G_BodyElement" element="ns1:body"/>
+    <variable name="G_CustomerRequest" messageType="ns3:RequestMessage"/>
+    <variable name="L_CustomerServiceResponse"
+              messageType="ns3:ResponseMessage"/>
+    <variable name="Flt_dataFault" messageType="ns3:FaultMessage"/>
+    <variable name="L_ProcessDetails" element="ns1:process"/>
+    <variable name="L_CommonErrorHandler_Request"
+              messageType="ns4:CEH_BPEL_CommonErrorHandlerRequestMessage"/>
+    <variable name="Flt_SelectionFailure"
+              messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="Flt_BindingFault" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="L_AnyFault" type="xsd:string"/>
+    <variable name="FaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+  </variables>
+  <faultHandlers>
+    <catch faultName="ns3:DataFault" faultVariable="Flt_dataFault">
+      <sequence name="Sequence_1">
+        <assign name="Assign_ErrorMessage">
+          <copy>
+            <from variable="Flt_dataFault" part="faultPart"
+                  query="/ns3:fault/ns1:faultCode"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorID"/>
+          </copy>
+          <copy>
+            <from variable="Flt_dataFault" part="faultPart"
+                  query="/ns3:fault/ns1:faultMessage"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorMessageCode"/>
+          </copy>
+          <copy>
+            <from variable="Flt_dataFault" part="faultPart"
+                  query="/ns3:fault/ns1:faultSummary"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorReason"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement" query="/ns1:header"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageHeader"/>
+          </copy>
+          <copy>
+            <from variable="G_BodyElement" query="/ns1:body/ns1:xmlPayload"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessagePayload"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement" query="/ns1:header/ns1:flowID"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:flowID"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:originalSource"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:source"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:destination"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:destination"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/@ns1:processID"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processID"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/node()"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processName"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/@ns1:location"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processLocation"/>
+          </copy>
+          <copy>
+            <from expression="string('LabTest')"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:environment"/>
+          </copy>
+          <copy>
+            <from expression="string('BPEL')"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processType"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorTime"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_CommonErrorHandler"
+                partnerLink="CEH_BPEL_CommonErrorHandler"
+                portType="ns4:CEH_BPEL_CommonErrorHandler"
+                operation="handleError"
+                inputVariable="L_CommonErrorHandler_Request"/>
+      </sequence>
+    </catch>
+    <catch faultName="bpws:selectionFailure"
+           faultVariable="Flt_SelectionFailure">
+      <sequence name="Sequence_3">
+        <assign name="Assign_selectionFailure">
+          <!--<copy>
+            <from variable="Flt_SelectionFailure" part="code"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorID"/>
+          </copy>
+          <copy>
+            <from variable="Flt_SelectionFailure" part="summary"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorMessageCode"/>
+          </copy>-->
+          <copy>
+            <from variable="G_HeaderElement" query="/ns1:header"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageHeader"/>
+          </copy>
+          <copy>
+            <from variable="G_BodyElement" query="/ns1:body/ns1:xmlPayload"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessagePayload"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement" query="/ns1:header/ns1:flowID"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:flowID"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:originalSource"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:source"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:destination"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:destination"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/@ns1:processID"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processID"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/node()"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processName"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/@ns1:location"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processLocation"/>
+          </copy>
+          <copy>
+            <from expression="string('LabTest')"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:environment"/>
+          </copy>
+          <copy>
+            <from expression="string('BPEL')"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processType"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorTime"/>
+          </copy>
+          <copy>
+            <from variable="Flt_SelectionFailure" part="summary"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorReason"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_CommonErrorHandler"
+                partnerLink="CEH_BPEL_CommonErrorHandler"
+                portType="ns4:CEH_BPEL_CommonErrorHandler"
+                operation="handleError"
+                inputVariable="L_CommonErrorHandler_Request"/>
+      </sequence>
+    </catch>
+    <catchAll>
+      <sequence name="Sequence_2">
+        <assign name="Assign_AnyFaultMsg">
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="L_AnyFault"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement" query="/ns1:header"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageHeader"/>
+          </copy>
+          <copy>
+            <from variable="G_BodyElement" query="/ns1:body/ns1:xmlPayload"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessagePayload"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement" query="/ns1:header/ns1:flowID"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:flowID"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:originalSource"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:source"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:destination"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:destination"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/@ns1:processID"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processID"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/node()"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processName"/>
+          </copy>
+          <copy>
+            <from variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process[last()]/@ns1:location"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processLocation"/>
+          </copy>
+          <copy>
+            <from expression="string('LabTest')"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:environment"/>
+          </copy>
+          <copy>
+            <from expression="string('BPEL')"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processType"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="L_CommonErrorHandler_Request" part="payload"
+                query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:errorTime"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_CommonErrorHandler"
+                partnerLink="CEH_BPEL_CommonErrorHandler"
+                portType="ns4:CEH_BPEL_CommonErrorHandler"
+                operation="handleError"
+                inputVariable="L_CommonErrorHandler_Request"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in CEH_BPEL_ProcessCustomer.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:CEH_BPEL_ProcessCustomer" operation="process"
+             variable="G_IN_inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_ProcessDetails">
+      <copy>
+        <from expression="ora:getInstanceId()"/>
+        <to variable="L_ProcessDetails" query="/ns1:process/@ns1:processID"/>
+      </copy>
+      <copy>
+        <from expression="ora:getProcessId()"/>
+        <to variable="L_ProcessDetails" query="/ns1:process"/>
+      </copy>
+    </assign>
+    <assign name="Assign_RoutingInfo">
+      <!-- <copy>
+        <from variable="G_BodyElement" query="/ns1:body/ns1:xmlPayload/node()"/>
+        <to variable="G_CustomerRequest" part="requestPart"/>
+      </copy>-->
+      <!--<copy>
+        <from variable="G_HeaderElement"
+              query="/ns1:header/ns1:routingInfo/ns1:process"/>
+        <to variable="L_CommonErrorHandler_Request" part="payload"
+            query="/ns5:errorMessage/ns5:errorMessageDetails/ns5:processDetails/ns5:processName"/>
+      </copy>-->
+      <copy>
+        <from variable="G_IN_inputVariable" part="payload"
+              query="/ns1:envelope/ns1:header"/>
+        <to variable="G_HeaderElement" query="/ns1:header"/>
+      </copy>
+      <copy>
+        <from variable="G_IN_inputVariable" part="payload"
+              query="/ns1:envelope/ns1:body/ns1:xmlPayload"/>
+        <to variable="G_BodyElement" query="/ns1:body/ns1:xmlPayload"/>
+      </copy>
+      <bpelx:insertAfter>
+        <bpelx:from variable="L_ProcessDetails" query="/ns1:process"/>
+        <bpelx:to variable="G_HeaderElement"
+                  query="/ns1:header/ns1:routingInfo/ns1:process"/>
+      </bpelx:insertAfter>
+      <copy>
+        <from expression="string('CEH_JWS_CustomerService')"/>
+        <to variable="G_HeaderElement" query="/ns1:header/ns1:destination"/>
+      </copy>
+    </assign>
+    <empty name="Empty_Logging"/>
+    <assign name="Transform_EnvelopeBodyToCustomer">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('envelopeBody_To_customer.xsl',bpws:getVariableData('G_BodyElement'))"/>
+        <to variable="G_CustomerRequest" part="requestPart"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_CustomerBusinessService"
+            partnerLink="CustomerBusinessService"
+            portType="ns3:CustomerPortType" operation="processCustomer"
+            inputVariable="G_CustomerRequest"
+            outputVariable="L_CustomerServiceResponse"
+            bpelx:inputHeaderVariable="G_HeaderElement"/>
+  </sequence>
+</process>

@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS" guid="9DFEA30076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ETH_DEQJMS_POAck_CustomOAGIS_9_0</description>
+   <versionInfo>
+      <ID>1275301749244</ID>
+      <lastModifiedTime>Mon May 31 10:29:09 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+   </versionInfo>
+   <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_DEQJMS_POAck_CustomOAGIS_9_0.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_POAck_CustomOAGIS_9_0/">tns:Consume_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="9E083FF076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomAcknowledgePurchaseOrder" element="tns:CustomAcknowledgePO"/>
+         <routingRules>
+            <routingRule guid="273B34F076EA11DE8F6D571805253247" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C794156176E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_Transform_CustomFlatFile_RS.execute" serviceGUID="C794156076E611DE8F6D571805253247" serviceQName="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_Transform_CustomFlatFile_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>CustomAcknowledgePO_To_CustomLiebertPOAck_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

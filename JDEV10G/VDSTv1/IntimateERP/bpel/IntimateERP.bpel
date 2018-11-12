@@ -1,0 +1,78 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Nov 04 01:09:04 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="IntimateERP"
+         targetNamespace="http://services.emerson.com/IntimateERP"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:client="http://services.emerson.com/IntimateERP"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Poll_triggerFile/"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns2="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="Poll_triggerFile"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="ConversionWebService"
+                 partnerRole="ConversionWebServicePortType_Role"
+                 partnerLinkType="ns2:ConversionWebServicePortType_PL"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_1_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="Invoke_1_importERPData_InputVariable"
+              messageType="ns2:ImportERPData"/>
+    <variable name="Invoke_1_importERPData_OutputVariable"
+              messageType="ns2:ImportERPDataResponse"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="Poll_triggerFile"
+             portType="ns1:Read_ptt" operation="Read"
+             variable="Receive_1_Read_InputVariable" createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from expression="string('SessionID')"/>
+        <to variable="Invoke_1_importERPData_InputVariable" part="parameters"
+            query="/ns2:importERPData/SessionID"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="ConversionWebService"
+            portType="ns2:ConversionWebServicePortType"
+            operation="importERPData"
+            inputVariable="Invoke_1_importERPData_InputVariable"
+            outputVariable="Invoke_1_importERPData_OutputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,57 @@
+<definitions
+     name="readRejectedMsg"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/readRejectedMsg/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/readRejectedMsg/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/" location="aqAdapterInboundHeader.wsdl"/>
+    <types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </types>
+    <message name="Dequeue_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="Dequeue_ptt">
+        <operation name="Dequeue">
+            <input message="tns:Dequeue_msg"/>
+        </operation>
+    </portType>
+    <binding name="Dequeue_binding" type="tns:Dequeue_ptt">
+    <pc:inbound_binding  />
+        <operation name="Dequeue">
+      <jca:operation
+          ActivationSpec="oracle.tip.adapter.aq.inbound.AQDequeueActivationSpec"
+          QueueName="REJECTION_QUEUE"
+          DatabaseSchema="AQ"
+          OpaqueSchema="true" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:Header" part="Header"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="readRejectedMsg">
+        <port name="Dequeue_pt" binding="tns:Dequeue_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/AqAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/AQ/OracleXE is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/AQ/OracleXE" UIConnectionName="OracleXE"/>
+        </port>
+    </service>
+  <plt:partnerLinkType name="Dequeue_plt" >
+    <plt:role name="Dequeue_role" >
+      <plt:portType name="tns:Dequeue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

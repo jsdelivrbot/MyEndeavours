@@ -1,0 +1,67 @@
+<definitions
+     name="LBT_Read_ItemNumber"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/LBT_Read_ItemNumber/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/LBT_Read_ItemNumber/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://TargetNamespace.com/InboundService"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterOutboundHeader.wsdl"/>
+    <types>
+      <!--<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/LBT_Read_ItemNumber/"-->
+      
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <!--<import namespace="http://TargetNamespace.com/InboundService" schemaLocation="ItemMaster_1.xsd" />-->
+        <element name="opaqueElement" type="base64Binary" />
+        <element name="empty"><complexType/></element>
+      </schema>
+    </types>
+    <message name="Empty_msg">
+        <part name="Empty" element="opaque:empty"/>
+    </message>
+    
+    <!--<message name="Root-Element_msg">
+        <part name="Root-Element" element="imp1:Root-Element"/>
+    </message> -->
+    
+    <message name="SynchRead_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    
+    <portType name="SynchRead_ptt">
+        <operation name="SynchRead">
+            <input message="tns:Empty_msg"/>
+            <output message="tns:SynchRead_msg"/>
+        </operation>
+    </portType>
+    <binding name="SynchRead_binding" type="tns:SynchRead_ptt">
+    <jca:binding  />
+        <operation name="SynchRead">
+      <jca:operation
+          FileType="ascii"
+          PhysicalDirectory="infile"
+          InteractionSpec="oracle.tip.adapter.ftp.outbound.FTPReadInteractionSpec"
+          DeleteFile="false"
+          FileName="ENPItemNumber.csv"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="LBT_Read_ItemNumber">
+        <port name="SynchRead_pt" binding="tns:SynchRead_binding">
+      <jca:address location="eis/FTP/Liebert_Vendavo" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="SynchRead_plt" >
+    <plt:role name="SynchRead_role" >
+      <plt:portType name="tns:SynchRead_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

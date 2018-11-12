@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ETH_BPEL_EmailESBErrors" src="ETH_BPEL_EmailESBErrors.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ETH_JMST_DEQ_ESBError">
+            <property name="wsdlLocation">ETH_JMST_DEQ_ESBError.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="NotificationService">
+            <property name="wsdlLocation">NotificationService.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ETH_JMST_DEQ_ESBError">
+            <property name="portType">Consume_Message_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

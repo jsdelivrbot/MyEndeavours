@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL" src="LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="Read_CTL">
+            <property name="wsdlLocation">Read_CTL.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="NotificationService">
+            <property name="wsdlLocation">NotificationService.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="WriteCTL">
+            <property name="wsdlLocation">WriteCTL.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

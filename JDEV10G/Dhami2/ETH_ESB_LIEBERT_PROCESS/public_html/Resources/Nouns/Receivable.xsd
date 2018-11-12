@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\Receivable.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="Receivable" type="ReceivableType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Receivable is a transaction representing an invoice, credit memo or debit memo to a customer.  A receivable is an open (unpaid) item in the Accounts Receivable ledger.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReceivableHeader" type="ReceivableHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that applies to the entire receivable document, including totals, invoice identifier, and description.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReceivableLine" type="ReceivableLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Line associated with the receivable document.  Can be an invoice line.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ReceivableType">
+                <xsd:sequence>
+                        <xsd:element ref="ReceivableHeader" minOccurs="0"/>
+                        <xsd:element ref="ReceivableLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ReceivableHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="LedgerEntryHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="BillToParty" minOccurs="0"/>
+                                        <xsd:element ref="ShipToParty" minOccurs="0"/>
+                                        <xsd:group ref="TaxesGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ReceivableLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="LedgerEntryLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,42 @@
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="unqualified"
+	targetNamespace="http://xmlns.emrsn.com/CustomChange_PO_006"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:cus6="http://xmlns.emrsn.com/CommonChangePO_006">
+        
+        <import namespace="http://xmlns.emrsn.com/CommonChangePO_006" 
+                schemaLocation="CommonChange_PO_006.xsd"/>
+        
+	<element name="CustomChange_PO_006">
+		<complexType>
+			<sequence>
+        			<element ref="cus6:CHANGE_PO_006"/>                                
+                                <element name="Message_id" type="string"/>
+                                <element name="Message_type" type="string"/>
+                                <element name="Message_standard" type="string"/>
+                                <element name="Message_direction" type="string"/>
+                                <element name="Transaction_type" type="string"/>
+                                <element name="Transaction_subtype" type="string"/>
+                                <element name="Document_number" type="string"/>
+                                <element name="Flow_id_1" type="string"/>
+				<element name="Flow_id_2" type="string"/>
+                                <element name="Sender_id" type="string"/>
+                                <element name="Sender_name" type="string"/>
+				<element name="Sender_system_type" type="string"/>
+                                <element name="Party_name" type="string"/>
+                                <element name="Party_id" type="string"/>
+                                <element name="Party_site_id" type="string"/>
+                                <element name="Party_type" type="string"/>
+                                <element name="Protocol_type" type="string"/>
+                                <element name="Protocol_address" type="string"/>
+                                <element name="Username" type="string"/>
+                                <element name="Password" type="string"/>
+                                <element name="Attribute1" type="string"/>
+                                <element name="Attribute2" type="string"/>
+                                <element name="Attribute3" type="string"/>
+                                <element name="Attribute4" type="string"/>
+                                <element name="Attribute5" type="string"/>
+        		</sequence>
+		</complexType>
+	</element>
+</schema>

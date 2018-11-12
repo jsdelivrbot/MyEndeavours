@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_PUTFTP_Feed1" guid="32E44C20059611DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_PUTFTP_Feed1" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="FTP" typeDescription="Outbound FTP Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1263982874723</ID>
+      <lastModifiedTime>Wed Jan 20 10:21:14 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami3_ETH_FTP_Intake</lastModifiedUser>
+   </versionInfo>
+   <parent guid="3BF23800059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_PUTFTP_Feed1.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_Feed1/">tns:Put_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_TestRnDServices/ETHSysGrp_FTPInput/ETH_PUTFTP_Feed1?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa.emerson.com:8800/event/ETHSystem_TestRnDServices/ETHSysGrp_FTPInput/ETH_PUTFTP_Feed1</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="32E90710059611DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_PUTFTP_Feed1.Put" wsdlOperation="Put" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+      </operationInfo>
+   </operations>
+</service>

@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ProcessPO_B2B" guid="DD1FD82022DE11DFBF87578BBCB77E08" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_B2B" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1271412048134</ID>
+      <lastModifiedTime>Fri Apr 16 10:00:48 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETHSystem_OutputServices_ETHSysGrp_B2BInOut_ETH_ProcessPO_B2B.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSystem_OutputServices_ETHSysGrp_B2BInOut">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_B2B?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_B2B</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="DD3079F022DE11DFBF87578BBCB77E08" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_B2B.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:ProcessPurchaseOrder"/>
+         <routingRules>
+            <routingRule guid="36A48FD022DF11DFBF87578BBCB77E08" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="977D0080097C11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B.Enqueue" serviceGUID="97736390097C11DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_Oagis_9_0_to_B2B" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>ProcessPurchaseOrder_To_B2B_WithHeader_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

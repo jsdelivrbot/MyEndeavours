@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_INSERT/UPdate_InventoryOrg" guid="99C775617F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1228925064990</ID>
+      <lastModifiedTime>Wed Dec 10 16:04:24 GMT+00:00 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>LBT_INSERT_UPdate_InventoryOrg.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_INSERT_UPdate_InventoryOrg/">tns:LBT_INSERT/UPdate_InventoryOrg_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_INSERT/UPdate_InventoryOrg?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_INSERT/UPdate_InventoryOrg</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="99C9BF507F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg.merge" wsdlOperation="merge" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTUPdateInventoryOrg" element="tns:EmrInventoryOrgCollection"/>
+      </operationInfo>
+      <operationInfo guid="99C9BF517F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg.write" wsdlOperation="write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTUPdateInventoryOrg" element="tns:EmrInventoryOrgCollection"/>
+      </operationInfo>
+   </operations>
+</service>

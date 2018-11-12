@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.4.795 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:tns="http://schemas.emerson.com/common/errorMessage" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.emerson.com/common/errorMessage" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="errorMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="errorMessageHeader" type="xs:anyType" />
+        <xs:element name="errorMessagePayload" type="xs:anyType" />
+        <xs:element name="errorMessageDetails" type="tns:errorMessageDetailsType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="errorMessageDetailsType">
+    <xs:sequence>
+      <xs:element name="flowID" type="xs:string" />
+      <xs:element name="source" type="xs:string" />
+      <xs:element name="destination" type="xs:string" />
+      <xs:element name="processDetails" type="tns:processDetailsType" />
+      <xs:element name="errorTime" type="xs:dateTime" />
+      <xs:element default="LabTest" name="environment" type="tns:environmentTypeEnum" />
+      <xs:element name="errorID" type="xs:string" />
+      <xs:element name="errorMessageCode" type="xs:string" />
+      <xs:element name="errorReason" type="xs:string" />
+      <xs:element name="errorException" type="xs:string" />
+      <xs:element name="errorStacktrace" type="xs:string" />
+      <xs:element name="errorProperties" type="tns:errorPropertiesType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="propertyType">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="value" type="xsd:string" />
+    </xsd:sequence>
+  </xs:complexType>
+  <xs:complexType name="errorPropertiesType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="errorProperty" type="tns:propertyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="processDetailsType">
+    <xs:sequence>
+      <xs:element name="processID" type="xs:string" />
+      <xs:element name="processName" type="xs:string" />
+      <xs:element name="processType" type="tns:processTypeEnum" />
+      <xs:element name="processLocation" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="environmentTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Development" />
+      <xs:enumeration value="LabTest" />
+      <xs:enumeration value="Staging" />
+      <xs:enumeration value="Production" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="processTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ESB" />
+      <xs:enumeration value="BPEL" />
+      <xs:enumeration value="JWS" />
+      <xs:enumeration value="EWS" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="VDST_BPEL_CSV_CatalogPricingProvABCS" src="VDST_BPEL_CSV_CatalogPricingProvABCS.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="VDST_JMSQDEQ_CSV_CatalogPricing">
+            <property name="wsdlLocation">VDST_JMSQDEQ_CSV_CatalogPricing.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ConversionWebService">
+            <property name="wsdlLocation">ConversionWebService.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="VDST_DBINS_CatalogPricing">
+            <property name="wsdlLocation">VDST_DBINS_CatalogPricing.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="VDST_JMSQDEQ_CSV_CatalogPricing">
+            <property name="destinationJNDI">jms/vdst_q/cnp/CP_ProvABCS_CSV</property>
+            <property name="factoryJNDI">eis/VDST/QueueConnectionFactory</property>
+            <property name="portType">Consume_Message_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

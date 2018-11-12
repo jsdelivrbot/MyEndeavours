@@ -1,0 +1,51 @@
+<definitions
+     name="ETH_PUTFTP_POAck_Liebert_FlatFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_POAck_Liebert_FlatFile/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_POAck_Liebert_FlatFile/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://xmlns.emrsn.com/POAckFlatFile"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/POAckFlatFile" schemaLocation="public_html/LiebertFlatFileOutput_POAck.xsd" />
+      </schema>
+    </types>
+    <message name="Root-Element_msg">
+        <part name="Root-Element" element="imp1:Root-Element"/>
+    </message>
+    <portType name="Put_ptt">
+        <operation name="Put">
+            <input message="tns:Root-Element_msg"/>
+        </operation>
+    </portType>
+    <binding name="Put_binding" type="tns:Put_ptt">
+    <jca:binding  />
+        <operation name="Put">
+      <jca:operation
+          FileType="ascii"
+          LogicalDirectory="ETH_Liebert_FTP_Out"
+          InteractionSpec="oracle.tip.adapter.ftp.outbound.FTPInteractionSpec"
+          FileNamingConvention="ETH_Liebert_POAck_%yyMMddHHmmssSS%.txt"
+          NumberMessages="1"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_PUTFTP_POAck_Liebert_FlatFile">
+        <port name="Put_pt" binding="tns:Put_binding">
+      <jca:address location="eis/Ftp/ETH_LIEBERT" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Put_plt" >
+    <plt:role name="Put_role" >
+      <plt:portType name="tns:Put_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

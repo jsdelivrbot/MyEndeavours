@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<system name="Search_MDMHUB" guid="138C69E1809311DDBFD8950892A6F037" qname="Search_MDMHUB" status="ENABLED">
+   <versionInfo>
+      <ID>1221208703126</ID>
+      <lastModifiedTime>Fri Sep 12 14:08:23 IST 2008</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <description/>
+   <parameters>
+      <parameter name="Fax"/>
+      <parameter name="Mobile"/>
+      <parameter name="Host">localhost</parameter>
+      <parameter name="Phone"/>
+      <parameter name="Pager"/>
+      <parameter name="Email"/>
+      <parameter name="Port">8888</parameter>
+   </parameters>
+   <clusterName>esb</clusterName>
+   <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+</system>

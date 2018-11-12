@@ -1,0 +1,28 @@
+<definitions
+     name="CEH_BPEL_ReceiveData"
+     targetNamespace="http://xmlns.oracle.com/CEH_BPEL_ReceiveData"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://schemas.emerson.com/common/envelope"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/CEH_BPEL_ReceiveData"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.emerson.com/common/envelope"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/CEH_BPEL_ReceiveData">
+            <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="CommonEnvelope.xsd"/>
+        </schema>
+    </types>
+    <message name="CEH_BPEL_ReceiveDataRequestMessage">
+        <part name="payload" element="ns1:envelope"/>
+    </message>
+    <portType name="CEH_BPEL_ReceiveData">
+        <operation name="initiate">
+            <input message="client:CEH_BPEL_ReceiveDataRequestMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="CEH_BPEL_ReceiveData">
+        <plnk:role name="CEH_BPEL_ReceiveDataProvider">
+            <plnk:portType name="client:CEH_BPEL_ReceiveData"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

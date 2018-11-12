@@ -1,0 +1,35 @@
+<definitions
+     name="FaultGenerator_BPEL"
+     targetNamespace="http://xmlns.emerson.com/FaultGenerator_BPEL"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://schemas.emerson.com/common/envelope"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns2="http://schemas.emerson.com/customer"
+     xmlns:client="http://xmlns.emerson.com/FaultGenerator_BPEL"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="CommonEnvelope.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://schemas.emerson.com/customer" schemaLocation="Customer.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="FaultGenerator_BPELRequestMessage">
+        <part name="payload" element="ns1:envelope"/>
+    </message>
+    <message name="FaultGenerator_BPELResponseMessage">
+        <part name="payload" element="ns1:envelope"/>
+    </message>
+    <portType name="FaultGenerator_BPEL">
+        <operation name="process">
+            <input message="client:FaultGenerator_BPELRequestMessage"/>
+            <output message="client:FaultGenerator_BPELResponseMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="FaultGenerator_BPEL">
+        <plnk:role name="FaultGenerator_BPELProvider">
+            <plnk:portType name="client:FaultGenerator_BPEL"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

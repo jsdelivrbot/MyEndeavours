@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Routing_ProcessCustomerService" guid="FECE324036F011DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.Routing_ProcessCustomerService" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1214809452748</ID>
+      <lastModifiedTime>Mon Jun 30 12:34:12 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDMApplication_Transform&amp;ValidateESBService</lastModifiedUser>
+   </versionInfo>
+   <parent guid="662E8A8036F011DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>esb:///ESB_Projects/MDMApplication_Transform&amp;ValidateESBService/Transform_ValidateSystem_Routing_ProcessCustomerService.wsdl</wsdlURL>
+      <portType xmlns:tns="http://www.gssamerica.com/mdm/Transform_ValidateSystem">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Transform&amp;ValidateSystem/Routing_ProcessCustomerService?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Transform&amp;ValidateSystem/Routing_ProcessCustomerService</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="FEDA192036F011DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.Routing_ProcessCustomerService.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbprocesscustomer" element="tns:ESBProcessCustomerRequest"/>
+         <routingRules>
+            <routingRule guid="201E5FF036F211DDBF87E36E13A58817" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="E802AA9136F111DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.WriteCreateFile.Write" serviceGUID="E802AA9036F111DDBF87E36E13A58817" serviceQName="Transform&amp;ValidateSystem.WriteCreateFile" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='CreateCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+               <transformation>
+                  <xslFileURL>esb:///ESB_Projects/MDMApplication_Transform&amp;ValidateESBService/ESBProcessCustomerRequest_To_CreateRecordsRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="29F0024036F711DDBF87E36E13A58817" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="2216461036F711DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.Invoke_Create_MDMRecords_BPELProcess.process" serviceGUID="220F413036F711DDBF87E36E13A58817" serviceQName="Transform&amp;ValidateSystem.Invoke_Create_MDMRecords_BPELProcess" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='CreateCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+               <transformation>
+                  <xslFileURL>esb:///ESB_Projects/MDMApplication_Transform&amp;ValidateESBService/ESBProcessCustomerRequest_To_CreateRecordsRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_DEQJMS_CustomChangePO" guid="0FD97630095A11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_DEQJMS_CustomChangePO" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1271412048134</ID>
+      <lastModifiedTime>Fri Apr 16 10:00:48 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="0FD97631095A11DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_DEQJMS_CustomChangePO_RS"/>
+      <interface>
+         <wsdlURL>ETH_DEQJMS_CustomChangePO.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_CustomChangePO/">tns:Consume_Message_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="clusterGroupId" value="ETHSysGrp_B2BInOut_Poller2"/>
+   </endpointProperties>
+</service>

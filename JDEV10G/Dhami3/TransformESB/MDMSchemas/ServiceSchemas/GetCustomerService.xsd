@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns="http://www.gssamerica.com/mdm/esbgetcustomer" elementFormDefault="unqualified" targetNamespace="http://www.gssamerica.com/mdm/esbgetcustomer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="../OAGIS/9_2/BODs/Standalone/GetCustomerPartyMaster/GetCustomerPartyMaster.xsd" namespace="http://www.openapplications.org/oagis/9" />
+  <xs:element name="ESBGetCustomerRequest" type="ESBGetCustomerRequestType" />
+  <xs:complexType name="ESBRequestHeaderType">
+    <xs:sequence>
+      <xs:element name="srcID" type="xs:string" />
+      <xs:element name="requestType" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ESBGetCustomerRequestType">
+    <xs:sequence>
+      <xs:element name="header" type="ESBRequestHeaderType" />
+      <xs:element name="body" type="ESBGetCustomerRequestBodyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ESBGetCustomerRequestBodyType">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://www.openapplications.org/oagis/9" ref="q1:GetCustomerPartyMaster" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

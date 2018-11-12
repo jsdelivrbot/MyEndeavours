@@ -1,0 +1,51 @@
+<definitions
+     name="Put_FTP_XMLFile"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/Put_FTP_XMLFile/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Put_FTP_XMLFile/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://schemas.emerson.com/customer"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schemas.emerson.com/customer" schemaLocation="Customer.xsd" />
+      </schema>
+    </types>
+    <message name="customer_msg">
+        <part name="customer" element="imp1:customer"/>
+    </message>
+    <portType name="Put_ptt">
+        <operation name="Put">
+            <input message="tns:customer_msg"/>
+        </operation>
+    </portType>
+    <binding name="Put_binding" type="tns:Put_ptt">
+    <jca:binding  />
+        <operation name="Put">
+      <jca:operation
+          FileType="ascii"
+          PhysicalDirectory="/outfile"
+          InteractionSpec="oracle.tip.adapter.ftp.outbound.FTPInteractionSpec"
+          FileNamingConvention="Inder_Test_notRejected%SEQ%.xml"
+          NumberMessages="1"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="Put_FTP_XMLFile">
+        <port name="Put_pt" binding="tns:Put_binding">
+      <jca:address location="eis/Ftp/InternalFTP" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Put_plt" >
+    <plt:role name="Put_role" >
+      <plt:portType name="tns:Put_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

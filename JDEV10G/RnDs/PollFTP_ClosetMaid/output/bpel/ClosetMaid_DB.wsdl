@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="ClosetMaid_DB"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ClosetMaid_DB/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ClosetMaid_DB/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ClosetMaidDB"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ClosetMaidDB"
+                schemaLocation="ClosetMaidDB_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="ClosetmaidDrwingsCollection_msg">
+        <part name="ClosetmaidDrwingsCollection" element="top:ClosetmaidDrwingsCollection"/>
+    </message>
+
+
+    <portType name="ClosetMaid_DB_ptt">
+        <operation name="merge">
+            <input message="tns:ClosetmaidDrwingsCollection_msg"/>
+        </operation>
+        <operation name="write">
+            <input message="tns:ClosetmaidDrwingsCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="ClosetMaid_DB_binding" type="tns:ClosetMaid_DB_ptt">
+        <jca:binding />
+        <operation name="merge">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ClosetMaidDB.ClosetmaidDrwings"
+                DmlType="merge"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="ClosetMaidDB_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="write">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ClosetMaidDB.ClosetmaidDrwings"
+                DmlType="write"
+                MappingsMetaDataURL="ClosetMaidDB_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/ClosetMaid is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="ClosetMaid_DB">
+        <port name="ClosetMaid_DB_pt" binding="tns:ClosetMaid_DB_binding">
+            <jca:address location="eis/DB/ClosetMaid"
+                UIConnectionName="OracleXE"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.OraclePlatform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//localhost:1521/xe"
+                mcf.UserName="system"
+                mcf.Password="47E570316F19A1CFFD2E2104BF5CA8FE"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="ClosetMaid_DB_plt" >
+        <plt:role name="ClosetMaid_DB_role" >
+            <plt:portType name="tns:ClosetMaid_DB_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

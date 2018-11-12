@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\RecoverWIP.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="RecoverWIP" type="RecoverWIPType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">RecoverWIP is used to notify a Manufacturing Application of the creation of usable production materials from material previously considered unsuitable for production use. This is most often likely to represent a return to production of scrap material.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RecoverWIPHeader" type="WIPDistributedEventHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information describing the recovered production order in the WIP Recovery/Bonus event.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RecoverWIPLine" type="RecoverWIPLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information describing the specific WIP Recovery/Bonus transaction to be processed.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="RecoverWIPType">
+                <xsd:sequence>
+                        <xsd:element ref="RecoverWIPHeader" minOccurs="0"/>
+                        <xsd:element ref="RecoverWIPLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="RecoverWIPLineType">
+                <xsd:sequence>
+                        <xsd:element ref="ItemQuantity" minOccurs="0"/>
+                        <xsd:element ref="Site" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the location that the RecoverWIP is intended.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="OperationReference" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a reference to the Operation in which the items are being recovered.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

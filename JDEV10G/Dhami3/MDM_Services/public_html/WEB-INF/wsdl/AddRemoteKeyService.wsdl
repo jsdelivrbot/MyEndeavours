@@ -1,0 +1,45 @@
+<definitions
+     name="AddRemoteKeyService"
+     targetNamespace="http://www.gssamerica.com/mdm/services/AddRemoteKeyService/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://www.gssamerica.com/mdm/services/AddRemoteKeyService/"
+     xmlns:mdm="http://www.gssamerica.com/mdm/services"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.gssamerica.com/mdm/services/AddRemoteKeyService/">
+            <xsd:import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="MDMService.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="AddRemoteKeyRequest">
+        <part name="AddRemoteKeyRequest" element="mdm:AddRemoteKeyRequest"/>
+    </message>
+    <message name="AddRemoteKeyResponse">
+        <part name="AddRemoteKeyResponse" element="mdm:ServiceReply"/>
+    </message>
+    <portType name="AddRemoteKey">
+        <operation name="addRemoteKey">
+            <input message="tns:AddRemoteKeyRequest"/>
+            <output message="tns:AddRemoteKeyResponse"/>
+        </operation>
+    </portType>
+    <binding name="AddRemoteKeySOAP" type="tns:AddRemoteKey">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="addRemoteKey">
+            <soap:operation soapAction="http://www.gssamerica.com/mdm/services/AddRemoteKeyService/addRemoteKey"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="AddRemoteKeyService">
+        <port name="AddRemoteKeySOAP" binding="tns:AddRemoteKeySOAP">
+            <soap:address location="http://10.0.2.20:8888/MDM-MDM_Services-context-root/AddRemoteKeySOAP"/>
+        </port>
+    </service>
+</definitions>

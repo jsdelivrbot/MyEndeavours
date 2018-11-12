@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="LBT_POLL_ITEM_COST_OUTBOUND"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_POLL_ITEM_COST_OUTBOUND/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_POLL_ITEM_COST_OUTBOUND/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPOLLITEMCOSTOUTBOUND"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPOLLITEMCOSTOUTBOUND"
+                schemaLocation="LBTPOLLITEMCOSTOUTBOUND_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="ItemCostOutboundCollection_msg">
+        <part name="ItemCostOutboundCollection" element="top:ItemCostOutboundCollection"/>
+    </message>
+
+    <portType name="LBT_POLL_ITEM_COST_OUTBOUND_ptt">
+        <operation name="receive">
+            <input message="tns:ItemCostOutboundCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="LBT_POLL_ITEM_COST_OUTBOUND_binding" type="tns:LBT_POLL_ITEM_COST_OUTBOUND_ptt">
+        <pc:inbound_binding/>
+        <operation name="receive">
+            <jca:operation
+                ActivationSpec="oracle.tip.adapter.db.DBActivationSpec"
+
+                DescriptorName="LBTPOLLITEMCOSTOUTBOUND.ItemCostOutbound"
+                QueryName="LBT_POLL_ITEM_COST_OUTBOUND"
+                PollingStrategyName="DeletePollingStrategy"
+                MaxRaiseSize="10000"
+                MaxTransactionSize="10000"
+                PollingInterval="7200"
+                NumberOfThreads="1"
+                UseBatchDestroy="false"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="LBTPOLLITEMCOSTOUTBOUND_toplink_mappings.xml" />
+        <input/>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/LBT_StagingENPDW is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="LBT_POLL_ITEM_COST_OUTBOUND">
+        <port name="LBT_POLL_ITEM_COST_OUTBOUND_pt" binding="tns:LBT_POLL_ITEM_COST_OUTBOUND_binding">
+            <jca:address location="eis/DB/LBT_StagingENPDW"
+                UIConnectionName="Staging"       />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="LBT_POLL_ITEM_COST_OUTBOUND_plt" >
+        <plt:role name="LBT_POLL_ITEM_COST_OUTBOUND_role" >
+            <plt:portType name="tns:LBT_POLL_ITEM_COST_OUTBOUND_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

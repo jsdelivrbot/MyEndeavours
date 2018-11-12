@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<metadata>
+   <system name="BPELSystem" guid="46E059505D3911DDBF4BC370CC7BF31A" qname="BPELSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1217313647773</ID>
+         <lastModifiedTime>Tue Jul 29 12:10:47 IST 2008</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="default" guid="46E75E305D3911DDBF4BC370CC7BF31A" qname="BPELSystem.default" status="ENABLED">
+         <versionInfo>
+            <ID>1217313647773</ID>
+            <lastModifiedTime>Tue Jul 29 12:10:47 IST 2008</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="46E059505D3911DDBF4BC370CC7BF31A" qname="BPELSystem" type="system"/>
+         <serviceGroup name="Create_MDMRecords_BPELProcess" guid="46E9CF305D3911DDBF4BC370CC7BF31A" qname="BPELSystem.default.Create_MDMRecords_BPELProcess" status="ENABLED">
+            <versionInfo>
+               <ID>1217313647773</ID>
+               <lastModifiedTime>Tue Jul 29 12:10:47 IST 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46E75E305D3911DDBF4BC370CC7BF31A" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="Update_MDMRecords_BPELProcess" guid="AE8A21305D3911DDBF4BC370CC7BF31A" qname="BPELSystem.default.Update_MDMRecords_BPELProcess" status="ENABLED">
+            <versionInfo>
+               <ID>1217313821489</ID>
+               <lastModifiedTime>Tue Jul 29 12:13:41 IST 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46E75E305D3911DDBF4BC370CC7BF31A" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="Delete_MDMRecords_BPELProcess" guid="77B7F410622111DDBF94451F7807F159" qname="BPELSystem.default.Delete_MDMRecords_BPELProcess" status="ENABLED">
+            <versionInfo>
+               <ID>1217853178219</ID>
+               <lastModifiedTime>Mon Aug 04 18:02:58 IST 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46E75E305D3911DDBF4BC370CC7BF31A" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+   </system>
+   <system name="TransformESB" guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" status="ENABLED">
+      <versionInfo>
+         <ID>1217331594306</ID>
+         <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="Search_MDMHUB" guid="138C69E1809311DDBFD8950892A6F037" qname="Search_MDMHUB" status="ENABLED">
+      <versionInfo>
+         <ID>1221208703126</ID>
+         <lastModifiedTime>Fri Sep 12 14:08:23 IST 2008</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <service name="MDMScearchRecords" guid="6314397080A211DDBFD8950892A6F037" qname="Search_MDMHUB.MDMScearchRecords" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1221208623553</ID>
+            <lastModifiedTime>Fri Sep 12 14:07:03 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_Search_MDMHUB_ESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="138C69E1809311DDBFD8950892A6F037" qname="Search_MDMHUB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>http://gdc-18:8888/MDM_Services/MDMSearchRecordSOAP?wsdl</wsdlURL>
+            <portType xmlns:tns="http://www.gssamerica.com/mdm/services/MDMSearchRecord/">tns:MDMSearchRecord</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/Search_MDMHUB/MDMScearchRecords?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/Search_MDMHUB/MDMScearchRecords</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="6316AA7080A211DDBFD8950892A6F037" qname="Search_MDMHUB.MDMScearchRecords.lookupRecord" wsdlOperation="lookupRecord" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:LookupSearchRequest"/>
+               <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://gdc-18:8888/MDM_Services/MDMService.xsd"/>
+            </operationInfo>
+            <operationInfo guid="6316AA7180A211DDBFD8950892A6F037" qname="Search_MDMHUB.MDMScearchRecords.searchRecord" wsdlOperation="searchRecord" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:SearchRecordRequest"/>
+               <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://gdc-18:8888/MDM_Services/MDMService.xsd"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="Search_MDMHUB_Routing" guid="A85C201080A211DDBFD8950892A6F037" qname="Search_MDMHUB.Search_MDMHUB_Routing" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED" dirty="true">
+         <versionInfo>
+            <ID>1221208623553</ID>
+            <lastModifiedTime>Fri Sep 12 14:07:03 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_Search_MDMHUB_ESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="138C69E1809311DDBFD8950892A6F037" qname="Search_MDMHUB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Search_MDMHUB.wsdl</wsdlURL>
+            <portType xmlns:tns="http://www.gssamerica.com/mdm/services/Search_MDMHUB/">tns:Search_MDMHUB</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/Search_MDMHUB/Search_MDMHUB_Routing?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/Search_MDMHUB/Search_MDMHUB_Routing</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="A8682E0080A211DDBFD8950892A6F037" qname="Search_MDMHUB.Search_MDMHUB_Routing.searchByRecordId" wsdlOperation="searchByRecordId" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" element="tns:ESBProcessCustomerRequest" xmlns:tns="http://www.gssamerica.com/mdm/esbprocesscustomer"/>
+               <reply validate="false" element="tns:ESBResponse" schemaLocation="esb:///ESB_Projects/MDM_Search_MDMHUB_ESB/ESBResponse.xsd" xmlns:tns="http://www.gssamerica.com/mdm/createesbresponse"/>
+               <routingRules/>
+            </operationInfo>
+         </operations>
+      </service>
+   </system>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+</metadata>

@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ETH_BPEL_XMLGTW_DQ" src="ETH_BPEL_XMLGTW_DQ.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ETH_XMLGTWAQ_DQ">
+            <property name="wsdlLocation">ETH_XMLGTWAQ_DQ.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ETH_XMLGTWAQ_DQ">
+            <property name="portType">DequeueXMLGTW_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

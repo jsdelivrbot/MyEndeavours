@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\EngineeringChangeOrder.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="EngineeringChangeOrder" type="EngineeringChangeOrderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">An EngineeringChangeOrder can be used to request a change to an manufactured item. This document allows the Change to progress through the different states from being a request and going through the review process to becoming an approved EngineeringChangeOrder.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RevisedBOMComponent" type="RevisedBOMComponentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes any Bill of Material that may be impacted by a given Engineering Change</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RevisedItemRevision" type="RevisedItemRevisionType"/>
+        <xsd:element name="RevisedSubstituteItem" type="RevisedSubstituteItemType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the changes to valid substitution that can be made for any Bill of Material Component.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RevisedReferenceDesignator" type="RevisedReferenceDesignatorType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the Location on the Drawing or Blueprint that the Bill of Material Component item is used. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EngineeringChangeHeader" type="EngineeringChangeHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Engineering Change Header information.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EngineeringChangeDetail" type="EngineeringChangeLineType"/>
+        <xsd:element name="EngineeringChangeRevision" type="EngineeringChangeRevisionType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Engineering Change Revision information.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EngineeringChangeReviewer" type="EngineeringChangeReviewType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the reviewers of the engineering change. It is their responsiblity to either approve or reject the engineering change document.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EngineeringChangeRevisedBOM" type="RevisedBOMType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the components of a Bill of Material that will be effected by a given engineering Change. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EngineeringChangeRevisedRoute" type="RevisedRouteType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that generally describes the routing. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="EngineeringChangeRevisedRouteOperation" type="RevisedRouteOperationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information specifying the operations and there order for the specified routing.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RevisedItemStatus" type="StatusType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a classification you can use to track and control a revised item's life cycle. Revised item statuses include Open, Released, Scheduled, Hold, Implemented and Cancelled.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="EngineeringChangeOrderType">
+                <xsd:sequence>
+                        <xsd:element ref="EngineeringChangeHeader" minOccurs="0"/>
+                        <xsd:element ref="EngineeringChangeDetail" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="EngineeringChangeHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="PriorityCode" minOccurs="0"/>
+                                        <xsd:element ref="ApprovalDateTime" minOccurs="0"/>
+                                        <xsd:element ref="EstimatedEngineeringCost" minOccurs="0"/>
+                                        <xsd:element ref="EstimatedManufacturingCost" minOccurs="0"/>
+                                        <xsd:element ref="ImplementationDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ApprovalRequiredByDateTime" minOccurs="0"/>
+                                        <xsd:element ref="RequesterParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Site" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="EngineeringChangeLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="EngineeringChangeRevision" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EngineeringChangeReviewer" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EngineeringChangeRevisedBOM" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EngineeringChangeRevisedRoute" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="EngineeringChangeRevisionType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="RevisionID" minOccurs="0"/>
+                                        <xsd:element ref="RequesterParty" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies who proposed this revision. This maybe someone with in the company or from someone in the companies Supply Chain.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Location" minOccurs="0"/>
+                                        <xsd:element ref="CreationDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ApprovalDateTime" minOccurs="0"/>
+                                        <xsd:element ref="RejectedDateTime" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="EngineeringChangeReviewType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="EngineeringChangeRevisionID" minOccurs="0"/>
+                                        <xsd:element ref="ReviewerParty" minOccurs="0"/>
+                                        <xsd:element ref="ApprovalEffectivePeriod" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RevisedRouteType">
+                <xsd:complexContent>
+                        <xsd:extension base="DocumentReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ImplementationDateTime" minOccurs="0"/>
+                                        <xsd:element ref="EngineeringChangeRevisedRouteOperation" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RevisedRouteOperationType">
+                <xsd:complexContent>
+                        <xsd:extension base="OperationReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ImplementationDateTime" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RevisedBOMType">
+                <xsd:complexContent>
+                        <xsd:extension base="BOMReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ImplementationDateTime" minOccurs="0"/>
+                                        <xsd:element ref="CancelDateTime" minOccurs="0"/>
+                                        <xsd:element ref="Disposition" minOccurs="0"/>
+                                        <xsd:element ref="InMRPPlanIndicator" minOccurs="0"/>
+                                        <xsd:element ref="IncludeInPlanIndicator" minOccurs="0"/>
+                                        <xsd:element ref="UpdateWIPIndicator" minOccurs="0"/>
+                                        <xsd:element ref="NewRevisionIndicator" minOccurs="0"/>
+                                        <xsd:element ref="UseUpInventoryIndicator" minOccurs="0"/>
+                                        <xsd:element ref="OldItemRevisionIndicator" minOccurs="0"/>
+                                        <xsd:element ref="NewItemRevisionIndicator" minOccurs="0"/>
+                                        <xsd:element ref="UseUpItem" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Site" minOccurs="0"/>
+                                        <xsd:element ref="RevisedBOMComponent" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RevisedBOMComponentType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="SequenceCode" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ImplementationDateTime" minOccurs="0"/>
+                                        <xsd:element ref="RevisedItemRevision" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RevisedSubstituteItem" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RevisedReferenceDesignator" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RevisedItemRevisionType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="SequenceCode" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ImplementationDateTime" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RevisedSubstituteItemType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ItemQuantity" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RevisedReferenceDesignatorType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the Location on the Drawing or Blueprint that the Bill of Material Component item is used. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ReferenceDesignatorID" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:group ref="ReferencesGroup"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

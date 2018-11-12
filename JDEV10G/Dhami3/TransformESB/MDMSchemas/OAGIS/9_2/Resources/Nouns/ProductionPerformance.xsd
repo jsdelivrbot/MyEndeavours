@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/ProductionPerformance.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:complexType name="ProductionPerformanceType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="DocumentDateTime" minOccurs="0"/>
+                        <xsd:element name="ProductionScheduleReference" type="SemanticDocumentReferenceType" minOccurs="0"/>
+                        <xsd:element ref="ReportTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="EquipmentElementLevel" minOccurs="0"/>
+                        <xsd:element ref="ProductionResponse" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ResponseStateCode" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ProductionResponseType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="ProductionRequestID" minOccurs="0"/>
+                        <xsd:element ref="ProductProductionRuleID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="ReportTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="PerformanceSegmentResponse" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ResponseStateCode" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="MaterialProducedActual" type="ManufacturingMaterialType"/>
+        <xsd:element name="MaterialConsumedActual" type="ManufacturingMaterialType"/>
+        <xsd:element name="ConsumableActual" type="ManufacturingMaterialType"/>
+        <xsd:element name="ProductionPerformance" type="ProductionPerformanceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">
+				Work-in-Progress confirmation represents confirmation of
+				the movement of WIP materials. The noun refers to
+				general information about the entire WIP transaction, as
+				well as line item detail about the specific WIP
+				operation or routing step. This may apply to the
+				movement of raw materials or finished products.
+			</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ProductionResponse" type="ProductionResponseType"/>
+        <xsd:complexType name="PerformanceSegmentResponseType">
+                <xsd:complexContent>
+                        <xsd:extension base="SegmentResponseBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ProductionData" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PersonnelActual" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EquipmentActual" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="MaterialActual" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="PerformanceSegmentResponse" type="PerformanceSegmentResponseType"/>
+</xsd:schema>

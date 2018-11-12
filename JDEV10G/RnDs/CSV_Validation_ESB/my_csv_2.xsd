@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://schema.emerson.com/native/FetchCSV"
+            xmlns:tns="http://schema.emerson.com/native/FetchCSV"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+    <xsd:simpleType name="nameType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+            <xsd:minLength value="4"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+  <xsd:element name="employees">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="employee" minOccurs="1" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="firstName" type="tns:nameType">
+              </xsd:element>
+              <xsd:element name="middleName" type="tns:nameType">
+              </xsd:element>
+              <xsd:element name="lastName" type="tns:nameType">
+              </xsd:element>
+              <xsd:element name="age" type="xsd:int">
+              </xsd:element>
+              <xsd:element name="salary" type="xsd:float">
+              </xsd:element>
+              <xsd:element name="city" type="xsd:string">
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

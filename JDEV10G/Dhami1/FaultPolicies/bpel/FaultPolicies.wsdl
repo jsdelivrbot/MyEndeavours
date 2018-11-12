@@ -1,0 +1,32 @@
+<definitions
+     name="FaultPolicies"
+     targetNamespace="http://xmlns.oracle.com/FaultPolicies"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://schemas.oracle.com/bpel/extension"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/FaultPolicies"
+    >
+    <import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/FaultPolicies" schemaLocation="FaultPolicies.xsd"/>
+        </schema>
+    </types>
+    <message name="FaultPoliciesRequestMessage">
+        <part name="payload" element="client:FaultPoliciesProcessRequest"/>
+    </message>
+    <message name="FaultPoliciesResponseMessage">
+        <part name="payload" element="client:FaultPoliciesProcessResponse"/>
+    </message>
+    <portType name="FaultPolicies">
+        <operation name="process">
+            <input message="client:FaultPoliciesRequestMessage"/>
+            <output message="client:FaultPoliciesResponseMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="FaultPolicies">
+        <plnk:role name="FaultPoliciesProvider">
+            <plnk:portType name="client:FaultPolicies"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="resultOutDBAdapter"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/resultOutDBAdapter/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/resultOutDBAdapter/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter"
+                schemaLocation="resultOutDBAdapter_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="CustomerCollection_msg">
+        <part name="CustomerCollection" element="top:CustomerCollection"/>
+    </message>
+
+
+    <portType name="resultOutDBAdapter_ptt">
+        <operation name="merge">
+            <input message="tns:CustomerCollection_msg"/>
+        </operation>
+        <operation name="write">
+            <input message="tns:CustomerCollection_msg"/>
+        </operation>
+        <operation name="insert">
+            <input message="tns:CustomerCollection_msg"/>
+        </operation>
+        <operation name="update">
+            <input message="tns:CustomerCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="resultOutDBAdapter_binding" type="tns:resultOutDBAdapter_ptt">
+        <jca:binding />
+        <operation name="merge">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="resultOutDBAdapter.Customer"
+                DmlType="merge"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="resultOutDBAdapter_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="write">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="resultOutDBAdapter.Customer"
+                DmlType="write"
+                MappingsMetaDataURL="resultOutDBAdapter_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="insert">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="resultOutDBAdapter.Customer"
+                DmlType="insert"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="resultOutDBAdapter_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="update">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="resultOutDBAdapter.Customer"
+                DmlType="update"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="resultOutDBAdapter_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/OracleXE is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="resultOutDBAdapter">
+        <port name="resultOutDBAdapter_pt" binding="tns:resultOutDBAdapter_binding">
+            <jca:address location="eis/DB/OracleXE"
+                UIConnectionName="OracleXE"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.OraclePlatform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//localhost:1521/XE"
+                mcf.UserName="system"
+                mcf.Password="47E570316F19A1CFFD2E2104BF5CA8FE"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="resultOutDBAdapter_plt" >
+        <plt:role name="resultOutDBAdapter_role" >
+            <plt:portType name="tns:resultOutDBAdapter_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

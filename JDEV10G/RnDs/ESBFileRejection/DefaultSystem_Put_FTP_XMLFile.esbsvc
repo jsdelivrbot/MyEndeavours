@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Put_FTP_XMLFile" guid="8295B100512D11DEAF3637EA93E8375C" qname="DefaultSystem.Put_FTP_XMLFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="FTP" typeDescription="Outbound FTP Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1244817794692</ID>
+      <lastModifiedTime>Fri Jun 12 20:13:14 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_ESBFileRejection</lastModifiedUser>
+   </versionInfo>
+   <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>Put_FTP_XMLFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Put_FTP_XMLFile/">tns:Put_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/DefaultSystem/Put_FTP_XMLFile?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/DefaultSystem/Put_FTP_XMLFile</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="8297FAF0512D11DEAF3637EA93E8375C" qname="DefaultSystem.Put_FTP_XMLFile.Put" wsdlOperation="Put" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/customer" element="tns:customer"/>
+      </operationInfo>
+   </operations>
+</service>

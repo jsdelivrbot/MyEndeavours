@@ -1,0 +1,54 @@
+<definitions
+     name="FetchCSV"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/FetchCSV/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/FetchCSV/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://schema.emerson.com/native/FetchCSV"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schema.emerson.com/native/FetchCSV" schemaLocation="my_csv_1.xsd" />
+      </schema>
+    </types>
+    <message name="employees_msg">
+        <part name="employees" element="imp1:employees"/>
+    </message>
+    <portType name="Read_ptt">
+        <operation name="Read">
+            <input message="tns:employees_msg"/>
+        </operation>
+    </portType>
+    <binding name="Read_binding" type="tns:Read_ptt">
+    <pc:inbound_binding  />
+        <operation name="Read">
+      <jca:operation
+          PhysicalDirectory="D:\oracle\Files\esbIn"
+          ActivationSpec="oracle.tip.adapter.file.inbound.FileActivationSpec"
+          DeleteFile="true"
+          IncludeFiles="csv_valid.*\.txt"
+          PublishSize="2"
+          PollingFrequency="30"
+          MinimumAge="0"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="FetchCSV">
+        <port name="Read_pt" binding="tns:Read_binding">
+      <jca:address location="eis/FileAdapter" UIincludeWildcard="csv_valid*.txt" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Read_plt" >
+    <plt:role name="Read_role" >
+      <plt:portType name="tns:Read_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

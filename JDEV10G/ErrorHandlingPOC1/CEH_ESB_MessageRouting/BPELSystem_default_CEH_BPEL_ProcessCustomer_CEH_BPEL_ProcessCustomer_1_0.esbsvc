@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="CEH_BPEL_ProcessCustomer_1_0" guid="26681C9012C811DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+   <description>BPEL Service for CEH_BPEL_ProcessCustomer</description>
+   <versionInfo>
+      <ID>1237276171496</ID>
+      <lastModifiedTime>Tue Mar 17 13:19:31 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <parent guid="26613EC012C811DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>http://INEDEC-MLAP-45.emrcorp.local:80/orabpel/default/CEH_BPEL_ProcessCustomer/1.0/CEH_BPEL_ProcessCustomer?wsdl</wsdlURL>
+      <portType xmlns:tns="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer">tns:CEH_BPEL_ProcessCustomer</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/BPELSystem/default/CEH_BPEL_ProcessCustomer/CEH_BPEL_ProcessCustomer_1_0?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://inedec-mlap-45.emrcorp.local:80/event/BPELSystem/default/CEH_BPEL_ProcessCustomer/CEH_BPEL_ProcessCustomer_1_0</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <parameters>
+      <parameter name="port">80</parameter>
+      <parameter name="processName">CEH_BPEL_ProcessCustomer</parameter>
+      <parameter name="host">INEDEC-MLAP-45.emrcorp.local</parameter>
+      <parameter name="processVersion">1.0</parameter>
+      <parameter name="processDomain">default</parameter>
+   </parameters>
+   <operations>
+      <operationInfo guid="2D7A6A1012C811DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0.process" wsdlOperation="process" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+      </operationInfo>
+   </operations>
+</service>

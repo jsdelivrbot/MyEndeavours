@@ -1,0 +1,54 @@
+<definitions
+     name="ETH_DBSEL_ItemKey"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey" schemaLocation="ETH_DBSEL_ItemKey.xsd" />
+      </schema>
+    </types>
+    <message name="ETH_DBSEL_ItemKeyInput_msg">
+        <part name="ETH_DBSEL_ItemKeyInput_msg" element="db:ETH_DBSEL_ItemKeyInput"/>
+    </message>
+    <message name="ETH_DBSEL_ItemKeyOutputCollection_msg">
+        <part name="ETH_DBSEL_ItemKeyOutputCollection" element="db:ETH_DBSEL_ItemKeyOutputCollection"/>
+    </message>
+    <portType name="ETH_DBSEL_ItemKey_ptt">
+        <operation name="ETH_DBSEL_ItemKey">
+            <input message="tns:ETH_DBSEL_ItemKeyInput_msg"/>
+            <output message="tns:ETH_DBSEL_ItemKeyOutputCollection_msg"/>
+        </operation>
+    </portType>
+    <binding name="ETH_DBSEL_ItemKey_binding" type="tns:ETH_DBSEL_ItemKey_ptt">
+    <jca:binding  />
+        <operation name="ETH_DBSEL_ItemKey">
+      <jca:operation
+          SqlString="SELECT DOCUMENT_NUMBER, ITEM_KEY FROM APPS.ECX_DOCLOGS WHERE (DOCUMENT_NUMBER = #DocNumber)"
+          InteractionSpec="oracle.tip.adapter.db.DBPureSQLInteractionSpec" >
+      </jca:operation>
+            <input/>
+            <output/>
+        </operation>
+    </binding>
+    <service name="ETH_DBSEL_ItemKey">
+        <port name="ETH_DBSEL_ItemKey_pt" binding="tns:ETH_DBSEL_ItemKey_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/DB/ProcessMgnt is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/DB/ProcessMgnt" UIConnectionName="ProcessMgnt" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="ETH_DBSEL_ItemKey_plt" >
+    <plt:role name="ETH_DBSEL_ItemKey_role" >
+      <plt:portType name="tns:ETH_DBSEL_ItemKey_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

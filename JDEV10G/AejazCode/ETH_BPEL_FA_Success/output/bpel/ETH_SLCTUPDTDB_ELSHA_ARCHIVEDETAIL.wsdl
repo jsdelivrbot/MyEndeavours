@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSLCTUPDTDBELSHAARCHIVEMASTER"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSLCTUPDTDBELSHAARCHIVEMASTER"
+                schemaLocation="ETHSLCTUPDTDBELSHAARCHIVEMASTER_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EthArchiveDetailTransactionCollection_msg">
+        <part name="EthArchiveDetailTransactionCollection" element="top:EthArchiveDetailTransactionCollection"/>
+    </message>
+
+    <message name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect_fa_tracking_id_inparameters">
+        <part name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect_fa_tracking_id_inparameters" element="top:ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect_fa_tracking_idInputParameters"/>
+    </message>
+    <message name="EthArchiveDetailTransaction_msg">
+        <part name="EthArchiveDetailTransaction" element="top:EthArchiveDetailTransaction"/>
+    </message>
+
+    <portType name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_ptt">
+        <operation name="update">
+            <input message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+        <operation name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect_fa_tracking_id">
+            <input message="tns:ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect_fa_tracking_id_inparameters"/>
+            <output message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+        <operation name="queryByExample">
+            <input message="tns:EthArchiveDetailTransaction_msg"/>
+            <output message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_binding" type="tns:ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_ptt">
+        <jca:binding />
+        <operation name="update">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveDetailTransaction"
+                DmlType="update"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="ETHSLCTUPDTDBELSHAARCHIVEMASTER_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect_fa_tracking_id">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveDetailTransaction"
+                QueryName="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="ETHSLCTUPDTDBELSHAARCHIVEMASTER_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="queryByExample">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveDetailTransaction"
+                IsQueryByExample="true"
+                MappingsMetaDataURL="ETHSLCTUPDTDBELSHAARCHIVEMASTER_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/db_Elshat3_Business is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER">
+        <port name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_pt" binding="tns:ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_binding">
+            <jca:address location="eis/DB/db_Elshat3_Business"
+                UIConnectionName="db_Elshat3_Business"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.Oracle10Platform"
+                mcf.ConnectionString="jdbc:oracle:thin:@elshat1db.emrsn.com:20003:elshat3"
+                mcf.UserName="SC_Report"
+                mcf.Password="F44034A2DD8158AE53D924290C873D4A"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_plt" >
+        <plt:role name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_role" >
+            <plt:portType name="tns:ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

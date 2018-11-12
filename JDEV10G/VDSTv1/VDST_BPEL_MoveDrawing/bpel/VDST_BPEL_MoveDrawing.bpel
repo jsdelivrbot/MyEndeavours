@@ -1,0 +1,145 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Oct 06 16:39:22 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_MoveDrawing"
+         targetNamespace="http://services.emerson.com/VDST_BPEL_MoveDrawing"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ns7="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:client="http://services.emerson.com/VDST_BPEL_MoveDrawing"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/PollDummy/"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns2="http://service.emerson.com/vdst/tool/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns8="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="PollDummy"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="VDSTIDMWebService" partnerRole="IDMWebService_Role"
+                 partnerLinkType="ns2:IDMWebService_PL"/>
+    <partnerLink name="ImportERP"
+                 partnerRole="ConversionWebServicePortType_Role"
+                 partnerLinkType="ns7:ConversionWebServicePortType_PL"/>
+    <partnerLink name="CADConversionWebService"
+                 partnerRole="CADConversionWebServicePortType_Role"
+                 partnerLinkType="ns8:CADConversionWebServicePortType_PL"/>
+    <partnerLink name="PartnerLink_1"
+                 partnerRole="CADConversionWebServicePortType_Role"
+                 partnerLinkType="ns8:CADConversionWebServicePortType_PL"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_1_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="Invoke_login_InputVariable"
+              messageType="ns2:IDMWebService_login"/>
+    <variable name="Invoke_login_OutputVariable"
+              messageType="ns2:IDMWebService_loginResponse"/>
+    <variable name="Invoke_importERPData_InputVariable"
+              messageType="ns7:ImportERPData"/>
+    <variable name="Invoke_importERPData_OutputVariable"
+              messageType="ns7:ImportERPDataResponse"/>
+    <variable name="Invoke_ImportCAD_InputVariable"
+              messageType="ns8:ImportCADModel"/>
+    <variable name="Invoke_ImportCAD_OutputVariable"
+              messageType="ns8:ImportCADModelResponse"/>
+    <variable name="Invoke_2_importCADModel_InputVariable"
+              messageType="ns8:ImportCADModel"/>
+    <variable name="Invoke_2_importCADModel_OutputVariable"
+              messageType="ns8:ImportCADModelResponse"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="PollDummy" portType="ns1:Read_ptt"
+             operation="Read" variable="Receive_1_Read_InputVariable"
+             createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from expression="string('importtester')"/>
+        <to variable="Invoke_login_InputVariable" part="login"
+            query="/ns2:login/LoginName"/>
+      </copy>
+      <copy>
+        <from expression="string('1234')"/>
+        <to variable="Invoke_login_InputVariable" part="login"
+            query="/ns2:login/Password"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_Login" partnerLink="VDSTIDMWebService"
+            portType="ns2:IDMWebService" operation="login"
+            inputVariable="Invoke_login_InputVariable"
+            outputVariable="Invoke_login_OutputVariable"/>
+    <assign name="Assign_ImportERP">
+      <copy>
+        <from variable="Invoke_login_OutputVariable" part="loginResponse"
+              query="/ns2:loginResponse/SessionID"/>
+        <to variable="Invoke_importERPData_InputVariable" part="parameters"
+            query="/ns7:importERPData/SessionID"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_ImportERPData" partnerLink="ImportERP"
+            portType="ns7:ConversionWebServicePortType"
+            operation="importERPData"
+            inputVariable="Invoke_importERPData_InputVariable"
+            outputVariable="Invoke_importERPData_OutputVariable"/>
+    <assign name="Assign_ImportCAD">
+      <copy>
+        <from variable="Invoke_login_OutputVariable" part="loginResponse"
+              query="/ns2:loginResponse/SessionID"/>
+        <to variable="Invoke_2_importCADModel_InputVariable" part="parameters"
+            query="/ns8:importCADModel/SessionID"/>
+      </copy>
+      <copy>
+        <from expression="string('5174_P.x_t')"/>
+        <to variable="Invoke_2_importCADModel_InputVariable" part="parameters"
+            query="/ns8:importCADModel/Imports/Import/Filename"/>
+      </copy>
+      <copy>
+        <from expression="string('CMC')"/>
+        <to variable="Invoke_2_importCADModel_InputVariable" part="parameters"
+            query="/ns8:importCADModel/DivisionID"/>
+      </copy>
+      <copy>
+        <from expression="string('0.75')"/>
+        <to variable="Invoke_2_importCADModel_InputVariable" part="parameters"
+            query="/ns8:importCADModel/TesselationFactor"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="PartnerLink_1"
+            portType="ns8:CADConversionWebServicePortType"
+            operation="importCADModel"
+            inputVariable="Invoke_2_importCADModel_InputVariable"
+            outputVariable="Invoke_2_importCADModel_OutputVariable"/>
+  </sequence>
+</process>

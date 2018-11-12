@@ -1,0 +1,128 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1139232135202</ID>
+         <lastModifiedTime>Thu Jun 29 21:00:55 GMT+05:30 2006</lastModifiedTime>
+         <lastModifiedUser>JDev</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="ETHSys_IntegrationServices" guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" status="ENABLED">
+      <versionInfo>
+         <ID>1244825629926</ID>
+         <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="ETHSysGrp_ProcessPurchaseOrder" guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" status="ENABLED">
+         <versionInfo>
+            <ID>1244825629926</ID>
+            <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+         </versionInfo>
+         <parent guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" type="system"/>
+      </serviceGroup>
+   </system>
+   <system name="BPELSystem" guid="AC400E815B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1245243990068</ID>
+         <lastModifiedTime>Wed Jun 17 18:36:30 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="default" guid="AC400E825B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default" status="ENABLED">
+         <versionInfo>
+            <ID>1245243990068</ID>
+            <lastModifiedTime>Wed Jun 17 18:36:30 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="AC400E815B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem" type="system"/>
+         <serviceGroup name="Called_BPEL" guid="AC49AB705B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default.Called_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1245243990068</ID>
+               <lastModifiedTime>Wed Jun 17 18:36:30 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="AC400E825B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default" type="serviceGroup"/>
+            <service name="Called_BPEL_1_0" guid="AC4C1C705B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default.Called_BPEL.Called_BPEL_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+               <description>BPEL Service for Called_BPEL</description>
+               <versionInfo>
+                  <ID>1245243990068</ID>
+                  <lastModifiedTime>Wed Jun 17 18:36:30 GMT+05:30 2009</lastModifiedTime>
+                  <lastModifiedUser>oc4jadmin</lastModifiedUser>
+               </versionInfo>
+               <parent guid="AC49AB705B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default.Called_BPEL" type="serviceGroup"/>
+               <serviceDefinition>
+                  <wsdlURL>http://INEDEC-MLAP-45.emrsn.org:80/orabpel/default/Called_BPEL/1.0/Called_BPEL?wsdl</wsdlURL>
+                  <portType xmlns:tns="http://schemas.emerson.com/Called_BPEL">tns:Called_BPEL</portType>
+                  <endpointDefinition>
+                     <concreteWSDLURL>/esb/wsil/BPELSystem/default/Called_BPEL/Called_BPEL_1_0?wsdl</concreteWSDLURL>
+                     <soapEndpointURI>http://localhost:8888/event/BPELSystem/default/Called_BPEL/Called_BPEL_1_0</soapEndpointURI>
+                  </endpointDefinition>
+               </serviceDefinition>
+               <parameters>
+                  <parameter name="port">80</parameter>
+                  <parameter name="processName">Called_BPEL</parameter>
+                  <parameter name="host">INEDEC-MLAP-45.emrsn.org</parameter>
+                  <parameter name="processVersion">1.0</parameter>
+                  <parameter name="processDomain">default</parameter>
+               </parameters>
+               <operations>
+                  <operationInfo guid="B4D097905B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default.Called_BPEL.Called_BPEL_1_0.process" wsdlOperation="process" mepDisplayName="One Way" mep="OneWay">
+                     <request validate="false" xmlns:tns="http://schemas.emerson.com/Called_BPEL" element="tns:Called_BPELProcessRequest"/>
+                  </operationInfo>
+               </operations>
+            </service>
+         </serviceGroup>
+      </serviceGroup>
+   </system>
+   <system name="ETHSys_ALICE_InOutSystem" guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1244825248570</ID>
+         <lastModifiedTime>Fri Jun 12 22:17:28 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_Dhami2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="Research1" guid="EDB50C102F0911DEAF3BBFF482BF59EB" qname="Research1" status="ENABLED">
+      <versionInfo>
+         <ID>1245244044962</ID>
+         <lastModifiedTime>Wed Jun 17 18:37:24 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_Dhami1_Calling_ESB</lastModifiedUser>
+      </versionInfo>
+      <service name="PollFile" guid="1063FCE12EFF11DEAF3BBFF482BF59EB" qname="Research1.PollFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1245244044962</ID>
+            <lastModifiedTime>Wed Jun 17 18:37:24 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami1_Calling_ESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="EDB50C102F0911DEAF3BBFF482BF59EB" qname="Research1" type="system"/>
+         <invocation>
+            <targetService guid="1063FCE22EFF11DEAF3BBFF482BF59EB" qname="Research1.PollFile_RS"/>
+            <interface>
+               <wsdlURL>PollFile.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/PollFile/">tns:Read_ptt</portType>
+            </interface>
+         </invocation>
+      </service>
+      <service name="PollFile_RS" guid="1063FCE22EFF11DEAF3BBFF482BF59EB" qname="Research1.PollFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service PollFile</description>
+         <versionInfo>
+            <ID>1245677648620</ID>
+            <lastModifiedTime>Mon Jun 22 19:04:08 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="EDB50C102F0911DEAF3BBFF482BF59EB" qname="Research1" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>PollFile.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/PollFile/">tns:Read_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/Research1/PollFile_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/Research1/PollFile_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="1063FCE32EFF11DEAF3BBFF482BF59EB" qname="Research1.PollFile_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+            </operationInfo>
+         </operations>
+      </service>
+   </system>
+</metadata>

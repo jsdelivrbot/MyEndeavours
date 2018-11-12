@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="DynamicInbound_BPEL" src="DynamicInbound_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="PollFile">
+            <property name="wsdlLocation">PollFile.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PutFile">
+            <property name="wsdlLocation">PutFile.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="Test1AQ">
+            <property name="wsdlLocation">Test1AQ.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="PollFile">
+            <property name="InputDIR">D:\oracle\Files\In</property>
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

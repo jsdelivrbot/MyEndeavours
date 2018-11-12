@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LIEBERT_VENDAVO_INTEGRATION_ItemNumber_BPEL" guid="56C838B133D011DEBFECE3447698DE8B" qname="LBT_StagingDBToVendavoFTP.LIEBERT_VENDAVO_INTEGRATION_ItemNumber_BPEL" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1275300331138</ID>
+      <lastModifiedTime>Mon May 31 10:05:31 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VenPh1_UC6.5_PROD_LIEBERT_VENDAVO_INTEGRATION_ItemNumberAndCostToFTP_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="10782A3098EB11DDBFD2A98E2688A63A" qname="LBT_StagingDBToVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>http://soa.emerson.com:8800/orabpel/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL/1.0/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL?wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL">tns:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_StagingDBToVendavoFTP/LIEBERT_VENDAVO_INTEGRATION_ItemNumber_BPEL?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_StagingDBToVendavoFTP/LIEBERT_VENDAVO_INTEGRATION_ItemNumber_BPEL</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="56D8DA8033D011DEBFECE3447698DE8B" qname="LBT_StagingDBToVendavoFTP.LIEBERT_VENDAVO_INTEGRATION_ItemNumber_BPEL.initiate" wsdlOperation="initiate" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBUpdITEMNUMOUTBOUND" element="tns:ItemNumberOutboundCollection"/>
+      </operationInfo>
+   </operations>
+</service>

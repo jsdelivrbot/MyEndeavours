@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\MoveInventory.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="MoveInventory" type="MoveInventoryType"/>
+        <xsd:element name="MoveInventoryHeader" type="MoveInventoryHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the things common to the entire Movement.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MoveInventoryLine" type="MoveInventoryLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the line items being Movemented providing information about the source and destination of the Movement.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Destination" type="DestinationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the destination of the inventory being moved.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="MoveInventoryType">
+                <xsd:sequence>
+                        <xsd:element ref="MoveInventoryHeader" minOccurs="0"/>
+                        <xsd:element ref="MoveInventoryLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MoveInventoryHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="MoveInventoryLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:group ref="InventoryTransactionGroup"/>
+                                        <xsd:element ref="Destination" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="DestinationType">
+                <xsd:sequence>
+                        <xsd:group ref="InventoryTransactionGroup"/>
+                        <xsd:element ref="RequiredDateTime" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation>This is the DateTime by which Delivery is Requested for this item</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

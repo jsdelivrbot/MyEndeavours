@@ -1,0 +1,256 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="TransformESB" guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" status="ENABLED">
+      <versionInfo>
+         <ID>1217331594306</ID>
+         <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+      </versionInfo>
+      <description/>
+      <parameters>
+         <parameter name="Host">localhost</parameter>
+         <parameter name="Port">8888</parameter>
+      </parameters>
+      <clusterName>esb</clusterName>
+      <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+      <service name="CreateRecordsBPEL" guid="C5695E905CA111DDBFBF7949E8E58CEB" qname="TransformESB.CreateRecordsBPEL" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1217331594306</ID>
+            <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>http://GDC-18.gssamerica.co.in:8888/orabpel/default/Create_MDMRecords_BPELProcess/Create_MDMRecords_BPELProcess?wsdl</wsdlURL>
+            <portType xmlns:tns="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess">tns:Create_MDMRecords_BPELProcess</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/CreateRecordsBPEL?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/CreateRecordsBPEL</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="C572FB805CA111DDBFBF7949E8E58CEB" qname="TransformESB.CreateRecordsBPEL.process" wsdlOperation="process" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:CreateRecordsRequest"/>
+               <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://GDC-18.gssamerica.co.in:8888/orabpel/default/Create_MDMRecords_BPELProcess/MDMService.xsd"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ReadMDMRequest" guid="F471FC215C9B11DDBFBF7949E8E58CEB" qname="TransformESB.ReadMDMRequest" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1217331594306</ID>
+            <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <invocation>
+            <targetService guid="F471FC225C9B11DDBFBF7949E8E58CEB" qname="TransformESB.ReadMDMRequest_RS"/>
+            <interface>
+               <wsdlURL>ReadMDMRequest.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ReadMDMRequest/">tns:Consume_ESBReq_Message_ptt</portType>
+            </interface>
+         </invocation>
+      </service>
+      <service name="ReadMDMRequest_RS" guid="F471FC225C9B11DDBFBF7949E8E58CEB" qname="TransformESB.ReadMDMRequest_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service ReadMDMRequest</description>
+         <versionInfo>
+            <ID>1217331594306</ID>
+            <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ReadMDMRequest.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ReadMDMRequest/">tns:Consume_ESBReq_Message_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/ReadMDMRequest_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/ReadMDMRequest_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="F471FC235C9B11DDBFBF7949E8E58CEB" qname="TransformESB.ReadMDMRequest_RS.Consume_ESBReq_Message" wsdlOperation="Consume_ESBReq_Message" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/adapter" element="tns:ESBRequest"/>
+               <routingRules>
+                  <routingRule guid="BB0BD3205CA011DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="57346CD05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routing_ProcessCustomer.execute" serviceGUID="572885F05C9C11DDBFBF7949E8E58CEB" serviceQName="TransformESB.Routing_ProcessCustomer" mepDisplayName="One Way" mep="OneWay"/>
+                     <filterExpression>{ends-with(/imp1:ESBRequest/header/requestType,'Customer')  and  not(starts-with(/imp1:ESBRequest/header/requestType,'Get'))};{ namespace imp1=http://www.gssamerica.com/mdm/adapter }</filterExpression>
+                     <transformation>
+                        <xslFileURL>ESBRequest_To_ESBProcessCustomerRequest.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="347118605CA111DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="848623E05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routin_GetCustomer.execute" serviceGUID="848168F05C9C11DDBFBF7949E8E58CEB" serviceQName="TransformESB.Routin_GetCustomer" mepDisplayName="One Way" mep="OneWay"/>
+                     <filterExpression>{normalize-space(/imp1:ESBRequest/header/requestType)='GetCustomer'};{ namespace imp1=http://www.gssamerica.com/mdm/adapter }</filterExpression>
+                     <transformation>
+                        <xslFileURL>ESBRequest_To_ESBGetCustomerRequest.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="Routing_ProcessCustomer" guid="572885F05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routing_ProcessCustomer" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1217922120194</ID>
+            <lastModifiedTime>Tue Aug 05 13:12:00 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>DefaultSystem_Routing_ProcessCustomer.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/DefaultSystem">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/Routing_ProcessCustomer?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/Routing_ProcessCustomer</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="57346CD05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routing_ProcessCustomer.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbprocesscustomer" element="tns:ESBProcessCustomerRequest"/>
+               <routingRules>
+                  <routingRule guid="63E9D8B05CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="4565A6D05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteToFile.Write" serviceGUID="45635CE05CA211DDBFBF7949E8E58CEB" serviceQName="TransformESB.WriteToFile" mepDisplayName="One Way" mep="OneWay"/>
+                     <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='DeleteCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+                     <transformation>
+                        <xslFileURL>ESBProcessCustomerRequest_To_DeleteRecordRequest.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="75D36AF05CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="C572FB805CA111DDBFBF7949E8E58CEB" qname="TransformESB.CreateRecordsBPEL.process" serviceGUID="C5695E905CA111DDBFBF7949E8E58CEB" serviceQName="TransformESB.CreateRecordsBPEL" mepDisplayName="Request Response" mep="RequestResponse"/>
+                     <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='CreateCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+                     <transformation>
+                        <xslFileURL>ESBProcessCustomerRequest_To_CreateRecordsRequest.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="94ED26105CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="D91FE8A05CA111DDBFBF7949E8E58CEB" qname="TransformESB.UpdateRecordsBPEL.process" serviceGUID="D91672C05CA111DDBFBF7949E8E58CEB" serviceQName="TransformESB.UpdateRecordsBPEL" mepDisplayName="Request Response" mep="RequestResponse"/>
+                     <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='UpdateCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+                     <transformation>
+                        <xslFileURL>ESBProcessCustomerRequest_To_UpdateRecordRequest.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="CAA95C9062C111DDBFC7DF068A717A51" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="A58CC82062C111DDBFC7DF068A717A51" qname="TransformESB.DeleteRecordBPEL.process" serviceGUID="A580E14162C111DDBFC7DF068A717A51" serviceQName="TransformESB.DeleteRecordBPEL" mepDisplayName="Request Response" mep="RequestResponse"/>
+                     <filterExpression>{normalize-space(/inp1:ESBProcessCustomerRequest/header/requestType)='DeleteCustomer'};{ namespace inp1=http://www.gssamerica.com/mdm/esbprocesscustomer }</filterExpression>
+                     <transformation>
+                        <xslFileURL>ESBProcessCustomerRequest_To_DeleteRecordRequest.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="Routin_GetCustomer" guid="848168F05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routin_GetCustomer" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1217331594306</ID>
+            <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>DefaultSystem_Routin_GetCustomer.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/DefaultSystem">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/Routin_GetCustomer?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/Routin_GetCustomer</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="848623E05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routin_GetCustomer.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbgetcustomer" element="tns:ESBGetCustomerRequest"/>
+               <routingRules>
+                  <routingRule guid="FF802B305CA211DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="E98381B05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteGetCustomer.Write" serviceGUID="E97EC6C05CA211DDBFBF7949E8E58CEB" serviceQName="TransformESB.WriteGetCustomer" mepDisplayName="One Way" mep="OneWay"/>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="UpdateRecordsBPEL" guid="D91672C05CA111DDBFBF7949E8E58CEB" qname="TransformESB.UpdateRecordsBPEL" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1217331594306</ID>
+            <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>http://GDC-18.gssamerica.co.in:8888/orabpel/default/Update_MDMRecords_BPELProcess/Update_MDMRecords_BPELProcess?wsdl</wsdlURL>
+            <portType xmlns:tns="http://com.gssamerica.mdm.process/Update_MDMRecords_BPELProcess">tns:Update_MDMRecords_BPELProcess</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/UpdateRecordsBPEL?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/UpdateRecordsBPEL</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="D91FE8A05CA111DDBFBF7949E8E58CEB" qname="TransformESB.UpdateRecordsBPEL.process" wsdlOperation="process" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:UpdateRecordRequest"/>
+               <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://GDC-18.gssamerica.co.in:8888/orabpel/default/Update_MDMRecords_BPELProcess/MDMService.xsd"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="WriteGetCustomer" guid="E97EC6C05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteGetCustomer" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1217331594306</ID>
+            <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>WriteGetCustomer.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/WriteGetCustomer/">tns:Write_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/WriteGetCustomer?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/WriteGetCustomer</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="E98381B05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteGetCustomer.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/esbgetcustomer" element="tns:ESBGetCustomerRequest"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="WriteToFile" guid="45635CE05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteToFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1217864185185</ID>
+            <lastModifiedTime>Mon Aug 04 21:06:25 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>WriteToFile.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/WriteToFile/">tns:Write_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/WriteToFile?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/WriteToFile</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="4565A6D05CA211DDBFBF7949E8E58CEB" qname="TransformESB.WriteToFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:DeleteRecordRequest"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="DeleteRecordBPEL" guid="A580E14162C111DDBFC7DF068A717A51" qname="TransformESB.DeleteRecordBPEL" status="ENABLED" serviceType="ExternalService" typeDescription="External Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1217922120194</ID>
+            <lastModifiedTime>Tue Aug 05 13:12:00 IST 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>http://GDC-18.gssamerica.co.in:8888/orabpel/default/Delete_MDMRecords_BPELProcess/Delete_MDMRecords_BPELProcess?wsdl</wsdlURL>
+            <portType xmlns:tns="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess">tns:Delete_MDMRecords_BPELProcess</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TransformESB/DeleteRecordBPEL?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TransformESB/DeleteRecordBPEL</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="A58CC82062C111DDBFC7DF068A717A51" qname="TransformESB.DeleteRecordBPEL.process" wsdlOperation="process" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:DeleteRecordRequest"/>
+               <reply validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:ServiceReply" schemaLocation="http://GDC-18.gssamerica.co.in:8888/orabpel/default/Delete_MDMRecords_BPELProcess/MDMService.xsd"/>
+            </operationInfo>
+         </operations>
+      </service>
+   </system>
+</project_metadata>

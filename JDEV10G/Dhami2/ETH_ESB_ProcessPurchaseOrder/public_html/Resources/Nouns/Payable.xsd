@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\Payable.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="Payable" type="PayableType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Payable is a transaction that represents an invoice from a supplier.  A payable is an open item, approved and ready for payment, in the Accounts Payable ledger.  In some systems it may be called a voucher.  Compare to PurchaseLedgerInvoice, which represents a not yet approved supplier invoice.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PayableHeader" type="PayableHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation>The Tax element contains any tax information such as the taxable amounts and the tax codes.  It is optional and used to summarize tax amounts across all the document lines. The principal intent of this data type is for use as a memo item</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PayableLine" type="PayableLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Lines on the payable document.  Invoice line or credit memo line are examples of a Line</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="PayableType">
+                <xsd:sequence>
+                        <xsd:element ref="PayableHeader" minOccurs="0"/>
+                        <xsd:element ref="PayableLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="PayableHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="LedgerEntryHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="VoucherReference" minOccurs="0"/>
+                                        <xsd:element ref="RemitToParty" minOccurs="0"/>
+                                        <xsd:element ref="PayeeParty" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PayableLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="LedgerEntryLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

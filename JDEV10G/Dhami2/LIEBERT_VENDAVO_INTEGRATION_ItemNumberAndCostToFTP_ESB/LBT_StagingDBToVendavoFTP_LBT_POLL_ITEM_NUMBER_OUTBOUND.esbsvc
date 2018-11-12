@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_POLL_ITEM_NUMBER_OUTBOUND" guid="206EECA133F811DEBF9CFFF39D5AEF8D" qname="LBT_StagingDBToVendavoFTP.LBT_POLL_ITEM_NUMBER_OUTBOUND" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.inbounddbadapterservice" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1275300331138</ID>
+      <lastModifiedTime>Mon May 31 10:05:31 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VenPh1_UC6.5_PROD_LIEBERT_VENDAVO_INTEGRATION_ItemNumberAndCostToFTP_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="10782A3098EB11DDBFD2A98E2688A63A" qname="LBT_StagingDBToVendavoFTP" type="system"/>
+   <invocation>
+      <targetService guid="206EECA233F811DEBF9CFFF39D5AEF8D" qname="LBT_StagingDBToVendavoFTP.LBT_POLL_ITEM_NUMBER_OUTBOUND_RS"/>
+      <interface>
+         <wsdlURL>LBT_POLL_ITEM_NUMBER_OUTBOUND.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_POLL_ITEM_NUMBER_OUTBOUND/">tns:LBT_POLL_ITEM_NUMBER_OUTBOUND_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="PollingInterval" value="7200"/>
+      <property name="clusterGroupId" value="uc65_number_cluster"/>
+   </endpointProperties>
+</service>

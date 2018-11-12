@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="IntimateERP" src="IntimateERP.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="Poll_triggerFile">
+            <property name="wsdlLocation">Poll_triggerFile.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ConversionWebService">
+            <property name="wsdlLocation">ConversionWebService.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="Poll_triggerFile">
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

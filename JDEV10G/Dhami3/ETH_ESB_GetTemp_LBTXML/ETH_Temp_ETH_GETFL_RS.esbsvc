@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFL_RS" guid="971D12115DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_GETFL_RS" status="DISABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ETH_GETFL</description>
+   <versionInfo>
+      <ID>1274146348064</ID>
+      <lastModifiedTime>Tue May 18 01:32:28 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <parent guid="5FF0ECD05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_GETFL.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL/">tns:Read_LBTXML_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETH_Temp/ETH_GETFL_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa.emerson.com:8800/event/ETH_Temp/ETH_GETFL_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="971F83105DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_GETFL_RS.Read_LBTXML" wsdlOperation="Read_LBTXML" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/LiebertPurchaseOrder" element="tns:Root-Element"/>
+         <routingRules>
+            <routingRule guid="FA3013C05DDB11DF9F6BAFA43D0B1832" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="F3744AB05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_PUSHAQ_LBTXML.Produce_LBTXML" serviceGUID="F37200C05DDB11DF9F6BAFA43D0B1832" serviceQName="ETH_Temp.ETH_PUSHAQ_LBTXML" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>Root_Element_To_CustomLiebertPO.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

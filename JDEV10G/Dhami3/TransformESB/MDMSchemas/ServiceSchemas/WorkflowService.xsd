@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns="http://www.gssamerica.com/mdm/workflowservice" elementFormDefault="unqualified" targetNamespace="http://www.gssamerica.com/mdm/workflowservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="WorkflowRequest" type="WorkflowRequestType" />
+  <xs:complexType name="WorkflowRequestHeaderType">
+    <xs:sequence>
+      <xs:element name="srcID" type="xs:string" />
+      <xs:element name="operation" type="xs:string" />
+      <xs:element name="entitystatus" type="xs:string" />
+      <xs:element name="entity" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="configData" type="configurationType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkflowRequestType">
+    <xs:sequence>
+      <xs:element name="header" type="WorkflowRequestHeaderType" />
+      <xs:element name="body" type="WorkflowRequestBodyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkflowRequestBodyType">
+    <xs:sequence>
+      <xs:any />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configurationType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBINSwriteCust" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBINSwriteCust" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="Customer1Collection" type="Customer1Collection"/>
+   <xs:complexType name="Customer1Collection">
+      <xs:sequence>
+         <xs:element name="Customer1" type="Customer1" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Customer1">
+      <xs:sequence>
+         <xs:element name="details" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="100"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="BPELProcess1" src="BPELProcess1.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ReadESBError">
+            <property name="wsdlLocation">ReadESBError.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="WriteToFile">
+            <property name="wsdlLocation">WriteToFile.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ReadESBError">
+            <property name="portType">execute_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

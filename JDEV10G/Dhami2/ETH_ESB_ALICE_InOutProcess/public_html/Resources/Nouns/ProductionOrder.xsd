@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\ProductionOrder.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="ProductionOrder" type="ProductionOrderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Production Order is a document requesting the manufacture of a specified product and quantity.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ProductionOrderHeader" type="ProductionOrderHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information used to communicate the details of the production order requested to be initiated.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ProductionOrderLine" type="ProductionOrderLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information used to communicate the individual items on the pre-determined Bill of Material structure.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ProductionOrderType">
+                <xsd:sequence>
+                        <xsd:element ref="ProductionOrderHeader" minOccurs="0"/>
+                        <xsd:element ref="ProductionOrderLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ProductionOrderHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:sequence>
+                                                <xsd:annotation>
+                                                        <xsd:documentation>Generally the BOMReference is used instead of the Item and ItemInstance definitions to indicate the Item to be produced or manufactured by the ProductionOrder. We allow all three to occur here optionally to allow for other usage.</xsd:documentation>
+                                                </xsd:annotation>
+                                                <xsd:element ref="BOMReference" minOccurs="0"/>
+                                                <xsd:element ref="Item" minOccurs="0"/>
+                                                <xsd:element ref="ItemInstance" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:element ref="OperationReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Site" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="OriginationCountryCode" minOccurs="0"/>
+                                        <xsd:element ref="DestinationCountryCode" minOccurs="0"/>
+                                        <xsd:element ref="PriorityCode" minOccurs="0"/>
+                                        <xsd:element ref="OrderQuantity" minOccurs="0"/>
+                                        <xsd:element ref="RequiredQuantity" minOccurs="0"/>
+                                        <xsd:element ref="DueQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ExecutionTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ForecastedTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="NeedDeliveryDate" minOccurs="0"/>
+                                        <xsd:element ref="DueDateTime" minOccurs="0"/>
+                                        <xsd:element ref="RequiredDateTime" minOccurs="0"/>
+                                        <xsd:element ref="AvailableDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                                        <xsd:element ref="KanbanNumber" minOccurs="0"/>
+                                        <xsd:element ref="SerializedLot" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Distribution" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ProductionOrderLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:sequence>
+                                                <xsd:annotation>
+                                                        <xsd:documentation>Generally the BOMReference is used instead of the Item and ItemInstance definitions to indicate the Item to be produced or manufactured by the ProductionOrder. We allow all three to occur here optionally to allow for other usage.</xsd:documentation>
+                                                </xsd:annotation>
+                                                <xsd:element ref="BOMReference" minOccurs="0"/>
+                                                <xsd:element ref="ManufacturingItem" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:element ref="Site" minOccurs="0"/>
+                                        <xsd:element ref="OrderQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ProducedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="TrackingIndicator" minOccurs="0"/>
+                                        <xsd:element ref="SerializedLot" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

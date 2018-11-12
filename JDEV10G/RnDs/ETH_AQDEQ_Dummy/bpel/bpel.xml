@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ETH_AQDEQ_Dummy" src="ETH_AQDEQ_Dummy.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ETH_JMSDEQ_AQ">
+            <property name="wsdlLocation">ETH_JMSDEQ_AQ.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ETH_JMSDEQ_AQ">
+            <property name="portType">Consume_Message_ptt</property>
+            <property name="clusterGroupId">ETH_AQDEQ_Dummy_001</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

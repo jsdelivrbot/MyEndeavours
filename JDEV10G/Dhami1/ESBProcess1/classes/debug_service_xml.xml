@@ -1,0 +1,163 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1234262497316</ID>
+         <lastModifiedTime>Tue Feb 10 16:11:37 IST 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="BPELSystem" guid="27BE6331F73C11DDBFE667C029489D26" qname="BPELSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1234247363194</ID>
+         <lastModifiedTime>Tue Feb 10 11:59:23 IST 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="default" guid="27C0D430F73C11DDBFE667C029489D26" qname="BPELSystem.default" status="ENABLED">
+         <versionInfo>
+            <ID>1234247363194</ID>
+            <lastModifiedTime>Tue Feb 10 11:59:23 IST 2009</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="27BE6331F73C11DDBFE667C029489D26" qname="BPELSystem" type="system"/>
+         <serviceGroup name="TaskManager" guid="27C0D431F73C11DDBFE667C029489D26" qname="BPELSystem.default.TaskManager" status="ENABLED">
+            <versionInfo>
+               <ID>1234247363194</ID>
+               <lastModifiedTime>Tue Feb 10 11:59:23 IST 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="27C0D430F73C11DDBFE667C029489D26" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="BPELProcess1" guid="605B3041FBEE11DDAF0D9FF379D326E8" qname="BPELSystem.default.BPELProcess1" status="ENABLED">
+            <versionInfo>
+               <ID>1234763713555</ID>
+               <lastModifiedTime>Mon Feb 16 11:25:13 IST 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="27C0D430F73C11DDBFE667C029489D26" qname="BPELSystem.default" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+   </system>
+   <system name="Process1" guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" status="ENABLED">
+      <versionInfo>
+         <ID>1234766649292</ID>
+         <lastModifiedTime>Mon Feb 16 12:14:09 IST 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+      </versionInfo>
+      <service name="customerFileAdapter" guid="778CBE00FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1234766649292</ID>
+            <lastModifiedTime>Mon Feb 16 12:14:09 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+         </versionInfo>
+         <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+         <invocation>
+            <targetService guid="778CBE01FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter_RS"/>
+            <interface>
+               <wsdlURL>customerFileAdapter.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/customerFileAdapter/">tns:Read_ptt</portType>
+            </interface>
+         </invocation>
+      </service>
+      <service name="customerFileAdapter_RS" guid="778CBE01FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service customerFileAdapter</description>
+         <versionInfo>
+            <ID>1234776416056</ID>
+            <lastModifiedTime>Mon Feb 16 14:56:56 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+         </versionInfo>
+         <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>customerFileAdapter.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/customerFileAdapter/">tns:Read_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/Process1/customerFileAdapter_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/Process1/customerFileAdapter_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="778CBE02FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.emerson.com/inder" element="tns:customer"/>
+               <routingRules>
+                  <routingRule guid="F695F3B0FBF311DD9F75B99054634EA7" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="EBBADE61FBF311DD9F75B99054634EA7" qname="Process1.resultOutFileAdapter.Write" serviceGUID="EBBADE60FBF311DD9F75B99054634EA7" serviceQName="Process1.resultOutFileAdapter" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>customer_To_customerOut.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="D2C1A9D0FC0B11DD9F75B99054634EA7" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="82604552FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.insert" serviceGUID="82591960FC0B11DD9F75B99054634EA7" serviceQName="Process1.resultOutDBAdapter" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>customer_To_CustomerCollection.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="resultOutDBAdapter" guid="82591960FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1234776416056</ID>
+            <lastModifiedTime>Mon Feb 16 14:56:56 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+         </versionInfo>
+         <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>resultOutDBAdapter.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/resultOutDBAdapter/">tns:resultOutDBAdapter_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/Process1/resultOutDBAdapter?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/Process1/resultOutDBAdapter</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="82604550FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.merge" wsdlOperation="merge" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+            </operationInfo>
+            <operationInfo guid="82604551FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.write" wsdlOperation="write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+            </operationInfo>
+            <operationInfo guid="82604552FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.insert" wsdlOperation="insert" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+            </operationInfo>
+            <operationInfo guid="82604553FC0B11DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter.update" wsdlOperation="update" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" element="tns:CustomerCollection"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="resultOutDBAdapter2" guid="6DC9CC70FC1411DD9F75B99054634EA7" qname="Process1.resultOutDBAdapter2" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="Outbound Database Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/resultOutDBAdapter2/" dirty="true" soapEndpointStatus="ENABLED">
+         <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>resultOutDBAdapter2.wsdl</wsdlURL>
+            <portType>tns:resultOutDBAdapter2_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="merge" guid="6DD0F860FC1411DD9F75B99054634EA7" mep="OneWay"/>
+            <operationInfo wsdlOperation="write" guid="6DD0F861FC1411DD9F75B99054634EA7" mep="OneWay"/>
+            <operationInfo wsdlOperation="insert" guid="6DD0F862FC1411DD9F75B99054634EA7" mep="OneWay"/>
+            <operationInfo wsdlOperation="update" guid="6DD0F863FC1411DD9F75B99054634EA7" mep="OneWay"/>
+         </operations>
+      </service>
+      <service name="resultOutFileAdapter" guid="EBBADE60FBF311DD9F75B99054634EA7" qname="Process1.resultOutFileAdapter" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1234768747028</ID>
+            <lastModifiedTime>Mon Feb 16 12:49:07 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+         </versionInfo>
+         <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>resultOutFileAdapter.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/resultOutFileAdapter/">tns:Write_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/Process1/resultOutFileAdapter?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/Process1/resultOutFileAdapter</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="EBBADE61FBF311DD9F75B99054634EA7" qname="Process1.resultOutFileAdapter.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.emerson.com/inderOut" element="tns:customerOut"/>
+            </operationInfo>
+         </operations>
+      </service>
+   </system>
+</metadata>

@@ -1,0 +1,843 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<metadata>
+   <system name="LBT_EBSDBToStagingDB" guid="E54CF20199AD11DDBF99AB3AF92C35F3" qname="LBT_EBSDBToStagingDB" status="ENABLED">
+      <versionInfo>
+         <ID>1227082261810</ID>
+         <lastModifiedTime>Wed Nov 19 08:11:01 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_EBSToSTAGING_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="BPELSystem" guid="EE75F4F0B61111DD9F069D2D3CE1B990" qname="BPELSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1227082403047</ID>
+         <lastModifiedTime>Wed Nov 19 08:13:23 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="LiebertServices" guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" status="ENABLED">
+         <versionInfo>
+            <ID>1227082403047</ID>
+            <lastModifiedTime>Wed Nov 19 08:13:23 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="EE75F4F0B61111DD9F069D2D3CE1B990" qname="BPELSystem" type="system"/>
+         <serviceGroup name="TaskManager" guid="EE873300B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.TaskManager" status="ENABLED">
+            <versionInfo>
+               <ID>1227082403047</ID>
+               <lastModifiedTime>Wed Nov 19 08:13:23 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ItemNumberAndCosts_BPEL" guid="36C16EA0BBA411DDBF8D9D4A3B991D84" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ItemNumberAndCosts_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227694986099</ID>
+               <lastModifiedTime>Wed Nov 26 10:23:06 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPExchangeRate_BPEL" guid="472C9620B63111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPExchangeRate_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227095865720</ID>
+               <lastModifiedTime>Wed Nov 19 11:57:45 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Invoke_ExcahngeRates_BPEL" guid="74151930B63311DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Invoke_ExcahngeRates_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227096800149</ID>
+               <lastModifiedTime>Wed Nov 19 12:13:20 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdLine_BPEL" guid="ECFA5050B7A411DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdLine_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227255487194</ID>
+               <lastModifiedTime>Fri Nov 21 08:18:07 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPPlatform_BPEL" guid="F56E3B90B7A211DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPPlatform_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227254642420</ID>
+               <lastModifiedTime>Fri Nov 21 08:04:02 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdBUDivision_BPEL" guid="CB9BA3B0B7A311DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdBUDivision_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227255001646</ID>
+               <lastModifiedTime>Fri Nov 21 08:10:01 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdModelLine_BPEL" guid="9843D7A0B7A611DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdModelLine_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227256204055</ID>
+               <lastModifiedTime>Fri Nov 21 08:30:04 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL" guid="A6577930B6D611DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227166892275</ID>
+               <lastModifiedTime>Thu Nov 20 07:41:32 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+            <service name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL_1_0" guid="939AC860B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+               <description>BPEL Service for LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL</description>
+               <versionInfo>
+                  <ID>1227175450833</ID>
+                  <lastModifiedTime>Thu Nov 20 10:04:10 GMT+00:00 2008</lastModifiedTime>
+                  <lastModifiedUser>oc4jadmin</lastModifiedUser>
+               </versionInfo>
+               <parent guid="A6577930B6D611DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL" type="serviceGroup"/>
+               <serviceDefinition>
+                  <wsdlURL>http://essapt020-u006:12001/orabpel/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL/1.0/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL?wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL">tns:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL</portType>
+                  <endpointDefinition>
+                     <concreteWSDLURL>/esb/wsil/BPELSystem/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL_1_0?wsdl</concreteWSDLURL>
+                     <soapEndpointURI>http://localhost:8888/event/BPELSystem/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL_1_0</soapEndpointURI>
+                  </endpointDefinition>
+               </serviceDefinition>
+               <parameters>
+                  <parameter name="port">12001</parameter>
+                  <parameter name="processName">LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL</parameter>
+                  <parameter name="host">essapt020-u006</parameter>
+                  <parameter name="processVersion">1.0</parameter>
+                  <parameter name="processDomain">LiebertServices</parameter>
+               </parameters>
+               <operations>
+                  <operationInfo guid="9A6A1970B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL_1_0.initiate" wsdlOperation="initiate" mepDisplayName="One Way" mep="OneWay">
+                     <request validate="false" xmlns:tns="http://TargetNamespace.com/FtpOpertngUnit_to_Vendavo" element="tns:Root-Element"/>
+                  </operationInfo>
+               </operations>
+            </service>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL" guid="47845930B6D811DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227167592184</ID>
+               <lastModifiedTime>Thu Nov 20 07:53:12 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+            <service name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0" guid="6B71DE50B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+               <description>BPEL Service for LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL</description>
+               <versionInfo>
+                  <ID>1227175383290</ID>
+                  <lastModifiedTime>Thu Nov 20 10:03:03 GMT+00:00 2008</lastModifiedTime>
+                  <lastModifiedUser>oc4jadmin</lastModifiedUser>
+               </versionInfo>
+               <parent guid="47845930B6D811DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL" type="serviceGroup"/>
+               <serviceDefinition>
+                  <wsdlURL>http://essapt020-u006:12001/orabpel/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL/1.0/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL?wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL">tns:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL</portType>
+                  <endpointDefinition>
+                     <concreteWSDLURL>/esb/wsil/BPELSystem/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0?wsdl</concreteWSDLURL>
+                     <soapEndpointURI>http://localhost:8888/event/BPELSystem/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0</soapEndpointURI>
+                  </endpointDefinition>
+               </serviceDefinition>
+               <parameters>
+                  <parameter name="port">12001</parameter>
+                  <parameter name="processName">LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL</parameter>
+                  <parameter name="host">essapt020-u006</parameter>
+                  <parameter name="processVersion">1.0</parameter>
+                  <parameter name="processDomain">LiebertServices</parameter>
+               </parameters>
+               <operations>
+                  <operationInfo guid="724993D0B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0.initiate" wsdlOperation="initiate" mepDisplayName="One Way" mep="OneWay">
+                     <request validate="false" xmlns:tns="http://TargetNamespace.com/LBT_FtpPut_OperatingType" element="tns:OperatingUnitRecord"/>
+                  </operationInfo>
+               </operations>
+            </service>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Invoke_Procedure_Bpel" guid="279D0A60B61311DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Invoke_Procedure_Bpel" status="ENABLED">
+            <versionInfo>
+               <ID>1227082927902</ID>
+               <lastModifiedTime>Wed Nov 19 08:22:07 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Update_FusnMaster_BPEL" guid="BC951E30B62411DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Update_FusnMaster_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227090479427</ID>
+               <lastModifiedTime>Wed Nov 19 10:27:59 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdSegment_BPEL" guid="20F06C50B7AF11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdSegment_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227259869410</ID>
+               <lastModifiedTime>Fri Nov 21 09:31:09 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdSubModelLine" guid="17526380B7B211DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdSubModelLine" status="ENABLED">
+            <versionInfo>
+               <ID>1227261141638</ID>
+               <lastModifiedTime>Fri Nov 21 09:52:21 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProductManager_BPEL" guid="13FBA1F0B7B311DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProductManager_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227261565516</ID>
+               <lastModifiedTime>Fri Nov 21 09:59:25 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Update_FusnDesc_BPEL" guid="E09C9920B62411DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Update_FusnDesc_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227090539635</ID>
+               <lastModifiedTime>Wed Nov 19 10:28:59 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ItemNumberAndCost_CTL_BPEL" guid="B57B5130B6D511DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ItemNumberAndCost_CTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227166488352</ID>
+               <lastModifiedTime>Thu Nov 20 07:34:48 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL" guid="8740E070B6D811DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227167699172</ID>
+               <lastModifiedTime>Thu Nov 20 07:54:59 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+            <service name="LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0" guid="F43DB470B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+               <description>BPEL Service for LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL</description>
+               <versionInfo>
+                  <ID>1227175612813</ID>
+                  <lastModifiedTime>Thu Nov 20 10:06:52 GMT+00:00 2008</lastModifiedTime>
+                  <lastModifiedUser>oc4jadmin</lastModifiedUser>
+               </versionInfo>
+               <parent guid="8740E070B6D811DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL" type="serviceGroup"/>
+               <serviceDefinition>
+                  <wsdlURL>http://essapt020-u006:12001/orabpel/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL/1.0/LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL?wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL">tns:LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL</portType>
+                  <endpointDefinition>
+                     <concreteWSDLURL>/esb/wsil/BPELSystem/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL/LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0?wsdl</concreteWSDLURL>
+                     <soapEndpointURI>http://localhost:8888/event/BPELSystem/LiebertServices/LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL/LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0</soapEndpointURI>
+                  </endpointDefinition>
+               </serviceDefinition>
+               <parameters>
+                  <parameter name="port">12001</parameter>
+                  <parameter name="processName">LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL</parameter>
+                  <parameter name="host">essapt020-u006</parameter>
+                  <parameter name="processVersion">1.0</parameter>
+                  <parameter name="processDomain">LiebertServices</parameter>
+               </parameters>
+               <operations>
+                  <operationInfo guid="FB1AE830B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0.initiate" wsdlOperation="initiate" mepDisplayName="One Way" mep="OneWay">
+                     <request validate="false" xmlns:tns="http://TargetNamespace.com/read" element="tns:Root-Element"/>
+                  </operationInfo>
+               </operations>
+            </service>
+         </serviceGroup>
+         <serviceGroup name="LIBERT_VENDAVO_INTEGRATION_ENPSalesInstallCountry_BPEL" guid="15527F70B6EF11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIBERT_VENDAVO_INTEGRATION_ENPSalesInstallCountry_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227177386446</ID>
+               <lastModifiedTime>Thu Nov 20 10:36:26 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_CountryMasterCTL_BPEL" guid="6A0EA3D0B6F511DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_CountryMasterCTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227180105781</ID>
+               <lastModifiedTime>Thu Nov 20 11:21:45 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPSalesOriginCountry" guid="D28C0900B6ED11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPSalesOriginCountry" status="ENABLED">
+            <versionInfo>
+               <ID>1227176844893</ID>
+               <lastModifiedTime>Thu Nov 20 10:27:24 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL" guid="2DF04100B6EC11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227176139339</ID>
+               <lastModifiedTime>Thu Nov 20 10:15:39 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPItemCosts_BPEL" guid="7E050C20B6EC11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPItemCosts_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227176273560</ID>
+               <lastModifiedTime>Thu Nov 20 10:17:53 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_GlobalHierarchy_CTL_BPEL" guid="25B88B70B79E11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_GlobalHierarchy_CTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227252575785</ID>
+               <lastModifiedTime>Fri Nov 21 07:29:35 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCustBillToCountry_BPEL" guid="9DFAAB80B6F011DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCustBillToCountry_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227178045177</ID>
+               <lastModifiedTime>Thu Nov 20 10:47:25 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCustShiptoCountry" guid="CEA16F10B6F211DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCustShiptoCountry" status="ENABLED">
+            <versionInfo>
+               <ID>1227178985765</ID>
+               <lastModifiedTime>Thu Nov 20 11:03:05 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCenterOfExpertise_BPEL" guid="6AA5A080B7A111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCenterOfExpertise_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227253980051</ID>
+               <lastModifiedTime>Fri Nov 21 07:53:00 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCustLocationCountry" guid="1C28BC10B6F411DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCustLocationCountry" status="ENABLED">
+            <versionInfo>
+               <ID>1227179545351</ID>
+               <lastModifiedTime>Thu Nov 20 11:12:25 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIBERT_VENDAVO_INTEGRATION_Global_Div_Master_CTL_BPEL" guid="62807080BA1F11DDBF0DFFA5D3749B53" qname="BPELSystem.LiebertServices.LIBERT_VENDAVO_INTEGRATION_Global_Div_Master_CTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227527985204</ID>
+               <lastModifiedTime>Mon Nov 24 11:59:45 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIBERT_VENDAVO_INTEGRATION_Global_Hierachy_Prd_Mgr_CTL_BPEL" guid="DB9B0310BA1D11DDBF0DFFA5D3749B53" qname="BPELSystem.LiebertServices.LIBERT_VENDAVO_INTEGRATION_Global_Hierachy_Prd_Mgr_CTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227527329589</ID>
+               <lastModifiedTime>Mon Nov 24 11:48:49 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Global_GphMaster_CTL_BPEL" guid="1CC7E660BA2211DDBF0DFFA5D3749B53" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Global_GphMaster_CTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1227529156794</ID>
+               <lastModifiedTime>Mon Nov 24 12:19:16 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="EE7A13A0B61111DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+      <serviceGroup name="ReachServices" guid="11EBB730B61211DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices" status="ENABLED">
+         <versionInfo>
+            <ID>1227082462054</ID>
+            <lastModifiedTime>Wed Nov 19 08:14:22 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="EE75F4F0B61111DD9F069D2D3CE1B990" qname="BPELSystem" type="system"/>
+         <serviceGroup name="XXReachReadEMail" guid="CD736CA0BBA311DDBF8D9D4A3B991D84" qname="BPELSystem.ReachServices.XXReachReadEMail" status="ENABLED">
+            <versionInfo>
+               <ID>1227694809441</ID>
+               <lastModifiedTime>Wed Nov 26 10:20:09 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="11EBB730B61211DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXReachUploadPDF" guid="F180E3A0B61411DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices.XXReachUploadPDF" status="ENABLED">
+            <versionInfo>
+               <ID>1227083696110</ID>
+               <lastModifiedTime>Wed Nov 19 08:34:56 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="11EBB730B61211DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="TaskManager" guid="11F61770B61211DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices.TaskManager" status="ENABLED">
+            <versionInfo>
+               <ID>1227082462054</ID>
+               <lastModifiedTime>Wed Nov 19 08:14:22 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="11EBB730B61211DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXReachManualIPCXML" guid="C4F0A070B61711DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices.XXReachManualIPCXML" status="ENABLED">
+            <versionInfo>
+               <ID>1227084909803</ID>
+               <lastModifiedTime>Wed Nov 19 08:55:09 GMT+00:00 2008</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="11EBB730B61211DD9F069D2D3CE1B990" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+   </system>
+   <system name="LBT_EBSDBToItemhubDB" guid="C59B9F81A59A11DD9F105B05BA00B049" qname="LBT_EBSDBToItemhubDB" status="ENABLED">
+      <versionInfo>
+         <ID>1227588288432</ID>
+         <lastModifiedTime>Tue Nov 25 04:44:48 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_XxinvFusnItemMasterAndDescToDB_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_ItemHubDBToVendavoFTP" guid="2BA47650991E11DDBFC10B3340FC727A" qname="LBT_ItemHubDBToVendavoFTP" status="ENABLED">
+      <versionInfo>
+         <ID>1227603621718</ID>
+         <lastModifiedTime>Tue Nov 25 09:00:21 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_Test_LIEBERT_VENDAVO_INTEGRATION_GlobalHierarchyToFTP_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1139232135202</ID>
+         <lastModifiedTime>Thu Jun 29 15:30:55 GMT+00:00 2006</lastModifiedTime>
+         <lastModifiedUser>JDev</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_ItemHubToEBS/Staging" guid="5124D6A0991311DD8F263FD179E663B4" qname="LBT_ItemHubToEBS/Staging" status="ENABLED">
+      <versionInfo>
+         <ID>1227202653428</ID>
+         <lastModifiedTime>Thu Nov 20 17:37:33 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_Vendavo_Ph1_LIEBERT_VENDAVO_INTEGRATION_ItemhubToEBS_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_CullinetAndJDEToVendavoFTP" guid="78EE6570B61911DD9F5557416CF4B040" qname="LBT_CullinetAndJDEToVendavoFTP" status="ENABLED">
+      <versionInfo>
+         <ID>1227195448093</ID>
+         <lastModifiedTime>Thu Nov 20 15:37:28 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_ItemCostToStagingDB_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_EBSToStagingDBAndVendavoFTP" guid="BAB61471991911DDBFC10B3340FC727A" qname="LBT_EBSToStagingDBAndVendavoFTP" status="ENABLED">
+      <versionInfo>
+         <ID>1227764174125</ID>
+         <lastModifiedTime>Thu Nov 27 05:36:14 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_ExchangeRatesToFTPandDB_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_ItemHubDBtoVendavoFTP_CountryMaster" guid="4EE378119E7711DD9F56710C84221765" qname="LBT_ItemHubDBtoVendavoFTP_CountryMaster" status="ENABLED">
+      <versionInfo>
+         <ID>1227766391924</ID>
+         <lastModifiedTime>Thu Nov 27 06:13:11 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_CountryMasterToFTP_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_ItemHubDBToStagingDBAndVendavoFTP" guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" status="ENABLED">
+      <versionInfo>
+         <ID>1227767127658</ID>
+         <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+         <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+      </versionInfo>
+      <service name="LBT_UPDATE_Fusn_Table" guid="BD2415A1B7C211DD9F1F7F000BFEDD5E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_UPDATE_Fusn_Table" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>LBT_UPDATE_Fusn_Table.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_UPDATE_Fusn_Table/">tns:LBT_UPDATE_Fusn_Table_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_UPDATE_Fusn_Table?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_UPDATE_Fusn_Table</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="BD265F90B7C211DD9F1F7F000BFEDD5E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_UPDATE_Fusn_Table.update" wsdlOperation="update" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTUPDATEFusnTable" element="tns:EmrFusionChangeControlCollection"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_INSERT_OperatingUnit" guid="BE0796D0737111DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT_OperatingUnit" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>LBT_INSERT_OperatingUnit.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_INSERT_OperatingUnit/">tns:LBT_INSERT_OperatingUnit_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_INSERT_OperatingUnit?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_INSERT_OperatingUnit</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="BE0A07D0737111DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT_OperatingUnit.insert" wsdlOperation="insert" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTOperatingUnit" element="tns:EmrOperatingUnitCollection"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_INSERT/UPdate_InventoryOrg" guid="99C775617F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>LBT_INSERT_UPdate_InventoryOrg.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_INSERT_UPdate_InventoryOrg/">tns:LBT_INSERT/UPdate_InventoryOrg_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_INSERT/UPdate_InventoryOrg?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_INSERT/UPdate_InventoryOrg</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="99C9BF507F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg.merge" wsdlOperation="merge" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTUPdateInventoryOrg" element="tns:EmrInventoryOrgCollection"/>
+            </operationInfo>
+            <operationInfo guid="99C9BF517F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg.write" wsdlOperation="write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTINSERTUPdateInventoryOrg" element="tns:EmrInventoryOrgCollection"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_Poll_CONTROLtable" guid="06B4D510735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Poll_CONTROLtable" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.inbounddbadapterservice" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <invocation>
+            <targetService guid="06B4D511735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Poll_CONTROLtable_RS"/>
+            <interface>
+               <wsdlURL>LBT_Poll_CONTROLtable.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_Poll_CONTROLtable/">tns:LBT_Poll_CONTROLtable_ptt</portType>
+            </interface>
+         </invocation>
+      </service>
+      <service name="LBT_Poll_CONTROLtable_RS" guid="06B4D511735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Poll_CONTROLtable_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service LBT_Poll_CONTROLtable</description>
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>LBT_Poll_CONTROLtable.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_Poll_CONTROLtable/">tns:LBT_Poll_CONTROLtable_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Poll_CONTROLtable_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Poll_CONTROLtable_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="06B4D512735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Poll_CONTROLtable_RS.receive" wsdlOperation="receive" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable" element="tns:EmrFusionChangeControlCollection"/>
+               <routingRules>
+                  <routingRule guid="AAF923B0735D11DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="A29290D1735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_EmrOperatingUnit.LBT_SELECT_EmrOperatingUnitSelect" serviceGUID="A29290D0735D11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_EmrOperatingUnit" mepDisplayName="Request Response" mep="RequestResponse"/>
+                     <filterExpression>{/top:EmrFusionChangeControlCollection/top:EmrFusionChangeControl/top:tableName='EMR_OPERATING_UNIT'};{ namespace top=http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable }</filterExpression>
+                     <transformation>
+                        <xslFileURL>EmrFusionChangeControlCollection_To_LBT_SELECT_EmrOperatingUnitSelectInputParameters.xsl</xslFileURL>
+                     </transformation>
+                     <replyHandler>
+                        <targetOperation guid="F0F3DF91735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit.execute" serviceGUID="F0F3DF90735D11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit" mepDisplayName="One Way" mep="OneWay"/>
+                     </replyHandler>
+                  </routingRule>
+                  <routingRule guid="EB8BADB0735F11DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="D0552031735F11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_OperatingType.LBT_SELECT_OperatingTypeSelect" serviceGUID="D0552030735F11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_OperatingType" mepDisplayName="Request Response" mep="RequestResponse"/>
+                     <filterExpression>{/top:EmrFusionChangeControlCollection/top:EmrFusionChangeControl/top:tableName='EMR_OPERATING_TYPE'};{ namespace top=http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable }</filterExpression>
+                     <transformation>
+                        <xslFileURL>EmrFusionChangeControlCollection_To_LBT_SELECT_OperatingTypeSelectInputParameters.xsl</xslFileURL>
+                     </transformation>
+                     <replyHandler>
+                        <targetOperation guid="0CC8E511736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingType.execute" serviceGUID="0CC8E510736011DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingType" mepDisplayName="One Way" mep="OneWay"/>
+                     </replyHandler>
+                  </routingRule>
+                  <routingRule guid="1C9F7CF073FC11DDBFC3773690A1AE9E" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="DEF5D02173FB11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg.LBT_SELECT_InventryOrgSelect" serviceGUID="DEF5D02073FB11DDBFC3773690A1AE9E" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg" mepDisplayName="Request Response" mep="RequestResponse"/>
+                     <filterExpression>{/top:EmrFusionChangeControlCollection/top:EmrFusionChangeControl/top:tableName='EMR_INVENTORY_ORG'};{ namespace top=http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable }</filterExpression>
+                     <transformation>
+                        <xslFileURL>EmrFusionChangeControlCollection_To_LBT_SELECT_InventryOrgSelectInputParameters.xsl</xslFileURL>
+                     </transformation>
+                     <replyHandler>
+                        <targetOperation guid="4B758A1173FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrg.execute" serviceGUID="4B758A1073FC11DDBFC3773690A1AE9E" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrg" mepDisplayName="One Way" mep="OneWay"/>
+                     </replyHandler>
+                  </routingRule>
+                  <routingRule guid="C0EC0F71B6D811DDBFBC71D69F0006D7" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="FB1AE830B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0.initiate" serviceGUID="F43DB470B6EA11DD9F069D2D3CE1B990" serviceQName="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>EmrFusionChangeControlCollection_To_Root_Element.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_Rtr_InventoryOrg" guid="4B758A1073FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrg" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_InventoryOrg.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_InventoryOrg?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_InventoryOrg</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="4B758A1173FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrg.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg" element="tns:EmrInventoryOrgCollection"/>
+               <routingRules>
+                  <routingRule guid="D2425BE073FC11DDBFC3773690A1AE9E" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="7E6BCDD073FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrgFtp.execute" serviceGUID="7E6712E073FC11DDBFC3773690A1AE9E" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrgFtp" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>EmrInventoryOrgCollection_To_SyncPartyMaster.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_Rtr_InventoryOrgFtp" guid="7E6712E073FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrgFtp" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_InventoryOrgFtp.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_InventoryOrgFtp?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_InventoryOrgFtp</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="7E6BCDD073FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrgFtp.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:SyncPartyMaster"/>
+               <routingRules>
+                  <routingRule guid="582CEE9173FE11DDBF2F21FF8FD76B3E" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="99C9BF507F0611DDBFCE87F389794F29" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg.merge" serviceGUID="99C775617F0611DDBFCE87F389794F29" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT/UPdate_InventoryOrg" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>SyncPartyMaster_To_EmrInventoryOrgCollection.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_Rtr_OperatingType" guid="0CC8E510736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingType" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_OperatingType.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingType?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingType</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="0CC8E511736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingType.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTOperatingType" element="tns:EmrOperatingTypeCollection"/>
+               <routingRules>
+                  <routingRule guid="45239F40736011DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="3CCDAE30736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingTypeFtp.execute" serviceGUID="3CC68240736011DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingTypeFtp" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>EmrOperatingTypeCollection_To_SyncPartyMaster.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_Rtr_OperatingTypeFtp" guid="3CC68240736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingTypeFtp" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_OperatingTypeFtp.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingTypeFtp?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingTypeFtp</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="3CCDAE30736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingTypeFtp.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:SyncPartyMaster"/>
+               <routingRules>
+                  <routingRule guid="A281A950B6E711DDAF0CADEAACA7B5C4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="724993D0B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0.initiate" serviceGUID="6B71DE50B6EA11DD9F069D2D3CE1B990" serviceQName="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL_1_0" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>SyncPartyMaster_To_OperatingUnitRecord_3.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_Rtr_OperatingUnit" guid="F0F3DF90735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_OperatingUnit.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingUnit?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingUnit</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="F0F3DF91735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit" element="tns:EmrOperatingUnitCollection"/>
+               <routingRules>
+                  <routingRule guid="6B0C9650735E11DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="5C8541E0735E11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingunitFTP.execute" serviceGUID="5C7E15F0735E11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingunitFTP" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>EmrOperatingUnitCollection_To_SyncPartyMaster.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_Rtr_OperatingunitFTP" guid="5C7E15F0735E11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingunitFTP" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Liebert_OrgsOperating_LBT_Rtr_OperatingunitFTP.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingunitFTP?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Rtr_OperatingunitFTP</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="5C8541E0735E11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingunitFTP.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:SyncPartyMaster"/>
+               <routingRules>
+                  <routingRule guid="DE1F8810737111DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="BE0A07D0737111DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT_OperatingUnit.insert" serviceGUID="BE0796D0737111DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_INSERT_OperatingUnit" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>SyncPartyMaster_To_EmrOperatingUnitCollection.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="13794C41B6E711DDAF0CADEAACA7B5C4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="9A6A1970B6EA11DD9F069D2D3CE1B990" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL_1_0.initiate" serviceGUID="939AC860B6EA11DD9F069D2D3CE1B990" serviceQName="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL_1_0" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>SyncPartyMaster_To_Root_Element_4.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_SELECT_EmrOperatingUnit" guid="A29290D0735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_EmrOperatingUnit" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>LBT_SELECT_EmrOperatingUnit.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_EmrOperatingUnit/">tns:LBT_SELECT_EmrOperatingUnit_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_EmrOperatingUnit?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_EmrOperatingUnit</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="A29290D1735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_EmrOperatingUnit.LBT_SELECT_EmrOperatingUnitSelect" wsdlOperation="LBT_SELECT_EmrOperatingUnitSelect" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit" element="tns:LBT_SELECT_EmrOperatingUnitSelectInputParameters"/>
+               <reply validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit" element="tns:EmrOperatingUnitCollection" schemaLocation="esb:///ESB_Projects/VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP/LBTSELECTEmrOperatingUnit_table.xsd"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_SELECT_InventryOrg" guid="DEF5D02073FB11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>LBT_SELECT_InventryOrg.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_InventryOrg/">tns:LBT_SELECT_InventryOrg_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_InventryOrg?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_InventryOrg</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="DEF5D02173FB11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg.LBT_SELECT_InventryOrgSelect" wsdlOperation="LBT_SELECT_InventryOrgSelect" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg" element="tns:LBT_SELECT_InventryOrgSelectInputParameters"/>
+               <reply validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg" element="tns:EmrInventoryOrgCollection" schemaLocation="esb:///ESB_Projects/VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP/LBTSELECTInventryOrg_table.xsd"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="LBT_SELECT_OperatingType" guid="D0552030735F11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_OperatingType" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1227767127658</ID>
+            <lastModifiedTime>Thu Nov 27 06:25:27 GMT+00:00 2008</lastModifiedTime>
+            <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+         </versionInfo>
+         <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>LBT_SELECT_OperatingType.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_OperatingType/">tns:LBT_SELECT_OperatingType_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_OperatingType?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_OperatingType</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="D0552031735F11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_OperatingType.LBT_SELECT_OperatingTypeSelect" wsdlOperation="LBT_SELECT_OperatingTypeSelect" mepDisplayName="Request Response" mep="RequestResponse">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTOperatingType" element="tns:LBT_SELECT_OperatingTypeSelectInputParameters"/>
+               <reply validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTOperatingType" element="tns:EmrOperatingTypeCollection" schemaLocation="esb:///ESB_Projects/VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP/LBTSELECTOperatingType_table.xsd"/>
+            </operationInfo>
+         </operations>
+      </service>
+   </system>
+</metadata>

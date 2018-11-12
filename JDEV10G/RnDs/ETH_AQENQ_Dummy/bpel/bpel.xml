@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ETH_AQENQ_Dummy" src="ETH_AQENQ_Dummy.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ETH_GETFL_GetMessage">
+            <property name="wsdlLocation">ETH_GETFL_GetMessage.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ETH_JMSENQ_PushAQ">
+            <property name="wsdlLocation">ETH_JMSENQ_PushAQ.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ETH_GETFL_GetMessage">
+            <property name="ETH_GetFL_DummyFile" type="LogicalDirectory">/ftpdata/Files/SC</property>
+            <property name="portType">ReadDummyAQ_ptt</property>
+            <property name="clusterGroupId">ETH_AQENQ_Dummy_001</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="FaultPolicies" src="FaultPolicies.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">FaultPolicies.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="HelloPolicies">
+            <property name="wsdlLocation">HelloPolicies.wsdl</property>
+            <property name="retryMaxCount">4</property>
+            <property name="retryInterval">30</property>
+            <property name="retryCount">4</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

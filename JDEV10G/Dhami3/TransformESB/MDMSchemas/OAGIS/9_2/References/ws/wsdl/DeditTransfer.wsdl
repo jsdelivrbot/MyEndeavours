@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/DeditTransfer.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessDebitTransfer.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeDebitTransfer.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetDebitTransfer.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowDebitTransfer.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="ProcessDebitTransfer">
+                <part name="Message" element="oa:ProcessDebitTransfer"/>
+        </message>
+        <message name="AcknowledgeDebitTransfer">
+                <part name="Message" element="oa:AcknowledgeDebitTransfer"/>
+        </message>
+        <message name="GetDebitTransfer">
+                <part name="Message" element="oa:GetDebitTransfer"/>
+        </message>
+        <message name="ShowDebitTransfer">
+                <part name="Message" element="oa:ShowDebitTransfer"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestDebitTransferPortType">
+                <operation name="GetDebitTransfer">
+                        <input message="oaws:GetDebitTransfer"/>
+                </operation>
+                <operation name="ProcessDebitTransfer">
+                        <input message="oaws:ProcessDebitTransfer"/>
+                </operation>
+        </portType>
+        <portType name="ResponseDebitTransferPortType">
+                <operation name="AcknowledgeDebitTransfer">
+                        <input message="oaws:AcknowledgeDebitTransfer"/>
+                </operation>
+                <operation name="ShowDebitTransfer">
+                        <input message="oaws:ShowDebitTransfer"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncDebitTransferPortType">
+                <operation name="GetDebitTransfer">
+                        <input message="oaws:GetDebitTransfer"/>
+                        <output message="oaws:ShowDebitTransfer"/>
+                </operation>
+                <operation name="ProcessDebitTransfer">
+                        <input message="oaws:ProcessDebitTransfer"/>
+                        <output message="oaws:AcknowledgeDebitTransfer"/>
+                </operation>
+        </portType>
+        <binding name="RequestDebitTransferBinding" type="oaws:RequestDebitTransferPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessDebitTransfer">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/DebitTransfer.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetDebitTransfer">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/DebitTransfer.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseDebitTransferBinding" type="oaws:ResponseDebitTransferPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeDebitTransfer">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/DebitTransfer.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowDebitTransfer">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/DebitTransfer.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/DebitTransfer.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncDebitTransferBinding" type="oaws:SyncDebitTransferPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetDebitTransfer">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/DebitTransfer.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ProcessDebitTransfer">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/DebitTransfer.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestDebitTransferService">
+                <port name="RequestDebitTransferBinding" binding="oaws:RequestDebitTransferBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestDebitTransfer"/>
+                </port>
+        </service>
+        <service name="ResponseDebitTransferService">
+                <port name="ResponseDebitTransferBinding" binding="oaws:ResponseDebitTransferBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseDebitTransfer"/>
+                </port>
+        </service>
+        <service name="SyncDebitTransferService">
+                <port name="SyncDebitTransferBinding" binding="oaws:SyncDebitTransferBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncDebitTransfer"/>
+                </port>
+        </service>
+</definitions>

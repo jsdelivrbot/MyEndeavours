@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/MaintenanceOrder.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CancelMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ChangeMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CreateMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetListMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ListMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/RespondMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/UpdateMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyMaintenanceOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="AcknowledgeMaintenanceOrder">
+                <part name="Message" element="oa:AcknowledgeMaintenanceOrder"/>
+        </message>
+        <message name="CancelMaintenanceOrder">
+                <part name="Message" element="oa:CancelMaintenanceOrder"/>
+        </message>
+        <message name="ChangeMaintenanceOrder">
+                <part name="Message" element="oa:ChangeMaintenanceOrder"/>
+        </message>
+        <message name="CreateMaintenanceOrder">
+                <part name="Message" element="oa:CreateMaintenanceOrder"/>
+        </message>
+        <message name="GetMaintenanceOrder">
+                <part name="Message" element="oa:GetMaintenanceOrder"/>
+        </message>
+        <message name="ShowMaintenanceOrder">
+                <part name="Message" element="oa:ShowMaintenanceOrder"/>
+        </message>
+        <message name="GetListMaintenanceOrder">
+                <part name="Message" element="oa:GetListMaintenanceOrder"/>
+        </message>
+        <message name="ListMaintenanceOrder">
+                <part name="Message" element="oa:ListMaintenanceOrder"/>
+        </message>
+        <message name="ProcessMaintenanceOrder">
+                <part name="Message" element="oa:ProcessMaintenanceOrder"/>
+        </message>
+        <message name="RespondMaintenanceOrder">
+                <part name="Message" element="oa:RespondMaintenanceOrder"/>
+        </message>
+        <message name="UpdateMaintenanceOrder">
+                <part name="Message" element="oa:UpdateMaintenanceOrder"/>
+        </message>
+        <message name="SyncMaintenanceOrder">
+                <part name="Message" element="oa:SyncMaintenanceOrder"/>
+        </message>
+        <message name="NotifyMaintenanceOrder">
+                <part name="Message" element="oa:NotifyMaintenanceOrder"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestMaintenanceOrderPortType">
+                <operation name="ProcessMaintenanceOrder">
+                        <input message="oaws:ProcessMaintenanceOrder"/>
+                </operation>
+                <operation name="ChangeMaintenanceOrder">
+                        <input message="oaws:ChangeMaintenanceOrder"/>
+                </operation>
+                <operation name="CancelMaintenanceOrder">
+                        <input message="oaws:CancelMaintenanceOrder"/>
+                </operation>
+                <operation name="CreateMaintenanceOrder">
+                        <input message="oaws:CreateMaintenanceOrder"/>
+                </operation>
+                <operation name="GetMaintenanceOrder">
+                        <input message="oaws:GetMaintenanceOrder"/>
+                </operation>
+                <operation name="GetListMaintenanceOrder">
+                        <input message="oaws:GetListMaintenanceOrder"/>
+                </operation>
+                <operation name="UpdateMaintenanceOrder">
+                        <input message="oaws:UpdateMaintenanceOrder"/>
+                </operation>
+                <operation name="SyncMaintenanceOrder">
+                        <input message="oaws:SyncMaintenanceOrder"/>
+                </operation>
+                <operation name="NotifyMaintenanceOrder">
+                        <input message="oaws:NotifyMaintenanceOrder"/>
+                </operation>
+        </portType>
+        <portType name="ResponseMaintenanceOrderPortType">
+                <operation name="AcknowledgeMaintenanceOrder">
+                        <input message="oaws:AcknowledgeMaintenanceOrder"/>
+                </operation>
+                <operation name="RespondMaintenanceOrder">
+                        <input message="oaws:RespondMaintenanceOrder"/>
+                </operation>
+                <operation name="ShowMaintenanceOrder">
+                        <input message="oaws:ShowMaintenanceOrder"/>
+                </operation>
+                <operation name="ListMaintenanceOrder">
+                        <input message="oaws:ListMaintenanceOrder"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncMaintenanceOrderPortType">
+                <operation name="ProcessMaintenanceOrder">
+                        <input message="oaws:ProcessMaintenanceOrder"/>
+                        <output message="oaws:AcknowledgeMaintenanceOrder"/>
+                </operation>
+                <operation name="ChangeMaintenanceOrder">
+                        <input message="oaws:ChangeMaintenanceOrder"/>
+                        <output message="oaws:RespondMaintenanceOrder"/>
+                </operation>
+                <operation name="CancelMaintenanceOrder">
+                        <input message="oaws:CancelMaintenanceOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="CreateMaintenanceOrder">
+                        <input message="oaws:CreateMaintenanceOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="GetMaintenanceOrder">
+                        <input message="oaws:GetMaintenanceOrder"/>
+                        <output message="oaws:ShowMaintenanceOrder"/>
+                </operation>
+                <operation name="GetListMaintenanceOrder">
+                        <input message="oaws:GetListMaintenanceOrder"/>
+                        <output message="oaws:ListMaintenanceOrder"/>
+                </operation>
+                <operation name="UpdateMaintenanceOrder">
+                        <input message="oaws:UpdateMaintenanceOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="SyncMaintenanceOrder">
+                        <input message="oaws:SyncMaintenanceOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyMaintenanceOrder">
+                        <input message="oaws:NotifyMaintenanceOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestMaintenanceOrderBinding" type="oaws:RequestMaintenanceOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ChangeMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="CancelMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="CreateMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetListMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="UpdateMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseMaintenanceOrderBinding" type="oaws:ResponseMaintenanceOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="RespondMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ListMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncMaintenanceOrderBinding" type="oaws:SyncMaintenanceOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ChangeMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CancelMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CreateMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetListMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="UpdateMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyMaintenanceOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/MaintenanceOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestMaintenanceOrderService">
+                <port name="RequestMaintenanceOrderBinding" binding="oaws:RequestMaintenanceOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestMaintenanceOrder"/>
+                </port>
+        </service>
+        <service name="ResponseMaintenanceOrderService">
+                <port name="ResponseMaintenanceOrderBinding" binding="oaws:ResponseMaintenanceOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseMaintenanceOrder"/>
+                </port>
+        </service>
+        <service name="SyncMaintenanceOrderService">
+                <port name="SyncMaintenanceOrderBinding" binding="oaws:SyncMaintenanceOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncMaintenanceOrder"/>
+                </port>
+        </service>
+</definitions>

@@ -1,0 +1,82 @@
+<definitions
+     name="ETH_ENQAPP_ALICE_ACK_PO"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_ENQAPP_ALICE_ACK_PO/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_ENQAPP_ALICE_ACK_PO/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://xmlns.emrsn.com/CommonAcknowledgePO_008"
+     xmlns:obj1="http://xmlns.oracle.com/xdb/SYSTEM"
+    >
+    <types>
+    <!-- Define AQ Headers = Payload Headers + Static Queue Headers -->
+    <schema attributeFormDefault="qualified" elementFormDefault="qualified"
+            targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_ENQAPP_ALICE_ACK_PO/"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/apps/ETH_ENQAPP_ALICE_ACK_PO/"
+            xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/aq/outbound/"
+            xmlns:obj1="http://xmlns.oracle.com/xdb/SYSTEM" >
+      <import namespace="http://xmlns.oracle.com/xdb/SYSTEM" schemaLocation="SYSTEM_ECXMSG.xsd"/>
+      <import namespace="http://xmlns.oracle.com/pcbpel/adapter/aq/outbound/" schemaLocation="aqAdapterOutboundHeader.xsd"/>
+      <complexType name="HeaderCType" >
+        <sequence>
+          <!-- static header -->
+          <element name="QueueHeader" type="hdr:HeaderType" />
+          <!-- payload header -->
+          <element name="PayloadHeader" type="obj1:ECXMSG" />
+        </sequence>
+      </complexType>
+      <element name="Header" type="tns:HeaderCType" />
+    </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CommonAcknowledgePO_008" schemaLocation="public_html/CommonACKNOWLEDGE_PO_008.xsd" />
+      </schema>
+    </types>
+    <message name="ACKNOWLEDGE_PO_008_msg">
+        <part name="ACKNOWLEDGE_PO_008" element="imp1:ACKNOWLEDGE_PO_008"/>
+    </message>
+    <message name="Header_msg">
+        <part name="Header" element="tns:Header"/>
+    </message>
+    <portType name="Enqueue_ptt">
+        <operation name="Enqueue">
+            <input message="tns:ACKNOWLEDGE_PO_008_msg"/>
+        </operation>
+    </portType>
+    <binding name="Enqueue_binding" type="tns:Enqueue_ptt">
+    <jca:binding  />
+        <operation name="Enqueue">
+      <jca:operation
+          InteractionSpec="oracle.tip.adapter.apps.AppsXMLGatewayEnqueueInteractionSpec"
+          PayloadHeaderRequired="true"
+          QueueName="ECX_INBOUND"
+          DatabaseSchema="APPS"
+          ObjectFieldName="PAYLOAD"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="tns:Header_msg" part="Header"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_ENQAPP_ALICE_ACK_PO">
+        <port name="Enqueue_pt" binding="tns:Enqueue_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/AppsAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/Apps/ALICE is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/Apps/Alice" UIConnectionName="ALICE" UIOracleAppType="XMLGATEWAY"
+          ManagedConnectionFactory="oracle.tip.adapter.apps.AppsManagedConnectionFactory"
+          mcf.ConnectionString="jdbc:oracle:thin:@essdbdu31.emrsn.com:20901:aliced2"
+          mcf.UserName="apps"
+          mcf.Password="53CB0F044A0D3DD2C063679F18F89870" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Enqueue_plt" >
+    <plt:role name="Enqueue_role" >
+      <plt:portType name="tns:Enqueue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

@@ -1,0 +1,140 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_DEQJMS_CustomProcessPO_RS" guid="B2D18831097A11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_DEQJMS_CustomProcessPO_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ETH_DEQJMS_CustomProcessPO</description>
+   <versionInfo>
+      <ID>1271412048134</ID>
+      <lastModifiedTime>Fri Apr 16 10:00:48 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_DEQJMS_CustomProcessPO.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_CustomProcessPO/">tns:Consume_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_DEQJMS_CustomProcessPO_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_DEQJMS_CustomProcessPO_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="B2D8B420097A11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_DEQJMS_CustomProcessPO_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+         <routingRules>
+            <routingRule guid="B04F55B0356211DE9F5E09AFEEE33747" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="788415D0096611DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="7881CBE1096611DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{(/imp1:CustomProcessPO/Trading_partner_1_format = 'DoNotSend' and /imp1:CustomProcessPO/Attribute5 ='TP1') or (/imp1:CustomProcessPO/Trading_partner_2_format = 'DoNotSend' and /imp1:CustomProcessPO/Attribute5 ='TP2') or (/imp1:CustomProcessPO/Trading_partner_3_format = 'DoNotSend' and /imp1:CustomProcessPO/Attribute5 ='TP3') or (/imp1:CustomProcessPO/Logistics_1_format = 'DoNotSend' and /imp1:CustomProcessPO/Attribute5 ='TP4') or (/imp1:CustomProcessPO/Logistics_2_format = 'DoNotSend' and /imp1:CustomProcessPO/Attribute5 ='TP5')};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>DoNotSend_Archival_ProcessPO_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="4F8112E0097B11DE9F1EA78AC56F7274" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="00493A40097B11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS.execute" serviceGUID="003FC460097B11DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_1_format = 'OAGIS_9_0'  and /imp1:CustomProcessPO/Attribute5 ='TP1'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomProcessPO_mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="9E700951203D11DEBFCC939548AC9849" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="00493A40097B11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS.execute" serviceGUID="003FC460097B11DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_2_format = 'OAGIS_9_0'  and /imp1:CustomProcessPO/Attribute5 ='TP2'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomProcessPO_mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="6A33CF60380011DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="00493A40097B11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS.execute" serviceGUID="003FC460097B11DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_3_format = 'OAGIS_9_0'  and /imp1:CustomProcessPO/Attribute5 ='TP3'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomProcessPO_mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="CDFBF040380011DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="00493A40097B11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS.execute" serviceGUID="003FC460097B11DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Logistics_1_format = 'OAGIS_9_0'  and /imp1:CustomProcessPO/Attribute5 ='TP4'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomProcessPO_mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="0FFF0C20380111DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="00493A40097B11DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS.execute" serviceGUID="003FC460097B11DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Logistics_2_format = 'OAGIS_9_0'  and /imp1:CustomProcessPO/Attribute5 ='TP5'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomProcessPO_mapping_V1.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="6464D250097B11DE9F1EA78AC56F7274" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_1_format ='EDI_5020_V5_0' and /imp1:CustomProcessPO/Attribute5 ='TP1'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_0_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="BC3D6E50203D11DEBFCC939548AC9849" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_2_format ='EDI_5020_V5_0' and /imp1:CustomProcessPO/Attribute5 ='TP2'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_0_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="7B78A0B0380111DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_3_format ='EDI_5020_V5_0' and /imp1:CustomProcessPO/Attribute5 ='TP3'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_0_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="FA04DE30380111DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Logistics_1_format ='EDI_5020_V5_0' and /imp1:CustomProcessPO/Attribute5 ='TP4'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_0_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="42F5CFA0380211DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Logistics_2_format ='EDI_5020_V5_0' and /imp1:CustomProcessPO/Attribute5 ='TP5'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_0_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="6464D250097B11DE9F1EA78AC56F7274" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_1_format ='EDI_5020_V5_1' and /imp1:CustomProcessPO/Attribute5 ='TP1'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_1_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="BC3D6E50203D11DEBFCC939548AC9849" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_2_format ='EDI_5020_V5_1' and /imp1:CustomProcessPO/Attribute5 ='TP2'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_1_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="D53255A0380211DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Trading_partner_3_format ='EDI_5020_V5_1' and /imp1:CustomProcessPO/Attribute5 ='TP3'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_1_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="0093D570380311DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Logistics_1_format ='EDI_5020_V5_1' and /imp1:CustomProcessPO/Attribute5 ='TP4'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_1_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="36DFACD0380311DFBF98A32C772F0224" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="734985D0097711DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS.execute" serviceGUID="73104D60097711DE9F1EA78AC56F7274" serviceQName="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_5020_RemoveNamespace_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/imp1:CustomProcessPO/Logistics_2_format ='EDI_5020_V5_1' and /imp1:CustomProcessPO/Attribute5 ='TP5'};{ namespace imp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_To_CustomEDI850_V5_1_V3.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

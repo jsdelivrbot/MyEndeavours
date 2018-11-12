@@ -1,0 +1,46 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="EmrInventoryOrgCollection" type="EmrInventoryOrgCollection"/>
+   <xs:complexType name="EmrInventoryOrgCollection">
+      <xs:sequence>
+         <xs:element name="EmrInventoryOrg" type="EmrInventoryOrg" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="EmrInventoryOrg">
+      <xs:sequence>
+         <xs:element name="appId">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="3"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="organizationCode">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="10"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="organizationName" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="40"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="operatingUnitCode" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="5"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="organizationCostPriority" type="xs:int" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="LBT_SELECT_InventryOrgSelectInputParameters" type="LBT_SELECT_InventryOrgSelect"/>
+   <xs:complexType name="LBT_SELECT_InventryOrgSelect">
+      <xs:sequence/>
+   </xs:complexType>
+</xs:schema>

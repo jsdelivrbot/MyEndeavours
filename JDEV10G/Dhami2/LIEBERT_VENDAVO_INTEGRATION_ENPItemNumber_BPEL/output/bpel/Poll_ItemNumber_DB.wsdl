@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="Poll_ItemNumber_DB"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Poll_ItemNumber_DB/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Poll_ItemNumber_DB/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/PollItemNumberDB"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/PollItemNumberDB"
+                schemaLocation="PollItemNumberDB_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="ItemNumberOutboundCollection_msg">
+        <part name="ItemNumberOutboundCollection" element="top:ItemNumberOutboundCollection"/>
+    </message>
+
+    <portType name="Poll_ItemNumber_DB_ptt">
+        <operation name="receive">
+            <input message="tns:ItemNumberOutboundCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="Poll_ItemNumber_DB_binding" type="tns:Poll_ItemNumber_DB_ptt">
+        <pc:inbound_binding/>
+        <operation name="receive">
+            <jca:operation
+                ActivationSpec="oracle.tip.adapter.db.DBActivationSpec"
+
+                DescriptorName="PollItemNumberDB.ItemNumberOutbound"
+                QueryName="Poll_ItemNumber_DB"
+                PollingStrategyName="LogicalDeletePollingStrategy"
+                MarkReadFieldName="PROCESS_FLAG"
+                MarkReadValue="Y"
+                SequencingFieldName="ITEM_NBR"
+                MaxRaiseSize="10000"
+                MaxTransactionSize="unlimited"
+                PollingInterval="7200"
+                NumberOfThreads="1"
+                UseBatchDestroy="false"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="PollItemNumberDB_toplink_mappings.xml" />
+        <input/>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if jdbc/DB/Liebert_VendavoStage is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="Poll_ItemNumber_DB">
+        <port name="Poll_ItemNumber_DB_pt" binding="tns:Poll_ItemNumber_DB_binding">
+            <jca:address location="jdbc/DB/Liebert_VendavoStage"
+                UIConnectionName="enpdw"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+               
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="Poll_ItemNumber_DB_plt" >
+        <plt:role name="Poll_ItemNumber_DB_role" >
+            <plt:portType name="tns:Poll_ItemNumber_DB_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

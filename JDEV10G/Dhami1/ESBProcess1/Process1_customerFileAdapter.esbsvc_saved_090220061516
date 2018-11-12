@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="customerFileAdapter" guid="778CBE00FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1235133818172</ID>
+      <lastModifiedTime>Fri Feb 20 18:13:38 IST 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_ESBProcess1</lastModifiedUser>
+   </versionInfo>
+   <parent guid="57A9EDE0FBF011DD9F75B99054634EA7" qname="Process1" type="system"/>
+   <invocation>
+      <targetService guid="778CBE01FBF311DD9F75B99054634EA7" qname="Process1.customerFileAdapter_RS"/>
+      <interface>
+         <wsdlURL>customerFileAdapter.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/customerFileAdapter/">tns:Read_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="HTTP_USERNAME" value="oc4jadmin"/>
+      <property name="rejectedMessageHandlers" value="wsif://http://inedec-moh-03:8888/Error_webservices/RejectionHandlerPort?WSDL|handleRejection|message"/>
+      <property name="HTTP_PASSWORD" value="welcome1"/>
+   </endpointProperties>
+</service>

@@ -1,0 +1,106 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 19 15:20:14 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="PollFTP_ClosetMaid"
+         targetNamespace="http://xmlns.emerson.com/PollFTP_ClosetMaid"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/ClosetMaid/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/ClosetMaid_DB/"
+         xmlns:client="http://xmlns.emerson.com/PollFTP_ClosetMaid"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <bpelx:exec import="java.io.BufferedInputStream"/>
+  <bpelx:exec import="java.io.FileOutputStream"/>
+  <bpelx:exec import="java.net.URL"/>
+  <bpelx:exec import="java.net.URLConnection"/>
+  <bpelx:exec import="java.util.Calendar"/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Get_role" name="ClosetMaid"
+                 partnerLinkType="ns1:Get_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_FileInfo_Get_InputVariable"
+              messageType="ns1:Get_msg"/>
+    <variable name="FTP_Header" messageType="ns4:InboundHeader_msg"/>
+    <variable name="fileName" type="xsd:string"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <empty name="Empty_1"/>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_FileInfo" partnerLink="ClosetMaid"
+             portType="ns1:Get_ptt" operation="Get"
+             variable="Receive_FileInfo_Get_InputVariable" createInstance="yes"
+             bpelx:headerVariable="FTP_Header"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="FTP_Header" part="inboundHeader"
+              query="/ns4:InboundFTPHeaderType/ns4:fileName"/>
+        <to variable="fileName"/>
+      </copy>
+    </assign>
+    <bpelx:exec name="Java_Embedding_1" language="java" version="1.4">
+      <![CDATA[String file = "";   
+long start, stop;  
+start = Calendar.getInstance().getTimeInMillis();  
+System.out.println("[PollFTP_ClosetMaid] Start Time - "+start);  
+try {          
+        String fileName = (java.lang.String)getVariableData("fileName");                                  
+        URL url = new URL("ftp://mktftpuser:user101@ftp01.b2netsolutions.com/VSP/"+fileName+";type=i");          
+        URLConnection con = url.openConnection();          
+        BufferedInputStream in = new BufferedInputStream(con.getInputStream());          
+        FileOutputStream out = new FileOutputStream("C:\\my_"+fileName);          
+          
+        int i = 0;          
+        byte[] bytesIn = new byte[1024];          
+        while ((i = in.read(bytesIn)) >= 0) {          
+                out.write(bytesIn, 0, i);          
+        }          
+        out.close();          
+        in.close();          
+          
+          
+} catch (Exception e) {          
+   e.printStackTrace();          
+}  
+stop = Calendar.getInstance().getTimeInMillis();  
+System.out.println("[PollFTP_ClosetMaid] Stop Time - "+stop);  
+System.out.println("[PollFTP_ClosetMaid] Total time taken is - "+((stop-start)/1000)+" secs");]]>
+    </bpelx:exec>
+  </sequence>
+</process>

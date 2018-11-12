@@ -1,0 +1,121 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Jun 27 13:53:33 MDT 2006
+  Author:  amahajan
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="DynPL_JNDI" targetNamespace="http://xmlns.oracle.com/DynPL_JNDI"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/ReadGifFile/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/ftp/FtpPutFileBLOBPayload/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.oracle.com/DynPL_JNDI"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="ReadGifFile"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="FtpPutFileBLOBPayload" partnerRole="Put_role"
+                 partnerLinkType="ns2:Put_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_1_Read_InputVariable" messageType="ns1:Read_msg"/>
+    <variable name="Invoke_1_Put_InputVariable" messageType="ns2:Put_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="ReadGifFile" portType="ns1:Read_ptt"
+             operation="Read" variable="Receive_1_Read_InputVariable"
+             createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="Receive_1_Read_InputVariable" part="opaque"
+              query="/ns3:opaqueElement"/>
+        <to variable="Invoke_1_Put_InputVariable" part="opaque"
+            query="/ns3:opaqueElement"/>
+      </copy>
+    </assign>
+    <assign name="Assign_2">
+      <copy>
+        <from>
+          <EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+            <Address>eis/ftp/anonymous</Address>
+          </EndpointReference>
+        </from>
+        <to partnerLink="FtpPutFileBLOBPayload"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="FtpPutFileBLOBPayload"
+            portType="ns2:Put_ptt" operation="Put"
+            inputVariable="Invoke_1_Put_InputVariable"/>
+    <wait name="Wait_1" for="'PT9S'"/>
+    <assign name="Assign_3">
+      <copy>
+        <from>
+          <EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+            <Address>eis/ftp/oracle</Address>
+          </EndpointReference>
+        </from>
+        <to partnerLink="FtpPutFileBLOBPayload"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_2" partnerLink="FtpPutFileBLOBPayload"
+            portType="ns2:Put_ptt" operation="Put"
+            inputVariable="Invoke_1_Put_InputVariable"/>
+    <wait name="Wait_2" for="'PT9S'"/>
+    <assign name="Assign_4">
+      <copy>
+        <from>
+          <EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+            <Address>eis/ftp/scott</Address>
+          </EndpointReference>
+        </from>
+        <to partnerLink="FtpPutFileBLOBPayload"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_3" partnerLink="FtpPutFileBLOBPayload"
+            portType="ns2:Put_ptt" operation="Put"
+            inputVariable="Invoke_1_Put_InputVariable"/>
+    <wait name="Wait_3" for="'PT9S'"/>
+    <assign name="Assign_5">
+      <copy>
+        <from>
+          <EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+            <Address/>
+          </EndpointReference>
+        </from>
+        <to partnerLink="FtpPutFileBLOBPayload"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_4" partnerLink="FtpPutFileBLOBPayload"
+            portType="ns2:Put_ptt" operation="Put"
+            inputVariable="Invoke_1_Put_InputVariable"/>
+  </sequence>
+</process>

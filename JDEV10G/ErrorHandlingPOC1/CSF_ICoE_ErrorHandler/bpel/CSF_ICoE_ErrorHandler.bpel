@@ -1,0 +1,334 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Oct 08 15:55:03 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CSF_ICoE_ErrorHandler"
+         targetNamespace="http://xmlns.oracle.com/CSF_ICoE_ErrorHandler"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://xmlns.oracle.com/CSF_ICoE_ErrorHandler"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/CSF_DBINS_ICoE_ErrorTable/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/top/CSFDBINSICoEErrorTable"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:CSF_ICoE_ErrorHandler"
+                 myRole="CSF_ICoE_ErrorHandlerProvider"/>
+    <partnerLink name="CSF_DBINS_ICoE_ErrorTable"
+                 partnerRole="CSF_DBINS_ICoE_ErrorTable_role"
+                 partnerLinkType="ns1:CSF_DBINS_ICoE_ErrorTable_plt"/>
+    <partnerLink name="NotificationService"
+                 partnerRole="NotificationServiceProvider"
+                 partnerLinkType="ns3:NotificationServiceLink"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:CSF_ICoE_ErrorHandlerRequestMessage"/>
+    <variable name="G_ICoE_ErrorTable_InputVariable"
+              messageType="ns1:IcoeErrorTableCollection_msg"/>
+    <variable name="G_ICoE_Support_Email" type="xsd:string"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="ICoE_ErrorHandler_Scope">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in CSF_ICoE_ErrorHandler.wsdl) -->
+    <receive name="Receive_Error" partnerLink="client"
+             portType="client:CSF_ICoE_ErrorHandler" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_SupportMailId">
+      <copy>
+        <from expression="string('inderpal.dhami@emerson.com')"/>
+        <to variable="G_ICoE_Support_Email"/>
+      </copy>
+    </assign>
+    <assign name="Assign_ICoE_ErrorTable">
+      <copy>
+        <from expression="ora:generateGUID()"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:uuid"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:account"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:account"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:sub_account"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:subAccount"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorCode"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorCode"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorSeverity"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorSeverity"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorSummary"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorSummary"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorDetail"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorDetail"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorMessage"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorMessage"/>
+      </copy>
+      <copy>
+        <from expression="concat('[STAGE] - ',bpws:getVariableData('G_ICoE_ErrorTable_InputVariable','IcoeErrorTableCollection','/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorSubject'))"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorSubject"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorDateTime"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:errorDatetime"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:messageID"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:messageId"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:messageType"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:messageType"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:messageSourceID"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:messageSourceId"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:environment"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:environment"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:processID"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:processId"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:processName"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:processName"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:processType"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:processType"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:contactName"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:contactName"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:contactEmail"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:contactEmail"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:contactPhone"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:conatctPhone"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:userName"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:createdBy"/>
+      </copy>
+      <copy>
+        <from expression="string('N')"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:contactIntimated"/>
+      </copy>
+      <copy>
+        <from expression="string('N')"/>
+        <to variable="G_ICoE_ErrorTable_InputVariable"
+            part="IcoeErrorTableCollection"
+            query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:supportIntimated"/>
+      </copy>
+    </assign>
+    <scope name="Email_ICoE_Support">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:email"></bpelx:pattern>
+      </bpelx:annotation>
+      <variables>
+        <variable name="varNotificationReq"
+                  messageType="ns3:EmailNotificationRequest"/>
+        <variable name="varNotificationResponse"
+                  messageType="ns3:ArrayOfResponse"/>
+        <variable name="NotificationServiceFaultVariable"
+                  messageType="ns3:NotificationServiceErrorMessage"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <empty name="Empty_1"/>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence_1">
+        <assign name="EmailParamsAssign">
+          <copy>
+            <from expression="string('ICoE_Services')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:FromAccountName"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Bcc"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:CSF_ICoE_ErrorHandlerProcessRequest/client:contactEmail"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Cc"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:ReplyToAddress"/>
+          </copy>
+          <copy>
+            <from expression="concat(ora:getInstanceId(),' ',substring(bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorSubject'),1,18))"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Subject"/>
+          </copy>
+          <copy>
+            <from expression="bpws:getVariableData('G_ICoE_Support_Email')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:To"/>
+          </copy>
+          <copy>
+            <from expression="concat('&lt;table>&lt;tr>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorMessage'),'&lt;/td>&lt;td>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&amp;nbsp;&lt;/td>&lt;td>&amp;nbsp;&lt;/td>&lt;/tr>&lt;tr>&lt;td>PROJECT ACCOUNT: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:account'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>PROJECT SUB-ACCOUNT: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:sub_account'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>ERROR CODE: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorCode'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>ERROR SUMMARY: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorSummary'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>ERROR DETAIL: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorDetail'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>ERROR SEVERITY: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorSeverity'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>ERROR TIME: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:errorDateTime'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>&amp;nbsp;&lt;/td>&lt;td>&amp;nbsp;&lt;/td>&lt;/tr>&lt;tr>&lt;td>PROCESS NAME: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:processName'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>PROCESS ID: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:processID'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>PROCESS TYPE: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:processType'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>ENVIRONMENT: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:environment'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>MAIL SENT TO: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:contactName'),' ',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:contactEmail'),' ',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:contactPhone'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>&amp;nbsp;&lt;/td>&lt;td>&amp;nbsp;&lt;/td>&lt;/tr>&lt;tr>&lt;td>MESSAGE ID: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:messageID'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>MESSAGE TYPE: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:messageType'),'&lt;/td>&lt;/tr>&lt;tr>&lt;td>MESSAGE SOURCE: &lt;/td>&lt;td>',bpws:getVariableData('inputVariable','payload','/client:CSF_ICoE_ErrorHandlerProcessRequest/client:messageSourceID'),'&lt;/td>&lt;/tr>&lt;/table>')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody"/>
+          </copy>
+          <copy>
+            <from expression="string('text/html; charset=UTF-8')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:MimeType"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeNotificationService"
+                partnerLink="NotificationService"
+                portType="ns3:NotificationService"
+                operation="sendEmailNotification"
+                inputVariable="varNotificationReq"
+                outputVariable="varNotificationResponse"/>
+        <assign name="Assign_EmailStatus">
+          <copy>
+            <from expression="string('Y')"/>
+            <to variable="G_ICoE_ErrorTable_InputVariable"
+                part="IcoeErrorTableCollection"
+                query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:contactIntimated"/>
+          </copy>
+          <copy>
+            <from expression="string('Y')"/>
+            <to variable="G_ICoE_ErrorTable_InputVariable"
+                part="IcoeErrorTableCollection"
+                query="/ns2:IcoeErrorTableCollection/ns2:IcoeErrorTable/ns2:supportIntimated"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <scope name="Scope_InsertError">
+      <sequence name="Sequence_2">
+        <invoke name="Invoke_ICoE_ErrorTable"
+                partnerLink="CSF_DBINS_ICoE_ErrorTable"
+                portType="ns1:CSF_DBINS_ICoE_ErrorTable_ptt" operation="insert"
+                inputVariable="G_ICoE_ErrorTable_InputVariable"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

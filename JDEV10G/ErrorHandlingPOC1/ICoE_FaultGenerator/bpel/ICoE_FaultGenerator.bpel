@@ -1,0 +1,168 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Oct 07 14:07:03 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ICoE_FaultGenerator"
+         targetNamespace="http://services.emerson.com/ICoE_FaultGenerator"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:client="http://services.emerson.com/ICoE_FaultGenerator"
+         xmlns:ns6="http://xmlns.oracle.com/CSF_ICoE_ErrorHandler"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://services.emerson.com/common/ICoE_ErrorHandler"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ns2="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:ICoE_FaultGenerator"
+                 myRole="ICoE_FaultGeneratorProvider"/>
+    <partnerLink name="CSF_ICoE_ErrorHandler"
+                 partnerRole="CSF_ICoE_ErrorHandlerProvider"
+                 partnerLinkType="ns6:CSF_ICoE_ErrorHandler"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:ICoE_FaultGeneratorRequestMessage"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable"
+              messageType="client:ICoE_FaultGeneratorResponseMessage"/>
+    <variable name="G_FaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="L_FaultGenerator_submitCommonError"
+              messageType="ns6:CSF_ICoE_ErrorHandlerRequestMessage"/>
+  </variables>
+  <faultHandlers>
+    <catch faultName="bpelx:remoteFault" faultVariable="G_FaultVar">
+      <sequence name="Sequence_1">
+        <assign name="Assign_FaultGenerator">
+          <copy>
+            <from expression="string('TEST')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:account"/>
+          </copy>
+          <copy>
+            <from variable="G_FaultVar" part="code"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorCode"/>
+          </copy>
+          <copy>
+            <from variable="G_FaultVar" part="summary"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSummary"/>
+          </copy>
+          <copy>
+            <from variable="G_FaultVar" part="detail"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorDetail"/>
+          </copy>
+          <copy>
+            <from expression="string('HIGH')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSeverity"/>
+          </copy>
+          <copy>
+            <from expression="string('inderpal.dhami@emerson.com')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactEmail"/>
+          </copy>
+          <copy>
+            <from expression="string('EMR29371293')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageID"/>
+          </copy>
+          <copy>
+            <from expression="string('TEST_MSG')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorMessage"/>
+          </copy>
+          <copy>
+            <from expression="string('EMR874')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageSourceID"/>
+          </copy>
+          <copy>
+            <from expression="ora:getInstanceId()"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processID"/>
+          </copy>
+          <copy>
+            <from expression="string('ICoE_FaultGenerator')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processName"/>
+          </copy>
+          <copy>
+            <from expression="string('BPEL')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processType"/>
+          </copy>
+          <copy>
+            <from expression="string('STAGE')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:environment"/>
+          </copy>
+          <copy>
+            <from expression="string('Inderpal Singh Dhami')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactName"/>
+          </copy>
+          <copy>
+            <from expression="string('Test Error Occured Subject')"/>
+            <to variable="L_FaultGenerator_submitCommonError" part="payload"
+                query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSubject"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_FaultGenerator" partnerLink="CSF_ICoE_ErrorHandler"
+                portType="ns6:CSF_ICoE_ErrorHandler" operation="process"
+                inputVariable="L_FaultGenerator_submitCommonError"/>
+      </sequence>
+    </catch>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ICoE_FaultGenerator.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:ICoE_FaultGenerator" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <throw name="Throw_Exception" faultName="bpelx:remoteFault"
+           faultVariable="G_FaultVar"/>
+    <reply name="replyOutput" partnerLink="client"
+           portType="client:ICoE_FaultGenerator" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

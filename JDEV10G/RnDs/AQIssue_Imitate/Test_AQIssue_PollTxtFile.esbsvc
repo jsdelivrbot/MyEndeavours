@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="PollTxtFile" guid="5131514056A611DEBFBFF543CBD6D3C1" qname="Test.AQIssue.PollTxtFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1244741177879</ID>
+      <lastModifiedTime>Thu Jun 11 17:26:17 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_AQIssue_Imitate</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B8A2F98056A311DEBFBFF543CBD6D3C1" qname="Test.AQIssue" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="5131514156A611DEBFBFF543CBD6D3C1" qname="Test.AQIssue.PollTxtFile_RS"/>
+      <interface>
+         <wsdlURL>PollTxtFile.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/PollTxtFile/">tns:Get_ptt</portType>
+      </interface>
+   </invocation>
+</service>

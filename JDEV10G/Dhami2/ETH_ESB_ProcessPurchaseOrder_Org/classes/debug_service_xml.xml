@@ -1,0 +1,1552 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<metadata>
+   <system name="LBT_ItemHubDB_ToVendavoFTP" guid="7D5852C107BC11DE9F072DA9DDB3B7F2" qname="LBT_ItemHubDB_ToVendavoFTP" status="ENABLED">
+      <versionInfo>
+         <ID>1238580579348</ID>
+         <lastModifiedTime>Wed Apr 01 10:09:39 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_VenPh1_UC7_LIEBERT_VENDAVO_INTEGRATION_GlobalHierToVendavoFTP_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="BPELSystem" guid="8228BEC011FD11DEAF2583A4A009007B" qname="BPELSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1237189138537</ID>
+         <lastModifiedTime>Mon Mar 16 07:38:58 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="ETHServices" guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" status="ENABLED">
+         <versionInfo>
+            <ID>1237189138537</ID>
+            <lastModifiedTime>Mon Mar 16 07:38:58 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="8228BEC011FD11DEAF2583A4A009007B" qname="BPELSystem" type="system"/>
+         <serviceGroup name="TaskManager" guid="8234F3C011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices.TaskManager" status="ENABLED">
+            <versionInfo>
+               <ID>1237189138537</ID>
+               <lastModifiedTime>Mon Mar 16 07:38:58 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXReachManualIPCXML" guid="C1043C20152F11DEBF7729630AA7FEAC" qname="BPELSystem.ETHServices.XXReachManualIPCXML" status="ENABLED">
+            <versionInfo>
+               <ID>1237540571610</ID>
+               <lastModifiedTime>Fri Mar 20 09:16:11 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="FlatFileSplitterProcess" guid="470AF7E0124811DEAF4F855945500849" qname="BPELSystem.ETHServices.FlatFileSplitterProcess" status="ENABLED">
+            <versionInfo>
+               <ID>1237221250967</ID>
+               <lastModifiedTime>Mon Mar 16 16:34:10 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="ETH_BPEL_ComplianceDataLogger" guid="68FA118012F511DEBFC71967D79D8EB9" qname="BPELSystem.ETHServices.ETH_BPEL_ComplianceDataLogger" status="ENABLED">
+            <versionInfo>
+               <ID>1237295610678</ID>
+               <lastModifiedTime>Tue Mar 17 13:13:30 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="CommonErrorHandling" guid="FD48F210147C11DEAF3755984D8E204A" qname="BPELSystem.ETHServices.CommonErrorHandling" status="ENABLED">
+            <versionInfo>
+               <ID>1237463792700</ID>
+               <lastModifiedTime>Thu Mar 19 11:56:32 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="ETH_BPEL_InsertSupplierConnectivityErrors" guid="80E09C70147011DEAF3755984D8E204A" qname="BPELSystem.ETHServices.ETH_BPEL_InsertSupplierConnectivityErrors" status="ENABLED">
+            <versionInfo>
+               <ID>1237458430117</ID>
+               <lastModifiedTime>Thu Mar 19 10:27:10 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="test" guid="6860BAA0139811DE8F3ABFA9A27ADF50" qname="BPELSystem.ETHServices.test" status="ENABLED">
+            <versionInfo>
+               <ID>1237365617674</ID>
+               <lastModifiedTime>Wed Mar 18 08:40:17 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="ETH_BPEL_LSNA_InOutProcess" guid="3CEDA3D01DFA11DE8F76BD309C31FC06" qname="BPELSystem.ETHServices.ETH_BPEL_LSNA_InOutProcess" status="ENABLED">
+            <versionInfo>
+               <ID>1238507147161</ID>
+               <lastModifiedTime>Tue Mar 31 13:45:47 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="822D2B9011FD11DEAF2583A4A009007B" qname="BPELSystem.ETHServices" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+      <serviceGroup name="LiebertServices" guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" status="ENABLED">
+         <versionInfo>
+            <ID>1237189168732</ID>
+            <lastModifiedTime>Mon Mar 16 07:39:28 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="8228BEC011FD11DEAF2583A4A009007B" qname="BPELSystem" type="system"/>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_CountryMasterCTL_BPEL" guid="79DB51C012C411DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_CountryMasterCTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237274593657</ID>
+               <lastModifiedTime>Tue Mar 17 07:23:13 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="TaskManager" guid="9499A97011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices.TaskManager" status="ENABLED">
+            <versionInfo>
+               <ID>1237189168732</ID>
+               <lastModifiedTime>Mon Mar 16 07:39:28 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdSegment_BPEL" guid="3E14F2A012BE11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdSegment_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237271916404</ID>
+               <lastModifiedTime>Tue Mar 17 06:38:36 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdSubModelLine" guid="559C33C012BE11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdSubModelLine" status="ENABLED">
+            <versionInfo>
+               <ID>1237271955900</ID>
+               <lastModifiedTime>Tue Mar 17 06:39:15 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPPlatform_BPEL" guid="870B57C012BD11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPPlatform_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237271609301</ID>
+               <lastModifiedTime>Tue Mar 17 06:33:29 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdBUDivision_BPEL" guid="F05E3BC012BD11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdBUDivision_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237271786020</ID>
+               <lastModifiedTime>Tue Mar 17 06:36:26 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProductManager_BPEL" guid="6DABB7B012BE11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProductManager_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237271996250</ID>
+               <lastModifiedTime>Tue Mar 17 06:39:56 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCustShiptoCountry" guid="906164A012C611DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCustShiptoCountry" status="ENABLED">
+            <versionInfo>
+               <ID>1237275490461</ID>
+               <lastModifiedTime>Tue Mar 17 07:38:10 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPSalesOriginCountry" guid="BBF31C3012C611DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPSalesOriginCountry" status="ENABLED">
+            <versionInfo>
+               <ID>1237275563537</ID>
+               <lastModifiedTime>Tue Mar 17 07:39:23 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCenterOfExpertise_BPEL" guid="B2777B6012BC11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCenterOfExpertise_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237271252748</ID>
+               <lastModifiedTime>Tue Mar 17 06:27:32 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdLine_BPEL" guid="0C4BBD3012BE11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdLine_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237271832873</ID>
+               <lastModifiedTime>Tue Mar 17 06:37:12 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPProdModelLine_BPEL" guid="27BC949012BE11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPProdModelLine_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237271878913</ID>
+               <lastModifiedTime>Tue Mar 17 06:37:58 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Global_GphMaster_CTL_BPEL" guid="832EC46012BE11DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Global_GphMaster_CTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237272032355</ID>
+               <lastModifiedTime>Tue Mar 17 06:40:32 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCustBillToCountry_BPEL" guid="4BD3A64012C611DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCustBillToCountry_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237275375439</ID>
+               <lastModifiedTime>Tue Mar 17 07:36:15 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPCustLocationCountry" guid="6EEF88B012C611DE8F1FCFCE96AF3E4D" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPCustLocationCountry" status="ENABLED">
+            <versionInfo>
+               <ID>1237275434333</ID>
+               <lastModifiedTime>Tue Mar 17 07:37:14 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL" guid="E720C200144B11DEAF3755984D8E204A" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237442710321</ID>
+               <lastModifiedTime>Thu Mar 19 06:05:10 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPExchangeRate_BPEL" guid="B3D5A020193011DEBFDCBF52A08137F6" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPExchangeRate_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237980783571</ID>
+               <lastModifiedTime>Wed Mar 25 11:33:03 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL" guid="1E8033A0144911DEAF3755984D8E204A" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingType_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237441514653</ID>
+               <lastModifiedTime>Thu Mar 19 05:45:14 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL" guid="BD86BBC0144B11DEAF3755984D8E204A" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237442640480</ID>
+               <lastModifiedTime>Thu Mar 19 06:04:00 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Invoke_ExchangeRate_BPEL" guid="AB4B0ED01A1211DE9F084BBE2A128FBE" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Invoke_ExchangeRate_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1238077835505</ID>
+               <lastModifiedTime>Thu Mar 26 14:30:35 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="LIEBERT_VENDAVO_INTEGRATION_Invoke_ExchangeRates_BPEL" guid="AFEC23F019BF11DEBFBEE9928EC50497" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_Invoke_ExchangeRates_BPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1238042195241</ID>
+               <lastModifiedTime>Thu Mar 26 04:36:35 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="948CFF4011FD11DEAF2583A4A009007B" qname="BPELSystem.LiebertServices" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+      <serviceGroup name="ReachServices" guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" status="ENABLED">
+         <versionInfo>
+            <ID>1237189226936</ID>
+            <lastModifiedTime>Mon Mar 16 07:40:26 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>oc4jadmin</lastModifiedUser>
+         </versionInfo>
+         <parent guid="8228BEC011FD11DEAF2583A4A009007B" qname="BPELSystem" type="system"/>
+         <serviceGroup name="XXEKanbanEditItemDetailsBPEL" guid="55F97E0013C611DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanEditItemDetailsBPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237385343629</ID>
+               <lastModifiedTime>Wed Mar 18 14:09:03 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanEditItemDetailsBPEL_zeldav9" guid="2E919A0013C611DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanEditItemDetailsBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237385277498</ID>
+               <lastModifiedTime>Wed Mar 18 14:07:57 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanGetLOVBPELScv_mariat1" guid="AA76372013C611DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanGetLOVBPELScv_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237385485367</ID>
+               <lastModifiedTime>Wed Mar 18 14:11:25 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanGetLOVBPELScv_zeldav10" guid="CF6552F013C611DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanGetLOVBPELScv_zeldav10" status="ENABLED">
+            <versionInfo>
+               <ID>1237385547348</ID>
+               <lastModifiedTime>Wed Mar 18 14:12:27 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanGetLOVBPELScv_zeldav9" guid="F14D223013C611DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanGetLOVBPELScv_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237385604261</ID>
+               <lastModifiedTime>Wed Mar 18 14:13:24 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanGetLOVBPELScv" guid="0B06FAC013C711DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanGetLOVBPELScv" status="ENABLED">
+            <versionInfo>
+               <ID>1237385647362</ID>
+               <lastModifiedTime>Wed Mar 18 14:14:07 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXReachUploadPDF" guid="955135A0122911DEAF4F855945500849" qname="BPELSystem.ReachServices.XXReachUploadPDF" status="ENABLED">
+            <versionInfo>
+               <ID>1237208068288</ID>
+               <lastModifiedTime>Mon Mar 16 12:54:28 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXReachManualIPCXML" guid="BA748400122D11DEAF4F855945500849" qname="BPELSystem.ReachServices.XXReachManualIPCXML" status="ENABLED">
+            <versionInfo>
+               <ID>1237209848207</ID>
+               <lastModifiedTime>Mon Mar 16 13:24:08 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXReachReadEMail" guid="CC85D7A0122F11DEAF4F855945500849" qname="BPELSystem.ReachServices.XXReachReadEMail" status="ENABLED">
+            <versionInfo>
+               <ID>1237210737395</ID>
+               <lastModifiedTime>Mon Mar 16 13:38:57 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanabanGetNotifTypeBPEL_zeldav10" guid="6D3015B012D711DE8F1FCFCE96AF3E4D" qname="BPELSystem.ReachServices.XXEkanabanGetNotifTypeBPEL_zeldav10" status="ENABLED">
+            <versionInfo>
+               <ID>1237282732845</ID>
+               <lastModifiedTime>Tue Mar 17 09:38:52 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="TaskManager" guid="B74BA68011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices.TaskManager" status="ENABLED">
+            <versionInfo>
+               <ID>1237189226936</ID>
+               <lastModifiedTime>Mon Mar 16 07:40:26 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanGetNotifDataBPEL_zelda10" guid="8D75CCD013CB11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanGetNotifDataBPEL_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237387584180</ID>
+               <lastModifiedTime>Wed Mar 18 14:46:24 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanabanGetNotifTypeBPEL_mariat1" guid="D5C7DEA013A911DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanabanGetNotifTypeBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237373103015</ID>
+               <lastModifiedTime>Wed Mar 18 10:45:03 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanabanGetNotifTypeBPEL_zeldav9" guid="4124D89013AC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanabanGetNotifTypeBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237374141822</ID>
+               <lastModifiedTime>Wed Mar 18 11:02:21 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanEditItemDetailsBPEL_zeldav10" guid="1046A09013C611DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanEditItemDetailsBPEL_zeldav10" status="ENABLED">
+            <versionInfo>
+               <ID>1237385226688</ID>
+               <lastModifiedTime>Wed Mar 18 14:07:06 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanCorrMvCrdBPEL" guid="40E905D0146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanCorrMvCrdBPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237451880379</ID>
+               <lastModifiedTime>Thu Mar 19 08:38:00 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanEditMoveCrdBPEL_zeldav10" guid="7FD089D0146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanEditMoveCrdBPEL_zeldav10" status="ENABLED">
+            <versionInfo>
+               <ID>1237451985851</ID>
+               <lastModifiedTime>Thu Mar 19 08:39:45 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanEditMoveCrdBPEL_zeldav9" guid="9D367A70146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanEditMoveCrdBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237452035133</ID>
+               <lastModifiedTime>Thu Mar 19 08:40:35 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanEdtCorBPEL_mariat1" guid="D30C1060146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanEdtCorBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237452125445</ID>
+               <lastModifiedTime>Thu Mar 19 08:42:05 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanEdtCorBPEL_zeldav10" guid="EB3F9710146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanEdtCorBPEL_zeldav10" status="ENABLED">
+            <versionInfo>
+               <ID>1237452166032</ID>
+               <lastModifiedTime>Thu Mar 19 08:42:46 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanEditMoveCrdBPEL_mariat1" guid="65DFC2C0146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanEditMoveCrdBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237451942279</ID>
+               <lastModifiedTime>Thu Mar 19 08:39:02 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanEdtCorBPEL_zeldav9" guid="FC3A3570146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanEdtCorBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237452194540</ID>
+               <lastModifiedTime>Thu Mar 19 08:43:14 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanEdtCorBPEL" guid="A67A0A60146211DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanEdtCorBPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237452480169</ID>
+               <lastModifiedTime>Thu Mar 19 08:48:00 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanHistoryBPEL_mariat1" guid="BD468700146211DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanHistoryBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237452518412</ID>
+               <lastModifiedTime>Thu Mar 19 08:48:38 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanHistoryBPEL_zelda10" guid="E7F865E0146211DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanHistoryBPEL_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237452590055</ID>
+               <lastModifiedTime>Thu Mar 19 08:49:50 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanHistoryBPEL_zeldav9" guid="0965ADF0146311DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanHistoryBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237452646118</ID>
+               <lastModifiedTime>Thu Mar 19 08:50:46 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanBarcodeBPELSvc_zeldav9" guid="ED8B396013E011DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanBarcodeBPELSvc_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237396764815</ID>
+               <lastModifiedTime>Wed Mar 18 17:19:24 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanBarcodeBPELSvc" guid="06090F8013E111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanBarcodeBPELSvc" status="ENABLED">
+            <versionInfo>
+               <ID>1237396805893</ID>
+               <lastModifiedTime>Wed Mar 18 17:20:05 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanCorrMvCrdBPEL_mariat1" guid="1CF3E99013E111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanCorrMvCrdBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237396844355</ID>
+               <lastModifiedTime>Wed Mar 18 17:20:44 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanCorrMvCrdBPEL_zelda10" guid="316426B013E111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanCorrMvCrdBPEL_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237396878636</ID>
+               <lastModifiedTime>Wed Mar 18 17:21:18 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanHistoryBPEL" guid="2302FDD0146311DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanHistoryBPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237452689124</ID>
+               <lastModifiedTime>Thu Mar 19 08:51:29 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanBarcodeBPELSvc_zelda10" guid="7E8B3D3013E011DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanBarcodeBPELSvc_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237396578584</ID>
+               <lastModifiedTime>Wed Mar 18 17:16:18 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanGetNotifDataBPEL_zeldav9" guid="A6EE088013CB11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanGetNotifDataBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237387626908</ID>
+               <lastModifiedTime>Wed Mar 18 14:47:06 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanGetNotifDataBPEL" guid="C0993B1013CB11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanGetNotifDataBPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237387669996</ID>
+               <lastModifiedTime>Wed Mar 18 14:47:49 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanMassUpdateOnHandBPELSvc_mariat1" guid="D55A575013CB11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanMassUpdateOnHandBPELSvc_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237387704793</ID>
+               <lastModifiedTime>Wed Mar 18 14:48:24 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="test" guid="1BB8777013A111DEBF83E51B2309286E" qname="BPELSystem.ReachServices.test" status="ENABLED">
+            <versionInfo>
+               <ID>1237369354578</ID>
+               <lastModifiedTime>Wed Mar 18 09:42:34 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanEditItemDetailsBPEL_mariat1" guid="F3272ED013C511DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanEditItemDetailsBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237385177979</ID>
+               <lastModifiedTime>Wed Mar 18 14:06:17 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanGetNotifDataBPEL_mariat1" guid="757B578013CB11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanGetNotifDataBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237387543962</ID>
+               <lastModifiedTime>Wed Mar 18 14:45:43 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanMassUpdateOnHandBPELSvc" guid="F5B3975013CB11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanMassUpdateOnHandBPELSvc" status="ENABLED">
+            <versionInfo>
+               <ID>1237387771605</ID>
+               <lastModifiedTime>Wed Mar 18 14:49:31 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMassUpdatePSBpel_zelda10" guid="302FAAE013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMassUpdatePSBpel_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237387857524</ID>
+               <lastModifiedTime>Wed Mar 18 14:50:57 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMassUpdatePSBpel_zeldav9" guid="4CA1778013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMassUpdatePSBpel_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237387905358</ID>
+               <lastModifiedTime>Wed Mar 18 14:51:45 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanabanGetNotifTypeBPEL" guid="25BA4D5013AD11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanabanGetNotifTypeBPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237374525287</ID>
+               <lastModifiedTime>Wed Mar 18 11:08:45 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMassUpdatePSBpel" guid="6CFEFD4013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMassUpdatePSBpel" status="ENABLED">
+            <versionInfo>
+               <ID>1237387959249</ID>
+               <lastModifiedTime>Wed Mar 18 14:52:39 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanMUConsumedBPELSvc_mariat1" guid="99A61C7013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanMUConsumedBPELSvc_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237388034159</ID>
+               <lastModifiedTime>Wed Mar 18 14:53:54 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanMUConsumedBPELSvc" guid="B699C34013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanMUConsumedBPELSvc" status="ENABLED">
+            <versionInfo>
+               <ID>1237388082731</ID>
+               <lastModifiedTime>Wed Mar 18 14:54:42 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMUDemandAccBpelSvc_mariat1" guid="D2736E9013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMUDemandAccBpelSvc_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237388129474</ID>
+               <lastModifiedTime>Wed Mar 18 14:55:29 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMUDemandAccBpelSvc" guid="E7731A7013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMUDemandAccBpelSvc" status="ENABLED">
+            <versionInfo>
+               <ID>1237388164658</ID>
+               <lastModifiedTime>Wed Mar 18 14:56:04 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMURTS_mariat1" guid="FB69BAC013CC11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMURTS_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237388198168</ID>
+               <lastModifiedTime>Wed Mar 18 14:56:38 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMURTS_zeldav9" guid="787C975013D011DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMURTS_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237389696503</ID>
+               <lastModifiedTime>Wed Mar 18 15:21:36 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMURTS" guid="7FEFF6F013D811DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMURTS" status="ENABLED">
+            <versionInfo>
+               <ID>1237393144989</ID>
+               <lastModifiedTime>Wed Mar 18 16:19:04 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanUsrConfBPEL_zelda10" guid="B45098C013DB11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanUsrConfBPEL_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237394521355</ID>
+               <lastModifiedTime>Wed Mar 18 16:42:01 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanUsrConfBPEL_zeldav9" guid="FA2A30B013DE11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanUsrConfBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237395927042</ID>
+               <lastModifiedTime>Wed Mar 18 17:05:27 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanEditMoveCrdBPEL" guid="B40A4A10146111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanEditMoveCrdBPEL" status="ENABLED">
+            <versionInfo>
+               <ID>1237452073447</ID>
+               <lastModifiedTime>Thu Mar 19 08:41:13 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanUsrConfBPELSvc_mariat1" guid="B58C9E6013DF11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanUsrConfBPELSvc_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237396241373</ID>
+               <lastModifiedTime>Wed Mar 18 17:10:41 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanbanUsrConfBPELSvc" guid="2584410013E011DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanbanUsrConfBPELSvc" status="ENABLED">
+            <versionInfo>
+               <ID>1237396429223</ID>
+               <lastModifiedTime>Wed Mar 18 17:13:49 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanBarcodeBPELSvc_mariat1" guid="468818E013E011DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanBarcodeBPELSvc_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237396484619</ID>
+               <lastModifiedTime>Wed Mar 18 17:14:44 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanCorrMvCrdBPEL_zeldav9" guid="474E0B8013E111DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanCorrMvCrdBPEL_zeldav9" status="ENABLED">
+            <versionInfo>
+               <ID>1237396915403</ID>
+               <lastModifiedTime>Wed Mar 18 17:21:55 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanMainMoveCrdBPEL_mariat1" guid="382A07D0146311DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanMainMoveCrdBPEL_mariat1" status="ENABLED">
+            <versionInfo>
+               <ID>1237452724589</ID>
+               <lastModifiedTime>Thu Mar 19 08:52:04 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEKanMainMoveCrdBPEL_zelda10" guid="C44DBB80146311DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEKanMainMoveCrdBPEL_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237452959695</ID>
+               <lastModifiedTime>Thu Mar 19 08:55:59 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+         <serviceGroup name="XXEkanbanMURTS_zelda10" guid="1A5F732013CD11DEAF3755984D8E204A" qname="BPELSystem.ReachServices.XXEkanbanMURTS_zelda10" status="ENABLED">
+            <versionInfo>
+               <ID>1237388250231</ID>
+               <lastModifiedTime>Wed Mar 18 14:57:30 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>oc4jadmin</lastModifiedUser>
+            </versionInfo>
+            <parent guid="B7427EC011FD11DEAF2583A4A009007B" qname="BPELSystem.ReachServices" type="serviceGroup"/>
+         </serviceGroup>
+      </serviceGroup>
+   </system>
+   <system name="xxekanMUConsume" guid="E7AA61F097FF11DCBFBC5FC0D5C2B4A8" qname="xxekanMUConsume" status="ENABLED">
+      <versionInfo>
+         <ID>1237544634453</ID>
+         <lastModifiedTime>Fri Mar 20 10:23:54 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEKanbanMUConsumedESBSvc</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_ItemHubDBToVendavoDB_ToFTP" guid="339DA310147D11DE8F0BB34A3C344BD0" qname="LBT_ItemHubDBToVendavoDB_ToFTP" status="ENABLED">
+      <versionInfo>
+         <ID>1238082099601</ID>
+         <lastModifiedTime>Thu Mar 26 15:41:39 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_uc8_finalesb_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToVenFTP</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="ETHSys_ArchiveTransaction" guid="731D54E012BB11DE8F722784927B2487" qname="ETHSys_ArchiveTransaction" status="ENABLED">
+      <versionInfo>
+         <ID>1238589144884</ID>
+         <lastModifiedTime>Wed Apr 01 12:32:24 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_Archive_Transaction</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEKanMUOnHand" guid="F2B70A80967E11DCBFA0E3F5BEB71841" qname="XXEKanMUOnHand" status="ENABLED">
+      <versionInfo>
+         <ID>1237544519974</ID>
+         <lastModifiedTime>Fri Mar 20 10:21:59 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEKanbanMassUpdateOnHandESBSvc</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEkanMUDAcc" guid="3E28ED91990811DCBF8EFF80729B74A9" qname="XXEkanMUDAcc" status="ENABLED">
+      <versionInfo>
+         <ID>1237544647167</ID>
+         <lastModifiedTime>Fri Mar 20 10:24:07 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEkanbanMUDemandAccEsbSvc</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEkanMURTS" guid="09AD2F41B30711DCBF858F944FCC6201" qname="XXEkanMURTS" status="ENABLED">
+      <versionInfo>
+         <ID>1237544656403</ID>
+         <lastModifiedTime>Fri Mar 20 10:24:16 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEkanbanMURTSesb</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXeKanBarCodeSys" guid="4B94A6B1BE9511DC8F1457D6B6B9FFA0" qname="XXeKanBarCodeSys" status="ENABLED">
+      <versionInfo>
+         <ID>1237544724974</ID>
+         <lastModifiedTime>Fri Mar 20 10:25:24 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEKanBarcodeESBSvc</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEkanEdCorSys" guid="0898A401A01911DCBF910F679A3BABDF" qname="XXEkanEdCorSys" status="ENABLED">
+      <versionInfo>
+         <ID>1237544824718</ID>
+         <lastModifiedTime>Fri Mar 20 10:27:04 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEkanEdCorESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEKanEditMoveCrdSys" guid="28C8A400938A11DCBF1EEF8EF1A43536" qname="XXEKanEditMoveCrdSys" status="ENABLED">
+      <versionInfo>
+         <ID>1237544836032</ID>
+         <lastModifiedTime>Fri Mar 20 10:27:16 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEKanEditMoveCrdESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEKanbanESBGetLOVScv" guid="71309FC1862B11DCBFF6F1B18AE0F013" qname="XXEKanbanESBGetLOVScv" status="ENABLED">
+      <versionInfo>
+         <ID>1237543421732</ID>
+         <lastModifiedTime>Fri Mar 20 10:03:41 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEKanbanESBGetLOVScv</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_ItemHubDBtoVendavoFTP_CountryMaster" guid="4EE378119E7711DD9F56710C84221765" qname="LBT_ItemHubDBtoVendavoFTP_CountryMaster" status="ENABLED">
+      <versionInfo>
+         <ID>1237284998843</ID>
+         <lastModifiedTime>Tue Mar 17 10:16:38 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_VenPh1_UC10_LIEBERT_VENDAVO_INTEGRATION_CountryMasterToFTP_ESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEkanNotifData" guid="20D066B0BFA511DCBFB827CBD3810D8A" qname="XXEkanNotifData" status="ENABLED">
+      <versionInfo>
+         <ID>1237544705667</ID>
+         <lastModifiedTime>Fri Mar 20 10:25:05 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEkanbanNotifDataESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEkanNotifType" guid="D2463F91BF6A11DCBFA61525E793E1FD" qname="XXEkanNotifType" status="ENABLED">
+      <versionInfo>
+         <ID>1237544505617</ID>
+         <lastModifiedTime>Fri Mar 20 10:21:45 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEkanbanGetNotifTypeESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="XXEKanCorrMvCrdSys" guid="31973A419C0B11DCBF9E6F27D0EB7DA0" qname="XXEKanCorrMvCrdSys" status="ENABLED">
+      <versionInfo>
+         <ID>1237544814769</ID>
+         <lastModifiedTime>Fri Mar 20 10:26:54 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEKanCorrMvCrdESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="ETHSys_IntegrationServices" guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" status="ENABLED">
+      <versionInfo>
+         <ID>1238147964085</ID>
+         <lastModifiedTime>Fri Mar 27 09:59:24 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+      </versionInfo>
+      <serviceGroup name="ETHSysGrp_B2BInOut" guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" status="ENABLED">
+         <versionInfo>
+            <ID>1238493237914</ID>
+            <lastModifiedTime>Tue Mar 31 09:53:57 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+         </versionInfo>
+         <parent guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" type="system"/>
+      </serviceGroup>
+      <serviceGroup name="ETHSysGrp_ProcessPurchaseOrder" guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" status="ENABLED">
+         <versionInfo>
+            <ID>1238517129043</ID>
+            <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+         </versionInfo>
+         <parent guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" type="system"/>
+         <service name="ETH_DEQJMS_ProcessPO_EDI_5020" guid="CBA511E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="CBA782E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020_RS"/>
+               <interface>
+                  <wsdlURL>ETH_DEQJMS_ProcessPO_EDI_5020.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_EDI_5020/">tns:Consume_Message_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_EDI_5020_RS" guid="CBA782E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <description>This is the Routing Service for Adapter Service ETH_DEQJMS_ProcessPO_EDI_5020</description>
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_DEQJMS_ProcessPO_EDI_5020.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_EDI_5020/">tns:Consume_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_EDI_5020_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_EDI_5020_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="CC092AE0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomEDI850"/>
+                  <routingRules>
+                     <routingRule guid="E6884F40099A11DE9F797560A73BB653" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="411D81B0088C11DEBFB8778FE2904592" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS.execute" serviceGUID="40C54F91088C11DEBFB8778FE2904592" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_FlatFile" guid="54D14CF1099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="54D396E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile_RS"/>
+               <interface>
+                  <wsdlURL>ETH_DEQJMS_ProcessPO_FlatFile.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_FlatFile/">tns:Consume_Message_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_FlatFile_RS" guid="54D396E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <description>This is the Routing Service for Adapter Service ETH_DEQJMS_ProcessPO_FlatFile</description>
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_DEQJMS_ProcessPO_FlatFile.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_FlatFile/">tns:Consume_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_FlatFile_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_FlatFile_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="54D607E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" element="tns:CustomLiebertPO"/>
+                  <routingRules>
+                     <routingRule guid="7537D360099A11DE9F797560A73BB653" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="F29B53A0F91811DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS.execute" serviceGUID="F298E2A0F91811DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_OAGIS_7_2" guid="01E07F40097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="01E07F41097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS"/>
+               <interface>
+                  <wsdlURL>ETH_DEQJMS_ProcessPO_OAGIS_7_2.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_OAGIS_7_2/">tns:Consume_Message_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS" guid="01E07F41097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <description>This is the Routing Service for Adapter Service ETH_DEQJMS_ProcessPO_OAGIS_7_2</description>
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_DEQJMS_ProcessPO_OAGIS_7_2.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_OAGIS_7_2/">tns:Consume_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="01E56140097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+                  <routingRules>
+                     <routingRule guid="39D4AF70097F11DEBF8E7DC952E68DF0" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="43851750F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS.execute" serviceGUID="4382CD60F82F11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ENQJMS_ArchiveTransaction" guid="99BB5FA0F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_ENQJMS_ArchiveTransaction.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ArchiveTransaction/">tns:Produce_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ArchiveTransaction?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ArchiveTransaction</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/SC_Archive" element="tns:RootElement"/>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ENQJMS_BusinessErrors" guid="5AE1A6A10CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_ENQJMS_BusinessErrors.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_BusinessErrors/">tns:Produce_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_BusinessErrors?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_BusinessErrors</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/SC_Error_Details" element="tns:CommonErrorHandlerCollection"/>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ENQJMS_ProcessPO_B2B" guid="12CC1EF1097E11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ProcessPO_B2B" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_ENQJMS_ProcessPO_B2B.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ProcessPO_B2B/">tns:Produce_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ProcessPO_B2B?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ProcessPO_B2B</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="12D805D0097E11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ProcessPO_B2B.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ENQJMS_TransactionComplianceData" guid="906420C001D011DEBF404303D787CDAF" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_TransactionComplianceData" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_ENQJMS_TransactionComplianceData.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_TransactionComplianceData/">tns:Produce_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_TransactionComplianceData?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_TransactionComplianceData</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="90666AB001D011DEBF404303D787CDAF" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_TransactionComplianceData.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/TransactionComplianceData" element="tns:TransactionComplianceData"/>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ProcessPO_ComplianceChecker_RS" guid="AF326921FC2C11DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_ComplianceChecker_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_ComplianceChecker_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_ComplianceChecker_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="AF430AF0FC2C11DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="9A4A75D001D011DEBF404303D787CDAF" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="90666AB001D011DEBF404303D787CDAF" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_TransactionComplianceData.Produce_Message" serviceGUID="906420C001D011DEBF404303D787CDAF" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_TransactionComplianceData" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>TransactionComplianceData.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="42505290FCEA11DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>Archive_ComplianceCheck.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="977B4280FCE911DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="8A4FFBA0FCE911DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RemoveComplianceError_RS.execute" serviceGUID="8A465EB0FCE911DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RemoveComplianceError_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>RoutingRules.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ProcessPO_RemoveComplianceError_RS" guid="8A465EB0FCE911DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RemoveComplianceError_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_RemoveComplianceError_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_RemoveComplianceError_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_RemoveComplianceError_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="8A4FFBA0FCE911DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RemoveComplianceError_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="A70B8B60FCFD11DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" serviceGUID="7F2F5990F84E11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                     <routingRule guid="C07A6850FCE911DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="BDCA3E70FCD311DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS.execute" serviceGUID="BD5583A0FCD311DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{((/inp1:CustomProcessPO/Compliance_result = false()) and (/inp1:CustomProcessPO/Send_on_fail != 'ROUTING_ERROR'))};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                     </routingRule>
+                     <routingRule guid="B55D89E0FCFB11DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="BDCA3E70FCD311DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS.execute" serviceGUID="BD5583A0FCD311DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{((/inp1:CustomProcessPO/Compliance_result = true()) and (/inp1:CustomProcessPO/Send_on_fail = 'Y'))};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>RemoveComplianceError.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="9F2CD1B0FCF311DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" serviceGUID="5AE1A6A10CC211DEBFD3896422B338BD" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{((/inp1:CustomProcessPO/Compliance_result = true()) and (/inp1:CustomProcessPO/Send_on_fail = 'N'))};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>ComplianceErrorHandler.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="DA552AD0FCF311DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" serviceGUID="5AE1A6A10CC211DEBFD3896422B338BD" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{/inp1:CustomProcessPO/Send_on_fail = 'ROUTING_ERROR'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>RoutingErrorHandler.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ProcessPO_RoutingRules_RS" guid="BD5583A0FCD311DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_RoutingRules_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_RoutingRules_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_RoutingRules_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="BDCA3E70FCD311DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="1C7C2AC0FCE611DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" serviceGUID="7F2F5990F84E11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                     <routingRule guid="213E0EE0FD0211DDBF83DF076401BB1A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="12D805D0097E11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ProcessPO_B2B.Produce_Message" serviceGUID="12CC1EF1097E11DEBF8E7DC952E68DF0" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ProcessPO_B2B" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{(/inp1:CustomProcessPO/Trading_partner_1_date_from &lt;= xp20:current-date()) and (/inp1:CustomProcessPO/Trading_partner_1_date_to >= xp20:current-date())};{ namespace xp20=http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20 namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>ProcessPO_B2B_TP_1.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="8EBD2E911E0B11DE9F30CB255D36B9E4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="12D805D0097E11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ProcessPO_B2B.Produce_Message" serviceGUID="12CC1EF1097E11DEBF8E7DC952E68DF0" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ProcessPO_B2B" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{(/inp1:CustomProcessPO/Trading_partner_2_date_from &lt;= xp20:current-date()) and (/inp1:CustomProcessPO/Trading_partner_2_date_to >= xp20:current-date())};{ namespace xp20=http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20 namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>ProcessPO_B2B_TP_2.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="F3E30561073B11DEBF2AFB889ED021C8" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" serviceGUID="5AE1A6A10CC211DEBFD3896422B338BD" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{(/inp1:CustomProcessPO/Trading_partner_1_date_from > xp20:current-date()) or (/inp1:CustomProcessPO/Trading_partner_1_date_to &lt; xp20:current-date()) or (/inp1:CustomProcessPO/Trading_partner_2_date_from > xp20:current-date()) or (/inp1:CustomProcessPO/Trading_partner_2_date_to &lt; xp20:current-date())};{ namespace xp20=http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20 namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>EffectiveDateErrorHandler.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ProcessPO_SequencingChecker_RS" guid="763B47311D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238590652911</ID>
+               <lastModifiedTime>Wed Apr 01 12:57:32 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_SequencingChecker_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/DefaultSystem">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_SequencingChecker_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_SequencingChecker_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="76499F101D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="BFDCC3F01D0211DE8F0F01D3DBED06DC" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'VALID'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>Archive_Transformed_OAGIS_9_0.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="CF7169B01D0211DE8F0F01D3DBED06DC" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="AF430AF0FC2C11DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS.execute" serviceGUID="AF326921FC2C11DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'VALID'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>ComplianceChecker.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="70B1F7D01EBC11DE9F30CB255D36B9E4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" serviceGUID="5AE1A6A10CC211DEBFD3896422B338BD" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'DUPLICATE_ERROR'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>DuplicateErrorHandler.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="836A24B01EBC11DE9F30CB255D36B9E4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" serviceGUID="5AE1A6A10CC211DEBFD3896422B338BD" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'OUT_OF_SEQ_ERROR'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>OutOfSeqErrorHandler.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_PUTFL_CustomOAGIS_7_2" guid="9CD7E990F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_PUTFL_CustomOAGIS_7_2.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_CustomOAGIS_7_2/">tns:Write_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_7_2?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_7_2</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="9CDA3380F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="Custom_OAGIS_7_2" value="/elshat1/elshat1/aelshat1/workingfolder/SC/Custom72"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_PUTFL_CustomOAGIS_9_0" guid="7F2F5990F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_PUTFL_CustomOAGIS_9_0.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_CustomOAGIS_9_0/">tns:Write_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_9_0?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_9_0</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="CustomOAGIS_9_0" value="/elshat1/elshat1/aelshat1/workingfolder/SC/Custom90"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomEDI_5020_850_RS" guid="40C54F91088C11DEBFB8778FE2904592" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomEDI_5020_850_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomEDI_5020_850_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomEDI_5020_850_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="411D81B0088C11DEBFB8778FE2904592" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomEDI850"/>
+                  <routingRules>
+                     <routingRule guid="95517C90088D11DEBFB8778FE2904592" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>Archive_EDI850_Input.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="1C998E50088D11DEBFB8778FE2904592" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" serviceGUID="CF742AD0F84D11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>CustomEDI850_To_CustomProcessPO.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomLiebertPO_RS" guid="F298E2A0F91811DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomLiebertPO_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomLiebertPO_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomLiebertPO_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="F29B53A0F91811DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" element="tns:CustomLiebertPO"/>
+                  <routingRules>
+                     <routingRule guid="80205250F99811DD9F70D37D7A4376D4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>Archive_LiebertInput.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="FD158440F91811DD9F70D37D7A4376D4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" serviceGUID="CF742AD0F84D11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>CustomLiebertPO_To_CustomProcessPO.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomOAGIS_7_2_RS" guid="4382CD60F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238517129043</ID>
+               <lastModifiedTime>Tue Mar 31 16:32:09 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomOAGIS_7_2_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_7_2_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_7_2_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="43851750F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+                  <routingRules>
+                     <routingRule guid="A264CF90F82F11DDBFE65184CC52E945" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="9CDA3380F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2.Write" serviceGUID="9CD7E990F82F11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                     <routingRule guid="72CA2AE0F99811DD9F70D37D7A4376D4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>Archive_OAGIS_7_2_Input.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="D6240D00F84D11DDBFE65184CC52E945" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" serviceGUID="CF742AD0F84D11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>CustomProcessPO_007_To_CustomProcessPO.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomOAGIS_9_0_RS" guid="CF742AD0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1238590652911</ID>
+               <lastModifiedTime>Wed Apr 01 12:57:32 GMT+00:00 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomOAGIS_9_0_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_9_0_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_9_0_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="88085D50F84E11DDBFE65184CC52E945" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" serviceGUID="7F2F5990F84E11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                     <routingRule guid="917DE2A01D0211DE8F0F01D3DBED06DC" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" serviceGUID="7F2F5990F84E11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>SequencingChecker.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="0B1783E01D3B11DE8F0F01D3DBED06DC" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="76499F101D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS.execute" serviceGUID="763B47311D0211DE8F0F01D3DBED06DC" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>SequencingChecker.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+      </serviceGroup>
+      <serviceGroup name="ETHSysGrp_ChangePurchaseOrder" guid="B41142F003CE11DEBFDA4111CC98E5C0" qname="ETHSys_IntegrationServices.ETHSysGrp_ChangePurchaseOrder" status="ENABLED">
+         <versionInfo>
+            <ID>1238407522084</ID>
+            <lastModifiedTime>Mon Mar 30 10:05:22 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ChangePurchaseOrder</lastModifiedUser>
+         </versionInfo>
+         <parent guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" type="system"/>
+      </serviceGroup>
+      <serviceGroup name="ETHSysGrp_B2B_ErrorTracking" guid="91B0FCD1153C11DEAF3C4D1506276A97" qname="ETHSys_IntegrationServices.ETHSysGrp_B2B_ErrorTracking" status="ENABLED">
+         <versionInfo>
+            <ID>1238148186131</ID>
+            <lastModifiedTime>Fri Mar 27 10:03:06 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_ErrorTracking</lastModifiedUser>
+         </versionInfo>
+         <parent guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" type="system"/>
+      </serviceGroup>
+   </system>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1139232135202</ID>
+         <lastModifiedTime>Thu Jun 29 15:30:55 GMT+00:00 2006</lastModifiedTime>
+         <lastModifiedUser>JDev</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="ETHSys_BusinessErrorHandler" guid="3F882F300CBF11DEBF9C492A2688F82D" qname="ETHSys_BusinessErrorHandler" status="ENABLED">
+      <versionInfo>
+         <ID>1237458836713</ID>
+         <lastModifiedTime>Thu Mar 19 10:33:56 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_Migrated_Error_Handling_Process_ETH_ESB_BusinessErrorHandler</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="EditItemDetails" guid="8E25FC41884411DCBF970D9A0C13D609" qname="EditItemDetails" status="ENABLED">
+      <versionInfo>
+         <ID>1237543405076</ID>
+         <lastModifiedTime>Fri Mar 20 10:03:25 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_EKanbanESBs_XXEkanbanEditItemDetailsESB</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="ETH_Sys_LIEBERT_Process" guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" status="ENABLED">
+      <versionInfo>
+         <ID>1238148396161</ID>
+         <lastModifiedTime>Fri Mar 27 10:06:36 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="RCH_Min" guid="8AA54CA011E711DEBF9FD9E2F2AB81AF" qname="RCH_Min" status="ENABLED">
+      <versionInfo>
+         <ID>1237794685242</ID>
+         <lastModifiedTime>Mon Mar 23 07:51:25 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_RCH_IntegrationServices_RCH_ESB_MinIntegration</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="LBT_EBSToStagingDBAndVendavoFTP" guid="BAB61471991911DDBFC10B3340FC727A" qname="LBT_EBSToStagingDBAndVendavoFTP" status="ENABLED">
+      <versionInfo>
+         <ID>1238089693440</ID>
+         <lastModifiedTime>Thu Mar 26 17:48:13 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>oc4jadmin</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="ETHSys_ALICE_InOutSystem" guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1238577396711</ID>
+         <lastModifiedTime>Wed Apr 01 09:16:36 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+      </versionInfo>
+   </system>
+   <system name="ETHSys_LSNA_InOutSystem" guid="762CE211F99111DDBF5B11CC773907E0" qname="ETHSys_LSNA_InOutSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1238515173170</ID>
+         <lastModifiedTime>Tue Mar 31 15:59:33 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LSNA_InOutProcess</lastModifiedUser>
+      </versionInfo>
+   </system>
+</metadata>

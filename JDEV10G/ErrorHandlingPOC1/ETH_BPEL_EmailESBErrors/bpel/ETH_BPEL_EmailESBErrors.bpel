@@ -1,0 +1,285 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jul 13 19:25:36 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_EmailESBErrors"
+         targetNamespace="http://xmlns.oracle.com/ETH_BPEL_EmailESBErrors"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns7="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:client="http://xmlns.oracle.com/ETH_BPEL_EmailESBErrors"
+         xmlns:ns6="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_JMST_DEQ_ESBError/"
+         xmlns:ns3="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <bpelx:exec import="java.util.*"/>
+  <bpelx:exec import="java.lang.*"/>
+  <bpelx:exec import="java.math.*"/>
+  <bpelx:exec import="java.io.*"/>
+  <bpelx:exec import="org.w3c.dom.Element"/>
+  <bpelx:exec import="oracle.xml.parser.v2.XMLElement"/>
+  <bpelx:exec import="oracle.xml.parser.v2.XMLText"/>
+  <bpelx:exec import="com.collaxa.common.util.Base64Decoder"/>
+  <partnerLinks>
+    <partnerLink myRole="Consume_Message_role" name="ETH_JMST_DEQ_ESBError"
+                 partnerLinkType="ns1:Consume_Message_plt"/>
+    <partnerLink name="NotificationService"
+                 partnerRole="NotificationServiceProvider"
+                 partnerLinkType="ns3:NotificationServiceLink"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_IN_ESBError_Payload"
+              messageType="ns1:Consume_Message_msg"/>
+    <variable name="G_IN_ESBError_JMSHeader"
+              messageType="ns2:InboundHeader_msg"/>
+    <variable name="L_ESBError_JMSHeader"
+              messageType="ns2:JMS_IN_Header_Message"/>
+    <variable name="L_ESB_ERROR_STACK"
+              messageType="ns1:ConsumeESBError_xmlMsg"/>
+    <variable name="L_Decoded_Payload"
+              messageType="ns1:ConsumeESBError_xmlMsg"/>
+    <variable name="L_MessageID" type="xsd:string"/>
+    <variable name="L_JMS_Header_String"
+              messageType="ns1:ConsumeESBError_xmlMsg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_ESBError" partnerLink="ETH_JMST_DEQ_ESBError"
+             portType="ns1:Consume_Message_ptt" operation="Consume_Message"
+             variable="G_IN_ESBError_Payload" createInstance="yes"
+             bpelx:headerVariable="G_IN_ESBError_JMSHeader"/>
+    <assign name="Assign_Startup">
+      <copy>
+        <from variable="G_IN_ESBError_JMSHeader" part="inboundHeader"
+              query="/ns2:JMSInboundHeadersAndProperties"/>
+        <to variable="L_ESBError_JMSHeader" part="jms_header"
+            query="/ns2:JMS_IN_Header/ns2:JMSInboundHeadersAndProperties"/>
+      </copy>
+      <copy>
+        <from expression="string('Unknown Error in ESB')"/>
+        <to variable="L_Decoded_Payload" part="stringMsg"
+            query="/ns4:stringElement"/>
+      </copy>
+    </assign>
+    <bpelx:exec name="Java_Decode_Payload" language="java" version="1.3">
+      <![CDATA[try         
+{       
+// XML Element will not work since we have base64Binary string not any node tree in our request     
+// XMLElement node = (XMLElement)getVariableData("G_IN_ESBError","opaque","/ns2:opaqueElement");     
+// String strBase64 = node.getNodeValue();  This will give null     
+     
+// To get the string we need to get the text node value     
+String strBase64 = ""; 
+XMLText text = (XMLText)getVariableData("G_IN_ESBError_Payload","opaque","/ns4:opaqueElement/node()"); 
+if(text!=null){ 
+    strBase64 = text.getNodeValue(); 
+} 
+ 
+byte[] decodedBytes = Base64Decoder.decode(strBase64.getBytes());         
+String decoded = new String(decodedBytes);         
+setVariableData("L_Decoded_Payload","stringMsg","/ns4:stringElement",decoded);       
+}         
+catch(Exception e)         
+{         
+e.printStackTrace();         
+}]]>
+    </bpelx:exec>
+    <assign name="Transform_GInJMS_LJMS_Header">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Transformation_GInJMS_LJMS_Header.xsl',bpws:getVariableData('G_IN_ESBError_JMSHeader','inboundHeader'))"/>
+        <to variable="L_ESBError_JMSHeader" part="jms_header"/>
+      </copy>
+    </assign>
+    <assign name="Transform_PopulateESBErrorStack">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Transform_PopulateESBErrorStack.xsl',bpws:getVariableData('G_IN_ESBError_JMSHeader','inboundHeader'))"/>
+        <to variable="L_ESB_ERROR_STACK" part="stringMsg"/>
+      </copy>
+    </assign>
+    <assign name="Assign_ErrorDetails">
+      <copy>
+        <from variable="G_IN_ESBError_JMSHeader" part="inboundHeader"
+              query="/ns2:JMSInboundHeadersAndProperties/ns2:JMSInboundProperties/ns2:Property[@name='ESB_FLOW_ID']/@value"/>
+        <to variable="L_MessageID"/>
+      </copy>
+      <copy>
+        <from expression="ora:getContentAsString(bpws:getVariableData('L_ESBError_JMSHeader','jms_header','/ns2:JMS_IN_Header'))"/>
+        <!--<from expression="string('&lt;JMS_IN_Header xmlns=&quot;http://xmlns.oracle.com/pcbpel/adapter/jms/&quot;>   &lt;JMSInboundHeadersAndProperties>      &lt;JMSInboundProperties>         &lt;Property name=&quot;JMS_OC4J_Type&quot; value=&quot;textmessage&quot;/>         &lt;Property name=&quot;ESB_EVENT_KEY&quot; value=&quot;464B773012F211DEBFAAAF0F9B80B267_ROUTER_ROUTER&quot;/>         &lt;Property name=&quot;ESB_INDOUND_ADAPTOR_ID&quot; value=&quot;4646BC4112F211DEBFAAAF0F9B80B267&quot;/>         &lt;Property name=&quot;JMSXRcvTimestamp&quot; type=&quot;long&quot; value=&quot;1247686881783&quot;/>         &lt;Property name=&quot;ESB_ERROR_STACK&quot; value=&quot;oracle.tip.esb.server.common.exceptions.BusinessEventRejectionException: An unhandled exception has been thrown in the ESB system. The exception reported is: &amp;quot;org.collaxa.thirdparty.apache.wsif.WSIFException: esb:///ESB_Projects/SC_Phase2_ETH_ESB_ChangePurchaseOrder/ETH_PUTFL_CustomChangeOAGIS_7_2.wsdl [ Write_ptt::Write(CustomChange_PO_006) ] - WSIF JCA Execute of operation 'Write' failed due to: Directory cannot be created successfully.&amp;#xA;Directory: /elshas1/elshas1/aelshas1/workingfolder/SC/Custom72 cannot be created successfully.&amp;#xA;; nested exception is: &amp;#xA;&amp;#x9;ORABPEL-11054&amp;#xA;Directory cannot be created successfully.&amp;#xA;Directory: /elshas1/elshas1/aelshas1/workingfolder/SC/Custom72 cannot be created successfully.&amp;#xA;Contact oracle support if error is not fixable.&amp;#xA;&amp;#xA;&amp;#x9;at oracle.tip.adapter.fw.wsif.jca.WSIFOperation_JCA.executeRequestResponseOperation(WSIFOperation_JCA.java:644)&amp;#xA;&amp;#x9;at oracle.tip.adapter.fw.wsif.jca.WSIFOperation_JCA.executeInputOnlyOperation(WSIFOperation_JCA.java:739)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.common.wsif.WSIFInvoker.executeOperation(WSIFInvoker.java:927)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.common.wsif.WSIFInvoker.nextService(WSIFInvoker.java:842)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.common.wsif.WSIFInvoker.nextService(WSIFInvoker.java:865)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.service.impl.outadapter.OutboundAdapterService.nextService(OutboundAdapterService.java:231)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.service.impl.outadapter.OutboundAdapterService.processBusinessEvent(OutboundAdapterService.java:138)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.InitialEventDispatcher.dispatchNonRoutingService(InitialEventDispatcher.java:411)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.InitialEventDispatcher.dispatch(InitialEventDispatcher.java:169)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.BusinessEvent.raise(BusinessEvent.java:2010)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.BusinessEvent.raise(BusinessEvent.java:1469)&amp;#xA;&amp;#x9;at oracle.tip.esb.utils.EventUtils.raiseBusinessEvent(EventUtils.java:215)&amp;#xA;&amp;#x9;at oracle.tip.esb.utils.EventUtils.raiseBusinessEvent(Event&quot;/>         &lt;Property name=&quot;BES_PAYLOAD_OBJECT&quot; value=&quot;false&quot;/>         &lt;Property name=&quot;ESB_FLOW_ID&quot; value=&quot;flowId=86om91IvkQoMy8KVCv7EdA==,seq=1&quot;/>         &lt;Property name=&quot;ESB_SYSTEM_GUID&quot; value=&quot;17966820F82E11DDBFE65184CC52E945&quot;/>         &lt;Property name=&quot;JMSXProducerTXID&quot; value=&quot;Xid( Global Id 37.19.a8.08.00.00.00.00.9b.c3.e0.7e.22.01.00.00.f2.11.00.00.00.00.00.00, Format Id 1330790740, Branch Id 76.c7.c4.5e.00.00.00.00.00.00.00.00.00.00.00.00)&quot;/>         &lt;Property name=&quot;JMSXConsumerTXID&quot; value=&quot;Oc4jJMS.Session.essapt020-u006.emrsn.com.-680d5459:1227ee08d3b:-8000.448.39&quot;/>         &lt;Property name=&quot;ESB_RETRYABLE_FLAG&quot; type=&quot;boolean&quot; value=&quot;false&quot;/>         &lt;Property name=&quot;JMSXUserID&quot; value=&quot;&quot;/>         &lt;Property name=&quot;ESB_TRANSACTIONAL&quot; type=&quot;boolean&quot; value=&quot;true&quot;/>         &lt;Property name=&quot;ESB_PRIORITY&quot; type=&quot;integer&quot; value=&quot;4&quot;/>         &lt;Property name=&quot;ESB_OUTDOUND_ADAPTOR_ID&quot; value=&quot;8051697003D511DEBFDA4111CC98E5C0&quot;/>         &lt;Property name=&quot;ESB_OUTBOUND_EXCEPTION_RETRYABLE_FLAG&quot; type=&quot;boolean&quot; value=&quot;false&quot;/>         &lt;Property name=&quot;ESB_ERROR_MESSAGE&quot; value=&quot;oracle.tip.esb.server.common.exceptions.BusinessEventRejectionException: An unhandled exception has been thrown in the ESB system. The exception reported is: &amp;quot;org.collaxa.thirdparty.apache.wsif.WSIFException: esb:///ESB_Projects/SC_Phase2_ETH_ESB_ChangePurchaseOrder/ETH_PUTFL_CustomChangeOAGIS_7_2.wsdl [ Write_ptt::Write(CustomChange_PO_006) ] - WSIF JCA Execute of operation 'Write' failed due to: Directory cannot be created successfully.&amp;#xA;Directory: /elshas1/elshas1/aelshas1/workingfolder/SC/Custom72 cannot be created successfully.&amp;#xA;; nested exception is: &amp;#xA;&amp;#x9;ORABPEL-11054&amp;#xA;Directory cannot be created successfully.&amp;#xA;Directory: /elshas1/elshas1/aelshas1/workingfolder/SC/Custom72 cannot be created successfully.&amp;#xA;Contact oracle support if error is not fixable.&amp;#xA;&amp;#xA;&amp;#x9;at oracle.tip.adapter.fw.wsif.jca.WSIFOperation_JCA.executeRequestResponseOperation(WSIFOperation_JCA.java:644)&amp;#xA;&amp;#x9;at oracle.tip.adapter.fw.wsif.jca.WSIFOperation_JCA.executeInputOnlyOperation(WSIFOperation_JCA.java:739)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.common.wsif.WSIFInvoker.executeOperation(WSIFInvoker.java:927)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.common.wsif.WSIFInvoker.nextService(WSIFInvoker.java:842)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.common.wsif.WSIFInvoker.nextService(WSIFInvoker.java:865)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.service.impl.outadapter.OutboundAdapterService.nextService(OutboundAdapterService.java:231)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.service.impl.outadapter.OutboundAdapterService.processBusinessEvent(OutboundAdapterService.java:138)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.InitialEventDispatcher.dispatchNonRoutingService(InitialEventDispatcher.java:411)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.InitialEventDispatcher.dispatch(InitialEventDispatcher.java:169)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.BusinessEvent.raise(BusinessEvent.java:2010)&amp;#xA;&amp;#x9;at oracle.tip.esb.server.dispatch.BusinessEvent.raise(BusinessEvent.java:1469)&amp;#xA;&amp;#x9;at oracle.tip.esb.utils.EventUtils.raiseBusinessEvent(EventUtils.java:215)&amp;#xA;&amp;#x9;at oracle.tip.esb.utils.EventUtils.raiseBusinessEvent(Event&quot;/>         &lt;Property name=&quot;ESB_FROM_SYSTEM_GUID&quot; value=&quot;17966820F82E11DDBFE65184CC52E945&quot;/>         &lt;Property name=&quot;JMSXDeliveryCount&quot; type=&quot;integer&quot; value=&quot;1&quot;/>         &lt;Property name=&quot;ESB_OPERATION_GUID&quot; value=&quot;8053DA7003D511DEBFDA4111CC98E5C0&quot;/>      &lt;/JMSInboundProperties>   &lt;/JMSInboundHeadersAndProperties>&lt;/JMS_IN_Header>')"/>-->
+        <to variable="L_JMS_Header_String" part="stringMsg"
+            query="/ns4:stringElement"/>
+      </copy>
+      <copy>
+        <from expression="substring-before(bpws:getVariableData('L_MessageID'),',')"/>
+        <to variable="L_MessageID"/>
+      </copy>
+    </assign>
+    <scope name="Email_1">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:email"></bpelx:pattern>
+      </bpelx:annotation>
+      <variables>
+        <variable name="varNotificationReq"
+                  messageType="ns3:EmailNotificationRequest"/>
+        <variable name="varNotificationResponse"
+                  messageType="ns3:ArrayOfResponse"/>
+        <variable name="NotificationServiceFaultVariable"
+                  messageType="ns3:NotificationServiceErrorMessage"/>
+      </variables>
+      <sequence name="Sequence_1">
+        <assign name="EmailParamsAssign">
+          <copy>
+            <from expression="string('ETH')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:FromAccountName"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Bcc"/>
+          </copy>
+          <copy>
+            <!--<from expression="string('inderpal.dhami@emerson.com;shivendra.mamgain@emerson.com;sukhjinder.singh@emerson.com')"/>-->
+            <from expression="string('aejaz.muneerudeen@wipro.com;anand.natarajan@Emerson.com')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Cc"/>
+          </copy>
+          <copy>
+            <from expression="string('srinivas.kola@emerson.com')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:ReplyToAddress"/>
+          </copy>
+          <copy>
+            <from expression="concat('ESB Error: ',bpws:getVariableData('L_MessageID'),'[',ora:getInstanceId(),']')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Subject"/>
+          </copy>
+          <copy>
+            <from expression="string('DLITSSFusionSupport@emerson.com')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:To"/>
+          </copy>
+          <copy>
+            <from>
+              <Content xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                <MimeType xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">multipart/mixed</MimeType>
+                <ContentBody xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                  <MultiPart xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                    <BodyPart xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                      <MimeType xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <ContentBody xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <BodyPartName xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                    </BodyPart>
+                    <BodyPart xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                      <MimeType xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <ContentBody xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <BodyPartName xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                    </BodyPart>
+                    <BodyPart xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService">
+                      <MimeType xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <ContentBody xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                      <BodyPartName xmlns="http://xmlns.oracle.com/ias/pcbpel/NotificationService"/>
+                    </BodyPart>
+                  </MultiPart>
+                </ContentBody>
+              </Content>
+            </from>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content"/>
+          </copy>
+          <copy>
+            <from expression="string('text/html; charset=UTF-8')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[1]/ns3:MimeType"/>
+          </copy>
+          <copy>
+            <from expression="string('ESB_ERROR_STACK.log')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[1]/ns3:BodyPartName"/>
+          </copy>
+          <copy>
+            <from expression="concat('Error --- ',xp20:current-dateTime(),' : ',bpws:getVariableData('L_ESB_ERROR_STACK','stringMsg','/ns4:stringElement'))"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[1]/ns3:ContentBody"/>
+          </copy>
+          <copy>
+            <from expression="string('text/html; charset=UTF-8')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[2]/ns3:MimeType"/>
+          </copy>
+          <copy>
+            <from expression="string('Payload')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[2]/ns3:BodyPartName"/>
+          </copy>
+          <copy>
+            <from variable="L_Decoded_Payload" part="stringMsg"
+                  query="/ns4:stringElement"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[2]/ns3:ContentBody"/>
+          </copy>
+          <copy>
+            <from expression="string('text/html; charset=UTF-8')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[3]/ns3:MimeType"/>
+          </copy>
+          <copy>
+            <from expression="string('Header')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[3]/ns3:BodyPartName"/>
+          </copy>
+          <copy>
+            <from variable="L_JMS_Header_String" part="stringMsg"
+                  query="/ns4:stringElement"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns3:Content/ns3:ContentBody/ns3:MultiPart/ns3:BodyPart[3]/ns3:ContentBody"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeNotificationService"
+                partnerLink="NotificationService"
+                portType="ns3:NotificationService"
+                operation="sendEmailNotification"
+                inputVariable="varNotificationReq"
+                outputVariable="varNotificationResponse"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

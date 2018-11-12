@@ -1,0 +1,47 @@
+<definitions
+     name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+     targetNamespace="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://TargetNamespace.com/InboundService"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBUpdITEMNUMOUTBOUND"
+     xmlns:client="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+                 schemaLocation="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/InboundService" schemaLocation="ItemMaster_1.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBUpdITEMNUMOUTBOUND"
+                 schemaLocation="DBUpdITEMNUMOUTBOUND_table.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELRequestMessage">
+        <part name="payload" element="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELProcessRequest"/>
+    </message>
+    <message name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELResponseMessage">
+        <part name="payload" element="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELProcessResponse"/>
+    </message>
+    <portType name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL">
+        <operation name="initiate">
+            <input message="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELRequestMessage"/>
+        </operation>
+    </portType>
+    <portType name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELCallback">
+        <operation name="onResult">
+            <input message="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELResponseMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL">
+        <plnk:role name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELProvider">
+            <plnk:portType name="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"/>
+        </plnk:role>
+        <plnk:role name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELRequester">
+            <plnk:portType name="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

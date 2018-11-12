@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ProcessPO_SequencingChecker_RS" guid="763B47311D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+   <versionInfo>
+      <ID>1245910753210</ID>
+      <lastModifiedTime>Thu Jun 25 11:49:13 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_SequencingChecker_RS.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/DefaultSystem">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_SequencingChecker_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_SequencingChecker_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="76499F101D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+         <routingRules>
+            <routingRule guid="3C9933E0280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'VALID'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>Archive_Transformed_OAGIS_9_0.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="3C998200280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="AF430AF0FC2C11DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS.execute" serviceGUID="AF326921FC2C11DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'VALID'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>ComplianceChecker.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

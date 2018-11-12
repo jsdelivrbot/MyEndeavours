@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Get_FTP_XMLFile_RS" guid="29611522512D11DEAF3637EA93E8375C" qname="DefaultSystem.Get_FTP_XMLFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service Get_FTP_XMLFile</description>
+   <versionInfo>
+      <ID>1244817794692</ID>
+      <lastModifiedTime>Fri Jun 12 20:13:14 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_ESBFileRejection</lastModifiedUser>
+   </versionInfo>
+   <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>Get_FTP_XMLFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Get_FTP_XMLFile/">tns:Get_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/DefaultSystem/Get_FTP_XMLFile_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/DefaultSystem/Get_FTP_XMLFile_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="296CFC00512D11DEAF3637EA93E8375C" qname="DefaultSystem.Get_FTP_XMLFile_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/customer" element="tns:customer"/>
+         <routingRules>
+            <routingRule guid="8F49CC10512D11DEAF3637EA93E8375C" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="8297FAF0512D11DEAF3637EA93E8375C" qname="DefaultSystem.Put_FTP_XMLFile.Put" serviceGUID="8295B100512D11DEAF3637EA93E8375C" serviceQName="DefaultSystem.Put_FTP_XMLFile" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

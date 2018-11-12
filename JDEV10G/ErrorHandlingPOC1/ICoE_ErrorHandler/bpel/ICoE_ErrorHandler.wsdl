@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="ICoE_ErrorHandler"
+             targetNamespace="http://services.emerson.com/common/ICoE_ErrorHandler"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://services.emerson.com/common/ICoE_ErrorHandler"
+             xmlns:ns1="http://schemas.emerson.com/common/envelope"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://services.emerson.com/common/ICoE_ErrorHandler">
+			<import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="EMR_CTE.xsd" />
+                        <element name="errorDetails">
+				<complexType>
+					<sequence>
+						<element name="account" type="string"/>
+						<element name="errorCode" type="string"/>
+						<element name="errorSummary" type="string"/>
+						<element name="errorDetail" type="string"/>
+                                                <element name="errorSeverity" type="string"/>
+						<element name="email" type="string"/>
+                                                <element name="messageID" type="string" minOccurs="0"/>
+                                                <element name="messageType" type="string" minOccurs="0"/>
+                                                <element name="messageSourceID" type="string" minOccurs="0"/>
+                                                <element name="messageCreationDateTime" type="dateTime"/>
+                                                <element name="processID" type="string"/>
+                                                <element name="processName" type="string"/>
+                                                <element name="processType" type="string"/>
+                                                <element name="environment" type="string"/>
+                                                <element name="errorDateTime" type="dateTime"/>
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+	</types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<message name="ICoE_ErrorHandlerRequestMessage_EBH">
+		<part name="payload" element="ns1:envelope" />
+	</message>
+	<message name="ICoE_ErrorHandlerResponseMessage_Detail">
+		<part name="payload" element="client:errorDetails" />
+	</message>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!-- portType implemented by the ICoE_ErrorHandler BPEL process -->
+	<portType name="ICoE_ErrorHandler">
+		<operation name="sumbitEBHError">
+			<input  message="client:ICoE_ErrorHandlerRequestMessage_EBH" />
+		</operation>
+                <operation name="submitError">
+			<input  message="client:ICoE_ErrorHandlerResponseMessage_Detail" />
+		</operation>
+	</portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="ICoE_ErrorHandler">
+		<plnk:role name="ICoE_ErrorHandlerProvider">
+			<plnk:portType name="client:ICoE_ErrorHandler"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</definitions>

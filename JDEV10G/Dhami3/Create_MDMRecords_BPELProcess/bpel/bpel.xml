@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="Create_MDMRecords_BPELProcess" src="Create_MDMRecords_BPELProcess.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">Create_MDMRecords_BPELProcess.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="AuditService">
+            <property name="wsdlLocation">AuditService.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="LogService">
+            <property name="wsdlLocation">LogService.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="MDMSearchRecord">
+            <property name="wsdlLocation">MDMSearchRecord.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="WorkFlowService">
+            <property name="wsdlLocation">WorkFlowService.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ExceptionService">
+            <property name="wsdlLocation">ExceptionService.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

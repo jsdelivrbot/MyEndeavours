@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/ProductionSchedule.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:complexType name="ProductionScheduleType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="DocumentDateTime" minOccurs="0"/>
+                        <xsd:element ref="ReportTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="EquipmentElementLevel" minOccurs="0"/>
+                        <xsd:element ref="ScheduleStateCode" minOccurs="0"/>
+                        <xsd:element ref="ProductionRequest" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ProductionRequestType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ProductProductionRuleID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="ReportTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="PriorityCode" minOccurs="0"/>
+                        <xsd:element ref="SegmentRequirement" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="SegmentResponse" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="RequestStateCode" minOccurs="0"/>
+                        <xsd:element ref="RequiredByRequestedSegmentResponseCode" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SegmentRequirementType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="ParentID" minOccurs="0"/>
+                        <xsd:element ref="ProcessSegmentID" minOccurs="0"/>
+                        <xsd:element ref="ProductSegmentID" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="ScheduleTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="Duration" minOccurs="0"/>
+                        <xsd:element ref="RequiredByRequestedSegmentResponseCode" minOccurs="0"/>
+                        <xsd:element ref="SegmentStateCode" minOccurs="0"/>
+                        <xsd:element ref="ProductionParameter" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="PersonnelRequirement" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="EquipmentRequirement" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="MaterialRequirement" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ProductionParameterType">
+                <xsd:sequence>
+                        <xsd:element ref="ProcessSegmentID" minOccurs="0"/>
+                        <xsd:element ref="ProductSegmentID" minOccurs="0"/>
+                        <xsd:element ref="Parameter" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="ProductionSchedule" type="ProductionScheduleType"/>
+        <xsd:element name="ProductionRequest" type="ProductionRequestType"/>
+        <xsd:element name="SegmentRequirement" type="SegmentRequirementType"/>
+        <xsd:element name="PersonnelRequirement" type="ManufacturingPersonnelType"/>
+        <xsd:element name="ProductionParameter" type="ProductionParameterType"/>
+        <xsd:element name="EquipmentRequirement" type="EquipmentType"/>
+        <xsd:element name="MaterialRequirement" type="ManufacturingMaterialType"/>
+        <xsd:element name="MaterialProducedRequirement" type="ManufacturingMaterialType"/>
+        <xsd:element name="MaterialConsumedRequirement" type="ManufacturingMaterialType"/>
+        <xsd:element name="ConsumableExpectedRequirement" type="ManufacturingMaterialType"/>
+</xsd:schema>

@@ -1,0 +1,383 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Jul 14 13:22:30 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_XMLGTW_TEST"
+         targetNamespace="http://service.emerson.com/ETH_BPEL_XMLGTW_TEST"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns13="http://xmlns.emrsn.com/CustomProcess_PO_007"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns7="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_JMSENQ_PROCESS/"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/file/"
+         xmlns:client="http://service.emerson.com/ETH_BPEL_XMLGTW_TEST"
+         xmlns:ns6="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns11="http://xmlns.emrsn.com/CustomChange_PO_006"
+         xmlns:ns9="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_RAW/"
+         xmlns:ns3="http://xmlns.emrsn.com/CommonChangePO_006"
+         xmlns:ns2="http://xmlns.emrsn.com/CommonProcessPO_007"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_JMSENQ_CHANGE/">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_RAW_role" name="ETH_GETFL_RAW"
+                 partnerLinkType="ns1:Read_RAW_plt"/>
+    <partnerLink name="ETH_JMSENQ_CHANGE" partnerRole="Produce_MessageETH_role"
+                 partnerLinkType="ns10:Produce_MessageETH_plt"/>
+    <partnerLink name="ETH_JMSENQ_PROCESS"
+                 partnerRole="Produce_MessageETHProcess_role"
+                 partnerLinkType="ns12:Produce_MessageETHProcess_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="G_In_Receive_PM_PO" messageType="ns1:Read_RAW_msg"/>
+    <variable name="G_PO_decodedString" type="xsd:string"/>
+    <variable name="G_PO_UpdatedString" type="xsd:string"/>
+    <variable name="G_ProcessPO" element="ns2:PROCESS_PO_007"/>
+    <variable name="G_ChangePO" element="ns3:CHANGE_PO_006"/>
+    <variable name="G_FileHeader" messageType="ns5:InboundHeader_msg"/>
+    <variable name="G_TransactionType" type="xsd:string"/>
+    <variable name="G_DocumentNumber" type="xsd:string"/>
+    <variable name="G_ItemKey" type="xsd:string"/>
+    <variable name="G_In_ENQJMS_ChangePO"
+              messageType="ns10:CustomChange_PO_006_msg"/>
+    <variable name="G_In_ENQJMS_ProcessPO"
+              messageType="ns12:CustomProcess_PO_007_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_XMLGTW_FEED" partnerLink="ETH_GETFL_RAW"
+             portType="ns1:Read_RAW_ptt" operation="Read_RAW"
+             variable="G_In_Receive_PM_PO" createInstance="yes"
+             bpelx:headerVariable="G_FileHeader"/>
+    <assign name="Assign_DBSEL_ItemKey">
+      <copy>
+        <from expression='string("PROCESS")'/>
+        <to variable="G_TransactionType"/>
+      </copy>
+      <copy>
+        <from expression='string("4114012827:0:281")'/>
+        <to variable="G_DocumentNumber"/>
+      </copy>
+      <copy>
+        <from expression='string("874048-444242")'/>
+        <to variable="G_ItemKey"/>
+      </copy>
+    </assign>
+    <bpelx:exec name="Java_Embedding_1" language="java" version="1.3">
+      <![CDATA[/*Write your java code below e.g.  
+	System.out.println("Hello, World"); 
+*/ 
+addAuditTrailEntry("System_base64string");                              
+String System_base64string = ((oracle.xml.parser.v2.XMLElement)getVariableData("G_In_Receive_PM_PO","opaque","/ns4:opaqueElement")).getFirstChild().getNodeValue();      
+addAuditTrailEntry("System_base64string",System_base64string);                              
+try                                                           
+{                                                                            
+ String decoded = Base64Decoder.decode(System_base64string);                             
+ addAuditTrailEntry("decoded string is ",decoded);                           
+ setVariableData("G_PO_decodedString",decoded);                                  
+}                                                                            
+catch(Exception e)          
+{        
+    e.printStackTrace();        
+}]]>
+    </bpelx:exec>
+    <switch name="Switch_1">
+      <case condition="bpws:getVariableData('G_TransactionType')='PROCESS'">
+        <scope name="Scope_PO">
+          <faultHandlers>
+            <catchAll>
+              <empty name="ERROR_PROCESS"/>
+            </catchAll>
+          </faultHandlers>
+          <sequence name="Sequence_1">
+            <assign name="Assign_updateDecodedString_Process">
+              <copy>
+                <from expression="concat(&quot;&lt;?xml version = '1.0' encoding = 'UTF-8' standalone = 'no'?>&quot;, &quot;&lt;PROCESS_PO_007&quot;,substring-after(bpws:getVariableData('G_PO_decodedString'),&quot;&lt;PROCESS_PO_007&quot;))  "/>
+                <to variable="G_PO_UpdatedString"/>
+              </copy>
+            </assign>
+            <assign name="Assign_parse_ProcessPO">
+              <copy>
+                <from expression="ora:parseXML(bpws:getVariableData('G_PO_UpdatedString'))"/>
+                <to variable="G_ProcessPO" query="/ns2:PROCESS_PO_007"/>
+              </copy>
+            </assign>
+            <assign name="Assign_ENQJMS_ProcessPO">
+              <copy>
+                <from variable="G_ProcessPO" query="/ns2:PROCESS_PO_007"/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/ns2:PROCESS_PO_007"/>
+              </copy>
+              <copy>
+                <from expression='string("XML")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Message_type"/>
+              </copy>
+              <copy>
+                <from expression='string("OAG")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Message_standard"/>
+              </copy>
+              <copy>
+                <from variable="G_TransactionType"/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Transaction_type"/>
+              </copy>
+              <copy>
+                <from expression='string("PRO")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Transaction_subtype"/>
+              </copy>
+              <copy>
+                <from variable="G_DocumentNumber"/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Document_number"/>
+              </copy>
+              <copy>
+                <from expression='string("21235")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Party_id"/>
+              </copy>
+              <copy>
+                <from expression='string("EMR150")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Party_site_id"/>
+              </copy>
+              <copy>
+                <from expression='string("S")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Party_type"/>
+              </copy>
+              <copy>
+                <from expression='string("ETHPO")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Protocol_type"/>
+              </copy>
+              <copy>
+                <from expression='string("na")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Protocol_address"/>
+              </copy>
+              <copy>
+                <from expression='string("test")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Username"/>
+              </copy>
+              <copy>
+                <from expression='string("_86@@4^^8!800^90^09!900^986$46#!868#^$8 `$$@$}9&amp;8|+%+^%}|")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Password"/>
+              </copy>
+              <copy>
+                <from expression='string("MMI_USA_OU")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Attribute1"/>
+              </copy>
+              <copy>
+                <from expression='string("XML GW")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Attribute2"/>
+              </copy>
+              <copy>
+                <from expression='orcl:sequence-next-val("SC_MessageID_Seq","jdbc/ETH_BusinessDB")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Message_id"/>
+              </copy>
+              <copy>
+                <from expression='string("Out")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Message_direction"/>
+              </copy>
+              <copy>
+                <from expression='string("EMR150")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Sender_id"/>
+              </copy>
+              <copy>
+                <from expression='string("Oracle")'/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Sender_system_type"/>
+              </copy>
+              <copy>
+                <from expression="ora:getInstanceId()"/>
+                <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                    query="/ns13:CustomProcess_PO_007/Flow_id_1"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_ENQJMS_ProcessPO"
+                    partnerLink="ETH_JMSENQ_PROCESS"
+                    portType="ns12:Produce_MessageETHProcess_ptt"
+                    operation="Produce_MessageETHProcess"
+                    inputVariable="G_In_ENQJMS_ProcessPO"/>
+          </sequence>
+        </scope>
+      </case>
+      <case condition="bpws:getVariableData('G_TransactionType')='CHANGE'">
+        <scope name="Scope_CPO">
+          <faultHandlers>
+            <catchAll>
+              <empty name="ERROR_CHANGE"/>
+            </catchAll>
+          </faultHandlers>
+          <sequence name="Sequence_2">
+            <assign name="Assign_updateDecodedString_Change">
+              <copy>
+                <from expression="concat(&quot;&lt;?xml version = '1.0' encoding = 'UTF-8' standalone = 'no'?>&quot;, &quot;&lt;CHANGE_PO_006&quot;,substring-after(bpws:getVariableData('G_PO_decodedString'),&quot;&lt;CHANGE_PO_006&quot;))"/>
+                <to variable="G_PO_UpdatedString"/>
+              </copy>
+            </assign>
+            <assign name="Assign_parse_ChangePO">
+              <copy>
+                <from expression="ora:parseXML(bpws:getVariableData('G_PO_UpdatedString'))"/>
+                <to variable="G_ChangePO" query="/ns3:CHANGE_PO_006"/>
+              </copy>
+            </assign>
+            <assign name="Assign_ENQJMS_ChangePO">
+              <copy>
+                <from variable="G_ChangePO" query="/ns3:CHANGE_PO_006"/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/ns3:CHANGE_PO_006"/>
+              </copy>
+              <copy>
+                <from expression='string("XML")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Message_type"/>
+              </copy>
+              <copy>
+                <from expression='string("OAG")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Message_standard"/>
+              </copy>
+              <copy>
+                <from variable="G_TransactionType"/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Transaction_type"/>
+              </copy>
+              <copy>
+                <from expression='string("POCO")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Transaction_subtype"/>
+              </copy>
+              <copy>
+                <from variable="G_DocumentNumber"/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Document_number"/>
+              </copy>
+              <copy>
+                <from expression='string("21235")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Party_id"/>
+              </copy>
+              <copy>
+                <from expression='string("EMR150")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Party_site_id"/>
+              </copy>
+              <copy>
+                <from expression='string("S")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Party_type"/>
+              </copy>
+              <copy>
+                <from expression='string("ETHPO")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Protocol_type"/>
+              </copy>
+              <copy>
+                <from expression='string("na")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Protocol_address"/>
+              </copy>
+              <copy>
+                <from expression='string("test")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Username"/>
+              </copy>
+              <copy>
+                <from expression='string("_86@@4^^8!800^90^09!900^986$46#!868#^$8 `$$@$}9&amp;8|+%+^%}|")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Password"/>
+              </copy>
+              <copy>
+                <from expression='string("MMI_USA_OU")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Attribute1"/>
+              </copy>
+              <copy>
+                <from expression='string("XML GW")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Attribute2"/>
+              </copy>
+              <copy>
+                <from expression='orcl:sequence-next-val("SC_MessageID_Seq","jdbc/ETH_BusinessDB")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Message_id"/>
+              </copy>
+              <copy>
+                <from expression='string("Out")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Message_direction"/>
+              </copy>
+              <copy>
+                <from expression='string("EMR150")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Sender_id"/>
+              </copy>
+              <copy>
+                <from expression='string("Oracle")'/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Sender_system_type"/>
+              </copy>
+              <copy>
+                <from expression="ora:getInstanceId()"/>
+                <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                    query="/ns11:CustomChange_PO_006/Flow_id_1"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_ENQJMS_ChangePO"
+                    inputVariable="G_In_ENQJMS_ChangePO"
+                    partnerLink="ETH_JMSENQ_CHANGE"
+                    portType="ns10:Produce_MessageETH_ptt"
+                    operation="Produce_MessageETH"/>
+          </sequence>
+        </scope>
+      </case>
+      <otherwise>
+        <empty name="Empty_Unidentified_Transaction"/>
+      </otherwise>
+    </switch>
+    <bpelx:exec import="com.collaxa.common.util.Base64Decoder"/>
+    <bpelx:exec import="com.collaxa.common.util.Base64Encoder"/>
+  </sequence>
+</process>

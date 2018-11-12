@@ -1,0 +1,59 @@
+<definitions
+     name="LogService"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/LogService/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/LogService/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://www.gssamerica.com/mdm/loghandler"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.gssamerica.com/mdm/loghandler" schemaLocation="LogRequest.xsd" />
+      </schema>
+    </types>
+    <message name="logRequests_msg">
+        <part name="logRequests" element="imp1:LogRequests"/>
+    </message>
+    <portType name="Produce_Message_To_LogMDMQueue_ptt">
+        <operation name="Produce_Message_To_LogMDMQueue">
+            <input message="tns:logRequests_msg"/>
+        </operation>
+    </portType>
+    <binding name="Produce_Message_To_LogMDMQueue_binding" type="tns:Produce_Message_To_LogMDMQueue_ptt">
+    <jca:binding  />
+        <operation name="Produce_Message_To_LogMDMQueue">
+      <jca:operation
+          InteractionSpec="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec"
+          DestinationName="mdm/MDMLogQueue"
+          DeliveryMode="Persistent"
+          TimeToLive="0"
+          PayloadType="TextMessage"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="LogService">
+        <port name="Produce_Message_To_LogMDMQueue_pt" binding="tns:Produce_Message_To_LogMDMQueue_binding">
+      <jca:address location="eis/Jms/QueueConnectionFactory" UIConnectionName="LocalApplicationServer"
+          ManagedConnectionFactory="oracle.tip.adapter.jms.JmsManagedConnectionFactory"
+          mcf.ConnectionFactoryLocation="mdm/MDMConnectionFactory"
+          mcf.IsTopic="false"
+          mcf.IsTransacted="false"
+          mcf.FactoryProperties=""
+          mcf.Username="oc4jadmin"
+          mcf.Password="33249B2910CFF3FB37820D56077EB7A3"
+          UIJmsProvider="OC4JJMS" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Produce_Message_To_LogMDMQueue_plt" >
+    <plt:role name="Produce_Message_To_LogMDMQueue_role" >
+      <plt:portType name="tns:Produce_Message_To_LogMDMQueue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

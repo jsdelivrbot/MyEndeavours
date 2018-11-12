@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.gssamerica.com/mdm/hub/database" xmlns:tns="http://www.gssamerica.com/mdm/hub/database">
+
+	<xs:simpleType name="dataType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NUMBER"/>
+			<xs:enumeration value="DATE"/>
+			<xs:enumeration value="BOOLEAN"/>
+			<xs:enumeration value="STRING"/>
+			<xs:enumeration value="CHAR"/>
+			<xs:enumeration value="INTEGER"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="columnAttr">
+		<xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="tns:dataType" use="required"/>
+		<xs:attribute name="null" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="primaryKey" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="default" type="xs:string" use="optional" default=""/>
+	</xs:attributeGroup>
+	<xs:element name="comment" type="xs:string" nillable="true"/>
+	<xs:element name="referenceTable">
+		<xs:complexType>
+			<xs:attribute name="code" type="xs:string" use="required"/>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="column" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="foreignKey">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tns:referenceTable" maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="column">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="tns:comment" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="tns:foreignKey" minOccurs="0" maxOccurs="1"/>
+			</xs:all>
+			<xs:attributeGroup ref="tns:columnAttr"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tns:comment" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="tns:column" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="code" type="xs:string" use="required"/>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="database">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tns:comment" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="tns:table" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+			<xs:attribute name="prefix" type="xs:string" use="optional"/>
+			<xs:attribute name="type" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

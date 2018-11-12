@@ -1,0 +1,72 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Aug 27 19:24:36 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TestCatalogPricing_EBS"
+         targetNamespace="http://xmlns.oracle.com/TestCatalogPricing_EBS"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/Poll_CatalogPricing/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://schemas.emerson.com/common/envelope"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/Push_CNP_ESB/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.oracle.com/TestCatalogPricing_EBS"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="Poll_CatalogPricing"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="Push_CNP_ESB" partnerRole="Produce_Message_role"
+                 partnerLinkType="ns2:Produce_Message_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_CNP_Read_InputVariable"
+              messageType="ns1:envelope_msg"/>
+    <variable name="Invoke_1_Produce_Message_InputVariable"
+              messageType="ns2:envelope_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_CNP" partnerLink="Poll_CatalogPricing"
+             portType="ns1:Read_ptt" operation="Read"
+             variable="Receive_CNP_Read_InputVariable" createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="Receive_CNP_Read_InputVariable" part="envelope"
+              query="/ns3:envelope"/>
+        <to variable="Invoke_1_Produce_Message_InputVariable" part="envelope"
+            query="/ns3:envelope"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="Push_CNP_ESB"
+            portType="ns2:Produce_Message_ptt" operation="Produce_Message"
+            inputVariable="Invoke_1_Produce_Message_InputVariable"/>
+  </sequence>
+</process>

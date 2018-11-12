@@ -1,0 +1,223 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jun 29 22:38:20 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_CSV_CatalogPricingProvABCS"
+         targetNamespace="http://services.emerson.com/VDST/VDST_BPEL_CSV_CatalogPricingProvABCS"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/VDST_DBINS_CatalogPricing/"
+         xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+         xmlns:ns7="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://schemas.emerson.com/common/envelope"
+         xmlns:client="http://services.emerson.com/VDST/VDST_BPEL_CSV_CatalogPricingProvABCS"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/VDSTDBINSCatalogPricing"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CSV_CatalogPricing/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://schema.emerson.com/VDST_FTP_GET_CatalogPricing"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns8="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Consume_Message_role"
+                 name="VDST_JMSQDEQ_CSV_CatalogPricing"
+                 partnerLinkType="ns1:Consume_Message_plt"/>
+    <partnerLink name="ConversionWebService"
+                 partnerRole="ConversionWebServicePortType_Role"
+                 partnerLinkType="ns8:ConversionWebServicePortType_PL"/>
+    <partnerLink name="VDST_DBINS_CatalogPricing"
+                 partnerRole="VDST_DBINS_CatalogPricing_role"
+                 partnerLinkType="ns4:VDST_DBINS_CatalogPricing_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="G_IN_CTE_CSV_CP" messageType="ns1:envelope_msg"/>
+    <variable name="G_IN_JMSHeader" messageType="ns2:InboundHeader_msg"/>
+    <variable name="G_CatalogPricing_StagingDB_Req"
+              messageType="ns4:VdstCatalogPriceCollection_msg"/>
+    <variable name="G_ExecutionUnit" element="ns5:ExecutionUnit"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_CatalogPricing"
+             partnerLink="VDST_JMSQDEQ_CSV_CatalogPricing"
+             portType="ns1:Consume_Message_ptt" operation="Consume_Message"
+             variable="G_IN_CTE_CSV_CP" createInstance="yes"
+             bpelx:headerVariable="G_IN_JMSHeader"/>
+    <assign name="Assign_ExecutionUnit">
+      <copy>
+        <from expression="0"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:SequenceNumber"/>
+      </copy>
+      <copy>
+        <from expression="ora:getInstanceId()"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ExecutionUnitID"/>
+      </copy>
+      <copy>
+        <from expression="string('VDST_BPEL_CatalogPricingProvABCS')"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ExecutionUnitName"/>
+      </copy>
+      <copy>
+        <from expression="string('BPEL')"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ImplementationCode"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-dateTime()"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ActivityDateTime"/>
+      </copy>
+      <bpelx:insertAfter>
+        <bpelx:from variable="G_ExecutionUnit" query="/ns5:ExecutionUnit"/>
+        <bpelx:to variable="G_IN_CTE_CSV_CP" part="envelope"
+                  query="/ns5:envelope/ns5:header/ns5:EBMTracking/ns5:ExecutionUnit"/>
+      </bpelx:insertAfter>
+    </assign>
+    <scope name="Scope_GetABM">
+      <variables>
+        <variable name="L_CatalogPricing_CSV" element="ns3:CP-Load"/>
+      </variables>
+      <sequence name="Sequence_1">
+        <assign name="Transform_Get_CSVPayload">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:processXSLT('Transformation_Get_CSVPayload.xsl',bpws:getVariableData('G_IN_CTE_CSV_CP','envelope'))"/>
+            <to variable="L_CatalogPricing_CSV"/>
+          </copy>
+        </assign>
+        <assign name="Transform_CSV_ABM">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:processXSLT('Transformation_CSV_ABM.xsl',bpws:getVariableData('L_CatalogPricing_CSV'))"/>
+            <to variable="G_CatalogPricing_StagingDB_Req"
+                part="VdstCatalogPriceCollection"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <scope name="Scope_Set_DynamicPartnerLink">
+      <sequence name="Choose_Division">
+        <switch name="Switch_1">
+          <case condition="bpws:getVariableData('G_IN_CTE_CSV_CP','envelope','/ns5:envelope/ns5:header/ns5:Sender/ns5:ID') = string('EMR5110026')">
+            <assign name="Assign_Knaack">
+              <copy>
+                <from>
+                  <EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+                    <Address>eis/DB/VDST/KNK/Import</Address>
+                  </EndpointReference>
+                </from>
+                <to partnerLink="VDST_DBINS_CatalogPricing"/>
+              </copy>
+            </assign>
+          </case>
+          <case condition="bpws:getVariableData('G_IN_CTE_CSV_CP','envelope','/ns5:envelope/ns5:header/ns5:Sender/ns5:ID') = string('EMR5160035')">
+            <assign name="Assign_ClosetMaid">
+              <copy>
+                <from>
+                  <EndpointReference xmlns="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+                    <Address>eis/DB/VDST/CMC/Import</Address>
+                  </EndpointReference>
+                </from>
+                <to partnerLink="VDST_DBINS_CatalogPricing"/>
+              </copy>
+            </assign>
+          </case>
+          <otherwise>
+            <sequence name="Sequence_4">
+              <empty name="Empty_Unidentified_Sender"/>
+              <terminate name="Terminate_Unidentified_Sender"/>
+            </sequence>
+          </otherwise>
+        </switch>
+      </sequence>
+    </scope>
+    <scope name="Scope_Invoke_StagingDB">
+      <sequence name="Save_Data_to_Staging">
+        <bpelx:exec name="Java_Checkpoint" language="java" version="1.3">
+          <![CDATA[/*Write your java code below e.g.  
+	System.out.println("Hello, World"); 
+*/ 
+checkpoint();]]>
+        </bpelx:exec>
+        <invoke name="Invoke_CatalogPricing_StagingDB"
+                portType="ns4:VDST_DBINS_CatalogPricing_ptt"
+                inputVariable="G_CatalogPricing_StagingDB_Req"
+                partnerLink="VDST_DBINS_CatalogPricing" operation="merge"/>
+      </sequence>
+    </scope>
+    <scope name="Scope_Inform_Yumetech">
+      <variables>
+        <variable name="L_IN_ImportERP" messageType="ns8:ImportERPData"/>
+        <variable name="L_OUT_ImportERP"
+                  messageType="ns8:ImportERPDataResponse"/>
+        <variable name="Intimate" type="xsd:int"/>
+      </variables>
+      <sequence name="Call_ImportERPService">
+        <assign name="Assign_Intimate">
+          <copy>
+            <from expression="1"/>
+            <to variable="Intimate"/>
+          </copy>
+        </assign>
+        <switch name="Switch_2">
+          <case condition="bpws:getVariableData('Intimate') = 1">
+            <sequence name="Sequence_5">
+              <assign name="Assign_ImportERP_Input">
+                <copy>
+                  <from expression="string('SessionID')"/>
+                  <to variable="L_IN_ImportERP" part="parameters"
+                      query="/ns8:importERPData/SessionID"/>
+                </copy>
+              </assign>
+              <invoke name="Invoke_ImportERP" partnerLink="ConversionWebService"
+                      portType="ns8:ConversionWebServicePortType"
+                      operation="importERPData" inputVariable="L_IN_ImportERP"
+                      outputVariable="L_OUT_ImportERP"/>
+            </sequence>
+          </case>
+          <otherwise>
+            <empty name="Empty_Do_Nothing"/>
+          </otherwise>
+        </switch>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

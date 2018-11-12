@@ -1,0 +1,666 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Aug 01 15:10:39 IST 2008
+  Author:  venkatareddy
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Delete_MDMRecords_BPELProcess"
+         targetNamespace="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns13="http://www.gssamerica.com/mdm/loghandler"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/jms/AuditService/"
+         xmlns:ns7="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns12="http://schemas.oracle.com/service/bpel/common"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/jms/LogService/"
+         xmlns:client="http://www.gssamerica.com/mdm/Delete_MDMRecords_BPELProcess"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/jms/ExceptionService/"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns11="http://www.gssamerica.com/mdm/audithandler"
+         xmlns:ns9="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/WorkFlowService/"
+         xmlns:ns14="http://www.gssamerica.com/mdm/errorhandler"
+         xmlns:ns3="http://www.gssamerica.com/mdm/services"
+         xmlns:ns2="http://www.gssamerica.com/mdm/workflowservice"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns10="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns8="http://xmlns.oracle.com/bpel/services/IdentityService/xpath">
+  <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client"
+                 partnerLinkType="client:Delete_MDMRecords_BPELProcess"
+                 myRole="Delete_MDMRecords_BPELProcessProvider"/>
+    <partnerLink name="WorkFlowService"
+                 partnerRole="Produce_Message_To_WorkFlowQueue_role"
+                 partnerLinkType="ns1:Produce_Message_To_WorkFlowQueue_plt"/>
+    <partnerLink name="AuditService"
+                 partnerRole="Produce_Message_To_MDMAuditQueue_role"
+                 partnerLinkType="ns4:Produce_Message_To_MDMAuditQueue_plt"/>
+    <partnerLink name="LogService"
+                 partnerRole="Produce_Message_To_LogMDMQueue_role"
+                 partnerLinkType="ns5:Produce_Message_To_LogMDMQueue_plt"/>
+    <partnerLink name="ExceptionService"
+                 partnerRole="Produce_Message_To_MDMExceptionQueue_role"
+                 partnerLinkType="ns6:Produce_Message_To_MDMExceptionQueue_plt"/>
+  </partnerLinks>
+  <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <!-- Reference to the message that will be sent back to the requester during callback -->
+    <variable name="inputVariable"
+              messageType="client:Delete_MDMRecords_BPELProcessRequestMessage"/>
+    <variable name="outputVariable"
+              messageType="client:Delete_MDMRecords_BPELProcessResponseMessage"/>
+    <variable name="Invoke_1_Produce_Message_To_WorkFlowQueue_InputVariable"
+              messageType="ns1:WorkflowRequest_msg"/>
+    <variable name="deleteRecordCounter" type="xsd:int"/>
+    <variable name="remoteKeyFoundCounter" type="xsd:int"/>
+    <variable name="remoteKeyNotFoundCounter" type="xsd:int"/>
+    <variable name="userId" type="xsd:string"/>
+    <variable name="createdDateTime" type="xsd:dateTime"/>
+    <variable name="projectName" type="xsd:string"/>
+    <variable name="processName" type="xsd:string"/>
+    <variable name="transactionId" type="xsd:string"/>
+    <variable name="sourceDescription" type="xsd:string"/>
+    <variable name="statusFlag" type="xsd:string"/>
+    <variable name="businessKey" type="xsd:string"/>
+    <variable name="source" type="xsd:string"/>
+    <variable name="destination" type="xsd:string"/>
+    <variable name="errorInputData" type="xsd:string"/>
+    <variable name="environment" type="xsd:string"/>
+    <variable name="errorAction" type="xsd:string"/>
+    <variable name="errorMessage" type="xsd:string"/>
+    <variable name="errorMessageCode" type="xsd:string"/>
+    <variable name="dateTime" type="xsd:string"/>
+    <variable name="processId" type="xsd:string"/>
+    <variable name="stackTrace" type="xsd:string"/>
+    <variable name="ExchangeFormat" type="xsd:string"/>
+    <variable name="remediationQueue" type="xsd:string"/>
+    <variable name="logType" type="xsd:string"/>
+    <variable name="logMessage" type="xsd:string"/>
+    <variable name="logLevel" type="xsd:string"/>
+    <variable name="location" type="xsd:string"/>
+    <variable name="Invoke_AuditService_InputVariable"
+              messageType="ns4:auditRequest_msg"/>
+    <variable name="Invoke_LogService_InputVariable"
+              messageType="ns5:logRequests_msg"/>
+    <variable name="logMaxSize" type="xsd:int"/>
+    <variable name="Invoke_WorkFlowQueue_InputVariable"
+              messageType="ns1:WorkflowRequest_msg"/>
+    <variable name="RKeyFoundOutput" type="xsd:string"/>
+    <variable name="RKeyNotFoundOutput" type="xsd:string"/>
+    <variable name="DeleteRecordOutput" type="xsd:string"/>
+    <variable name="Invoke_MDMExceptionService_InputVariable"
+              messageType="ns6:ErrorHandlerRequests_msg"/>
+    <variable name="errorType" type="xsd:string"/>
+    <variable name="errorId" type="xsd:string"/>
+    <variable name="externalParameter" element="ns12:parameters"/>
+    <variable name="bpel_xsltParmVariable" element="ns12:parameters"/>
+    <variable name="remoteKeyFlag" type="xsd:string"/>
+    <variable name="Invoke_Delete_Wokflow_Produce_Message_To_WorkFlowQueue_InputVariable"
+              messageType="ns1:WorkflowRequest_msg"/>
+    <variable name="BindingFaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="RemoteFaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+  </variables>
+  <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <faultHandlers>
+    <catch faultName="bpelx:bindingFault" faultVariable="BindingFaultVar">
+      <sequence name="Sequence_10">
+        <assign name="Assign_MDMException_Binding">
+          <copy>
+            <from variable="errorInputData"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/InputData"/>
+          </copy>
+          <copy>
+            <from variable="processName"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ProcessName"/>
+          </copy>
+          <copy>
+            <from expression="string('BindingException')"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Type"/>
+          </copy>
+          <copy>
+            <from variable="errorId"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorID"/>
+          </copy>
+          <copy>
+            <from variable="environment"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Environment"/>
+          </copy>
+          <copy>
+            <from variable="errorAction"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Action"/>
+          </copy>
+          <copy>
+            <from variable="errorMessage"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorMessage"/>
+          </copy>
+          <copy>
+            <from variable="errorMessageCode"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorMessageCode"/>
+          </copy>
+          <copy>
+            <from variable="createdDateTime"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/DateTime"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/ns3:DeleteRecordRequest"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Data"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_MDMException_Binding"
+                partnerLink="ExceptionService"
+                portType="ns6:Produce_Message_To_MDMExceptionQueue_ptt"
+                operation="Produce_Message_To_MDMExceptionQueue"
+                inputVariable="Invoke_MDMExceptionService_InputVariable"/>
+      </sequence>
+    </catch>
+    <catch faultName="bpelx:remoteFault" faultVariable="RemoteFaultVar">
+      <sequence name="Sequence_9">
+        <assign name="Assign_MDMException_Remote">
+          <copy>
+            <from variable="errorInputData"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/InputData"/>
+          </copy>
+          <copy>
+            <from variable="processName"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ProcessName"/>
+          </copy>
+          <copy>
+            <from expression="string('RemoteException')"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Type"/>
+          </copy>
+          <copy>
+            <from variable="errorId"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorID"/>
+          </copy>
+          <copy>
+            <from variable="environment"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Environment"/>
+          </copy>
+          <copy>
+            <from variable="errorAction"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Action"/>
+          </copy>
+          <copy>
+            <from variable="errorMessage"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorMessage"/>
+          </copy>
+          <copy>
+            <from variable="errorMessageCode"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorMessageCode"/>
+          </copy>
+          <copy>
+            <from variable="createdDateTime"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/DateTime"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/ns3:DeleteRecordRequest"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Data"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_MDMException_Remote" partnerLink="ExceptionService"
+                portType="ns6:Produce_Message_To_MDMExceptionQueue_ptt"
+                operation="Produce_Message_To_MDMExceptionQueue"
+                inputVariable="Invoke_MDMExceptionService_InputVariable"/>
+      </sequence>
+    </catch>
+    <catchAll>
+      <sequence name="Sequence_11">
+        <assign name="Assign_MDMException">
+          <copy>
+            <from variable="errorInputData"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/InputData"/>
+          </copy>
+          <copy>
+            <from variable="processName"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ProcessName"/>
+          </copy>
+          <copy>
+            <from expression="string('AllException')"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Type"/>
+          </copy>
+          <copy>
+            <from variable="errorId"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorID"/>
+          </copy>
+          <copy>
+            <from variable="environment"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Environment"/>
+          </copy>
+          <copy>
+            <from variable="errorAction"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Action"/>
+          </copy>
+          <copy>
+            <from variable="errorMessage"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorMessage"/>
+          </copy>
+          <copy>
+            <from variable="errorMessageCode"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/ErrorMessageCode"/>
+          </copy>
+          <copy>
+            <from variable="createdDateTime"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/DateTime"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/ns3:DeleteRecordRequest"/>
+            <to variable="Invoke_MDMExceptionService_InputVariable"
+                part="ErrorHandlerRequests"
+                query="/ns14:ErrorHandlerRequests/ns14:ErrorHandlerRequest/Data"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_MDMEXception" partnerLink="ExceptionService"
+                portType="ns6:Produce_Message_To_MDMExceptionQueue_ptt"
+                operation="Produce_Message_To_MDMExceptionQueue"
+                inputVariable="Invoke_MDMExceptionService_InputVariable"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Delete_MDMRecords_BPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:Delete_MDMRecords_BPELProcess" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_GlobalVariables">
+      <copy>
+        <from expression="bpws:getVariableData('inputVariable','payload','/ns3:DeleteRecordRequest/ns3:configData/ns3:element[ns3:name=&quot;userID&quot;]/ns3:value')"/>
+        <to variable="userId"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-dateTime()"/>
+        <to variable="createdDateTime"/>
+      </copy>
+      <copy>
+        <from expression="string('MDM')"/>
+        <to variable="projectName"/>
+      </copy>
+      <copy>
+        <from expression="string('Delete Records BPEL Process')"/>
+        <to variable="processName"/>
+      </copy>
+      <copy>
+        <from expression="bpws:getVariableData('inputVariable','payload','/ns3:DeleteRecordRequest/ns3:configData/ns3:element[ns3:name=&quot;transactionID&quot;]/ns3:value')"/>
+        <to variable="transactionId"/>
+      </copy>
+      <copy>
+        <from expression="string('DeleteStatus')"/>
+        <to variable="statusFlag"/>
+      </copy>
+      <copy>
+        <from expression="bpws:getVariableData('inputVariable','payload','/ns3:DeleteRecordRequest/ns3:configData/ns3:element[ns3:name=&quot;srcID&quot;]/ns3:value')"/>
+        <to variable="source"/>
+      </copy>
+      <copy>
+        <from expression="string('MDMSystemIP')"/>
+        <to variable="destination"/>
+      </copy>
+      <copy>
+        <from expression="ora:getProcessURL()"/>
+        <to variable="processId"/>
+      </copy>
+      <copy>
+        <from expression="string('Info')"/>
+        <to variable="logType"/>
+      </copy>
+      <copy>
+        <from expression="string('ready to invoke loolup service')"/>
+        <to variable="logMessage"/>
+      </copy>
+      <copy>
+        <from expression="string('initial')"/>
+        <to variable="logLevel"/>
+      </copy>
+      <copy>
+        <from expression="string('Testing Environment')"/>
+        <to variable="environment"/>
+      </copy>
+      <copy>
+        <from expression="string('create BPEL Process')"/>
+        <to variable="location"/>
+      </copy>
+      <copy>
+        <from expression="0"/>
+        <to variable="deleteRecordCounter"/>
+      </copy>
+      <copy>
+        <from expression="0"/>
+        <to variable="remoteKeyFoundCounter"/>
+      </copy>
+      <copy>
+        <from expression="0"/>
+        <to variable="remoteKeyNotFoundCounter"/>
+      </copy>
+      <copy>
+        <from expression="string('inputData')"/>
+        <to variable="errorInputData"/>
+      </copy>
+      <copy>
+        <from expression="string('NO ACTION')"/>
+        <to variable="errorAction"/>
+      </copy>
+      <copy>
+        <from expression="string('ERROR in DELETE RECORD BPEL')"/>
+        <to variable="errorMessage"/>
+      </copy>
+      <copy>
+        <from expression="string('EX101')"/>
+        <to variable="errorMessageCode"/>
+      </copy>
+      <copy>
+        <from expression="string('err101')"/>
+        <to variable="errorId"/>
+      </copy>
+    </assign>
+    <scope name="Initial_AuditandLog_Scope">
+      <sequence name="AuditandLog_Sequence">
+        <assign name="Assign_AuditService_From_AuditLogScope">
+          <copy>
+            <from variable="userId"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/userId"/>
+          </copy>
+          <copy>
+            <from variable="createdDateTime"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/createdDateTime"/>
+          </copy>
+          <copy>
+            <from variable="projectName"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/projectName"/>
+          </copy>
+          <copy>
+            <from variable="processName"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/processName"/>
+          </copy>
+          <copy>
+            <from variable="transactionId"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/transactionId"/>
+          </copy>
+          <copy>
+            <from variable="statusFlag"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/statusFlag"/>
+          </copy>
+          <copy>
+            <from variable="source"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/source"/>
+          </copy>
+          <copy>
+            <from variable="destination"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/destination"/>
+          </copy>
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/ns3:DeleteRecordRequest"/>
+            <to variable="Invoke_AuditService_InputVariable" part="auditRequest"
+                query="/ns11:auditRequest/auditData/oldRecord"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_AuditService_From_AuditLogScope"
+                partnerLink="AuditService"
+                portType="ns4:Produce_Message_To_MDMAuditQueue_ptt"
+                operation="Produce_Message_To_MDMAuditQueue"
+                inputVariable="Invoke_AuditService_InputVariable"/>
+        <assign name="Assign_LogService_From_AuditLogScope">
+          <copy>
+            <from variable="processId"/>
+            <to variable="Invoke_LogService_InputVariable" part="logRequests"
+                query="/ns13:logRequests/logRequest/processId"/>
+          </copy>
+          <copy>
+            <from variable="logType"/>
+            <to variable="Invoke_LogService_InputVariable" part="logRequests"
+                query="/ns13:logRequests/logRequest/logType"/>
+          </copy>
+          <copy>
+            <from variable="logMessage"/>
+            <to variable="Invoke_LogService_InputVariable" part="logRequests"
+                query="/ns13:logRequests/logRequest/logMessage"/>
+          </copy>
+          <copy>
+            <from variable="environment"/>
+            <to variable="Invoke_LogService_InputVariable" part="logRequests"
+                query="/ns13:logRequests/logRequest/environment"/>
+          </copy>
+          <copy>
+            <from variable="projectName"/>
+            <to variable="Invoke_LogService_InputVariable" part="logRequests"
+                query="/ns13:logRequests/logRequest/projectName"/>
+          </copy>
+          <copy>
+            <from variable="processName"/>
+            <to variable="Invoke_LogService_InputVariable" part="logRequests"
+                query="/ns13:logRequests/logRequest/processName"/>
+          </copy>
+          <copy>
+            <from variable="location"/>
+            <to variable="Invoke_LogService_InputVariable" part="logRequests"
+                query="/ns13:logRequests/logRequest/location"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_LogService_From_AuditLogScope"
+                partnerLink="LogService"
+                portType="ns5:Produce_Message_To_LogMDMQueue_ptt"
+                operation="Produce_Message_To_LogMDMQueue"
+                inputVariable="Invoke_LogService_InputVariable"/>
+      </sequence>
+    </scope>
+    <scope name="WhileLoop">
+      <variables>
+        <variable name="noOfRecords" type="xsd:int"/>
+        <variable name="recordIndex" type="xsd:int"/>
+      </variables>
+      <sequence name="While_Sequence">
+        <assign name="Assign_IncrementValue">
+          <copy>
+            <from expression="ora:countNodes('inputVariable','payload','/ns3:DeleteRecordRequest/ns3:recordIdentifier')"/>
+            <to variable="noOfRecords"/>
+          </copy>
+          <copy>
+            <from expression="1"/>
+            <to variable="recordIndex"/>
+          </copy>
+        </assign>
+        <while name="While_DeleteRecordsExist"
+               condition="bpws:getVariableData('noOfRecords') >0">
+          <scope name="deleteworkflow_scope">
+            <variables>
+              <variable name="DeleteRecordRequest_InputVariable"
+                        messageType="client:Delete_MDMRecords_BPELProcessRequestMessage"/>
+              <variable name="deleteParameters" element="ns12:parameters"/>
+            </variables>
+            <sequence name="delete_sequence">
+              <assign name="GetIndividualRecords">
+                <copy>
+                  <from expression="bpws:getVariableData('noOfRecords')-1"/>
+                  <to variable="noOfRecords"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload')/ns3:recordIdentifier[bpws:getVariableData('recordIndex')]"/>
+                  <to variable="DeleteRecordRequest_InputVariable" query="/ns3:DeleteRecordRequest/ns3:recordIdentifier"
+                      part="payload"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload','/ns3:DeleteRecordRequest/ns3:repositoryInfo')"/>
+                  <to variable="DeleteRecordRequest_InputVariable" query="/ns3:DeleteRecordRequest/ns3:repositoryInfo"
+                      part="payload"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload','/ns3:DeleteRecordRequest/ns3:configData')"/>
+                  <to variable="DeleteRecordRequest_InputVariable" query="/ns3:DeleteRecordRequest/ns3:configData"
+                      part="payload"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('recordIndex')+1"/>
+                  <to variable="recordIndex"/>
+                </copy>
+              </assign>
+              <assign name="Transform_Workflow_Delete">
+                <copy>
+                  <from>
+                    <tns:parameters xmlns="http://schemas.oracle.com/service/bpel/common"
+                                    xmlns:tns="http://schemas.oracle.com/service/bpel/common"
+                                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <tns:item>
+                        <tns:name>srcID</tns:name>
+                        <tns:value>CRM-1</tns:value>
+                      </tns:item>
+                      <tns:item>
+                        <tns:name>operation</tns:name>
+                        <tns:value>delete</tns:value>
+                      </tns:item>
+                      <tns:item>
+                        <tns:name>entity</tns:name>
+                        <tns:value>Customer</tns:value>
+                      </tns:item>
+                      <tns:item>
+                        <tns:name>entitystatus</tns:name>
+                        <tns:value>old</tns:value>
+                      </tns:item>
+                    </tns:parameters>
+                  </from>
+                  <to variable="deleteParameters"/>
+                </copy>
+                <copy>
+                  <from expression="ora:processXSLT('Transformation_Workflow_Delete.xsl',bpws:getVariableData('DeleteRecordRequest_InputVariable','payload'),bpws:getVariableData('deleteParameters'))"/>
+                  <to variable="Invoke_WorkFlowQueue_InputVariable"
+                      part="WorkflowRequest" query="/ns2:WorkflowRequest"/>
+                </copy>
+              </assign>
+              <invoke name="Invoke_Delete_Wokflow" partnerLink="WorkFlowService"
+                      portType="ns1:Produce_Message_To_WorkFlowQueue_ptt"
+                      operation="Produce_Message_To_WorkFlowQueue"
+                      inputVariable="Invoke_WorkFlowQueue_InputVariable"/>
+              <assign name="Assign_From_DeleteRecord">
+                <bpelx:append>
+                  <bpelx:from expression='string("delete")'/>
+                  <bpelx:to variable="outputVariable" part="payload"
+                            query="/ns3:ServiceReply/ns3:executionStatus/ns3:status"/>
+                </bpelx:append>
+                <copy>
+                  <from expression="bpws:getVariableData('deleteRecordCounter')+1"/>
+                  <to variable="deleteRecordCounter"/>
+                </copy>
+                <copy>
+                  <from expression="concat(bpws:getVariableData('deleteRecordCounter'),&quot;Record has been sent to work flow for deletion&quot;)"/>
+                  <to variable="DeleteRecordOutput"/>
+                </copy>
+              </assign>
+            </sequence>
+          </scope>
+        </while>
+      </sequence>
+    </scope>
+    <assign name="Assign_Output">
+      <copy>
+        <from expression="bpws:getVariableData('DeleteRecordOutput')"/>
+        <to variable="outputVariable" part="payload"
+            query="/ns3:ServiceReply/ns3:executionStatus/ns3:status"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="client"
+           portType="client:Delete_MDMRecords_BPELProcess" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

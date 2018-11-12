@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Pick" guid="329B26E0A37A11DEBFF07737C08641B4" qname="VDST_IntegrationSystem.VDSTSysGrp_Test.Pick" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1253209001014</ID>
+      <lastModifiedTime>Thu Sep 17 23:06:41 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_VDSTv1_TestESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="0AA98E91A37C11DEBFE131C60F4267F4" qname="VDST_IntegrationSystem.VDSTSysGrp_Test" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="329D97E0A37A11DEBFF07737C08641B4" qname="VDST_IntegrationSystem.VDSTSysGrp_Test.Pick_RS"/>
+      <interface>
+         <wsdlURL>Pick.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Pick/">tns:Read_ptt</portType>
+      </interface>
+   </invocation>
+</service>

@@ -1,0 +1,97 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Sep 18 13:12:28 IST 2008
+  Author:  inderpal
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Search_MDMHUB_BPEL"
+         targetNamespace="http://www.gssamerica.com/mdm/Search_MDMHUB_BPEL"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://www.gssamerica.com/mdm/createesbresponse"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://www.gssamerica.com/mdm/services/MDMSearchRecord/"
+         xmlns:client="http://www.gssamerica.com/mdm/Search_MDMHUB_BPEL"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://www.gssamerica.com/mdm/esbprocesscustomer"
+         xmlns:ns3="http://www.gssamerica.com/mdm/services/Search_MDMHUB/"
+         xmlns:ns2="http://www.openapplications.org/oagis/9"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink name="client" partnerLinkType="client:Search_MDMHUB_BPEL"
+                 myRole="Search_MDMHUB_BPELProvider"/>
+    <partnerLink name="MDMSearchRecord" partnerLinkType="ns5:MDMSearchRecord_PL"
+                 myRole="MDMSearchRecord_Role"
+                 partnerRole="MDMSearchRecord_Role"/>
+  </partnerLinks>
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="inputVariable"
+              messageType="client:Search_MDMHUB_BPELRequestMessage"/>
+    <variable name="outputVariable"
+              messageType="client:Search_MDMHUB_BPELResponseMessage"/>
+    <variable name="Input_MDMSearchrecord"
+              messageType="ns5:SearchRecordRequest"/>
+    <variable name="Output_MDMSearchRecord"
+              messageType="ns5:SearchRecordResponse"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Search_MDMHUB_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:Search_MDMHUB_BPEL" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Transform_BPELInput_TO_SearchServiceInput">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('SearchHub_Request_Transformation.xsl',bpws:getVariableData('inputVariable','payload'))"/>
+        <to variable="Input_MDMSearchrecord" part="SearchRecordRequest"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_MDMSearchRecords_ESB" partnerLink="MDMSearchRecord"
+            portType="ns5:MDMSearchRecord" operation="searchRecord"
+            inputVariable="Input_MDMSearchrecord"
+            outputVariable="Output_MDMSearchRecord"/>
+    <assign name="Transform_SearchServiceOutput_TO_BPELOutput">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('SearchHub_Response_Transformation.xsl',bpws:getVariableData('Output_MDMSearchRecord','RecordExistResponse'))"/>
+        <to variable="outputVariable" part="payload"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="client"
+           portType="client:Search_MDMHUB_BPEL" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="PollTxtFile_RS" guid="5131514156A611DEBFBFF543CBD6D3C1" qname="Test.AQIssue.PollTxtFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service PollTxtFile</description>
+   <versionInfo>
+      <ID>1244741177879</ID>
+      <lastModifiedTime>Thu Jun 11 17:26:17 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_AQIssue_Imitate</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B8A2F98056A311DEBFBFF543CBD6D3C1" qname="Test.AQIssue" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>PollTxtFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/PollTxtFile/">tns:Get_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Test/AQIssue/PollTxtFile_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Test/AQIssue/PollTxtFile_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="51339B3056A611DEBFBFF543CBD6D3C1" qname="Test.AQIssue.PollTxtFile_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+         <routingRules>
+            <routingRule guid="4938BE4056AD11DEBFBFF543CBD6D3C1" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="3BF35FB056AD11DEBFBFF543CBD6D3C1" qname="Test.AQIssue.B2B_AQ_Push.Enqueue" serviceGUID="3BF0EEB056AD11DEBFBFF543CBD6D3C1" serviceQName="Test.AQIssue.B2B_AQ_Push" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

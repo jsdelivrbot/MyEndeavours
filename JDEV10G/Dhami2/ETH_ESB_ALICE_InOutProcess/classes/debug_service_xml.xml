@@ -1,0 +1,199 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="ETHSys_ALICE_InOutSystem" guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1238689775082</ID>
+         <lastModifiedTime>Thu Apr 02 16:29:35 GMT+00:00 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+      </versionInfo>
+      <description/>
+      <parameters>
+         <parameter name="Host">localhost</parameter>
+         <parameter name="Port">12001</parameter>
+      </parameters>
+      <clusterName>esb</clusterName>
+      <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+      <service name="ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2" guid="C16F0FA1096D11DEBFDF5DDDA038BDBD" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1238689775082</ID>
+            <lastModifiedTime>Thu Apr 02 16:29:35 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+         </versionInfo>
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2/">tns:Produce_Message_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSys_ALICE_InOutSystem/ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:12001/event/ETHSys_ALICE_InOutSystem/ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="C173CA90096D11DEBFDF5DDDA038BDBD" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2" guid="BCCD6BA00BEC11DEAF6B65FA898FD56C" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1238689775082</ID>
+            <lastModifiedTime>Thu Apr 02 16:29:35 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+         </versionInfo>
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2/">tns:Produce_Message_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSys_ALICE_InOutSystem/ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:12001/event/ETHSys_ALICE_InOutSystem/ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="BCCFDCA00BEC11DEAF6B65FA898FD56C" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomChange_PO_006" element="tns:CustomChange_PO_006"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ETH_GETFTP_ALICE_SBYN_OAGIS_7_2" guid="7C7460910A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1238689775082</ID>
+            <lastModifiedTime>Thu Apr 02 16:29:35 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+         </versionInfo>
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <invocation>
+            <targetService guid="7C76D1900A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS"/>
+            <interface>
+               <wsdlURL>ETH_GETFTP_ALICE_SBYN_OAGIS_7_2.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2/">tns:Get_ptt</portType>
+            </interface>
+         </invocation>
+         <endpointProperties>
+            <property name="ETH_ALICE_FTP_Folder_PO" value="infile/850/PO/"/>
+            <property name="ETH_ALICE_FTP_Archive_PO" value="infile/850/Archive/PO/"/>
+            <property name="ETH_ALICE_FileName_PO" value="OFM_SC_.\*.dat"/>
+            <property name="ETH_ALICE_POLL_FREQ_PO" value="10"/>
+         </endpointProperties>
+      </service>
+      <service name="ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS" guid="7C76D1900A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED" dirty="true">
+         <description>This is the Routing Service for Adapter Service ETH_GETFTP_ALICE_SBYN_OAGIS_7_2</description>
+         <versionInfo>
+            <ID>1238689775082</ID>
+            <lastModifiedTime>Thu Apr 02 16:29:35 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+         </versionInfo>
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_GETFTP_ALICE_SBYN_OAGIS_7_2.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2/">tns:Get_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSys_ALICE_InOutSystem/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:12001/event/ETHSys_ALICE_InOutSystem/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="7C791B800A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" element="tns:CustomProcess_PO_007" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007"/>
+               <routingRules>
+                  <routingRule guid="C71991B00A1B11DEBF845DB5CFB32423" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="C173CA90096D11DEBFDF5DDDA038BDBD" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2.Produce_Message" serviceGUID="C16F0FA1096D11DEBFDF5DDDA038BDBD" serviceQName="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>CustomProcess_PO_007_To_CustomProcess_PO_007.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="6B0BB6301FA811DEBFA88D70DF7EEB48" subscriptionType="ANY" executionType="Immediate">
+                     <targetOperation guid="5A730DF01FA811DEBFA88D70DF7EEB48" qname="ETHSys_ALICE_InOutSystem.ETH_PUTFL_PO.Write" serviceGUID="5A70C4001FA811DEBFA88D70DF7EEB48" serviceQName="ETHSys_ALICE_InOutSystem.ETH_PUTFL_PO" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>CustomProcess_PO_007_To_CustomProcess_PO_007.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+         <endpointProperties>
+            <property name="enableAccessBusinessEvent" value="true"/>
+         </endpointProperties>
+      </service>
+      <service name="ETH_PUTFL_ChangePO" guid="AF739D101FA811DEBFA88D70DF7EEB48" qname="ETHSys_ALICE_InOutSystem.ETH_PUTFL_ChangePO" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_ChangePO/" dirty="true" soapEndpointStatus="ENABLED">
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUTFL_ChangePO.wsdl</wsdlURL>
+            <portType>tns:Write_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Write" guid="AF75E7001FA811DEBFA88D70DF7EEB48" mep="OneWay"/>
+         </operations>
+      </service>
+      <service name="ETH_PUTFL_PO" guid="5A70C4001FA811DEBFA88D70DF7EEB48" qname="ETHSys_ALICE_InOutSystem.ETH_PUTFL_PO" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" dirty="true" soapEndpointStatus="ENABLED" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_PO/">
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUTFL_PO.wsdl</wsdlURL>
+            <portType>tns:Write_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Write" guid="5A730DF01FA811DEBFA88D70DF7EEB48" mep="OneWay">
+               <request/>
+            </operationInfo>
+         </operations>
+         <endpointProperties>
+            <property name="POFile" value="/elshat1/elshat1/aelshat1/workingfolder/SC/Custom72"/>
+         </endpointProperties>
+      </service>
+      <service name="GETFTP_ALICE_SBYN_Change_OAGIS_7_2" guid="DCBA2EB1120111DEBFA2CB0549903FF7" qname="ETHSys_ALICE_InOutSystem.GETFTP_ALICE_SBYN_Change_OAGIS_7_2" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1238689775082</ID>
+            <lastModifiedTime>Thu Apr 02 16:29:35 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+         </versionInfo>
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <invocation>
+            <targetService guid="DCBEE9A0120111DEBFA2CB0549903FF7" qname="ETHSys_ALICE_InOutSystem.GETFTP_ALICE_SBYN_Change_OAGIS_7_2_RS"/>
+            <interface>
+               <wsdlURL>GETFTP_ALICE_SBYN_Change_OAGIS_7_2.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/GETFTP_ALICE_SBYN_Change_OAGIS_7_2/">tns:Get_ptt</portType>
+            </interface>
+         </invocation>
+         <endpointProperties>
+            <property name="ETH_ALICE_FTP_Folder_ChangePO" value="infile/850/ChangePO/"/>
+            <property name="ETH_ALICE_FTP_Archive_ChangePO" value="infile/850/Archive/ChangePO/"/>
+            <property name="ETH_ALICE_POLL_FREQ_ChangePO" value="10"/>
+            <property name="ETH_ALICE_FileName_ChangePO" value="OFM_SC_.\*.dat"/>
+         </endpointProperties>
+      </service>
+      <service name="GETFTP_ALICE_SBYN_Change_OAGIS_7_2_RS" guid="DCBEE9A0120111DEBFA2CB0549903FF7" qname="ETHSys_ALICE_InOutSystem.GETFTP_ALICE_SBYN_Change_OAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service GETFTP_ALICE_SBYN_Change_OAGIS_7_2</description>
+         <versionInfo>
+            <ID>1238689775082</ID>
+            <lastModifiedTime>Thu Apr 02 16:29:35 GMT+00:00 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+         </versionInfo>
+         <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>GETFTP_ALICE_SBYN_Change_OAGIS_7_2.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/GETFTP_ALICE_SBYN_Change_OAGIS_7_2/">tns:Get_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSys_ALICE_InOutSystem/GETFTP_ALICE_SBYN_Change_OAGIS_7_2_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:12001/event/ETHSys_ALICE_InOutSystem/GETFTP_ALICE_SBYN_Change_OAGIS_7_2_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="DCC15AA0120111DEBFA2CB0549903FF7" qname="ETHSys_ALICE_InOutSystem.GETFTP_ALICE_SBYN_Change_OAGIS_7_2_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomChange_PO_006" element="tns:CustomChange_PO_006"/>
+               <routingRules>
+                  <routingRule guid="78D37E701F9811DEBFA88D70DF7EEB48" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="BCCFDCA00BEC11DEAF6B65FA898FD56C" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2.Produce_Message" serviceGUID="BCCD6BA00BEC11DEAF6B65FA898FD56C" serviceQName="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ChangePO_OAGIS_7_2" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>CustomChange_PO_006_To_CustomChange_PO_006.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+         <endpointProperties>
+            <property name="enableAccessBusinessEvent" value="true"/>
+         </endpointProperties>
+      </service>
+   </system>
+</project_metadata>

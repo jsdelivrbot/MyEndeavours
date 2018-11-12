@@ -1,0 +1,21 @@
+<webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
+     version="1.1">
+    <webservice-description>
+        <webservice-description-name>ProxyMDMSearchRecord</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/ProxyMDMSearchRecord.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/ProxyMDMSearchRecord-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>ProxyMDMSearchRecordSOAP</port-component-name>
+            <wsdl-port xmlns:wsa0="http://www.gssamerica.com/mdm/services/ProxyMDMSearchRecord/">wsa0:ProxyMDMSearchRecordSOAP</wsdl-port>
+            <service-endpoint-interface>com.gssamerica.mdm.services.searchproxy.MDMSearchRecord</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>ProxyMDMSearchRecordSOAP</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>proxyMDMSearchRecordAuditHandler</handler-name>
+                <handler-class>com.gssamerica.mdm.services.handlers.ProxyMDMSearchRecordAuditHandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+</webservices>

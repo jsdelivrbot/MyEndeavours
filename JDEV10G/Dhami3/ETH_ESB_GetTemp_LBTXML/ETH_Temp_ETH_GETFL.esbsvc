@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFL" guid="971D12105DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_GETFL" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1275464629479</ID>
+      <lastModifiedTime>Wed Jun 02 07:43:49 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami3_ETH_ESB_GetTemp_LBTXML</lastModifiedUser>
+   </versionInfo>
+   <parent guid="5FF0ECD05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp" type="system"/>
+   <invocation>
+      <targetService guid="971D12115DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_GETFL_RS"/>
+      <interface>
+         <wsdlURL>ETH_GETFL.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL/">tns:Read_LBTXML_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="Infile_Folder" value="/ftpdata/elshad1/lbt/infile/850/temp"/>
+      <property name="Archive_Folder" value="/ftpdata/elshad1/lbt/archive/850"/>
+   </endpointProperties>
+</service>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd"
+            targetNamespace="http://schema.emerson.com/VDST_FTP_GET_ChannelPartner_PartMap"
+            xmlns:tns="http://schema.emerson.com/VDST_FTP_GET_ChannelPartner_PartMap"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified" nxsd:encoding="ASCII" 
+            nxsd:stream="chars" nxsd:version="NXSD" nxsd:uniqueMessageSeparator="${eol}">
+  <xsd:element name="CPM-Load">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="cpm" minOccurs="1" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="PART_NUMBER" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="CHANNEL_PARTNER_ID" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="CHANNEL_PARTNER_PART_NUMBER" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="GENERATED_TIMESTAMP" type="xsd:dateTime" nxsd:style="terminated" nxsd:terminatedBy="${eol}" nxsd:quotedBy="&quot;">
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+<!--NXSDWIZ:D:\VDST CSV\VDST_PD_EMR5110026_COMP_20090615_142030.csv:-->
+<!--USE-HEADER:true:-->

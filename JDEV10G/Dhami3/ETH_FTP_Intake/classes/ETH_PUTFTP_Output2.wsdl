@@ -1,0 +1,52 @@
+<definitions
+     name="ETH_PUTFTP_Output2"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_Output2/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_Output2/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterOutboundHeader.wsdl"/>
+    <types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </types>
+    <message name="Put_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="Put_ptt">
+        <operation name="Put">
+            <input message="tns:Put_msg"/>
+        </operation>
+    </portType>
+    <binding name="Put_binding" type="tns:Put_ptt">
+    <jca:binding  />
+        <operation name="Put">
+      <jca:operation
+          FileType="ascii"
+          PhysicalDirectory="$ETH_OutputDir2"
+          InteractionSpec="oracle.tip.adapter.ftp.outbound.FTPInteractionSpec"
+          FileNamingConvention="ReadFTP1_%yyMMddHHmmss%.txt"
+          NumberMessages="1"
+          OpaqueSchema="true" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_PUTFTP_Output2">
+        <port name="Put_pt" binding="tns:Put_binding">
+      <jca:address location="eis/Ftp/ETH_ICE" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Put_plt" >
+    <plt:role name="Put_role" >
+      <plt:portType name="tns:Put_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

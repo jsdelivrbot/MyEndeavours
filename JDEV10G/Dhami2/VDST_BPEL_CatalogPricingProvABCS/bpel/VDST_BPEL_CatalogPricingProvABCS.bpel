@@ -1,0 +1,95 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Jun 24 14:30:30 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_CatalogPricingProvABCS"
+         targetNamespace="http://services.emerson.com/VDST/VDST_BPEL_CatalogPricingProvABCS"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://schemas.emerson.com/common/envelope"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/VDST_DBINS_CatalogPricing/"
+         xmlns:client="http://services.emerson.com/VDST/VDST_BPEL_CatalogPricingProvABCS"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/VDSTDBINSCatalogPricing"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CPProvABCS/"
+         xmlns:ns3="http://schema.emerson.com/VDST_FTP_GET_CatalogPricing"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Consume_Message_role" name="VDST_JMSQDEQ_CPProvABCS"
+                 partnerLinkType="ns1:Consume_Message_plt"/>
+    <partnerLink name="VDST_DBINS_CatalogPricing"
+                 partnerRole="VDST_DBINS_CatalogPricing_role"
+                 partnerLinkType="ns5:VDST_DBINS_CatalogPricing_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_IN_CTE_OAGIS_CP" messageType="ns1:envelope_msg"/>
+    <variable name="G_IN_JMSHeader" messageType="ns2:InboundHeader_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_CatalogPricing" partnerLink="VDST_JMSQDEQ_CPProvABCS"
+             portType="ns1:Consume_Message_ptt" operation="Consume_Message"
+             variable="G_IN_CTE_OAGIS_CP" createInstance="yes"
+             bpelx:headerVariable="G_IN_JMSHeader"/>
+    <scope name="Scope_GetABM">
+      <variables>
+        <variable name="L_ABM_DB" element="ns3:CP-Load"/>
+        <variable name="L_VDST_CatalogPricingDB_Req"
+                  messageType="ns5:VdstCatalogPriceStagingCollection_msg"/>
+      </variables>
+      <sequence name="Sequence_1">
+        <assign name="Transform_GetPayload">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:processXSLT('Transformation_GetPayload.xsl',bpws:getVariableData('G_IN_CTE_OAGIS_CP','envelope'))"/>
+            <to variable="L_ABM_DB"/>
+          </copy>
+        </assign>
+        <assign name="Transform_ABM">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:processXSLT('Transformation_CTE_ABM.xsl',bpws:getVariableData('L_ABM_DB'))"/>
+            <to variable="L_VDST_CatalogPricingDB_Req"
+                part="VdstCatalogPriceStagingCollection"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_VDST_DB" partnerLink="VDST_DBINS_CatalogPricing"
+                portType="ns5:VDST_DBINS_CatalogPricing_ptt" operation="insert"
+                inputVariable="L_VDST_CatalogPricingDB_Req"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

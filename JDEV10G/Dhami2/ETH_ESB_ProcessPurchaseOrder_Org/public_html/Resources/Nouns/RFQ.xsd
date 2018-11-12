@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\RFQ.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Operational/OrderManagementComponents.xsd"/>
+        <xsd:element name="RFQ" type="RFQType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a document describing goods or services desired from a vendor.  The RFQ includes the terms of the purchase, delivery requirements, identification of goods or services ordered, as well as their quantities.The RFQ noun is used in conjunction with the Quote noun to form a Business-to-Business negotiation dialogue concerning the goods or services specified.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="RFQType">
+                <xsd:sequence>
+                        <xsd:element ref="RFQHeader" minOccurs="0"/>
+                        <xsd:element ref="RFQLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="RFQHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="ProcurementHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="BuyerParty" minOccurs="0"/>
+                                        <xsd:element ref="RequesterParty" minOccurs="0"/>
+                                        <xsd:element ref="PriorityCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis">Priority of the Request</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="SupplierSelectionTimePeriod" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the timeperiod that Supplier(s) will be selected.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="BiddingTimePeriod" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the period in which bidding can occur.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="QualificationTerm" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Message" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RFQLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="ProcurementLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="BuyerParty" minOccurs="0"/>
+                                        <xsd:element ref="RequesterParty" minOccurs="0"/>
+                                        <xsd:element ref="RequisitionReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EnterpriseUnit" minOccurs="0"/>
+                                        <xsd:element ref="DeliveryTimeTolerance" minOccurs="0"/>
+                                        <xsd:element ref="Message" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="QualificationTerm" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RFQSubLine" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RFQSchedule" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RFQSubLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="RequestSubLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RFQScheduleType">
+                <xsd:annotation>
+                        <xsd:documentation>The Quantity on the Schedule Line Indicates the number of items that are to be deliveried on the Required Date or the number of items to be delivered on each occurance of the Schedule period frequency or the number of items to be delivered on each delivery where the number of deliveries is provided by the NumberOfDeliveries field below.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="ProcurementScheduleType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="RFQHeader" type="RFQHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that applies to the entire request for quote.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RFQLine" type="RFQLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The item or product ordered along with quantity, price and other descriptive information.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RFQSubLine" type="RFQSubLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Component Subline represents any additional information concerning the product on the Line.  The Subline can be used to describe a specific configuration of the ordered item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RFQSchedule" type="RFQScheduleType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the schedule for the delivery of this line item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+</xsd:schema>

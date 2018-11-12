@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="VDST_JMSQ_DEQ_ChannelPartnerEBS" guid="1A2B95B0667E11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_DEQ_ChannelPartnerEBS" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1263818870839</ID>
+      <lastModifiedTime>Mon Jan 18 12:47:50 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VDSTv1_VDST_ESB_ChannelPartnerEBS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="E280CA90667D11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="1A2B95B1667E11DE8F34ADC545AA0A86" qname="VDSTSystem_EBSServices.VDSTSysGrp_ChannelPartner.VDST_JMSQ_DEQ_ChannelPartnerEBS_RS"/>
+      <interface>
+         <wsdlURL>VDST_JMSQ_DEQ_ChannelPartnerEBS.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQ_DEQ_ChannelPartnerEBS/">tns:Consume_Message_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="factoryJNDI" value="eis/VDST/QueueConnectionFactory"/>
+      <property name="destinationJNDI" value="jms/vdst_q/cp/EBS"/>
+   </endpointProperties>
+</service>

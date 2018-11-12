@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/resultOutDBAdapter" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CustomerCollection" type="CustomerCollection"/>
+   <xs:complexType name="CustomerCollection">
+      <xs:sequence>
+         <xs:element name="Customer" type="Customer" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Customer">
+      <xs:sequence>
+         <xs:element name="name" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="100"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="age" type="xs:int" nillable="true"/>
+         <xs:element name="salary" type="xs:decimal" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

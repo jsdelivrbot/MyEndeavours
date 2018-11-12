@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_UPDATE_Fusn_Table" guid="BD2415A1B7C211DD9F1F7F000BFEDD5E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_UPDATE_Fusn_Table" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1228925064990</ID>
+      <lastModifiedTime>Wed Dec 10 16:04:24 GMT+00:00 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>LBT_UPDATE_Fusn_Table.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_UPDATE_Fusn_Table/">tns:LBT_UPDATE_Fusn_Table_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_UPDATE_Fusn_Table?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_UPDATE_Fusn_Table</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="BD265F90B7C211DD9F1F7F000BFEDD5E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_UPDATE_Fusn_Table.update" wsdlOperation="update" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTUPDATEFusnTable" element="tns:EmrFusionChangeControlCollection"/>
+      </operationInfo>
+   </operations>
+</service>

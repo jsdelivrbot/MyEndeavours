@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="ICoE_DBINS_ErrorTable"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ICoE_DBINS_ErrorTable/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ICoE_DBINS_ErrorTable/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoEDBINSErrorTable"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ICoEDBINSErrorTable"
+                schemaLocation="ICoEDBINSErrorTable_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="ErrorTableCollection_msg">
+        <part name="ErrorTableCollection" element="top:ErrorTableCollection"/>
+    </message>
+
+
+    <portType name="ICoE_DBINS_ErrorTable_ptt">
+        <operation name="insert">
+            <input message="tns:ErrorTableCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="ICoE_DBINS_ErrorTable_binding" type="tns:ICoE_DBINS_ErrorTable_ptt">
+        <jca:binding />
+        <operation name="insert">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ICoEDBINSErrorTable.ErrorTable"
+                DmlType="insert"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="ICoEDBINSErrorTable_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/ICoE_DB is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="ICoE_DBINS_ErrorTable">
+        <port name="ICoE_DBINS_ErrorTable_pt" binding="tns:ICoE_DBINS_ErrorTable_binding">
+            <jca:address location="eis/DB/ICoE_DB" UIConnectionName="DEV_ADF_Elshad2"/>
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="ICoE_DBINS_ErrorTable_plt" >
+        <plt:role name="ICoE_DBINS_ErrorTable_role" >
+            <plt:portType name="tns:ICoE_DBINS_ErrorTable_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

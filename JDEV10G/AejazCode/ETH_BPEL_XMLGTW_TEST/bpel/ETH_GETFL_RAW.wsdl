@@ -1,0 +1,55 @@
+<definitions
+     name="ETH_GETFL_RAW"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_RAW/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_RAW/"
+     xmlns:ns1="http://xmlns.emrsn.com/CommonProcessPO_007"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:ns2="http://xmlns.emrsn.com/CommonChangePO_006"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterInboundHeader.wsdl"/>
+    <types>
+        <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns="http://www.w3.org/2001/XMLSchema">
+            <element name="opaqueElement" type="base64Binary"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.emrsn.com/CommonProcessPO_007" schemaLocation="public_html/CommonProcess_PO_007.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.emrsn.com/CommonChangePO_006" schemaLocation="public_html/CommonChange_PO_006.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="Read_RAW_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="Read_RAW_ptt">
+        <operation name="Read_RAW">
+            <input message="tns:Read_RAW_msg"/>
+        </operation>
+    </portType>
+    <binding name="Read_RAW_binding" type="tns:Read_RAW_ptt">
+        <pc:inbound_binding/>
+        <operation name="Read_RAW">
+            <jca:operation LogicalDirectory="INPUT_FOLDER" ActivationSpec="oracle.tip.adapter.file.inbound.FileActivationSpec"
+                 LogicalArchiveDirectory="ARCHIVE_FOLDER" DeleteFile="true" IncludeFiles="XMLGTW.*\.xml"
+                 PollingFrequency="60" MinimumAge="60" OpaqueSchema="true"/>
+            <input>
+                <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="ETH_GETFL_RAW">
+        <port name="Read_RAW_pt" binding="tns:Read_RAW_binding">
+            <jca:address location="eis/FileAdapter" UIincludeWildcard="XMLGTW*.xml"/>
+        </port>
+    </service>
+    <plt:partnerLinkType name="Read_RAW_plt">
+        <plt:role name="Read_RAW_role">
+            <plt:portType name="tns:Read_RAW_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+</definitions>

@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CEH_BPEL_ReceiveData" src="CEH_BPEL_ReceiveData.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">CEH_BPEL_ReceiveData.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="RoutingESBService">
+            <property name="wsdlLocation">http://inedec-mlap-45.emrcorp.local/event/CEHSys_EHPOC1/CEH_MessageRouterRS?wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PtESB_RoutingService">
+            <property name="wsdlLocation">http://inedec-mlap-45.emrcorp.local/esb/wsil/CEHSys_EHPOC1/CEH_MessageRouterRS?wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CEH_BPEL_CommonErrorHandler">
+            <property name="wsdlLocation">http://INEDEC-MLAP-45.emrcorp.local/orabpel/default/CEH_BPEL_CommonErrorHandler/CEH_BPEL_CommonErrorHandler?wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <configurations>
+         <property name="sensorLocation">sensor.xml</property>
+         <property name="sensorActionLocation">sensorAction.xml</property>
+      </configurations>
+   </BPELProcess>
+</BPELSuitcase>

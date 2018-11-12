@@ -1,0 +1,41 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="CEH_MessageRouterRS" guid="2F29E30004CB11DE8F7CE9923B183B07" qname="CEHSys_EHPOC1.CEH_MessageRouterRS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1239724943977</ID>
+      <lastModifiedTime>Tue Apr 14 21:32:23 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_ErrorHandlingPOC1_CEH_ESB_MessageRouting</lastModifiedUser>
+   </versionInfo>
+   <parent guid="00AA229012C911DE9F411B4F09FCBA8D" qname="CEHSys_EHPOC1" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>RoutingService.wsdl</wsdlURL>
+      <portType xmlns:tns="http://esb.emerson.com/dataRouting">tns:RoutingPortType</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/CEHSys_EHPOC1/CEH_MessageRouterRS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://inedec-mlap-45.emrcorp.local:80/event/CEHSys_EHPOC1/CEH_MessageRouterRS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="2F2C540004CB11DE8F7CE9923B183B07" qname="CEHSys_EHPOC1.CEH_MessageRouterRS.route" wsdlOperation="route" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+         <routingRules>
+            <routingRule guid="4000F3D004CB11DE8F7CE9923B183B07" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="2D7A6A1012C811DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0.process" serviceGUID="26681C9012C811DEBFA159875E1114B1" serviceQName="BPELSystem.default.CEH_BPEL_ProcessCustomer.CEH_BPEL_ProcessCustomer_1_0" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/emr:envelope/emr:header/emr:originalSource)='CustomerApp'};{ namespace emr=http://schemas.emerson.com/common/envelope }</filterExpression>
+               <transformation>
+                  <xslFileURL>envelope_To_envelope.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="6F26FF0107E711DEBF96030817719483" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="76891CB012C811DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ProcessProduct.CEH_BPEL_ProcessProduct_1_0.process" serviceGUID="6F8267F012C811DEBFA159875E1114B1" serviceQName="BPELSystem.default.CEH_BPEL_ProcessProduct.CEH_BPEL_ProcessProduct_1_0" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/emr:envelope/emr:header/emr:originalSource)='ProductApp'};{ namespace emr=http://schemas.emerson.com/common/envelope }</filterExpression>
+               <transformation>
+                  <xslFileURL>envelope_To_envelope.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

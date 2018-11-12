@@ -1,0 +1,51 @@
+<definitions
+     name="BPELError"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/BPELError/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/BPELError/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterOutboundHeader.wsdl"/>
+    <types>
+    <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+            xmlns="http://www.w3.org/2001/XMLSchema" >
+      <element name="opaqueElement" type="base64Binary" />
+    </schema>
+    </types>
+    <message name="WriteBPELError_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="WriteBPELError_ptt">
+        <operation name="WriteBPELError">
+            <input message="tns:WriteBPELError_msg"/>
+        </operation>
+    </portType>
+    <binding name="WriteBPELError_binding" type="tns:WriteBPELError_ptt">
+    <jca:binding  />
+        <operation name="WriteBPELError">
+      <jca:operation
+          PhysicalDirectory="C:\oracle\Files"
+          InteractionSpec="oracle.tip.adapter.file.outbound.FileInteractionSpec"
+          FileNamingConvention="bpel_error_%yyMMddHHmmssSS%"
+          NumberMessages="1"
+          OpaqueSchema="true" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="BPELError">
+        <port name="WriteBPELError_pt" binding="tns:WriteBPELError_binding">
+      <jca:address location="eis/FileAdapter" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="WriteBPELError_plt" >
+    <plt:role name="WriteBPELError_role" >
+      <plt:portType name="tns:WriteBPELError_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

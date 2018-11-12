@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<database name="mdm" type="oracle10g">
+	<comment></comment>
+	<table code="466546" name="Person">
+		<comment></comment>
+    	<column id="1" code="6543265" name="personId" type="NUMBER" null="false" primaryKey="true">
+    		<comment></comment>
+    	</column>
+    	<column id="2" code="931364" name="name" type="NUMBER" null="false">
+    		<comment></comment>
+    		<foreignKey>
+    			<referenceTable code="961323" name="name" column="nameId"/>
+    		</foreignKey>
+    	</column>
+    	<column id="3" code="643213" name="addresses" type="NUMBER" null="false">
+    		<comment></comment>
+    		<foreignKey>
+    			<referenceTable code="811364" name="person_addresses" column="addressesId"/>
+    		</foreignKey>
+    	</column>
+    	<column id="4" code="546513" name="emailid" type="NUMBER" null="false">
+    		<comment></comment>
+    		<foreignKey>
+    			<referenceTable code="354564" name="person_emails" column="emailId"/>
+    		</foreignKey>
+    	</column>
+    	<column id="5" code="528641" name="gender" type="CHAR" null="false" default="M">
+    		<comment></comment>
+    	</column>
+    	<column id="6" code="493143" name="DOB" type="DATE" null="false">
+    		<comment></comment>
+    	</column>
+    	<column id="7" code="846316" name="SSN" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="8" code="279566" name="PAN" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+	</table>
+	<table code="961323" name="Name">
+		<comment></comment>
+    	<column id="1" code="384621" name="nameId" type="NUMBER" null="false" primaryKey="true">
+    		<comment></comment>
+    	</column>
+    	<column id="2" code="846312" name="title" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="3" code="846342" name="firstName" type="STRING" null="false">
+    		<comment></comment>
+    	</column>
+    	<column id="4" code="846301" name="middleName" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="5" code="846394" name="lastName" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="6" code="846372" name="nickName" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    </table>
+    <table code="811364" name="person_addresses">
+		<comment></comment>
+    	<column id="1" code="384486" name="addressesId" type="NUMBER" null="false" primaryKey="true">
+    		<comment></comment>
+    	</column>
+    	<column id="2" code="846235" name="permanentaddress" type="NUMBER" null="true">
+    		<comment></comment>
+    		<foreignKey>
+    			<referenceTable code="354862" name="address" column="addressId"/>
+    		</foreignKey>
+    	</column>
+    	<column id="3" code="846934" name="communicationaddress" type="NUMBER" null="true">
+    		<comment></comment>
+    		<foreignKey>
+    			<referenceTable code="354862" name="address" column="addressId"/>
+    		</foreignKey>
+    	</column>
+    </table>
+    <table code="354564" name="person_emails">
+		<comment></comment>
+    	<column id="1" code="373186" name="emailId" type="NUMBER" null="false" primaryKey="true">
+    		<comment></comment>
+    	</column>
+    	<column id="2" code="573135" name="primaryemail" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="3" code="891304" name="secondaryemail" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="4" code="838794" name="companyemail" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    </table>
+    <table code="354862" name="address">
+		<comment></comment>
+    	<column id="1" code="384777" name="addressId" type="NUMBER" null="false" primaryKey="true">
+    		<comment></comment>
+    	</column>
+    	<column id="2" code="384784" name="attentionOfName" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="3" code="384788" name="careOfName" type="STRING" null="true">
+    		<comment></comment>
+    	</column>
+    	<column id="4" code="384790" name="Line1" type="STRING" null="false">
+    		<comment></comment>
+       	</column>
+       	<column id="5" code="380194" name="Line2" type="STRING" null="false">
+    		<comment></comment>
+       	</column>
+       	<column id="6" code="380388" name="Line3" type="STRING" null="true">
+    		<comment></comment>
+       	</column>
+       	<column id="7" code="380089" name="citySubDivision" type="STRING" null="true">
+    		<comment></comment>
+       	</column>
+       	<column id="8" code="380378" name="City" type="STRING" null="false">
+    		<comment></comment>
+       	</column>
+       	<column id="9" code="389438" name="State" type="STRING" null="false">
+    		<comment></comment>
+       	</column>
+       	<column id="10" code="648278" name="Country" type="STRING" null="false">
+    		<comment></comment>
+       	</column>
+       	<column id="11" code="984378" name="Zipcode" type="STRING" null="false">
+    		<comment></comment>
+       	</column>
+    </table>
+</database>

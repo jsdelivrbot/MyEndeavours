@@ -1,0 +1,109 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Feb 24 13:58:19 IST 2009
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FaultPolicies"
+         targetNamespace="http://xmlns.oracle.com/FaultPolicies"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://hello.emerson.com"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://xmlns.oracle.com/FaultPolicies"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:FaultPolicies"
+                 myRole="FaultPoliciesProvider"/>
+    <partnerLink name="HelloPolicies" partnerRole="HelloPoliciesPortType_Role"
+                 partnerLinkType="ns1:HelloPoliciesPortType_PL"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:FaultPoliciesRequestMessage"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable"
+              messageType="client:FaultPoliciesResponseMessage"/>
+    <variable name="Input_HelloFaultPolicy"
+              messageType="ns1:HelloPoliciesRequestMessage"/>
+    <variable name="Result_HelloFaultPolicy"
+              messageType="ns1:HelloPoliciesResponseMessage"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FaultPolicies.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:FaultPolicies" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_1">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:FaultPoliciesProcessRequest/client:input"/>
+        <to variable="Input_HelloFaultPolicy" part="requestPart"
+            query="/ns1:requestElement"/>
+      </copy>
+    </assign>
+    <scope name="Scope_1">
+      <variables>
+        <variable name="FaultVar" messageType="bpelx:RuntimeFaultMessage"/>
+        <variable name="FaultVar_1" messageType="bpelx:RuntimeFaultMessage"/>
+      </variables>
+      <faultHandlers>
+        <catch faultName="bpelx:remoteFault" faultVariable="FaultVar">
+          <empty name="Empty_1"/>
+        </catch>
+        <catch faultName="bpelx:bindingFault" faultVariable="FaultVar_1">
+          <empty name="Empty_2"/>
+        </catch>
+      </faultHandlers>
+      <invoke name="Invoke_HelloFaultPolicy" partnerLink="HelloPolicies"
+              portType="ns1:HelloPoliciesPortType" operation="process"
+              inputVariable="Input_HelloFaultPolicy"
+              outputVariable="Result_HelloFaultPolicy"/>
+    </scope>
+    <assign name="Assign_2">
+      <copy>
+        <from variable="Result_HelloFaultPolicy" part="responsePart"
+              query="/ns1:responseElement"/>
+        <to variable="outputVariable" part="payload"
+            query="/client:FaultPoliciesProcessResponse/client:result"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="client"
+           portType="client:FaultPolicies" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

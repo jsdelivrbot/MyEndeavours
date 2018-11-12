@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHDBSELItemKey" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHDBSELItemKey" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="EcxDoclogsCollection" type="EcxDoclogsCollection"/>
+   <xs:element name="EcxDoclogs" type="EcxDoclogs"/>
+   <xs:complexType name="EcxDoclogsCollection">
+      <xs:sequence>
+         <xs:element name="EcxDoclogs" type="EcxDoclogs" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="EcxDoclogs">
+      <xs:sequence>
+         <xs:element name="documentNumber" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="256"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="itemKey" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="240"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ETH_DBSEL_ItemKeySelect_DocNumberInputParameters" type="ETH_DBSEL_ItemKeySelect_DocNumber"/>
+   <xs:complexType name="ETH_DBSEL_ItemKeySelect_DocNumber">
+      <xs:sequence>
+         <xs:element name="DocNumber" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

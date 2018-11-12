@@ -1,0 +1,101 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 26 18:45:41 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FaultGenerator_BPEL"
+         targetNamespace="http://xmlns.emerson.com/FaultGenerator_BPEL"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:client="http://xmlns.emerson.com/FaultGenerator_BPEL"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns1="http://schemas.emerson.com/customer"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns2="http://schemas.emerson.com/common/envelope"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:FaultGenerator_BPEL"
+                 myRole="FaultGenerator_BPELProvider"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="inputVariable"
+              messageType="client:FaultGenerator_BPELRequestMessage"/>
+    <variable name="outputVariable"
+              messageType="client:FaultGenerator_BPELResponseMessage"/>
+    <variable name="L_CustomerData" element="ns1:customer"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FaultGenerator_BPEL.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:FaultGenerator_BPEL" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Transform_1">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Transformation_1.xsl',bpws:getVariableData('inputVariable','payload'))"/>
+        <to variable="L_CustomerData"/>
+      </copy>
+    </assign>
+    <assign name="Assign_1">
+      <copy>
+        <from expression="string('Emerson Eletric Co')"/>
+        <to variable="L_CustomerData" query="/ns1:customer/ns1:company"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/ns2:envelope/ns2:header"/>
+        <to variable="outputVariable" part="payload"
+            query="/ns2:envelope/ns2:header"/>
+      </copy>
+      <copy>
+        <from variable="L_CustomerData"/>
+        <to variable="outputVariable" part="payload"
+            query="/ns2:envelope/ns2:body/ns2:xmlPayload"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="client"
+           portType="client:FaultGenerator_BPEL" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

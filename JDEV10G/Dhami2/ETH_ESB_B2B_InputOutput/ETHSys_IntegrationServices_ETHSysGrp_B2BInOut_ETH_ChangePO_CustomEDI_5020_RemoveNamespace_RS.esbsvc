@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS" guid="A22AA9C0096711DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885417084</ID>
+      <lastModifiedTime>Mon Jun 01 19:43:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_B2BInOut_ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_B2BInOut">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="A3278050096711DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_5020_RemoveNamespace_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomEDI850"/>
+         <routingRules>
+            <routingRule guid="14945DD0096811DE9F1EA78AC56F7274" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="D2C5BF70096711DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_EDI_5020_RS.execute" serviceGUID="D26FFE50096711DE9F1EA78AC56F7274" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ChangePO_CustomEDI_EDI_5020_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>CustomEDI850_RemoveNamesapce.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

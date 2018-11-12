@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="PollFile1" guid="9486424028D711DE9F6E25369D68C9F5" qname="Research.PollFile1" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1239707775017</ID>
+      <lastModifiedTime>Tue Apr 14 16:46:15 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_MultipleInbound_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="26E1DE7128D711DE9F6E25369D68C9F5" qname="Research" type="system"/>
+   <invocation>
+      <targetService guid="9486424128D711DE9F6E25369D68C9F5" qname="Research.PollFile1_RS"/>
+      <interface>
+         <wsdlURL>PollFile1.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/PollFile1/">tns:Read_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="InputDIR" value="D:\oracle\Files\esbIn\In0"/>
+   </endpointProperties>
+</service>

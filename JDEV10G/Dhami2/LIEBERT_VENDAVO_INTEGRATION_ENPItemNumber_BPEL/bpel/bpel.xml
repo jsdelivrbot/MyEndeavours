@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL" src="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="LBT_Read_ItemNumber">
+            <property name="wsdlLocation">LBT_Read_ItemNumber.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="LBT_Write_ItemNumber">
+            <property name="wsdlLocation">LBT_Write_ItemNumber.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="DB_Upd_ITEM_NUM_OUTBOUND">
+            <property name="wsdlLocation">DB_Upd_ITEM_NUM_OUTBOUND.wsdl</property>
+            <property name="transaction">participate</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="Poll_ItemNumber_DB">
+            <property name="wsdlLocation">Poll_ItemNumber_DB.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="Poll_ItemNumber_DB">
+            <property name="portType">Poll_ItemNumber_DB_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

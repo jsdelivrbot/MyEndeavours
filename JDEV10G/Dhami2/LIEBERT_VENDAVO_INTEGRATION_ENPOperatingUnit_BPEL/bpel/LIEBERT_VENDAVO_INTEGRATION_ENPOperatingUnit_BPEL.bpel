@@ -1,0 +1,268 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Nov 06 13:53:03 IST 2008
+  Author:  radhmmi
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+         targetNamespace="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/ftp/LBT_Write_ENPOperatingUnit/"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://TargetNamespace.com/FtpOpertngUnit_to_Vendavo"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/ftp/LBT_Read_ENPOperatingUnit/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="client"
+                     partnerLinkType="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+                     myRole="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELProvider"
+                     partnerRole="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELRequester"/>
+        <partnerLink myRole="SynchRead_role" name="LBT_Read_ENPOperatingUnit"
+                     partnerRole="SynchRead_role"
+                     partnerLinkType="ns2:SynchRead_plt"/>
+        <partnerLink name="NotificationService"
+                     partnerRole="NotificationServiceProvider"
+                     partnerLinkType="ns3:NotificationServiceLink"/>
+        <partnerLink name="LBT_Write_ENPOperatingUnit" partnerRole="Put_role"
+                     partnerLinkType="ns4:Put_plt"/>
+    </partnerLinks>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable"
+                  messageType="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELRequestMessage"/>
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable"
+                  messageType="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELResponseMessage"/>
+        <variable name="TestFile" type="xsd:string"/>
+        <variable name="Invoke_ReadFile_SynchRead_InputVariable"
+                  messageType="ns2:Empty_msg"/>
+        <variable name="Invoke_ReadFile_SynchRead_OutputVariable"
+                  messageType="ns2:Root-Element_msg"/>
+        <variable name="Invoke_WriteFile_Put_InputVariable"
+                  messageType="ns4:Root-Element_msg"/>
+        <variable name="Counter" type="xsd:integer"/>
+    </variables>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL.wsdl) -->
+        <receive name="receiveInput" partnerLink="client"
+                 portType="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+                 operation="initiate" variable="inputVariable"
+                 createInstance="yes"/>
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <assign name="Assign_File">
+            <copy>
+                <from expression="'File Found'"/>
+                <to variable="TestFile"/>
+            </copy>
+            <copy>
+                <from expression="0"/>
+                <to variable="Counter"/>
+            </copy>
+        </assign>
+        <while name="While_1"
+               condition="bpws:getVariableData('TestFile') = 'File Found' and bpws:getVariableData('Counter') &lt; 5">
+            <scope name="Scope_1">
+                <faultHandlers>
+                    <catchAll>
+                        <assign name="Assign_FileName">
+                            <copy>
+                                <from expression="'File Not Found'"/>
+                                <to variable="TestFile"/>
+                            </copy>
+                        </assign>
+                    </catchAll>
+                </faultHandlers>
+                <sequence name="Sequence_2">
+                    <invoke name="Invoke_ReadFile"
+                            partnerLink="LBT_Read_ENPOperatingUnit"
+                            portType="ns2:SynchRead_ptt" operation="SynchRead"
+                            inputVariable="Invoke_ReadFile_SynchRead_InputVariable"
+                            outputVariable="Invoke_ReadFile_SynchRead_OutputVariable"/>
+                    <scope name="Email_1">
+                        <bpelx:annotation>
+                            <bpelx:pattern patternName="bpelx:email"></bpelx:pattern>
+                        </bpelx:annotation>
+                        <variables>
+                            <variable name="varNotificationReq"
+                                      messageType="ns3:EmailNotificationRequest"/>
+                            <variable name="varNotificationResponse"
+                                      messageType="ns3:ArrayOfResponse"/>
+                            <variable name="NotificationServiceFaultVariable"
+                                      messageType="ns3:NotificationServiceErrorMessage"/>
+                        </variables>
+                        <sequence name="Sequence_1">
+                            <assign name="EmailParamsAssign">
+                                <copy>
+                                    <from expression="string('Default')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:FromAccountName"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Bcc"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Cc"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:ReplyToAddress"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('File Found')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Subject"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('radhika.lakshmikilari@wipro.com')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:To"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('delete it')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Content/ns3:ContentBody"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('text/html; charset=UTF-8')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Content/ns3:MimeType"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('Default')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:FromAccountName"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Bcc"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Cc"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:ReplyToAddress"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('File Found')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Subject"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('radhika.lakshmikilari@wipro.com')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:To"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('delete it')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Content/ns3:ContentBody"/>
+                                </copy>
+                                <copy>
+                                    <from expression="string('text/html; charset=UTF-8')"/>
+                                    <to variable="varNotificationReq"
+                                        part="EmailPayload"
+                                        query="/EmailPayload/ns3:Content/ns3:MimeType"/>
+                                </copy>
+                            </assign>
+                            <invoke name="InvokeNotificationService"
+                                    partnerLink="NotificationService"
+                                    portType="ns3:NotificationService"
+                                    operation="sendEmailNotification"
+                                    inputVariable="varNotificationReq"
+                                    outputVariable="varNotificationResponse"/>
+                        </sequence>
+                    </scope>
+                    <wait name="Wait_1" for="'PT1H'"/>
+                    <assign name="Assign_1">
+                        <copy>
+                            <from expression="bpws:getVariableData('Counter') + 1"/>
+                            <to variable="Counter"/>
+                        </copy>
+                    </assign>
+                </sequence>
+            </scope>
+        </while>
+        <assign name="Transform_OperatingUnit">
+            <bpelx:annotation>
+                <bpelx:pattern>transformation</bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+                <from expression="ora:processXSLT('Transformation_OperatingUnit.xsl',bpws:getVariableData('inputVariable','payload'))"/>
+                <to variable="Invoke_WriteFile_Put_InputVariable"
+                    part="Root-Element"/>
+            </copy>
+        </assign>
+        <invoke name="Invoke_WriteFile" partnerLink="LBT_Write_ENPOperatingUnit"
+                portType="ns4:Put_ptt" operation="Put"
+                inputVariable="Invoke_WriteFile_Put_InputVariable"/>
+        <invoke name="callbackClient" partnerLink="client"
+                portType="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELCallback"
+                operation="onResult" inputVariable="outputVariable"/>
+    </sequence>
+</process>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd"
+            targetNamespace="http://schema.emerson.com/native/FetchCSV"
+            xmlns:tns="http://schema.emerson.com/native/FetchCSV"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified" nxsd:encoding="ASCII" nxsd:stream="chars" nxsd:version="NXSD" nxsd:uniqueMessageSeparator="${eol}"> <!-- nxsd:uniqueMessageSeparator="${eol}" -->
+    <xsd:simpleType name="nameType">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+            <xsd:minLength value="4"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+  <xsd:element name="employees">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="employee" minOccurs="1" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="firstName" type="tns:nameType" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="middleName" type="tns:nameType" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="lastName" type="tns:nameType" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="age" type="xsd:int" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="salary" type="xsd:float" nxsd:style="terminated" nxsd:terminatedBy="," nxsd:quotedBy="&quot;">
+              </xsd:element>
+              <xsd:element name="city" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="${eol}" nxsd:quotedBy="&quot;">
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+<!--NXSDWIZ:D:\\my_csv.txt:-->
+<!--USE-HEADER:false:-->

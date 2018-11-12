@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="VDST_CatalogPricingEBS_RS"
+     targetNamespace="http://services.emrson.com/VDTS/CatalogPricing"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://services.emrson.com/VDTS/CatalogPricing"
+     xmlns:inp1="http://schemas.emerson.com/common/envelope"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="EMR_CTE.xsd" />
+      </schema>
+    </types>
+    <message name="envelope_request">
+        <part name="envelope" element="inp1:envelope"/>
+    </message>
+    <portType name="execute_ppt">
+        <operation name="execute">
+            <input message="tns:envelope_request"/>
+        </operation>
+    </portType>
+</definitions>

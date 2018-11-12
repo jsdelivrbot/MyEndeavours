@@ -1,0 +1,53 @@
+<definitions
+     name="ETH_DEQJMS_CustomProcessPO"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_CustomProcessPO/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_CustomProcessPO/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://xmlns.emrsn.com/CustomProcessPurchaseOrder"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" schemaLocation="public_html/CustomProcessPurchaseOrder.xsd" />
+      </schema>
+    </types>
+    <message name="CustomProcessPO_msg">
+        <part name="CustomProcessPO" element="imp1:CustomProcessPO"/>
+    </message>
+    <portType name="Consume_Message_ptt">
+        <operation name="Consume_Message">
+            <input message="tns:CustomProcessPO_msg"/>
+        </operation>
+    </portType>
+    <binding name="Consume_Message_binding" type="tns:Consume_Message_ptt">
+    <pc:inbound_binding  />
+        <operation name="Consume_Message">
+      <jca:operation
+          DestinationName="java:comp/resource/esbRP/Topics/ETH_PROCESSPO_B2B"
+          UseMessageListener="false"
+          DurableSubscriber="ETH_ProcessPO_B2B_001"
+          PayloadType="TextMessage"
+          ActivationSpec="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec"
+          OpaqueSchema="false" 
+          UseServerTimeout="true">
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_DEQJMS_CustomProcessPO">
+        <port name="Consume_Message_pt" binding="tns:Consume_Message_binding">
+      <jca:address location="eis/Jms/AQ/Topic/ETH" UIConnectionName="as_elshas1_Ofm"/>
+        </port>
+    </service>
+  <plt:partnerLinkType name="Consume_Message_plt" >
+    <plt:role name="Consume_Message_role" >
+      <plt:portType name="tns:Consume_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

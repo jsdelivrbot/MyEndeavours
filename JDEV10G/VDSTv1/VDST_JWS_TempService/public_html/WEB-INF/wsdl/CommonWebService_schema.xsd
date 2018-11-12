@@ -1,0 +1,37 @@
+<xs:schema version="1.0" targetNamespace="http://service.emerson.com/vdst/tool/common" xmlns:ns1="http://service.emerson.com/vdst/tool/common"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="SOAPException" type="ns1:SOAPException"/>
+    <xs:element name="FaultDetail" type="ns1:FaultDetailType"/>
+    <xs:simpleType name="UUIDType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9A-Z]{32}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DealerIDType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="3"/>
+            <xs:maxLength value="50"/>
+            <xs:pattern value="[0-9A-Za-z\-]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LicenseKeyType">
+        <xs:restriction base="xs:string">
+            <xs:length value="31"/>
+            <xs:pattern value="[0-9A-Z]{7}-[0-9A-Z]{7}-[0-9A-Z]{7}-[0-9A-Z]{7}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="VoidType">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="FaultDetailType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SOAPException">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

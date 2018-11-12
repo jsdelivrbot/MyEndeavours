@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="B2B_AQ_Push" guid="3BF0EEB056AD11DEBFBFF543CBD6D3C1" qname="Test.AQIssue.B2B_AQ_Push" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="AQ" typeDescription="oracle.tip.esb.console.servicetype.outboundaqadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1244741476762</ID>
+      <lastModifiedTime>Thu Jun 11 17:31:16 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_AQIssue_Imitate</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B8A2F98056A311DEBFBFF543CBD6D3C1" qname="Test.AQIssue" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>B2B_AQ_Push.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/B2B_AQ_Push/">tns:Enqueue_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Test/AQIssue/B2B_AQ_Push?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Test/AQIssue/B2B_AQ_Push</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="3BF35FB056AD11DEBFBFF543CBD6D3C1" qname="Test.AQIssue.B2B_AQ_Push.Enqueue" wsdlOperation="Enqueue" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+      </operationInfo>
+   </operations>
+</service>

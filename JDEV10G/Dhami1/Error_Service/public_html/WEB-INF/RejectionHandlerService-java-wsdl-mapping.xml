@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java-wsdl-mapping xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+  http://www.ibm.com/webservices/xsd/j2ee_jaxrpc_mapping_1_1.xsd"
+  version="1.1">
+
+    <package-mapping>
+        <package-type>com.emerson.com.oracle.xmlns.pcbpel.errorhandling</package-type>
+        <namespaceURI>http://xmlns.oracle.com/pcbpel/errorHandling</namespaceURI>
+    </package-mapping>
+    <package-mapping>
+        <package-type>com.emerson.inder.error</package-type>
+        <namespaceURI>http://xmlns.oracle.com/pcbpel/rejectionHandler</namespaceURI>
+    </package-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.com.oracle.xmlns.pcbpel.errorhandling.FatalErrorMessageType</java-type>
+        <root-type-qname xmlns:typeNS="http://xmlns.oracle.com/pcbpel/errorHandling">typeNS:FatalErrorMessageType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>originator</java-variable-name>
+            <xml-element-name>Originator</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>reason</java-variable-name>
+            <xml-element-name>Reason</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>exception</java-variable-name>
+            <xml-element-name>Exception</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>stackTrace</java-variable-name>
+            <xml-element-name>StackTrace</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.com.oracle.xmlns.pcbpel.errorhandling.RejectionPropType</java-type>
+        <root-type-qname xmlns:typeNS="http://xmlns.oracle.com/pcbpel/errorHandling">typeNS:RejectionPropType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>name</java-variable-name>
+            <xml-attribute-name>name</xml-attribute-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>value</java-variable-name>
+            <xml-attribute-name>value</xml-attribute-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.com.oracle.xmlns.pcbpel.errorhandling.RejectedMessageType</java-type>
+        <root-type-qname xmlns:typeNS="http://xmlns.oracle.com/pcbpel/errorHandling">typeNS:RejectedMessageType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>messageHeader</java-variable-name>
+            <xml-element-name>MessageHeader</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>messagePayload</java-variable-name>
+            <xml-element-name>MessagePayload</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>rejectionReason</java-variable-name>
+            <xml-element-name>RejectionReason</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>additionalProperties</java-variable-name>
+            <xml-element-name>AdditionalProperties</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>rejectionId</java-variable-name>
+            <xml-attribute-name>RejectionId</xml-attribute-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>batchId</java-variable-name>
+            <xml-attribute-name>BatchId</xml-attribute-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>batchInfo</java-variable-name>
+            <xml-attribute-name>BatchInfo</xml-attribute-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>primaryKey</java-variable-name>
+            <xml-attribute-name>PrimaryKey</xml-attribute-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>messageOriginReference</java-variable-name>
+            <xml-attribute-name>MessageOriginReference</xml-attribute-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.com.oracle.xmlns.pcbpel.errorhandling.AdditionalPropsType</java-type>
+        <root-type-qname xmlns:typeNS="http://xmlns.oracle.com/pcbpel/errorHandling">typeNS:AdditionalPropsType</root-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>rejectionProp</java-variable-name>
+            <xml-element-name>RejectionProp</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>com.emerson.com.oracle.xmlns.pcbpel.errorhandling.RejectionPropType[]</java-type>
+        <anonymous-type-qname>{http://xmlns.oracle.com/pcbpel/errorHandling}AdditionalPropsType&gt;RejectionProp[0,unbounded]</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+    </java-xml-type-mapping>
+    <service-interface-mapping>
+        <service-interface>com.emerson.inder.error.RejectionHandlerService</service-interface>
+        <wsdl-service-name xmlns:serviceNS="http://xmlns.oracle.com/pcbpel/rejectionHandler">serviceNS:RejectionHandlerService</wsdl-service-name>
+        <port-mapping>
+            <port-name>RejectionHandlerPort</port-name>
+            <java-port-name>RejectionHandlerPort</java-port-name>
+        </port-mapping>
+    </service-interface-mapping>
+    <service-endpoint-interface-mapping>
+        <service-endpoint-interface>com.emerson.inder.error.RejectionHandlerPortType</service-endpoint-interface>
+        <wsdl-port-type xmlns:portTypeNS="http://xmlns.oracle.com/pcbpel/rejectionHandler">portTypeNS:RejectionHandlerPortType</wsdl-port-type>
+        <wsdl-binding xmlns:bindingNS="http://xmlns.oracle.com/pcbpel/rejectionHandler">bindingNS:RejectionHandlerBinding</wsdl-binding>
+        <service-endpoint-method-mapping>
+            <java-method-name>handleError</java-method-name>
+            <wsdl-operation>handleError</wsdl-operation>
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>com.emerson.com.oracle.xmlns.pcbpel.errorhandling.RejectedMessageType</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://xmlns.oracle.com/pcbpel/rejectionHandler">wsdlMsgNS:RejectionMessage</wsdl-message>
+                    <wsdl-message-part-name>message</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+        </service-endpoint-method-mapping>
+    </service-endpoint-interface-mapping>
+</java-wsdl-mapping>
+

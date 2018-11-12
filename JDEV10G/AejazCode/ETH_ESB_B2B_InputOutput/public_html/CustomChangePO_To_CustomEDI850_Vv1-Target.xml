@@ -1,0 +1,282 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ns11:CustomEDI850 xmlns:ns11="http://xmlns.emrsn.com/CustomProcessPurchaseOrder">
+   <ns10:Transaction-850 xmlns:ns10="urn:oracle:integration:b2b:DCC1FCD2811C47748DF43A39F735F4F0" XDataVersion="1.0" Standard="X12" GUID="{D4791971-A782-D811-B0F2-080020C8C860}" CreatedBy="ECXEngine_899" CreatedDate="2010-04-16T16:01:21+05:30">
+      <ns10:Internal-Properties>
+         <ns10:Data-Structure Name="Interchange">
+            <ns10:Lookup Name="InterchangeSenderQual">ZZ</ns10:Lookup>
+            <ns10:Lookup Name="InterchangeSenderID">EMR</ns10:Lookup>
+            <ns10:Lookup Name="InterchangeReceiverQual">ZZ</ns10:Lookup>
+            <ns10:Lookup Name="InterchangeReceiverID">SeeBeyond</ns10:Lookup>
+            <ns10:Lookup Name="InterchangeControlVersion">00502</ns10:Lookup>
+            <ns10:Lookup Name="Standard">X12</ns10:Lookup>
+            <ns10:Property Name="InterchangeAuthorizationInfoQual">00</ns10:Property>
+            <ns10:Property Name="InterchangeAuthorizationInfo"/>
+            <ns10:Property Name="InterchangeSecurityInfoQual">00</ns10:Property>
+            <ns10:Property Name="InterchangeSecurityInfo"/>
+            <ns10:Property Name="InterchangeSenderQual">ZZ</ns10:Property>
+            <ns10:Property Name="InterchangeSenderID">EMR</ns10:Property>
+            <ns10:Property Name="InterchangeReceiverQual">ZZ</ns10:Property>
+            <ns10:Property Name="InterchangeReceiverID">SeeBeyond</ns10:Property>
+            <ns10:Property Name="InterchangeDate">100416</ns10:Property>
+            <ns10:Property Name="InterchangeTime">1601</ns10:Property>
+            <ns10:Property Name="InterchangeControlStandard_RepeatingSeparator">&lt;</ns10:Property>
+            <ns10:Property Name="InterchangeControlVersion">00502</ns10:Property>
+            <ns10:Property Name="InterchangeControlNumber"/>
+            <ns10:Property Name="InterchangeAckRequested">0</ns10:Property>
+            <ns10:Property Name="InterchangeUsageIndicator">P</ns10:Property>
+            <ns10:Property Name="InterchangeComponentElementSep">0x3e</ns10:Property>
+            <ns10:Property Name="DecimalSeparator"/>
+            <ns10:Property Name="ElementDelimiter">0x7c</ns10:Property>
+            <ns10:Property Name="ReleaseCharacter"/>
+            <ns10:Property Name="RepeatingSeparator">0x3c</ns10:Property>
+            <ns10:Property Name="SegmentDelimiter">0x7e0xd0xa</ns10:Property>
+            <ns10:Property Name="SubelementDelimiter">0x3e</ns10:Property>
+            <ns10:Property Name="InterchangeChildCount">3</ns10:Property>
+            <ns10:Property Name="InterchangeTrailerControlNumber"/>
+            <ns10:Data-Structure Name="Group">
+               <ns10:Lookup Name="GroupSenderID">EMR</ns10:Lookup>
+               <ns10:Lookup Name="GroupReceiverID">SeeBeyond</ns10:Lookup>
+               <ns10:Lookup Name="GroupVersionNumber">005020</ns10:Lookup>
+               <ns10:Property Name="GroupID">PO</ns10:Property>
+               <ns10:Property Name="GroupSenderID">normalizedString6</ns10:Property>
+               <ns10:Property Name="GroupReceiverID">SeeBeyond</ns10:Property>
+               <ns10:Property Name="GroupDate">20100416</ns10:Property>
+               <ns10:Property Name="GroupTime">1601</ns10:Property>
+               <ns10:Property Name="GroupControlNumber"/>
+               <ns10:Property Name="GroupAgencyCode">X</ns10:Property>
+               <ns10:Property Name="GroupVersionNumber">005020</ns10:Property>
+               <ns10:Property Name="GroupChildCount">3</ns10:Property>
+               <ns10:Property Name="GroupTrailerControlNumber"/>
+               <ns10:Data-Structure Name="Transaction">
+                  <ns10:Lookup Name="TransactionID">850</ns10:Lookup>
+                  <ns10:Property Name="TransactionID">850</ns10:Property>
+                  <ns10:Property Name="TransactionControlNumber"/>
+                  <ns10:Property Name="TransactionImplementationReference"/>
+                  <ns10:Property Name="TransactionChildCount">#SegmentCount#</ns10:Property>
+                  <ns10:Property Name="TransactionTrailerControlNumber"/>
+               </ns10:Data-Structure>
+            </ns10:Data-Structure>
+         </ns10:Data-Structure>
+      </ns10:Internal-Properties>
+      <ns10:Segment-ST>
+         <ns10:Element-143>850</ns10:Element-143>
+         <ns10:Element-329/>
+      </ns10:Segment-ST>
+      <ns10:Segment-BEG>
+         <ns10:Element-353>04</ns10:Element-353>
+         <ns10:Element-324/>
+         <ns10:Element-328/>
+         <ns10:Element-373/>
+         <ns10:Element-367/>
+         <ns10:Element-786>03</ns10:Element-786>
+      </ns10:Segment-BEG>
+      <ns10:Segment-CUR>
+         <ns10:Element-98>BY</ns10:Element-98>
+         <ns10:Element-100/>
+      </ns10:Segment-CUR>
+      <ns10:Segment-REF>
+         <ns10:Element-128>S3</ns10:Element-128>
+         <ns10:Element-127>EMR850V5.0</ns10:Element-127>
+      </ns10:Segment-REF>
+      <ns10:Segment-REF>
+         <ns10:Element-128>06</ns10:Element-128>
+         <ns10:Element-352>normalizedString36</ns10:Element-352>
+      </ns10:Segment-REF>
+      <ns10:Loop-PO1>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+      </ns10:Loop-PO1>
+      <ns10:Loop-CTT>
+         <ns10:Segment-CTT>
+            <ns10:Element-354>3</ns10:Element-354>
+         </ns10:Segment-CTT>
+      </ns10:Loop-CTT>
+      <ns10:Segment-SE>
+         <ns10:Element-96>#SegmentCount#</ns10:Element-96>
+         <ns10:Element-329/>
+      </ns10:Segment-SE>
+      <ns10:Segment-ST>
+         <ns10:Element-143>850</ns10:Element-143>
+         <ns10:Element-329/>
+      </ns10:Segment-ST>
+      <ns10:Segment-BEG>
+         <ns10:Element-353>04</ns10:Element-353>
+         <ns10:Element-324/>
+         <ns10:Element-328/>
+         <ns10:Element-373/>
+         <ns10:Element-367/>
+         <ns10:Element-786>03</ns10:Element-786>
+      </ns10:Segment-BEG>
+      <ns10:Segment-CUR>
+         <ns10:Element-98>BY</ns10:Element-98>
+         <ns10:Element-100/>
+      </ns10:Segment-CUR>
+      <ns10:Segment-REF>
+         <ns10:Element-128>S3</ns10:Element-128>
+         <ns10:Element-127>EMR850V5.0</ns10:Element-127>
+      </ns10:Segment-REF>
+      <ns10:Segment-REF>
+         <ns10:Element-128>06</ns10:Element-128>
+         <ns10:Element-352>normalizedString36</ns10:Element-352>
+      </ns10:Segment-REF>
+      <ns10:Loop-PO1>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+      </ns10:Loop-PO1>
+      <ns10:Loop-CTT>
+         <ns10:Segment-CTT>
+            <ns10:Element-354>3</ns10:Element-354>
+         </ns10:Segment-CTT>
+      </ns10:Loop-CTT>
+      <ns10:Segment-SE>
+         <ns10:Element-96>#SegmentCount#</ns10:Element-96>
+         <ns10:Element-329/>
+      </ns10:Segment-SE>
+      <ns10:Segment-ST>
+         <ns10:Element-143>850</ns10:Element-143>
+         <ns10:Element-329/>
+      </ns10:Segment-ST>
+      <ns10:Segment-BEG>
+         <ns10:Element-353>04</ns10:Element-353>
+         <ns10:Element-324/>
+         <ns10:Element-328/>
+         <ns10:Element-373/>
+         <ns10:Element-367/>
+         <ns10:Element-786>03</ns10:Element-786>
+      </ns10:Segment-BEG>
+      <ns10:Segment-CUR>
+         <ns10:Element-98>BY</ns10:Element-98>
+         <ns10:Element-100/>
+      </ns10:Segment-CUR>
+      <ns10:Segment-REF>
+         <ns10:Element-128>S3</ns10:Element-128>
+         <ns10:Element-127>EMR850V5.0</ns10:Element-127>
+      </ns10:Segment-REF>
+      <ns10:Segment-REF>
+         <ns10:Element-128>06</ns10:Element-128>
+         <ns10:Element-352>normalizedString36</ns10:Element-352>
+      </ns10:Segment-REF>
+      <ns10:Loop-PO1>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+         <ns10:Segment-PO1>
+            <ns10:Element-350_1/>
+            <ns10:Element-380_2/>
+            <ns10:Element-212_1>NaN</ns10:Element-212_1>
+         </ns10:Segment-PO1>
+         <ns10:Loop-PID/>
+      </ns10:Loop-PO1>
+      <ns10:Loop-CTT>
+         <ns10:Segment-CTT>
+            <ns10:Element-354>3</ns10:Element-354>
+         </ns10:Segment-CTT>
+      </ns10:Loop-CTT>
+      <ns10:Segment-SE>
+         <ns10:Element-96>#SegmentCount#</ns10:Element-96>
+         <ns10:Element-329/>
+      </ns10:Segment-SE>
+   </ns10:Transaction-850>
+   <Message_id>Message_id46</Message_id>
+   <Message_direction>Message_direction47</Message_direction>
+   <Sender_Document_number>Sender_Document_number48</Sender_Document_number>
+   <Sender_Message_type>Sender_Message_type49</Sender_Message_type>
+   <Sender_Message_standard>Sender_Message_standard50</Sender_Message_standard>
+   <Sender_Transaction_type>Sender_Transaction_type51</Sender_Transaction_type>
+   <Sender_Transaction_subtype>Sender_Transaction_subtype52</Sender_Transaction_subtype>
+   <Sender_System_type>Sender_System_type53</Sender_System_type>
+   <Sender_Id>Sender_Id54</Sender_Id>
+   <Sender_Site_Id>Sender_Site_Id55</Sender_Site_Id>
+   <Sender_Name>Sender_Name56</Sender_Name>
+   <Sender_Type>Sender_Type57</Sender_Type>
+   <Receiver_System_type>Receiver_System_type58</Receiver_System_type>
+   <Receiver_Id>Receiver_Id59</Receiver_Id>
+   <Receiver_Site_id>Receiver_Site_id60</Receiver_Site_id>
+   <Receiver_Name>Receiver_Name61</Receiver_Name>
+   <Receiver_type>Receiver_type62</Receiver_type>
+   <File_name>File_name63</File_name>
+   <Record_total>Record_total64</Record_total>
+   <Record_number>Record_number65</Record_number>
+   <Flow_id_1>Flow_id_166</Flow_id_1>
+   <Flow_id_2>Flow_id_267</Flow_id_2>
+   <Flow_id_3>Flow_id_368</Flow_id_3>
+   <Send_on_fail>Send_on_fail69</Send_on_fail>
+   <Division_name>Division_name70</Division_name>
+   <Division_format>Division_format71</Division_format>
+   <Trading_partner_1_name>Trading_partner_1_name72</Trading_partner_1_name>
+   <Trading_partner_1_format>Trading_partner_1_format73</Trading_partner_1_format>
+   <Trading_partner_1_date_from>Trading_partner_1_date_from74</Trading_partner_1_date_from>
+   <Trading_partner_1_date_to>Trading_partner_1_date_to75</Trading_partner_1_date_to>
+   <Trading_partner_2_name>Trading_partner_2_name76</Trading_partner_2_name>
+   <Trading_partner_2_format>Trading_partner_2_format77</Trading_partner_2_format>
+   <Trading_partner_2_date_from>Trading_partner_2_date_from78</Trading_partner_2_date_from>
+   <Trading_partner_2_date_to>Trading_partner_2_date_to79</Trading_partner_2_date_to>
+   <Trading_partner_3_name>Trading_partner_3_name80</Trading_partner_3_name>
+   <Trading_partner_3_format>Trading_partner_3_format81</Trading_partner_3_format>
+   <Trading_partner_3_date_from>Trading_partner_3_date_from82</Trading_partner_3_date_from>
+   <Trading_partner_3_date_to>Trading_partner_3_date_to83</Trading_partner_3_date_to>
+   <Logistics_1_name>Logistics_1_name84</Logistics_1_name>
+   <Logistics_1_format>Logistics_1_format85</Logistics_1_format>
+   <Logistics_1_date_from>Logistics_1_date_from86</Logistics_1_date_from>
+   <Logistics_1_date_to>Logistics_1_date_to87</Logistics_1_date_to>
+   <Logistics_2_name>Logistics_2_name88</Logistics_2_name>
+   <Logistics_2_format>Logistics_2_format89</Logistics_2_format>
+   <Logistics_2_date_from>Logistics_2_date_from90</Logistics_2_date_from>
+   <Logistics_2_date_to>Logistics_2_date_to91</Logistics_2_date_to>
+   <Logistics_3_name>Logistics_3_name92</Logistics_3_name>
+   <Logistics_3_format>Logistics_3_format93</Logistics_3_format>
+   <Logistics_3_date_from>Logistics_3_date_from94</Logistics_3_date_from>
+   <Logistics_3_date_to>Logistics_3_date_to95</Logistics_3_date_to>
+   <Compliance_result>Compliance_result96</Compliance_result>
+   <Attribute1>Attribute197</Attribute1>
+   <Attribute2>Attribute298</Attribute2>
+   <Attribute3>Attribute399</Attribute3>
+   <Attribute4>Attribute4100</Attribute4>
+   <Attribute5>Attribute5101</Attribute5>
+   <Attribute6/>
+   <Attribute7>Invalid_860_20100416_160121.dat</Attribute7>
+   <Attribute8>Attribute8104</Attribute8>
+   <Attribute9>Attribute9105</Attribute9>
+   <Attribute10>Attribute10106</Attribute10>
+</ns11:CustomEDI850>

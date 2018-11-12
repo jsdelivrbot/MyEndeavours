@@ -1,0 +1,87 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Sep 29 14:33:13 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CommonErrorHandler"
+         targetNamespace="http://schema.emerson.com/common/errorHandler"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/ICoE_DBINS_ErrorTable/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://schemas.emerson.com/common/envelope"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://schema.emerson.com/common/errorHandler"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink myRole="CommonErrorHandlerProvider"
+                     name="CommonErrorHandler"
+                     partnerRole="CommonErrorHandlerRequester"
+                     partnerLinkType="client:CommonErrorHandler"/>
+        <partnerLink name="ICoE_DBINS_ErrorTable"
+                     partnerRole="ICoE_DBINS_ErrorTable_role"
+                     partnerLinkType="ns1:ICoE_DBINS_ErrorTable_plt"/>
+    </partnerLinks>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="OnMessage_submitErrorEBH_InputVariable"
+                  messageType="client:CommonErrorHandlerErrorEBHRequestMessage"/>
+        <variable name="OnMessage_submitError_InputVariable"
+                  messageType="client:CommonErrorHandlerErrorRequestMessage"/>
+        <variable name="G_InsertICoEError_InputVariable"
+                  messageType="ns1:ErrorTableCollection_msg"/>
+    </variables>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in CommonErrorHandler.wsdl) -->
+        <pick name="Pick_Error" createInstance="yes">
+            <onMessage portType="client:CommonErrorHandler"
+                       operation="submitErrorEBH"
+                       variable="OnMessage_submitErrorEBH_InputVariable"
+                       partnerLink="CommonErrorHandler">
+                <sequence name="Sequence_1">
+                    <assign name="Assign_1"/>
+                </sequence>
+            </onMessage>
+            <onMessage portType="client:CommonErrorHandler"
+                       operation="submitError"
+                       variable="OnMessage_submitError_InputVariable"
+                       partnerLink="CommonErrorHandler"/>
+        </pick>
+        <invoke name="Invoke_InsertICoEError"
+                partnerLink="ICoE_DBINS_ErrorTable"
+                portType="ns1:ICoE_DBINS_ErrorTable_ptt" operation="insert"
+                inputVariable="G_InsertICoEError_InputVariable"/>
+    </sequence>
+</process>

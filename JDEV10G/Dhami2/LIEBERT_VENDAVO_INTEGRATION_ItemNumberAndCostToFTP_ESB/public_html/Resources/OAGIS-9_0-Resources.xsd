@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\OAGIS 9.0 Resources.xsd
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- =================================================================== -->
+	<!-- ===== Imports of Code Lists                                   ===== -->
+	<!-- =================================================================== -->
+	<xs:import namespace="http://www.openapplications.org/oagis/9/codelists" schemaLocation="Components\Common\CodeLists.xsd"/>
+	<!-- =================================================================== -->
+	<!-- ===== Include Components                                     ===== -->
+	<!-- =================================================================== -->
+	<xs:include schemaLocation="Components\Common\Meta.xsd"/>
+	<xs:include schemaLocation="Components\Common\Fields.xsd"/>
+	<xs:include schemaLocation="Components\Common\Components.xsd"/>
+	<xs:include schemaLocation="Components\Financial\Components.xsd"/>
+	<xs:include schemaLocation="Components\Operational\OrderManagementComponents.xsd"/>
+	<xs:include schemaLocation="Components\Operational\CRMComponents.xsd"/>
+	<xs:include schemaLocation="Components\Operational\LogisticsComponents.xsd"/>
+	<xs:include schemaLocation="Components\Operational\ManufacturingComponents.xsd"/>
+	<!-- =================================================================== -->
+	<!-- ===== Include Nouns                                              ===== -->
+	<!-- =================================================================== -->
+	<xs:include schemaLocation="Nouns\ActualLedger.xsd"/>
+	<xs:include schemaLocation="Nouns\AllocateResource.xsd"/>
+	<xs:include schemaLocation="Nouns\BOD.xsd"/>
+	<xs:include schemaLocation="Nouns\BOM.xsd"/>
+	<xs:include schemaLocation="Nouns\BudgetLedger.xsd"/>
+	<xs:include schemaLocation="Nouns\CarrierRoute.xsd"/>
+	<xs:include schemaLocation="Nouns\Catalog.xsd"/>
+	<xs:include schemaLocation="Nouns\ChartOfAccounts.xsd"/>
+	<xs:include schemaLocation="Nouns\ConfirmWIP.xsd"/>
+	<xs:include schemaLocation="Nouns\CostingActivity.xsd"/>
+	<xs:include schemaLocation="Nouns\Credit.xsd"/>
+	<xs:include schemaLocation="Nouns\CreditStatus.xsd"/>
+	<xs:include schemaLocation="Nouns\CreditTransfer.xsd"/>
+	<xs:include schemaLocation="Nouns\CreditTransferIST.xsd"/>
+	<xs:include schemaLocation="Nouns\CurrencyExchangeRate.xsd"/>
+	<xs:include schemaLocation="Nouns\CustomerPartyMaster.xsd"/>
+	<xs:include schemaLocation="Nouns\DebitTransfer.xsd"/>
+	<xs:include schemaLocation="Nouns\DebitTransferIST.xsd"/>
+	<xs:include schemaLocation="Nouns\DispatchList.xsd"/>
+	<xs:include schemaLocation="Nouns\EmployeeWorkSchedule.xsd"/>
+	<xs:include schemaLocation="Nouns\EmployeeWorkTime.xsd"/>
+	<xs:include schemaLocation="Nouns\EngineeringChangeOrder.xsd"/>
+	<xs:include schemaLocation="Nouns\EngineeringWorkDocument.xsd"/>
+	<xs:include schemaLocation="Nouns\Field.xsd"/>
+	<xs:include schemaLocation="Nouns\InspectDelivery.xsd"/>
+	<xs:include schemaLocation="Nouns\InventoryBalance.xsd"/>
+	<xs:include schemaLocation="Nouns\InventoryConsumption.xsd"/>
+	<xs:include schemaLocation="Nouns\InventoryCount.xsd"/>
+	<xs:include schemaLocation="Nouns\Invoice.xsd"/>
+	<xs:include schemaLocation="Nouns\InvoiceLedgerEntry.xsd"/>
+	<xs:include schemaLocation="Nouns\IssueInventory.xsd"/>
+	<xs:include schemaLocation="Nouns\ItemMaster.xsd"/>
+	<xs:include schemaLocation="Nouns\JournalEntry.xsd"/>
+	<xs:include schemaLocation="Nouns\Location.xsd"/>
+	<xs:include schemaLocation="Nouns\LocationService.xsd"/>
+	<xs:include schemaLocation="Nouns\MaintenanceOrder.xsd"/>
+	<xs:include schemaLocation="Nouns\MatchDocument.xsd"/>
+	<xs:include schemaLocation="Nouns\MergeWIP.xsd"/>
+	<xs:include schemaLocation="Nouns\MoveInventory.xsd"/>
+	<xs:include schemaLocation="Nouns\MoveWIP.xsd"/>
+	<xs:include schemaLocation="Nouns\OnlineOrder.xsd"/>
+	<xs:include schemaLocation="Nouns\OnlineSession.xsd"/>
+	<xs:include schemaLocation="Nouns\Operation.xsd"/>
+	<xs:include schemaLocation="Nouns\Opportunity.xsd"/>
+	<xs:include schemaLocation="Nouns\PartyMaster.xsd"/>
+	<xs:include schemaLocation="Nouns\Payable.xsd"/>
+	<xs:include schemaLocation="Nouns\PaymentStatus.xsd"/>
+	<xs:include schemaLocation="Nouns\PaymentStatusIST.xsd"/>
+	<xs:include schemaLocation="Nouns\Personnel.xsd"/>
+	<xs:include schemaLocation="Nouns\PickList.xsd"/>
+	<xs:include schemaLocation="Nouns\PlanningSchedule.xsd"/>
+	<xs:include schemaLocation="Nouns\PriceList.xsd"/>
+	<xs:include schemaLocation="Nouns\ProductAvailability.xsd"/>
+	<xs:include schemaLocation="Nouns\ProductionOrder.xsd"/>
+	<xs:include schemaLocation="Nouns\ProjectAccounting.xsd"/>
+	<xs:include schemaLocation="Nouns\ProjectMaster.xsd"/>
+	<xs:include schemaLocation="Nouns\PurchaseOrder.xsd"/>
+	<xs:include schemaLocation="Nouns\Quote.xsd"/>
+	<xs:include schemaLocation="Nouns\Receivable.xsd"/>
+	<xs:include schemaLocation="Nouns\ReceiveDelivery.xsd"/>
+	<xs:include schemaLocation="Nouns\ReceiveItem.xsd"/>
+	<xs:include schemaLocation="Nouns\RecoverWIP.xsd"/>
+	<xs:include schemaLocation="Nouns\RequireProduct.xsd"/>
+	<xs:include schemaLocation="Nouns\Requisition.xsd"/>
+	<xs:include schemaLocation="Nouns\RFQ.xsd"/>
+	<xs:include schemaLocation="Nouns\RiskControlLibrary.xsd"/>
+	<xs:include schemaLocation="Nouns\Routing.xsd"/>
+	<xs:include schemaLocation="Nouns\SalesLead.xsd"/>
+	<xs:include schemaLocation="Nouns\SalesOrder.xsd"/>
+	<xs:include schemaLocation="Nouns\SequenceSchedule.xsd"/>
+	<xs:include schemaLocation="Nouns\Shipment.xsd"/>
+	<xs:include schemaLocation="Nouns\ShipmentSchedule.xsd"/>
+	<xs:include schemaLocation="Nouns\ShipmentUnit.xsd"/>
+	<xs:include schemaLocation="Nouns\SplitWIP.xsd"/>
+	<xs:include schemaLocation="Nouns\SupplierPartyMaster.xsd"/>
+	<xs:include schemaLocation="Nouns\UOMGroup.xsd"/>
+	<xs:include schemaLocation="Nouns\WIPStatus.xsd"/>
+	<!-- =================================================================== -->
+	<!-- ===== Nouns Element and Type                                 ===== -->
+	<!-- =================================================================== -->
+	<xs:element name="OAGIS9Nouns" type="OAGIS9NounsType"/>
+	<xs:complexType name="OAGIS9NounsType">
+		<xs:sequence>
+			<xs:element ref="ActualLedger"/>
+			<xs:element ref="AllocateResource"/>
+			<xs:element ref="BOD"/>
+			<xs:element ref="BOM"/>
+			<xs:element ref="BudgetLedger"/>
+			<xs:element ref="CarrierRoute"/>
+			<xs:element ref="Catalog"/>
+			<xs:element ref="ChartOfAccounts"/>
+			<xs:element ref="ConfirmWIP"/>
+			<xs:element ref="CostingActivity"/>
+			<xs:element ref="Credit"/>
+			<xs:element ref="CreditStatus"/>
+			<xs:element ref="CreditTransfer"/>
+			<xs:element ref="CreditTransferIST"/>
+			<!--
+				<xs:element ref="CountInventory"/>
+				-->
+			<xs:element ref="CustomerPartyMaster"/>
+			<xs:element ref="DebitTransfer"/>
+			<xs:element ref="DebitTransferIST"/>
+			<xs:element ref="DispatchList"/>
+			<xs:element ref="EmployeeWorkSchedule"/>
+			<xs:element ref="EmployeeWorkTime"/>
+			<xs:element ref="EngineeringChangeOrder"/>
+			<xs:element ref="EngineeringWorkDocument"/>
+			<xs:element ref="Field"/>
+			<xs:element ref="InspectDelivery"/>
+			<xs:element ref="InventoryBalance"/>
+			<xs:element ref="InventoryConsumption"/>
+			<xs:element ref="InventoryCount"/>
+			<xs:element ref="Invoice"/>
+			<xs:element ref="InvoiceLedgerEntry"/>
+			<xs:element ref="IssueInventory"/>
+			<xs:element ref="ItemMaster"/>
+			<xs:element ref="JournalEntry"/>
+			<xs:element ref="LocationService"/>
+			<xs:element ref="MaintenanceOrder"/>
+			<xs:element ref="MatchDocument"/>
+			<xs:element ref="MergeWIP"/>
+			<xs:element ref="MoveInventory"/>
+			<xs:element ref="MoveWIP"/>
+			<xs:element ref="OnlineOrder"/>
+			<xs:element ref="OnlineSession"/>
+			<xs:element ref="Opportunity"/>
+			<xs:element ref="PartyMaster"/>
+			<xs:element ref="Payable"/>
+			<xs:element ref="PaymentStatus"/>
+			<xs:element ref="PaymentStatusIST"/>
+			<xs:element ref="Personnel"/>
+			<xs:element ref="PickList"/>
+			<xs:element ref="PlanningSchedule"/>
+			<xs:element ref="PriceList"/>
+			<xs:element ref="ProductAvailability"/>
+			<xs:element ref="ProductionOrder"/>
+			<xs:element ref="ProjectAccounting"/>
+			<xs:element ref="ProjectMaster"/>
+			<xs:element ref="PurchaseOrder"/>
+			<xs:element ref="Quote"/>
+			<xs:element ref="Receivable"/>
+			<xs:element ref="ReceiveDelivery"/>
+			<xs:element ref="ReceiveItem"/>
+			<xs:element ref="RecoverWIP"/>
+			<xs:element ref="RequireProduct"/>
+			<xs:element ref="Requisition"/>
+			<xs:element ref="RFQ"/>
+			<xs:element ref="RiskControlLibrary"/>
+			<xs:element ref="Routing"/>
+			<xs:element ref="SalesLead"/>
+			<xs:element ref="SequenceSchedule"/>
+			<xs:element ref="Shipment"/>
+			<xs:element ref="ShipmentSchedule"/>
+			<xs:element ref="SplitWIP"/>
+			<xs:element ref="SupplierPartyMaster"/>
+			<xs:element ref="UOMGroup"/>
+			<xs:element ref="WIPStatus"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

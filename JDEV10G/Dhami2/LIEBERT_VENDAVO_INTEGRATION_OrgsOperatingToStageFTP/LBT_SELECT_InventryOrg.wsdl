@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="LBT_SELECT_InventryOrg"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_InventryOrg/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_InventryOrg/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg"
+                schemaLocation="LBTSELECTInventryOrg_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EmrInventoryOrgCollection_msg">
+        <part name="EmrInventoryOrgCollection" element="top:EmrInventoryOrgCollection"/>
+    </message>
+
+    <message name="LBT_SELECT_InventryOrgSelect_inparameters">
+        <part name="LBT_SELECT_InventryOrgSelect_inparameters" element="top:LBT_SELECT_InventryOrgSelectInputParameters"/>
+    </message>
+
+    <portType name="LBT_SELECT_InventryOrg_ptt">
+        <operation name="LBT_SELECT_InventryOrgSelect">
+            <input message="tns:LBT_SELECT_InventryOrgSelect_inparameters"/>
+            <output message="tns:EmrInventoryOrgCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="LBT_SELECT_InventryOrg_binding" type="tns:LBT_SELECT_InventryOrg_ptt">
+        <jca:binding />
+        <operation name="LBT_SELECT_InventryOrgSelect">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="LBTSELECTInventryOrg.EmrInventoryOrg"
+                QueryName="LBT_SELECT_InventryOrgSelect"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="LBTSELECTInventryOrg_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if jdbc/DB/Liebert_Hub is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="LBT_SELECT_InventryOrg">
+        <port name="LBT_SELECT_InventryOrg_pt" binding="tns:LBT_SELECT_InventryOrg_binding">
+            <jca:address location="jdbc/DB/Liebert_Hub"
+                UIConnectionName="itemHub"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.Oracle10Platform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//enpushntora01.na.enpad.org:1521/enps"
+                mcf.UserName="fusion"
+                mcf.Password="631F097942148D7DF48C54F2DE1BBC2B"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="LBT_SELECT_InventryOrg_plt" >
+        <plt:role name="LBT_SELECT_InventryOrg_role" >
+            <plt:portType name="tns:LBT_SELECT_InventryOrg_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

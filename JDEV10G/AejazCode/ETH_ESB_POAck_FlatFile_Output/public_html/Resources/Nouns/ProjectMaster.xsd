@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\ProjectMaster.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="ProjectMaster" type="ProjectMasterType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A set of tasks with the following attributes: a singular purpose, a start and end date, those that accumulate costs, and those that may have materials and overhead. SYNONYMS: Job, Process Model, Program, Work Breakdown Structure (WBS) element
+
+This is used to enable all relevant sub-systems that submit transactions to the project accounting application to maintain valid values for the key project fields.  The target applications for this update would include, but not necessarily be limited to:
+Accounts Payable
+Accounts Receivable
+Budget
+Order Management
+Purchasing
+Time and Labor
+Travel and Expense</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ProjectMasterType">
+                <xsd:annotation>
+                        <xsd:documentation>A set of tasks with the following attributes: a singular purpose, a start and end date, those that accumulate costs, and those that may have materials and overhead. SYNONYMS: Job, Process Model, Program, Work Breakdown Structure (WBS) element</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="ProjectBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Status" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the status of the Project.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="DocumentDateTime" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="AuthorizationID" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BudgetedAmount" minOccurs="0"/>
+                                        <xsd:element ref="AccruedAmount" minOccurs="0"/>
+                                        <xsd:element ref="TotalCostAmount" minOccurs="0"/>
+                                        <xsd:element ref="GLEntityID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the Source General Ledger recogized entity that is responsible for paying for the Project.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ProjectActivity" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The specific business processes or tasks within a project.  For example, billing, receiving or preparing purchase orders</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:group ref="ReferencesGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ProjectActivityBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="ProjectBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Status" minOccurs="0"/>
+                                        <xsd:element ref="AccruedAmount" minOccurs="0"/>
+                                        <xsd:element ref="BudgetedAmount" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ProjectActivityType">
+                <xsd:complexContent>
+                        <xsd:extension base="ProjectActivityBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="ProjectActivity" type="ProjectActivityType"/>
+</xsd:schema>

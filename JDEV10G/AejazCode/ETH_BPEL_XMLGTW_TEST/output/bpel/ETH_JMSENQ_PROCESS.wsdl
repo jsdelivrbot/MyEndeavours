@@ -1,0 +1,65 @@
+<definitions
+     name="ETH_JMSENQ_PROCESS"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_JMSENQ_PROCESS/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_JMSENQ_PROCESS/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://xmlns.emrsn.com/CustomProcess_PO_007"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomProcess_PO_007" schemaLocation="public_html/CustomProcess_PO_007.xsd" />
+      </schema>
+    </types>
+    <message name="CustomProcess_PO_007_msg">
+        <part name="CustomProcess_PO_007" element="imp1:CustomProcess_PO_007"/>
+    </message>
+    <portType name="Produce_MessageETHProcess_ptt">
+        <operation name="Produce_MessageETHProcess">
+            <input message="tns:CustomProcess_PO_007_msg"/>
+        </operation>
+    </portType>
+    <binding name="Produce_MessageETHProcess_binding" type="tns:Produce_MessageETHProcess_ptt">
+    <jca:binding  />
+        <operation name="Produce_MessageETHProcess">
+      <jca:operation
+          DestinationName="java:comp/resource/esbRP/Topics/ORAESB.ETH_PROCESSPO_OAGIS72"
+          DeliveryMode="Persistent"
+          TimeToLive="0"
+          PayloadType="TextMessage"
+          InteractionSpec="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_JMSENQ_PROCESS">
+        <port name="Produce_MessageETHProcess_pt" binding="tns:Produce_MessageETHProcess_binding">
+<!--Your runtime connection is declared in 
+J2EE_HOME/application-deployments/default/JMSAdapter/oc4j-ra.xml 
+These mcf properties here are from your design time connection and 
+save you from having to edit that file and restart the application server 
+if eis/Jms/AQ/Topic/ETH is missing. 
+These mcf properties are safe to remove.-->
+      <jca:address location="eis/Jms/AQ/Topic/ETH" UIConnectionName="Elshad1_ESB_DB"
+          ManagedConnectionFactory="oracle.tip.adapter.jms.JmsManagedConnectionFactory"
+          mcf.ConnectionFactoryLocation="java:comp/resource/esbRP/TopicConnectionFactories/TCF"
+          mcf.IsTopic="true"
+          mcf.IsTransacted="true"
+          mcf.FactoryProperties=""
+          mcf.Username="oraesb"
+          mcf.Password="A0D145248EE3105167775A50E20071F4"
+          UIJmsProvider="OJMS" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Produce_MessageETHProcess_plt" >
+    <plt:role name="Produce_MessageETHProcess_role" >
+      <plt:portType name="tns:Produce_MessageETHProcess_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

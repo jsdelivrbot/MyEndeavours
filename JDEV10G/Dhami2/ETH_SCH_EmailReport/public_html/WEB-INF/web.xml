@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee">
+    <description>Empty web.xml file for Web Application</description>
+    <!--servlet>
+        <servlet-name>QuartzInitializer</servlet-name>
+        <servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+        <init-param>
+          <param-name>config-file</param-name>
+          <param-value>bpel_quartz.properties</param-value>
+      </init-param>
+    </servlet-->
+    <servlet>
+        <servlet-name>TransactionreportServlet</servlet-name>
+        <servlet-class>eth_sch_emailreport.TransactionreportScheduler</servlet-class>
+        <init-param>
+            <param-name>cronExpr</param-name>
+            <param-value>0 15 15,16 ? * *</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TransactionreportServlett</servlet-name>
+        <url-pattern>/Transactionreport</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>35</session-timeout>
+    </session-config>
+    <mime-mapping>
+        <extension>html</extension>
+        <mime-type>text/html</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>txt</extension>
+        <mime-type>text/plain</mime-type>
+    </mime-mapping>
+</web-app>

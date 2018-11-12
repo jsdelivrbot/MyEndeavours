@@ -1,0 +1,59 @@
+<definitions
+     name="Workflow_Service"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/Workflow_Service/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Workflow_Service/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://www.gssamerica.com/mdm/workflowservice"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.gssamerica.com/mdm/workflowservice" schemaLocation="WorkflowService.xsd" />
+      </schema>
+    </types>
+    <message name="WorkflowRequest_msg">
+        <part name="WorkflowRequest" element="imp1:WorkflowRequest"/>
+    </message>
+    <portType name="Produce_Message_To_WorkflowQueue_ptt">
+        <operation name="Produce_Message_To_WorkflowQueue">
+            <input message="tns:WorkflowRequest_msg"/>
+        </operation>
+    </portType>
+    <binding name="Produce_Message_To_WorkflowQueue_binding" type="tns:Produce_Message_To_WorkflowQueue_ptt">
+    <jca:binding  />
+        <operation name="Produce_Message_To_WorkflowQueue">
+      <jca:operation
+          InteractionSpec="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec"
+          DestinationName="mdm/WorkFlowQueue"
+          DeliveryMode="Persistent"
+          TimeToLive="0"
+          PayloadType="TextMessage"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="Workflow_Service">
+        <port name="Produce_Message_To_WorkflowQueue_pt" binding="tns:Produce_Message_To_WorkflowQueue_binding">
+      <jca:address location="eis/Jms/QueueConnectionFactory" UIConnectionName="LocalApplicationServer"
+          ManagedConnectionFactory="oracle.tip.adapter.jms.JmsManagedConnectionFactory"
+          mcf.ConnectionFactoryLocation="mdm/MDMConnectionFactory"
+          mcf.IsTopic="false"
+          mcf.IsTransacted="false"
+          mcf.FactoryProperties=""
+          mcf.Username="oc4jadmin"
+          mcf.Password="33249B2910CFF3FB37820D56077EB7A3"
+          UIJmsProvider="OC4JJMS" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Produce_Message_To_WorkflowQueue_plt" >
+    <plt:role name="Produce_Message_To_WorkflowQueue_role" >
+      <plt:portType name="tns:Produce_Message_To_WorkflowQueue_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

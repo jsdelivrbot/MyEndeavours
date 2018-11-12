@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="SendEmailWithAttachments" src="SendEmailWithAttachments.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">SendEmailWithAttachments.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="NotificationService">
+            <property name="wsdlLocation">NotificationService.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <configurations>
+         <property name="defaultInput" encryption="plaintext">
+            <![CDATA[<SendEmailWithAttachmentsProcessRequest xmlns="http://xmlns.oracle.com/SendEmailWithAttachments">
+        <to>jcooper</to> 
+        <subject>Review of samplecover.pdf</subject> 
+        <body>Please review the sample cover sheet</body> 
+        <attachmentName>samplecover.pdf</attachmentName> 
+        <attachmentMimeType>application/pdf</attachmentMimeType> 
+        <attachmentURI>samplecover.pdf</attachmentURI> 
+</SendEmailWithAttachmentsProcessRequest>]]>
+         </property>
+      </configurations>
+   </BPELProcess>
+</BPELSuitcase>

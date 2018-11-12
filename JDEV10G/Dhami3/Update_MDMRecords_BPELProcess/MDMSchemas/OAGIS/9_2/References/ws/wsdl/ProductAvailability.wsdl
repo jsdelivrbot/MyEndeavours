@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/ProductAvailability.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessProductAvailability.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeProductAvailability.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetProductAvailability.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowProductAvailability.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="ProcessProductAvailability">
+                <part name="Message" element="oa:ProcessProductAvailability"/>
+        </message>
+        <message name="AcknowledgeProductAvailability">
+                <part name="Message" element="oa:AcknowledgeProductAvailability"/>
+        </message>
+        <message name="GetProductAvailability">
+                <part name="Message" element="oa:GetProductAvailability"/>
+        </message>
+        <message name="ShowProductAvailability">
+                <part name="Message" element="oa:ShowProductAvailability"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestProductAvailabilityPortType">
+                <operation name="GetProductAvailability">
+                        <input message="oaws:GetProductAvailability"/>
+                </operation>
+                <operation name="ProcessProductAvailability">
+                        <input message="oaws:ProcessProductAvailability"/>
+                </operation>
+        </portType>
+        <portType name="ResponseProductAvailabilityPortType">
+                <operation name="AcknowledgeProductAvailability">
+                        <input message="oaws:AcknowledgeProductAvailability"/>
+                </operation>
+                <operation name="ShowProductAvailability">
+                        <input message="oaws:ShowProductAvailability"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncProductAvailabilityPortType">
+                <operation name="GetProductAvailability">
+                        <input message="oaws:GetProductAvailability"/>
+                        <output message="oaws:ShowProductAvailability"/>
+                </operation>
+                <operation name="ProcessProductAvailability">
+                        <input message="oaws:ProcessProductAvailability"/>
+                        <output message="oaws:AcknowledgeProductAvailability"/>
+                </operation>
+        </portType>
+        <binding name="RequestProductAvailabilityBinding" type="oaws:RequestProductAvailabilityPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessProductAvailability">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductAvailability.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetProductAvailability">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductAvailability.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseProductAvailabilityBinding" type="oaws:ResponseProductAvailabilityPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeProductAvailability">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductAvailability.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowProductAvailability">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductAvailability.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductAvailability.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncProductAvailabilityBinding" type="oaws:SyncProductAvailabilityPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetProductAvailability">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductAvailability.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ProcessProductAvailability">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductAvailability.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestProductAvailabilityService">
+                <port name="RequestProductAvailabilityBinding" binding="oaws:RequestProductAvailabilityBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestProductAvailability"/>
+                </port>
+        </service>
+        <service name="ResponseProductAvailabilityService">
+                <port name="ResponseProductAvailabilityBinding" binding="oaws:ResponseProductAvailabilityBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseProductAvailability"/>
+                </port>
+        </service>
+        <service name="SyncProductAvailabilityService">
+                <port name="SyncProductAvailabilityBinding" binding="oaws:SyncProductAvailabilityBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncProductAvailability"/>
+                </port>
+        </service>
+</definitions>

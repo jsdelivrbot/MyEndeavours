@@ -1,0 +1,120 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Sep 21 18:19:48 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ReachMailSend"
+         targetNamespace="http://schema.emerson.com/ReachMailSend"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:client="http://schema.emerson.com/ReachMailSend"
+         xmlns:ns6="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/pollFile/"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns2="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="pollFile"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="NotificationService"
+                 partnerRole="NotificationServiceProvider"
+                 partnerLinkType="ns2:NotificationServiceLink"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_1_Read_InputVariable" messageType="ns1:Read_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="pollFile" portType="ns1:Read_ptt"
+             operation="Read" variable="Receive_1_Read_InputVariable"
+             createInstance="yes"/>
+    <scope name="Email_1">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:email"></bpelx:pattern>
+      </bpelx:annotation>
+      <variables>
+        <variable name="varNotificationReq"
+                  messageType="ns2:EmailNotificationRequest"/>
+        <variable name="varNotificationResponse"
+                  messageType="ns2:ArrayOfResponse"/>
+        <variable name="NotificationServiceFaultVariable"
+                  messageType="ns2:NotificationServiceErrorMessage"/>
+      </variables>
+      <sequence name="Sequence_1">
+        <assign name="EmailParamsAssign">
+          <copy>
+            <from expression="string('Default')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns2:FromAccountName"/>
+          </copy>
+          <copy>
+            <from expression="string('inderdhami2001@gmail.com')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns2:Bcc"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns2:ReplyToAddress"/>
+          </copy>
+          <copy>
+            <from expression="string('Reaching')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns2:Subject"/>
+          </copy>
+          <copy>
+            <from expression="string('inderpal.dhami@emerson.com;manasa.tadi@wipro.com')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns2:To"/>
+          </copy>
+          <copy>
+            <from expression="string('')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns2:Content/ns2:ContentBody"/>
+          </copy>
+          <copy>
+            <from expression="string('text/html; charset=UTF-8')"/>
+            <to variable="varNotificationReq" part="EmailPayload"
+                query="/EmailPayload/ns2:Content/ns2:MimeType"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeNotificationService"
+                partnerLink="NotificationService"
+                portType="ns2:NotificationService"
+                operation="sendEmailNotification"
+                inputVariable="varNotificationReq"
+                outputVariable="varNotificationResponse"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

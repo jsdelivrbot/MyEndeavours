@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="ETH_SELECT_ARCHIVE_DETAIL"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_SELECT_ARCHIVE_DETAIL/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_SELECT_ARCHIVE_DETAIL/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSELECTARCHIVEDETAIL"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSELECTARCHIVEDETAIL"
+                schemaLocation="ETHSELECTARCHIVEDETAIL_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EthArchiveDetailTransactionCollection_msg">
+        <part name="EthArchiveDetailTransactionCollection" element="top:EthArchiveDetailTransactionCollection"/>
+    </message>
+
+    <message name="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id_inparameters">
+        <part name="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id_inparameters" element="top:ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_idInputParameters"/>
+    </message>
+    <message name="EthArchiveDetailTransaction_msg">
+        <part name="EthArchiveDetailTransaction" element="top:EthArchiveDetailTransaction"/>
+    </message>
+
+    <portType name="ETH_SELECT_ARCHIVE_DETAIL_ptt">
+        <operation name="merge">
+            <input message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+        <operation name="write">
+            <input message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+        <operation name="insert">
+            <input message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+        <operation name="update">
+            <input message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+        <operation name="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id">
+            <input message="tns:ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id_inparameters"/>
+            <output message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+        <operation name="queryByExample">
+            <input message="tns:EthArchiveDetailTransaction_msg"/>
+            <output message="tns:EthArchiveDetailTransactionCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="ETH_SELECT_ARCHIVE_DETAIL_binding" type="tns:ETH_SELECT_ARCHIVE_DETAIL_ptt">
+        <jca:binding />
+        <operation name="merge">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ETHSELECTARCHIVEDETAIL.EthArchiveDetailTransaction"
+                DmlType="merge"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="ETHSELECTARCHIVEDETAIL_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="write">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ETHSELECTARCHIVEDETAIL.EthArchiveDetailTransaction"
+                DmlType="write"
+                MappingsMetaDataURL="ETHSELECTARCHIVEDETAIL_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="insert">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ETHSELECTARCHIVEDETAIL.EthArchiveDetailTransaction"
+                DmlType="insert"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="ETHSELECTARCHIVEDETAIL_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="update">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="ETHSELECTARCHIVEDETAIL.EthArchiveDetailTransaction"
+                DmlType="update"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="ETHSELECTARCHIVEDETAIL_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="ETHSELECTARCHIVEDETAIL.EthArchiveDetailTransaction"
+                QueryName="ETH_SELECT_ARCHIVE_DETAILSelect"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="ETHSELECTARCHIVEDETAIL_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+        <operation name="queryByExample">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="ETHSELECTARCHIVEDETAIL.EthArchiveDetailTransaction"
+                IsQueryByExample="true"
+                MappingsMetaDataURL="ETHSELECTARCHIVEDETAIL_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/ETH_Business is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="ETH_SELECT_ARCHIVE_DETAIL">
+        <port name="ETH_SELECT_ARCHIVE_DETAIL_pt" binding="tns:ETH_SELECT_ARCHIVE_DETAIL_binding">
+            <jca:address location="eis/DB/ETH_Business"
+                UIConnectionName="db_Elshat3_Business"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.Oracle10Platform"
+                mcf.ConnectionString="jdbc:oracle:thin:@elshat1db.emrsn.com:20003:elshat3"
+                mcf.UserName="SC_Report"
+                mcf.Password="F44034A2DD8158AE53D924290C873D4A"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="ETH_SELECT_ARCHIVE_DETAIL_plt" >
+        <plt:role name="ETH_SELECT_ARCHIVE_DETAIL_role" >
+            <plt:portType name="tns:ETH_SELECT_ARCHIVE_DETAIL_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

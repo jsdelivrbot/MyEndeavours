@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="VDST_BPEL_MoveDrawing" src="VDST_BPEL_MoveDrawing.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="PollDummy">
+            <property name="wsdlLocation">PollDummy.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="VDSTIDMWebService">
+            <property name="wsdlLocation">VDSTIDMWebService.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ImportERP">
+            <property name="wsdlLocation">PartnerLink_1.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CADConversionWebService">
+            <property name="wsdlLocation">CADConversionWebServiceRef.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PartnerLink_1">
+            <property name="wsdlLocation">CADConversionWebServiceRef.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="PollDummy">
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

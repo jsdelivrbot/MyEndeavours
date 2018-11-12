@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\RiskControlLibrary.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="RiskControlLibrary" type="RiskControlLibraryType"/>
+        <xsd:element name="ControlProcess" type="ControlProcessType"/>
+        <xsd:element name="Risk" type="RiskType"/>
+        <xsd:element name="Control" type="ControlType"/>
+        <xsd:element name="TestingProcedure" type="TestingProcedureType"/>
+        <xsd:element name="ControlAssertion" type="ControlAssertionType"/>
+        <xsd:element name="ControlComponent" type="ControlComponentType"/>
+        <xsd:element name="ControlCodeType" type="ControlCodeType"/>
+        <xsd:element name="ControlObjectiveCategory" type="RiskCodeType"/>
+        <xsd:complexType name="RiskControlLibraryType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:annotation>
+                                                <xsd:documentation>The name of a risk and control library.  For the publisher this may represent the Industry or Country to which the Risks are relevant</xsd:documentation>
+                                                <xsd:documentation>The publishing party</xsd:documentation>
+                                                <xsd:documentation>The name of the process.  This is consistent with the optionality and datatyping for BPML</xsd:documentation>
+                                                <xsd:documentation>A risk is something that can go wrong.  Within the context of Risk Based Auditing a risk is something that would prevent an organization from meeting its objectives.</xsd:documentation>
+                                                <xsd:documentation>An example of a Risk is that a customer may not pay their debts.</xsd:documentation>
+                                                <xsd:documentation>A control is something that mitigates a risk.</xsd:documentation>
+                                                <xsd:documentation>An example of a control that mitigates for the risk of customer default is credit checking.</xsd:documentation>
+                                                <xsd:documentation>A testing procedure is a set of instructions on how to test a set of controls.</xsd:documentation>
+                                                <xsd:documentation>An example of a testing procedure is Testing Procedures for Order to Cash Controls.</xsd:documentation>
+                                                <xsd:documentation>An Account is a categorization of account balances on a trial balance.</xsd:documentation>
+                                                <xsd:documentation>An example of an account is Revenue.</xsd:documentation>
+                                        </xsd:annotation>
+                                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PublisherParty" minOccurs="0"/>
+                                        <xsd:element ref="ControlProcess" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Risk" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Control" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="TestingProcedure" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RiskControlComponentBaseType">
+                <xsd:sequence>
+                        <xsd:element ref="DocumentID" minOccurs="0"/>
+                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ControlProcessType">
+                <xsd:complexContent>
+                        <xsd:extension base="RiskControlComponentBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OwnerParty" minOccurs="0"/>
+                                        <xsd:element ref="ApprovalStatus" minOccurs="0"/>
+                                        <xsd:element ref="SignificantProcessIndicator" minOccurs="0"/>
+                                        <xsd:element ref="StandardProcessIndicator" minOccurs="0"/>
+                                        <xsd:element ref="CategoryCodes" minOccurs="0"/>
+                                        <xsd:element ref="ParentProcessID" minOccurs="0"/>
+                                        <xsd:element ref="ExposedRiskIDs" minOccurs="0"/>
+                                        <xsd:element ref="GLAccount" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="OperationalMeasureIDs" minOccurs="0"/>
+                                        <xsd:group ref="ReferencesGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RiskType">
+                <xsd:complexContent>
+                        <xsd:extension base="RiskControlComponentBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ApprovalStatus" minOccurs="0"/>
+                                        <xsd:element ref="MaterialRiskIndicator" minOccurs="0"/>
+                                        <xsd:element ref="MaterialityValueAssessmentAmount" minOccurs="0"/>
+                                        <xsd:element ref="MaterialityOperationalAssessmentAmount" minOccurs="0"/>
+                                        <xsd:element ref="LikelihoodAssessmentText" minOccurs="0"/>
+                                        <xsd:element ref="ImpactAssessmentText" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="MitigatingControlID" minOccurs="0"/>
+                                        <xsd:element ref="RiskType" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ControlType">
+                <xsd:complexContent>
+                        <xsd:extension base="RiskControlComponentBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ControlCodeType" minOccurs="0"/>
+                                        <xsd:element ref="PreventIndicator" minOccurs="0"/>
+                                        <xsd:element ref="DetectIndicator" minOccurs="0"/>
+                                        <xsd:element ref="ApprovalStatus" minOccurs="0"/>
+                                        <xsd:element ref="ControlComponent" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ControlObjectiveCategory" minOccurs="0"/>
+                                        <xsd:element ref="ControlAssertion" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="TestingProcedureType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ApprovalStatus" minOccurs="0"/>
+                                        <xsd:element ref="TestingProcedureStep" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="TestedControlIDs" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="TestingProcedureStepType">
+                <xsd:annotation>
+                        <xsd:documentation>The Sequence Number of the Testing Procedure Step . For example Step C.1 in a Bank Reconciliation may be performed
+          as step number 7</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:annotation>
+                                <xsd:documentation>The Identifier of the Testing Procedure Step . For example Step 1 in a Bank Reconciliation.</xsd:documentation>
+                                <xsd:documentation>The Name of the Testing Procedure Step . For example Step 1 in a Bank Reconciliation.</xsd:documentation>
+                                <xsd:documentation>The description of the Testing Procedure Step . For example Step 1 in a Bank Reconciliation might
+          be described as "Obtain a copy of the current chart of accounts listing to determine the number of bank accounts maintained"</xsd:documentation>
+                                <xsd:documentation>The Approval Status of the Testing Procedure Step . For example Step C.1 in a Bank Reconciliation have been added
+          to the procedure in an unapproved status</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:element ref="DocumentID" minOccurs="0"/>
+                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="FreeFormTextGroup"/>
+                        <xsd:element ref="ApprovalStatus" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="SequenceNumber" type="PositiveIntegerNumericType"/>
+        </xsd:complexType>
+        <xsd:element name="TestingProcedureStep" type="TestingProcedureStepType"/>
+        <xsd:element name="TestedControlIDs" type="SequencedIDsType"/>
+</xsd:schema>

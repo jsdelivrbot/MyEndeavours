@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ProcessPO_CustomEDI_EDI_5020_RS" guid="FECEFDB0097711DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_EDI_5020_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885417084</ID>
+      <lastModifiedTime>Mon Jun 01 19:43:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_B2BInOut_ETH_ProcessPO_CustomEDI_EDI_5020_RS.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_B2BInOut">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_CustomEDI_EDI_5020_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_CustomEDI_EDI_5020_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="00A98A10097811DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomEDI_EDI_5020_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomEDI850"/>
+         <routingRules>
+            <routingRule guid="9BC959C0098811DEBF306F92CEA8EC06" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="6EF63980124411DEAF575582B6334BBE" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_EDI_PO_5020.Write" serviceGUID="6E9B9661124411DEAF575582B6334BBE" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_EDI_PO_5020" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>CustomEDI850_To_Transaction_850.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="D6EA36A0097911DE9F1EA78AC56F7274" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="89530B20097811DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B.Enqueue" serviceGUID="8925B990097811DE9F1EA78AC56F7274" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>Transaction_850_WithHeaderData_toB2B.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="C3B5CC80098711DEBF306F92CEA8EC06" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="788415D0096611DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="7881CBE1096611DE9F1EA78AC56F7274" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>CustomEDI850_ArchiveMapping.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

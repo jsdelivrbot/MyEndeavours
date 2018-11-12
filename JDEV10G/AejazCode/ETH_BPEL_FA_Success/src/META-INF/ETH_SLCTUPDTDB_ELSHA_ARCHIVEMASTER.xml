@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.4.0) (Build 080602)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveDetailTransaction</opm:class>
+         <opm:alias>EthArchiveDetailTransaction</opm:alias>
+         <opm:primary-key>
+            <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="SEQ_NUMBER" xsi:type="opm:column"/>
+            <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="MESSAGE_ID" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect" xsi:type="toplink:read-all-query">
+                  <opm:criteria operator="equal" xsi:type="toplink:relation-expression">
+                     <toplink:left name="destinationAckTrackingId" xsi:type="toplink:query-key-expression">
+                        <toplink:base xsi:type="toplink:base-expression"/>
+                     </toplink:left>
+                     <toplink:right xsi:type="toplink:parameter-expression">
+                        <toplink:parameter name="fa_tracking_id" xsi:type="opm:column"/>
+                     </toplink:right>
+                  </opm:criteria>
+                  <opm:arguments>
+                     <opm:argument name="fa_tracking_id">
+                        <opm:type>java.lang.String</opm:type>
+                     </opm:argument>
+                  </opm:arguments>
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveDetailTransaction</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+               <opm:query name="findAllEthArchiveDetailTransaction" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveDetailTransaction</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>seqNumber</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="SEQ_NUMBER" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>messageId</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="MESSAGE_ID" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>bussinessDocumentId</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="BUSSINESS_DOCUMENT_ID" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>destinationAckTrackingId</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="DESTINATION_ACK_TRACKING_ID" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="ETH_ARCHIVE_DETAIL_TRANSACTION"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveMasterTransaction</opm:class>
+         <opm:alias>EthArchiveMasterTransaction</opm:alias>
+         <opm:primary-key>
+            <opm:field table="ETH_ARCHIVE_MASTER_TRANSACTION" name="MESSAGE_ID" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect" xsi:type="toplink:read-all-query">
+                  <opm:criteria operator="equal" xsi:type="toplink:relation-expression">
+                     <toplink:left name="stControl" xsi:type="toplink:query-key-expression">
+                        <toplink:base xsi:type="toplink:base-expression"/>
+                     </toplink:left>
+                     <toplink:right xsi:type="toplink:parameter-expression">
+                        <toplink:parameter name="stcontrol" xsi:type="opm:column"/>
+                     </toplink:right>
+                  </opm:criteria>
+                  <opm:arguments>
+                     <opm:argument name="stcontrol">
+                        <opm:type>java.lang.String</opm:type>
+                     </opm:argument>
+                  </opm:arguments>
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveMasterTransaction</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+               <opm:query name="findAllEthArchiveMasterTransaction" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>ETHSLCTUPDTDBELSHAARCHIVEMASTER.EthArchiveMasterTransaction</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>messageId</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_MASTER_TRANSACTION" name="MESSAGE_ID" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>stage</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_MASTER_TRANSACTION" name="STAGE" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>stControl</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_MASTER_TRANSACTION" name="ST_CONTROL" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="ETH_ARCHIVE_MASTER_TRANSACTION"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+   <toplink:login xsi:type="toplink:database-login">
+      <toplink:platform-class>oracle.toplink.platform.database.oracle.Oracle10Platform</toplink:platform-class>
+      <toplink:user-name>SC_Report</toplink:user-name>
+      <toplink:password>F44034A2DD8158AE53D924290C873D4A</toplink:password>
+      <toplink:driver-class>oracle.jdbc.OracleDriver</toplink:driver-class>
+      <toplink:connection-url>jdbc:oracle:thin:@elshat1db.emrsn.com:20003:elshat3</toplink:connection-url>
+   </toplink:login>
+</toplink:object-persistence>

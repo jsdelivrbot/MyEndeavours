@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="CEH_FL_GET_ReceiveCustomer" guid="BEE6BBB0040A11DEBF8BA9BFEFE09888" qname="CEHSys_EHPOC1.CEH_FL_GET_ReceiveCustomer" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <description>This service will poll a xml file to fetch Customer data.</description>
+   <versionInfo>
+      <ID>1237281108324</ID>
+      <lastModifiedTime>Tue Mar 17 14:41:48 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_ErrorHandlingPOC1_CEH_ESB_FetchCustomerData</lastModifiedUser>
+   </versionInfo>
+   <parent guid="00AA229012C911DE9F411B4F09FCBA8D" qname="CEHSys_EHPOC1" type="system"/>
+   <invocation>
+      <targetService guid="BEE6BBB1040A11DEBF8BA9BFEFE09888" qname="CEHSys_EHPOC1.CEH_FL_GET_ReceiveCustomer_RS"/>
+      <interface>
+         <wsdlURL>CEH_FL_GET_ReceiveCustomer.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/CEH_FL_GET_ReceiveCustomer/">tns:ReadCustomerFile_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="rejectedMessageHandlers" value="file://C:/oracle/Files/EHPOC1/error/esbHandler"/>
+      <property name="fatalErrorFailoverProcess" value="file://C:/oracle/Files/EHPOC1/error/esbHandler"/>
+   </endpointProperties>
+</service>

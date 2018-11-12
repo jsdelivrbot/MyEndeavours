@@ -1,0 +1,221 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 19 10:01:42 IST 2009
+  Author:  aejaz
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_FA_Success"
+         targetNamespace="http://xmlns.emrsn.com/ETH_BPEL_FA_Success"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="NS_31CA8D0F33324F95A0BF15D85539C27E20090105072502"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/file/read997/"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSLCTUPDTDBELSHAARCHIVEMASTER"
+         xmlns:client="http://xmlns.emrsn.com/ETH_BPEL_FA_Success"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHINSRTDBELSHAARCHIVEDETAIL"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_SELECT_ARCHIVE_DETAIL/"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_DEQAQ_IPINQUEUE_FA/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_INSRTDB_ELSHA_ARCHIVEDETAIL/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/top/ETHSELECTARCHIVEDETAIL"
+         xmlns:ns8="NS_31CA8D0F33324F95A0BF15D85539C27E20081030041611">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Dequeue_role" name="ETH_DEQAQ_IPINQUEUE_FA"
+                 partnerLinkType="ns1:Dequeue_plt"/>
+    <partnerLink name="ETH_INSRTDB_ELSHA_ARCHIVEDETAIL"
+                 partnerRole="ETH_INSRTDB_ELSHA_ARCHIVEDETAIL_role"
+                 partnerLinkType="ns3:ETH_INSRTDB_ELSHA_ARCHIVEDETAIL_plt"/>
+    <partnerLink name="ETH_SELECT_ARCHIVE_DETAIL"
+                 partnerRole="ETH_SELECT_ARCHIVE_DETAIL_role"
+                 partnerLinkType="ns9:ETH_SELECT_ARCHIVE_DETAIL_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="G_Receive_FATransaction_Dequeue_InputVariable"
+              messageType="ns1:Transaction-997_msg"/>
+    <variable name="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+              messageType="ns3:EthArchiveDetailTransactionCollection_msg"/>
+    <variable name="Invoke_SLCT_ArchiveDetail_In"
+              messageType="ns9:ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id_inparameters"/>
+    <variable name="Invoke_SLCT_ArchiveDetail_Out"
+              messageType="ns9:EthArchiveDetailTransactionCollection_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_FATransaction" partnerLink="ETH_DEQAQ_IPINQUEUE_FA"
+             portType="ns1:Dequeue_ptt" operation="Dequeue"
+             variable="G_Receive_FATransaction_Dequeue_InputVariable"
+             createInstance="yes"/>
+    <assign name="Assign_SLCT_MessageID">
+      <copy>
+        <from variable="G_Receive_FATransaction_Dequeue_InputVariable"
+              part="Transaction-997"
+              query="/ns8:Transaction-997/ns8:Segment-AK1/ns8:Element-28"/>
+        <to variable="Invoke_SLCT_ArchiveDetail_In"
+            part="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id_inparameters"
+            query="/ns10:ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_idInputParameters/ns10:fa_tracking_id"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_SLCT_ArchiveDetail"
+            partnerLink="ETH_SELECT_ARCHIVE_DETAIL"
+            portType="ns9:ETH_SELECT_ARCHIVE_DETAIL_ptt"
+            operation="ETH_SELECT_ARCHIVE_DETAILSelect_fa_tracking_id"
+            inputVariable="Invoke_SLCT_ArchiveDetail_In"
+            outputVariable="Invoke_SLCT_ArchiveDetail_Out"/>
+    <!--
+    <assign name="Assign_UPDT_Master">
+      <copy>
+        <from variable="G_Invoke_SLCT_Archivemaster_ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTERSelect_stcontrol_OutputVariable"
+              part="EthArchiveMasterTransactionCollection"
+              query="/ns5:EthArchiveMasterTransactionCollection/ns5:EthArchiveMasterTransaction/ns5:messageId"/>
+        <to variable="G_Invoke_UPDT_Archivemaster_update_InputVariable"
+            part="EthArchiveMasterTransactionCollection"
+            query="/ns5:EthArchiveMasterTransactionCollection/ns5:EthArchiveMasterTransaction/ns5:messageId"/>
+      </copy>
+      <copy>
+        <from expression="'FA_RECEIVE'"/>
+        <to variable="G_Invoke_UPDT_Archivemaster_update_InputVariable"
+            part="EthArchiveMasterTransactionCollection"
+            query="/ns5:EthArchiveMasterTransactionCollection/ns5:EthArchiveMasterTransaction/ns5:stage"/>
+      </copy>
+      <copy>
+        <from variable="G_Receive_FATransaction_Dequeue_InputVariable"
+              part="Transaction-997"
+              query="/ns8:Transaction-997/ns8:Loop-AK2/ns8:Segment-AK2/ns8:Element-329"/>
+        <to variable="G_Invoke_UPDT_Archivemaster_update_InputVariable"
+            part="EthArchiveMasterTransactionCollection"
+            query="/ns5:EthArchiveMasterTransactionCollection/ns5:EthArchiveMasterTransaction/ns5:stControl"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_UPDT_Archivemaster"
+            partnerLink="ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER"
+            portType="ns2:ETH_SLCTUPDTDB_ELSHA_ARCHIVEMASTER_ptt"
+            operation="update"
+            inputVariable="G_Invoke_UPDT_Archivemaster_update_InputVariable"/>
+            -->
+    <assign name="Assign_UPDT_Detail">
+      <copy>
+        <from expression="ora:getContentAsString(bpws:getVariableData('G_Receive_FATransaction_Dequeue_InputVariable','Transaction-997','/ns8:Transaction-997'))"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:payload"/>
+      </copy>
+      <copy>
+        <from variable="Invoke_SLCT_ArchiveDetail_Out"
+              part="EthArchiveDetailTransactionCollection"
+              query="/ns10:EthArchiveDetailTransactionCollection/ns10:EthArchiveDetailTransaction/ns10:messageId"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:messageId"/>
+      </copy>
+      <copy>
+        <from variable="G_Receive_FATransaction_Dequeue_InputVariable"
+              part="Transaction-997"
+              query="/ns8:Transaction-997/ns8:Internal-Properties/ns8:Data-Structure/ns8:Property[13]"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:faIsaNumber"/>
+      </copy>
+      <copy>
+        <from variable="G_Receive_FATransaction_Dequeue_InputVariable"
+              part="Transaction-997"
+              query="/ns8:Transaction-997/ns8:Internal-Properties/ns8:Data-Structure/ns8:Data-Structure/ns8:Property[6]"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:faGsNumber"/>
+      </copy>
+      <copy>
+        <from variable="G_Receive_FATransaction_Dequeue_InputVariable"
+              part="Transaction-997"
+              query="/ns8:Transaction-997/ns8:Internal-Properties/ns8:Data-Structure/ns8:Data-Structure/ns8:Property[5]"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:faTime"/>
+      </copy>
+      <copy>
+        <from expression="concat(substring(bpws:getVariableData('G_Receive_FATransaction_Dequeue_InputVariable','Transaction-997','/ns8:Transaction-997/ns8:Internal-Properties/ns8:Data-Structure/ns8:Data-Structure/ns8:Property[4]'),1.0,4.0),&quot;-&quot;,substring(bpws:getVariableData('G_Receive_FATransaction_Dequeue_InputVariable','Transaction-997','/ns8:Transaction-997/ns8:Internal-Properties/ns8:Data-Structure/ns8:Data-Structure/ns8:Property[4]'),5.0,2.0),&quot;-&quot;,substring(bpws:getVariableData('G_Receive_FATransaction_Dequeue_InputVariable','Transaction-997','/ns8:Transaction-997/ns8:Internal-Properties/ns8:Data-Structure/ns8:Data-Structure/ns8:Property[4]'),7.0,2.0))"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:faDate"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-date()"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:transactionDate"/>
+      </copy>
+      <copy>
+        <from expression="'997'"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:transactionType"/>
+      </copy>
+      <copy>
+        <from expression="'B2B'"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:source"/>
+      </copy>
+      <copy>
+        <from variable="Invoke_SLCT_ArchiveDetail_Out"
+              part="EthArchiveDetailTransactionCollection"
+              query="/ns10:EthArchiveDetailTransactionCollection/ns10:EthArchiveDetailTransaction/ns10:destinationAckTrackingId"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:destinationAckTrackingId"/>
+      </copy>
+      <copy>
+        <from variable="Invoke_SLCT_ArchiveDetail_Out"
+              part="EthArchiveDetailTransactionCollection"
+              query="/ns10:EthArchiveDetailTransactionCollection/ns10:EthArchiveDetailTransaction/ns10:destinationSystem"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:destinationSystem"/>
+      </copy>
+      <copy>
+        <from variable="Invoke_SLCT_ArchiveDetail_Out"
+              part="EthArchiveDetailTransactionCollection"
+              query="/ns10:EthArchiveDetailTransactionCollection/ns10:EthArchiveDetailTransaction/ns10:bussinessDocumentId"/>
+        <to variable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"
+            part="EthArchiveDetailTransactionCollection"
+            query="/ns6:EthArchiveDetailTransactionCollection/ns6:EthArchiveDetailTransaction/ns6:bussinessDocumentId"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_INSRT_Archivedetail"
+            partnerLink="ETH_INSRTDB_ELSHA_ARCHIVEDETAIL"
+            portType="ns3:ETH_INSRTDB_ELSHA_ARCHIVEDETAIL_ptt"
+            operation="insert"
+            inputVariable="G_Invoke_INSRT_Archivedetail_insert_InputVariable"/>
+  </sequence>
+</process>

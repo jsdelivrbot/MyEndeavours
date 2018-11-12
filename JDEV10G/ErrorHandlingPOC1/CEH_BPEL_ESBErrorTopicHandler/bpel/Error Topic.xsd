@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.4.795 (http://www.liquid-technologies.com)-->
+<schema xmlns:jms="http://xmlns.oracle.com/pcbpel/adapter/jms/" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="Error_Topic_Message">
+    <complexType>
+      <sequence>
+        <element minOccurs="0" maxOccurs="1" ref="jms:JMSInboundHeadersAndProperties" />
+        <element minOccurs="0" maxOccurs="1" name="payload" type="anyType" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="JMSInboundHeadersAndProperties">
+    <complexType>
+      <sequence>
+        <element minOccurs="0" maxOccurs="1" name="JMSInboundHeaders" type="jms:JMSInboundHeaderType" />
+        <element minOccurs="0" maxOccurs="1" name="JMSInboundProperties" type="jms:JMSInboundPropertiesType" />
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="JMSInboundHeaderType">
+    <all>
+      <element minOccurs="0" maxOccurs="1" name="JMSCorrelationID" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="JMSDeliveryMode" type="integer" />
+      <element minOccurs="0" maxOccurs="1" name="JMSExpiration" type="long" />
+      <element minOccurs="0" maxOccurs="1" name="JMSMessageID" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="JMSPriority" type="integer" />
+      <element minOccurs="0" maxOccurs="1" name="JMSRedelivered" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="JMSType" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="JMSTimestamp" type="long" />
+      <element minOccurs="0" maxOccurs="1" name="JMSReplyTo" type="string" />
+    </all>
+  </complexType>
+  <complexType name="JMSInboundPropertiesType">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="Property" type="jms:InboundPropType" />
+    </sequence>
+  </complexType>
+  <complexType name="InboundPropType">
+    <simpleContent>
+      <extension base="string">
+        <attribute name="name" type="ID" use="required" />
+        <attribute name="type" type="jms:InboundPropTypeEnum" use="optional" />
+        <attribute name="value" type="string" use="required" />
+      </extension>
+    </simpleContent>
+  </complexType>
+  <simpleType name="InboundPropTypeEnum">
+    <restriction base="string">
+      <enumeration value="string" />
+      <enumeration value="integer" />
+      <enumeration value="long" />
+      <enumeration value="boolean" />
+      <enumeration value="byte" />
+      <enumeration value="short" />
+      <enumeration value="float" />
+      <enumeration value="double" />
+    </restriction>
+  </simpleType>
+</schema>

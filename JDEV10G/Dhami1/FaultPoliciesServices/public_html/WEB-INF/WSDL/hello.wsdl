@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="HelloPolicies"
+             targetNamespace="http://hello.emerson.com" 
+             xmlns="http://schemas.xmlsoap.org/wsdl/" 
+             xmlns:tns="http://hello.emerson.com"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://hello.emerson.com">
+                    <element name="requestElement" type="xsd:string"/>
+                    <element name="responseElement" type="xsd:string"/>
+		</schema>
+	</types>
+	<message name="HelloPoliciesRequestMessage">
+		<part name="requestPart" element="tns:requestElement"/>
+	</message>
+	<message name="HelloPoliciesResponseMessage">
+		<part name="responsePart" element="tns:responseElement"/>
+	</message>
+
+	<portType name="HelloPoliciesPortType">
+		<operation name="process">
+			<input  message="tns:HelloPoliciesRequestMessage" />
+			<output message="tns:HelloPoliciesResponseMessage"/>
+		</operation>
+	</portType>
+        <binding name="HeloPoliciesBinding" type="tns:HelloPoliciesPortType">
+            <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+            <operation name="process">
+                <soap:operation soapAction="process"/>
+                <input><soap:body use="literal"/></input>
+                <output><soap:body use="literal"/></output>
+            </operation>
+        </binding>
+        <service name="HelloPoliciesService2">
+            <port binding="tns:HeloPoliciesBinding" name="HelloPoliciesPort2">
+                <soap:address location=""/>
+            </port>
+        </service>
+</definitions>

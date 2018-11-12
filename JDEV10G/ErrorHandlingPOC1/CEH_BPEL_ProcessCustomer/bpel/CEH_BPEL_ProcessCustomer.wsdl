@@ -1,0 +1,37 @@
+<definitions
+     name="CEH_BPEL_ProcessCustomer"
+     targetNamespace="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://schemas.emerson.com/common/envelope"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns3="http://schemas.oracle.com/bpel/extension"
+     xmlns:ns2="http://schemas.emerson.com/customer"
+     xmlns:client="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer"
+    >
+    <import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.emerson.com/common/envelope"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer"
+             xmlns:ns2="http://schemas.emerson.com/customer">
+            <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="CommonEnvelope.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.emerson.com/common/envelope"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:ns2="http://schemas.emerson.com/customer"
+             xmlns:client="http://bpel.emerson.com/CEH_BPEL_ProcessCustomer">
+            <xsd:import namespace="http://schemas.emerson.com/customer" schemaLocation="Customer.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="CEH_BPEL_ProcessCustomerRequestMessage">
+        <part name="payload" element="ns1:envelope"/>
+    </message>
+    <portType name="CEH_BPEL_ProcessCustomer">
+        <operation name="process">
+            <input message="client:CEH_BPEL_ProcessCustomerRequestMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="CEH_BPEL_ProcessCustomer">
+        <plnk:role name="CEH_BPEL_ProcessCustomerProvider">
+            <plnk:portType name="client:CEH_BPEL_ProcessCustomer"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

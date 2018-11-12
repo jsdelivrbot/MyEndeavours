@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CEH_BPEL_AQRejectedMsgHandler" src="CEH_BPEL_AQRejectedMsgHandler.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="readRejectedMsg">
+            <property name="wsdlLocation">readRejectedMsg.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PutFile">
+            <property name="wsdlLocation">PutFile.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="readRejectedMsg">
+            <property name="portType">Dequeue_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

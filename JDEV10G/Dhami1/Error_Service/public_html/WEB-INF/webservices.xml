@@ -1,0 +1,25 @@
+<webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
+     version="1.1">
+    <webservice-description>
+        <webservice-description-name>RejectionHandlerService</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/RejectionHandlerService.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/RejectionHandlerService-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>RejectionHandlerPort</port-component-name>
+            <wsdl-port xmlns:wsa0="http://xmlns.oracle.com/pcbpel/rejectionHandler">wsa0:RejectionHandlerPort</wsdl-port>
+            <service-endpoint-interface>com.emerson.inder.error.RejectionHandlerPortType</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>RejectionHandlerPort</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>Service Handler</handler-name>
+                <handler-class>com.emerson.inder.handler.ServiceHandler</handler-class>
+                <init-param>
+                   <param-name>test</param-name>
+                   <param-value>testValue</param-value>
+                </init-param>
+            </handler>
+        </port-component>
+    </webservice-description>
+</webservices>

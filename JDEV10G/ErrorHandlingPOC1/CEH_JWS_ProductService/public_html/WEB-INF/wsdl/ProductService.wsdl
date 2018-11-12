@@ -1,0 +1,62 @@
+<definitions
+    
+     targetNamespace="http://services.emerson.com/product"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://services.emerson.com/product"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:emr="http://schemas.emerson.com/common/envelope"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:prod="http://schemas.emerson.com/product"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://services.emerson.com/product"
+             xmlns:tns="http://services.emerson.com/product">
+            <import namespace="http://schemas.emerson.com/product" schemaLocation="Product.xsd"/>
+            <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="CommonEnvelope.xsd"/>
+            <element name="responseString" type="string"/>
+            <element name="fault" type="emr:faultType"/>
+            <element name="header" type="emr:headerType"/>
+        </schema>
+    </types>
+    <message name="RequestMessage">
+        <part name="requestPart" element="prod:product"/>
+    </message>
+    <message name="ResponseMessage">
+        <part name="responsePart" element="tns:responseString"/>
+    </message>
+    <message name="FaultMessage">
+        <part name="faultPart" element="tns:fault"/>
+    </message>
+    <message name="HeaderMessage">
+        <part name="headerPart" element="tns:header"/>
+    </message>
+    <portType name="ProductPortType">
+        <operation name="processProduct">
+            <input message="tns:RequestMessage"/>
+            <output message="tns:ResponseMessage"/>
+            <fault name="DataFault" message="tns:FaultMessage"/>
+        </operation>
+    </portType>
+    <binding name="ProductBinding" type="tns:ProductPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="processProduct">
+            <soap:operation style="document" soapAction="processProduct"/>
+            <input>
+                <soap:header message="tns:HeaderMessage" part="headerPart" use="literal"/>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="DataFault">
+                <soap:fault name="DataFault" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="ProductService">
+        <port name="ProductPort" binding="tns:ProductBinding">
+            <soap:address location="http://10.129.160.118:8888/ProductService/ProductPort"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.gssamerica.com/mdm/services" elementFormDefault="qualified" targetNamespace="http://www.gssamerica.com/mdm/services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CreateRecordsRequest" type="tns:createRecordRequestType" />
+  <xs:element name="UpdateRecordRequest" type="tns:updateRecordRequestType" />
+  <xs:element name="LookupSearchRequest" type="tns:searchRecordRequestType" />
+  <xs:element name="SearchRecordRequest" type="tns:searchRecordRequestType" />
+  <xs:element name="AddRemoteKeyRequest" type="tns:addRemoteKeyRequestType" />
+  <xs:element name="DeleteRecordRequest" type="tns:delRemoteKeyRequestType" />
+  <xs:element name="DeleteDuplicatesRequest" type="tns:delRemoteKeyRequestType" />
+  <xs:element name="PublishUpdates" type="tns:publishUpdatesRequestType" />
+  <xs:element name="ReplicateDataRequest" type="tns:replicateDataRequestType" />
+  <xs:element name="ServiceReply" nillable="true" type="tns:serviceReturnType" />
+  <xs:complexType name="serviceReturnType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="executionStatus" type="tns:executionStatusType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="valueType">
+    <xs:annotation>
+      <xs:documentation> Data Types </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="language" type="xs:string" />
+      <xs:element name="value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="keyType">
+    <xs:sequence>
+      <xs:element name="isDefault" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="remoteKeyType">
+    <xs:sequence>
+      <xs:element name="key" type="tns:keyType" />
+      <xs:element name="remoteSystem" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="unifiedValueType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="unit" type="xs:string" />
+      <xs:element name="value" type="tns:valueType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="objectNameType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="language" type="xs:string" />
+      <xs:element name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tableType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string" />
+      <xs:element name="tableName" type="tns:objectNameType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="unifiedFieldType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string" />
+      <xs:element name="fieldName" type="tns:objectNameType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="simpleValueType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="position" type="xs:integer" />
+      <xs:element name="unifiedValue" type="tns:unifiedValueType" />
+      <xs:element minOccurs="0" name="remoteKey" type="tns:remoteKeyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldType">
+    <xs:sequence>
+      <xs:element name="dataType" type="xs:string" />
+      <xs:element minOccurs="0" name="taxonomyField" type="tns:unifiedFieldType" />
+      <xs:element minOccurs="0" name="unifiedField" type="tns:unifiedFieldType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recordIdentifierType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="recordId" type="xs:string" />
+      <xs:element minOccurs="0" name="externalId" type="xs:string" />
+      <xs:element minOccurs="0" name="autoId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="remoteKey" nillable="true" type="tns:remoteKeyType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="unifiedFields" type="tns:dataElementType" />
+      <xs:element name="table" type="tns:tableType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recordType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="dataElement" type="tns:dataElementType" />
+      <xs:element name="recordIdentifier" type="tns:recordIdentifierType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="lookupValueType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="linkId" type="xs:string" />
+      <xs:element name="record" type="tns:recordType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dataElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="displayValue" type="tns:valueType" />
+      <xs:element name="field" type="tns:fieldType" />
+      <xs:element minOccurs="0" name="simpleValue" type="tns:simpleValueType" />
+      <xs:element minOccurs="0" name="lookupValue" type="tns:lookupValueType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configurationDataType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="element" type="tns:configurationDataElementType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configurationDataElementType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="faultType">
+    <xs:sequence>
+      <xs:element name="severity" type="xs:string" />
+      <xs:element name="faultId" type="xs:string" />
+      <xs:element name="faultText" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="executionStatusType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="status" type="xs:string" />
+      <xs:element minOccurs="0" name="description" type="xs:string" />
+      <xs:element minOccurs="0" name="dataObject" type="xs:string" />
+      <xs:element minOccurs="0" name="returnValue" type="xs:string" />
+      <xs:element minOccurs="0" name="dataObjectId" type="tns:recordIdentifierType" />
+      <xs:element minOccurs="0" name="fault" nillable="true" type="tns:faultType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchRecordRequestType">
+    <xs:sequence>
+      <xs:element name="query" type="tns:queryType" />
+      <xs:element name="repositoryInfo" type="tns:repositoryInformationType" />
+      <xs:element minOccurs="0" name="configData" type="tns:configurationDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="queryType">
+    <xs:sequence>
+      <xs:element name="recordCriteria" type="tns:recordCriteriaType" />
+      <xs:element minOccurs="0" name="resultDefinition" type="tns:resultDefinitionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recordCriteriaType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="logicOperator" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dataElementCriteria" type="tns:dataElementCriteriaType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="recordIdentifierCriteria" type="tns:recordIdentifierCriteriaType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="keywordCriteria" type="tns:simpleValueCriteriaType" />
+      <xs:element name="tableCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="repositoryInformationType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dataLang" type="xs:string" />
+      <xs:element name="repositoryName" type="xs:string" />
+      <xs:element name="repositoryPort" type="xs:integer" />
+      <xs:element name="serverName" type="xs:string" />
+      <xs:element minOccurs="0" name="schemaLang" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dataElementCriteriaType">
+    <xs:sequence>
+      <xs:element name="fieldCode" type="xs:string" />
+      <xs:element minOccurs="0" name="taxonomyFieldCode" type="xs:string" />
+      <xs:element name="dataType" type="xs:string" />
+      <xs:element minOccurs="0" name="logicOperator" type="xs:string" />
+      <xs:element minOccurs="0" name="simpleValueCriteria" type="tns:simpleValueCriteriaType" />
+      <xs:element minOccurs="0" name="lookupValueCriteria">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="tableCode" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="dataElementCriteria" type="tns:dataElementCriteriaType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recordIdentifierCriteriaType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="autoId" type="xs:integer" />
+      <xs:element minOccurs="0" name="externalId" type="xs:string" />
+      <xs:element name="recordId" type="xs:string" />
+      <xs:element minOccurs="0" name="remoteKey" type="tns:remoteKeyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="simpleValueCriteriaType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="expressionOperator" type="xs:string" />
+      <xs:element minOccurs="0" name="unit" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createRecordRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="record" type="tns:recordType" />
+      <xs:element name="repositoryInfo" type="tns:repositoryInformationType" />
+      <xs:element minOccurs="0" name="configData" type="tns:configurationDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addRemoteKeyRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="recordIdentifier" type="tns:recordIdentifierType" />
+      <xs:element name="repositoryInfo" type="tns:repositoryInformationType" />
+      <xs:element minOccurs="0" name="configData" type="tns:configurationDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sortDefinitionType">
+    <xs:sequence>
+      <xs:element name="sortField" type="tns:sortFieldType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sortFieldType">
+    <xs:sequence>
+      <xs:element name="isAscending" type="xs:boolean" />
+      <xs:element name="fieldCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resultDefinitionType">
+    <xs:sequence>
+      <xs:element name="tableCode" type="xs:string" />
+      <xs:element name="fieldListType" type="xs:string" />
+      <xs:element name="fieldDefinition" type="tns:fieldDefinitionType" />
+      <xs:element name="languageFilter" type="xs:string" />
+      <xs:element name="retrieveRemoteKeys" type="tns:retreiveRemoteKeysType" />
+      <xs:element name="sortDefinition" type="tns:sortFieldType" />
+      <xs:element name="pageSize" type="xs:integer" />
+      <xs:element name="pageNumber" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="remoteSystemFilterType">
+    <xs:sequence>
+      <xs:element name="remoteSystemDefaultsOnly" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="remoteSystem" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="retreiveRemoteKeysType">
+    <xs:sequence>
+      <xs:element name="retreiveRemoteKeys" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="remoteSystemFilter" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldDefinitionType">
+    <xs:sequence>
+      <xs:element name="loadAttributes" type="xs:boolean" />
+      <xs:element name="lookupLevel" type="xs:integer" />
+      <xs:element name="fieldCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recordIdentifierRequestType">
+    <xs:sequence>
+      <xs:element name="TableCode" />
+      <xs:element name="recordIdentifier" type="tns:recordIdentifierCriteriaType" />
+      <xs:element name="remoteSystemFilter" type="tns:remoteSystemFilterType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="keyMappingQuereyRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="recordIdentifierRequest" type="tns:recordIdentifierRequestType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="delRemoteKeyRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="recordIdentifier" type="tns:recordIdentifierType" />
+      <xs:element name="repositoryInfo" type="tns:repositoryInformationType" />
+      <xs:element minOccurs="0" name="configData" type="tns:configurationDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateRecordRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="record" type="tns:recordType" />
+      <xs:element name="repositoryInfo" type="tns:repositoryInformationType" />
+      <xs:element minOccurs="0" name="configData" type="tns:configurationDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="publishUpdatesRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="record" type="tns:recordType" />
+      <xs:element name="repositoryInfo" type="tns:repositoryInformationType" />
+      <xs:element minOccurs="0" name="configData" type="tns:configurationDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="replicateDataRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="record" type="tns:recordType" />
+      <xs:element name="repositoryInfo" type="tns:repositoryInformationType" />
+      <xs:element minOccurs="0" name="configData" type="tns:configurationDataType" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,25 @@
+<xs:schema xmlns:tns="http://schemas.emerson.com/customer" attributeFormDefault="qualified" elementFormDefault="qualified"
+     targetNamespace="http://schemas.emerson.com/customer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="customer" type="tns:customerType"/>
+    <xs:complexType name="nameType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="middleName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="customerType">
+        <xs:sequence>
+            <xs:element name="name" type="tns:nameType"/>
+            <xs:element name="age">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="10"/>
+                        <xs:maxInclusive value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="company" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

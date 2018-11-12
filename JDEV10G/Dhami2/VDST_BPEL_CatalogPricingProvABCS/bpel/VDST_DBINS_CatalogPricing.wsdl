@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="VDST_DBINS_CatalogPricing"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/VDST_DBINS_CatalogPricing/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/VDST_DBINS_CatalogPricing/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/VDSTDBINSCatalogPricing"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/VDSTDBINSCatalogPricing"
+                schemaLocation="VDSTDBINSCatalogPricing_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="VdstCatalogPriceStagingCollection_msg">
+        <part name="VdstCatalogPriceStagingCollection" element="top:VdstCatalogPriceStagingCollection"/>
+    </message>
+
+
+    <portType name="VDST_DBINS_CatalogPricing_ptt">
+        <operation name="insert">
+            <input message="tns:VdstCatalogPriceStagingCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="VDST_DBINS_CatalogPricing_binding" type="tns:VDST_DBINS_CatalogPricing_ptt">
+        <jca:binding />
+        <operation name="insert">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBWriteInteractionSpec"
+
+                DescriptorName="VDSTDBINSCatalogPricing.VdstCatalogPriceStaging"
+                DmlType="insert"
+                DetectOmissions="true"
+                OptimizeMerge="true"
+                MappingsMetaDataURL="VDSTDBINSCatalogPricing_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if eis/DB/LocalDev_ClosetMaid is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="VDST_DBINS_CatalogPricing">
+        <port name="VDST_DBINS_CatalogPricing_pt" binding="tns:VDST_DBINS_CatalogPricing_binding">
+            <jca:address location="eis/DB/LocalDev_ClosetMaid"
+                UIConnectionName="LocalDev_ClosetMaid"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.OraclePlatform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//inedec-moh-17:1521/XE"
+                mcf.UserName="closetmaid"
+                mcf.Password="3F2A158D604073EBEDA9E6D8D4C51CD0"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="VDST_DBINS_CatalogPricing_plt" >
+        <plt:role name="VDST_DBINS_CatalogPricing_role" >
+            <plt:portType name="tns:VDST_DBINS_CatalogPricing_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

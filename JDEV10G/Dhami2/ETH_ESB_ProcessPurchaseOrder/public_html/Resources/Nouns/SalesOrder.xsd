@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\SalesOrder.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/OrderManagementComponents.xsd"/>
+        <xsd:element name="SalesOrder" type="SalesOrderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The SalesOrder is a order or customer order, it is a step beyond a PurchaseOrder in that the receiving entity of the order also communicates SalesInformoration about the Order along with the Order itself. The SalesOrder is intended to be used when a order needs to be communicated between business applications and the PurchaseOrder terms and conditions and quantities have been agreed to. This agreement may occur in an electronic or by other means.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SalesOrderHeader" type="SalesOrderHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides information that pertains to the entire SalesOrder. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SalesOrderLine" type="SalesOrderLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides the line level detail of the items ordered by the SalesOrder and the associated detail.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SalesOrderSubLine" type="SalesOrderSubLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Component Subline represents any additional information concerning the product on the Line.  The Subline can be used to describe a specific configuration of the ordered item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SalesOrderSchedule" type="SalesOrderScheduleType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the schedule for the delivery of this line item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="SalesOrderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The schema type for SaleOrder.  SalesOrder's  base abstract type, Order, is shared between PurchaseOrder and SalesOrder. SalesOrder is essentially an extension of PurchaseOrder, but in order to use the local-global design pattern, each of PO and SO needs to instantiate its own Header and Line elements.To do this, we factored out the PO content models, instantiated both PO and SO from Order.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Sees an order from end to end...</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="SalesOrderHeader" minOccurs="0"/>
+                        <xsd:element ref="SalesOrderLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SalesOrderHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="OrderHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="BackOrderIndicator" minOccurs="0"/>
+                                        <xsd:element ref="SalesOrganizationIDs" minOccurs="0"/>
+                                        <xsd:element ref="DistributionCenterCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the DistributionCenter that the Seller will ship the items from.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="OrderCommission" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PurchaseOrderReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SalesOrderLineType">
+                <xsd:annotation>
+                        <xsd:documentation>Is the SalesOrder Line type that provides the structure of the SalesOrder Line.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="OrderLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="BackOrderIndicator" minOccurs="0"/>
+                                        <xsd:element ref="PurchaseOrderReference" minOccurs="0"/>
+                                        <xsd:element ref="RouteReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BOMReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PromisedDeliveryDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ScheduledDeliveryDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis">The scheduled delivery date provided by the supplier.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ActualDeliveryDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis">Is the actual delivery date and time of the line item.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ActualShipDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis">Inidicates the shipping date and time of the line item.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis">Inidicates the shipping date and time of the line item.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="DistributionCenterCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis">Indicates the distribution center the line item will be shipped from.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="OrderCommission" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SalesOrderSubLine" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SalesOrderSchedule" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SalesOrderSubLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="RequestSubLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SalesOrderScheduleType">
+                <xsd:complexContent>
+                        <xsd:extension base="ProcurementScheduleType">
+                                <xsd:sequence>
+                                        <xsd:element ref="BackOrderIndicator" minOccurs="0"/>
+                                        <xsd:element ref="PurchaseOrderReference" minOccurs="0"/>
+                                        <xsd:element ref="OrderCommission" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

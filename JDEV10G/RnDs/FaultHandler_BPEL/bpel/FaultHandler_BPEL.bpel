@@ -1,0 +1,85 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 26 18:35:56 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FaultHandler_BPEL"
+         targetNamespace="http://xmlns.emerson.com/FaultHandler_BPEL"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://xmlns.emerson.com/FaultHandler_BPEL"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/PollCTEXML/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://schemas.emerson.com/common/envelope"
+         xmlns:ns2="http://xmlns.emerson.com/FaultGenerator_BPEL"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Read_role" name="PollCTEXML"
+                 partnerLinkType="ns1:Read_plt"/>
+    <partnerLink name="FaultGenerator_BPEL"
+                 partnerRole="FaultGenerator_BPELProvider"
+                 partnerLinkType="ns2:FaultGenerator_BPEL"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="Receive_InputCTE_Read_InputVariable"
+              messageType="ns1:envelope_msg"/>
+    <variable name="Invoke_FaultGenerator_Input"
+              messageType="ns2:FaultGenerator_BPELRequestMessage"/>
+    <variable name="Invoke_FaultGenerator_Output"
+              messageType="ns2:FaultGenerator_BPELResponseMessage"/>
+    <variable name="G_BPEL_INPUT" type="xsd:string"/>
+    <variable name="G_CURRENT_INVOKE" type="xsd:string"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_InputCTE" partnerLink="PollCTEXML"
+             portType="ns1:Read_ptt" operation="Read"
+             variable="Receive_InputCTE_Read_InputVariable"
+             createInstance="yes"/>
+    <assign name="Assign_1">
+      <copy>
+        <from expression="string('Input')"/>
+        <to variable="G_BPEL_INPUT"/>
+      </copy>
+      <copy>
+        <from expression="string('Invoke')"/>
+        <to variable="G_CURRENT_INVOKE"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="FaultGenerator_BPEL"
+            portType="ns2:FaultGenerator_BPEL" operation="process"
+            inputVariable="Invoke_FaultGenerator_Input"
+            outputVariable="Invoke_FaultGenerator_Output"/>
+  </sequence>
+</process>

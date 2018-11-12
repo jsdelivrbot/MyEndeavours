@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.4.0) (Build 080602)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>ETH_DBSEL_ItemKey</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>ETHDBSELItemKey.EcxDoclogs</opm:class>
+         <opm:alias>EcxDoclogs</opm:alias>
+         <opm:primary-key>
+            <opm:field table="ECX_DOCLOGS" name="DOCUMENT_NUMBER" xsi:type="opm:column"/>
+            <opm:field table="ECX_DOCLOGS" name="ITEM_KEY" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="ETH_DBSEL_ItemKeySelect" xsi:type="toplink:read-all-query">
+                  <opm:criteria operator="equal" xsi:type="toplink:relation-expression">
+                     <toplink:left name="documentNumber" xsi:type="toplink:query-key-expression">
+                        <toplink:base xsi:type="toplink:base-expression"/>
+                     </toplink:left>
+                     <toplink:right xsi:type="toplink:parameter-expression">
+                        <toplink:parameter name="DocNumber" xsi:type="opm:column"/>
+                     </toplink:right>
+                  </opm:criteria>
+                  <opm:arguments>
+                     <opm:argument name="DocNumber">
+                        <opm:type>java.lang.String</opm:type>
+                     </opm:argument>
+                  </opm:arguments>
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>ETHDBSELItemKey.EcxDoclogs</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+               <opm:query name="findAllEcxDoclogs" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>ETHDBSELItemKey.EcxDoclogs</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>documentNumber</opm:attribute-name>
+               <opm:field table="ECX_DOCLOGS" name="DOCUMENT_NUMBER" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemKey</opm:attribute-name>
+               <opm:field table="ECX_DOCLOGS" name="ITEM_KEY" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="ECX_DOCLOGS"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+   <toplink:login xsi:type="toplink:database-login">
+      <toplink:platform-class>oracle.toplink.platform.database.oracle.Oracle10Platform</toplink:platform-class>
+      <toplink:user-name>apps</toplink:user-name>
+      <toplink:password>B9D6BB536E38834CF956D456DFFE4433</toplink:password>
+      <toplink:driver-class>oracle.jdbc.OracleDriver</toplink:driver-class>
+      <toplink:connection-url>jdbc:oracle:thin:@sarahs0db1.emrsn.com:25001:SARAHS0</toplink:connection-url>
+   </toplink:login>
+</toplink:object-persistence>

@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="CEH_FL_GET_ReceiveCustomer_RS" guid="BEE6BBB1040A11DEBF8BA9BFEFE09888" qname="CEHSys_EHPOC1.CEH_FL_GET_ReceiveCustomer_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service CEH_FL_GET_ReceiveCustomer</description>
+   <versionInfo>
+      <ID>1237281108324</ID>
+      <lastModifiedTime>Tue Mar 17 14:41:48 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_ErrorHandlingPOC1_CEH_ESB_FetchCustomerData</lastModifiedUser>
+   </versionInfo>
+   <parent guid="00AA229012C911DE9F411B4F09FCBA8D" qname="CEHSys_EHPOC1" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>CEH_FL_GET_ReceiveCustomer.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/CEH_FL_GET_ReceiveCustomer/">tns:ReadCustomerFile_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/CEHSys_EHPOC1/CEH_FL_GET_ReceiveCustomer_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://inedec-mlap-45.emrcorp.local:80/event/CEHSys_EHPOC1/CEH_FL_GET_ReceiveCustomer_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="BEE6BBB2040A11DEBF8BA9BFEFE09888" qname="CEHSys_EHPOC1.CEH_FL_GET_ReceiveCustomer_RS.ReadCustomerFile" wsdlOperation="ReadCustomerFile" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/customer" element="tns:customer"/>
+         <routingRules>
+            <routingRule guid="E27BAE30049811DEBFDC11A765C51E81" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="A9688E0012D111DEBFA159875E1114B1" qname="BPELSystem.default.CEH_BPEL_ReceiveData.CEH_BPEL_ReceiveData_1_0.initiate" serviceGUID="A25C33F112D111DEBFA159875E1114B1" serviceQName="BPELSystem.default.CEH_BPEL_ReceiveData.CEH_BPEL_ReceiveData_1_0" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>customer_To_envelope.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

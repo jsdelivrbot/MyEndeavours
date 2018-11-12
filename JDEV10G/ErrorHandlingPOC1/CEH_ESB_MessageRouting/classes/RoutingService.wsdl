@@ -1,0 +1,37 @@
+<definitions 
+    targetNamespace="http://esb.emerson.com/dataRouting" 
+    xmlns="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:tns="http://esb.emerson.com/dataRouting" 
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:emr="http://schemas.emerson.com/common/envelope">
+    
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://esb.emerson.com/dataRouting" xmlns:tns="http://esb.emerson.com/dataRouting">
+            <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="CommonEnvelope.xsd"/> 
+        </schema>
+    </types>
+    <message name="RequestMessage">
+        <part name="requestPart" element="emr:envelope"/>
+    </message>
+    <portType name="RoutingPortType">
+        <operation name="route">
+            <input message="tns:RequestMessage"/>
+        </operation>
+    </portType>
+    <binding name="RoutingBinding" type="tns:RoutingPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="route">
+            <soap:operation style="document" soapAction="route"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="RoutingService">
+        <port name="RoutingPort" binding="tns:RoutingBinding">
+            <soap:address location=""/>
+        </port>
+    </service>
+</definitions>

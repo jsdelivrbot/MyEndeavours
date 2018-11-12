@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="VDST_FILEPUT_DebugFile" guid="B05744C1661111DEBF7F17F5CA68AC99" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_FILEPUT_DebugFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1263818791638</ID>
+      <lastModifiedTime>Mon Jan 18 12:46:31 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>VDST_FILEPUT_DebugFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/VDST_FILEPUT_DebugFile/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/VDSTSystem_EBSServices/VDSTSysGrp_CatalogPricing/VDST_FILEPUT_DebugFile?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:80/event/VDSTSystem_EBSServices/VDSTSysGrp_CatalogPricing/VDST_FILEPUT_DebugFile</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="B0598EB0661111DEBF7F17F5CA68AC99" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_FILEPUT_DebugFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/common/envelope" element="tns:envelope"/>
+      </operationInfo>
+   </operations>
+</service>

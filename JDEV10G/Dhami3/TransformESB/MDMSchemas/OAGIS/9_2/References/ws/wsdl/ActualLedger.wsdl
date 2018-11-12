@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/ActualLedger.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" xmlns:ns="http://www.openapplications.org/oagis/9/IANAMIMEMediaTypes:2003" xmlns:ns1="http://www.openapplications.org/oagis/9/currencycode/54217:2001" xmlns:ns2="http://www.openapplications.org/oagis/9/languagecode/5639:1988" xmlns:ns3="http://www.openapplications.org/oagis/9/unitcode/66411:2001" xmlns:ns4="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:ns5="http://www.openapplications.org/oagis/9/codelists" xmlns:ns6="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" xmlns:ns7="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/GetActualLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowActualLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetListActualLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ListActualLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/LoadActualLedger.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="GetActualLedger">
+                <part name="Message" element="oa:GetActualLedger"/>
+        </message>
+        <message name="ShowActualLedger">
+                <part name="Message" element="oa:ShowActualLedger"/>
+        </message>
+        <message name="GetListActualLedger">
+                <part name="Message" element="oa:GetListActualLedger"/>
+        </message>
+        <message name="ListActualLedger">
+                <part name="Message" element="oa:ListActualLedger"/>
+        </message>
+        <message name="LoadActualLedger">
+                <part name="Message" element="oa:LoadActualLedger"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestActualLedgerPortType">
+                <operation name="GetActualLedger">
+                        <input message="oaws:GetActualLedger"/>
+                </operation>
+                <operation name="GetListActualLedger">
+                        <input message="oaws:GetListActualLedger"/>
+                </operation>
+                <operation name="LoadActualLedger">
+                        <input message="oaws:LoadActualLedger"/>
+                </operation>
+        </portType>
+        <portType name="ResponseActualLedgerPortType">
+                <operation name="ShowActualLedger">
+                        <input message="oaws:ShowActualLedger"/>
+                </operation>
+                <operation name="ListActualLedger">
+                        <input message="oaws:ListActualLedger"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncActualLedgerPortType">
+                <operation name="GetActualLedger">
+                        <input message="oaws:GetActualLedger"/>
+                        <output message="oaws:ShowActualLedger"/>
+                </operation>
+                <operation name="GetListActualLedger">
+                        <input message="oaws:GetListActualLedger"/>
+                        <output message="oaws:ListActualLedger"/>
+                </operation>
+                <operation name="LoadActualLedger">
+                        <input message="oaws:LoadActualLedger"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestActualLedgerBinding" type="oaws:RequestActualLedgerPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetListActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="LoadActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseActualLedgerBinding" type="oaws:ResponseActualLedgerPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ListActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncActualLedgerBinding" type="oaws:SyncActualLedgerPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetListActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="LoadActualLedger">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ActualLedger.wsdl"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestActualLedgerService">
+                <port name="RequestActualLedgerBinding" binding="oaws:RequestActualLedgerBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestActualLedger"/>
+                </port>
+        </service>
+        <service name="ResponseActualLedgerService">
+                <port name="ResponseActualLedgerBinding" binding="oaws:ResponseActualLedgerBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseActualLedger"/>
+                </port>
+        </service>
+        <service name="SyncActualLedgerService">
+                <port name="SyncActualLedgerBinding" binding="oaws:SyncActualLedgerBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncActualLedger"/>
+                </port>
+        </service>
+</definitions>

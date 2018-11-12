@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\PaymentStatus.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="PaymentStatus" type="PaymentStatusType"/>
+        <xsd:element name="PaymentStatusHeader" type="PaymentStatusHeaderType"/>
+        <xsd:element name="PaymentStatusPayment" type="PaymentStatusOriginalPayment"/>
+        <xsd:complexType name="PaymentStatusType">
+                <xsd:sequence>
+                        <xsd:element ref="PaymentStatusHeader" minOccurs="0"/>
+                        <xsd:element ref="PaymentStatusPayment" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="PaymentStatusHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="InitiatingParty" minOccurs="0"/>
+                                        <xsd:element ref="ForwardingAgentParty" minOccurs="0"/>
+                                        <xsd:element ref="FirstAgentParty" minOccurs="0"/>
+                                        <xsd:element ref="RejectionStatus" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PaymentStatusOriginalPayment">
+                <xsd:complexContent>
+                        <xsd:extension base="TransferPaymentType"/>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

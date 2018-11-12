@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Called_BPEL_1_0" guid="AF8D7CF15F3E11DEBFCEF37B15612FC0" qname="BPELSystem.default.Called_BPEL.Called_BPEL_1_0" status="ENABLED" serviceType="BPELService" typeDescription="BPEL Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+   <description>BPEL Service for Called_BPEL</description>
+   <versionInfo>
+      <ID>1245683370746</ID>
+      <lastModifiedTime>Mon Jun 22 20:39:30 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <parent guid="AC49AB705B3F11DEBFB21BB3D92A8AFA" qname="BPELSystem.default.Called_BPEL" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>http://INEDEC-MLAP-45.emrsn.org:80/orabpel/default/Called_BPEL/1.0/Called_BPEL?wsdl</wsdlURL>
+      <portType xmlns:tns="http://schemas.emerson.com/Called_BPEL">tns:Called_BPEL</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/BPELSystem/default/Called_BPEL/Called_BPEL_1_0?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/BPELSystem/default/Called_BPEL/Called_BPEL_1_0</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <parameters>
+      <parameter name="port">80</parameter>
+      <parameter name="processName">Called_BPEL</parameter>
+      <parameter name="host">INEDEC-MLAP-45.emrsn.org</parameter>
+      <parameter name="processVersion">1.0</parameter>
+      <parameter name="processDomain">default</parameter>
+   </parameters>
+   <operations>
+      <operationInfo guid="B6C505B05F3E11DEBFCEF37B15612FC0" qname="BPELSystem.default.Called_BPEL.Called_BPEL_1_0.process" wsdlOperation="process" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://schemas.emerson.com/Called_BPEL" element="tns:Called_BPELProcessRequest"/>
+      </operationInfo>
+   </operations>
+</service>

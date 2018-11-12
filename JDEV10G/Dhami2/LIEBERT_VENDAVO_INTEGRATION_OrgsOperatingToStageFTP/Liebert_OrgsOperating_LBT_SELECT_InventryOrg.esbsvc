@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_SELECT_InventryOrg" guid="DEF5D02073FB11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="DB" typeDescription="oracle.tip.esb.console.servicetype.outbounddbadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1228925064990</ID>
+      <lastModifiedTime>Wed Dec 10 16:04:24 GMT+00:00 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>LBT_SELECT_InventryOrg.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_InventryOrg/">tns:LBT_SELECT_InventryOrg_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_InventryOrg?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_SELECT_InventryOrg</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="DEF5D02173FB11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg.LBT_SELECT_InventryOrgSelect" wsdlOperation="LBT_SELECT_InventryOrgSelect" mepDisplayName="Request Response" mep="RequestResponse">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg" element="tns:LBT_SELECT_InventryOrgSelectInputParameters"/>
+         <reply validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTInventryOrg" element="tns:EmrInventoryOrgCollection" schemaLocation="esb:///ESB_Projects/VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP/LBTSELECTInventryOrg_table.xsd"/>
+      </operationInfo>
+   </operations>
+</service>

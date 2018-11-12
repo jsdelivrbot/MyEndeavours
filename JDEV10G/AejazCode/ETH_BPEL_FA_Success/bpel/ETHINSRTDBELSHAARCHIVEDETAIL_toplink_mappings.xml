@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.4.0) (Build 080602)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>ETH_INSRTDB_ELSHA_ARCHIVEDETAIL</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>ETHINSRTDBELSHAARCHIVEDETAIL.EthArchiveDetailTransaction</opm:class>
+         <opm:alias>EthArchiveDetailTransaction</opm:alias>
+         <opm:primary-key>
+            <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="SEQ_NUMBER" xsi:type="opm:column"/>
+            <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="MESSAGE_ID" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="findAllEthArchiveDetailTransaction" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>ETHINSRTDBELSHAARCHIVEDETAIL.EthArchiveDetailTransaction</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>seqNumber</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="SEQ_NUMBER" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>messageId</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="MESSAGE_ID" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>flowId1</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="FLOW_ID_1" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>transactionDate</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="TRANSACTION_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>transactionType</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="TRANSACTION_TYPE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>payload</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="PAYLOAD" xsi:type="opm:column"/>
+               <opm:attribute-classification>[C</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>bussinessDocumentId</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="BUSSINESS_DOCUMENT_ID" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>source</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="SOURCE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>stage</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="STAGE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>destinationSystem</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="DESTINATION_SYSTEM" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>destinationFlowid</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="DESTINATION_FLOWID" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>destinationAckTrackingId</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="DESTINATION_ACK_TRACKING_ID" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>destinationAckFlag</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="DESTINATION_ACK_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>faIsaNumber</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="FA_ISA_NUMBER" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>faGsNumber</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="FA_GS_NUMBER" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>faDate</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="FA_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>faTime</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="FA_TIME" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>faErrorFlag</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="FA_ERROR_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>xmlConfirmbodNumber</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="XML_CONFIRMBOD_NUMBER" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>xmlConfirmbodDate</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="XML_CONFIRMBOD_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>xmlConfirmbodTime</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="XML_CONFIRMBOD_TIME" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>xmlConfirmbodErrorFlag</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="XML_CONFIRMBOD_ERROR_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>creationDate</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="CREATION_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>createdBy</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="CREATED_BY" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>lastUpdateDate</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="LAST_UPDATE_DATE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>lastUpdatedBy</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="LAST_UPDATED_BY" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>lastUpdateLogin</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="LAST_UPDATE_LOGIN" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute1</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_1" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute2</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_2" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute3</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_3" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute4</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_4" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute5</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_5" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute6</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_6" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute7</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_7" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute8</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_8" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute9</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_9" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>attribute10</opm:attribute-name>
+               <opm:field table="ETH_ARCHIVE_DETAIL_TRANSACTION" name="ATTRIBUTE_10" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="ETH_ARCHIVE_DETAIL_TRANSACTION"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+</toplink:object-persistence>

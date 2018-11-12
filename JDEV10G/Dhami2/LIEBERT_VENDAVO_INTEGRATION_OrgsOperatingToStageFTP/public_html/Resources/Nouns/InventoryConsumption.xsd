@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\InventoryConsumption.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="InventoryConsumption" type="InventoryConsumptionType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is used to share a consumer's usage information about an item or product with the supplier of the item or product</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="InventoryConsumptionHeader" type="InventoryConsumptionHeaderType"/>
+        <xsd:element name="InventoryConsumptionLine" type="InventoryConsumptionLineType"/>
+        <xsd:complexType name="InventoryConsumptionType">
+                <xsd:sequence>
+                        <xsd:element ref="InventoryConsumptionHeader" minOccurs="0"/>
+                        <xsd:element ref="InventoryConsumptionLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="InventoryConsumptionHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="TransactionDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Datetime at which the item consumption is reported</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Facility" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the location where the items are consumed. This can be specified on the header or the lines. Any value specified at line level over-rides the header value.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the location where the items are consumed. This can be specified on the header or the lines. Any value specified at line level over-rides the header value.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ShipToParty" minOccurs="0"/>
+                                        <xsd:element ref="SupplierParty" minOccurs="0"/>
+                                        <xsd:element ref="CarrierParty" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SupplierContractReference" minOccurs="0"/>
+                                        <xsd:element ref="BuyerContractReference" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="InventoryConsumptionLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:annotation>
+                                                <xsd:documentation>The Quantity is is the quantity of item consumed i.e. the reduction in on-hand quantity of acceptable items at the end of the current reporting period (for example, at the end of the day, or at point of sale) due to consumption of the items.
+
+The TransactionDateTime is the datetime at which the quantity is consumed</xsd:documentation>
+                                        </xsd:annotation>
+                                        <xsd:group ref="InventoryTransactionGroup"/>
+                                        <xsd:element ref="ShipUnitQuantity" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This contains the quantity of units or things shipped. This represents the container(s), not the product shipped.  An example of this is "4 truck loads" or "2 wooden crates"</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="FreightClassification" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Classifies the items being consumed for transportation.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="BuyerContractReference" minOccurs="0"/>
+                                        <xsd:element ref="SupplierContractReference" minOccurs="0"/>
+                                        <xsd:element ref="Charge" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

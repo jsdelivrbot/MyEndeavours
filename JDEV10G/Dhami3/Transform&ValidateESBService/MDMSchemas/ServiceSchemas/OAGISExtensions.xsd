@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns="http://www.gssamerica.com/mdm/oagisextensions" elementFormDefault="qualified" targetNamespace="http://www.gssamerica.com/mdm/oagisextensions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CustomerPartyExtensions" type="CustomerPartyExtensionType" />
+  <xs:complexType name="PersonExtentionsType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" type="EmailType" />
+      <xs:element minOccurs="0" name="Gender" type="xs:string" />
+      <xs:element minOccurs="0" name="DOB" type="xs:date" />
+      <xs:element minOccurs="0" name="SSN" type="xs:string" />
+      <xs:element minOccurs="0" name="PAN" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EmailType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PrimaryEmail" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondaryEmail" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyEmail" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddressExtensionsType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AttentionOfName" type="xs:string" />
+      <xs:element minOccurs="0" name="CareOfName" type="xs:string" />
+      <xs:element minOccurs="0" name="State" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomerPartyExtensionType">
+    <xs:sequence>
+      <xs:element name="PersonExtentions" type="PersonExtentionsType" />
+      <xs:element name="AddressExtensions" type="AddressExtensionsType" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

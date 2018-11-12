@@ -1,0 +1,61 @@
+<definitions
+     name="CEH_JMSTDEQ_ESBErrorTopic"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/CEH_JMSTDEQ_ESBErrorTopic/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/CEH_JMSTDEQ_ESBErrorTopic/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterInboundHeader.wsdl"/>
+    <types>
+        <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/opaque/" xmlns="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/CEH_JMSTDEQ_ESBErrorTopic/"
+             xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+             xmlns:pc="http://xmlns.oracle.com/pcbpel/" xmlns:opaque="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+             xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/">
+            <element name="opaqueElement" type="base64Binary"/>
+            <element name="stringElement" type="string"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" schemaLocation="Error%20Topic.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="ConsumeESBError_xmlMsg">
+        <part name="stringMsg" element="opaque:stringElement"/>
+    </message>
+    <message name="ConsumeESBError_msg">
+        <part name="opaque" element="opaque:opaqueElement"/>
+    </message>
+    <portType name="ConsumeESBError_ptt">
+        <operation name="ConsumeESBError">
+            <input message="tns:ConsumeESBError_msg"/>
+        </operation>
+    </portType>
+    <binding name="ConsumeESBError_binding" type="tns:ConsumeESBError_ptt">
+        <pc:inbound_binding/>
+        <operation name="ConsumeESBError">
+            <jca:operation DestinationName="jms/topic/ESB_ERROR" UseMessageListener="false" PayloadType="TextMessage"
+                 ActivationSpec="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec"
+                 OpaqueSchema="true"/>
+            <input>
+                <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="CEH_JMSTDEQ_ESBErrorTopic">
+        <port name="ConsumeESBError_pt" binding="tns:ConsumeESBError_binding">
+            <jca:address location="jms/ESB_ERROR_TOPIC" UIConnectionName="Local" ManagedConnectionFactory="oracle.tip.adapter.jms.JmsManagedConnectionFactory"
+                 mcf.ConnectionFactoryLocation="jms/TopicConnectionFactory" mcf.IsTopic="true"
+                 mcf.IsTransacted="false" mcf.FactoryProperties="" mcf.Username="oc4jadmin"
+                 mcf.Password="F44034A2DD8158AE53D924290C873D4A" UIJmsProvider="OC4JJMS"/>
+        </port>
+    </service>
+    <plt:partnerLinkType name="ConsumeESBError_plt">
+        <plt:role name="ConsumeESBError_role">
+            <plt:portType name="tns:ConsumeESBError_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+</definitions>

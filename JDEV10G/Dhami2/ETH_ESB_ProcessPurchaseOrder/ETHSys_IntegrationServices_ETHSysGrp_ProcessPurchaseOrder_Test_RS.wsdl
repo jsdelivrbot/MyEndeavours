@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="Test_RS"
+     targetNamespace="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder"
+     xmlns:inp1="http://xmlns.emrsn.com/CustomProcessPurchaseOrder"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" schemaLocation="public_html/CustomProcessPurchaseOrder.xsd" />
+      </schema>
+    </types>
+    <message name="CustomProcessPO_request">
+        <part name="CustomProcessPO" element="inp1:CustomProcessPO"/>
+    </message>
+    <portType name="execute_ppt">
+        <operation name="execute">
+            <input message="tns:CustomProcessPO_request"/>
+        </operation>
+    </portType>
+</definitions>

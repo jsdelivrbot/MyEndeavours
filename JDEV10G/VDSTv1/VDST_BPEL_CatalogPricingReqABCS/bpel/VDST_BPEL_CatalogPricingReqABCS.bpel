@@ -1,0 +1,251 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jun 22 15:06:14 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_CatalogPricingReqABCS"
+         targetNamespace="http://services.emerson.com/VDST_BPEL_CatalogPricingReqABCS"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://schema.emerson.com/VDST_FTP_GET_CatalogPricing"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQENQ_CatalogPricing/"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://schemas.emerson.com/common/envelope"
+         xmlns:client="http://services.emerson.com/VDST_BPEL_CatalogPricingReqABCS"
+         xmlns:ns6="http://schemas.oracle.com/service/bpel/common"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/VDST_FTP_GET_CatalogPricing/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://services.emrson.com/VDTS/CatalogPricing"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Get_role" name="VDST_FTP_GET_CatalogPricing"
+                 partnerLinkType="ns1:Get_plt"/>
+    <partnerLink name="VDST_JMSQENQ_CatalogPricing"
+                 partnerRole="Produce_Message_role"
+                 partnerLinkType="ns7:Produce_Message_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_In_ReceiveCatalogPricing" messageType="ns1:CP-Load_msg"/>
+    <variable name="G_In_FtpHeader" messageType="ns2:InboundHeader_msg"/>
+    <variable name="G_ExecutionUnitId" type="xsd:string"/>
+    <variable name="G_ExecutionUnitName" type="xsd:string"/>
+    <variable name="G_ExecutionUnitType" type="xsd:string"/>
+    <!--<variable name="G_ExecutionParameters" element="ns6:parameters"/>-->
+    <variable name="G_CTE_Header" element="ns5:header"/>
+    <variable name="G_CTE_Body" element="ns5:body"/>
+    <variable name="G_ExecutionUnit" element="ns5:ExecutionUnit"/>
+    <variable name="G_CurrentExecutionTime" type="xsd:dateTime"/>
+    <variable name="G_NumberOfRecordsProcessed" type="xsd:string"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_CatalogPricing"
+             partnerLink="VDST_FTP_GET_CatalogPricing" portType="ns1:Get_ptt"
+             operation="Get" variable="G_In_ReceiveCatalogPricing"
+             createInstance="yes" bpelx:headerVariable="G_In_FtpHeader"/>
+    <assign name="Transform_TrimInput">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Transformation_TrimInput.xsl',bpws:getVariableData('G_In_ReceiveCatalogPricing','CP-Load'))"/>
+        <to variable="G_In_ReceiveCatalogPricing" part="CP-Load"/>
+      </copy>
+    </assign>
+    <assign name="Assign_GeneralElements">
+      <copy>
+        <from expression="ora:getInstanceId()"/>
+        <to variable="G_ExecutionUnitId"/>
+      </copy>
+      <copy>
+        <from expression="string('VDST_BPEL_CatalogPricingReqABCS')"/>
+        <to variable="G_ExecutionUnitName"/>
+      </copy>
+      <copy>
+        <from expression="string('BPEL')"/>
+        <to variable="G_ExecutionUnitType"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-dateTime()"/>
+        <to variable="G_CurrentExecutionTime"/>
+      </copy>
+      <!--<copy>
+        <from expression="ora:countNodes('G_In_ReceiveCatalogPricing','CP-Load','/ns4:CP-Load/ns4:cp/')"/>
+        <to variable="G_NumberOfRecordsProcessed"/>
+      </copy>-->
+    </assign>
+    <assign name="Assign_ExecutionUnit">
+      <copy>
+        <from variable="G_ExecutionUnitId"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ExecutionUnitID"/>
+      </copy>
+      <copy>
+        <from variable="G_ExecutionUnitName"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ExecutionUnitName"/>
+      </copy>
+      <copy>
+        <from variable="G_ExecutionUnitType"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ImplementationCode"/>
+      </copy>
+      <copy>
+        <from expression="0"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:SequenceNumber"/>
+      </copy>
+      <copy>
+        <from variable="G_CurrentExecutionTime"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns5:ExecutionUnit/ns5:ActivityDateTime"/>
+      </copy>
+    </assign>
+    <scope name="Scope_CreateCTE">
+      <variables>
+        <variable name="L_inputFileName" type="xsd:string"/>
+        <variable name="L_inputDirectoryName" type="xsd:string"/>
+        <variable name="L_sourceID" type="xsd:string"/>
+      </variables>
+      <sequence name="Sequence_1">
+        <assign name="Assign_FTPHeaderDetails">
+          <copy>
+            <from variable="G_In_FtpHeader" part="inboundHeader"
+                  query="/ns2:InboundFTPHeaderType/ns2:fileName"/>
+            <to variable="L_inputFileName"/>
+          </copy>
+          <copy>
+            <from variable="G_In_FtpHeader" part="inboundHeader"
+                  query="/ns2:InboundFTPHeaderType/ns2:directory"/>
+            <to variable="L_inputDirectoryName"/>
+          </copy>
+          <copy>
+            <from expression="substring-before(substring-after(substring-after(bpws:getVariableData('L_inputFileName'),'_'),'_'),'_')"/>
+            <to variable="L_sourceID"/>
+          </copy>
+        </assign>
+        <assign name="Assign_CTE_Header">
+          <copy>
+            <from variable="G_ExecutionUnitId"/>
+            <to variable="G_CTE_Header" query="/ns5:header/ns5:EBMID"/>
+          </copy>
+          <copy>
+            <from variable="G_ExecutionUnitId"/>
+            <to variable="G_CTE_Header" query="/ns5:header/ns5:InteractionID"/>
+          </copy>
+          <copy>
+            <from expression="string('http://schema.emerson.com/VDST_FTP_GET_CatalogPricing:CP-Load')"/>
+            <to variable="G_CTE_Header" query="/ns5:header/ns5:EBOName"/>
+          </copy>
+          <copy>
+            <from variable="G_CurrentExecutionTime"/>
+            <to variable="G_CTE_Header"
+                query="/ns5:header/ns5:CreationDateTime"/>
+          </copy>
+          <copy>
+            <from variable="L_sourceID"/>
+            <to variable="G_CTE_Header" query="/ns5:header/ns5:Sender/ns5:ID"/>
+          </copy>
+          <copy>
+            <from expression="string('Inder')"/>
+            <to variable="G_CTE_Header"
+                query="/ns5:header/ns5:Sender/ns5:ContactName"/>
+          </copy>
+          <copy>
+            <from expression="string('inderpal.dhami@emerson.com')"/>
+            <to variable="G_CTE_Header"
+                query="/ns5:header/ns5:Sender/ns5:ContactEmail"/>
+          </copy>
+          <copy>
+            <from expression="string('91-9878037124')"/>
+            <to variable="G_CTE_Header"
+                query="/ns5:header/ns5:Sender/ns5:ContactPhoneNumber"/>
+          </copy>
+          <copy>
+            <from expression="0"/>
+            <to variable="G_CTE_Header"
+                query="/ns5:header/ns5:EBMTracking/@ns5:executionUnitCount"/>
+          </copy>
+          <copy>
+            <from variable="G_ExecutionUnit" query="/ns5:ExecutionUnit"/>
+            <to variable="G_CTE_Header"
+                query="/ns5:header/ns5:EBMTracking/ns5:ExecutionUnit"/>
+          </copy>
+        </assign>
+        <assign name="Transform_CPRequest_CTE_Body">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:processXSLT('Transformation_CPRequest_CTEBody.xsl',bpws:getVariableData('G_In_ReceiveCatalogPricing','CP-Load'))"/>
+            <to variable="G_CTE_Body"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <scope name="Scope_InvokeCPEBS">
+      <variables>
+        <variable name="L_Out_CatalogPricingEBS_Req"
+                  messageType="ns7:envelope_msg"/>
+      </variables>
+      <sequence name="Sequence_2">
+        <assign name="Assign_CatalogPricingEBS_Req">
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="G_CurrentExecutionTime"/>
+          </copy>
+          <copy>
+            <from variable="G_CurrentExecutionTime"/>
+            <to variable="G_ExecutionUnit"
+                query="/ns5:ExecutionUnit/ns5:ActivityDateTime"/>
+          </copy>
+          <copy>
+            <from variable="G_CTE_Header" query="/ns5:header"/>
+            <to variable="L_Out_CatalogPricingEBS_Req"
+                query="/ns5:envelope/ns5:header" part="envelope"/>
+          </copy>
+          <copy>
+            <from variable="G_CTE_Body" query="/ns5:body"/>
+            <to variable="L_Out_CatalogPricingEBS_Req"
+                query="/ns5:envelope/ns5:body" part="envelope"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_CatalogPricingEBS"
+                inputVariable="L_Out_CatalogPricingEBS_Req"
+                partnerLink="VDST_JMSQENQ_CatalogPricing"
+                portType="ns7:Produce_Message_ptt" operation="Produce_Message"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

@@ -1,0 +1,42 @@
+<definitions
+     name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+     targetNamespace="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://TargetNamespace.com/FtpOpertngUnit_to_Vendavo"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"
+                 schemaLocation="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/FtpOpertngUnit_to_Vendavo" schemaLocation="ENPopeartingUnit_1.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELResponseMessage">
+        <part name="payload" element="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELProcessResponse"/>
+    </message>
+    <message name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELRequestMessage">
+        <part name="payload" element="ns1:Root-Element"/>
+    </message>
+    <portType name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELCallback">
+        <operation name="onResult">
+            <input message="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELResponseMessage"/>
+        </operation>
+    </portType>
+    <portType name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL">
+        <operation name="initiate">
+            <input message="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELRequestMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL">
+        <plnk:role name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELProvider">
+            <plnk:portType name="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPEL"/>
+        </plnk:role>
+        <plnk:role name="LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELRequester">
+            <plnk:portType name="client:LIEBERT_VENDAVO_INTEGRATION_ENPOperatingUnit_BPELCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

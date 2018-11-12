@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="LBT_Rtr_OperatingUnit"
+     targetNamespace="http://oracle.com/esb/namespaces/Liebert_OrgsOperating"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/esb/namespaces/Liebert_OrgsOperating"
+     xmlns:inp1="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit" schemaLocation="LBTSELECTEmrOperatingUnit_table.xsd" />
+      </schema>
+    </types>
+    <message name="EmrOperatingUnitCollection_request">
+        <part name="EmrOperatingUnitCollection" element="inp1:EmrOperatingUnitCollection"/>
+    </message>
+    <portType name="execute_ppt">
+        <operation name="execute">
+            <input message="tns:EmrOperatingUnitCollection_request"/>
+        </operation>
+    </portType>
+</definitions>

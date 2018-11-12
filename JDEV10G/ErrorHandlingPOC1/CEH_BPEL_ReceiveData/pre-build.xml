@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<project name="bpel.pre-build" default="pre-build" basedir=".">
+
+    <property environment="env"/>
+    <!-- Set bpel.home using env variable BPEL_HOME, if set by developer prompt -->
+    <condition property="bpel.home" value="${env.BPEL_HOME}">
+      <available file="${env.BPEL_HOME}/utilities/ant-orabpel.xml"/>
+    </condition>
+    <!-- Set bpel.home using ant property oracle.home, if set by JDev -->
+    <condition property="bpel.home" value="${oracle.home}/integration/bpel">
+      <available file="${oracle.home}/integration/bpel/utilities/ant-orabpel.xml"/> 
+    </condition>
+
+    <target name="compile">
+        <schemac input="${basedir}/bpel/ReadFTP_JB.wsdl" binding="type" out="${basedir}/bpel/BPEL-INF/classes"/>
+        <javac srcdir="${basedir}/src" destdir="${basedir}/bpel/BPEL-INF/classes"/>
+    </target>
+    
+    <target name="pre-build" depends="compile"/> 
+    
+</project>

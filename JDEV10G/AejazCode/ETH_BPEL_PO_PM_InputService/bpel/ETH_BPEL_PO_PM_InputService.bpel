@@ -1,0 +1,491 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Apr 15 16:27:53 IST 2010
+  Author:  kgoll
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_BPEL_PO_PM_InputService"
+         targetNamespace="http://xmlns.oracle.com/ETH_BPEL_PO_PM_InputService"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSP_CompleteActivity/"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ChangePO/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_DEQ_AQ_PO_PM/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey/"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns10="http://xmlns.emrsn.com/CustomChange_PO_006"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns7="http://xmlns.emrsn.com/CommonChangePO_006"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns12="http://xmlns.emrsn.com/CustomProcess_PO_007"
+         xmlns:client="http://xmlns.oracle.com/ETH_BPEL_PO_PM_InputService"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/APPS/WF_ENGINE/COMPLETEACTIVITY/"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ProcessPO/"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns8="http://xmlns.emrsn.com/CommonProcessPO_007">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Dequeue_role" name="ETH_DEQ_AQ_PO_PM"
+                 partnerLinkType="ns1:Dequeue_plt"/>
+    <partnerLink name="ETH_DBSEL_ItemKey" partnerRole="ETH_DBSEL_ItemKey_role"
+                 partnerLinkType="ns2:ETH_DBSEL_ItemKey_plt"/>
+    <partnerLink name="ETH_DBSP_CompleteActivity"
+                 partnerRole="ETH_DBSP_CompleteActivity_role"
+                 partnerLinkType="ns5:ETH_DBSP_CompleteActivity_plt"/>
+    <partnerLink name="ETH_ENQJMS_ChangePO" partnerRole="Produce_Message_role"
+                 partnerLinkType="ns9:Produce_Message_plt"/>
+    <partnerLink name="ETH_ENQJMS_ProcessPO" partnerRole="Produce_Message_role"
+                 partnerLinkType="ns11:Produce_Message_plt"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_In_Receive_PM_PO" messageType="ns1:Dequeue_msg"/>
+    <variable name="G_In_DBSEL_ItemKey"
+              messageType="ns2:ETH_DBSEL_ItemKeyInput_msg"/>
+    <variable name="G_Out_DBSEL_ItemKey"
+              messageType="ns2:ETH_DBSEL_ItemKeyOutputCollection_msg"/>
+    <variable name="G_AQ_Header" messageType="ns1:Header_msg"/>
+    <variable name="G_In_DBSP_CompleteActivity" messageType="ns5:args_in_msg"/>
+    <variable name="G_PO_decodedString" type="xsd:string"/>
+    <variable name="G_ChangePO" element="ns7:CHANGE_PO_006"/>
+    <variable name="G_PO_UpdatedString" type="xsd:string"/>
+    <variable name="G_ProcessPO" element="ns8:PROCESS_PO_007"/>
+    <variable name="G_In_ENQJMS_ChangePO"
+              messageType="ns9:CustomChange_PO_006_msg"/>
+    <variable name="G_In_ENQJMS_ProcessPO"
+              messageType="ns11:CustomProcess_PO_007_msg"/>
+    <variable name="L_CallWorkFlow_Switch" type="xsd:string"/>
+    <variable name="G_Header_Local" messageType="ns1:Header_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_PM_PO" partnerLink="ETH_DEQ_AQ_PO_PM"
+             portType="ns1:Dequeue_ptt" operation="Dequeue"
+             variable="G_In_Receive_PM_PO" createInstance="yes"
+             bpelx:headerVariable="G_AQ_Header"/>
+    <assign name="Assign_DBSEL_ItemKey">
+      <copy>
+        <from variable="G_AQ_Header" part="Header" query="/ns1:Header"/>
+        <to variable="G_Header_Local" part="Header" query="/ns1:Header"/>
+      </copy>
+      <copy>
+        <from variable="G_AQ_Header" part="Header"
+              query="/ns1:Header/ns1:PayloadHeader/DOCUMENT_NUMBER"/>
+        <to variable="G_In_DBSEL_ItemKey" part="ETH_DBSEL_ItemKeyInput_msg"
+            query="/ns4:ETH_DBSEL_ItemKeyInput/ns4:DocNumber"/>
+      </copy>
+      <copy>
+        <from expression="string('0')"/>
+        <to variable="L_CallWorkFlow_Switch"/>
+      </copy>
+    </assign>
+    <switch name="Switch_CompleteActivity">
+      <case condition="bpws:getVariableData('L_CallWorkFlow_Switch')='1'">
+        <sequence name="Sequence_3">
+          <invoke name="Invoke_DBSEL_ItemKey" partnerLink="ETH_DBSEL_ItemKey"
+                  portType="ns2:ETH_DBSEL_ItemKey_ptt"
+                  operation="ETH_DBSEL_ItemKey"
+                  inputVariable="G_In_DBSEL_ItemKey"
+                  outputVariable="G_Out_DBSEL_ItemKey"/>
+          <assign name="Assign_DBSP_CompleteActivity">
+            <copy>
+              <from expression="'POXML'"/>
+              <to variable="G_In_DBSP_CompleteActivity" part="InputParameters"
+                  query="/ns6:InputParameters/ns6:ITEMTYPE"/>
+            </copy>
+            <copy>
+              <from variable="G_Out_DBSEL_ItemKey"
+                    part="ETH_DBSEL_ItemKeyOutputCollection"
+                    query="/ns4:ETH_DBSEL_ItemKeyOutputCollection/ns4:ETH_DBSEL_ItemKeyOutput/ns4:ITEM_KEY"/>
+              <to variable="G_In_DBSP_CompleteActivity" part="InputParameters"
+                  query="/ns6:InputParameters/ns6:ITEMKEY"/>
+            </copy>
+            <copy>
+              <from expression="'WF_SEND'"/>
+              <to variable="G_In_DBSP_CompleteActivity" part="InputParameters"
+                  query="/ns6:InputParameters/ns6:ACTIVITY"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_DBSP_CompleteActivity"
+                  partnerLink="ETH_DBSP_CompleteActivity"
+                  portType="ns5:ETH_DBSP_CompleteActivity_ptt"
+                  operation="ETH_DBSP_CompleteActivity"
+                  inputVariable="G_In_DBSP_CompleteActivity"/>
+        </sequence>
+      </case>
+      <otherwise>
+        <empty name="Empty_DontCall_CompleteActivity"/>
+      </otherwise>
+    </switch>
+    <bpelx:exec import="com.collaxa.common.util.Base64Decoder"/>
+    <bpelx:exec import="com.collaxa.common.util.Base64Encoder"/>
+    <bpelx:exec name="Java_Embedding_1" language="java" version="1.3">
+      <![CDATA[addAuditTrailEntry("System_base64string");                             
+String System_base64string = ((oracle.xml.parser.v2.XMLElement)getVariableData("G_In_Receive_PM_PO","opaque","/ns13:opaqueElement")).getFirstChild().getNodeValue();     
+addAuditTrailEntry("System_base64string",System_base64string);                             
+try                                                          
+{                                                                           
+ String decoded = Base64Decoder.decode(System_base64string);                            
+ addAuditTrailEntry("decoded string is ",decoded);                          
+ setVariableData("G_PO_decodedString",decoded);                                 
+}                                                                           
+catch(Exception e)         
+{       
+    e.printStackTrace();       
+}]]>
+    </bpelx:exec>
+    <switch name="Switch_1">
+      <case condition="bpws:getVariableData('G_AQ_Header','Header','/ns1:Header/ns1:PayloadHeader/TRANSACTION_SUBTYPE') ='CHANGE' or bpws:getVariableData('G_AQ_Header','Header','/ns1:Header/ns1:PayloadHeader/TRANSACTION_SUBTYPE') ='POCO'">
+        <sequence name="Sequence_1">
+          <assign name="Assign_updateDecodedString_Change">
+            <copy>
+              <from expression="concat(&quot;&lt;?xml version = '1.0' encoding = 'UTF-8' standalone = 'no'?>&quot;, &quot;&lt;CHANGE_PO_006&quot;,substring-after(bpws:getVariableData('G_PO_decodedString'),&quot;&lt;CHANGE_PO_006&quot;))"/>
+              <to variable="G_PO_UpdatedString"/>
+            </copy>
+          </assign>
+          <assign name="Assign_parse_ChangePO">
+            <copy>
+              <from expression="ora:parseXML(bpws:getVariableData('G_PO_UpdatedString'))"/>
+              <to variable="G_ChangePO" query="/ns7:CHANGE_PO_006"/>
+            </copy>
+          </assign>
+          <assign name="Assign_ENQJMS_ChangePO">
+            <copy>
+              <from variable="G_ChangePO" query="/ns7:CHANGE_PO_006"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/ns7:CHANGE_PO_006"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/MESSAGE_TYPE"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Message_type"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/MESSAGE_STANDARD"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Message_standard"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/TRANSACTION_TYPE"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Transaction_type"/>
+            </copy>
+            <copy>
+              <from expression="'POCO'"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Transaction_subtype"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/DOCUMENT_NUMBER"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Document_number"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTYID"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Party_id"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTY_SITE_ID"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Party_site_id"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTY_TYPE"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Party_type"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PROTOCOL_TYPE"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Protocol_type"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PROTOCOL_ADDRESS"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Protocol_address"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/USERNAME"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Username"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PASSWORD"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Password"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE1"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Attribute1"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE2"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Attribute2"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE3"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Attribute3"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE4"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Attribute4"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE5"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Attribute5"/>
+            </copy>
+            <copy>
+              <from expression='orcl:sequence-next-val("SC_MessageID_Seq","jdbc/ETH_BusinessDB")'/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Message_id"/>
+            </copy>
+            <copy>
+              <from expression="'Out'"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Message_direction"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTY_SITE_ID"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Sender_id"/>
+            </copy>
+            <copy>
+              <from expression="'Oracle'"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Sender_system_type"/>
+            </copy>
+            <copy>
+              <from expression="'XML GW'"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Attribute2"/>
+            </copy>
+            <copy>
+              <from expression="ora:getInstanceId()"/>
+              <to variable="G_In_ENQJMS_ChangePO" part="CustomChange_PO_006"
+                  query="/ns10:CustomChange_PO_006/Flow_id_1"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ENQJMS_ChangePO"
+                  partnerLink="ETH_ENQJMS_ChangePO"
+                  portType="ns9:Produce_Message_ptt" operation="Produce_Message"
+                  inputVariable="G_In_ENQJMS_ChangePO"/>
+        </sequence>
+      </case>
+      <case condition="bpws:getVariableData('G_AQ_Header','Header','/ns1:Header/ns1:PayloadHeader/TRANSACTION_SUBTYPE')='PROCESS' or bpws:getVariableData('G_AQ_Header','Header','/ns1:Header/ns1:PayloadHeader/TRANSACTION_SUBTYPE') ='PRO'">
+        <sequence name="Sequence_2">
+          <assign name="Assign_updateDecodedString_Process">
+            <copy>
+              <from expression="concat(&quot;&lt;?xml version = '1.0' encoding = 'UTF-8' standalone = 'no'?>&quot;, &quot;&lt;PROCESS_PO_007&quot;,substring-after(bpws:getVariableData('G_PO_decodedString'),&quot;&lt;PROCESS_PO_007&quot;))"/>
+              <to variable="G_PO_UpdatedString"/>
+            </copy>
+          </assign>
+          <assign name="Assign_parse_ProcessPO">
+            <copy>
+              <from expression="ora:parseXML(bpws:getVariableData('G_PO_UpdatedString'))"/>
+              <to variable="G_ProcessPO" query="/ns8:PROCESS_PO_007"/>
+            </copy>
+          </assign>
+          <assign name="Assign_ENQJMS_ProcessPO">
+            <copy>
+              <from variable="G_ProcessPO" query="/ns8:PROCESS_PO_007"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/ns8:PROCESS_PO_007"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/MESSAGE_TYPE"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Message_type"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/MESSAGE_STANDARD"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Message_standard"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/TRANSACTION_TYPE"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Transaction_type"/>
+            </copy>
+            <copy>
+              <from expression="'PRO'"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Transaction_subtype"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/DOCUMENT_NUMBER"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Document_number"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTYID"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Party_id"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTY_SITE_ID"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Party_site_id"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTY_TYPE"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Party_type"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PROTOCOL_TYPE"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Protocol_type"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PROTOCOL_ADDRESS"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Protocol_address"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/USERNAME"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Username"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PASSWORD"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Password"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE1"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Attribute1"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE2"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Attribute2"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE3"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Attribute3"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE4"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Attribute4"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/ATTRIBUTE5"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Attribute5"/>
+            </copy>
+            <copy>
+              <from expression='orcl:sequence-next-val("SC_MessageID_Seq","jdbc/ETH_BusinessDB")'/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Message_id"/>
+            </copy>
+            <copy>
+              <from expression="'Out'"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Message_direction"/>
+            </copy>
+            <copy>
+              <from variable="G_AQ_Header" part="Header"
+                    query="/ns1:Header/ns1:PayloadHeader/PARTY_SITE_ID"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Sender_id"/>
+            </copy>
+            <copy>
+              <from expression="'Oracle'"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Sender_system_type"/>
+            </copy>
+            <copy>
+              <from expression="'XML GW'"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Attribute2"/>
+            </copy>
+            <copy>
+              <from expression="ora:getInstanceId()"/>
+              <to variable="G_In_ENQJMS_ProcessPO" part="CustomProcess_PO_007"
+                  query="/ns12:CustomProcess_PO_007/Flow_id_1"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ENQJMS_ProcessPO"
+                  partnerLink="ETH_ENQJMS_ProcessPO"
+                  portType="ns11:Produce_Message_ptt"
+                  operation="Produce_Message"
+                  inputVariable="G_In_ENQJMS_ProcessPO"/>
+        </sequence>
+      </case>
+      <otherwise>
+        <empty name="Empty_Unidentified_Transaction"/>
+      </otherwise>
+    </switch>
+  </sequence>
+</process>

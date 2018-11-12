@@ -1,0 +1,562 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem">
+      <service name="TempFileAdpter_RS" guid="172C0E505F4C11DEBF1DAF5BFF95B26F" qname="DefaultSystem.TempFileAdpter_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service TempFileAdpter</description>
+         <versionInfo>
+            <ID>1245689287522</ID>
+            <lastModifiedTime>Mon Jun 22 22:18:07 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+         </versionInfo>
+         <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>TempFileAdpter.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/TempFileAdpter/">tns:Read_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/DefaultSystem/TempFileAdpter_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/DefaultSystem/TempFileAdpter_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="172E58405F4C11DEBF1DAF5BFF95B26F" qname="DefaultSystem.TempFileAdpter_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+               <routingRules>
+                  <routingRule guid="5C68AA505F4C11DEBF1DAF5BFF95B26F" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="43851750F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS.execute" serviceGUID="4382CD60F82F11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS" mepDisplayName="One Way" mep="OneWay"/>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+   </system>
+   <system name="ETHSys_IntegrationServices" guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" status="ENABLED">
+      <versionInfo>
+         <ID>1244825629926</ID>
+         <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+      </versionInfo>
+      <description/>
+      <parameters>
+         <parameter name="Host">localhost</parameter>
+         <parameter name="Port">12001</parameter>
+      </parameters>
+      <clusterName>esb</clusterName>
+      <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+      <serviceGroup status="ENABLED" name="ETHSysGrp_ProcessPurchaseOrder" guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder">
+         <description/>
+         <versionInfo>
+            <ID>1244825629926</ID>
+            <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+         </versionInfo>
+         <parent guid="17966820F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices" type="system"/>
+         <service name="TempFileAdpter" guid="17299D515F4C11DEBF1DAF5BFF95B26F" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.TempFileAdpter" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false" dirty="true">
+            <description/>
+            <versionInfo>
+               <ID>1245689287522</ID>
+               <lastModifiedTime>Mon Jun 22 22:18:07 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="172C0E505F4C11DEBF1DAF5BFF95B26F" qname="DefaultSystem.TempFileAdpter_RS"/>
+               <interface>
+                  <wsdlURL>TempFileAdpter.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/TempFileAdpter/">tns:Read_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_EDI_5020" guid="CBA511E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="CBA782E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020_RS"/>
+               <interface>
+                  <wsdlURL>ETH_DEQJMS_ProcessPO_EDI_5020.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_EDI_5020/">tns:Consume_Message_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_EDI_5020_RS" guid="CBA782E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <description>This is the Routing Service for Adapter Service ETH_DEQJMS_ProcessPO_EDI_5020</description>
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_DEQJMS_ProcessPO_EDI_5020.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_EDI_5020/">tns:Consume_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_EDI_5020_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_EDI_5020_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="CC092AE0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomEDI850"/>
+                  <routingRules>
+                     <routingRule guid="B97A4EE0280D11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="411D81B0088C11DEBFB8778FE2904592" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS.execute" serviceGUID="40C54F91088C11DEBFB8778FE2904592" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_FlatFile" guid="54D14CF1099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="54D396E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile_RS"/>
+               <interface>
+                  <wsdlURL>ETH_DEQJMS_ProcessPO_FlatFile.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_FlatFile/">tns:Consume_Message_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_FlatFile_RS" guid="54D396E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <description>This is the Routing Service for Adapter Service ETH_DEQJMS_ProcessPO_FlatFile</description>
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_DEQJMS_ProcessPO_FlatFile.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_FlatFile/">tns:Consume_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_FlatFile_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_FlatFile_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="54D607E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_FlatFile_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" element="tns:CustomLiebertPO"/>
+                  <routingRules>
+                     <routingRule guid="53110F202FD511DE9F4D277D7F6A1C73" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="F29B53A0F91811DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS.execute" serviceGUID="F298E2A0F91811DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_OAGIS_7_2" guid="01E07F40097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+            <versionInfo>
+               <ID>1244826431240</ID>
+               <lastModifiedTime>Fri Jun 12 22:37:11 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="01E07F41097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS"/>
+               <interface>
+                  <wsdlURL>ETH_DEQJMS_ProcessPO_OAGIS_7_2.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_OAGIS_7_2/">tns:Consume_Message_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS" guid="01E07F41097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <description>This is the Routing Service for Adapter Service ETH_DEQJMS_ProcessPO_OAGIS_7_2</description>
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_DEQJMS_ProcessPO_OAGIS_7_2.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_OAGIS_7_2/">tns:Consume_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="01E56140097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+                  <routingRules>
+                     <routingRule guid="815982402FD511DE9F4D277D7F6A1C73" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="43851750F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS.execute" serviceGUID="4382CD60F82F11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ENQJMS_ArchiveTransaction" guid="99BB5FA0F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1245689800476</ID>
+               <lastModifiedTime>Mon Jun 22 22:26:40 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_ENQJMS_ArchiveTransaction.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ArchiveTransaction/">tns:Produce_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ArchiveTransaction?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ENQJMS_ArchiveTransaction</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ProcessPO_ComplianceChecker_RS" guid="AF326921FC2C11DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <versionInfo>
+               <ID>1245689287522</ID>
+               <lastModifiedTime>Mon Jun 22 22:18:07 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_ComplianceChecker_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_ComplianceChecker_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_ComplianceChecker_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="AF430AF0FC2C11DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="81D5363056CA11DE8F4F5D66B4000912" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="4BDCEB2156CC11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Test_ComplianceRS.execute" serviceGUID="4BDCEB2056CC11DE8F4F5D66B4000912" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Test_ComplianceRS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                     <routingRule guid="1632FD2055DC11DE9F026DA5F3A1A817" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="3988F7D055DB11DE9F026DA5F3A1A817" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.TestPutTransComplianceFile.Write" serviceGUID="398686D155DB11DE9F026DA5F3A1A817" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.TestPutTransComplianceFile" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_ProcessPO_SequencingChecker_RS" guid="763B47311D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <versionInfo>
+               <ID>1245689800476</ID>
+               <lastModifiedTime>Mon Jun 22 22:26:40 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_SequencingChecker_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/DefaultSystem">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_SequencingChecker_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_SequencingChecker_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="76499F101D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="3C9933E0280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'VALID'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>Archive_Transformed_OAGIS_9_0.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="3C998200280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="AF430AF0FC2C11DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS.execute" serviceGUID="AF326921FC2C11DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_ComplianceChecker_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <filterExpression>{/inp1:CustomProcessPO/Attribute3 = 'VALID'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+                        <transformation>
+                           <xslFileURL>ComplianceChecker.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="ETH_PUTFL_CustomOAGIS_7_2" guid="9CD7E990F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_PUTFL_CustomOAGIS_7_2.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_CustomOAGIS_7_2/">tns:Write_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_7_2?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_7_2</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="9CDA3380F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="Custom_OAGIS_7_2" value="C:\JMS Issue\OG72"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_PUTFL_CustomOAGIS_9_0" guid="7F2F5990F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETH_PUTFL_CustomOAGIS_9_0.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_CustomOAGIS_9_0/">tns:Write_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_9_0?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_PUTFL_CustomOAGIS_9_0</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="CustomOAGIS_9_0" value="C:\JMS Issue\OG90"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomEDI_5020_850_RS" guid="40C54F91088C11DEBFB8778FE2904592" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomEDI_5020_850_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomEDI_5020_850_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomEDI_5020_850_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="411D81B0088C11DEBFB8778FE2904592" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomEDI_5020_850_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomEDI850"/>
+                  <routingRules>
+                     <routingRule guid="88971730280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>Archive_EDI850_Input.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="88973E40280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" serviceGUID="CF742AD0F84D11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>CustomEDI850_To_CustomProcessPO.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomLiebertPO_RS" guid="F298E2A0F91811DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomLiebertPO_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomLiebertPO_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomLiebertPO_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="F29B53A0F91811DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomLiebertPO_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" element="tns:CustomLiebertPO"/>
+                  <routingRules>
+                     <routingRule guid="D63113C0280D11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>Archive_LiebertInput.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="D6313AD0280D11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" serviceGUID="CF742AD0F84D11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>CustomLiebertPO_To_CustomProcessPO.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomOAGIS_7_2_RS" guid="4382CD60F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomOAGIS_7_2_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_7_2_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_7_2_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="43851750F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+                  <routingRules>
+                     <routingRule guid="C23C2120280D11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="9CDA3380F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2.Write" serviceGUID="9CD7E990F82F11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_7_2" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                     <routingRule guid="C23C2121280D11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="99C9B780F99511DD9F70D37D7A4376D4" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="99BB5FA0F99511DD9F70D37D7A4376D4" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>Archive_OAGIS_7_2_Input.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="C23C2122280D11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" serviceGUID="CF742AD0F84D11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>CustomProcessPO_007_To_CustomProcessPO.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="ETH_Transform_CustomOAGIS_9_0_RS" guid="CF742AD0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_Transform_CustomOAGIS_9_0_RS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_9_0_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_Transform_CustomOAGIS_9_0_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="CF8282B0F84D11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_9_0_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+                  <routingRules>
+                     <routingRule guid="5051B9C0280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" serviceGUID="7F2F5990F84E11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                     <routingRule guid="5051B9C1280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" serviceGUID="7F2F5990F84E11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>SequencingChecker.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                     <routingRule guid="5051E0D0280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="76499F101D0211DE8F0F01D3DBED06DC" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS.execute" serviceGUID="763B47311D0211DE8F0F01D3DBED06DC" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_SequencingChecker_RS" mepDisplayName="One Way" mep="OneWay"/>
+                        <transformation>
+                           <xslFileURL>SequencingChecker.xsl</xslFileURL>
+                        </transformation>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="enableAccessBusinessEvent" value="true"/>
+            </endpointProperties>
+         </service>
+         <service name="Push_DummyJMS" guid="D36205E056CB11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Push_DummyJMS" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1245689287522</ID>
+               <lastModifiedTime>Mon Jun 22 22:18:07 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>Push_DummyJMS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/Push_DummyJMS/">tns:Produce_Message_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/Push_DummyJMS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/Push_DummyJMS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="D36931D056CB11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Push_DummyJMS.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/TransactionComplianceData" element="tns:TransactionComplianceData"/>
+               </operationInfo>
+            </operations>
+            <endpointProperties>
+               <property name="cacheWSIFOperation" value="true"/>
+               <property name="cacheConnections" value="false"/>
+            </endpointProperties>
+         </service>
+         <service name="Test_ComplianceRS" guid="4BDCEB2056CC11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Test_ComplianceRS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_Test_ComplianceRS.wsdl</wsdlURL>
+               <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/Test_ComplianceRS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/Test_ComplianceRS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="4BDCEB2156CC11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Test_ComplianceRS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/TransactionComplianceData" element="tns:TransactionComplianceData"/>
+                  <routingRules>
+                     <routingRule guid="6885582056CC11DE8F4F5D66B4000912" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="D36931D056CB11DE8F4F5D66B4000912" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Push_DummyJMS.Produce_Message" serviceGUID="D36205E056CB11DE8F4F5D66B4000912" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.Push_DummyJMS" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="TestPutTransComplianceFile" guid="398686D155DB11DE9F026DA5F3A1A817" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.TestPutTransComplianceFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+            <versionInfo>
+               <ID>1244825629926</ID>
+               <lastModifiedTime>Fri Jun 12 22:23:49 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_Dhami2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+            </versionInfo>
+            <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>TestPutTransComplianceFile.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/TestPutTransComplianceFile/">tns:Write_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/TestPutTransComplianceFile?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:12001/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/TestPutTransComplianceFile</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="3988F7D055DB11DE9F026DA5F3A1A817" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.TestPutTransComplianceFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" xmlns:tns="http://xmlns.emrsn.com/TransactionComplianceData" element="tns:TransactionComplianceData"/>
+               </operationInfo>
+            </operations>
+         </service>
+      </serviceGroup>
+   </system>
+</project_metadata>

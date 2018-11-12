@@ -1,0 +1,31 @@
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/CSF_ICoE_ErrorHandler"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="CSF_ICoE_ErrorHandlerProcessRequest">
+		<complexType>
+			<sequence>
+				<element name="account" type="string" nillable="false"/>
+                                <element name="sub_account" type="string" default="Unknown_SubAccount"/>
+                                <element name="errorCode" type="string" default="0"/>
+                                <element name="errorSeverity" type="string" default="LOW"/>
+                                <element name="errorSummary" type="string"/>
+                                <element name="errorDetail" type="string" default="Unknown_ErrorDetails"/>
+                                <element name="errorMessage" type="string"/>
+                                <element name="errorSubject" type="string"/>
+                                <element name="errorDateTime" type="dateTime"/>
+                                <element name="messageID" type="string"/>
+                                <element name="messageType" type="string"/>
+                                <element name="messageSourceID" type="string"/>
+                                <element name="environment" type="string"/>
+                                <element name="processID" type="string"/>
+                                <element name="processName" type="string"/>
+                                <element name="processType" type="string"/>
+                                <element name="contactName" type="string"/>
+                                <element name="contactEmail" type="string"/>
+                                <element name="contactPhone" type="string"/>
+                                <element name="userName" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<system name="CEHSys_EHPOC1" guid="00AA229012C911DE9F411B4F09FCBA8D" qname="CEHSys_EHPOC1" status="ENABLED">
+   <versionInfo>
+      <ID>1237279910000</ID>
+      <lastModifiedTime>Tue Mar 17 14:21:50 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>oc4jadmin</lastModifiedUser>
+   </versionInfo>
+   <description/>
+   <parameters>
+      <parameter name="Fax"/>
+      <parameter name="Mobile"/>
+      <parameter name="Host">inedec-mlap-45.emrcorp.local</parameter>
+      <parameter name="Phone"/>
+      <parameter name="Pager"/>
+      <parameter name="Email"/>
+      <parameter name="Port">80</parameter>
+   </parameters>
+   <clusterName>esb</clusterName>
+   <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+</system>

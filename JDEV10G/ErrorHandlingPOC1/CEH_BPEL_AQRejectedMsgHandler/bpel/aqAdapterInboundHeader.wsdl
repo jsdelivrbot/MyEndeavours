@@ -1,0 +1,19 @@
+<definitions
+     name="aqAdapter"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/" 
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/"   
+     xmlns="http://schemas.xmlsoap.org/wsdl/" >
+
+    <types>
+        <schema attributeFormDefault="qualified" elementFormDefault="qualified" 
+                xmlns="http://www.w3.org/2001/XMLSchema">
+          <import namespace="http://xmlns.oracle.com/pcbpel/adapter/aq/inbound/" schemaLocation="aqAdapterInboundHeader.xsd"/>
+	</schema>
+    </types>
+
+    <!-- Header Message --> 
+    <message name="Header"> 
+      <part name="Header" element="tns:Header"/> 
+   </message> 
+
+</definitions>

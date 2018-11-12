@@ -1,0 +1,40 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="ETH_Temp" guid="5FF0ECD05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp" dirty="true">
+      <service name="ETH_GETFL" guid="971D12105DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_GETFL" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL/" dirty="true">
+         <parent guid="5FF0ECD05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp" type="system"/>
+         <invocation>
+            <interface>
+               <wsdlURL>ETH_GETFL.wsdl</wsdlURL>
+               <portType>tns:Read_LBTXML_ptt</portType>
+            </interface>
+            <targetService guid="971D12115DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_GETFL_RS"/>
+         </invocation>
+         <operations>
+            <operationInfo wsdlOperation="Read_LBTXML" guid="972687F05DDB11DF9F6BAFA43D0B1832" mep="OneWay"/>
+         </operations>
+      </service>
+      <service name="ETH_GETFL_RS" guid="971D12115DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_GETFL_RS" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL/" dirty="true" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service ETH_GETFL</description>
+         <parent guid="5FF0ECD05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_GETFL.wsdl</wsdlURL>
+            <portType>tns:Read_LBTXML_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Read_LBTXML" guid="971F83105DDB11DF9F6BAFA43D0B1832" mep="OneWay"/>
+         </operations>
+      </service>
+      <service name="ETH_PUSHAQ_LBTXML" guid="F37200C05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp.ETH_PUSHAQ_LBTXML" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_PUSHAQ_LBTXML/" dirty="true" soapEndpointStatus="ENABLED">
+         <parent guid="5FF0ECD05DDB11DF9F6BAFA43D0B1832" qname="ETH_Temp" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUSHAQ_LBTXML.wsdl</wsdlURL>
+            <portType>tns:Produce_LBTXML_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Produce_LBTXML" guid="F3744AB05DDB11DF9F6BAFA43D0B1832" mep="OneWay"/>
+         </operations>
+      </service>
+   </system>
+</project_metadata>

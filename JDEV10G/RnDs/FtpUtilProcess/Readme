@@ -1,0 +1,27 @@
+This process takes 11 parameters
+    <element name="ftp_jndi" type="string"/>
+    <element name="ftp_dir" type="string"/>
+    <element name="ftp_operation" type="string"/><!--For dirlisting, pass LS-->
+    <element name="ftp_host" type="string"/><!--Used if JNDI access fails-->
+    <element name="ftp_uid" type="string"/><!--Used if JNDI access fails-->
+    <element name="ftp_pwd" type="string"/><!--Used if JNDI access fails-->
+    <element name="attrib1" type="string"/><!--Future use-->
+    <element name="attrib2" type="string"/><!--Future use-->
+    <element name="attrib3" type="string"/><!--Future use-->
+    <element name="attrib4" type="string"/><!--Future use-->
+    <element name="attrib5" type="string"/><!--Future use-->
+    
+1. ftp_dir and ftp_operation are required attributes
+2. If you specify ftp_jndi, ftp_host, ftp_uid, ftp_pwd, then 
+   it tries to connect to the FTP location using jndi first, 
+   if it fails then it tries using ftp_host, ftp_uid and ftp_pwd
+3. If you specify ftp_jndi, but pass "" for ftp_host, ftp_uid, ftp_pwd, then
+   it tries to connect to the FTP location using jndi first, 
+   if it fails then it tries using default values for host, uid, pwd. 
+   These values are hardcoded in the java file
+3. If you specify "" for ftp_jndi, but pass valid values for ftp_host, ftp_uid, ftp_pwd, then
+   it tries to connect to the FTP location using ftp_host, ftp_uid and ftp_pwd
+4. If you pass "" for all values, then
+   it tries to connect using default jndi, 
+   if it fails then it tries using default values for host, uid, pwd. 
+   These values are hardcoded in the java file   

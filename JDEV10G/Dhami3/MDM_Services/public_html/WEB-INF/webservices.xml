@@ -1,0 +1,106 @@
+<webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
+     version="1.1">
+    <webservice-description>
+        <webservice-description-name>MDMSearchRecord</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/MDMSearchRecord.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/MDMSearchRecord-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>MDMSearchRecordSOAP</port-component-name>
+            <wsdl-port xmlns:wsa0="http://www.gssamerica.com/mdm/services/MDMSearchRecord/">wsa0:MDMSearchRecordSOAP</wsdl-port>
+            <service-endpoint-interface>com.gssamerica.mdm.services.search.MDMSearchRecord_PortType</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>MDMSearchRecordSOAP</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>searchAuditHandler</handler-name>
+                <handler-class>com.gssamerica.mdm.services.handlers.SearchServiceAuditHandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+    <webservice-description>
+        <webservice-description-name>MDMCreateRecords</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/MDMCreateRecords.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/MDMCreateRecords-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>MDMCreateRecordsSOAP</port-component-name>
+            <wsdl-port xmlns:wsa0="http://www.gssamerica.com/mdm/services/MDMCreateRecords/">wsa0:MDMCreateRecordsSOAP</wsdl-port>
+            <service-endpoint-interface>com.gssamerica.mdm.services.create.MDMCreateRecords_PortType</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>MDMCreateRecordsSOAP</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>createAuditHandler</handler-name>
+                <handler-class>com.gssamerica.mdm.services.handlers.CreateServiceAuditHandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+    <webservice-description>
+        <webservice-description-name>MDMUpdateRecords</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/MDMUpdateRecords.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/MDMUpdateRecords-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>MDMUpdateRecordsSOAP</port-component-name>
+            <wsdl-port xmlns:wsa0="http://www.gssamerica.com/mdm/services/MDMUpdateRecord/">wsa0:MDMUpdateRecordsSOAP</wsdl-port>
+            <service-endpoint-interface>com.gssamerica.mdm.services.update.MDMUpdateRecords_PortType</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>MDMUpdateRecordsSOAP</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>updateAuditHandler</handler-name>
+                <handler-class>com.gssamerica.mdm.services.handlers.UpdateServiceAuditHandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+    <webservice-description>
+        <webservice-description-name>AddRemoteKeyService</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/AddRemoteKeyService.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/AddRemoteKeyService-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>AddRemoteKeySOAP</port-component-name>
+            <wsdl-port xmlns:wsa0="http://www.gssamerica.com/mdm/services/AddRemoteKeyService/">wsa0:AddRemoteKeySOAP</wsdl-port>
+            <service-endpoint-interface>com.gssamerica.mdm.services.addremotekey.AddRemoteKey</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>AddRemoteKeySOAP</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>AddRemoteKeyAuditHandler</handler-name>
+                <handler-class>com.gssamerica.mdm.services.handlers.AddRemoteKeyAuditHandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+    <webservice-description>
+        <webservice-description-name>ReplicateDataService</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/ReplicateDataService.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/ReplicateDataService-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>ReplicateDataSOAP</port-component-name>
+            <wsdl-port xmlns:wsa0="http://www.gssamerica.com/mdm/services/ReplicateDataService/">wsa0:ReplicateDataSOAP</wsdl-port>
+            <service-endpoint-interface>com.gssamerica.mdm.services.replicatedata.ReplicateData</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>ReplicateDataSOAP</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>ReplicateDataAuditHandler</handler-name>
+                <handler-class>com.gssamerica.mdm.services.handlers.ReplicateDataAuditHandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+    <webservice-description>
+        <webservice-description-name>MDMDeleteRecords</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/MDMDeleteRecords.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/MDMDeleteRecords-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>MDMDeleteRecordSOAP</port-component-name>
+            <wsdl-port xmlns:wsa0="http://www.gssamerica.com/mdm/services/MDMDeleteRecord/">wsa0:MDMDeleteRecordSOAP</wsdl-port>
+            <service-endpoint-interface>com.gssamerica.mdm.services.delete.MDMDeleteRecord</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>MDMDeleteRecordSOAP</servlet-link>
+            </service-impl-bean>
+            <handler>
+                <handler-name>DeleteServiceAuditHandler</handler-name>
+                <handler-class>com.gssamerica.mdm.services.handlers.DeleteServiceAuditHandler</handler-class>
+            </handler>
+        </port-component>
+    </webservice-description>
+</webservices>

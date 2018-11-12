@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/PlanningSchedule.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/GetPlanningSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowPlanningSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncPlanningSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyPlanningSchedule.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="GetPlanningSchedule">
+                <part name="Message" element="oa:GetPlanningSchedule"/>
+        </message>
+        <message name="ShowPlanningSchedule">
+                <part name="Message" element="oa:ShowPlanningSchedule"/>
+        </message>
+        <message name="SyncPlanningSchedule">
+                <part name="Message" element="oa:SyncPlanningSchedule"/>
+        </message>
+        <message name="NotifyPlanningSchedule">
+                <part name="Message" element="oa:NotifyPlanningSchedule"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestPlanningSchedulePortType">
+                <operation name="GetPlanningSchedule">
+                        <input message="oaws:GetPlanningSchedule"/>
+                </operation>
+                <operation name="SyncPlanningSchedule">
+                        <input message="oaws:SyncPlanningSchedule"/>
+                </operation>
+                <operation name="NotifyPlanningSchedule">
+                        <input message="oaws:NotifyPlanningSchedule"/>
+                </operation>
+        </portType>
+        <portType name="ResponsePlanningSchedulePortType">
+                <operation name="ShowPlanningSchedule">
+                        <input message="oaws:ShowPlanningSchedule"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncPlanningSchedulePortType">
+                <operation name="GetPlanningSchedule">
+                        <input message="oaws:GetPlanningSchedule"/>
+                        <output message="oaws:ShowPlanningSchedule"/>
+                </operation>
+                <operation name="SyncPlanningSchedule">
+                        <input message="oaws:SyncPlanningSchedule"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyPlanningSchedule">
+                        <input message="oaws:NotifyPlanningSchedule"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestPlanningScheduleBinding" type="oaws:RequestPlanningSchedulePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetPlanningSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncPlanningSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyPlanningSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponsePlanningScheduleBinding" type="oaws:ResponsePlanningSchedulePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowPlanningSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncPlanningScheduleBinding" type="oaws:SyncPlanningSchedulePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetPlanningSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncPlanningSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyPlanningSchedule">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PlanningSchedule.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestPlanningScheduleService">
+                <port name="RequestPlanningScheduleBinding" binding="oaws:RequestPlanningScheduleBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestPlanningSchedule"/>
+                </port>
+        </service>
+        <service name="ResponsePlanningScheduleService">
+                <port name="ResponsePlanningScheduleBinding" binding="oaws:ResponsePlanningScheduleBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponsePlanningSchedule"/>
+                </port>
+        </service>
+        <service name="SyncPlanningScheduleService">
+                <port name="SyncPlanningScheduleBinding" binding="oaws:SyncPlanningScheduleBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncPlanningSchedule"/>
+                </port>
+        </service>
+</definitions>

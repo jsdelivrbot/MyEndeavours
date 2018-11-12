@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<definitions name="FTPService"
+        targetNamespace="http://services.emerson.com"
+        xmlns:tns="http://services.emerson.com"
+        xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+        xmlns:format="http://schemas.xmlsoap.org/wsdl/formatbinding/"
+        xmlns:java="http://schemas.xmlsoap.org/wsdl/java/"        
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        >
+                      
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     TYPE DEFINITION - List of services participating in this BPEL process 
+     The default output of the BPELZ wizard uses Strings as input and 
+     output to the BPEL Process. But you can define or import any XML 
+     Schema type and us them as part of the message types.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <types>  
+        <schema attributeFormDefault="qualified" 
+                elementFormDefault="qualified" 
+                targetNamespace="http://services.emerson.com" 
+                xmlns="http://www.w3.org/2001/XMLSchema"/>
+    </types>
+    
+  <message name="MoveFile_RequestMessage">
+    <part name="ftpRACFJndi" type="xsd:string"/>      
+    <part name="sourcePathwithFileName" type="xsd:string"/>
+    <part name="destPathWithFileName" type="xsd:string"/>
+  </message>
+  
+  <message name="MoveFile_ResponseMessage">
+    <part name="returnCode" type="xsd:string"/>
+  </message>
+  
+  <message name="GetDirListing_RequestMessage">
+    <part name="ftpRACFJndi" type="xsd:string"/>      
+    <part name="directory" type="xsd:string"/>
+    <part name="mode" type="xsd:string"/>
+    <part name="hostname" type="xsd:string"/>
+    <part name="username" type="xsd:string"/>
+    <part name="password" type="xsd:string"/>
+  </message>
+  
+  <message name="GetDirListing_ResponseMessage">
+    <part name="DIR_Listing" type="xsd:string"/>
+  </message>
+  
+
+  <portType name="FTPService_JB">
+    <operation name="moveFile">
+      <input message="tns:MoveFile_RequestMessage"/>
+      <output message="tns:MoveFile_ResponseMessage"/>
+    </operation>  
+    <operation name="getFTPDirectoryListing">
+      <input message="tns:GetDirListing_RequestMessage"/>
+      <output message="tns:GetDirListing_ResponseMessage"/>
+    </operation>
+  </portType>
+
+  <binding name="JavaBinding" type="tns:FTPService_JB">
+    <java:binding/>
+    <format:typeMapping encoding="Java" style="Java">
+      <format:typeMap typeName="xsd:string" formatType="java.lang.String" />
+    </format:typeMapping>
+    <operation name="moveFile">
+      <java:operation methodName="moveFile"/>
+      <input/>
+      <output/>
+    </operation>  
+    <operation name="getFTPDirectoryListing">
+      <java:operation methodName="getFTPDirectoryListing"/>
+      <input/>
+      <output/>
+    </operation> 
+  </binding>
+
+  <service name="FTPService">
+    <port name="JavaPort" binding="tns:JavaBinding">
+      <java:address className="com.emerson.common.services.FTPService"/>
+    </port>
+  </service>
+  
+  <plnk:partnerLinkType name="FTPService_JB">
+    <plnk:role name="FTPService_JB_Provider">
+      <plnk:portType name="tns:FTPService_JB"/>
+    </plnk:role>
+  </plnk:partnerLinkType>  
+
+</definitions>

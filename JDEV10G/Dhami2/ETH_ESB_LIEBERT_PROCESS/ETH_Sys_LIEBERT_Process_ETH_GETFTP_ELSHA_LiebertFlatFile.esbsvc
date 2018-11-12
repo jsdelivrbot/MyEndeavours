@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_ELSHA_LiebertFlatFile" guid="838973900C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1243885777999</ID>
+      <lastModifiedTime>Mon Jun 01 19:49:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+   <invocation>
+      <targetService guid="838973910C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS"/>
+      <interface>
+         <wsdlURL>ETH_GETFTP_ELSHA_LiebertFlatFile.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ELSHA_LiebertFlatFile/">tns:Get_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="ETH_LIEBERT_FTP_Folder_PO" value="infile/850/"/>
+      <property name="ETH_LIEBERT_Archive_Folder_PO" value="archive/850/"/>
+      <property name="ETH_LIEBERT_POLL_FREQ_PO" value="10"/>
+      <property name="ETH_LIEBERT_FileName_PO" value="LBT.*\.txt"/>
+      <property name="rejectedMessageHandlers" value="file:///elshas1/elshas1/aelshas1/workingfolder/SC/RejectedMessages/LIEBERT"/>
+   </endpointProperties>
+</service>

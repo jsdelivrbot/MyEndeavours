@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/ProductionOrder.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CancelProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ChangeProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CreateProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetListProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ListProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/RespondProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/UpdateProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyProductionOrder.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="AcknowledgeProductionOrder">
+                <part name="Message" element="oa:AcknowledgeProductionOrder"/>
+        </message>
+        <message name="CancelProductionOrder">
+                <part name="Message" element="oa:CancelProductionOrder"/>
+        </message>
+        <message name="ChangeProductionOrder">
+                <part name="Message" element="oa:ChangeProductionOrder"/>
+        </message>
+        <message name="CreateProductionOrder">
+                <part name="Message" element="oa:CreateProductionOrder"/>
+        </message>
+        <message name="GetProductionOrder">
+                <part name="Message" element="oa:GetProductionOrder"/>
+        </message>
+        <message name="ShowProductionOrder">
+                <part name="Message" element="oa:ShowProductionOrder"/>
+        </message>
+        <message name="GetListProductionOrder">
+                <part name="Message" element="oa:GetListProductionOrder"/>
+        </message>
+        <message name="ListProductionOrder">
+                <part name="Message" element="oa:ListProductionOrder"/>
+        </message>
+        <message name="ProcessProductionOrder">
+                <part name="Message" element="oa:ProcessProductionOrder"/>
+        </message>
+        <message name="RespondProductionOrder">
+                <part name="Message" element="oa:RespondProductionOrder"/>
+        </message>
+        <message name="UpdateProductionOrder">
+                <part name="Message" element="oa:UpdateProductionOrder"/>
+        </message>
+        <message name="SyncProductionOrder">
+                <part name="Message" element="oa:SyncProductionOrder"/>
+        </message>
+        <message name="NotifyProductionOrder">
+                <part name="Message" element="oa:NotifyProductionOrder"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <message name="NewMessage"/>
+        <message name="NewMessage2"/>
+        <message name="NewMessage3"/>
+        <portType name="RequestProductionOrderPortType">
+                <operation name="ProcessProductionOrder">
+                        <input message="oaws:ProcessProductionOrder"/>
+                </operation>
+                <operation name="ChangeProductionOrder">
+                        <input message="oaws:ChangeProductionOrder"/>
+                </operation>
+                <operation name="CancelProductionOrder">
+                        <input message="oaws:CancelProductionOrder"/>
+                </operation>
+                <operation name="CreateProductionOrder">
+                        <input message="oaws:CreateProductionOrder"/>
+                </operation>
+                <operation name="GetProductionOrder">
+                        <input message="oaws:GetProductionOrder"/>
+                </operation>
+                <operation name="GetListProductionOrder">
+                        <input message="oaws:GetListProductionOrder"/>
+                </operation>
+                <operation name="UpdateProductionOrder">
+                        <input message="oaws:UpdateProductionOrder"/>
+                </operation>
+                <operation name="SyncProductionOrder">
+                        <input message="oaws:SyncProductionOrder"/>
+                </operation>
+                <operation name="NotifyProductionOrder">
+                        <input message="oaws:NotifyProductionOrder"/>
+                </operation>
+        </portType>
+        <portType name="ResponseProductionOrderPortType">
+                <operation name="AcknowledgeProductionOrder">
+                        <input message="oaws:AcknowledgeProductionOrder"/>
+                </operation>
+                <operation name="RespondProductionOrder">
+                        <input message="oaws:RespondProductionOrder"/>
+                </operation>
+                <operation name="ShowProductionOrder">
+                        <input message="oaws:ShowProductionOrder"/>
+                </operation>
+                <operation name="ListProductionOrder">
+                        <input message="oaws:ListProductionOrder"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncProductionOrderPortType">
+                <operation name="ProcessProductionOrder">
+                        <input message="oaws:ProcessProductionOrder"/>
+                        <output message="oaws:AcknowledgeProductionOrder"/>
+                </operation>
+                <operation name="ChangeProductionOrder">
+                        <input message="oaws:ChangeProductionOrder"/>
+                        <output message="oaws:RespondProductionOrder"/>
+                </operation>
+                <operation name="CancelProductionOrder">
+                        <input message="oaws:CancelProductionOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="CreateProductionOrder">
+                        <input message="oaws:CreateProductionOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="GetProductionOrder">
+                        <input message="oaws:GetProductionOrder"/>
+                        <output message="oaws:ShowProductionOrder"/>
+                </operation>
+                <operation name="GetListProductionOrder">
+                        <input message="oaws:GetListProductionOrder"/>
+                        <output message="oaws:ListProductionOrder"/>
+                </operation>
+                <operation name="UpdateProductionOrder">
+                        <input message="oaws:UpdateProductionOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="SyncProductionOrder">
+                        <input message="oaws:SyncProductionOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyProductionOrder">
+                        <input message="oaws:NotifyProductionOrder"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestProductionOrderBinding" type="oaws:RequestProductionOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ChangeProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="CancelProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="CreateProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetListProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="UpdateProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseProductionOrderBinding" type="oaws:ResponseProductionOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="RespondProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ListProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncProductionOrderBinding" type="oaws:SyncProductionOrderPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ChangeProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CancelProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CreateProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetListProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="UpdateProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyProductionOrder">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/ProductionOrder.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestProductionOrderService">
+                <port name="RequestProductionOrderBinding" binding="oaws:RequestProductionOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestProductionOrder"/>
+                </port>
+        </service>
+        <service name="ResponseProductionOrderService">
+                <port name="ResponseProductionOrderBinding" binding="oaws:ResponseProductionOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseProductionOrder"/>
+                </port>
+        </service>
+        <service name="SyncProductionOrderService">
+                <port name="SyncProductionOrderBinding" binding="oaws:SyncProductionOrderBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncProductionOrder"/>
+                </port>
+        </service>
+</definitions>

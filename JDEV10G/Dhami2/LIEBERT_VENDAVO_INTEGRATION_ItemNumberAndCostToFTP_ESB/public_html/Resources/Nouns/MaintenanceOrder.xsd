@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\MaintenanceOrder.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="MaintenanceOrder" type="MaintenanceOrderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A Maintenance Order is an order for a machine, building, tooling or fixed asset to be repaired or for preventitive maintenance to be performed.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MaintenanceOrderHeader" type="MaintenanceOrderHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that generally describes the maintenance order</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MaintenanceOrderLine" type="MaintenanceOrderLineType"/>
+        <xsd:element name="MeterRecording" type="MeterRecordingType"/>
+        <xsd:complexType name="MaintenanceOrderType">
+                <xsd:sequence>
+                        <xsd:element ref="MaintenanceOrderHeader" minOccurs="0"/>
+                        <xsd:element ref="MaintenanceOrderLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MaintenanceOrderHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="PriorityCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the priority of the MaintenanceOrder</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ParentMaintenanceOrderID" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the maintenance order that proceeded this order or from which this maintenance order originated after further investigation or work was performed.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ReportedDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies when the work to be done in this work order was reported</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="RespondByDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the date by which a response is expected for this maintenance order</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ChangeDateTime" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Timestamp in which the maintenance order was changed.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="FailureDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the timestamp when the machine failed or broke down such that it was no longer useable.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PlannedTimePeriod" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the Planned TimePeriod in which the maintenance order is planned to be performed.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ScheduledTimePeriod" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the TimePeriod in which the work is Scheduled to be performed.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ActualTimePeriod" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the TimePeriod in which the work was actually done. There maybe multiple occurances of this compound if part of the work was completed and the remainder performed at another time. This may happen when a part needs to be ordered.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="BudgetedAmount" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the monetary amount budgeted for the MaintenanceOrder.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EstimatedAmount" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the EstimatedAmount of the MaintenanceOrder.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ActualAmount" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the ActualAmount of the MaintenanceOrder.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EstimatedDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is an estimate as to how long it will take to complete the MaintenanceOrder.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ActualDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the total time spent working on the MaintenanceOrder. Is all of the sum of all the occurances of the ActualTimePeriod.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="RemainingDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Time needed to complete the MaintenanceOrder.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Machine" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the status of the machine.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Facility" minOccurs="0"/>
+                                        <xsd:element ref="JobPlanID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a identifier that describes the specific type of job sequence being performed/requested.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PreventiveMaintenanceID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the specific type of preventive maintenance sequence being performed/requested.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CalendarID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the maintenance calendar used when scheduling this maintenance order</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="SplitOperationsIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether an operation in a maintenance order have to be performed all at once or can be split into non-contiguous work segments.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PlannerID" minOccurs="0"/>
+                                        <xsd:element ref="SupervisorID" minOccurs="0"/>
+                                        <xsd:element ref="RequesterID" minOccurs="0"/>
+                                        <xsd:element ref="ProjectReference" minOccurs="0"/>
+                                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EstimatedResourceRequirements" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This identifies resources that are required to perform the maintenance operation. Resource Requirements can be specified for the entire maintenance order or for each operation within the order</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ActualResources" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This identifies the actual usage of resources against the requirements estimated for the work order</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Safety" minOccurs="0"/>
+                                        <xsd:element ref="Failure" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="MaintenanceOrderLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OperationID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This is the identifier of the Maintenance Operation</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ActualDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the total time spent working on the MaintenanceOrder. Is all of the sum of all the occurances of the ActualTimePeriod.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="RemainingDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Time needed to complete the MaintenanceOrder.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EstimatedDuration" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is an estimate as to how long it will take to complete the MaintenanceOrder.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CompletionDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the timestamp that indicates when the MaintenanceOrder was completed.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="MeterRecording" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Safety" minOccurs="0"/>
+                                        <xsd:element ref="Failure" minOccurs="0"/>
+                                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EstimatedResourceRequirements" minOccurs="0"/>
+                                        <xsd:element ref="ActualResources" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation>This identifies the actual usage of resources against the requirements estimated for the work order</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="MeterRecordingType">
+                <xsd:sequence>
+                        <xsd:element ref="MeterID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation>Identifies the meter that was measured</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="RecordedMeasure" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the measurement value of the maintenance operation.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="RecordingDateTime" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the timestamp in which the measurement was recorded.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="InspectorID" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

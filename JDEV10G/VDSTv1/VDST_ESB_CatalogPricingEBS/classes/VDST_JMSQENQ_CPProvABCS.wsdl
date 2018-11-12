@@ -1,0 +1,59 @@
+<definitions
+     name="VDST_JMSQENQ_CPProvABCS"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQENQ_CPProvABCS/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQENQ_CPProvABCS/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://schemas.emerson.com/common/envelope"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="EMR_CTE.xsd" />
+      </schema>
+    </types>
+    <message name="envelope_msg">
+        <part name="envelope" element="imp1:envelope"/>
+    </message>
+    <portType name="Produce_Message_ptt">
+        <operation name="Produce_Message">
+            <input message="tns:envelope_msg"/>
+        </operation>
+    </portType>
+    <binding name="Produce_Message_binding" type="tns:Produce_Message_ptt">
+    <jca:binding  />
+        <operation name="Produce_Message">
+      <jca:operation
+          DestinationName="jms/VDST_CP_ProvABCS"
+          DeliveryMode="Persistent"
+          TimeToLive="0"
+          PayloadType="TextMessage"
+          InteractionSpec="oracle.tip.adapter.jms.outbound.JmsProduceInteractionSpec"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="VDST_JMSQENQ_CPProvABCS">
+        <port name="Produce_Message_pt" binding="tns:Produce_Message_binding">
+      <jca:address location="eis/Jms/VDST_CatalogPricingProvABCS" UIConnectionName="Local"
+          ManagedConnectionFactory="oracle.tip.adapter.jms.JmsManagedConnectionFactory"
+          mcf.ConnectionFactoryLocation="jms/QueueConnectionFactory"
+          mcf.IsTopic="false"
+          mcf.IsTransacted="false"
+          mcf.FactoryProperties=""
+          mcf.Username="oc4jadmin"
+          mcf.Password="F44034A2DD8158AE53D924290C873D4A"
+          UIJmsProvider="OC4JJMS" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Produce_Message_plt" >
+    <plt:role name="Produce_Message_role" >
+      <plt:portType name="tns:Produce_Message_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="SendEmailWithAttachments"
+             targetNamespace="http://xmlns.oracle.com/SendEmailWithAttachments"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/SendEmailWithAttachments"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and us them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<types>
+		<schema attributeFormDefault="qualified"
+			elementFormDefault="qualified"
+			targetNamespace="http://xmlns.oracle.com/SendEmailWithAttachments"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="SendEmailWithAttachmentsProcessRequest">
+        <complexType>
+          <sequence>
+            <element name="to" type="string"/>
+            <element name="subject" type="string"/>
+            <element name="body" type="string"/>
+            <element name="attachmentName" type="string"/>
+            <element name="attachmentMimeType" type="string"/>
+            <element name="attachmentURI" type="string"/>
+          </sequence>
+        </complexType>
+      </element>
+			<element name="SendEmailWithAttachmentsProcessResponse">
+				<complexType>
+					<sequence>
+						<element name="result" type="string"/>
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+	</types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<message name="SendEmailWithAttachmentsRequestMessage">
+		<part name="payload" element="client:SendEmailWithAttachmentsProcessRequest"/>
+	</message>
+
+	<message name="SendEmailWithAttachmentsResponseMessage">
+		<part name="payload" element="client:SendEmailWithAttachmentsProcessResponse"/>
+	</message>
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- portType implemented by the SendEmailWithAttachments BPEL process -->
+	<portType name="SendEmailWithAttachments">
+		<operation name="initiate">
+			<input message="client:SendEmailWithAttachmentsRequestMessage"/>
+		</operation>
+	</portType>
+
+	<!-- portType implemented by the requester of SendEmailWithAttachments BPEL process
+	for asynchronous callback purposes
+	-->
+	<portType name="SendEmailWithAttachmentsCallback">
+		<operation name="onResult">
+			<input message="client:SendEmailWithAttachmentsResponseMessage"/>
+		</operation>
+	</portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	the SendEmailWithAttachments partnerLinkType binds the provider and
+	requester portType into an asynchronous conversation.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<plnk:partnerLinkType name="SendEmailWithAttachments">
+		<plnk:role name="SendEmailWithAttachmentsProvider">
+			<plnk:portType name="client:SendEmailWithAttachments"/>
+		</plnk:role>
+		<plnk:role name="SendEmailWithAttachmentsRequester">
+			<plnk:portType name="client:SendEmailWithAttachmentsCallback"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</definitions>

@@ -1,0 +1,171 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Nov 05 15:24:54 IST 2008
+  Author:  radhmmi
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+         targetNamespace="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/ftp/LBT_Write_ItemNumber/"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/Poll_ItemNumber_DB/"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/DB_Upd_ITEM_NUM_OUTBOUND/"
+         xmlns:client="http://xmlns.oracle.com/LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/DBUpdITEMNUMOUTBOUND"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://TargetNamespace.com/InboundService"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/ftp/LBT_Read_ItemNumber/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="client"
+                     partnerLinkType="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL"
+                     myRole="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELProvider"
+                     partnerRole="LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELRequester"/>
+        <partnerLink name="LBT_Read_ItemNumber" partnerRole="SynchRead_role"
+                     partnerLinkType="ns2:SynchRead_plt"/>
+        <partnerLink name="LBT_Write_ItemNumber" partnerRole="Put_role"
+                     partnerLinkType="ns4:Put_plt" myRole="Put_role"/>
+        <partnerLink name="DB_Upd_ITEM_NUM_OUTBOUND"
+                     partnerRole="DB_Upd_ITEM_NUM_OUTBOUND_role"
+                     partnerLinkType="ns5:DB_Upd_ITEM_NUM_OUTBOUND_plt"/>
+        <partnerLink name="Poll_ItemNumber_DB"
+                     partnerLinkType="ns7:Poll_ItemNumber_DB_plt"
+                     myRole="Poll_ItemNumber_DB_role"/>
+    </partnerLinks>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable"
+                  messageType="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELResponseMessage"/>
+        <variable name="TestFile" type="xsd:string"/>
+        <variable name="Invoke_ReadFile_SynchRead_InputVariable"
+                  messageType="ns2:Empty_msg"/>
+        <variable name="Invoke_ReadFile_SynchRead_OutputVariable"
+                  messageType="ns2:SynchRead_msg"/>
+        <variable name="Invoke_WriteFile_Put_InputVariable"
+                  messageType="ns4:Root-Element_msg"/>
+        <variable name="Counter" type="xsd:integer"/>
+        <variable name="Var_UpdDB_Number"
+                  messageType="ns5:ItemNumberOutboundCollection_msg"/>
+        <variable name="Receive_InputVar_ItemNumberCollection"
+                  messageType="ns7:ItemNumberOutboundCollection_msg"/>
+        <variable name="callbackClient_onResult_InputVariable"
+                  messageType="client:LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPELResponseMessage"/>
+    </variables>
+    <faultHandlers>
+        <catchAll/>
+    </faultHandlers>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in LIEBERT_VENDAVO_INTEGRATION_ENPItemNumber_BPEL.wsdl) -->
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <receive name="Receive_1" partnerLink="Poll_ItemNumber_DB"
+                 portType="ns7:Poll_ItemNumber_DB_ptt" operation="receive"
+                 variable="Receive_InputVar_ItemNumberCollection"
+                 createInstance="yes"/>
+        <assign name="Assign_1">
+            <copy>
+                <from expression="'Y'"/>
+                <to variable="TestFile"/>
+            </copy>
+        </assign>
+        <scope name="Scope_3">
+            <faultHandlers>
+                <catchAll>
+                    <sequence name="Sequence_6">
+                        <assign name="Assign_2">
+                            <copy>
+                                <from expression="'N'"/>
+                                <to variable="TestFile"/>
+                            </copy>
+                        </assign>
+                    </sequence>
+                </catchAll>
+            </faultHandlers>
+            <sequence name="Sequence_7">
+                <invoke name="Invoke_ReadFile" partnerLink="LBT_Read_ItemNumber"
+                        portType="ns2:SynchRead_ptt" operation="SynchRead"
+                        inputVariable="Invoke_ReadFile_SynchRead_InputVariable"
+                        outputVariable="Invoke_ReadFile_SynchRead_OutputVariable"/>
+            </sequence>
+        </scope>
+        <switch name="Switch_1">
+            <case condition="bpws:getVariableData('TestFile')='N'">
+                <sequence name="Sequence_8">
+                    <assign name="Transform_1">
+                        <bpelx:annotation>
+                            <bpelx:pattern>transformation</bpelx:pattern>
+                        </bpelx:annotation>
+                        <copy>
+                            <from expression="ora:processXSLT('Tfm_ItemNumber.xsl',bpws:getVariableData('Receive_InputVar_ItemNumberCollection','ItemNumberOutboundCollection'))"/>
+                            <to variable="Invoke_WriteFile_Put_InputVariable"
+                                part="Root-Element"/>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke_WriteFile"
+                            partnerLink="LBT_Write_ItemNumber"
+                            portType="ns4:Put_ptt" operation="Put"
+                            inputVariable="Invoke_WriteFile_Put_InputVariable"/>
+                </sequence>
+            </case>
+            <otherwise>
+                <sequence name="Sequence_9">
+                    <assign name="Transform_UpdateDB">
+                        <bpelx:annotation>
+                            <bpelx:pattern>transformation</bpelx:pattern>
+                        </bpelx:annotation>
+                        <copy>
+                            <from expression="ora:processXSLT('Tfm_UpdItemNumber_DB.xsl',bpws:getVariableData('Receive_InputVar_ItemNumberCollection','ItemNumberOutboundCollection'))"/>
+                            <to variable="Var_UpdDB_Number"
+                                part="ItemNumberOutboundCollection"/>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke_1"
+                            portType="ns5:DB_Upd_ITEM_NUM_OUTBOUND_ptt"
+                            inputVariable="Var_UpdDB_Number"
+                            partnerLink="DB_Upd_ITEM_NUM_OUTBOUND"
+                            operation="update"/>
+                </sequence>
+            </otherwise>
+        </switch>
+    </sequence>
+</process>

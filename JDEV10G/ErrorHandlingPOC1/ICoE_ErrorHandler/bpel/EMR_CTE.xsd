@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:tns="http://schemas.emerson.com/common/envelope" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.emerson.com/common/envelope" elementFormDefault="qualified" attributeFormDefault="qualified">
+	<xsd:element name="envelope">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tns:header"/>
+				<xsd:element ref="tns:body"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="header" type="tns:headerType"/>
+	<xsd:element name="body">
+		<xsd:annotation>
+			<xsd:documentation>Actual message/payload is stored here</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="xmlPayload" type="xsd:anyType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="process">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="processID" type="xsd:string" use="required"/>
+					<xsd:attribute name="location" type="xsd:anyURI" use="optional"/>
+					<xsd:attribute name="processDateTime" type="xsd:dateTime"/>
+					<xsd:attribute name="type" type="xsd:string"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="headerType">
+		<xsd:sequence>
+			<xsd:element name="EBMID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Contains the GUID to uniquely identify the Message</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EBOName" type="xsd:QName">
+				<xsd:annotation>
+					<xsd:documentation>Contains the fully qualified name of the message element in the payload, in the notation: {namespaceURI}localpart</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RequestEBMID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>This element contains the originating request GUID that uniquely identifies the originating request ID. The EBS populates this field in the response message by extracting it from the request message.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InteractionID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Contains ID of any local interaction which may happen in the life cycle of the Message. Could be used for asynchronous interactions.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CreationDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>This element contains the timestamp when the EBM was created. The timestamp should be presented in UTC, which can be presented in current datetime, and GMT offset as: yyyy '-' mm '-' dd �T� hh ':' mm ':' ss ('.' s +)? (zzzzzz)?</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="VerbCode" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Contains the verb represented by the EBM</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MessageProcessingInstruction" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Contains instruction on how the message should be processed. This section is used to indicate if the EBM is a production system level message where it should go through its standard path, or whether it is a testing level message where it should go through the testing/simulation path.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="EnvironmentCode" default="PRODUCTION">
+							<xsd:annotation>
+								<xsd:documentation>Can be set to either CAVS or PRODUCTION. The default is PRODUCTION.</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="CAVS"/>
+									<xsd:enumeration value="PRODUCTION"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="DefinitionID" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Used to specify the test definition ID.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="InstanceID" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Used to specify the test instance ID.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Sender">
+				<xsd:annotation>
+					<xsd:documentation>Stores the details of the Sender System</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>This is the Complex Type which defines the sender.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ID" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Contains the sender system identifier code as seeded in BSR. This is a mandatory element. This element represents the unique identifier of each source system. This value is stored in BSR. ReqABCSImpl should call the API detailed in the section below to populate this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="Description" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>This is the long description of the Sender System. This value is stored in the BSR too. ReqABCSImpl should call the API detailed in the section below to populate this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="IPAddress" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Represents the IP address of the sender system. This value is stored in BSR. ReqABCSImpl can call the API detailed below to populate this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="SenderMessageID" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>This is the message identifier of the sender system. ReqABCSImpl may have this information and that information can be used to populate this element.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="TransactionCode" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>This is the task code in the sender system that is used to generate this message. ReqABCSImpl has this information and should use that while preparing the EBM.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="CallingServiceName" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Name for the calling ABC service. Will be populated by source ABC service.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="Application" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Holds information about the originating application.</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ID" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>The sender system can designate the originating application code in this element. This will be stored in BSR. ReqABCSImpl should call the API detailed in the section below to populate this value.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="Version" type="xsd:float">
+										<xsd:annotation>
+											<xsd:documentation>The sender system can designate the version of the originating application in this element. This will be stored in BSR ReqABCSImpl should call the API detailed in the section below to populate this value.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="ContactName" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Name of the contact of the sender system. This will be stored in BSR. ReqABCSImpl should call the API detailed in the section below to populate this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="ContactEmail" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Email of the contact of the sender system. This will be stored in BSR. ReqABCSImpl should call the API detailed in the section below to populate this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="ContactPhoneNumber" type="xsd:string">
+							<xsd:annotation>
+								<xsd:documentation>Phone number of the contact of the sender system. This will be stored in BSR. ReqABCSImpl should call the API detailed in the section below to populate this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="ESBHeaderExtension" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>Some data passed from sender system must be transported through the EBM message life cycle and needed for identifying and processing the target system. Target ABM may not have placeholder for those kinds of data. Since they can't be forced to provide a placeholder for every such element, this ESB header will be used to hold that information. ESB has name/value pair and this component can have as many such elements as possible.</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Name" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>ESB Header element name is the same as the ID. Even though it allows multiple names for EBM Header scenarios there is only one value that is same as the ID.Any transformation in the life cycle of the EBM header can populate this field.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="DataType" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>ESB Header element data type is populated by source ABC service.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="Value" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>ESB Header element value is populated by source ABC service. Even though it allows different placeholders for different data types, for simplicity only this element is populated. Any transformation in the life cycle of the EBM header can populate this field.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Custom" type="xsd:anyType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>This is the complex type that customers can extend to add their own elements.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Target" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Stores the details of the Target Service</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ID" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Used to identify target systems to route to when the routing rules are overridden. Populated by EBS when the target system must be overridden. The value of the participating application instance code as registered in Business Service Repository (BSR). Other target system information can be looked up from BSR using the ID as a key.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="OverrideRoutingRuleIndicator" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Indicates if the routing rule should be overridden. Routing rules should always inspect this indicator before executing their own routing.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="ServiceName" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Contains the name of the service to route to. This is the name of the target ABC service and populated by EBS.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="ApplicationTypeCode" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Identifies the type of application. An identifier for the application type where multiple instances of the same application type may be registered in the integration platform. The application type may contain the version number of the application if more than one version is supported on the
+system. This is derived from the BSR and populated in EBS.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="EndpointURI" type="xsd:anyURI" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>This will have the target service end point URI. Populated in EBS when the target system is known.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="Custom" type="xsd:anyType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>This is the complex type that customers can extend to add their own elements when needed.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="BusinessScope" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Every EBM must contain at least two rows for these elements. One row with type Business Scope describes the end-to-end business process that the message is part of. The second row describes the main message associated in the flow (e.g.order message in ProcessOrder flow). For most of the cases, each end-to-end process will have only one message only. However in complex business scenarios there could be multiple messages spawned or forked from the process. In that case each spawned message must be a row in this section.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ID" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>An optional identifier that identifies the contract this instance relates to. ReqABCSImpl populates this value. This is an alpha numeric code assigned by the application team concatenated with aGUID. For message type business scope section use the same EBMID as used in the top
+section.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="InstanceID" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>A unique identifier that references the instance of the scope( e.g. process execution instance of document instance). This is the name of the process or message given by the applications. The name used here will be used in the BSR error notification table process name.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="BusinessScopeTypeCode" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Indicates the kind of business scope. Valid values are BusinessScope (UMM), BusinessService (for ebXML), and Message. ReqABCSImpl populates this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="EnterpriseServiceName" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Name of the Enterprise business service where this message belongs. Known to the message creator, be it ABCS or EBS. ReqABCSImpl populates this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="EnterpriseServiceOperationName" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Name of the action of the Enterprise business service this message belongs. Known to the message creator, be it ABCS or EBS. ReqABCSImpl populates this value.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="Custom" type="xsd:anyType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>A complex type for customer to extend to add extra elements.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="EBMTracking">
+				<xsd:annotation>
+					<xsd:documentation>Contains tracking information about the each node that the EBM has been through. EBMTracking contains one ExecutionUnit for each unit it EBM has gone through.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:ExecutionUnit" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+					<xsd:attribute name="executionUnitCount" type="xsd:integer" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Custom" type="xsd:anyType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Can extend the custom types to add any extra elements or attributes you may need. Can also take advantage of the XSLT file extensibility features to add the necessary code to populate and/or read values from the custom section.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UserID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>ID of the user who started the transaction</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HeaderProperties" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Used to hold other custom name-value pairs of the message metadata</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="HeaderProperty" type="tns:propertyType" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="LogDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Could be populated if this CTE is being sent to Common Logging Service</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="logTime" type="xsd:dateTime"/>
+						<xsd:element name="environment" type="tns:environmentTypeEnum"/>
+						<xsd:element name="serverName" type="xsd:string"/>
+						<xsd:element name="logLevel">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="DEBUG"/>
+									<xsd:enumeration value="INFO"/>
+									<xsd:enumeration value="WARN"/>
+									<xsd:enumeration value="ERROR"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+                                                <xsd:element name="logMessage" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ErrorDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Could be populated if the current CTE is an Error message and is being sent to Common Error Handler Service.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:process"/>
+						<xsd:element name="environment" type="tns:environmentTypeEnum" default="LabTest"/>
+						<xsd:element name="server" type="xsd:string"/>
+						<xsd:element name="errorProperties">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="errorProperty" type="tns:propertyType" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="error" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="errorID" type="xsd:string"/>
+									<xsd:element name="errorTime" type="xsd:dateTime"/>
+									<xsd:element name="severity">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="HIGH"/>
+												<xsd:enumeration value="MEDIUM"/>
+												<xsd:enumeration value="LOW"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="errorMessageCode" type="xsd:string"/>
+									<xsd:element name="errorMessage" type="xsd:string"/>
+									<xsd:element name="errorException" type="xsd:string"/>
+									<xsd:element name="errorStacktrace" type="xsd:string"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="propertyType">
+		<xsd:sequence>
+			<xsd:element name="Name" type="xsd:string"/>
+			<xsd:element name="DataType" type="xsd:string"/>
+			<xsd:element name="Value" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="environmentTypeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Development"/>
+			<xsd:enumeration value="LabTest"/>
+			<xsd:enumeration value="Staging"/>
+			<xsd:enumeration value="Production"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="ExecutionUnit">
+							<xsd:annotation>
+								<xsd:documentation>Contains tracking information about the one node that the EBM has been through. ExecutionUnit may appear multiple times, once for each execution unit it passes through.</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="SequenceNumber" type="xsd:integer">
+										<xsd:annotation>
+											<xsd:documentation>Contains the sequence number of the node the EBM has been through.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="ExecutionUnitID" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>Contains the ID of the execution unit, node, or process ID.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="ExecutionUnitName" type="xsd:string">
+										<xsd:annotation>
+											<xsd:documentation>Contains the fully qualified name of the execution unit, node, or process ID.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="ImplementationCode">
+										<xsd:annotation>
+											<xsd:documentation>Contains the category of the execution unit, which indicates the type of the execution unit such as BPEL, ESB, or Java Service.</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="BPEL"/>
+												<xsd:enumeration value="ESB"/>
+												<xsd:enumeration value="JWS"/>
+												<xsd:enumeration value="EWS"/>
+												<xsd:enumeration value="OTHER"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="ActivityDateTime" type="xsd:dateTime">
+										<xsd:annotation>
+											<xsd:documentation>This element contains the timestamp indicating when the EBM was processed by the execution unit. The timestamp should be presented in UTC, which can be presented in current datetime, and GMT offset as: yyyy '-' mm '-' dd �T� hh ':' mm ':' ss ('.' s+)? (zzzzzz)?</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+</xsd:schema>

@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ReadBigFile_BPEL" src="ReadBigFile_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="readBIGFile">
+            <property name="wsdlLocation">readBIGFile.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="writeBigFile">
+            <property name="wsdlLocation">writeBigFile.wsdl</property>
+            <property name="OutDIR" type="LogicalDirectory">D:\oracle\Files\Out</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="readBIGFile">
+            <property name="InDIR" type="LogicalDirectory">D:\oracle\Files\bpelIn</property>
+            <property name="archiveDIR" type="LogicalArchiveDirectory">D:\oracle\Files\bpelArchive</property>
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

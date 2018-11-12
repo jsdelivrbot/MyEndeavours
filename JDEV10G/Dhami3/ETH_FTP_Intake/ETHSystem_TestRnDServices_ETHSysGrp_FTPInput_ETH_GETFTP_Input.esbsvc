@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_Input" guid="E5900090059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_GETFTP_Input" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1263982874723</ID>
+      <lastModifiedTime>Wed Jan 20 10:21:14 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami3_ETH_FTP_Intake</lastModifiedUser>
+   </versionInfo>
+   <parent guid="3BF23800059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="E5900091059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_GETFTP_Input_RS"/>
+      <interface>
+         <wsdlURL>ETH_GETFTP_Input.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_Input/">tns:Get_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="ETH_Read1" value="ReadFTP1*.txt"/>
+      <property name="ETH_InputDir" value="infile/"/>
+      <property name="clusterGroupId" value="ETH_GETFTP_Input_Poller1"/>
+   </endpointProperties>
+</service>

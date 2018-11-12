@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\Shipment.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/LogisticsComponents.xsd"/>
+        <xsd:element name="Shipment" type="ShipmentType">
+                <xsd:annotation>
+                        <xsd:documentation>A Shipment document identifies and describes a specific collection of goods to be transported by a carrier and delivered to one or more business partner destinations.   A Shipment document represents the extent and content of "transportation work" to be done by the carrier.  For transportation efficiency, a shipment document typically consolidates deliveries to multiple destinations within a certain geographic region and may provide carrier routing instructions to each delivery stop.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShipmentHeader" type="ShipmentHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides general information about the document that is used to transport a specific quantity of material goods from a supplier to a single customer business partner destination.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShipmentItem" type="ShipmentItemType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides general information about the item inventory being delivered, including the planned and actual quantities.  This information usually directly references a line item or shipment schedule line on a sales order, purchase order or other inventory transfer document.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ShipmentType">
+                <xsd:sequence>
+                        <xsd:element ref="ShipmentHeader" minOccurs="0"/>
+                        <xsd:element ref="ShipmentItem" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ShipmentUnit" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ShipmentHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="ShipmentHeaderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ShipToParty" minOccurs="0"/>
+                                        <xsd:element ref="DeclaredValueAmount" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the declared monetary value of the contents of a shipping unit or a delivery for insurance purposes.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EstimatedFreightChargeAmount" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is used to describe the estimated cost of transporting the items or products being sold, produced or purchased.   This amount is usually determined at the time the sales order is created and is quoted to the customer, before the actual shipping method, weight or number of units is known.  This is also customarily known as a general "Shipping and Handling" charge.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="FreightCostAmount" minOccurs="0"/>
+                                        <xsd:element ref="FreightChargeAmount" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is used to report the total price charged to the customer for transporting the items or products being sold, produced or purchased.   This amount is determined by the shipping partner and/or reported by the carrier partner upon shipment or delivery of the product. The shipper's total operational freight cost (which may be different the price charged) can be reported using FreightOperationalAmount.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="SalePriceAmount" minOccurs="0"/>
+                                        <xsd:element ref="ShipmentTotalAmount" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents a summary sub-total or grand-total amount associated with a business document or line item entity.  It may be a cost, it may be an expense, or it may be a price.  The meaning is based on the context in the instance of the BOD.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="RequiredDeliveryDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that the business partner is requesting delivery of goods to arrive.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that the business partner is requesting delivery of goods to arrive.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PromisedDeliveryDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that the supplier business partner promises delivery of goods</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that the business partner is supplying goods promises delivery of goods to arrive.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LoadingDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that is used to mark the date and time a shipment loading process is complete.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that is used to mark the date and time a shipment loading process is complete.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EarliestShipDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies the earliest possible date at which a shipment can be made.  This may be used in conjunction with the ShipPriorToDueDateInd which indicates that the item, shipping unit or delivery may be shipped early.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies the earliest possible date at which a shipment can be made.  This may be used in conjunction with the ShipPriorToDueDateInd which indicates that the item, shipping unit or delivery may be shipped early.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PromisedShipDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date the business partner supplying goods is promising goods to be shipped.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ScheduledShipDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the date on which the goods are scheduled to be shipped.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ImportLicenseRequiredIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Communicates the need for an import license on a good or service. Valid values are '0' for no license required, and '1' for license required.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ExportLicenseRequiredIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Communicates the need for an export license on a good or service. Valid values are '0' for no license required, and '1' for license required.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="DropShipmentIndicator" minOccurs="0"/>
+                                        <xsd:element ref="PartialShipmentAllowedIndicator" minOccurs="0"/>
+                                        <xsd:element ref="EarlyShipmentAllowedIndicator" minOccurs="0"/>
+                                        <xsd:element ref="PriorityCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Priority of a document, task, or activity.  Could be used for production orders, sales orders, purchase orders, etc.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ShipmentServiceLevelCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a generic code that specifies a particular type or quality of carrier delivery service to be used for transporting goods.  A generic service level code is often established by shippers to consolidate various equivalent, but differently named, carrier service levels for comparison when "rate shopping" for the lowest cost transportation provider.  See CarrierServiceLevel for specifying the carrier's actual service level code.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CarrierServiceLevelCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The carrier's code or marketing term for specifying a particular type or quality of delivery service to be used for transporting goods.  Use ShipmentServiceLevel when specifying a shipper-assigned code for generic delivery service level that is not specific to a carrier.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="DestinationCountryCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents the identifier of the country of origin.  The list of valid codes can be found in ISO Standard number 3166.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PointOfLoadingCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the location shipped goods are to be loaded.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PointOfShipmentCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the location the goods are to be shipped.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PointOfStagingCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the location goods are to be placed prior to loading for shipment.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="TransportationTerm" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a contractual code used to describe the point where delivery occurs (goods ownership is transferred) in a contract of sale.  It identifies the rights and obligations of each partner  (supplier, carrier and customer) in the transaction and may specify the requirements to assume ownership (i.e. paying for the cost of the goods and/or transportation). The United Nations Trade Facilitation Information Exchange (UN/TraFIX) has established the following codes (INCOTERMS 1990) for use in international trade to Europe, Asia and the Pacific.  (See http://www.unece.org/trade/rec/rec05en.htm).  These terms may also be found in the United States Uniform Commercial Code (UCC).</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShipmentItemType">
+                <xsd:complexContent>
+                        <xsd:extension base="ShipItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="PlannedShipQuantity" minOccurs="0"/>
+                                        <xsd:element ref="UnitSalePriceAmount" minOccurs="0"/>
+                                        <xsd:element ref="ExtendedSalePriceAmount" minOccurs="0"/>
+                                        <xsd:group ref="FreightItemGroup"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

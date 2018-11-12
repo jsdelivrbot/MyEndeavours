@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ICoE_FaultGenerator" src="ICoE_FaultGenerator.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">ICoE_FaultGenerator.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CSF_ICoE_ErrorHandler">
+            <property name="wsdlLocation">http://soa-stg.emerson.com:8800/orabpel/default/CSF_ICoE_ErrorHandler/1.0/CSF_ICoE_ErrorHandler?wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

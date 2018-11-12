@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns:ns0="http://www.openapplications.org/oagis/9" xmlns="http://www.gssamerica.com/mdm/adapter" elementFormDefault="unqualified" targetNamespace="http://www.gssamerica.com/mdm/adapter" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AdapterElements" type="AdapterElementsType" />
+  <xs:complexType name="AdapterElementsType">
+    <xs:sequence>
+      <xs:element name="AdapterBody" type="AdapterBodyType" />
+      <xs:element name="AdapterHeader" type="AdapterHeaderType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AdapterBodyType">
+    <xs:sequence>
+      <xs:element name="entityXMLObj" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AdapterHeaderType">
+    <xs:sequence>
+      <xs:element name="srcID" type="xs:string" />
+      <xs:element name="requestType" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ESBRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header" type="ESBRequestHeaderType" />
+        <xs:element name="body" type="ESBRequestBodyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ESBRequestBodyType">
+    <xs:sequence>
+      <xs:element name="entityXMLObj" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ESBRequestHeaderType">
+    <xs:sequence>
+      <xs:element name="srcID" type="xs:string" />
+      <xs:element name="requestType" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

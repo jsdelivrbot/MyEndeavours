@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="TestPollFile_RS" guid="75263392714A11DEBFE2B3AE743F5CF2" qname="DefaultSystem.TestPollFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service TestPollFile</description>
+   <versionInfo>
+      <ID>1250489982879</ID>
+      <lastModifiedTime>Mon Aug 17 06:19:42 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami1_TestESBPoll</lastModifiedUser>
+   </versionInfo>
+   <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>TestPollFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/TestPollFile/">tns:Read_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/DefaultSystem/TestPollFile_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/DefaultSystem/TestPollFile_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="752AEE80714A11DEBFE2B3AE743F5CF2" qname="DefaultSystem.TestPollFile_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+      </operationInfo>
+   </operations>
+</service>

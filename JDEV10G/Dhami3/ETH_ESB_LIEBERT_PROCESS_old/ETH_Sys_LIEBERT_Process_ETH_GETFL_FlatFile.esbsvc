@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFL_FlatFile" guid="9E377AB0B29911DEBF19353201C4DBF0" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_GETFL_FlatFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1262786936139</ID>
+      <lastModifiedTime>Wed Jan 06 06:08:56 PST 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_SCPH2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="02B9F251D8E311DEBFF4E177418C329B" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="9E377AB1B29911DEBF19353201C4DBF0" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_GETFL_FlatFile_RS"/>
+      <interface>
+         <wsdlURL>ETH_GETFL_FlatFile.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_FlatFile/">tns:Read_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="ETH_LBT_FlatFile" value="/ftpdata/elshap1/lbt/infile/850"/>
+      <property name="ETH_LBT_FlatFile_Archive" value="/ftpdata/elshap1/lbt/archive/850"/>
+      <property name="ETH_LIEBERT_FileName_PO" value="LIE.*\.txt"/>
+      <property name="ETH_LIEBERT_POLL_FREQ_PO" value="10"/>
+      <property name="rejectedMessageHandlers" value="file:///ftpdata/elshap1/lbt/error/850"/>
+      <property name="clusterGroupId" value="ETHSysGrp_Liebert_Process_Poller2"/>
+   </endpointProperties>
+</service>

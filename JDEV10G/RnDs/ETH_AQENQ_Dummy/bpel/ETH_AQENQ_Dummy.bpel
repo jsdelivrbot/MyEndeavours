@@ -1,0 +1,74 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Feb 10 16:03:30 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_AQENQ_Dummy"
+         targetNamespace="http://xmlns.emerson.com/ETH_AQENQ_Dummy"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_GETFL_GetMessage/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_JMSENQ_PushAQ/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.emerson.com/ETH_AQENQ_Dummy"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="ReadDummyAQ_role" name="ETH_GETFL_GetMessage"
+                 partnerLinkType="ns1:ReadDummyAQ_plt"/>
+    <partnerLink name="ETH_JMSENQ_PushAQ" partnerRole="Produce_Message_role"
+                 partnerLinkType="ns3:Produce_Message_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="G_IN_Receive_ReadDummyAQFile"
+              messageType="ns1:ReadDummyAQ_msg"/>
+    <variable name="G_IN_FTPHeader" element="ns2:InboundFileHeaderType"/>
+    <variable name="G_Out_JMSProduce" messageType="ns3:Produce_Message_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="ETH_GETFL_GetMessage"
+             portType="ns1:ReadDummyAQ_ptt" operation="ReadDummyAQ"
+             variable="G_IN_Receive_ReadDummyAQFile" createInstance="yes"
+             bpelx:headerVariable="G_IN_FTPHeader"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="G_IN_Receive_ReadDummyAQFile" part="opaque"
+              query="/ns4:opaqueElement"/>
+        <to variable="G_Out_JMSProduce" part="opaque"
+            query="/ns4:opaqueElement"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_1" partnerLink="ETH_JMSENQ_PushAQ"
+            portType="ns3:Produce_Message_ptt" operation="Produce_Message"
+            inputVariable="G_Out_JMSProduce"/>
+  </sequence>
+</process>

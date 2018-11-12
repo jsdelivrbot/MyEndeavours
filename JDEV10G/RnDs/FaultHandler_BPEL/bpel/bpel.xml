@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="FaultHandler_BPEL" src="FaultHandler_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="PollCTEXML">
+            <property name="wsdlLocation">PollCTEXML.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="FaultGenerator_BPEL">
+            <property name="wsdlLocation">http://INEDEC-MLAP-45.emrcorp.local:80/orabpel/default/FaultGenerator_BPEL/FaultGenerator_BPEL?wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="PollCTEXML">
+            <property name="archiveDIR" type="LogicalArchiveDirectory">D:\oracle\Files\bpelArchive</property>
+            <property name="InDIR" type="LogicalDirectory">D:\oracle\Files\bpelIn</property>
+            <property name="portType">Read_ptt</property>
+            <property name="rejectedMessageHandlers">bpel://default:welcome1|CEH_BPEL_RejectedMsgHandler|handleRejection|payload</property>
+         </activationAgent>
+      </activationAgents>
+      <faultPolicyBindings>
+         <process faultPolicy="MyPolicy"/>
+      </faultPolicyBindings>
+   </BPELProcess>
+</BPELSuitcase>

@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="VDST_BPEL_ChannelPartner_PartMapReqABCS" src="VDST_BPEL_ChannelPartner_PartMapReqABCS.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="VDST_FTP_GET_ChannelPartner_PartMap">
+            <property name="wsdlLocation">VDST_FTP_GET_ChannelPartner_PartMap.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="VDST_JMSQ_ENQ_ChannelPartner_PartMapCTE">
+            <property name="wsdlLocation">VDST_JMSQ_ENQ_ChannelPartner_PartMapCTE.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="VDST_FTP_GET_ChannelPartner_PartMap">
+            <property name="clusterGroupId">VDST_BPEL_ChannelPartner_PartMapReqABCS_KNK</property>
+            <property name="FTP_JNDI">eis/FTP/VDST_KnaackFTP</property>
+            <property name="archive_dir">cp/archive/</property>
+            <property name="input_dir">cp/infile/</property>
+            <property name="poll_frequency">60</property>
+            <property name="portType">Get_ptt</property>
+            <property name="file_pattern">VDST_CPM_*.csv</property>
+            <property name="clusterAcrossSubnet">false</property>
+            <property name="useJgroupConfigFile">true</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

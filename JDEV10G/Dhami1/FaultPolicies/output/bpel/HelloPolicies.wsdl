@@ -1,0 +1,16 @@
+<definitions
+     name="HelloPolicies"
+     targetNamespace="http://hello.emerson.com"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://hello.emerson.com"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <import namespace="http://hello.emerson.com" location="http://INEDEC-MOH-03:8888/FaultPoliciesServices/HelloPoliciesPort?wsdl"/>
+    <plnk:partnerLinkType name="HelloPoliciesPortType_PL">
+        <plnk:role name="HelloPoliciesPortType_Role">
+            <plnk:portType name="tns:HelloPoliciesPortType"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

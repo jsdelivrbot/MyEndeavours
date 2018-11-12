@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="Test" src="Test.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="fileReadOne">
+            <property name="wsdlLocation">fileReadOne.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="fileReadTwo">
+            <property name="wsdlLocation">fileReadTwo.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="fileReadOne">
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="fileReadTwo">
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/IssueInventory.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessIssueInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeIssueInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetIssueInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowIssueInventory.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="ProcessIssueInventory">
+                <part name="Message" element="oa:ProcessIssueInventory"/>
+        </message>
+        <message name="AcknowledgeIssueInventory">
+                <part name="Message" element="oa:AcknowledgeIssueInventory"/>
+        </message>
+        <message name="GetIssueInventory">
+                <part name="Message" element="oa:GetIssueInventory"/>
+        </message>
+        <message name="ShowIssueInventory">
+                <part name="Message" element="oa:ShowIssueInventory"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestIssueInventoryPortType">
+                <operation name="ProcessIssueInventory">
+                        <input message="oaws:ProcessIssueInventory"/>
+                </operation>
+                <operation name="GetIssueInventory">
+                        <input message="oaws:GetIssueInventory"/>
+                </operation>
+        </portType>
+        <binding name="RequestIssueInventoryBinding" type="oaws:RequestIssueInventoryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessIssueInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/IssueInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetIssueInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/IssueInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <service name="RequestIssueInventoryService">
+                <port name="RequestIssueInventoryBinding" binding="oaws:RequestIssueInventoryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestIssueInventory"/>
+                </port>
+        </service>
+        <portType name="ResponseIssueInventoryPortType">
+                <operation name="ShowIssueInventory">
+                        <input message="oaws:ShowIssueInventory"/>
+                </operation>
+                <operation name="AcknowledgeIssueInventory">
+                        <input message="oaws:AcknowledgeIssueInventory"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="ResponseIssueInventoryBinding" type="oaws:ResponseIssueInventoryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowIssueInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/IssueInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="AcknowledgeIssueInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/IssueInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/IssueInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <service name="ResponseIssueInventoryService">
+                <port name="ResponseIssueInventoryBinding" binding="oaws:ResponseIssueInventoryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseIssueInventory"/>
+                </port>
+        </service>
+        <portType name="SyncIssueInventoryPortType">
+                <operation name="ProcessIssueInventory">
+                        <input message="oaws:ProcessIssueInventory"/>
+                        <output message="oaws:AcknowledgeIssueInventory"/>
+                </operation>
+                <operation name="GetIssueInventory">
+                        <input message="oaws:GetIssueInventory"/>
+                        <output message="oaws:ShowIssueInventory"/>
+                </operation>
+        </portType>
+        <binding name="SyncIssueInventoryBinding" type="oaws:SyncIssueInventoryPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessIssueInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/IssueInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetIssueInventory">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/IssueInventory.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="SyncIssueInventoryService">
+                <port name="SyncIssueInventoryBinding" binding="oaws:SyncIssueInventoryBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncIssueInventory"/>
+                </port>
+        </service>
+</definitions>

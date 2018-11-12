@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2" guid="C16F0FA1096D11DEBFDF5DDDA038BDBD" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1244826361379</ID>
+      <lastModifiedTime>Fri Jun 12 22:36:01 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+   </versionInfo>
+   <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2/">tns:Produce_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_ALICE_InOutSystem/ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:12001/event/ETHSys_ALICE_InOutSystem/ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="C173CA90096D11DEBFDF5DDDA038BDBD" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+      </operationInfo>
+   </operations>
+</service>

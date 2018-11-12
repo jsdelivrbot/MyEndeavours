@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\SequenceSchedule.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="SequenceSchedule" type="SequenceScheduleType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A ShipTo Partner is required to represent the business partner that the goods or services are shipped to.
+Optionally, partner types SoldTo, BillTo and ShipFrom, and Supplier can be used.
+</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SequenceScheduleHeader" type="SequenceScheduleHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Header level informatoin for the schedule.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SequenceScheduleEvent" type="SequenceScheduleEventType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Sequence Schedule Date and Time information associated with the Schedule Line.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SequenceScheduleLine" type="SequenceScheduleLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Line level informatoin for the schedule within a particular event.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="SequenceScheduleType">
+                <xsd:sequence>
+                        <xsd:element ref="SequenceScheduleHeader"/>
+                        <xsd:element ref="SequenceScheduleEvent" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SequenceScheduleHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="ScheduleHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="SoldToParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BillToParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ShipFromParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SupplierParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SequenceScheduleEventType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Event represents date and time information for the associated Schedule Line(s). The date and time the detail lines of the sequence schedule are required to be delivered. This allows Sequence Lines to be grouped together by an Event and minimizes the amount of potential redundant data.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="RequiredDateTime" minOccurs="0"/>
+                        <xsd:element ref="BeginSequenceCodes" minOccurs="0"/>
+                        <xsd:element ref="EndSequenceCode" minOccurs="0"/>
+                        <xsd:element ref="SequenceScheduleLine" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SequenceScheduleLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="ScheduleLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="SequenceCode" minOccurs="0"/>
+                                        <xsd:element ref="FinishedGoodItem" minOccurs="0"/>
+                                        <xsd:element ref="LineFeedLocation" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

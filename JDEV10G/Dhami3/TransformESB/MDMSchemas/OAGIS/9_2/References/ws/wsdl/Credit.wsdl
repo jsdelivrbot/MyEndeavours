@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/Credit.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ChangeCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/RespondCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/UpdateCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyCredit.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="ProcessCredit">
+                <part name="Message" element="oa:ProcessCredit"/>
+        </message>
+        <message name="AcknowledgeCredit">
+                <part name="Message" element="oa:AcknowledgeCredit"/>
+        </message>
+        <message name="ChangeCredit">
+                <part name="Message" element="oa:ChangeCredit"/>
+        </message>
+        <message name="RespondCredit">
+                <part name="Message" element="oa:RespondCredit"/>
+        </message>
+        <message name="SyncCredit">
+                <part name="Message" element="oa:SyncCredit"/>
+        </message>
+        <message name="GetCredit">
+                <part name="Message" element="oa:GetCredit"/>
+        </message>
+        <message name="ShowCredit">
+                <part name="Message" element="oa:ShowCredit"/>
+        </message>
+        <message name="UpdateCredit">
+                <part name="Message" element="oa:UpdateCredit"/>
+        </message>
+        <message name="NotifyCredit">
+                <part name="Message" element="oa:NotifyCredit"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestCreditPortType">
+                <operation name="GetCredit">
+                        <input message="oaws:GetCredit"/>
+                </operation>
+                <operation name="ProcessCredit">
+                        <input message="oaws:ProcessCredit"/>
+                </operation>
+                <operation name="ChangeCredit">
+                        <input message="oaws:ChangeCredit"/>
+                </operation>
+                <operation name="SyncCredit">
+                        <input message="oaws:SyncCredit"/>
+                </operation>
+                <operation name="UpdateCredit">
+                        <input message="oaws:UpdateCredit"/>
+                </operation>
+                <operation name="NotifyCrefit">
+                        <input message="oaws:NotifyCredit"/>
+                </operation>
+        </portType>
+        <portType name="ResponseCreditPortType">
+                <operation name="AcknowledgeCredit">
+                        <input message="oaws:AcknowledgeCredit"/>
+                </operation>
+                <operation name="RespondCredit">
+                        <input message="oaws:RespondCredit"/>
+                </operation>
+                <operation name="ShowCredit">
+                        <input message="oaws:ShowCredit"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncCreditPortType">
+                <operation name="GetCredit">
+                        <input message="oaws:GetCredit"/>
+                        <output message="oaws:ShowCredit"/>
+                </operation>
+                <operation name="UpdateCredit">
+                        <input message="oaws:UpdateCredit"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="ProcessCredit">
+                        <input message="oaws:ProcessCredit"/>
+                        <output message="oaws:AcknowledgeCredit"/>
+                </operation>
+                <operation name="ChangeCredit">
+                        <input message="oaws:ChangeCredit"/>
+                        <output message="oaws:RespondCredit"/>
+                </operation>
+                <operation name="SyncCredit">
+                        <input message="oaws:SyncCredit"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyCredit">
+                        <input message="oaws:NotifyCredit"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestCreditBinding" type="oaws:RequestCreditPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ChangeCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="UpdateCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyCrefit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseCreditBinding" type="oaws:ResponseCreditPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="RespondCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncCreditBinding" type="oaws:SyncCreditPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ProcessCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ChangeCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="UpdateCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyCredit">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/Credit.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestCreditService">
+                <port name="RequestCreditBinding" binding="oaws:RequestCreditBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestCredit"/>
+                </port>
+        </service>
+        <service name="ResponseCreditService">
+                <port name="ResponseCreditBinding" binding="oaws:ResponseCreditBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseCredit"/>
+                </port>
+        </service>
+        <service name="SyncCreditService">
+                <port name="SyncCreditBinding" binding="oaws:SyncCreditBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncCredit"/>
+                </port>
+        </service>
+</definitions>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Nouns\Routing.xsd
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="Routing" type="RoutingType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Routing is the description of all of the resources, steps, and activities associated with a path or routing associated with a manufacturing or production process.  Typically, a routing contains people, machines, tooling, operations, and steps.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RoutingHeader" type="RoutingHeaderType"/>
+        <xsd:element name="OperationGroup" type="OperationGroupType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information specifying a grouping of operations and their relationships.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RouteOperation" type="RouteOperationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information specifying the operations and there order for the specified routing.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PreviousOperation" type="PreviousOperationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information specifying the previous operation.  This provides the immediate preceding operation of the current operation defined in RouteOperation.  The RouteOperation of the operations of the potential first operations will not have an associated PreviousOperation, however all others must contain one.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="GroupMember" type="GroupMemberType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information specifying the occurrence of the operations within an OperationGroup.  At least one occurrence of the GroupMember component is required for each occurrence of the OperationGroup component. Except for the request BODs which use the verbs Get and GetList.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="RoutingType">
+                <xsd:sequence>
+                        <xsd:element ref="RoutingHeader" minOccurs="0"/>
+                        <xsd:element ref="Operation" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="RoutingHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Type" minOccurs="0"/>
+                                        <xsd:element ref="BOMReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ManufacturingItem" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the Item Identifier in which the Routing is being used to create.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Site" minOccurs="0"/>
+                                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Charge" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="OperationGroup" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RouteOperation" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="RouteOperationType">
+                <xsd:complexContent>
+                        <xsd:extension base="OperationReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ContainerID" minOccurs="0"/>
+                                        <xsd:element ref="ContainerType" minOccurs="0"/>
+                                        <xsd:element ref="OperationMultiplier" minOccurs="0"/>
+                                        <xsd:element ref="InQueueLocation" minOccurs="0"/>
+                                        <xsd:element ref="TerminationIndicator" minOccurs="0"/>
+                                        <xsd:element ref="PreviousOperation" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ManufacturingItem" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="PreviousOperationType">
+                <xsd:complexContent>
+                        <xsd:extension base="OperationReferenceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OutQueueLocation" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="TimeInQueueDuration" minOccurs="0"/>
+                                        <xsd:element ref="PlannedOverrunPercent" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="OperationGroupType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">In a manufacturing environment where a CNC Lathe or a Manual Lathe may be alternative operations used in the production of a finished good.
+In the example above the Manual Lathe OperationGroup Name would be Alternate OperationGroupType.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="GroupName" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="GroupType" minOccurs="0"/>
+                        <xsd:element ref="GroupMember" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="GroupMemberType">
+                <xsd:sequence>
+                        <xsd:element ref="OperationID" minOccurs="0"/>
+                        <xsd:element ref="OperationName" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="SequenceCode" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

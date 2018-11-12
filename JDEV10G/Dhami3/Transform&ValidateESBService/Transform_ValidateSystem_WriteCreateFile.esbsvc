@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="WriteCreateFile" guid="E802AA9036F111DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.WriteCreateFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1214809452748</ID>
+      <lastModifiedTime>Mon Jun 30 12:34:12 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDMApplication_Transform&amp;ValidateESBService</lastModifiedUser>
+   </versionInfo>
+   <parent guid="662E8A8036F011DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>esb:///ESB_Projects/MDMApplication_Transform&amp;ValidateESBService/WriteCreateFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/WriteCreateFile/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/Transform&amp;ValidateSystem/WriteCreateFile?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/Transform&amp;ValidateSystem/WriteCreateFile</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="E802AA9136F111DDBF87E36E13A58817" qname="Transform&amp;ValidateSystem.WriteCreateFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/services" element="tns:CreateRecordsRequest"/>
+      </operationInfo>
+   </operations>
+</service>

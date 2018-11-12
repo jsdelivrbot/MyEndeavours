@@ -1,0 +1,16 @@
+<definitions
+     name="CADConversionWebService"
+     targetNamespace="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <import namespace="http://service.emerson.com/vdst/tool/CADConversionWebService.wsdl" location="CADConversionWebService.wsdl"/>
+    <plnk:partnerLinkType name="CADConversionWebServicePortType_PL">
+        <plnk:role name="CADConversionWebServicePortType_Role">
+            <plnk:portType name="tns:CADConversionWebServicePortType"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

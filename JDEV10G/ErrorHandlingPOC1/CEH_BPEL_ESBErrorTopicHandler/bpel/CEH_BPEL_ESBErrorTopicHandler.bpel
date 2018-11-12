@@ -1,0 +1,146 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Mar 04 14:48:35 IST 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CEH_BPEL_ESBErrorTopicHandler"
+         targetNamespace="http://bpel.oracle.com/CEH_BPEL_ESBErrorTopicHandler"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns4="http://bpel.oracle.com/CEH_BPEL_CommonErrorHandler"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://bpel.oracle.com/CEH_BPEL_ESBErrorTopicHandler"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/CEH_JMSTDEQ_ESBErrorTopic/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/opaque/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <bpelx:exec import="java.util.*"/>
+  <bpelx:exec import="java.lang.*"/>
+  <bpelx:exec import="java.math.*"/>
+  <bpelx:exec import="java.io.*"/>
+  <bpelx:exec import="org.w3c.dom.Element"/>
+  <bpelx:exec import="oracle.xml.parser.v2.XMLElement"/>
+  <bpelx:exec import="oracle.xml.parser.v2.XMLText"/>
+  <bpelx:exec import="com.collaxa.common.util.Base64Decoder"/>
+  <partnerLinks>
+    <partnerLink myRole="ConsumeESBError_role" name="CEH_JMSTDEQ_ESBErrorTopic"
+                 partnerLinkType="ns1:ConsumeESBError_plt"/>
+    <partnerLink name="CEH_BPEL_CommonErrorHandler"
+                 partnerRole="CEH_BPEL_CommonErrorHandlerProvider"
+                 partnerLinkType="ns4:CEH_BPEL_CommonErrorHandler"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_IN_ESBError" messageType="ns1:ConsumeESBError_msg"/>
+    <variable name="G_IN_ESBError_Header"
+              element="ns3:JMSInboundHeadersAndProperties"/>
+    <variable name="L_CommonErrorHandler_Request"
+              messageType="ns4:CEH_BPEL_CommonErrorHandlerRequestMessage"/>
+    <variable name="G_ESBError_Message" element="ns3:Error_Topic_Message"/>
+    <variable name="L_ESBError_XML" messageType="ns1:ConsumeESBError_xmlMsg"/>
+    <variable name="L_AnyFaultString" type="xsd:string"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence_1">
+        <assign name="Assign_AnyExceptionMsg">
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="L_AnyFaultString"/>
+          </copy>
+        </assign>
+        <empty name="Empty_IfAnyFault"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main">
+    <receive name="Receive_ESBError" createInstance="yes"
+             partnerLink="CEH_JMSTDEQ_ESBErrorTopic"
+             portType="ns1:ConsumeESBError_ptt" operation="ConsumeESBError"
+             variable="G_IN_ESBError"
+             bpelx:headerVariable="G_IN_ESBError_Header"/>
+    <bpelx:exec name="Java_Convert_base64BinaryTOXml" language="java"
+                version="1.3">
+      <![CDATA[/*Write your java code below e.g.     
+	System.out.println("Hello, World");    
+*/    
+    
+   
+try    
+{  
+// XML Element will not work since we have base64Binary string not any node tree in our request
+// XMLElement node = (XMLElement)getVariableData("G_IN_ESBError","opaque","/ns2:opaqueElement");
+// String strBase64 = node.getNodeValue();  This will give null
+
+// To get the string we need to get the text node value
+XMLText text = (XMLText)getVariableData("G_IN_ESBError","opaque","/ns2:opaqueElement/node()");
+String strBase64 = text.getNodeValue();
+byte[] decodedBytes = Base64Decoder.decode(strBase64.getBytes());    
+String decoded = new String(decodedBytes);    
+setVariableData("L_ESBError_XML","stringMsg","/ns2:stringElement",decoded);  
+}    
+catch(Exception uee)    
+{    
+uee.printStackTrace();    
+}]]>
+    </bpelx:exec>
+    <assign name="Assign_ESBError_Message">
+      <copy>
+        <from variable="L_ESBError_XML" part="stringMsg"
+              query="/ns2:stringElement"/>
+        <to variable="G_ESBError_Message"
+            query="/ns3:Error_Topic_Message/ns3:payload"/>
+      </copy>
+      <copy>
+        <from variable="G_IN_ESBError_Header"
+              query="/ns3:JMSInboundHeadersAndProperties"/>
+        <to variable="G_ESBError_Message"
+            query="/ns3:Error_Topic_Message/ns3:JMSInboundHeadersAndProperties"/>
+      </copy>
+    </assign>
+    <assign name="Transform_ESBError_ErrorMsg">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:processXSLT('Transformation_ESBErrorMsg_ErrorMsg.xsl',bpws:getVariableData('G_ESBError_Message'))"/>
+        <to variable="L_CommonErrorHandler_Request" part="payload"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_CommonErrorHandlerBPEL"
+            partnerLink="CEH_BPEL_CommonErrorHandler"
+            portType="ns4:CEH_BPEL_CommonErrorHandler" operation="handleError"
+            inputVariable="L_CommonErrorHandler_Request"/>
+  </sequence>
+</process>

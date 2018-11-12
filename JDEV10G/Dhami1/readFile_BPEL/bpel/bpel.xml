@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="readFile_BPEL" src="readFile_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="readFile">
+            <property name="wsdlLocation">readFile.wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="readFile">
+            <property name="clusterGroupId">readFile_BPEL_Poller1</property>
+            <property name="portType">Read_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

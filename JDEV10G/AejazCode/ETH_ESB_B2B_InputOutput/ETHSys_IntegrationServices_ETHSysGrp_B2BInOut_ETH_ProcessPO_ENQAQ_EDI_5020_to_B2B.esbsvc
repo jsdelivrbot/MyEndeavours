@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B" guid="8925B990097811DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="AQ" typeDescription="oracle.tip.esb.console.servicetype.outboundaqadapterservice" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1271412048134</ID>
+      <lastModifiedTime>Fri Apr 16 10:00:48 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/aq/ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B/">tns:Enqueue_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_OutputServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="89530B20097811DE9F1EA78AC56F7274" qname="ETHSystem_OutputServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_ENQAQ_EDI_5020_to_B2B.Enqueue" wsdlOperation="Enqueue" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="urn:oracle:integration:b2b:DCC1FCD2811C47748DF43A39F735F4F0" element="tns:Transaction-850"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="cacheConnections" value="false"/>
+   </endpointProperties>
+</service>

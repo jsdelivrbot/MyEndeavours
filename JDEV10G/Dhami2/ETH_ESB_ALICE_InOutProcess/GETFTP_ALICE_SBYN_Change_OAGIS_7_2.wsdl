@@ -1,0 +1,57 @@
+<definitions
+     name="GETFTP_ALICE_SBYN_Change_OAGIS_7_2"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/GETFTP_ALICE_SBYN_Change_OAGIS_7_2/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/GETFTP_ALICE_SBYN_Change_OAGIS_7_2/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://xmlns.emrsn.com/CustomChange_PO_006"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomChange_PO_006" schemaLocation="public_html/CustomChange_PO_006.xsd" />
+      </schema>
+    </types>
+    <message name="CustomChange_PO_006_msg">
+        <part name="CustomChange_PO_006" element="imp1:CustomChange_PO_006"/>
+    </message>
+    <portType name="Get_ptt">
+        <operation name="Get">
+            <input message="tns:CustomChange_PO_006_msg"/>
+        </operation>
+    </portType>
+    <binding name="Get_binding" type="tns:Get_ptt">
+    <pc:inbound_binding  />
+        <operation name="Get">
+      <jca:operation
+          FileType="ascii"
+          LogicalDirectory="ETH_ALICE_FTP_Folder_ChangePO"
+          ActivationSpec="oracle.tip.adapter.ftp.inbound.FTPActivationSpec"
+          LogicalArchiveDirectory="ETH_ALICE_FTP_Archive_ChangePO"
+          DeleteFile="true"
+          IncludeFiles="$ETH_ALICE_FileName_ChangePO"
+          PollingFrequency="$ETH_ALICE_POLL_FREQ_ChangePO"
+          MinimumAge="0"
+          Sorter="oracle.tip.adapter.file.sorter.TimestampSorterAscending"
+          OpaqueSchema="false" 
+          UseRemoteArchive="true">
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="GETFTP_ALICE_SBYN_Change_OAGIS_7_2">
+        <port name="Get_pt" binding="tns:Get_binding">
+      <jca:address location="eis/Ftp/ETH_EMC" UIincludeWildcard="read*.dat" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Get_plt" >
+    <plt:role name="Get_role" >
+      <plt:portType name="tns:Get_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

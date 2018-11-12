@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CommonErrorHandler" src="CommonErrorHandler.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="CommonErrorHandler">
+            <property name="wsdlLocation">CommonErrorHandler.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ICoE_DBINS_ErrorTable">
+            <property name="wsdlLocation">ICoE_DBINS_ErrorTable.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+   </BPELProcess>
+</BPELSuitcase>

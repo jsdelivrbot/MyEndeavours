@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Write_PUTFL_BeforeNamespaceRemoval" guid="67167B71099411DEBFB92D530C216A38" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_BeforeNamespaceRemoval" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885417084</ID>
+      <lastModifiedTime>Mon Jun 01 19:43:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>Write_PUTFL_BeforeNamespaceRemoval.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Write_PUTFL_BeforeNamespaceRemoval/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/Write_PUTFL_BeforeNamespaceRemoval?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/Write_PUTFL_BeforeNamespaceRemoval</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="68859BD0099411DEBFB92D530C216A38" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_BeforeNamespaceRemoval.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="ETH_BeforeNameSpace_CustomOAGIS9" value="/elshat1/elshat1/aelshat1/workingfolder/SC/NewFlatFile"/>
+   </endpointProperties>
+</service>

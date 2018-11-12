@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="LBT_Poll_CONTROLtable_RS" guid="06B4D511735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Poll_CONTROLtable_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service LBT_Poll_CONTROLtable</description>
+   <versionInfo>
+      <ID>1228925064990</ID>
+      <lastModifiedTime>Wed Dec 10 16:04:24 GMT+00:00 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_VendavoPhase1_LIEBERT_VENDAVO_INTEGRATION_OrgsOperatingToStageFTP</lastModifiedUser>
+   </versionInfo>
+   <parent guid="B3EC2DB0993111DDBFC10B3340FC727A" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>LBT_Poll_CONTROLtable.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_Poll_CONTROLtable/">tns:LBT_Poll_CONTROLtable_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Poll_CONTROLtable_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/LBT_ItemHubDBToStagingDBAndVendavoFTP/LBT_Poll_CONTROLtable_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="06B4D512735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Poll_CONTROLtable_RS.receive" wsdlOperation="receive" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable" element="tns:EmrFusionChangeControlCollection"/>
+         <routingRules>
+            <routingRule guid="AAF923B0735D11DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="A29290D1735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_EmrOperatingUnit.LBT_SELECT_EmrOperatingUnitSelect" serviceGUID="A29290D0735D11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_EmrOperatingUnit" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{/top:EmrFusionChangeControlCollection/top:EmrFusionChangeControl/top:tableName='EMR_OPERATING_UNIT'};{ namespace top=http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable }</filterExpression>
+               <transformation>
+                  <xslFileURL>EmrFusionChangeControlCollection_To_LBT_SELECT_EmrOperatingUnitSelectInputParameters.xsl</xslFileURL>
+               </transformation>
+               <replyHandler>
+                  <targetOperation guid="F0F3DF91735D11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit.execute" serviceGUID="F0F3DF90735D11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingUnit" mepDisplayName="One Way" mep="OneWay"/>
+               </replyHandler>
+            </routingRule>
+            <routingRule guid="EB8BADB0735F11DDBFE2EDC05EC3906B" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="D0552031735F11DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_OperatingType.LBT_SELECT_OperatingTypeSelect" serviceGUID="D0552030735F11DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_OperatingType" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{/top:EmrFusionChangeControlCollection/top:EmrFusionChangeControl/top:tableName='EMR_OPERATING_TYPE'};{ namespace top=http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable }</filterExpression>
+               <transformation>
+                  <xslFileURL>EmrFusionChangeControlCollection_To_LBT_SELECT_OperatingTypeSelectInputParameters.xsl</xslFileURL>
+               </transformation>
+               <replyHandler>
+                  <targetOperation guid="0CC8E511736011DDBFE2EDC05EC3906B" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingType.execute" serviceGUID="0CC8E510736011DDBFE2EDC05EC3906B" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_OperatingType" mepDisplayName="One Way" mep="OneWay"/>
+               </replyHandler>
+            </routingRule>
+            <routingRule guid="1C9F7CF073FC11DDBFC3773690A1AE9E" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="DEF5D02173FB11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg.LBT_SELECT_InventryOrgSelect" serviceGUID="DEF5D02073FB11DDBFC3773690A1AE9E" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_SELECT_InventryOrg" mepDisplayName="Request Response" mep="RequestResponse"/>
+               <filterExpression>{/top:EmrFusionChangeControlCollection/top:EmrFusionChangeControl/top:tableName='EMR_INVENTORY_ORG'};{ namespace top=http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTPollCONTROLtable }</filterExpression>
+               <transformation>
+                  <xslFileURL>EmrFusionChangeControlCollection_To_LBT_SELECT_InventryOrgSelectInputParameters.xsl</xslFileURL>
+               </transformation>
+               <replyHandler>
+                  <targetOperation guid="4B758A1173FC11DDBFC3773690A1AE9E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrg.execute" serviceGUID="4B758A1073FC11DDBFC3773690A1AE9E" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_Rtr_InventoryOrg" mepDisplayName="One Way" mep="OneWay"/>
+               </replyHandler>
+            </routingRule>
+            <routingRule guid="C0EC0F71B6D811DDBFBC71D69F0006D7" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="1878E0C0C13711DD9F77616F9FAE6CA3" qname="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0.initiate" serviceGUID="11A1EE90C13711DD9F77616F9FAE6CA3" serviceQName="BPELSystem.LiebertServices.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL.LIEBERT_VENDAVO_INTEGRATION_OrgAndOperatingCTL_BPEL_1_0" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>EmrFusionChangeControlCollection_To_Root_Element.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="9EBE9750BC4C11DDBF74410B6F137C40" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="BD265F90B7C211DD9F1F7F000BFEDD5E" qname="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_UPDATE_Fusn_Table.update" serviceGUID="BD2415A1B7C211DD9F1F7F000BFEDD5E" serviceQName="LBT_ItemHubDBToStagingDBAndVendavoFTP.LBT_UPDATE_Fusn_Table" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>EmrFusionChangeControlCollection_To_EmrFusionChangeControlCollection.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

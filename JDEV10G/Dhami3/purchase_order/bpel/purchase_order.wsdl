@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions name="purchase_order"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             targetNamespace="http://xmlns.oracle.com/purchase_order"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:po="http://xmlns.oracle.com/purchase_order_xsd"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+             xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+             xmlns:client="http://xmlns.oracle.com/purchase_order"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+             
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://xmlns.oracle.com/purchase_order_xsd" schemaLocation="purchase_order.xsd" />
+		</schema>
+                
+        </types>
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<message name="purchase_orderRequestMessage">
+                <part name="po" element="po:PO"/>
+		<!--<part name="poid" element="po:POID"/>
+		<part name="Date_Time" element="po:Date_Time"/>-->
+    	</message>
+	<message name="purchase_orderResponseMessage">
+		<part name="Result" element="po:response"/>
+	</message>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- portType implemented by the purchase_order BPEL process -->
+	<portType name="purchase_order">
+		<operation name="Purchase">
+			<input message="client:purchase_orderRequestMessage"/>
+			<output message="client:purchase_orderResponseMessage"/>
+		</operation>
+	</portType>
+        
+        <!--<binding name="PurchaseBinding" type="client:purchase_order">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="Purchase">
+			<soap:operation style="document" soapAction="Purchase"/>
+			<input>
+				<soap:header message="client:purchase_orderRequestMessage" part="poid" use="literal"/>
+				<soap:header message="client:purchase_orderRequestMessage" part="Date_Time" use="literal"/>
+				
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="PurchaseService">
+		<port name="PurchasePort" binding="client:PurchaseBinding">
+			<soap:address location="http://localhost:80/example.com/purchase"/>
+		</port>
+	</service>-->
+	<!--Explicit header -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	     
+                <plnk:partnerLinkType name="purchase_order">
+		<plnk:role name="purchase_orderProvider">
+			<plnk:portType name="client:purchase_order"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</definitions>
+

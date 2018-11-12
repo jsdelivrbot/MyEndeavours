@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="SortedFTPPoller" src="SortedFTPPoller.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="PollMyFile">
+            <property name="wsdlLocation">PollMyFile.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PutFile">
+            <property name="wsdlLocation">PutFile.wsdl</property>
+            <property name="$outfile" type="LogicalDirectory"></property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="PollMyFile">
+            <property name="ftpJNDI">eis/FTP/InternalFTP</property>
+            <property name="inFolder">/infile</property>
+            <property name="portType">Get_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

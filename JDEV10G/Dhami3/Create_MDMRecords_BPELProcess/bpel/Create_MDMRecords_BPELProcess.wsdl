@@ -1,0 +1,47 @@
+<definitions
+     name="Create_MDMRecords_BPELProcess"
+     targetNamespace="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://www.gssamerica.com/mdm/services"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns3="http://schemas.oracle.com/service/bpel/common"
+     xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+     xmlns:client="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess"
+    >
+    <import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gssamerica.com/mdm/services"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess"
+             xmlns:ns2="http://schemas.oracle.com/bpel/extension" xmlns:ns3="http://schemas.oracle.com/service/bpel/common">
+            <import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="MDMService.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gssamerica.com/mdm/services"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+             xmlns:client="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess"
+             xmlns:ns3="http://schemas.oracle.com/service/bpel/common">
+            <xsd:import namespace="http://schemas.oracle.com/service/bpel/common" schemaLocation="ExternalParameters.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gssamerica.com/mdm/services"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:ns3="http://schemas.oracle.com/service/bpel/common"
+             xmlns:ns2="http://schemas.oracle.com/bpel/extension" xmlns:client="http://www.gssamerica.com/mdm/Create_MDMRecords_BPELProcess">
+            <xsd:import namespace="http://schemas.oracle.com/service/bpel/common" schemaLocation="ExternalParameters.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="Create_MDMRecords_BPELProcessRequestMessage">
+        <part name="payload" element="ns1:CreateRecordsRequest"/>
+    </message>
+    <message name="Create_MDMRecords_BPELProcessResponseMessage">
+        <part name="payload" element="ns1:ServiceReply"/>
+    </message>
+    <portType name="Create_MDMRecords_BPELProcess">
+        <operation name="process">
+            <input message="client:Create_MDMRecords_BPELProcessRequestMessage"/>
+            <output message="client:Create_MDMRecords_BPELProcessResponseMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="Create_MDMRecords_BPELProcess">
+        <plnk:role name="Create_MDMRecords_BPELProcessProvider">
+            <plnk:portType name="client:Create_MDMRecords_BPELProcess"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

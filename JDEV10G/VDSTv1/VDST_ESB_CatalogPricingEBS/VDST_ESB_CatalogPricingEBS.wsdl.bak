@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="Called_BPEL"
+             targetNamespace="http://services.emerson.com/CatalogPricingEBS"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://services.emerson.com/CatalogPricingEBS"
+	     xmlns:emr="http://schemas.emerson.com/common/envelope">
+
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="EMR_CTE.xsd" />
+		</schema>
+	</types>
+
+	<message name="CatalogPricingEBS_RequestMsg">
+		<part name="payload" element="emr:envelope"/>
+	</message>
+	<portType name="CatalogPricingEBS_PortType">
+		<operation name="process">
+			<input  message="tns:CatalogPricingEBS_RequestMsg" />
+		</operation>
+	</portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="Called_BPEL">
+		<plnk:role name="Called_BPELProvider">
+			<plnk:portType name="client:Called_BPEL"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</definitions>

@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_DEQJMS_ProcessPO_EDI_5020" guid="CBA511E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1244631346288</ID>
+      <lastModifiedTime>Wed Jun 10 10:55:46 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="CBA782E0099A11DE9F797560A73BB653" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_EDI_5020_RS"/>
+      <interface>
+         <wsdlURL>ETH_DEQJMS_ProcessPO_EDI_5020.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_EDI_5020/">tns:Consume_Message_ptt</portType>
+      </interface>
+   </invocation>
+</service>

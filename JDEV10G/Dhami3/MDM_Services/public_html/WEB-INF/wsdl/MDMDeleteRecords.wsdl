@@ -1,0 +1,52 @@
+<definitions
+     name="MDMDeleteRecords"
+     targetNamespace="http://www.gssamerica.com/mdm/services/MDMDeleteRecord/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://www.gssamerica.com/mdm/services/MDMDeleteRecord/"
+     xmlns:mdm="http://www.gssamerica.com/mdm/services"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.gssamerica.com/mdm/services/MDMDeleteRecord/">
+            <xsd:import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="MDMService.xsd"/>
+            <xsd:element name="DeleteServiceRequest" type="tns:deleteServiceType"/>
+            <xsd:complexType name="deleteServiceType">
+                <xsd:sequence>
+                    <xsd:element ref="mdm:DeleteRecordRequest"/>
+                    <xsd:element name="deleteType" type="xsd:boolean"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="DeleteRecordRequest">
+        <part name="DeleteRecordRequest" element="tns:DeleteServiceRequest"/>
+    </message>
+    <message name="DeleteRecordResponse">
+        <part name="DeleteRecordResponse" element="mdm:ServiceReply"/>
+    </message>
+    <portType name="MDMDeleteRecord">
+        <operation name="deleteRecord">
+            <input message="tns:DeleteRecordRequest"/>
+            <output message="tns:DeleteRecordResponse"/>
+        </operation>
+    </portType>
+    <binding name="MDMDeleteRecordSOAP" type="tns:MDMDeleteRecord">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="deleteRecord">
+            <soap:operation soapAction="http://www.gssamerica.com/mdm/services/MDMDeleteRecord/deleteRecord"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="MDMDeleteRecords">
+        <port name="MDMDeleteRecordSOAP" binding="tns:MDMDeleteRecordSOAP">
+            <soap:address location="http://10.0.3.191:8888/MDMApplications-DeleteCombined-context-root/MDMDeleteRecordSOAP"/>
+        </port>
+    </service>
+</definitions>

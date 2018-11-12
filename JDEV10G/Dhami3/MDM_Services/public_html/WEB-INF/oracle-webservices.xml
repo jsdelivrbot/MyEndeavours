@@ -1,0 +1,45 @@
+<oracle-webservices xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/oracle-webservices-10_0.xsd">
+    <webservice-description name="MDMSearchRecord">
+        <port-component name="MDMSearchRecordSOAP">
+            <operations>
+                <operation name="lookupRecord" input="{http://www.gssamerica.com/mdm/services}LookupSearchRequest"/>
+                <operation name="searchRecord" input="{http://www.gssamerica.com/mdm/services}SearchRecordRequest"/>
+            </operations>
+        </port-component>
+    </webservice-description>
+    <webservice-description name="MDMCreateRecords">
+        <port-component name="MDMCreateRecordsSOAP">
+            <operations>
+                <operation name="createRecords" input="{http://www.gssamerica.com/mdm/services}CreateRecordsRequest"/>
+            </operations>
+        </port-component>
+    </webservice-description>
+    <webservice-description name="MDMUpdateRecords">
+        <port-component name="MDMUpdateRecordsSOAP">
+            <operations>
+                <operation name="updateRecords" input="{http://www.gssamerica.com/mdm/services}UpdateRecordRequest"/>
+            </operations>
+        </port-component>
+    </webservice-description>
+    <webservice-description name="AddRemoteKeyService">
+        <port-component name="AddRemoteKeySOAP">
+            <operations>
+                <operation name="addRemoteKey" input="{http://www.gssamerica.com/mdm/services}AddRemoteKeyRequest"/>
+            </operations>
+        </port-component>
+    </webservice-description>
+    <webservice-description name="ReplicateDataService">
+        <port-component name="ReplicateDataSOAP">
+            <operations>
+                <operation name="replicateData" input="{http://www.gssamerica.com/mdm/services}ReplicateDataRequest"/>
+            </operations>
+        </port-component>
+    </webservice-description>
+    <webservice-description name="MDMDeleteRecords">
+        <port-component name="MDMDeleteRecordSOAP">
+            <operations>
+                <operation name="deleteRecord" input="{http://www.gssamerica.com/mdm/services/MDMDeleteRecord/}DeleteServiceRequest"/>
+            </operations>
+        </port-component>
+    </webservice-description>
+</oracle-webservices>

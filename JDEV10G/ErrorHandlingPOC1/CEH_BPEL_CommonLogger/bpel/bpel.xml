@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CEH_BPEL_CommonLogger" src="CEH_BPEL_CommonLogger.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="fetchSensorLog">
+            <property name="wsdlLocation">fetchSensorLog.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PutLogMessage">
+            <property name="wsdlLocation">PutLogMessage.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="fetchSensorLog">
+            <property name="portType">Consume_Message_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

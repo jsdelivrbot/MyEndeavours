@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/VDSTDBINSChannelPartnerListStaging" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/VDSTDBINSChannelPartnerListStaging" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="VdstChnlpartnerMasterCollection" type="VdstChnlpartnerMasterCollection"/>
+   <xs:complexType name="VdstChnlpartnerMasterCollection">
+      <xs:sequence>
+         <xs:element name="VdstChnlpartnerMaster" type="VdstChnlpartnerMaster" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="VdstChnlpartnerMaster">
+      <xs:sequence>
+         <xs:element name="channelPartnerId">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="120"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="language" minOccurs="0">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="2"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="channelPartnerDescription" minOccurs="0">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="240"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="generatedTimestamp" type="xs:dateTime" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

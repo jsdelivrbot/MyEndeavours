@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.gssamerica.com/mdm/audithandler" elementFormDefault="unqualified" targetNamespace="http://www.gssamerica.com/mdm/audithandler" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="auditDataType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="userId" type="xs:string" />
+      <xs:element name="createdDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="oldRecord" type="xs:anyType" />
+      <xs:element minOccurs="0" name="newRecord" type="xs:anyType" />
+      <xs:element minOccurs="0" name="projectName" type="xs:string" />
+      <xs:element name="processName" type="xs:string" />
+      <xs:element minOccurs="0" name="processDescription" type="xs:string" />
+      <xs:element name="transactionId" type="xs:string" />
+      <xs:element name="statusFlag" type="xs:string" />
+      <xs:element minOccurs="0" name="businessKey" type="xs:string" />
+      <xs:element minOccurs="0" name="source" type="xs:string" />
+      <xs:element minOccurs="0" name="sourceDescription" type="xs:string" />
+      <xs:element minOccurs="0" name="destination" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="auditRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="auditData" type="auditDataType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

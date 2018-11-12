@@ -1,0 +1,533 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Jul 02 00:37:22 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_ChannelPartnerListReqABCS"
+         targetNamespace="http://services.emerson.com/VDST_BPEL_ChannelPartnerListReqABCS"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQ_ENQ_ChannelPartnerListCTE/"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://services.emerson.com/common/ICoE_ErrorHandler"
+         xmlns:client="http://services.emerson.com/VDST_BPEL_ChannelPartnerListReqABCS"
+         xmlns:ns6="http://xmlns.oracle.com/CSF_ICoE_ErrorHandler"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/ftp/VDST_FTP_GET_ChannelPartnerList/"
+         xmlns:ehdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns3="http://schemas.emerson.com/common/envelope"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Get_role" name="VDST_FTP_GET_ChannelPartnerList"
+                 partnerLinkType="ns1:Get_plt"/>
+    <partnerLink name="VDST_JMSQ_ENQ_ChannelPartnerListCTE"
+                 partnerRole="Produce_Message_role"
+                 partnerLinkType="ns4:Produce_Message_plt"/>
+    <partnerLink name="CSF_ICoE_ErrorHandler"
+                 partnerRole="CSF_ICoE_ErrorHandlerProvider"
+                 partnerLinkType="ns6:CSF_ICoE_ErrorHandler"/>
+  </partnerLinks>
+  <variables>
+    <variable name="G_IN_ChannelPartnerList" messageType="ns1:CPL-Load_msg"/>
+    <variable name="G_In_FtpHeader" messageType="ns2:InboundHeader_msg"/>
+    <variable name="G_CTE_Header" element="ns3:header"/>
+    <variable name="G_CTE_Body" element="ns3:body"/>
+    <variable name="G_ExecutionUnit" element="ns3:ExecutionUnit"/>
+    <variable name="G_Instance_ID" type="xsd:string"/>
+    <variable name="G_Process_ID" type="xsd:string"/>
+    <variable name="G_inputFileName" type="xsd:string"/>
+    <variable name="G_inputDirectoryName" type="xsd:string"/>
+    <variable name="G_sourceID" type="xsd:string"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="PartnerListRequest_Scope">
+    <receive name="Receive_ChannelPartnerList"
+             partnerLink="VDST_FTP_GET_ChannelPartnerList"
+             portType="ns1:Get_ptt" operation="Get"
+             variable="G_IN_ChannelPartnerList" createInstance="yes"
+             bpelx:headerVariable="G_In_FtpHeader"/>
+    <assign name="Assign_ExecutionUnit">
+      <copy>
+        <from expression="0"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns3:ExecutionUnit/ns3:SequenceNumber"/>
+      </copy>
+      <copy>
+        <from expression="ora:getInstanceId()"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns3:ExecutionUnit/ns3:ExecutionUnitID"/>
+      </copy>
+      <copy>
+        <from expression="string('VDST_BPEL_ChannelPartnerListReqABCS')"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns3:ExecutionUnit/ns3:ExecutionUnitName"/>
+      </copy>
+      <copy>
+        <from expression="string('BPEL')"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns3:ExecutionUnit/ns3:ImplementationCode"/>
+      </copy>
+      <copy>
+        <from expression="xp20:current-dateTime()"/>
+        <to variable="G_ExecutionUnit"
+            query="/ns3:ExecutionUnit/ns3:ActivityDateTime"/>
+      </copy>
+      <copy>
+        <from expression="ora:getInstanceId()"/>
+        <to variable="G_Instance_ID"/>
+      </copy>
+      <copy>
+        <from expression="ora:getProcessId()"/>
+        <to variable="G_Process_ID"/>
+      </copy>
+    </assign>
+    <scope name="Scope_CreateCTE">
+      <variables>
+        <variable name="Invoke_ICoE_Error_Handler_process_InputVariable"
+                  messageType="ns6:CSF_ICoE_ErrorHandlerRequestMessage"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <sequence name="Sequence_1">
+            <assign name="Assign_ErrorDetails">
+              <copy>
+                <from expression="string('VDST')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:account"/>
+              </copy>
+              <copy>
+                <from variable="G_sourceID"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:sub_account"/>
+              </copy>
+              <copy>
+                <from expression="string('VDST_ERROR')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorCode"/>
+              </copy>
+              <copy>
+                <from expression="string('MEDIUM')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSummary"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorDetail"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSummary"/>
+              </copy>
+              <copy>
+                <from expression="string('Error Occured in ReqABCS for CannelPartnerList, while creating Common Transacion Envelope')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorMessage"/>
+              </copy>
+              <copy>
+                <from expression="string('VDST Error in ChannelPartner List Requestor ABCS')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSubject"/>
+              </copy>
+              <copy>
+                <from expression="xp20:current-dateTime()"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorDateTime"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header" query="/ns3:header/ns3:EBMID"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageID"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header" query="/ns3:header/ns3:EBOName"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageType"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:InteractionID"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageSourceID"/>
+              </copy>
+              <copy>
+                <from expression="string('PRODUCTION')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:environment"/>
+              </copy>
+              <copy>
+                <from variable="G_Instance_ID"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processID"/>
+              </copy>
+              <copy>
+                <from variable="G_Process_ID"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processName"/>
+              </copy>
+              <copy>
+                <from expression="string('BPEL')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processType"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:Sender/ns3:ContactName"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactName"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:Sender/ns3:ContactEmail"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactEmail"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:Sender/ns3:ContactPhoneNumber"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactPhone"/>
+              </copy>
+              <copy>
+                <from expression="string('ICoE')"/>
+                <to variable="Invoke_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:userName"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_ICoE_Error_Handler"
+                    partnerLink="CSF_ICoE_ErrorHandler"
+                    portType="ns6:CSF_ICoE_ErrorHandler" operation="process"
+                    inputVariable="Invoke_ICoE_Error_Handler_process_InputVariable"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Create_Envelope_Scope">
+        <assign name="Assign_FTPHeaderDetails">
+          <copy>
+            <from variable="G_In_FtpHeader" part="inboundHeader"
+                  query="/ns2:InboundFTPHeaderType/ns2:fileName"/>
+            <to variable="G_inputFileName"/>
+          </copy>
+          <copy>
+            <from variable="G_In_FtpHeader" part="inboundHeader"
+                  query="/ns2:InboundFTPHeaderType/ns2:directory"/>
+            <to variable="G_inputDirectoryName"/>
+          </copy>
+          <copy>
+            <from expression="substring-before(substring-after(substring-after(bpws:getVariableData('G_inputFileName'),'_'),'_'),'_')"/>
+            <to variable="G_sourceID"/>
+          </copy>
+        </assign>
+        <bpelx:exec name="Java_SetTitle" language="java" version="1.3">
+          <![CDATA[/*Write your java code below e.g.      
+	System.out.println("Hello, World");     
+*/     
+String title;     
+title = getVariableData("G_Instance_ID")+" : "+getVariableData("G_inputFileName");   
+setTitle(title);]]>
+        </bpelx:exec>
+        <assign name="Assign_CTE_Header">
+          <copy>
+            <from expression="ora:generateGUID()"/>
+            <to variable="G_CTE_Header" query="/ns3:header/ns3:EBMID"/>
+          </copy>
+          <copy>
+            <from variable="G_inputFileName"/>
+            <to variable="G_CTE_Header" query="/ns3:header/ns3:InteractionID"/>
+          </copy>
+          <copy>
+            <from expression="string('http://schema.emerson.com/VDST_FTP_GET_ChannelPartnerList:CPL-Load')"/>
+            <to variable="G_CTE_Header" query="/ns3:header/ns3:EBOName"/>
+          </copy>
+          <copy>
+            <from variable="G_ExecutionUnit"
+                  query="/ns3:ExecutionUnit/ns3:ActivityDateTime"/>
+            <to variable="G_CTE_Header"
+                query="/ns3:header/ns3:CreationDateTime"/>
+          </copy>
+          <copy>
+            <from variable="G_sourceID"/>
+            <to variable="G_CTE_Header" query="/ns3:header/ns3:Sender/ns3:ID"/>
+          </copy>
+          <copy>
+            <from expression="string('Inderpal Dhami')"/>
+            <to variable="G_CTE_Header"
+                query="/ns3:header/ns3:Sender/ns3:ContactName"/>
+          </copy>
+          <copy>
+            <from expression="string('inderpal.dhami@emerson.com')"/>
+            <to variable="G_CTE_Header"
+                query="/ns3:header/ns3:Sender/ns3:ContactEmail"/>
+          </copy>
+          <copy>
+            <from expression="string('91-172-4267868')"/>
+            <to variable="G_CTE_Header"
+                query="/ns3:header/ns3:Sender/ns3:ContactPhoneNumber"/>
+          </copy>
+          <copy>
+            <from expression="0"/>
+            <to variable="G_CTE_Header"
+                query="/ns3:header/ns3:EBMTracking/@ns3:executionUnitCount"/>
+          </copy>
+          <copy>
+            <from variable="G_ExecutionUnit" query="/ns3:ExecutionUnit"/>
+            <to variable="G_CTE_Header"
+                query="/ns3:header/ns3:EBMTracking/ns3:ExecutionUnit"/>
+          </copy>
+        </assign>
+        <switch name="Switch_GetSourceName">
+          <case condition="bpws:getVariableData('G_CTE_Header','/ns3:header/ns3:Sender/ns3:ID')=string('EMR5160035')">
+            <assign name="Assign_Closetmaid">
+              <copy>
+                <from expression="string('CLOSETMAID')"/>
+                <to variable="G_CTE_Header"
+                    query="/ns3:header/ns3:Sender/ns3:Description"/>
+              </copy>
+            </assign>
+          </case>
+          <case condition="bpws:getVariableData('G_CTE_Header','/ns3:header/ns3:Sender/ns3:ID')=string('EMR5110026')">
+            <assign name="Assign_Knaack">
+              <copy>
+                <from expression="string('KNAACK')"/>
+                <to variable="G_CTE_Header"
+                    query="/ns3:header/ns3:Sender/ns3:Description"/>
+              </copy>
+            </assign>
+          </case>
+          <otherwise>
+            <assign name="Assign_Unknown">
+              <copy>
+                <from expression="string('UNKNOWN_ERROR')"/>
+                <to variable="G_CTE_Header"
+                    query="/ns3:header/ns3:Sender/ns3:Description"/>
+              </copy>
+            </assign>
+          </otherwise>
+        </switch>
+        <assign name="Transform_CPLRequest_CTEBody">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:processXSLT('Transformation_CPLRequest_CTEBody.xsl',bpws:getVariableData('G_IN_ChannelPartnerList','CPL-Load'))"/>
+            <to variable="G_CTE_Body"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <scope name="Scope_Invoke_ChannelPartnerEBS">
+      <variables>
+        <variable name="L_Out_ChannelPartnerCTE_Req"
+                  messageType="ns4:envelope_msg"/>
+        <variable name="L_ICoE_Error_Handler_process_InputVariable"
+                  messageType="ns6:CSF_ICoE_ErrorHandlerRequestMessage"/>
+      </variables>
+      <faultHandlers>
+        <catchAll>
+          <sequence name="Sequence_2">
+            <assign name="Assign_ErrorDetails">
+              <copy>
+                <from expression="string('VDST')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:account"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:Sender/ns3:Description"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:sub_account"/>
+              </copy>
+              <copy>
+                <from expression="string('VDST_ERROR')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorCode"/>
+              </copy>
+              <copy>
+                <from expression="string('MEDIUM')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSummary"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorDetail"/>
+              </copy>
+              <copy>
+                <from expression="ora:getFaultAsString()"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSummary"/>
+              </copy>
+              <copy>
+                <from expression="string('Error Occured in ReqABCS for CannelPartnerList, while invoking EBS')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorMessage"/>
+              </copy>
+              <copy>
+                <from expression="string('VDST Error in ChannelPartner List Requestor ABCS')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorSubject"/>
+              </copy>
+              <copy>
+                <from expression="xp20:current-dateTime()"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:errorDateTime"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header" query="/ns3:header/ns3:EBMID"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageID"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header" query="/ns3:header/ns3:EBOName"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageType"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:InteractionID"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:messageSourceID"/>
+              </copy>
+              <copy>
+                <from expression="string('PRODUCTION')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:environment"/>
+              </copy>
+              <copy>
+                <from variable="G_Instance_ID"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processID"/>
+              </copy>
+              <copy>
+                <from variable="G_Process_ID"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processName"/>
+              </copy>
+              <copy>
+                <from expression="string('BPEL')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:processType"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:Sender/ns3:ContactName"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactName"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:Sender/ns3:ContactEmail"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactEmail"/>
+              </copy>
+              <copy>
+                <from variable="G_CTE_Header"
+                      query="/ns3:header/ns3:Sender/ns3:ContactPhoneNumber"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:contactPhone"/>
+              </copy>
+              <copy>
+                <from expression="string('ICoE')"/>
+                <to variable="L_ICoE_Error_Handler_process_InputVariable"
+                    part="payload"
+                    query="/ns6:CSF_ICoE_ErrorHandlerProcessRequest/ns6:userName"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_ICoE_Error_Handler"
+                    partnerLink="CSF_ICoE_ErrorHandler"
+                    portType="ns6:CSF_ICoE_ErrorHandler" operation="process"
+                    inputVariable="L_ICoE_Error_Handler_process_InputVariable"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Processing_Scope">
+        <assign name="Assign_ChannelPartnerEBS_Req">
+          <copy>
+            <from variable="G_CTE_Header" query="/ns3:header"/>
+            <to variable="L_Out_ChannelPartnerCTE_Req" part="envelope"
+                query="/ns3:envelope/ns3:header"/>
+          </copy>
+          <copy>
+            <from variable="G_CTE_Body" query="/ns3:body/ns3:xmlPayload"/>
+            <to variable="L_Out_ChannelPartnerCTE_Req" part="envelope"
+                query="/ns3:envelope/ns3:body/ns3:xmlPayload"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_ChannelPartner_EBS"
+                partnerLink="VDST_JMSQ_ENQ_ChannelPartnerListCTE"
+                portType="ns4:Produce_Message_ptt" operation="Produce_Message"
+                inputVariable="L_Out_ChannelPartnerCTE_Req"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

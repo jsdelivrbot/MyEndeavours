@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="VDST_BPEL_IntimateDrawing"
+             targetNamespace="http://schema.emerson.com/VDST_BPEL_IntimateDrawing"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://schema.emerson.com/VDST_BPEL_IntimateDrawing"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://schema.emerson.com/VDST_BPEL_IntimateDrawing" schemaLocation="VDST_BPEL_IntimateDrawing.xsd" />
+		</schema>
+	</types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<message name="VDST_BPEL_IntimateDrawingRequestMessage">
+		<part name="payload" element="client:VDST_BPEL_IntimateDrawingProcessRequest"/>
+	</message>
+	<message name="VDST_BPEL_IntimateDrawingResponseMessage">
+		<part name="payload" element="client:VDST_BPEL_IntimateDrawingProcessResponse"/>
+	</message>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!-- portType implemented by the VDST_BPEL_IntimateDrawing BPEL process -->
+	<portType name="VDST_BPEL_IntimateDrawing">
+		<operation name="process">
+			<input  message="client:VDST_BPEL_IntimateDrawingRequestMessage" />
+			<output message="client:VDST_BPEL_IntimateDrawingResponseMessage"/>
+		</operation>
+	</portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="VDST_BPEL_IntimateDrawing">
+		<plnk:role name="VDST_BPEL_IntimateDrawingProvider">
+			<plnk:portType name="client:VDST_BPEL_IntimateDrawing"/>
+		</plnk:role>
+	</plnk:partnerLinkType>
+</definitions>

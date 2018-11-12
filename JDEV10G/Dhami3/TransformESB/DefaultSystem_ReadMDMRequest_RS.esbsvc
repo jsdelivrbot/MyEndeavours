@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ReadMDMRequest_RS" guid="F471FC225C9B11DDBFBF7949E8E58CEB" qname="TransformESB.ReadMDMRequest_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ReadMDMRequest</description>
+   <versionInfo>
+      <ID>1217331594306</ID>
+      <lastModifiedTime>Tue Jul 29 17:09:54 IST 2008</lastModifiedTime>
+      <lastModifiedUser>JDev_MDM_TransformESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="51EE97205D3A11DDBFA1A189C6396C1C" qname="TransformESB" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>ReadMDMRequest.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ReadMDMRequest/">tns:Consume_ESBReq_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/TransformESB/ReadMDMRequest_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/TransformESB/ReadMDMRequest_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="F471FC235C9B11DDBFBF7949E8E58CEB" qname="TransformESB.ReadMDMRequest_RS.Consume_ESBReq_Message" wsdlOperation="Consume_ESBReq_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.gssamerica.com/mdm/adapter" element="tns:ESBRequest"/>
+         <routingRules>
+            <routingRule guid="BB0BD3205CA011DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="57346CD05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routing_ProcessCustomer.execute" serviceGUID="572885F05C9C11DDBFBF7949E8E58CEB" serviceQName="TransformESB.Routing_ProcessCustomer" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{ends-with(/imp1:ESBRequest/header/requestType,'Customer')  and  not(starts-with(/imp1:ESBRequest/header/requestType,'Get'))};{ namespace imp1=http://www.gssamerica.com/mdm/adapter }</filterExpression>
+               <transformation>
+                  <xslFileURL>ESBRequest_To_ESBProcessCustomerRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="347118605CA111DDBFBF7949E8E58CEB" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="848623E05C9C11DDBFBF7949E8E58CEB" qname="TransformESB.Routin_GetCustomer.execute" serviceGUID="848168F05C9C11DDBFBF7949E8E58CEB" serviceQName="TransformESB.Routin_GetCustomer" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{normalize-space(/imp1:ESBRequest/header/requestType)='GetCustomer'};{ namespace imp1=http://www.gssamerica.com/mdm/adapter }</filterExpression>
+               <transformation>
+                  <xslFileURL>ESBRequest_To_ESBGetCustomerRequest.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

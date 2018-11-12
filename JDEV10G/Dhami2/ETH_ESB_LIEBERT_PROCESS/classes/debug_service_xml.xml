@@ -1,0 +1,150 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="ETH_Sys_LIEBERT_Process" guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" status="ENABLED">
+      <versionInfo>
+         <ID>1236595710562</ID>
+         <lastModifiedTime>Mon Mar 09 16:18:30 IST 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+      </versionInfo>
+      <description/>
+      <clusterName>esb</clusterName>
+      <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleASjms/MyXATCF">OracleASjms/ESBDeferredTopic</deferredQueueName>
+      <service name="ETH_ENQJMS_PO_LiebertFlatFile" guid="E8CE84900CA111DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_ENQJMS_PO_LiebertFlatFile" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_PO_LiebertFlatFile/" dirty="true" soapEndpointStatus="ENABLED">
+         <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_ENQJMS_PO_LiebertFlatFile.wsdl</wsdlURL>
+            <portType>tns:Produce_Message_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Produce_Message" guid="E8D0CE800CA111DEBFB957152A29AC2D" mep="OneWay"/>
+         </operations>
+      </service>
+      <service name="ETH_GETFTP_ELSHA_LiebertFlatFile" guid="838973900C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1236595710562</ID>
+            <lastModifiedTime>Mon Mar 09 16:18:30 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+         </versionInfo>
+         <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+         <invocation>
+            <targetService guid="838973910C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS"/>
+            <interface>
+               <wsdlURL>ETH_GETFTP_ELSHA_LiebertFlatFile.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ELSHA_LiebertFlatFile/">tns:Get_ptt</portType>
+            </interface>
+         </invocation>
+      </service>
+      <service name="ETH_GETFTP_ELSHA_LiebertFlatFile_RS" guid="838973910C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service ETH_GETFTP_ELSHA_LiebertFlatFile</description>
+         <versionInfo>
+            <ID>1236595710562</ID>
+            <lastModifiedTime>Mon Mar 09 16:18:30 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+         </versionInfo>
+         <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_GETFTP_ELSHA_LiebertFlatFile.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ELSHA_LiebertFlatFile/">tns:Get_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETH_Sys_LIEBERT_Process/ETH_GETFTP_ELSHA_LiebertFlatFile_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/ETH_Sys_LIEBERT_Process/ETH_GETFTP_ELSHA_LiebertFlatFile_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="838BE4900C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_GETFTP_ELSHA_LiebertFlatFile_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/LiebertPurchaseOrder" element="tns:Root-Element"/>
+               <routingRules>
+                  <routingRule guid="352B15900C9511DEBFB957152A29AC2D" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="155A34E00C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.writeFile.Write" serviceGUID="1557C3E00C9411DEBFB957152A29AC2D" serviceQName="ETH_Sys_LIEBERT_Process.writeFile" mepDisplayName="One Way" mep="OneWay"/>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ETH_PUTFTP_LIEBERT_ASN" guid="11C013B0F84711DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process.ETH_PUTFTP_LIEBERT_ASN" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="FTP" typeDescription="Outbound FTP Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1236595710562</ID>
+            <lastModifiedTime>Mon Mar 09 16:18:30 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+         </versionInfo>
+         <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUTFTP_LIEBERT_ASN.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_LIEBERT_ASN/">tns:Put_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETH_Sys_LIEBERT_Process/ETH_PUTFTP_LIEBERT_ASN?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/ETH_Sys_LIEBERT_Process/ETH_PUTFTP_LIEBERT_ASN</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="11E8AA50F84711DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process.ETH_PUTFTP_LIEBERT_ASN.Put" wsdlOperation="Put" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="NS_31CA8D0F33324F95A0BF15D85539C27E20081029152015" element="tns:Transaction-855"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ETH_PUTFTP_LIEBERT_Invoices" guid="B2A4D910F84611DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process.ETH_PUTFTP_LIEBERT_Invoices" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="FTP" typeDescription="Outbound FTP Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1236595710562</ID>
+            <lastModifiedTime>Mon Mar 09 16:18:30 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+         </versionInfo>
+         <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUTFTP_LIEBERT_Invoices.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_LIEBERT_Invoices/">tns:Put_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETH_Sys_LIEBERT_Process/ETH_PUTFTP_LIEBERT_Invoices?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/ETH_Sys_LIEBERT_Process/ETH_PUTFTP_LIEBERT_Invoices</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="B2A72300F84611DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process.ETH_PUTFTP_LIEBERT_Invoices.Put" wsdlOperation="Put" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="NS_31CA8D0F33324F95A0BF15D85539C27E20090105175154" element="tns:Transaction-810"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ETH_PUTFTP_LIEBERT_POAcknowledgement" guid="5D0C3330F84711DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process.ETH_PUTFTP_LIEBERT_POAcknowledgement" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="FTP" typeDescription="Outbound FTP Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1236595710562</ID>
+            <lastModifiedTime>Mon Mar 09 16:18:30 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+         </versionInfo>
+         <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUTFTP_LIEBERT_POAcknowledgement.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_PUTFTP_LIEBERT_POAcknowledgement/">tns:Put_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETH_Sys_LIEBERT_Process/ETH_PUTFTP_LIEBERT_POAcknowledgement?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/ETH_Sys_LIEBERT_Process/ETH_PUTFTP_LIEBERT_POAcknowledgement</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="5D111530F84711DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process.ETH_PUTFTP_LIEBERT_POAcknowledgement.Put" wsdlOperation="Put" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="NS_31CA8D0F33324F95A0BF15D85539C27E20081212182610" element="tns:Transaction-856"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="writeFile" guid="1557C3E00C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.writeFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1236595710562</ID>
+            <lastModifiedTime>Mon Mar 09 16:18:30 IST 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+         </versionInfo>
+         <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>writeFile.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/writeFile/">tns:Write_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETH_Sys_LIEBERT_Process/writeFile?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/ETH_Sys_LIEBERT_Process/writeFile</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="155A34E00C9411DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.writeFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/LiebertPurchaseOrder" element="tns:Root-Element"/>
+            </operationInfo>
+         </operations>
+      </service>
+   </system>
+</project_metadata>

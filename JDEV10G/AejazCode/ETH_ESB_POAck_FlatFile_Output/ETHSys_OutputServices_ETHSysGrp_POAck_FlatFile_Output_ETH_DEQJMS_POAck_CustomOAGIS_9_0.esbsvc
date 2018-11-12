@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_DEQJMS_POAck_CustomOAGIS_9_0" guid="9DFC591076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1275301749244</ID>
+      <lastModifiedTime>Mon May 31 10:29:09 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_ETH_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+   </versionInfo>
+   <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="9DFEA30076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS"/>
+      <interface>
+         <wsdlURL>ETH_DEQJMS_POAck_CustomOAGIS_9_0.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_POAck_CustomOAGIS_9_0/">tns:Consume_Message_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="clusterGroupId" value="ETHSysGrp_POAck_FlatFile_Output_Poller1"/>
+   </endpointProperties>
+</service>

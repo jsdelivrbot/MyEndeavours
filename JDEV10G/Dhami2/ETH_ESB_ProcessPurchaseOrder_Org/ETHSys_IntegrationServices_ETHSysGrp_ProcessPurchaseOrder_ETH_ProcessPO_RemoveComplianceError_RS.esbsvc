@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ProcessPO_RemoveComplianceError_RS" guid="8A465EB0FCE911DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RemoveComplianceError_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+   <versionInfo>
+      <ID>1244631346288</ID>
+      <lastModifiedTime>Wed Jun 10 10:55:46 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder_ETH_ProcessPO_RemoveComplianceError_RS.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_ProcessPurchaseOrder">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_RemoveComplianceError_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_ProcessPO_RemoveComplianceError_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="8A4FFBA0FCE911DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RemoveComplianceError_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+         <routingRules>
+            <routingRule guid="1BCFCCF0280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="7F3B4070F84E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0.Write" serviceGUID="7F2F5990F84E11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_PUTFL_CustomOAGIS_9_0" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+            <routingRule guid="1BCFF400280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="BDCA3E70FCD311DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS.execute" serviceGUID="BD5583A0FCD311DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{((/inp1:CustomProcessPO/Compliance_result = false()) and (/inp1:CustomProcessPO/Send_on_fail != 'ROUTING_ERROR'))};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+            </routingRule>
+            <routingRule guid="1BD04220280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="BDCA3E70FCD311DDBF83DF076401BB1A" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS.execute" serviceGUID="BD5583A0FCD311DDBF83DF076401BB1A" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ProcessPO_RoutingRules_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{((/inp1:CustomProcessPO/Compliance_result = true()) and (/inp1:CustomProcessPO/Send_on_fail = 'Y'))};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>RemoveComplianceError.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="1BD09040280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" serviceGUID="5AE1A6A10CC211DEBFD3896422B338BD" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{((/inp1:CustomProcessPO/Compliance_result = true()) and (/inp1:CustomProcessPO/Send_on_fail = 'N'))};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>ComplianceErrorHandler.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+            <routingRule guid="1BD0B750280E11DE8F72B51CF1908538" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="5AE8D2900CC211DEBFD3896422B338BD" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors.Produce_Message" serviceGUID="5AE1A6A10CC211DEBFD3896422B338BD" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_ENQJMS_BusinessErrors" mepDisplayName="One Way" mep="OneWay"/>
+               <filterExpression>{/inp1:CustomProcessPO/Send_on_fail = 'ROUTING_ERROR'};{ namespace inp1=http://xmlns.emrsn.com/CustomProcessPurchaseOrder }</filterExpression>
+               <transformation>
+                  <xslFileURL>RoutingErrorHandler.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

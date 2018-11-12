@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name="LBT_SELECT_EmrOperatingUnit"
+    targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_EmrOperatingUnit/"
+    xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/LBT_SELECT_EmrOperatingUnit/"
+    xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+    xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+    xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit"
+    xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/db/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/" location="DBAdapterOutboundHeader.wsdl"/>
+
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/LBTSELECTEmrOperatingUnit"
+                schemaLocation="LBTSELECTEmrOperatingUnit_table.xsd"/>
+        </schema>
+    </types>
+
+    <message name="EmrOperatingUnitCollection_msg">
+        <part name="EmrOperatingUnitCollection" element="top:EmrOperatingUnitCollection"/>
+    </message>
+
+    <message name="LBT_SELECT_EmrOperatingUnitSelect_inparameters">
+        <part name="LBT_SELECT_EmrOperatingUnitSelect_inparameters" element="top:LBT_SELECT_EmrOperatingUnitSelectInputParameters"/>
+    </message>
+
+    <portType name="LBT_SELECT_EmrOperatingUnit_ptt">
+        <operation name="LBT_SELECT_EmrOperatingUnitSelect">
+            <input message="tns:LBT_SELECT_EmrOperatingUnitSelect_inparameters"/>
+            <output message="tns:EmrOperatingUnitCollection_msg"/>
+        </operation>
+    </portType>
+
+    <binding name="LBT_SELECT_EmrOperatingUnit_binding" type="tns:LBT_SELECT_EmrOperatingUnit_ptt">
+        <jca:binding />
+        <operation name="LBT_SELECT_EmrOperatingUnitSelect">
+            <jca:operation
+                InteractionSpec="oracle.tip.adapter.db.DBReadInteractionSpec"
+
+                DescriptorName="LBTSELECTEmrOperatingUnit.EmrOperatingUnit"
+                QueryName="LBT_SELECT_EmrOperatingUnitSelect"
+                ReturnSingleResultSet="false"
+                MappingsMetaDataURL="LBTSELECTEmrOperatingUnit_toplink_mappings.xml" />
+            <input>
+                <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+
+    <!-- Your runtime connection is declared in
+        J2EE_HOME/application-deployments/default/DbAdapter/oc4j-ra.xml
+        These 'mcf' properties here are from your design time connection and 
+        save you from having to edit that file and restart the application server
+        if jdbc/DB/Liebert_Hub is missing.
+        These 'mcf' properties are safe to remove.
+    -->
+    <service name="LBT_SELECT_EmrOperatingUnit">
+        <port name="LBT_SELECT_EmrOperatingUnit_pt" binding="tns:LBT_SELECT_EmrOperatingUnit_binding">
+            <jca:address location="jdbc/DB/Liebert_Hub"
+                UIConnectionName="itemHub"
+                ManagedConnectionFactory="oracle.tip.adapter.db.DBManagedConnectionFactory"
+                mcf.DriverClassName="oracle.jdbc.OracleDriver"
+                mcf.PlatformClassName="oracle.toplink.platform.database.oracle.Oracle10Platform"
+                mcf.ConnectionString="jdbc:oracle:thin:@//enpushntora01.na.enpad.org:1521/enps"
+                mcf.UserName="fusion"
+                mcf.Password="631F097942148D7DF48C54F2DE1BBC2B"
+            />
+        </port>
+    </service>
+
+    <plt:partnerLinkType name="LBT_SELECT_EmrOperatingUnit_plt" >
+        <plt:role name="LBT_SELECT_EmrOperatingUnit_role" >
+            <plt:portType name="tns:LBT_SELECT_EmrOperatingUnit_ptt" />
+        </plt:role>
+    </plt:partnerLinkType>
+
+</definitions>

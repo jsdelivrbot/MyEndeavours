@@ -1,0 +1,157 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <serviceGroup status="ENABLED" name="ETHSysGrp_POAck_FlatFile_Output" guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output">
+      <description/>
+      <versionInfo>
+         <ID>1266506768601</ID>
+         <lastModifiedTime>Thu Feb 18 15:26:08 GMT+00:00 2010</lastModifiedTime>
+         <lastModifiedUser>JDev_ETH_WorkingESB_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+      </versionInfo>
+      <parent guid="6E22AEA1A5F911DEBFA54F68EB7C2675" qname="ETHSystem_OutputServices" type="system"/>
+      <service name="ETH_PUTFL_POAck_FixedWidth_FlatFile" guid="6F4BF540520411DF8F00EF1C230ABACC" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_FixedWidth_FlatFile" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_POAck_FixedWidth_FlatFile/" dirty="true" soapEndpointStatus="ENABLED">
+         <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUTFL_POAck_FixedWidth_FlatFile.wsdl</wsdlURL>
+            <portType>tns:Write_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Write" guid="6F4E3F30520411DF8F00EF1C230ABACC" mep="OneWay"/>
+         </operations>
+      </service>
+      <service name="ETH_PUTFL_POAck_Liebert_FlatFile" guid="5F6F82601CA111DFBFC8EFB8D5E31181" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_Liebert_FlatFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1266506768601</ID>
+            <lastModifiedTime>Thu Feb 18 15:26:08 GMT+00:00 2010</lastModifiedTime>
+            <lastModifiedUser>JDev_ETH_WorkingESB_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+         </versionInfo>
+         <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_PUTFL_POAck_Liebert_FlatFile.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PUTFL_POAck_Liebert_FlatFile/">tns:Write_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_PUTFL_POAck_Liebert_FlatFile?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://elshad2.emerson.com:35000/event/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_PUTFL_POAck_Liebert_FlatFile</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="5F6F82611CA111DFBFC8EFB8D5E31181" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_Liebert_FlatFile.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/POAckFlatFile" element="tns:Root-Element"/>
+            </operationInfo>
+         </operations>
+         <endpointProperties>
+            <property name="ETH_Liebert_FTP_Out" value="/ftpdata/elshap1/lbt/outfile/POAck"/>
+         </endpointProperties>
+      </service>
+      <service name="ETH_DEQJMS_POAck_CustomOAGIS_9_0" guid="9DFC591076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+         <versionInfo>
+            <ID>1266506768601</ID>
+            <lastModifiedTime>Thu Feb 18 15:26:08 GMT+00:00 2010</lastModifiedTime>
+            <lastModifiedUser>JDev_ETH_WorkingESB_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+         </versionInfo>
+         <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+         <invocation>
+            <targetService guid="9DFEA30076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS"/>
+            <interface>
+               <wsdlURL>ETH_DEQJMS_POAck_CustomOAGIS_9_0.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_POAck_CustomOAGIS_9_0/">tns:Consume_Message_ptt</portType>
+            </interface>
+         </invocation>
+         <endpointProperties>
+            <property name="clusterGroupId" value="ETHSysGrp_POAck_FlatFile_Output_Poller1"/>
+         </endpointProperties>
+      </service>
+      <service name="ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS" guid="9DFEA30076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <description>This is the Routing Service for Adapter Service ETH_DEQJMS_POAck_CustomOAGIS_9_0</description>
+         <versionInfo>
+            <ID>1266506768601</ID>
+            <lastModifiedTime>Thu Feb 18 15:26:08 GMT+00:00 2010</lastModifiedTime>
+            <lastModifiedUser>JDev_ETH_WorkingESB_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+         </versionInfo>
+         <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_DEQJMS_POAck_CustomOAGIS_9_0.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_POAck_CustomOAGIS_9_0/">tns:Consume_Message_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://elshad2.emerson.com:35000/event/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="9E083FF076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_DEQJMS_POAck_CustomOAGIS_9_0_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomAcknowledgePurchaseOrder" element="tns:CustomAcknowledgePO"/>
+               <routingRules>
+                  <routingRule guid="273B34F076EA11DE8F6D571805253247" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="C794156176E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_Transform_CustomFlatFile_RS.execute" serviceGUID="C794156076E611DE8F6D571805253247" serviceQName="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_Transform_CustomFlatFile_RS" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>CustomAcknowledgePO_To_CustomLiebertPOAck.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ETH_ENQJMS_ArchiveTransaction" guid="AE2A151076E711DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_ENQJMS_ArchiveTransaction" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1266506768601</ID>
+            <lastModifiedTime>Thu Feb 18 15:26:08 GMT+00:00 2010</lastModifiedTime>
+            <lastModifiedUser>JDev_ETH_WorkingESB_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+         </versionInfo>
+         <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+         <serviceDefinition>
+            <wsdlURL>ETH_ENQJMS_ArchiveTransaction.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_ArchiveTransaction/">tns:Produce_Message_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_ENQJMS_ArchiveTransaction?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://elshad2.emerson.com:35000/event/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_ENQJMS_ArchiveTransaction</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="AE2C861076E711DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_ENQJMS_ArchiveTransaction.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.emrsn.com/SC_Archive" element="tns:RootElement"/>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="ETH_Transform_CustomFlatFile_RS" guid="C794156076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_Transform_CustomFlatFile_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED" dirty="true">
+         <versionInfo>
+            <ID>1266506768601</ID>
+            <lastModifiedTime>Thu Feb 18 15:26:08 GMT+00:00 2010</lastModifiedTime>
+            <lastModifiedUser>JDev_ETH_WorkingESB_ETH_ESB_POAck_FlatFile_Output</lastModifiedUser>
+         </versionInfo>
+         <parent guid="48BDD69076E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output" type="serviceGroup"/>
+         <serviceDefinition>
+            <wsdlURL>ETHSys_OutputServices_ETHSysGrp_POAck_FlatFile_Output_ETH_Transform_CustomFlatFile_RS.wsdl</wsdlURL>
+            <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_OutputServices_ETHSysGrp_POAck_FlatFile_Output">tns:execute_ppt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_Transform_CustomFlatFile_RS?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://elshad2.emerson.com:35000/event/ETHSystem_OutputServices/ETHSysGrp_POAck_FlatFile_Output/ETH_Transform_CustomFlatFile_RS</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="C794156176E611DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_Transform_CustomFlatFile_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" element="tns:CustomLiebertPOAck" xmlns:tns="http://xmlns.emrsn.com/CustomPOAckFlatFile"/>
+               <routingRules>
+                  <routingRule guid="AB3585D076EA11DE8F6D571805253247" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="5F6F82611CA111DFBFC8EFB8D5E31181" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_Liebert_FlatFile.Write" serviceGUID="5F6F82601CA111DFBFC8EFB8D5E31181" serviceQName="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_Liebert_FlatFile" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>CustomLiebertPOAck_To_Root_Element.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="BFCF43F076EA11DE8F6D571805253247" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                     <targetOperation guid="AE2C861076E711DE8F6D571805253247" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_ENQJMS_ArchiveTransaction.Produce_Message" serviceGUID="AE2A151076E711DE8F6D571805253247" serviceQName="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_ENQJMS_ArchiveTransaction" mepDisplayName="One Way" mep="OneWay"/>
+                     <transformation>
+                        <xslFileURL>Archive_FlatFile_Output.xsl</xslFileURL>
+                     </transformation>
+                  </routingRule>
+                  <routingRule guid="79F541A1520311DF8F00EF1C230ABACC" subscriptionType="ANY" executionType="Immediate">
+                     <targetOperation guid="5F6F82611CA111DFBFC8EFB8D5E31181" qname="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_Liebert_FlatFile.Write" serviceGUID="5F6F82601CA111DFBFC8EFB8D5E31181" serviceQName="ETHSystem_OutputServices.ETHSysGrp_POAck_FlatFile_Output.ETH_PUTFL_POAck_Liebert_FlatFile" mep="OneWay"/>
+                  </routingRule>
+               </routingRules>
+            </operationInfo>
+         </operations>
+         <endpointProperties>
+            <property name="enableAccessBusinessEvent" value="true"/>
+         </endpointProperties>
+      </service>
+   </serviceGroup>
+</project_metadata>

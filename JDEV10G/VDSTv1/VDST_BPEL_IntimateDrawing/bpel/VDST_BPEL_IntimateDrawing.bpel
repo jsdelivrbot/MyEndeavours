@@ -1,0 +1,123 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Aug 06 17:17:59 GMT+05:30 2009
+  Author:  idhami
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="VDST_BPEL_IntimateDrawing"
+         targetNamespace="http://schema.emerson.com/VDST_BPEL_IntimateDrawing"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns4="http://www.oracle.com/XSL/Transform/java/oracle.tip.esb.server.headers.ESBHeaderFunctions"
+         xmlns:ns1="http://xmlns.oracle.com/FtpUtilProcess"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns2="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://schema.emerson.com/VDST_BPEL_IntimateDrawing"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client"
+                 partnerLinkType="client:VDST_BPEL_IntimateDrawing"
+                 myRole="VDST_BPEL_IntimateDrawingProvider"/>
+    <partnerLink name="FtpUtilProcess_Request"
+                 partnerRole="FtpUtilProcessProvider"
+                 partnerLinkType="ns1:FtpUtilProcess"
+                 myRole="FtpUtilProcessRequester"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:VDST_BPEL_IntimateDrawingRequestMessage"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable"
+              messageType="client:VDST_BPEL_IntimateDrawingResponseMessage"/>
+    <variable name="Invoke_FTPUtilProcess_Request"
+              messageType="ns1:FtpUtilProcessRequestMessage"/>
+    <variable name="Invoke_FTPUtilProcess_Result"
+              messageType="ns1:FtpUtilProcessResponseMessage"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in VDST_BPEL_IntimateDrawing.wsdl) -->
+    <receive name="Receive_InputString" partnerLink="client"
+             portType="client:VDST_BPEL_IntimateDrawing" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_Input">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:VDST_BPEL_IntimateDrawingProcessRequest/client:input"/>
+        <to variable="outputVariable" part="payload"
+            query="/client:VDST_BPEL_IntimateDrawingProcessResponse/client:result"/>
+      </copy>
+      <copy>
+        <from expression="string('LS')"/>
+        <to variable="Invoke_FTPUtilProcess_Request" part="payload"
+            query="/ns1:FtpUtilProcessProcessRequest/ns1:ftp_operation"/>
+      </copy>
+      <copy>
+        <from expression="string('eis/FTP/VDST_ClosetMaidFTP')"/>
+        <to variable="Invoke_FTPUtilProcess_Request" part="payload"
+            query="/ns1:FtpUtilProcessProcessRequest/ns1:ftp_jndi"/>
+      </copy>
+      <copy>
+        <from expression="string('/CMC/DR/Infile')"/>
+        <to variable="Invoke_FTPUtilProcess_Request" part="payload"
+            query="/ns1:FtpUtilProcessProcessRequest/ns1:ftp_dir"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_FTPUtilProcess_Initiate"
+            partnerLink="FtpUtilProcess_Request" portType="ns1:FtpUtilProcess"
+            operation="initiate" inputVariable="Invoke_FTPUtilProcess_Request"/>
+    <receive name="Receive_FTPUtilProcess_Result"
+             partnerLink="FtpUtilProcess_Request"
+             portType="ns1:FtpUtilProcessCallback" operation="onResult"
+             variable="Invoke_FTPUtilProcess_Result" createInstance="no"/>
+    <assign name="Assign_Output">
+      <copy>
+        <from variable="Invoke_FTPUtilProcess_Result" part="payload"
+              query="/ns1:FtpUtilProcessProcessResponse/ns1:result"/>
+        <to variable="outputVariable" part="payload"
+            query="/client:VDST_BPEL_IntimateDrawingProcessResponse/client:result"/>
+      </copy>
+    </assign>
+    <scope name="Scope_IntimateYumetech">
+      <empty name="Empty_Invoke"/>
+    </scope>
+    <reply name="Reply_Output" partnerLink="client"
+           portType="client:VDST_BPEL_IntimateDrawing" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,40 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="VDST_BPEL_CatalogPricingReqABCS" src="VDST_BPEL_CatalogPricingReqABCS.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="VDST_FTP_GET_CatalogPricing">
+            <property name="wsdlLocation">VDST_FTP_GET_CatalogPricing.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="VDST_JMSQENQ_CatalogPricing">
+            <property name="wsdlLocation">VDST_JMSQENQ_CatalogPricing.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="VDST_FTP_GET_CatalogPricing">
+            <property name="FTP_JNDI">eis/FTP/VDST_ClosetMaidFTP</property>
+            <property name="input_dir">cp/infile/</property>
+            <property name="archive_dir">cp/archive/</property>
+            <property name="poll_frequency">60</property>
+            <property name="portType">Get_ptt</property>
+            <property name="file_pattern">VDST_CNP_*.csv</property>
+            <property name="clusterGroupId">VDST_BPEL_CatalogPricingReqABCS_CMC</property>
+            <property name="clusterAcrossSubnet">false</property>
+            <property name="useJgroupConfigFile">true</property>
+            <!--<property name="rejectedMessageHandlers">file:///elshas1/elshas1/aelshas1/workingfolder/VDST/RejectedMessages</property>-->
+         </activationAgent>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="VDST_FTP_GET_CatalogPricing">
+            <property name="FTP_JNDI">eis/FTP/VDST_KnaackFTP</property>
+            <property name="input_dir">cp/infile/</property>
+            <property name="archive_dir">cp/archive/</property>
+            <property name="poll_frequency">60</property>
+            <property name="portType">Get_ptt</property>
+            <property name="file_pattern">VDST_CNP_*.csv</property>
+            <property name="clusterGroupId">VDST_BPEL_CatalogPricingReqABCS_KNK</property>
+            <property name="clusterAcrossSubnet">false</property>
+            <property name="useJgroupConfigFile">true</property>
+            <!--<property name="rejectedMessageHandlers">file:///elshas1/elshas1/aelshas1/workingfolder/VDST/RejectedMessages</property>-->
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

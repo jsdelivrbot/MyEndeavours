@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="MultipleInboundFTP_BPEL" src="MultipleInboundFTP_BPEL.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="PollFTP">
+            <property name="wsdlLocation">PollFTP.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="PutFile">
+            <property name="wsdlLocation">PutFile.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="PollFTP">
+            <property name="ftpJNDI">eis/FTP/ClosetMaidTest</property>
+            <property name="InputDIR">/VSP</property>
+            <property name="archiveDIR">/VSP/archive</property>
+            <property name="portType">Get_ptt</property>
+         </activationAgent>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="PollFTP">
+            <property name="ftpJNDI">eis/FTP/InternalFTP</property>
+            <property name="InputDIR">/infile</property>
+            <property name="archiveDIR">/infile/archive</property>
+            <property name="portType">Get_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

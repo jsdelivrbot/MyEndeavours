@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/CostingActivity.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeCostingActivity.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/AllocateCostingActivity.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetCostingActivity.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/PostCostingActivity.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowCostingActivity.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="AcknowledgeCostingActivity">
+                <part name="Message" element="oa:AcknowledgeCostingActivity"/>
+        </message>
+        <message name="AllocateCostingActivity">
+                <part name="Message" element="oa:AllocateCostingActivity"/>
+        </message>
+        <message name="GetCostingActivity">
+                <part name="Message" element="oa:GetCostingActivity"/>
+        </message>
+        <message name="ShowCostingActivity">
+                <part name="Message" element="oa:ShowCostingActivity"/>
+        </message>
+        <message name="PostCostingActivity">
+                <part name="Message" element="oa:PostCostingActivity"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestCostingActivityPortType">
+                <operation name="AllocateCostingActivity">
+                        <input message="oaws:AllocateCostingActivity"/>
+                </operation>
+                <operation name="GetCostingActivity">
+                        <input message="oaws:GetCostingActivity"/>
+                </operation>
+                <operation name="PostCostingActivity">
+                        <input message="oaws:PostCostingActivity"/>
+                </operation>
+        </portType>
+        <portType name="ResponseCostingActivityPortType">
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="AcknowledgeCostingActivity">
+                        <input message="oaws:AcknowledgeCostingActivity"/>
+                </operation>
+                <operation name="ShowCostingActivity">
+                        <input message="oaws:ShowCostingActivity"/>
+                </operation>
+        </portType>
+        <portType name="SyncCostingActivityPortType">
+                <operation name="AllocateCostingActivity">
+                        <input message="oaws:AllocateCostingActivity"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="PostCostingActivity">
+                        <input message="oaws:PostCostingActivity"/>
+                        <output message="oaws:AcknowledgeCostingActivity"/>
+                </operation>
+                <operation name="GetCostingActivity">
+                        <input message="oaws:GetCostingActivity"/>
+                        <output message="oaws:ShowCostingActivity"/>
+                </operation>
+        </portType>
+        <binding name="RequestCostingActivityBinding" type="oaws:RequestCostingActivityPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AllocateCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="PostCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseCostingActivityBinding" type="oaws:ResponseCostingActivityPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="AcknowledgeCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncCostingActivityBinding" type="oaws:SyncCostingActivityPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AllocateCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="PostCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetCostingActivity">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/CostingActivity.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestCostingActivityService">
+                <port name="RequestCostingActivityBinding" binding="oaws:RequestCostingActivityBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestCostingActivity"/>
+                </port>
+        </service>
+        <service name="ResponseCostingActivityService">
+                <port name="ResponseCostingActivityBinding" binding="oaws:ResponseCostingActivityBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseCostingActivity"/>
+                </port>
+        </service>
+        <service name="SyncCostingActivityService">
+                <port name="SyncCostingActivityBinding" binding="oaws:SyncCostingActivityBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncCostingActivity"/>
+                </port>
+        </service>
+</definitions>

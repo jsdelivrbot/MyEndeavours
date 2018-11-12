@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.4.0) (Build 080602)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>VDST_DBINS_CatalogPricing</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>VDSTDBINSCatalogPricing.VdstCatalogPriceStaging</opm:class>
+         <opm:alias>VdstCatalogPriceStaging</opm:alias>
+         <opm:primary-key>
+            <opm:field table="VDST_CATALOG_PRICE_STAGING" name="UUID" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="findAllVdstCatalogPriceStaging" xsi:type="toplink:read-all-query">
+                  <toplink:timeout>0</toplink:timeout>
+                  <toplink:reference-class>VDSTDBINSCatalogPricing.VdstCatalogPriceStaging</toplink:reference-class>
+                  <toplink:cache-usage>primary-key</toplink:cache-usage>
+                  <toplink:lock-mode>none</toplink:lock-mode>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+            </opm:queries>
+            <toplink:does-exist-query xsi:type="toplink:does-exist-query">
+               <toplink:existence-check>check-database</toplink:existence-check>
+            </toplink:does-exist-query>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>uuid</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="UUID" xsi:type="opm:column"/>
+               <opm:attribute-classification>[B</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>senderId</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="SENDER_ID" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>partNumber</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="PART_NUMBER" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>partNumberDisplay</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="PART_NUMBER_DISPLAY" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>shortName</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="SHORT_NAME" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>longDescription</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="LONG_DESCRIPTION" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>pkgUomCode</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="PKG_UOM_CODE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>unitPerCase</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="UNIT_PER_CASE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>weightPerUnit</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="WEIGHT_PER_UNIT" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>color</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="COLOR" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>productGrouping</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="PRODUCT_GROUPING" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>groupingTypeList</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="GROUPING_TYPE_LIST" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>dimensionUomCode</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="DIMENSION_UOM_CODE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemHeight</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="ITEM_HEIGHT" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemWidth</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="ITEM_WIDTH" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>itemDepth</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="ITEM_DEPTH" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>listPrice</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="LIST_PRICE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>catalogNumber</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="CATALOG_NUMBER" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>drawingName</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="DRAWING_NAME" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>disconitnueFlag</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="DISCONITNUE_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>usedInVdstFlag</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="USED_IN_VDST_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>usedInB2bFlag</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="USED_IN_B2B_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>usedInB2cFlag</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="USED_IN_B2C_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>configurableItemFlag</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="CONFIGURABLE_ITEM_FLAG" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>x3dFile</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="X3D_FILE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>catalogImage</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="CATALOG_IMAGE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>category</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="CATEGORY" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>installTime</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="INSTALL_TIME" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.math.BigDecimal</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>language</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="LANGUAGE" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.lang.String</opm:attribute-classification>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>generatedTimestamp</opm:attribute-name>
+               <opm:field table="VDST_CATALOG_PRICE_STAGING" name="GENERATED_TIMESTAMP" xsi:type="opm:column"/>
+               <opm:attribute-classification>java.sql.Timestamp</opm:attribute-classification>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+            <toplink:always-refresh>true</toplink:always-refresh>
+         </toplink:caching>
+         <toplink:remote-caching>
+            <toplink:cache-type>weak-reference</toplink:cache-type>
+         </toplink:remote-caching>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="VDST_CATALOG_PRICE_STAGING"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+</toplink:object-persistence>

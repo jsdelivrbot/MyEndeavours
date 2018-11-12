@@ -1,0 +1,16 @@
+<definitions
+     name="ConversionWebService"
+     targetNamespace="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <import namespace="http://service.emerson.com/vdst/tool/ConversionWebService.wsdl" location="http://elshas2.emrsn.com:12001/ClosetMaid/Server/vdst/core/wsdl?ConversionWebService"/>
+    <plnk:partnerLinkType name="ConversionWebServicePortType_PL">
+        <plnk:role name="ConversionWebServicePortType_Role">
+            <plnk:portType name="tns:ConversionWebServicePortType"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

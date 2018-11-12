@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/SC_Error_Details" 
+                  xmlns="http://xmlns.oracle.com/pcbpel/SC_Error_Details" 
+                  elementFormDefault="qualified" 
+                  attributeFormDefault="qualified" 
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CommonErrorHandlerCollection" type="CommonErrorHandlerCollection"/>
+   <xs:complexType name="CommonErrorHandlerCollection">
+      <xs:sequence>
+         <xs:element name="CommonErrorHandler" type="CommonErrorHandler" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CommonErrorHandler">
+      <xs:sequence>
+         <xs:element name="activityId" type="xs:double"/>
+         <xs:element name="messageId" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="200"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+           <xs:element name="senderId" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="200"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      <xs:element name="sourceName" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="1000"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="invokedOperationName" minOccurs="0">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="1000"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+           <xs:element name="flowId" minOccurs="0">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="256"/>
+               </xs:restriction>
+            </xs:simpleType>
+            </xs:element>
+         <xs:element name="message" minOccurs="0">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="2000"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="exception" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="4000"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="inPayload" type="xs:base64Binary" minOccurs="0" nillable="true"/>
+     
+ 	<xs:element name="attribute1" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="300"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="attribute2" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="300"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="attribute3" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="300"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+	</xs:sequence>
+   </xs:complexType>
+</xs:schema>

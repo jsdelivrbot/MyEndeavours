@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="ETH_BPEL_FA_Success" src="ETH_BPEL_FA_Success.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="ETH_DEQAQ_IPINQUEUE_FA">
+            <property name="wsdlLocation">ETH_DEQAQ_IPINQUEUE_FA.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ETH_INSRTDB_ELSHA_ARCHIVEDETAIL">
+            <property name="wsdlLocation">ETH_INSRTDB_ELSHA_ARCHIVEDETAIL.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="ETH_SELECT_ARCHIVE_DETAIL">
+            <property name="wsdlLocation">ETH_SELECT_ARCHIVE_DETAIL.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="ETH_DEQAQ_IPINQUEUE_FA">
+            <property name="portType">Dequeue_ptt</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

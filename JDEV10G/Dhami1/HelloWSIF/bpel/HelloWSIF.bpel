@@ -1,0 +1,95 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri May 22 19:43:29 GMT+05:30 2009
+  Author:  agupta1
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="HelloWSIF" targetNamespace="http://xmlns.oracle.com/HelloWSIF"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://services.training.com"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:client="http://xmlns.oracle.com/HelloWSIF"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="client" partnerLinkType="client:HelloWSIF"
+                 myRole="HelloWSIFProvider"/>
+    <partnerLink name="MyProcess" partnerRole="MyProcess_Provider"
+                 partnerLinkType="ns1:MyProcess"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:HelloWSIFRequestMessage"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable"
+              messageType="client:HelloWSIFResponseMessage"/>
+    <variable name="Invoke_Hello_InputVariable"
+              messageType="ns1:MyProcessRequestMessage"/>
+    <variable name="Invoke_Hello_OutputVariable"
+              messageType="ns1:MyProcessResponseMessage"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in HelloWSIF.wsdl) -->
+    <receive name="receiveInput" partnerLink="client"
+             portType="client:HelloWSIF" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <!-- Generate reply to synchronous request -->
+    <assign name="Assign_Input">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:HelloWSIFProcessRequest/client:title"/>
+        <to variable="Invoke_Hello_InputVariable" part="title"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:HelloWSIFProcessRequest/client:name"/>
+        <to variable="Invoke_Hello_InputVariable" part="name"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_Hello" partnerLink="MyProcess" portType="ns1:MyProcess"
+            operation="hello" inputVariable="Invoke_Hello_InputVariable"
+            outputVariable="Invoke_Hello_OutputVariable"/>
+    <assign name="Assign_Output">
+      <copy>
+        <from variable="Invoke_Hello_OutputVariable" part="greeting"/>
+        <to variable="outputVariable" part="payload"
+            query="/client:HelloWSIFProcessResponse/client:result"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="client" portType="client:HelloWSIF"
+           operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

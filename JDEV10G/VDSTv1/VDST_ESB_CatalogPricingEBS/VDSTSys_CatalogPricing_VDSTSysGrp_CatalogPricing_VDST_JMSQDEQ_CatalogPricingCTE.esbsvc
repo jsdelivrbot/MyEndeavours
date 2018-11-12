@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="VDST_JMSQDEQ_CatalogPricingCTE" guid="E786C6B164A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="JMS" typeDescription="Inbound JMS Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1263818791638</ID>
+      <lastModifiedTime>Mon Jan 18 12:46:31 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VDSTv1_VDST_ESB_CatalogPricingEBS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="E4F3CC70609511DEBF958316DE2D66B2" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing" type="serviceGroup"/>
+   <invocation>
+      <targetService guid="E786C6B264A311DE8F10F7FBB1F6B216" qname="VDSTSystem_EBSServices.VDSTSysGrp_CatalogPricing.VDST_JMSQDEQ_CatalogPricingCTE_RS"/>
+      <interface>
+         <wsdlURL>VDST_JMSQDEQ_CatalogPricingCTE.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CatalogPricingCTE/">tns:Consume_Message_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="factoryJNDI" value="eis/VDST/QueueConnectionFactory"/>
+      <property name="rejectedMessageHandlers" value="file:///elshas1/elshas1/aelshas1/workingfolder"/>
+      <property name="destinationJNDI" value="jms/vdst_q/cnp/EBS"/>
+   </endpointProperties>
+</service>

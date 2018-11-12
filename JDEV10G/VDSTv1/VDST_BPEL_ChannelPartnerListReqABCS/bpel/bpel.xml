@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="VDST_BPEL_ChannelPartnerListReqABCS" src="VDST_BPEL_ChannelPartnerListReqABCS.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="VDST_FTP_GET_ChannelPartnerList">
+            <property name="wsdlLocation">VDST_FTP_GET_ChannelPartnerList.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="VDST_JMSQ_ENQ_ChannelPartnerListCTE">
+            <property name="wsdlLocation">VDST_JMSQ_ENQ_ChannelPartnerListCTE.wsdl</property>
+            <property name="retryInterval">60</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CSF_ICoE_ErrorHandler">
+            <property name="wsdlLocation">http://soa-stg.emerson.com:8800/orabpel/default/CSF_ICoE_ErrorHandler/CSF_ICoE_ErrorHandler?wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <activationAgents>
+         <activationAgent className="oracle.tip.adapter.fw.agent.jca.JCAActivationAgent" partnerLink="VDST_FTP_GET_ChannelPartnerList">
+            <property name="clusterGroupId">VDST_BPEL_ChannelPartnerListReqABCS_KNK</property>
+            <property name="FTP_JNDI">eis/FTP/VDST_KnaackFTP</property>
+            <property name="input_dir">cp/infile/</property>
+            <property name="archive_dir">cp/archive/</property>
+            <property name="poll_frequency">60</property>
+            <property name="portType">Get_ptt</property>
+            <property name="file_pattern">VDST_CPL_*.csv</property>
+         </activationAgent>
+      </activationAgents>
+   </BPELProcess>
+</BPELSuitcase>

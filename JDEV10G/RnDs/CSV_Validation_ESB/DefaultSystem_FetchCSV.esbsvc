@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="FetchCSV" guid="53020CF1228D11DE8F1BA9E5E980B820" qname="DefaultSystem.FetchCSV" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false">
+   <versionInfo>
+      <ID>1239098092843</ID>
+      <lastModifiedTime>Tue Apr 07 15:24:52 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_CSV_Validation_ESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="8E8E403019F611DEAF48EB13DD37ED61" qname="DefaultSystem" type="system"/>
+   <invocation>
+      <targetService guid="530456E0228D11DE8F1BA9E5E980B820" qname="DefaultSystem.FetchCSV_RS"/>
+      <interface>
+         <wsdlURL>FetchCSV.wsdl</wsdlURL>
+         <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/FetchCSV/">tns:Read_ptt</portType>
+      </interface>
+   </invocation>
+   <endpointProperties>
+      <property name="rejectedMessageHandlers" value="file://D:/oracle/Files/error/handler"/>
+   </endpointProperties>
+</service>

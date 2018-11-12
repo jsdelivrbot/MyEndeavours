@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="TestESB_put" guid="55667850A37A11DEBFF07737C08641B4" qname="VDST_IntegrationSystem.VDSTSysGrp_Test.TestESB_put" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1253192598004</ID>
+      <lastModifiedTime>Thu Sep 17 18:33:18 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_VDSTv1_TestESB</lastModifiedUser>
+   </versionInfo>
+   <parent guid="0AA98E91A37C11DEBFE131C60F4267F4" qname="VDST_IntegrationSystem.VDSTSysGrp_Test" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>TestESB_put.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/TestESB_put/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/VDST_IntegrationSystem/VDSTSysGrp_Test/TestESB_put?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:80/event/VDST_IntegrationSystem/VDSTSysGrp_Test/TestESB_put</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="556B3340A37A11DEBFF07737C08641B4" qname="VDST_IntegrationSystem.VDSTSysGrp_Test.TestESB_put.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+      </operationInfo>
+   </operations>
+</service>

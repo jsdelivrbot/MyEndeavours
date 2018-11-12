@@ -1,0 +1,57 @@
+<definitions
+     name="ETH_GETFTP_ALICE_SBYN_OAGIS_7_2"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://xmlns.emrsn.com/CustomProcess_PO_007"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/ftp/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/ftp/" location="ftpAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomProcess_PO_007" schemaLocation="public_html/CustomProcess_PO_007.xsd" />
+      </schema>
+    </types>
+    <message name="CustomProcess_PO_007_msg">
+        <part name="CustomProcess_PO_007" element="imp1:CustomProcess_PO_007"/>
+    </message>
+    <portType name="Get_ptt">
+        <operation name="Get">
+            <input message="tns:CustomProcess_PO_007_msg"/>
+        </operation>
+    </portType>
+    <binding name="Get_binding" type="tns:Get_ptt">
+    <pc:inbound_binding  />
+        <operation name="Get">
+      <jca:operation
+          FileType="ascii"
+          PhysicalDirectory="/infile"
+          ActivationSpec="oracle.tip.adapter.ftp.inbound.FTPActivationSpec"
+          PhysicalArchiveDirectory="/archive"
+          DeleteFile="true"
+          IncludeFiles="EMCXml_OFM_PO_.*\.dat"
+          PollingFrequency="60"
+          MinimumAge="0"
+          OpaqueSchema="false"
+          Sorter="oracle.tip.adapter.file.sorter.TimestampSorterAscending"
+          UseRemoteArchive="true" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="ETH_GETFTP_ALICE_SBYN_OAGIS_7_2">
+        <port name="Get_pt" binding="tns:Get_binding">
+      <jca:address location="eis/Ftp/InternalFTP" UIincludeWildcard="EMCXml_OFM_PO_*.dat" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Get_plt" >
+    <plt:role name="Get_role" >
+      <plt:portType name="tns:Get_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

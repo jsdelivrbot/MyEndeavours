@@ -1,0 +1,67 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Feb 12 11:59:04 GMT+05:30 2010
+  Author:  idhami
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ETH_AQDEQ_Dummy"
+         targetNamespace="http://xmlns.emerson.com/ETH_AQDEQ_Dummy"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_JMSDEQ_AQ/"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:client="http://xmlns.emerson.com/ETH_AQDEQ_Dummy"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:orcl="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <partnerLink myRole="Consume_Message_role" name="ETH_JMSDEQ_AQ"
+                 partnerLinkType="ns1:Consume_Message_plt"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <variable name="G_IN_JMS_Header" messageType="ns2:InboundHeader_msg"/>
+    <variable name="G_IN_Consume_Message_InputVariable"
+              messageType="ns1:Consume_Message_msg"/>
+    <variable name="L_IN_JMS_Header" messageType="ns2:InboundHeader_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <receive name="Receive_1" partnerLink="ETH_JMSDEQ_AQ"
+             portType="ns1:Consume_Message_ptt" operation="Consume_Message"
+             variable="G_IN_Consume_Message_InputVariable" createInstance="yes"
+             bpelx:headerVariable="G_IN_JMS_Header"/>
+    <assign name="Assign_1">
+      <copy>
+        <from variable="G_IN_JMS_Header" part="inboundHeader"
+              query="/ns2:JMSInboundHeadersAndProperties"/>
+        <to variable="L_IN_JMS_Header" part="inboundHeader"
+            query="/ns2:JMSInboundHeadersAndProperties"/>
+      </copy>
+    </assign>
+  </sequence>
+</process>

@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_Input_RS" guid="E5900091059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_GETFTP_Input_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <description>This is the Routing Service for Adapter Service ETH_GETFTP_Input</description>
+   <versionInfo>
+      <ID>1263981480120</ID>
+      <lastModifiedTime>Wed Jan 20 09:58:00 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami3_ETH_FTP_Intake</lastModifiedUser>
+   </versionInfo>
+   <parent guid="3BF23800059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_GETFTP_Input.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_Input/">tns:Get_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_TestRnDServices/ETHSysGrp_FTPInput/ETH_GETFTP_Input_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa.emerson.com:8800/event/ETHSystem_TestRnDServices/ETHSysGrp_FTPInput/ETH_GETFTP_Input_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="E594BB80059511DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_GETFTP_Input_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+         <routingRules>
+            <routingRule guid="3D5C0BC0059611DFBFD12D54526E389A" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="32E90710059611DFBFD12D54526E389A" qname="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_PUTFTP_Feed1.Put" serviceGUID="32E44C20059611DFBFD12D54526E389A" serviceQName="ETHSystem_TestRnDServices.ETHSysGrp_FTPInput.ETH_PUTFTP_Feed1" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

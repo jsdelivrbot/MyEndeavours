@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/InventoryBalance.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/AcknowledgeInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/CancelInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ChangeInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/GetInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ProcessInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/RespondInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/UpdateInventoryBalance.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="AcknowledgeInventoryBalance">
+                <part name="Message" element="oa:AcknowledgeInventoryBalance"/>
+        </message>
+        <message name="CancelInventoryBalance">
+                <part name="Message" element="oa:CancelInventoryBalance"/>
+        </message>
+        <message name="ChangeInventoryBalance">
+                <part name="Message" element="oa:ChangeInventoryBalance"/>
+        </message>
+        <message name="GetInventoryBalance">
+                <part name="Message" element="oa:GetInventoryBalance"/>
+        </message>
+        <message name="ProcessInventoryBalance">
+                <part name="Message" element="oa:ProcessInventoryBalance"/>
+        </message>
+        <message name="RespondInventoryBalance">
+                <part name="Message" element="oa:RespondInventoryBalance"/>
+        </message>
+        <message name="ShowInventoryBalance">
+                <part name="Message" element="oa:ShowInventoryBalance"/>
+        </message>
+        <message name="SyncInventoryBalance">
+                <part name="Message" element="oa:SyncInventoryBalance"/>
+        </message>
+        <message name="NotifyInventoryBalance">
+                <part name="Message" element="oa:NotifyInventoryBalance"/>
+        </message>
+        <message name="UpdateInventoryBalance">
+                <part name="Message" element="oa:UpdateInventoryBalance"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestInventoryBalancePortType">
+                <operation name="CancelInventoryBalance">
+                        <input message="oaws:CancelInventoryBalance"/>
+                </operation>
+                <operation name="ChangeInventoryBalance">
+                        <input message="oaws:ChangeInventoryBalance"/>
+                </operation>
+                <operation name="ProcessInventoryBalance">
+                        <input message="oaws:ProcessInventoryBalance"/>
+                </operation>
+                <operation name="GetInventoryBalance">
+                        <input message="oaws:GetInventoryBalance"/>
+                </operation>
+                <operation name="SyncInventoryBalance">
+                        <input message="oaws:SyncInventoryBalance"/>
+                </operation>
+                <operation name="UpdateInventoryBalance">
+                        <input message="oaws:UpdateInventoryBalance"/>
+                </operation>
+                <operation name="NotifyInventoryBalance">
+                        <input message="oaws:NotifyInventoryBalance"/>
+                </operation>
+        </portType>
+        <portType name="ResponseInventoryBalancePortType">
+                <operation name="AcknowledgeInventoryBalance">
+                        <input message="oaws:AcknowledgeInventoryBalance"/>
+                </operation>
+                <operation name="RespondInventoryBalance">
+                        <input message="oaws:RespondInventoryBalance"/>
+                </operation>
+                <operation name="ShowInventoryBalance">
+                        <input message="oaws:ShowInventoryBalance"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncInventoryBalancePortType">
+                <operation name="ProcessInventoryBalance">
+                        <input message="oaws:ProcessInventoryBalance"/>
+                        <output message="oaws:AcknowledgeInventoryBalance"/>
+                </operation>
+                <operation name="ChangeInventoryBalance">
+                        <input message="oaws:ChangeInventoryBalance"/>
+                        <output message="oaws:RespondInventoryBalance"/>
+                </operation>
+                <operation name="CancelInventoryBalance">
+                        <input message="oaws:CancelInventoryBalance"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="GetInventoryBalance">
+                        <input message="oaws:GetInventoryBalance"/>
+                        <output message="oaws:ShowInventoryBalance"/>
+                </operation>
+                <operation name="SyncInventoryBalance">
+                        <input message="oaws:SyncInventoryBalance"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="UpdateInventoryBalance">
+                        <input message="oaws:UpdateInventoryBalance"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyInventoryBalance">
+                        <input message="oaws:NotifyInventoryBalance"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestInventoryBalanceBinding" type="oaws:RequestInventoryBalancePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="CancelInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ChangeInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ProcessInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="GetInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="UpdateInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponseInventoryBalanceBinding" type="oaws:ResponseInventoryBalancePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="AcknowledgeInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="RespondInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ShowInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncInventoryBalanceBinding" type="oaws:SyncInventoryBalancePortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ProcessInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="ChangeInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="CancelInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="GetInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="UpdateInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyInventoryBalance">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/InventoryBalance.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestInventoryBalanceService">
+                <port name="RequestInventoryBalanceBinding" binding="oaws:RequestInventoryBalanceBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestInventoryBalance"/>
+                </port>
+        </service>
+        <service name="ResponseInventoryBalanceService">
+                <port name="ResponseInventoryBalanceBinding" binding="oaws:ResponseInventoryBalanceBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponseInventoryBalance"/>
+                </port>
+        </service>
+        <service name="SyncInventoryBalanceService">
+                <port name="SyncInventoryBalanceBinding" binding="oaws:SyncInventoryBalanceBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncInventoryBalance"/>
+                </port>
+        </service>
+</definitions>

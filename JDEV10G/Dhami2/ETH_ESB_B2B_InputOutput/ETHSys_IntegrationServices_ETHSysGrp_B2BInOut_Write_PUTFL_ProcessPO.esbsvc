@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="Write_PUTFL_ProcessPO" guid="30B305C0098611DEBF306F92CEA8EC06" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_ProcessPO" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885417084</ID>
+      <lastModifiedTime>Mon Jun 01 19:43:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>Write_PUTFL_ProcessPO.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Write_PUTFL_ProcessPO/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/Write_PUTFL_ProcessPO?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/Write_PUTFL_ProcessPO</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="30BA0AA0098611DEBF306F92CEA8EC06" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.Write_PUTFL_ProcessPO.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://www.openapplications.org/oagis/9" element="tns:ProcessPurchaseOrder"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="PO_OAGIS_9_0" value="/elshap1/elshap1/aelshap1/workingfolder/SC/NewFlatFile"/>
+   </endpointProperties>
+</service>

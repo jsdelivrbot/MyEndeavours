@@ -1,0 +1,81 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem"/>
+   <system name="VDST_IntegrationSystem" guid="D5235020667D11DE8F34ADC545AA0A86" qname="VDST_IntegrationSystem" status="ENABLED">
+      <versionInfo>
+         <ID>1253185820066</ID>
+         <lastModifiedTime>Thu Sep 17 16:40:20 GMT+05:30 2009</lastModifiedTime>
+         <lastModifiedUser>JDev_VDSTv1_TestESB</lastModifiedUser>
+      </versionInfo>
+      <description/>
+      <clusterName>esb</clusterName>
+      <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleOJMS/XATCF">ESBTopics/Topics/ESB_JAVA_DEFERRED</deferredQueueName>
+      <serviceGroup name="VDSTSysGrp_Test" guid="0AA98E91A37C11DEBFE131C60F4267F4" qname="TestSys_Service.TestSysGrp_Service" dirty="true">
+         <parent guid="D5235020667D11DE8F34ADC545AA0A86" qname="VDST_IntegrationSystem" type="system"/>
+         <service name="Pick" guid="329B26E0A37A11DEBFF07737C08641B4" qname="TestSys_Service.TestSysGrp_Service.Pick" status="ENABLED" serviceType="InboundAdapterService" serviceSubType="File" typeDescription="Inbound File Adapter Service" isWSDLEditable="false" dirty="true">
+            <description/>
+            <versionInfo>
+               <ID>1253185898253</ID>
+               <lastModifiedTime>Thu Sep 17 16:41:38 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_VDSTv1_TestESB</lastModifiedUser>
+            </versionInfo>
+            <parent guid="0AA98E91A37C11DEBFE131C60F4267F4" qname="TestSys_Service.TestSysGrp_Service" type="serviceGroup"/>
+            <invocation>
+               <targetService guid="329D97E0A37A11DEBFF07737C08641B4" qname="TestSys_Service.Pick_RS"/>
+               <interface>
+                  <wsdlURL>Pick.wsdl</wsdlURL>
+                  <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Pick/">tns:Read_ptt</portType>
+               </interface>
+            </invocation>
+         </service>
+         <service name="Pick_RS" guid="329D97E0A37A11DEBFF07737C08641B4" qname="TestSys_Service.TestSysGrp_Service.Pick_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED" dirty="true">
+            <description>This is the Routing Service for Adapter Service Pick</description>
+            <versionInfo>
+               <ID>1253185820066</ID>
+               <lastModifiedTime>Thu Sep 17 16:40:20 GMT+05:30 2009</lastModifiedTime>
+               <lastModifiedUser>JDev_VDSTv1_TestESB</lastModifiedUser>
+            </versionInfo>
+            <parent guid="0AA98E91A37C11DEBFE131C60F4267F4" qname="TestSys_Service.TestSysGrp_Service" type="serviceGroup"/>
+            <serviceDefinition>
+               <wsdlURL>Pick.wsdl</wsdlURL>
+               <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Pick/">tns:Read_ptt</portType>
+               <endpointDefinition>
+                  <concreteWSDLURL>/esb/wsil/TestSys_Service/Pick_RS?wsdl</concreteWSDLURL>
+                  <soapEndpointURI>http://localhost:8888/event/TestSys_Service/Pick_RS</soapEndpointURI>
+               </endpointDefinition>
+            </serviceDefinition>
+            <operations>
+               <operationInfo guid="329D97E1A37A11DEBFF07737C08641B4" qname="TestSys_Service.Pick_RS.Read" wsdlOperation="Read" mepDisplayName="One Way" mep="OneWay">
+                  <request validate="false" element="tns:opaqueElement" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/"/>
+                  <routingRules>
+                     <routingRule guid="67B6E2B0A37A11DEBFF07737C08641B4" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+                        <targetOperation guid="556B3340A37A11DEBFF07737C08641B4" qname="TestSys_Service.TestESB_put.Write" serviceGUID="55667850A37A11DEBFF07737C08641B4" serviceQName="TestSys_Service.TestESB_put" mepDisplayName="One Way" mep="OneWay"/>
+                     </routingRule>
+                  </routingRules>
+               </operationInfo>
+            </operations>
+         </service>
+         <service name="TestESB_put" guid="55667850A37A11DEBFF07737C08641B4" qname="TestSys_Service.TestESB_put" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+         <versionInfo>
+            <ID>1253185820066</ID>
+            <lastModifiedTime>Thu Sep 17 16:40:20 GMT+05:30 2009</lastModifiedTime>
+            <lastModifiedUser>JDev_VDSTv1_TestESB</lastModifiedUser>
+         </versionInfo>
+         <parent guid="0D49C6D1A37A11DEBFF07737C08641B4" qname="TestSys_Service" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>TestESB_put.wsdl</wsdlURL>
+            <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/TestESB_put/">tns:Write_ptt</portType>
+            <endpointDefinition>
+               <concreteWSDLURL>/esb/wsil/TestSys_Service/TestESB_put?wsdl</concreteWSDLURL>
+               <soapEndpointURI>http://localhost:8888/event/TestSys_Service/TestESB_put</soapEndpointURI>
+            </endpointDefinition>
+         </serviceDefinition>
+         <operations>
+            <operationInfo guid="556B3340A37A11DEBFF07737C08641B4" qname="TestSys_Service.TestESB_put.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+               <request validate="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/opaque/" element="tns:opaqueElement"/>
+            </operationInfo>
+         </operations>
+      </service>
+      </serviceGroup>
+   </system>
+</project_metadata>

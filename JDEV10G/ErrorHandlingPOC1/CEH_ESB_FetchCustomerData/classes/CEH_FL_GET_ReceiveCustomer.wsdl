@@ -1,0 +1,54 @@
+<definitions
+     name="CEH_FL_GET_ReceiveCustomer"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/CEH_FL_GET_ReceiveCustomer/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/CEH_FL_GET_ReceiveCustomer/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://schemas.emerson.com/customer"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterInboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://schemas.emerson.com/customer" schemaLocation="Customer.xsd" />
+      </schema>
+    </types>
+    <message name="customer_msg">
+        <part name="customer" element="imp1:customer"/>
+    </message>
+    <portType name="ReadCustomerFile_ptt">
+        <operation name="ReadCustomerFile">
+            <input message="tns:customer_msg"/>
+        </operation>
+    </portType>
+    <binding name="ReadCustomerFile_binding" type="tns:ReadCustomerFile_ptt">
+    <pc:inbound_binding  />
+        <operation name="ReadCustomerFile">
+      <jca:operation
+          PhysicalDirectory="D:/oracle/Files/EHPOC1/CustIN"
+          ActivationSpec="oracle.tip.adapter.file.inbound.FileActivationSpec"
+          DeleteFile="true"
+          IncludeFiles="cust.*\.xml"
+          PollingFrequency="30"
+          MinimumAge="5"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="CEH_FL_GET_ReceiveCustomer">
+        <Documentation>It will poll a file named cust*.xml</Documentation>
+        <port name="ReadCustomerFile_pt" binding="tns:ReadCustomerFile_binding">
+      <jca:address location="eis/FileAdapter" UIincludeWildcard="cust*.xml" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="ReadCustomerFile_plt" >
+    <plt:role name="ReadCustomerFile_role" >
+      <plt:portType name="tns:ReadCustomerFile_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

@@ -1,0 +1,45 @@
+<definitions
+     name="MDMCreateRecords"
+     targetNamespace="http://www.gssamerica.com/mdm/services/MDMCreateRecords/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://www.gssamerica.com/mdm/services/MDMCreateRecords/"
+     xmlns:mdm="http://www.gssamerica.com/mdm/services"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.gssamerica.com/mdm/services/MDMCreateRecords/">
+            <xsd:import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="MDMService.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="CreateRecordsRequest">
+        <part name="CreateRecordsRequest" element="mdm:CreateRecordsRequest"/>
+    </message>
+    <message name="CreateRecordsResponse">
+        <part name="CreateRecordsResponse" element="mdm:ServiceReply"/>
+    </message>
+    <portType name="MDMCreateRecords">
+        <operation name="createRecords">
+            <input message="tns:CreateRecordsRequest"/>
+            <output message="tns:CreateRecordsResponse"/>
+        </operation>
+    </portType>
+    <binding name="MDMCreateRecordsSOAP" type="tns:MDMCreateRecords">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="createRecords">
+            <soap:operation soapAction="http://www.gssamerica.com/mdm/services/MDMCreateRecords/createRecords"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="MDMCreateRecords">
+        <port name="MDMCreateRecordsSOAP" binding="tns:MDMCreateRecordsSOAP">
+            <soap:address location="http://gdc-18:8888/MDM_Services/MDMCreateRecordsSOAP"/>
+        </port>
+    </service>
+</definitions>

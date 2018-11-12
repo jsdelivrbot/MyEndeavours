@@ -1,0 +1,43 @@
+<schema attributeFormDefault="unqualified" elementFormDefault="unqualified"
+        targetNamespace="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:cusLbt="http://xmlns.emrsn.com/LiebertPurchaseOrder">
+ <import namespace="http://xmlns.emrsn.com/LiebertPurchaseOrder"
+         schemaLocation="LiebertFlatFileInput.xsd"/>
+ <element name="CustomLiebertPO">
+  <complexType>
+   <sequence>
+    <element ref="cusLbt:Root-Element"/>
+    <element name="Message_id" type="string"/>
+    <element name="Message_direction" type="string"/>
+    <element name="Sender_Document_number" type="string"/>
+    <element name="Sender_Message_type" type="string"/>    
+    <element name="Sender_Message_standard" type="string"/>    
+    <element name="Sender_Transaction_type" type="string"/>
+    <element name="Sender_Transaction_subtype" type="string"/>
+    <element name="Sender_System_type" type="string"/>
+    <element name="Sender_Id" type="string"/>
+    <element name="Sender_Site_Id" type="string"/>
+    <element name="Sender_Name" type="string"/>
+    <element name="Sender_Type" type="string"/>
+    <element name="Receiver_System_type" type="string"/>
+    <element name="Receiver_Id" type="string"/>
+    <element name="Receiver_Site_id" type="string"/>
+    <element name="Receiver_Name" type="string"/>
+    <element name="Receiver_type" type="string"/> 
+    <element name="File_name" type="string"/>
+    <element name="Record_total" type="string"/>
+    <element name="Record_number" type="string"/>
+    <element name="Flow_id_1" type="string"/>
+    <element name="Flow_id_2" type="string"/>
+    <element name="Flow_id_3" type="string"/>
+    <element name="Attribute1" type="string"/>
+    <element name="Attribute2" type="string"/>
+    <element name="Attribute3" type="string"/>
+    <element name="Attribute4" type="string"/>
+    <element name="Attribute5" type="string"/>
+   </sequence>
+  </complexType>
+ </element>
+</schema>
+

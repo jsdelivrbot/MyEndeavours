@@ -1,0 +1,70 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+     version="2.4">
+    <servlet>
+        <description>Web Service MDMSearchRecordSOAP</description>
+        <display-name>Web Service MDMSearchRecordSOAP</display-name>
+        <servlet-name>MDMSearchRecordSOAP</servlet-name>
+        <servlet-class>com.gssamerica.mdm.services.search.MDMSearchRecord</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description>Web Service MDMCreateRecordsSOAP</description>
+        <display-name>Web Service MDMCreateRecordsSOAP</display-name>
+        <servlet-name>MDMCreateRecordsSOAP</servlet-name>
+        <servlet-class>com.gssamerica.mdm.services.create.MDMCreateRecords</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description>Web Service MDMUpdateRecordsSOAP</description>
+        <display-name>Web Service MDMUpdateRecordsSOAP</display-name>
+        <servlet-name>MDMUpdateRecordsSOAP</servlet-name>
+        <servlet-class>com.gssamerica.mdm.services.update.MDMUpdateRecords</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description>Web Service AddRemoteKeySOAP</description>
+        <display-name>Web Service AddRemoteKeySOAP</display-name>
+        <servlet-name>AddRemoteKeySOAP</servlet-name>
+        <servlet-class>com.gssamerica.mdm.services.addremotekey.AddRemoteKeyImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description>Web Service ReplicateDataSOAP</description>
+        <display-name>Web Service ReplicateDataSOAP</display-name>
+        <servlet-name>ReplicateDataSOAP</servlet-name>
+        <servlet-class>com.gssamerica.mdm.services.replicatedata.ReplicateDataImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <description>Web Service MDMDeleteRecordSOAP</description>
+        <display-name>Web Service MDMDeleteRecordSOAP</display-name>
+        <servlet-name>MDMDeleteRecordSOAP</servlet-name>
+        <servlet-class>com.gssamerica.mdm.services.delete.MDMDeleteRecordImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MDMSearchRecordSOAP</servlet-name>
+        <url-pattern>MDMSearchRecordSOAP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MDMCreateRecordsSOAP</servlet-name>
+        <url-pattern>MDMCreateRecordsSOAP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MDMUpdateRecordsSOAP</servlet-name>
+        <url-pattern>MDMUpdateRecordsSOAP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRemoteKeySOAP</servlet-name>
+        <url-pattern>AddRemoteKeySOAP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReplicateDataSOAP</servlet-name>
+        <url-pattern>ReplicateDataSOAP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MDMDeleteRecordSOAP</servlet-name>
+        <url-pattern>MDMDeleteRecordSOAP</url-pattern>
+    </servlet-mapping>
+</web-app>

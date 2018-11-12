@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ENQJMS_PO_LiebertFlatFile" guid="E8CE84900CA111DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_ENQJMS_PO_LiebertFlatFile" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="JMS" typeDescription="Outbound JMS Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885777999</ID>
+      <lastModifiedTime>Mon Jun 01 19:49:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="4DCACFD0F84211DDAF17F39668B45988" qname="ETH_Sys_LIEBERT_Process" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_ENQJMS_PO_LiebertFlatFile.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_ENQJMS_PO_LiebertFlatFile/">tns:Produce_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETH_Sys_LIEBERT_Process/ETH_ENQJMS_PO_LiebertFlatFile?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:12001/event/ETH_Sys_LIEBERT_Process/ETH_ENQJMS_PO_LiebertFlatFile</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="E8D0CE800CA111DEBFB957152A29AC2D" qname="ETH_Sys_LIEBERT_Process.ETH_ENQJMS_PO_LiebertFlatFile.Produce_Message" wsdlOperation="Produce_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" element="tns:CustomLiebertPO"/>
+      </operationInfo>
+   </operations>
+</service>

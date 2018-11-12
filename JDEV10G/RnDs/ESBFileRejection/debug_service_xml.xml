@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<project_metadata>
+   <system name="DefaultSystem" guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem">
+      <service name="Get_FTP_XMLFile" guid="29611521512D11DEAF3637EA93E8375C" qname="DefaultSystem.Get_FTP_XMLFile" serviceType="InboundAdapterService" serviceSubType="FTP" typeDescription="Inbound FTP Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Get_FTP_XMLFile/" dirty="true">
+         <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+         <invocation>
+            <interface>
+               <wsdlURL>Get_FTP_XMLFile.wsdl</wsdlURL>
+               <portType>tns:Get_ptt</portType>
+            </interface>
+            <targetService guid="29611522512D11DEAF3637EA93E8375C" qname="DefaultSystem.Get_FTP_XMLFile_RS"/>
+         </invocation>
+         <operations>
+            <operationInfo wsdlOperation="Get" guid="297B53E0512D11DEAF3637EA93E8375C" mep="OneWay"/>
+         </operations>
+      </service>
+      <service name="Get_FTP_XMLFile_RS" guid="29611522512D11DEAF3637EA93E8375C" qname="DefaultSystem.Get_FTP_XMLFile_RS" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" dirty="true" soapEndpointStatus="ENABLED" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Get_FTP_XMLFile/">
+         <description>This is the Routing Service for Adapter Service Get_FTP_XMLFile</description>
+         <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Get_FTP_XMLFile.wsdl</wsdlURL>
+            <portType>tns:Get_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Get" guid="296CFC00512D11DEAF3637EA93E8375C" mep="OneWay">
+               <routingRules>
+                  <routingRule guid="8F49CC10512D11DEAF3637EA93E8375C" subscriptionType="ANY" executionType="Immediate"/>
+               </routingRules>
+            </operationInfo>
+         </operations>
+      </service>
+      <service name="Put_FTP_XMLFile" guid="8295B100512D11DEAF3637EA93E8375C" qname="DefaultSystem.Put_FTP_XMLFile" serviceType="OutboundAdapterService" serviceSubType="FTP" typeDescription="Outbound FTP Adapter Service" isWSDLEditable="false" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/Put_FTP_XMLFile/" dirty="true" soapEndpointStatus="ENABLED">
+         <parent guid="96DD76C0971311DABF1A87858E4395A7" qname="DefaultSystem" type="system"/>
+         <serviceDefinition>
+            <wsdlURL>Put_FTP_XMLFile.wsdl</wsdlURL>
+            <portType>tns:Put_ptt</portType>
+         </serviceDefinition>
+         <operations>
+            <operationInfo wsdlOperation="Put" guid="8297FAF0512D11DEAF3637EA93E8375C" mep="OneWay"/>
+         </operations>
+      </service>
+   </system>
+</project_metadata>

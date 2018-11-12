@@ -1,0 +1,54 @@
+<definitions
+     name="VDST_JMSQDEQ_CPProvABCS"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CPProvABCS/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/VDST_JMSQDEQ_CPProvABCS/"
+     xmlns:ns1="http://schema.emerson.com/VDST_FTP_GET_CatalogPricing"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:imp1="http://schemas.emerson.com/common/envelope"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/jms/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/jms/" location="jmsAdapterInboundHeader.wsdl"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://schemas.emerson.com/common/envelope" schemaLocation="EMR_CTE.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://schema.emerson.com/VDST_FTP_GET_CatalogPricing" schemaLocation="VDST_CP.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="envelope_msg">
+        <part name="envelope" element="imp1:envelope"/>
+    </message>
+    <portType name="Consume_Message_ptt">
+        <operation name="Consume_Message">
+            <input message="tns:envelope_msg"/>
+        </operation>
+    </portType>
+    <binding name="Consume_Message_binding" type="tns:Consume_Message_ptt">
+        <pc:inbound_binding/>
+        <operation name="Consume_Message">
+            <jca:operation DestinationName="jms/VDST_CP_ProvABCS" UseMessageListener="false" PayloadType="TextMessage"
+                 ActivationSpec="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec"
+                 OpaqueSchema="false"/>
+            <input>
+                <jca:header message="hdr:InboundHeader_msg" part="inboundHeader"/>
+            </input>
+        </operation>
+    </binding>
+    <service name="VDST_JMSQDEQ_CPProvABCS">
+        <port name="Consume_Message_pt" binding="tns:Consume_Message_binding">
+            <jca:address location="eis/VDST/QueueConnectionFactory" UIConnectionName="Local" ManagedConnectionFactory="oracle.tip.adapter.jms.JmsManagedConnectionFactory"
+                 mcf.ConnectionFactoryLocation="jms/VDST/QueueConnectionFactory" mcf.IsTopic="false"
+                 mcf.IsTransacted="false" mcf.FactoryProperties="" mcf.Username="oc4jadmin"
+                 mcf.Password="F44034A2DD8158AE53D924290C873D4A" UIJmsProvider="OC4JJMS"/>
+        </port>
+    </service>
+    <plt:partnerLinkType name="Consume_Message_plt">
+        <plt:role name="Consume_Message_role">
+            <plt:portType name="tns:Consume_Message_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+</definitions>

@@ -1,0 +1,16 @@
+<definitions
+     name="MDMSearchRecord"
+     targetNamespace="http://www.gssamerica.com/mdm/services/MDMSearchRecord/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:s1="http://www.gssamerica.com/mdm/services/MDMSearchRecord/"
+    >
+    <import namespace="http://www.gssamerica.com/mdm/services/MDMSearchRecord/" location="http://gdc-18:8888/MDM_Services/MDMSearchRecordSOAP?wsdl"/>
+    <plnk:partnerLinkType name="MDMSearchRecord_PL">
+        <plnk:role name="MDMSearchRecord_Role">
+            <plnk:portType name="s1:MDMSearchRecord"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

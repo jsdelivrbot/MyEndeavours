@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS" guid="003FC460097B11DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1243885417084</ID>
+      <lastModifiedTime>Mon Jun 01 19:43:37 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_B2B_InputOutput</lastModifiedUser>
+   </versionInfo>
+   <parent guid="CC946470095911DEBF89EFB363EA0848" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETHSys_IntegrationServices_ETHSysGrp_B2BInOut_ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS.wsdl</wsdlURL>
+      <portType xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_B2BInOut">tns:execute_ppt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_B2BInOut/ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="00493A40097B11DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_9_0_RemoveNamespace_RS.execute" wsdlOperation="execute" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcessPurchaseOrder" element="tns:CustomProcessPO"/>
+         <routingRules>
+            <routingRule guid="03BE4750097C11DE9F1EA78AC56F7274" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="DC69EB50097B11DE9F1EA78AC56F7274" qname="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_Oagis_9_0_RS.execute" serviceGUID="DC604E60097B11DE9F1EA78AC56F7274" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_B2BInOut.ETH_ProcessPO_CustomOagis_Oagis_9_0_RS" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>CustomProcessPO_RemoveNamespace.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

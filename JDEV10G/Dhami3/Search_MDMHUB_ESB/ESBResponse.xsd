@@ -1,0 +1,25 @@
+<xs:schema xmlns="http://www.gssamerica.com/mdm/createesbresponse" elementFormDefault="qualified"
+     targetNamespace="http://www.gssamerica.com/mdm/createesbresponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import schemaLocation="CustomerPartyMaster.xsd" namespace="http://www.openapplications.org/oagis/9"/>
+    <xs:element name="ESBResponse" type="ESBResponseType"/>
+    <xs:complexType name="ESBResponseType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="Response" type="ResponseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ResponseType">
+        <xs:sequence>
+            <xs:element name="Status" type="xs:string"/>
+            <xs:element minOccurs="0" name="Description" type="xs:string"/>
+            <xs:element minOccurs="0" name="Record">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element xmlns:q1="http://www.openapplications.org/oagis/9" minOccurs="0"
+                             name="CustomerRecord" type="q1:CustomerPartyMasterType"/>
+                        <xs:element minOccurs="0" name="ProductRecord" type="xs:string"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

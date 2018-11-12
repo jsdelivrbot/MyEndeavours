@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2 **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    OAGIS Example WSDL to be used with OAGIS 9.2 
+    
+    For more information about the Open Applications Group please see 
+    www.openapplicaitons.org
+     
+    
+     WSDL Example
+     
+    Name: /OAGIS/9_2/References/ws/wsdl/PartyMaster.wsdl
+-->
+		
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oaws="http://www.openapplications.org/oagis/9/ws" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+        <types>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/ws">
+                        <xs:include schemaLocation="../xsd/MessageResponse.xsd"/>
+                </xs:schema>
+                <xs:schema elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9">
+                        <xs:include schemaLocation="../../../BODs/Developer/GetPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ShowPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/SyncPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/NotifyPartyMaster.xsd"/>
+                        <xs:include schemaLocation="../../../BODs/Developer/ConfirmBOD.xsd"/>
+                </xs:schema>
+        </types>
+        <message name="GetPartyMaster">
+                <part name="Message" element="oa:GetPartyMaster"/>
+        </message>
+        <message name="ShowPartyMaster">
+                <part name="Message" element="oa:ShowPartyMaster"/>
+        </message>
+        <message name="SyncPartyMaster">
+                <part name="Message" element="oa:SyncPartyMaster"/>
+        </message>
+        <message name="NotifyPartyMaster">
+                <part name="Message" element="oa:NotifyPartyMaster"/>
+        </message>
+        <message name="ConfirmBOD">
+                <part name="Message" element="oa:ConfirmBOD"/>
+        </message>
+        <message name="MessageResponse">
+                <part name="Message" element="oaws:MessageResponse"/>
+        </message>
+        <portType name="RequestPartyMasterPortType">
+                <operation name="GetPartyMaster">
+                        <input message="oaws:GetPartyMaster"/>
+                </operation>
+                <operation name="SyncPartyMaster">
+                        <input message="oaws:SyncPartyMaster"/>
+                </operation>
+                <operation name="NotifyPartyMaster">
+                        <input message="oaws:NotifyPartyMaster"/>
+                </operation>
+        </portType>
+        <portType name="ResponsePartyMasterPortType">
+                <operation name="ShowPartyMaster">
+                        <input message="oaws:ShowPartyMaster"/>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <input message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <portType name="SyncPartyMasterPortType">
+                <operation name="GetPartyMaster">
+                        <input message="oaws:GetPartyMaster"/>
+                        <output message="oaws:ShowPartyMaster"/>
+                </operation>
+                <operation name="SyncPartyMaster">
+                        <input message="oaws:SyncPartyMaster"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+                <operation name="NotifyPartyMaster">
+                        <input message="oaws:NotifyPartyMaster"/>
+                        <output message="oaws:ConfirmBOD"/>
+                </operation>
+        </portType>
+        <binding name="RequestPartyMasterBinding" type="oaws:RequestPartyMasterPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="SyncPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="NotifyPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="ResponsePartyMasterBinding" type="oaws:ResponsePartyMasterPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="ShowPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+                <operation name="ConfirmBOD">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                </operation>
+        </binding>
+        <binding name="SyncPartyMasterBinding" type="oaws:SyncPartyMasterPortType">
+                <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+                <operation name="GetPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="SyncPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+                <operation name="NotifyPartyMaster">
+                        <soap:operation soapAction="http://www.openapplications.org/oagis/9.2/ws/wsdl/PartyMaster.wsdl" style="document"/>
+                        <input>
+                                <soap:body use="literal"/>
+                        </input>
+                        <output>
+                                <soap:body use="literal"/>
+                        </output>
+                </operation>
+        </binding>
+        <service name="RequestPartyMasterService">
+                <port name="RequestPartyMasterBinding" binding="oaws:RequestPartyMasterBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/RequestPartyMaster"/>
+                </port>
+        </service>
+        <service name="ResponsePartyMasterService">
+                <port name="ResponsePartyMasterBinding" binding="oaws:ResponsePartyMasterBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/ResponsePartyMaster"/>
+                </port>
+        </service>
+        <service name="SyncPartyMasterService">
+                <port name="SyncPartyMasterBinding" binding="oaws:SyncPartyMasterBinding">
+                        <soap:address location="http://openapplications.org/oagis/9.2/ws/SyncPartyMaster"/>
+                </port>
+        </service>
+</definitions>

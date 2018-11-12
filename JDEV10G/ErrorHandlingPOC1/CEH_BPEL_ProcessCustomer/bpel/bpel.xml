@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BPELSuitcase>
+   <BPELProcess id="CEH_BPEL_ProcessCustomer" src="CEH_BPEL_ProcessCustomer.bpel">
+      <partnerLinkBindings>
+         <partnerLinkBinding name="client">
+            <property name="wsdlLocation">CEH_BPEL_ProcessCustomer.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CustomerBusinessService">
+            <property name="wsdlLocation">PartnerLink_1.wsdl</property>
+         </partnerLinkBinding>
+         <partnerLinkBinding name="CEH_BPEL_CommonErrorHandler">
+            <property name="wsdlLocation">http://inedec-mlap-45.emrcorp.local/orabpel/default/CEH_BPEL_CommonErrorHandler/1.0/CEH_BPEL_CommonErrorHandler?wsdl</property>
+         </partnerLinkBinding>
+      </partnerLinkBindings>
+      <faultPolicyBindings>
+         <process faultPolicy="MyPolicy"/>
+      </faultPolicyBindings>
+   </BPELProcess>
+</BPELSuitcase>

@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<system name="LBT_StagingDBToVendavoFTP" guid="10782A3098EB11DDBFD2A98E2688A63A" qname="LBT_StagingDBToVendavoFTP" status="ENABLED">
+   <versionInfo>
+      <ID>1275300331138</ID>
+      <lastModifiedTime>Mon May 31 10:05:31 GMT+00:00 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_VenPh1_UC6.5_PROD_LIEBERT_VENDAVO_INTEGRATION_ItemNumberAndCostToFTP_ESB</lastModifiedUser>
+   </versionInfo>
+   <description/>
+   <parameters>
+      <parameter name="Host">soa.emerson.com</parameter>
+      <parameter name="Port">8800</parameter>
+   </parameters>
+   <clusterName>esb</clusterName>
+   <deferredQueueName numberOfListeners="1" topicConnectionFactory="OracleOJMS/XATCF">ESBTopics/Topics/ESB_JAVA_DEFERRED</deferredQueueName>
+</system>

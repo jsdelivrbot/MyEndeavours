@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.4.795 (http://www.liquid-technologies.com)-->
+<xsd:schema xmlns:tns="http://schemas.emerson.com/common/envelope" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.emerson.com/common/envelope" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="envelope">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="tns:header" />
+        <xsd:element ref="tns:body" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="header" type="tns:headerType" />
+  <xsd:element name="body" type="tns:bodyType" />
+  <xsd:element name="process" type="tns:processType" />
+  <xsd:complexType name="bodyType">
+    <xsd:sequence>
+      <xsd:element name="xmlPayload" type="xsd:anyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="headerType">
+    <xsd:sequence>
+      <xsd:element name="flowID" type="xsd:string" />
+      <xsd:element name="transactionID" type="xsd:string" />
+      <xsd:element name="originalSource" type="xsd:string" />
+      <xsd:element name="routingInfo" type="tns:routingInfoType" />
+      <xsd:element name="destination" type="xsd:string" />
+      <xsd:element name="userID" type="xsd:string" />
+      <xsd:element name="headerProperties" type="tns:headerPropertiesType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="headerPropertiesType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="headerProperty" type="tns:propertyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="propertyType">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="value" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="routingInfoType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" ref="tns:process" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="processType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="processID" type="xsd:string" use="required" />
+        <xsd:attribute name="location" type="xsd:string" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="faultType">
+    <xsd:sequence>
+      <xsd:element name="faultSeverity" type="tns:severityTypeEnum" />
+      <xsd:element name="faultCode" type="xsd:string" />
+      <xsd:element name="faultMessage" type="xsd:string" />
+      <xsd:element name="faultSummary" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="severityTypeEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="HIGH" />
+      <xsd:enumeration value="MEDIUM" />
+      <xsd:enumeration value="LOW" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

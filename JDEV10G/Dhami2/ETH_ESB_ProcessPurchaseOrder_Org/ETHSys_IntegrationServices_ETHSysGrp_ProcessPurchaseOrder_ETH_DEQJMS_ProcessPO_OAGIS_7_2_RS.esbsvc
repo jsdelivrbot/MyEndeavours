@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS" guid="01E07F41097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+   <description>This is the Routing Service for Adapter Service ETH_DEQJMS_ProcessPO_OAGIS_7_2</description>
+   <versionInfo>
+      <ID>1244631346288</ID>
+      <lastModifiedTime>Wed Jun 10 10:55:46 GMT+00:00 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_SC_Phase2_ETH_ESB_ProcessPurchaseOrder</lastModifiedUser>
+   </versionInfo>
+   <parent guid="46F6DAF0F82E11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_DEQJMS_ProcessPO_OAGIS_7_2.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/jms/ETH_DEQJMS_ProcessPO_OAGIS_7_2/">tns:Consume_Message_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:8888/event/ETHSys_IntegrationServices/ETHSysGrp_ProcessPurchaseOrder/ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="01E56140097F11DEBF8E7DC952E68DF0" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_DEQJMS_ProcessPO_OAGIS_7_2_RS.Consume_Message" wsdlOperation="Consume_Message" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+         <routingRules>
+            <routingRule guid="815982402FD511DE9F4D277D7F6A1C73" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="43851750F82F11DDBFE65184CC52E945" qname="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS.execute" serviceGUID="4382CD60F82F11DDBFE65184CC52E945" serviceQName="ETHSys_IntegrationServices.ETHSysGrp_ProcessPurchaseOrder.ETH_Transform_CustomOAGIS_7_2_RS" mepDisplayName="One Way" mep="OneWay"/>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+</service>

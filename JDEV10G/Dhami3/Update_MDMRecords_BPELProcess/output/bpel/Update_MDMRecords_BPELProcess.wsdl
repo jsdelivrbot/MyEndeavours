@@ -1,0 +1,38 @@
+<definitions
+     name="Update_MDMRecords_BPELProcess"
+     targetNamespace="http://com.gssamerica.mdm.process/Update_MDMRecords_BPELProcess"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://www.gssamerica.com/mdm/services"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+     xmlns:client="http://com.gssamerica.mdm.process/Update_MDMRecords_BPELProcess"
+    >
+    <import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gssamerica.com/mdm/services"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+             xmlns:client="http://com.gssamerica.mdm.process/Update_MDMRecords_BPELProcess">
+            <import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="MDMService.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.gssamerica.com/mdm/services" schemaLocation="ExternalParameters.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="Update_MDMRecords_BPELProcessRequestMessage">
+        <part name="payload" element="ns1:UpdateRecordRequest"/>
+    </message>
+    <message name="Update_MDMRecords_BPELProcessResponseMessage">
+        <part name="payload" element="ns1:ServiceReply"/>
+    </message>
+    <portType name="Update_MDMRecords_BPELProcess">
+        <operation name="process">
+            <input message="client:Update_MDMRecords_BPELProcessRequestMessage"/>
+            <output message="client:Update_MDMRecords_BPELProcessResponseMessage"/>
+        </operation>
+    </portType>
+    <plnk:partnerLinkType name="Update_MDMRecords_BPELProcess">
+        <plnk:role name="Update_MDMRecords_BPELProcessProvider">
+            <plnk:portType name="client:Update_MDMRecords_BPELProcess"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+</definitions>

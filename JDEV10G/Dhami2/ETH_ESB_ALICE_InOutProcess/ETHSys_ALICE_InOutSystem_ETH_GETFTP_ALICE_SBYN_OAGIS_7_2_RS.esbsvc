@@ -1,0 +1,34 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS" guid="7C76D1900A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS" status="ENABLED" serviceType="RoutingService" typeDescription="Routing Service" isWSDLEditable="false" soapEndpointStatus="DISABLED">
+   <description>This is the Routing Service for Adapter Service ETH_GETFTP_ALICE_SBYN_OAGIS_7_2</description>
+   <versionInfo>
+      <ID>1244825248570</ID>
+      <lastModifiedTime>Fri Jun 12 22:17:28 GMT+05:30 2009</lastModifiedTime>
+      <lastModifiedUser>JDev_Dhami2_ETH_ESB_ALICE_InOutProcess</lastModifiedUser>
+   </versionInfo>
+   <parent guid="77BE6CA0F99311DDBF5B11CC773907E0" qname="ETHSys_ALICE_InOutSystem" type="system"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_GETFTP_ALICE_SBYN_OAGIS_7_2.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/ftp/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2/">tns:Get_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSys_ALICE_InOutSystem/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://localhost:12001/event/ETHSys_ALICE_InOutSystem/ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="7C791B800A1B11DEBF845DB5CFB32423" qname="ETHSys_ALICE_InOutSystem.ETH_GETFTP_ALICE_SBYN_OAGIS_7_2_RS.Get" wsdlOperation="Get" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomProcess_PO_007" element="tns:CustomProcess_PO_007"/>
+         <routingRules>
+            <routingRule guid="C71991B00A1B11DEBF845DB5CFB32423" subscriptionType="ANY" executionType="Immediate" status="ENABLED">
+               <targetOperation guid="C173CA90096D11DEBFDF5DDDA038BDBD" qname="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2.Produce_Message" serviceGUID="C16F0FA1096D11DEBFDF5DDDA038BDBD" serviceQName="ETHSys_ALICE_InOutSystem.ETH_ENQJMS_ALICE_ProcessPO_OAGIS_7_2" mepDisplayName="One Way" mep="OneWay"/>
+               <transformation>
+                  <xslFileURL>CustomProcess_PO_007_To_CustomProcess_PO_007.xsl</xslFileURL>
+               </transformation>
+            </routingRule>
+         </routingRules>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="enableAccessBusinessEvent" value="true"/>
+   </endpointProperties>
+</service>

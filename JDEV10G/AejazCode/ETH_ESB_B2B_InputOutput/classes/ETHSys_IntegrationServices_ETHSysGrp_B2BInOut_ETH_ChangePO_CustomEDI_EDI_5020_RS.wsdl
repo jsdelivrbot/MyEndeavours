@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="ETH_ChangePO_CustomEDI_EDI_5020_RS"
+     targetNamespace="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_B2BInOut"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/esb/namespaces/ETHSys_IntegrationServices_ETHSysGrp_B2BInOut"
+     xmlns:inp1="http://xmlns.emrsn.com/CustomEDI860"
+    >
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.emrsn.com/CustomEDI860" schemaLocation="public_html/Custom_EMR860V5020_ETH.xsd" />
+      </schema>
+    </types>
+    <message name="CustomEDI860_request">
+        <part name="CustomEDI860" element="inp1:CustomEDI860"/>
+    </message>
+    <portType name="execute_ppt">
+        <operation name="execute">
+            <input message="tns:CustomEDI860_request"/>
+        </operation>
+    </portType>
+</definitions>

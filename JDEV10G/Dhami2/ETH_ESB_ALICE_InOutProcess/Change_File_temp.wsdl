@@ -1,0 +1,50 @@
+<definitions
+     name="Change_File_temp"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Change_File_temp/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Change_File_temp/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:imp1="http://TargetNamespace.com/ETH_DEQAPP_ALICE_CHANGE_PO"
+     xmlns:hdr="http://xmlns.oracle.com/pcbpel/adapter/file/"
+    >
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/file/" location="fileAdapterOutboundHeader.wsdl"/>
+    <types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://TargetNamespace.com/ETH_DEQAPP_ALICE_CHANGE_PO" schemaLocation="CHANGE_PO_006.xsd" />
+      </schema>
+    </types>
+    <message name="CHANGE_PO_006_msg">
+        <part name="CHANGE_PO_006" element="imp1:CHANGE_PO_006"/>
+    </message>
+    <portType name="Write_ptt">
+        <operation name="Write">
+            <input message="tns:CHANGE_PO_006_msg"/>
+        </operation>
+    </portType>
+    <binding name="Write_binding" type="tns:Write_ptt">
+    <jca:binding  />
+        <operation name="Write">
+      <jca:operation
+          PhysicalDirectory="D:\PO_Process\OAGIS_7_2"
+          InteractionSpec="oracle.tip.adapter.file.outbound.FileInteractionSpec"
+          FileNamingConvention="temp_%SEQ%.xml"
+          NumberMessages="1"
+          OpaqueSchema="false" >
+      </jca:operation>
+      <input>
+        <jca:header message="hdr:OutboundHeader_msg" part="outboundHeader"/>
+      </input>
+        </operation>
+    </binding>
+    <service name="Change_File_temp">
+        <port name="Write_pt" binding="tns:Write_binding">
+      <jca:address location="eis/FileAdapter" />
+        </port>
+    </service>
+  <plt:partnerLinkType name="Write_plt" >
+    <plt:role name="Write_role" >
+      <plt:portType name="tns:Write_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+</definitions>

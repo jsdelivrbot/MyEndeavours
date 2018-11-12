@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>SendEmailWithAttachments readme</title>
+  <meta name="author" content="Ravi Rangaswamy">
+</head>
+<body>
+<h1>SendEmailWithAttachments</h1>
+
+<h2>Abstract</h2>
+The SendEmailWithAttachments process is used to send an email with attachment.
+
+<h2>How to Run</h2>
+Run obant.bat from the 130.SendEmailWithAttachments directory to deploy the process to the BPEL engine. When the process is deployed, test by doing the following:<br>
+<br>
+<ol>
+   <li>Login to the BPEL console for your server, select the SendEmailWithAttachments process, and go to the 'initiate' tab.</li>
+   <li>The process has a default message that can be used to initiate the process. The default message sets the email TO to jcooper and the file samplecover.pdf as the email. The attachmentURI can be one of the following 
+       <ol>
+           <li>As a file URI. For example, 'file:C:/documents/samplecover.pdf'</li>
+           <li>As an http URI. For example, 'http://host1/documents/samplecover.pdf'</li>
+           <li>Relative to the BPEL suitcase. For example, 'samplecover.pdf' represents the file samplecover.pdf that is deployed with the BPEL suitcase at the same level as the bpel.xml</li>
+       </ol>
+   </li>
+   <li>Check the email account of jcooper, there should be an email with the attachment.</li>
+</ol>
+<br>
+<br>
+</body>
+</html>

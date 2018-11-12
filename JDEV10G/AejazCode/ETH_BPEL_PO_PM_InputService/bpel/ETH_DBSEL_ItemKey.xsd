@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/ETH_DBSEL_ItemKey" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="ETH_DBSEL_ItemKeyInput" type="ETH_DBSEL_ItemKeyInput"/>
+   <xs:complexType name="ETH_DBSEL_ItemKeyInput">
+      <xs:sequence>
+         <xs:element name="DocNumber" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="ETH_DBSEL_ItemKeyOutputCollection" type="ETH_DBSEL_ItemKeyOutputCollection"/>
+   <xs:complexType name="ETH_DBSEL_ItemKeyOutputCollection">
+      <xs:sequence>
+         <xs:element name="ETH_DBSEL_ItemKeyOutput" type="ETH_DBSEL_ItemKeyOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ETH_DBSEL_ItemKeyOutput">
+      <xs:sequence>
+         <xs:element name="DOCUMENT_NUMBER" type="xs:string" nillable="true"/>
+         <xs:element name="ITEM_KEY" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

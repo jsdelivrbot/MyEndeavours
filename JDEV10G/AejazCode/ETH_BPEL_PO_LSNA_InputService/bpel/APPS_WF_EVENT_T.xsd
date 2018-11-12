@@ -1,0 +1,91 @@
+<schema targetNamespace="http://xmlns.oracle.com/xdb/APPS" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:APPS="http://xmlns.oracle.com/xdb/APPS" elementFormDefault="unqualified" attributeFormDefault="qualified">
+   <complexType name="WF_EVENT_T">
+      <sequence>
+         <element name="PRIORITY" type="double" nillable="true" minOccurs="0"/>
+         <element name="SEND_DATE" type="string" nillable="true" minOccurs="0"/>
+         <element name="RECEIVE_DATE" type="string" nillable="true" minOccurs="0"/>
+         <element name="CORRELATION_ID" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="240"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="PARAMETER_LIST" type="APPS:WF_PARAMETER_LIST_T" nillable="true" minOccurs="0"/>
+         <element name="EVENT_NAME" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="240"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="EVENT_KEY" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="240"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="EVENT_DATA" type="string" nillable="true" minOccurs="0"/>
+         <element name="FROM_AGENT" type="APPS:WF_AGENT_T" nillable="true" minOccurs="0"/>
+         <element name="TO_AGENT" type="APPS:WF_AGENT_T" nillable="true" minOccurs="0"/>
+         <element name="ERROR_SUBSCRIPTION" type="base64Binary" nillable="true" minOccurs="0"/>
+         <element name="ERROR_MESSAGE" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="4000"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="ERROR_STACK" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="4000"/>
+               </restriction>
+            </simpleType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="WF_AGENT_T">
+      <sequence>
+         <element name="NAME" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="30"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="SYSTEM" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="30"/>
+               </restriction>
+            </simpleType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="WF_PARAMETER_T">
+      <sequence>
+         <element name="NAME" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="30"/>
+               </restriction>
+            </simpleType>
+         </element>
+         <element name="VALUE" nillable="true" minOccurs="0">
+            <simpleType>
+               <restriction base="string">
+                  <maxLength value="2000"/>
+               </restriction>
+            </simpleType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="WF_PARAMETER_LIST_T">
+      <sequence>
+         <element name="PARAMETER_LIST_ITEM" type="APPS:WF_PARAMETER_T" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+      </sequence>
+   </complexType>
+   <element name="WF_EVENT_T" type="APPS:WF_EVENT_T" />
+</schema>

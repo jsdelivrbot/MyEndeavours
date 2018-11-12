@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<service name="ETH_PutFL_LiebertBatchFiles" guid="E6C9227130FB11DFBF863B88AC359C68" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_PutFL_LiebertBatchFiles" status="ENABLED" serviceType="OutboundAdapterService" serviceSubType="File" typeDescription="Outbound File Adapter Service" isWSDLEditable="false" soapEndpointStatus="ENABLED">
+   <versionInfo>
+      <ID>1268819956565</ID>
+      <lastModifiedTime>Wed Mar 17 15:29:16 GMT+05:30 2010</lastModifiedTime>
+      <lastModifiedUser>JDev_RnDs_ETH_ESB_LIEBERT_PROCESS</lastModifiedUser>
+   </versionInfo>
+   <parent guid="02B9F251D8E311DEBFF4E177418C329B" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process" type="serviceGroup"/>
+   <serviceDefinition>
+      <wsdlURL>ETH_PutFL_LiebertBatchFiles.wsdl</wsdlURL>
+      <portType xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/ETH_PutFL_LiebertBatchFiles/">tns:Write_ptt</portType>
+      <endpointDefinition>
+         <concreteWSDLURL>/esb/wsil/ETHSystem_InputServices/ETHSysGrp_Liebert_Process/ETH_PutFL_LiebertBatchFiles?wsdl</concreteWSDLURL>
+         <soapEndpointURI>http://soa-stg.emerson.com:8800/event/ETHSystem_InputServices/ETHSysGrp_Liebert_Process/ETH_PutFL_LiebertBatchFiles</soapEndpointURI>
+      </endpointDefinition>
+   </serviceDefinition>
+   <operations>
+      <operationInfo guid="E6CB937030FB11DFBF863B88AC359C68" qname="ETHSystem_InputServices.ETHSysGrp_Liebert_Process.ETH_PutFL_LiebertBatchFiles.Write" wsdlOperation="Write" mepDisplayName="One Way" mep="OneWay">
+         <request validate="false" xmlns:tns="http://xmlns.emrsn.com/CustomLiebertPurchaseOrder" element="tns:CustomLiebertPO"/>
+      </operationInfo>
+   </operations>
+   <endpointProperties>
+      <property name="Output_Dir" value="D:\oracle\Files\Out"/>
+   </endpointProperties>
+</service>
